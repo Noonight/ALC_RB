@@ -24,16 +24,21 @@ class NewsDetailViewController: UIViewController, MvpView {
     
     private let presenter = NewsDetailPresenter()
     
-    override func viewDidLoad() {
+    override func viewDidLoad() {`
         super.viewDidLoad()
         
         initPresenter()
+        initView()
     }
-    
+
     func initPresenter() {
         presenter.attachView(view: self)
         
         presenter.getImage(imageName: cImageText!)
+    }
+
+    func initView() {
+
     }
     
     func onGetImageSuccess(_ image: UIImage) {
@@ -45,6 +50,6 @@ class NewsDetailViewController: UIViewController, MvpView {
         mDate?.text = cDate
         //mImage.image = cImage
         mText?.text = cText
-        
+
     }
 }
