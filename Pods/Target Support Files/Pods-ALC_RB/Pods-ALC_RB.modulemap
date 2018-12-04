@@ -1,0 +1,6 @@
+framework module Pods_ALC_RB {
+  umbrella header "Pods-ALC_RB-umbrella.h"
+
+  export *
+  module * { export * }
+}
