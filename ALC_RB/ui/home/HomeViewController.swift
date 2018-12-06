@@ -62,7 +62,7 @@ class HomeViewController: UIViewController {
     }
     
     func add(childVC viewController: UIViewController) {
-        addChildViewController(viewController)
+        addChild(viewController)
         
         viewContainer.addSubview(viewController.view)
         
@@ -82,6 +82,6 @@ class HomeViewController: UIViewController {
         viewController.view.removeFromSuperview()
         
         // Notify Child View Controller
-        viewController.removeFromParentViewController()
+        viewController.removeFromParent()
     }
 }

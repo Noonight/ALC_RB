@@ -98,7 +98,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="center" contentHorizontalAlignment="fill" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ovm-Xc-AHE">
-                                <rect key="frame" x="8" y="72" width="359" height="29"/>
+                                <rect key="frame" x="8" y="71" width="359" height="29"/>
                                 <segments>
                                     <segment title="Расписание"/>
                                     <segment title="Команды"/>
@@ -131,34 +131,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMa-0m-4H4">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <connections>
-                                    <segue destination="Pwd-o0-fxG" kind="embed" id="5wf-II-Md5"/>
-                                </connections>
+                                <rect key="frame" x="0.0" y="72" width="375" height="546"/>
                             </containerView>
+                            <segmentedControl opaque="NO" contentMode="center" contentHorizontalAlignment="fill" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="PD3-2a-Fqy">
+                                <rect key="frame" x="8" y="36" width="359" height="29"/>
+                                <segments>
+                                    <segment title="Новости"/>
+                                    <segment title="Ближайшие матчи"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentChanged:" destination="qfh-ra-8NT" eventType="valueChanged" id="vki-y3-OVt"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="mMa-0m-4H4" firstAttribute="bottom" secondItem="ydu-z6-vbG" secondAttribute="bottom" id="4mX-pi-Kpr"/>
-                            <constraint firstItem="mMa-0m-4H4" firstAttribute="top" secondItem="ydu-z6-vbG" secondAttribute="top" id="F7j-eP-Rna"/>
+                            <constraint firstItem="ydu-z6-vbG" firstAttribute="trailing" secondItem="PD3-2a-Fqy" secondAttribute="trailing" constant="8" id="J3e-Pi-pzZ"/>
+                            <constraint firstItem="PD3-2a-Fqy" firstAttribute="top" secondItem="ydu-z6-vbG" secondAttribute="top" constant="16" id="L1c-za-Wvu"/>
                             <constraint firstItem="mMa-0m-4H4" firstAttribute="trailing" secondItem="ydu-z6-vbG" secondAttribute="trailing" id="RqW-xI-uOG"/>
                             <constraint firstItem="mMa-0m-4H4" firstAttribute="leading" secondItem="ydu-z6-vbG" secondAttribute="leading" id="hMf-rz-kqL"/>
+                            <constraint firstItem="PD3-2a-Fqy" firstAttribute="leading" secondItem="ydu-z6-vbG" secondAttribute="leading" constant="8" id="web-H3-yg5"/>
+                            <constraint firstItem="mMa-0m-4H4" firstAttribute="top" secondItem="PD3-2a-Fqy" secondAttribute="bottom" constant="8" id="xUO-CC-aBV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ydu-z6-vbG"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="ic_home" id="doP-UK-cdq">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="0.0"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="AtB-uw-s3E">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="center" contentHorizontalAlignment="fill" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" id="PD3-2a-Fqy">
-                            <rect key="frame" x="56" y="8" width="263" height="29"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                            <segments>
-                                <segment title="Новости"/>
-                                <segment title="Ближайшие матчи"/>
-                            </segments>
-                            <connections>
-                                <action selector="segmentChanged:" destination="qfh-ra-8NT" eventType="valueChanged" id="vki-y3-OVt"/>
-                            </connections>
-                        </segmentedControl>
                     </navigationItem>
                     <connections>
                         <outlet property="segmentedControl" destination="PD3-2a-Fqy" id="7KJ-TE-2je"/>
@@ -167,7 +169,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UtV-dD-1o9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1114" y="-4085"/>
+            <point key="canvasLocation" x="-2036" y="-4080.8095952023991"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="VFP-fV-QdH">
@@ -180,10 +182,10 @@
                         <color key="selectedImageTintColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="10P-gY-sZT" kind="relationship" relationship="viewControllers" id="lLy-lA-cQ6"/>
+                        <segue destination="qfh-ra-8NT" kind="relationship" relationship="viewControllers" id="m1J-LH-5JX"/>
                         <segue destination="sPa-qT-CdH" kind="relationship" relationship="viewControllers" id="bj4-ac-nSp"/>
-                        <segue destination="427-kr-52D" kind="relationship" relationship="viewControllers" id="IPh-iX-PXg"/>
                         <segue destination="7hd-qi-iyc" kind="relationship" relationship="viewControllers" id="tb8-B4-5yi"/>
+                        <segue destination="427-kr-52D" kind="relationship" relationship="viewControllers" id="IPh-iX-PXg"/>
                         <segue destination="ztZ-hc-O5Z" kind="relationship" relationship="viewControllers" id="wdf-Zq-FNG"/>
                     </connections>
                 </tabBarController>
@@ -224,8 +226,8 @@
         <scene sceneID="as7-z4-Kf0">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7hd-qi-iyc" userLabel="Teams NC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Клубы" image="ic_club" landscapeImage="ic_club" largeContentSizeImage="ic_club" id="xpz-ja-5Hq">
-                        <inset key="imageInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                    <tabBarItem key="tabBarItem" title="" image="ic_club" landscapeImage="ic_club" largeContentSizeImage="ic_club" id="xpz-ja-5Hq">
+                        <inset key="imageInsets" minX="0.0" minY="9" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5BH-Yu-Odg">
@@ -274,8 +276,8 @@
         <scene sceneID="Vhx-Hg-Uce">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sPa-qT-CdH" userLabel="Players NC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Игроки" image="ic_players" landscapeImage="ic_players" largeContentSizeImage="ic_players" id="aG6-h3-6PK">
-                        <inset key="imageInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                    <tabBarItem key="tabBarItem" title="" image="ic_players" landscapeImage="ic_players" largeContentSizeImage="ic_players" id="aG6-h3-6PK">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NCh-XS-9eq">
@@ -310,8 +312,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="z5j-fM-9Sk"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Пользователь" image="ic_user" landscapeImage="ic_user" largeContentSizeImage="ic_user" id="NKp-xn-S3l">
-                        <inset key="imageInsets" minX="3" minY="3" maxX="0.0" maxY="3"/>
+                    <tabBarItem key="tabBarItem" title="" image="ic_user" landscapeImage="ic_user" largeContentSizeImage="ic_user" id="NKp-xn-S3l">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NAj-QN-I0F" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -322,8 +324,8 @@
         <scene sceneID="Pml-zE-jre">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="427-kr-52D" userLabel="Tournaments NC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Турниры" image="ic_cup" id="5a4-aj-G08">
-                        <inset key="imageInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                    <tabBarItem key="tabBarItem" title="" image="ic_cup" id="5a4-aj-G08">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="s8s-e8-JKs">
@@ -344,7 +346,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="NewsTableViewController" id="Pwd-o0-fxG" userLabel="News Announce TVC" customClass="NewsTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="NkZ-W3-a2D">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -356,16 +358,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="jdM-3V-Nmb">
-                                            <rect key="frame" x="8" y="8" width="714" height="27.5"/>
+                                            <rect key="frame" x="8" y="8" width="325" height="27.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="И снова гол. Кокорин !!!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvI-nM-2fi">
-                                                    <rect key="frame" x="0.0" y="0.0" width="714" height="18"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="325" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="10.11.2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="257-aO-Ymy">
-                                                    <rect key="frame" x="0.0" y="22" width="714" height="5.5"/>
+                                                    <rect key="frame" x="0.0" y="22" width="325" height="5.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.047679759562015533" green="0.46900761127471924" blue="0.7472040057182312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -394,7 +396,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="И снова гол. Кокорин !!!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bS0-BC-wfp">
-                                            <rect key="frame" x="8" y="8" width="752" height="27.5"/>
+                                            <rect key="frame" x="8" y="8" width="359" height="27.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -456,67 +458,22 @@
                     <viewLayoutGuide key="safeArea" id="vP1-WS-Vbh"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-226" y="-4393"/>
+            <point key="canvasLocation" x="-1114" y="-4388"/>
         </scene>
         <!--News Detail VC-->
         <scene sceneID="mk7-F8-tCf">
             <objects>
                 <viewController id="Kv1-VO-635" userLabel="News Detail VC" customClass="NewsDetailViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KyM-ep-179">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j2N-6F-20K">
-                                <rect key="frame" x="16" y="20" width="343" height="514"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Jgu-u3-yBc">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="640"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IiF-Af-ua3">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="128"/>
-                                                <color key="backgroundColor" red="0.90784996750000002" green="0.81313735249999997" blue="0.58586794139999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hzo-Q9-KLJ">
-                                                <rect key="frame" x="0.0" y="128" width="343" height="128"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NXb-ag-sJa">
-                                                <rect key="frame" x="0.0" y="256" width="343" height="128"/>
-                                                <color key="backgroundColor" red="0.04767975956" green="0.46900761130000002" blue="0.74720400570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4A6-lJ-gPW">
-                                                <rect key="frame" x="0.0" y="384" width="343" height="128"/>
-                                                <color key="backgroundColor" red="1" green="0.74975484609999998" blue="0.000121939258" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H2n-Ac-2Cl">
-                                                <rect key="frame" x="0.0" y="512" width="343" height="128"/>
-                                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            </view>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="Jgu-u3-yBc" firstAttribute="top" secondItem="j2N-6F-20K" secondAttribute="top" id="5yA-xt-1S4"/>
-                                    <constraint firstAttribute="bottom" secondItem="Jgu-u3-yBc" secondAttribute="bottom" id="CRq-ug-3Wf"/>
-                                    <constraint firstItem="Jgu-u3-yBc" firstAttribute="leading" secondItem="j2N-6F-20K" secondAttribute="leading" id="aMz-9z-5pc"/>
-                                    <constraint firstAttribute="trailing" secondItem="Jgu-u3-yBc" secondAttribute="trailing" id="adb-RQ-cFo"/>
-                                    <constraint firstItem="Jgu-u3-yBc" firstAttribute="width" secondItem="j2N-6F-20K" secondAttribute="width" id="m9S-Sf-rWQ"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="j2N-6F-20K" firstAttribute="trailing" secondItem="KyM-ep-179" secondAttribute="trailingMargin" id="4at-nt-G6h"/>
-                            <constraint firstAttribute="bottom" secondItem="j2N-6F-20K" secondAttribute="bottom" constant="20" id="6QN-Rf-y6g"/>
-                            <constraint firstItem="j2N-6F-20K" firstAttribute="leading" secondItem="KyM-ep-179" secondAttribute="leadingMargin" id="W9Z-kr-kZ1"/>
-                            <constraint firstItem="j2N-6F-20K" firstAttribute="top" secondItem="KyM-ep-179" secondAttribute="top" constant="20" symbolic="YES" id="nQo-Fu-M6s"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5sc-kC-FLH"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZMe-cm-dDl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="668" y="-4393"/>
+            <point key="canvasLocation" x="-254" y="-4388"/>
         </scene>
         <!--Games TVC-->
         <scene sceneID="WVI-vq-SSX">
@@ -560,28 +517,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="APu-DC-SEG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-226" y="-3701"/>
-        </scene>
-        <!--News Announce NC-->
-        <scene sceneID="I4F-aY-ahc">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="10P-gY-sZT" userLabel="News Announce NC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="ic_home" id="TWx-Ha-3Sj">
-                        <inset key="imageInsets" minX="3" minY="3" maxX="3" maxY="3"/>
-                    </tabBarItem>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wjj-uM-Lvq">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="qfh-ra-8NT" kind="relationship" relationship="rootViewController" id="xzU-td-LlT"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1qE-8e-UYM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2036" y="-4085"/>
+            <point key="canvasLocation" x="-1114" y="-3674"/>
         </scene>
     </scenes>
     <resources>

@@ -20,7 +20,7 @@ class NewsDetailViewController: UIViewController, MvpView {
     //var cImage = UII
     var cText: String? = String()
     
-    var cImageText: String? = ""
+    var cImageText: String? = String()
     
     private let presenter = NewsDetailPresenter()
     
