@@ -13,11 +13,11 @@
 		CE158CE921AD532600CEECFE /* TournamentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE158CE821AD532600CEECFE /* TournamentDetailViewController.swift */; };
 		CE47323E21A5513500199D79 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE47323D21A5513500199D79 /* HomeViewController.swift */; };
 		CE60234321AE6A9F00B428EE /* GamesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60234221AE6A9F00B428EE /* GamesTableViewController.swift */; };
-		CE60234C21AE756C00B428EE /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60234B21AE756C00B428EE /* NewsTableViewController.swift */; };
+		CE60234C21AE756C00B428EE /* NewsAnnounceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60234B21AE756C00B428EE /* NewsAnnounceTableViewController.swift */; };
 		CE61551321AF929E008C4463 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61551221AF929E008C4463 /* NewsTableViewCell.swift */; };
 		CE61551721AF9797008C4463 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61551621AF9797008C4463 /* News.swift */; };
 		CE61551D21AFC33D008C4463 /* Announces.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61551C21AFC33D008C4463 /* Announces.swift */; };
-		CE61551F21AFC799008C4463 /* NewsFewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61551E21AFC799008C4463 /* NewsFewPresenter.swift */; };
+		CE61551F21AFC799008C4463 /* NewsAnnouncePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61551E21AFC799008C4463 /* NewsAnnouncePresenter.swift */; };
 		CE61552221AFD329008C4463 /* AnnouncesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61552121AFD329008C4463 /* AnnouncesTableViewCell.swift */; };
 		CE61552521AFEB54008C4463 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61552421AFEB54008C4463 /* UserViewController.swift */; };
 		CE6E380621B65E1E009C2D1F /* NewsDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E380521B65E1E009C2D1F /* NewsDetailPresenter.swift */; };
@@ -32,6 +32,8 @@
 		CEA6EBB921A53FB9008F874D /* MvpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6EBB821A53FB9008F874D /* MvpView.swift */; };
 		CEA6EBBB21A53FD1008F874D /* MvpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6EBBA21A53FD1008F874D /* MvpPresenter.swift */; };
 		DB17384B21BA56D400017B6D /* NewsAllTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB17384A21BA56D400017B6D /* NewsAllTableViewController.swift */; };
+		DB17384E21BA6F8600017B6D /* AnnounceAllTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB17384D21BA6F8600017B6D /* AnnounceAllTableViewController.swift */; };
+		DB17385021BA706E00017B6D /* AnnounceDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB17384F21BA706E00017B6D /* AnnounceDateTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,11 +45,11 @@
 		CE158CE821AD532600CEECFE /* TournamentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentDetailViewController.swift; sourceTree = "<group>"; };
 		CE47323D21A5513500199D79 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CE60234221AE6A9F00B428EE /* GamesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesTableViewController.swift; sourceTree = "<group>"; };
-		CE60234B21AE756C00B428EE /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
+		CE60234B21AE756C00B428EE /* NewsAnnounceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAnnounceTableViewController.swift; sourceTree = "<group>"; };
 		CE61551221AF929E008C4463 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		CE61551621AF9797008C4463 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		CE61551C21AFC33D008C4463 /* Announces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announces.swift; sourceTree = "<group>"; };
-		CE61551E21AFC799008C4463 /* NewsFewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFewPresenter.swift; sourceTree = "<group>"; };
+		CE61551E21AFC799008C4463 /* NewsAnnouncePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAnnouncePresenter.swift; sourceTree = "<group>"; };
 		CE61552121AFD329008C4463 /* AnnouncesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncesTableViewCell.swift; sourceTree = "<group>"; };
 		CE61552421AFEB54008C4463 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		CE6E380521B65E1E009C2D1F /* NewsDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailPresenter.swift; sourceTree = "<group>"; };
@@ -64,6 +66,8 @@
 		CEA6EBB821A53FB9008F874D /* MvpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MvpView.swift; sourceTree = "<group>"; };
 		CEA6EBBA21A53FD1008F874D /* MvpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MvpPresenter.swift; sourceTree = "<group>"; };
 		DB17384A21BA56D400017B6D /* NewsAllTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAllTableViewController.swift; sourceTree = "<group>"; };
+		DB17384D21BA6F8600017B6D /* AnnounceAllTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceAllTableViewController.swift; sourceTree = "<group>"; };
+		DB17384F21BA706E00017B6D /* AnnounceDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceDateTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,11 +148,12 @@
 		CE61551821AF9814008C4463 /* news_and_announce */ = {
 			isa = PBXGroup;
 			children = (
+				DB17384C21BA6F6F00017B6D /* announce_all */,
 				DB17384921BA569600017B6D /* news_all */,
 				CE722F3C21B4D9F400D14BAA /* cells */,
 				CE916ABA21B520B60025FECF /* news_detail */,
-				CE60234B21AE756C00B428EE /* NewsTableViewController.swift */,
-				CE61551E21AFC799008C4463 /* NewsFewPresenter.swift */,
+				CE60234B21AE756C00B428EE /* NewsAnnounceTableViewController.swift */,
+				CE61551E21AFC799008C4463 /* NewsAnnouncePresenter.swift */,
 			);
 			path = news_and_announce;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 				CE61551221AF929E008C4463 /* NewsTableViewCell.swift */,
 				CE61552121AFD329008C4463 /* AnnouncesTableViewCell.swift */,
 				CE916AAF21B4EE2D0025FECF /* NoSectionCellTableViewCell.swift */,
+				DB17384F21BA706E00017B6D /* AnnounceDateTableViewCell.swift */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -271,6 +277,14 @@
 				DB17384A21BA56D400017B6D /* NewsAllTableViewController.swift */,
 			);
 			path = news_all;
+			sourceTree = "<group>";
+		};
+		DB17384C21BA6F6F00017B6D /* announce_all */ = {
+			isa = PBXGroup;
+			children = (
+				DB17384D21BA6F8600017B6D /* AnnounceAllTableViewController.swift */,
+			);
+			path = announce_all;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -396,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE158CE921AD532600CEECFE /* TournamentDetailViewController.swift in Sources */,
+				DB17385021BA706E00017B6D /* AnnounceDateTableViewCell.swift in Sources */,
 				CE61552521AFEB54008C4463 /* UserViewController.swift in Sources */,
 				CEA6EBBB21A53FD1008F874D /* MvpPresenter.swift in Sources */,
 				CE916ABC21B520D90025FECF /* NewsDetailViewController.swift in Sources */,
@@ -409,12 +424,13 @@
 				CE60234321AE6A9F00B428EE /* GamesTableViewController.swift in Sources */,
 				CE158CE421AD2CE000CEECFE /* TournamentsTableViewController.swift in Sources */,
 				CE158CE621AD3E8A00CEECFE /* TournamentTableViewCell.swift in Sources */,
-				CE61551F21AFC799008C4463 /* NewsFewPresenter.swift in Sources */,
-				CE60234C21AE756C00B428EE /* NewsTableViewController.swift in Sources */,
+				CE61551F21AFC799008C4463 /* NewsAnnouncePresenter.swift in Sources */,
+				CE60234C21AE756C00B428EE /* NewsAnnounceTableViewController.swift in Sources */,
 				CE77AC7B21B0F1BA00C0ED0D /* DateFormatter.swift in Sources */,
 				CE61551721AF9797008C4463 /* News.swift in Sources */,
 				CE916AAC21B4E1FC0025FECF /* ApiRoute.swift in Sources */,
 				CE47323E21A5513500199D79 /* HomeViewController.swift in Sources */,
+				DB17384E21BA6F8600017B6D /* AnnounceAllTableViewController.swift in Sources */,
 				CE6E380621B65E1E009C2D1F /* NewsDetailPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

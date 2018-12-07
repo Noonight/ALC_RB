@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class NewsFewPresenter: MvpPresenter<NewsTableViewController> {
+class NewsAnnouncePresenter: MvpPresenter<NewsAnnounceTableViewController> {
     
     func getFewNews() {        
         Alamofire

@@ -31,6 +31,8 @@ class NewsAllTableViewController: UITableViewController {
         //print(parent!.navigationController?.navigationBar)
         
         self.title = mTitle
+        
+        tableView.tableFooterView = UIView()
     }
 
     func updateUI() {
@@ -44,7 +46,7 @@ class NewsAllTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData?.count ?? 0
+        return (tableData?.news.count)!
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

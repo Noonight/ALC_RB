@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsTableViewController: UITableViewController, MvpView {
+class NewsAnnounceTableViewController: UITableViewController, MvpView {
 
     @IBOutlet var noNewsView: UIView!
     @IBOutlet var noAnnounceView: UIView!
@@ -31,13 +31,13 @@ class NewsTableViewController: UITableViewController, MvpView {
         func getCountItemOfSection(_ section: Int) -> Int {
             if (section == 0) {
                 if (news.count < countItemsOfSection) {
-                    return news.count
+                    return news.news.count
                 }
                 return countItemsOfSection
             }
             if (section == 1) {
                 if (announces.count < countItemsOfSection) {
-                    return announces.count
+                    return announces.announces.count
                 }
                 return countItemsOfSection
             }
@@ -48,7 +48,7 @@ class NewsTableViewController: UITableViewController, MvpView {
     let cellNews = "cell_news_dynamic"
     let cellAnnounce = "cell_announce_dynamic"
     
-    private let presenter = NewsFewPresenter()
+    private let presenter = NewsAnnouncePresenter()
     
     var tableData = NewsTableData()
     
@@ -59,6 +59,8 @@ class NewsTableViewController: UITableViewController, MvpView {
         super.viewDidLoad()
         
         initPresenter()
+        
+        tableView.tableFooterView = UIView()
         
         //tableView.backgroundView = noNewsView
         //navigationController?.navigationItem.title = "title"
@@ -77,7 +79,6 @@ class NewsTableViewController: UITableViewController, MvpView {
             let destination = segue.destination as? NewsDetailViewController,
             let cellIndex = tableView.indexPathForSelectedRow?.row
         {
-            print(navigationItem.backBarButtonItem)
             destination.content = NewsDetailViewController.Content(
                 title: tableData.news.news[cellIndex].caption,
                 date: (tableData.news.news[cellIndex].updatedAt).UTCToLocal(from: .utc, to: .local),
@@ -178,8 +179,13 @@ class NewsTableViewController: UITableViewController, MvpView {
             
             navigationController?.pushViewController(viewController, animated: true)
         } else if (sender.btnType == .announces) {
-            print("on all announce pressed")
-            //navigationController?.pushViewController(AnnounceAllTableViewController(), animated: true)
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            
+            let viewController = storyboard.instantiateViewController(withIdentifier: "AnnounceAllTableViewController") as! AnnounceAllTableViewController
+            
+            viewController.tableData = tableData.announces
+            
+            navigationController?.pushViewController(viewController, animated: true)
         }
     }
 }

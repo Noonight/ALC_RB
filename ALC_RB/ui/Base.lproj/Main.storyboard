@@ -178,9 +178,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="JoN-yP-8jZ" kind="relationship" relationship="viewControllers" id="m1J-LH-5JX"/>
-                        <segue destination="sPa-qT-CdH" kind="relationship" relationship="viewControllers" id="bj4-ac-nSp"/>
-                        <segue destination="7hd-qi-iyc" kind="relationship" relationship="viewControllers" id="tb8-B4-5yi"/>
                         <segue destination="427-kr-52D" kind="relationship" relationship="viewControllers" id="IPh-iX-PXg"/>
+                        <segue destination="7hd-qi-iyc" kind="relationship" relationship="viewControllers" id="tb8-B4-5yi"/>
+                        <segue destination="sPa-qT-CdH" kind="relationship" relationship="viewControllers" id="bj4-ac-nSp"/>
                         <segue destination="ztZ-hc-O5Z" kind="relationship" relationship="viewControllers" id="wdf-Zq-FNG"/>
                     </connections>
                 </tabBarController>
@@ -222,7 +222,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7hd-qi-iyc" userLabel="Teams NC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="ic_club" landscapeImage="ic_club" largeContentSizeImage="ic_club" id="xpz-ja-5Hq">
-                        <inset key="imageInsets" minX="0.0" minY="9" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5BH-Yu-Odg">
@@ -336,6 +336,63 @@
             </objects>
             <point key="canvasLocation" x="-2036" y="-2833"/>
         </scene>
+        <!--Announce All Table View Controller-->
+        <scene sceneID="Qyc-kt-rBa">
+            <objects>
+                <tableViewController storyboardIdentifier="AnnounceAllTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xeA-AA-pnj" customClass="AnnounceAllTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hGE-1z-4Fz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="cell_announce_date" id="gqV-QO-Su7" customClass="AnnounceDateTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gqV-QO-Su7" id="FPN-RN-ubf">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="cBV-F3-BT6">
+                                            <rect key="frame" x="8" y="8" width="359" height="27.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="И снова гол. Кокорин !!!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deH-4j-Vvn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="10.11.2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0U-q4-BgQ">
+                                                    <rect key="frame" x="0.0" y="22" width="359" height="5.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.04767975956" green="0.46900761130000002" blue="0.74720400570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="cBV-F3-BT6" secondAttribute="bottom" constant="8" id="KKZ-bE-qta"/>
+                                        <constraint firstItem="cBV-F3-BT6" firstAttribute="leading" secondItem="FPN-RN-ubf" secondAttribute="leading" constant="8" id="khA-Ql-Svf"/>
+                                        <constraint firstItem="cBV-F3-BT6" firstAttribute="top" secondItem="FPN-RN-ubf" secondAttribute="top" constant="8" id="t63-MF-6UY"/>
+                                        <constraint firstAttribute="trailing" secondItem="cBV-F3-BT6" secondAttribute="trailing" constant="8" id="w0U-1j-7hP"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="content" destination="deH-4j-Vvn" id="FmJ-ax-mSg"/>
+                                    <outlet property="date" destination="l0U-q4-BgQ" id="82A-6b-7oN"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="xeA-AA-pnj" id="Vtk-wa-EMm"/>
+                            <outlet property="delegate" destination="xeA-AA-pnj" id="VJH-Og-1Oc"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YjI-Jf-dqg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-226" y="-5164"/>
+        </scene>
         <!--News All TVC-->
         <scene sceneID="Glb-kr-MnD">
             <objects>
@@ -392,12 +449,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NLn-l9-G94" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-226" y="-5157"/>
+            <point key="canvasLocation" x="622" y="-5163"/>
         </scene>
         <!--News Announce TVC-->
         <scene sceneID="MgP-uf-qar">
             <objects>
-                <tableViewController storyboardIdentifier="NewsTableViewController" id="Pwd-o0-fxG" userLabel="News Announce TVC" customClass="NewsTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="NewsTableViewController" id="Pwd-o0-fxG" userLabel="News Announce TVC" customClass="NewsAnnounceTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="NkZ-W3-a2D">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -659,6 +716,6 @@
         <image name="ic_user" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="M4f-5t-IJv"/>
+        <segue reference="bxV-uX-kDR"/>
     </inferredMetricsTieBreakers>
 </document>
