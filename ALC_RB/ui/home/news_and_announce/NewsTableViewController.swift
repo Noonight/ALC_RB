@@ -77,14 +77,18 @@ class NewsTableViewController: UITableViewController, MvpView {
             let destination = segue.destination as? NewsDetailViewController,
             let cellIndex = tableView.indexPathForSelectedRow?.row
         {
-            destination.cTitle = tableData.news.news[cellIndex].caption
-            destination.cDate = tableData.news.news[cellIndex].updatedAt
-            destination.cImageText = tableData.news.news[cellIndex].img
-            destination.cText = tableData.news.news[cellIndex].content
+            destination.content = NewsDetailViewController.Content(
+                title: tableData.news.news[cellIndex].caption,
+                date: (tableData.news.news[cellIndex].updatedAt).UTCToLocal(from: .utc, to: .current),
+                content: tableData.news.news[cellIndex].content,
+                imagePath: tableData.news.news[cellIndex].img)
+//            destination.cTitle = tableData.news.news[cellIndex].caption
+//            destination.cDate = tableData.news.news[cellIndex].updatedAt
+//            destination.cImagePath = tableData.news.news[cellIndex].img
+//            destination.cText = tableData.news.news[cellIndex].content
         }
     }
     
-    // MARK: - view methods
     func onGetNewsDataSuccess(news: News) {
         tableData.news = news
         self.tableView.reloadData()
@@ -173,8 +177,6 @@ class FooterBtn {
     var id: BtnType?
     var btn: UIButton?
     var viewContainer: UIView?
-    
-    //var actionTouchUpInside: () -> ()
     
     init(id: BtnType, viewContainer: UIView/*, actionTouchUpInside: @escaping () -> ()*/) {
         self.id = id

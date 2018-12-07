@@ -67,21 +67,11 @@ class HomeViewController: UIViewController {
         viewContainer.addSubview(viewController.view)
         
         viewController.view.frame = viewContainer.bounds
-        //viewController.view.frame.width = view.
         viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        // Notify Child View Controller
-        //viewController.didMove(toParentViewController: self)
     }
     
     func remove(childVC viewController: UIViewController) {
-        // Notify Child View Controller
-        //viewController.willMove(toParentViewController: nil)
-        
-        // Remove Child View From Superview
         viewController.view.removeFromSuperview()
-        
-        // Notify Child View Controller
         viewController.removeFromParent()
     }
 }

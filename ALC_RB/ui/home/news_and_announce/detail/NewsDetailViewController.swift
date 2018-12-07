@@ -15,12 +15,30 @@ class NewsDetailViewController: UIViewController, MvpView {
     @IBOutlet weak var mImage: UIImageView?
     @IBOutlet weak var mText: UITextView?
     
-    var cTitle: String? = String()
-    var cDate: String? = String()
-    //var cImage = UII
-    var cText: String? = String()
+    struct Content {
+        var cTitle: String? = String()
+        var cDate: String? = String()
+        var cText: String? = String()
+        var cImagePath: String? = String()
+        
+        init(title: String, date: String, content: String, imagePath: String) {
+            cTitle = title
+            cDate = date
+            cText = content
+            cImagePath = imagePath
+        }
+    }
     
-    var cImageText: String? = String()
+    var content: Content? {
+        didSet {
+            refreshUI()
+        }
+    }
+    
+//    var cTitle: String? = String()
+//    var cDate: String? = String()
+//    var cText: String? = String()
+//    var cImagePath: String? = String()
     
     private let presenter = NewsDetailPresenter()
     
@@ -28,28 +46,32 @@ class NewsDetailViewController: UIViewController, MvpView {
         super.viewDidLoad()
         
         initPresenter()
-        initView()
     }
 
+    func refreshUI() {
+        mTitle?.text = content?.cTitle
+        mDate?.text = content?.cDate
+        mText?.text = content?.cText
+        presenter.getImage(imageName: (content?.cImagePath)!)
+    }
+    
     func initPresenter() {
         presenter.attachView(view: self)
         
-        presenter.getImage(imageName: cImageText!)
+        //presenter.getImage(imageName: cImagePath!)
     }
 
-    func initView() {
-
-    }
     
     func onGetImageSuccess(_ image: UIImage) {
         mImage?.image = image
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        mTitle?.text = cTitle
-        mDate?.text = cDate
-        //mImage.image = cImage
-        mText?.text = cText
+        refreshUI()
+//        mTitle?.text = cTitle
+//        mDate?.text = cDate
+//        //mImage.image = cImage
+//        mText?.text = cText
 
     }
 }
