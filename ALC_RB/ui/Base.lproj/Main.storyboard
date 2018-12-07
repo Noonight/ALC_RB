@@ -144,8 +144,8 @@
                         <viewLayoutGuide key="safeArea" id="ydu-z6-vbG"/>
                     </view>
                     <navigationItem key="navigationItem" id="AtB-uw-s3E">
-                        <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="center" misplaced="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" id="PD3-2a-Fqy">
+                        <barButtonItem key="backBarButtonItem" title=" " id="W1E-g6-iuZ"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="center" contentHorizontalAlignment="fill" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" id="PD3-2a-Fqy">
                             <rect key="frame" x="8" y="7.5" width="359" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
@@ -336,10 +336,10 @@
             </objects>
             <point key="canvasLocation" x="-2036" y="-2833"/>
         </scene>
-        <!--All News TVC-->
+        <!--News All TVC-->
         <scene sceneID="Glb-kr-MnD">
             <objects>
-                <tableViewController id="kpc-Jg-Muj" userLabel="All News TVC" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="NewsAllTableViewController" id="kpc-Jg-Muj" userLabel="News All TVC" customClass="NewsAllTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="kdc-yW-h2q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -380,7 +380,7 @@
                                 <connections>
                                     <outlet property="content" destination="410-ru-cfV" id="NX2-xa-gnC"/>
                                     <outlet property="date" destination="TUb-H3-FB4" id="Ban-XB-g86"/>
-                                    <segue destination="Kv1-VO-635" kind="show" id="M4f-5t-IJv"/>
+                                    <segue destination="Kv1-VO-635" kind="show" identifier="NewsDetailIdentifier" id="M4f-5t-IJv"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -659,6 +659,6 @@
         <image name="ic_user" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bxV-uX-kDR"/>
+        <segue reference="M4f-5t-IJv"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -77,9 +77,10 @@ class NewsTableViewController: UITableViewController, MvpView {
             let destination = segue.destination as? NewsDetailViewController,
             let cellIndex = tableView.indexPathForSelectedRow?.row
         {
+            print(navigationItem.backBarButtonItem)
             destination.content = NewsDetailViewController.Content(
                 title: tableData.news.news[cellIndex].caption,
-                date: (tableData.news.news[cellIndex].updatedAt).UTCToLocal(from: .utc, to: .current),
+                date: (tableData.news.news[cellIndex].updatedAt).UTCToLocal(from: .utc, to: .local),
                 content: tableData.news.news[cellIndex].content,
                 imagePath: tableData.news.news[cellIndex].img)
 //            destination.cTitle = tableData.news.news[cellIndex].caption
@@ -123,7 +124,7 @@ class NewsTableViewController: UITableViewController, MvpView {
         
         if (indexPath.section == 0) {
             cellNews?.content?.text = tableData.news.news[indexPath.row].caption
-            cellNews?.date?.text = (tableData.news.news[indexPath.row].updatedAt).UTCToLocal(from: .utc, to: .current)
+            cellNews?.date?.text = (tableData.news.news[indexPath.row].updatedAt).UTCToLocal(from: .utc, to: .local)
             
             return cellNews!
         }
@@ -143,23 +144,47 @@ class NewsTableViewController: UITableViewController, MvpView {
     }
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let btn = UIButton(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
-        btn.backgroundColor = UIColor.white
-        
-        btn.addTarget(self, action: #selector(onBtnPressed), for: .touchUpInside)
-        btn.setTitle(tableData.footer[section], for: .normal)
-        btn.setTitleColor(.black, for: .normal)
+//        let btn = UIButton(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
+//        btn.backgroundColor = UIColor.white
+//
+//        btn.addTarget(self, action: #selector(onBtnPressed), for: .touchUpInside)
+//        btn.setTitle(tableData.footer[section], for: .normal)
+//        btn.setTitleColor(.black, for: .normal)
 
-        return btn
+        if (section == 0) {
+            let footerBtn = FooterBtn.instanceBtn(id: .news, title: tableData.footer[section], viewContainer: tableView)
+            footerBtn.addTarget(self, action: #selector(onFooterBtnPressed), for: .touchUpInside)
+            return footerBtn
+        }
+        if (section == 1) {
+            let footerBtn = FooterBtn.instanceBtn(id: .announces, title: tableData.footer[section], viewContainer: tableView)
+            footerBtn.addTarget(self, action: #selector(onFooterBtnPressed), for: .touchUpInside)
+            return footerBtn
+        }
+        
+        //let footerBtn = FooterBtn.instanceBtn(id: .news, title: <#T##String#>, viewContainer: <#T##UIView#>)
+        
+        return UIView()
     }
     
     // MARK: - footer action
-    @objc func onBtnPressed(_ sender: UIButton) {
-        print("btn")
+    @objc func onFooterBtnPressed(_ sender: FooterBtn) {
+        if (sender.btnType == .news) {
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            
+            let viewController = storyboard.instantiateViewController(withIdentifier: "NewsAllTableViewController") as! NewsAllTableViewController
+            
+            viewController.tableData = tableData.news
+            
+            navigationController?.pushViewController(viewController, animated: true)
+        } else if (sender.btnType == .announces) {
+            print("on all announce pressed")
+            //navigationController?.pushViewController(AnnounceAllTableViewController(), animated: true)
+        }
     }
 }
 
-class FooterBtn {
+class FooterBtn: UIButton {
     
     enum BtnType: Int {
         case news = 001
@@ -174,19 +199,33 @@ class FooterBtn {
         static let backgroundColor: UIColor = .white
     }
     
-    var id: BtnType?
-    var btn: UIButton?
+    var btnType: BtnType?
+    //var btn: UIButton?
     var viewContainer: UIView?
     
-    init(id: BtnType, viewContainer: UIView/*, actionTouchUpInside: @escaping () -> ()*/) {
-        self.id = id
+    init(id: BtnType, title: String, viewContainer: UIView/*, actionTouchUpInside: @escaping () -> ()*/) {
+        self.btnType = id
         self.viewContainer = viewContainer
-        btn = UIButton(frame: CGRect(x: DefaultParams.x,
-                                     y: DefaultParams.y,
-                                     width: Int(viewContainer.frame.width),
-                                     height: DefaultParams.height))
+//        btn = UIButton(frame: CGRect(x: DefaultParams.x,
+//                                     y: DefaultParams.y,
+//                                     width: Int(viewContainer.frame.width),
+//                                     height: DefaultParams.height))
+//        btn?.backgroundColor = DefaultParams.backgroundColor
+//        btn?.setTitle(title, for: .normal)
+//        btn?.setTitleColor(DefaultParams.titleColor, for: .normal)
 //        self.actionTouchUpInside = actionTouchUpInside
 //        btn?.addTarget(self, action: #selector(actionTouchUpInside), for: .touchUpInside)
+        super.init(frame: CGRect(x: DefaultParams.x,
+                                 y: DefaultParams.y,
+                                 width: Int(viewContainer.frame.width),
+                                 height: DefaultParams.height))
+        backgroundColor = DefaultParams.backgroundColor
+        setTitle(title, for: .normal)
+        setTitleColor(DefaultParams.titleColor, for: .normal)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func getInstance() -> FooterBtn {
@@ -197,8 +236,8 @@ class FooterBtn {
 //        
 //    }
     
-    static func instanceBtn(id: BtnType, viewContainer: UIView/*, actionTouchUpInside: () -> ()*/) -> FooterBtn {
-        return FooterBtn(id: id, viewContainer: viewContainer).getInstance()
+    static func instanceBtn(id: BtnType, title: String, viewContainer: UIView/*, actionTouchUpInside: () -> ()*/) -> FooterBtn {
+        return FooterBtn(id: id, title: title, viewContainer: viewContainer).getInstance()
     }
 }
 

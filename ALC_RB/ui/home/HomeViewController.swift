@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "NewsTableViewController") as! NewsTableViewController
-        
+        viewController.navigationItem.leftBarButtonItem?.title = ""
         self.add(childVC: viewController)
         
         return viewController
@@ -25,7 +25,7 @@ class HomeViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "GamesTableViewController") as! GamesTableViewController
-        
+        viewController.navigationItem.leftBarButtonItem?.title = ""
         self.add(childVC: viewController)
         
         return viewController
