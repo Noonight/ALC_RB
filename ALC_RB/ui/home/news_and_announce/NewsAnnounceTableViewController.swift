@@ -121,7 +121,7 @@ class NewsAnnounceTableViewController: UITableViewController, MvpView {
         
         let cellAnnounce = tableView.dequeueReusableCell(withIdentifier: self.cellAnnounce) as? AnnouncesTableViewCell
         
-        print("section: \(indexPath.section), row: \(indexPath.row)")
+        //print("section: \(indexPath.section), row: \(indexPath.row)")
         
         if (indexPath.section == 0) {
             cellNews?.content?.text = tableData.news.news[indexPath.row].caption

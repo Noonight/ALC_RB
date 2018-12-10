@@ -10,7 +10,9 @@ import Foundation
 
 enum DateFormats: String {
     case utc = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    case utcTime = "yyyy-MM-dd'T'HH:mm"
     case local = "dd.MM.yyyy"
+    case localTime = "HH:mm"
 }
 
 extension String {

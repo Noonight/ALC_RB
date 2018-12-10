@@ -21,10 +21,10 @@ class HomeViewController: UIViewController {
         
         return viewController
     }()
-    private lazy var gamesTable: GamesTableViewController = {
+    private lazy var gamesTable: UpcomingGamesTableViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
-        var viewController = storyboard.instantiateViewController(withIdentifier: "GamesTableViewController") as! GamesTableViewController
+        var viewController = storyboard.instantiateViewController(withIdentifier: "UpcomingGamesTableViewController") as! UpcomingGamesTableViewController
         
         self.add(childVC: viewController)
         
@@ -50,11 +50,11 @@ class HomeViewController: UIViewController {
             case 0:
                 remove(childVC: gamesTable)
                 add(childVC: newsTable)
-                print("Case 0")
+                //print("Case 0")
             case 1:
                 remove(childVC: newsTable)
                 add(childVC: gamesTable)
-                print("Case 1")
+                //print("Case 1")
             
             default:
                 break

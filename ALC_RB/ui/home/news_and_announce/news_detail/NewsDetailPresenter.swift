@@ -16,7 +16,7 @@ class NewsDetailPresenter: MvpPresenter<NewsDetailViewController> {
             .request(ApiRoute.getImageURL(image: imageName))
             .responseData { (response) in
                 if response.error == nil {
-                    print(response.result)
+                    //print(response.result)
                     
                     if let data = response.data {
                         self.getView().onGetImageSuccess(UIImage(data: data)!)

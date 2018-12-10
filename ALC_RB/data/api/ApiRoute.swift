@@ -13,7 +13,8 @@ struct ApiRoute {
     static let baseRoute = "http://footballapi.ibb.su/"
     
     static func getApiURL(_ mod: Routes) -> URL {
-        return URL(string: "\(baseRoute)api/\(mod)")!
+        print("\(baseRoute)api/\(mod.rawValue)")
+        return URL(string: "\(baseRoute)api/\(mod.rawValue)")!
     }
     
     static func getImageURL(image: String) -> URL {
@@ -25,4 +26,6 @@ enum Routes: String {
     case news = "news"
     case announce = "announce"
     case ads = "ads"
+    case upcomingMatches = "matches/upcoming"
+    case clubs = "clubs"
 }
