@@ -48,6 +48,10 @@ class NewsDetailViewController: UIViewController, MvpView {
         print()
         
         initPresenter()
+        
+        //mImage?.frame.minX = 0
+        //mImage?.frame.midY = 0
+        //mImage?.image
     }
 
     func refreshUI() {
@@ -66,6 +70,7 @@ class NewsDetailViewController: UIViewController, MvpView {
     
     func onGetImageSuccess(_ image: UIImage) {
         mImage?.image = image
+        //mImage.st
     }
     
     override func viewWillAppear(_ animated: Bool) {

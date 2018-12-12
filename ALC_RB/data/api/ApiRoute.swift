@@ -28,4 +28,5 @@ enum Routes: String {
     case ads = "ads"
     case upcomingMatches = "matches/upcoming"
     case clubs = "clubs"
+    case tournaments = "leagues/all"
 }

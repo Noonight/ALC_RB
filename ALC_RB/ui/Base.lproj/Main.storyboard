@@ -19,54 +19,60 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_tournament" rowHeight="121" id="XbJ-5i-LXI" customClass="TournamentTableViewCell" customModule="ALC_RB" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="320" height="121"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_tournament" rowHeight="125" id="XbJ-5i-LXI" customClass="TournamentTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="320" height="125"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XbJ-5i-LXI" id="jOR-lN-K8S">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="120.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="286" height="124.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleAspectFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aJF-iL-1LK">
-                                            <rect key="frame" x="8" y="8" width="304" height="104.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="286" height="124.5"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_con" translatesAutoresizingMaskIntoConstraints="NO" id="kTH-Xt-GGI">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="104.5"/>
+                                                    <rect key="frame" x="8" y="8" width="65" height="108.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="ZXH-am-z6D"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="khD-mU-rNX"/>
+                                                        <constraint firstAttribute="width" constant="65" id="jl7-45-bYx"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5Mu-Xh-BsC">
-                                                    <rect key="frame" x="108" y="0.0" width="196" height="104.5"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="5Mu-Xh-BsC">
+                                                    <rect key="frame" x="81" y="8" width="205" height="108.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="DOLOR IPPSUM SIT ALERT DISGUST ALERT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qv-SH-gmZ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="196" height="63.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="БайкалАвтоТрак - чемпионат Республики Бурятия по мини-футболу. Суперлига" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qv-SH-gmZ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="205" height="70"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="70" id="e5h-Zg-WUY"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0de-NT-ell">
-                                                            <rect key="frame" x="0.0" y="63.5" width="196" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01.01.2019 - 01.01.2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0de-NT-ell">
+                                                            <rect key="frame" x="0.0" y="74" width="205" height="14.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfk-yc-GA0">
-                                                            <rect key="frame" x="0.0" y="84" width="196" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Количество команд: 16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfk-yc-GA0">
+                                                            <rect key="frame" x="0.0" y="92.5" width="205" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="0de-NT-ell" secondAttribute="bottom" constant="20" symbolic="YES" id="L4t-sd-28U"/>
+                                                    </constraints>
                                                 </stackView>
                                             </subviews>
+                                            <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="0.0"/>
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="aJF-iL-1LK" secondAttribute="bottom" constant="8" id="AWe-mh-k1A"/>
-                                        <constraint firstAttribute="trailing" secondItem="aJF-iL-1LK" secondAttribute="trailing" constant="8" id="f2m-2X-Q0Y"/>
-                                        <constraint firstItem="aJF-iL-1LK" firstAttribute="leading" secondItem="jOR-lN-K8S" secondAttribute="leading" constant="8" id="mvl-2T-kzN"/>
-                                        <constraint firstItem="aJF-iL-1LK" firstAttribute="top" secondItem="jOR-lN-K8S" secondAttribute="top" constant="8" id="p3S-r6-sna"/>
+                                        <constraint firstItem="aJF-iL-1LK" firstAttribute="centerY" secondItem="jOR-lN-K8S" secondAttribute="centerY" id="3hQ-dR-vBh"/>
+                                        <constraint firstItem="aJF-iL-1LK" firstAttribute="centerX" secondItem="jOR-lN-K8S" secondAttribute="centerX" id="QN1-GF-iyn"/>
+                                        <constraint firstItem="aJF-iL-1LK" firstAttribute="leading" secondItem="jOR-lN-K8S" secondAttribute="leading" id="w2V-Uz-f1f"/>
+                                        <constraint firstItem="aJF-iL-1LK" firstAttribute="top" secondItem="jOR-lN-K8S" secondAttribute="top" id="yat-4X-96w"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -98,7 +104,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="center" contentHorizontalAlignment="fill" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ovm-Xc-AHE">
-                                <rect key="frame" x="8" y="72" width="304" height="29"/>
+                                <rect key="frame" x="8" y="71" width="304" height="29"/>
                                 <segments>
                                     <segment title="Расписание"/>
                                     <segment title="Команды"/>
