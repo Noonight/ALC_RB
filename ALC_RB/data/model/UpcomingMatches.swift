@@ -14,23 +14,26 @@ import Foundation
 import Alamofire
 
 struct UpcomingMatches: Codable {
-    let matches: [Match]
-    let count: Int
+    var matches: [Match]
+    var count: Int
 }
 
 struct Match: Codable {
-    let id, date: String
-    let stage, played: Bool
-    let tour: String
-    let playersList: [JSONAny]
-    let place: String
-    let winner, score, fouls, autoGoals: JSONNull?
-    let league: String
-    let teamOne, teamTwo: Team
-    let events, referees: [JSONAny]
-    let createdAt, updatedAt: String
-    let v: Int
-    let leagueID: String
+    var id, date: String
+    var stage, played: Bool
+    var tour: String
+    var playersList: [JSONAny]
+    var place: String
+    var winner/*, score*/, fouls, autoGoals: JSONNull?
+    var score: String
+    var league: String
+    var teamOne, teamTwo: Team
+    var events, referees: [JSONAny]
+    var createdAt, updatedAt: String
+    var v: Int
+    var leagueID: String
+    
+    
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
@@ -41,16 +44,18 @@ struct Match: Codable {
 }
 
 struct Team: Codable {
-    let status: String
-    let place: Int
-    let playoffPlace: JSONNull?
-    let madeToPlayoff: Bool
-    let group: String
-    let goals, goalsReceived, wins, losses: Int
-    let draws, groupScore: Int
-    let id, name, creator: String
-    let players: [Player]
-    let club: String
+    var status: String
+    var place: Int
+    var playoffPlace: JSONNull?
+    var madeToPlayoff: Bool
+    var group: String
+    var goals, goalsReceived, wins, losses: Int
+    var draws, groupScore: Int
+    var id, name, creator: String
+    var players: [Player]
+    var club: String
+    
+    
     
     enum CodingKeys: String, CodingKey {
         case status, place, playoffPlace, madeToPlayoff, group, goals, goalsReceived, wins, losses, draws, groupScore
@@ -121,6 +126,30 @@ extension UpcomingMatches {
 }
 
 extension Match {
+    
+    init() {
+        id = ""
+        date = ""
+        stage = false
+        played = false
+        tour = ""
+        playersList = []
+        place = ""
+        winner = nil
+        score = ""
+        fouls = nil
+        autoGoals = nil
+        league = ""
+        teamOne = Team()
+        teamTwo = Team()
+        events = []
+        referees = []
+        createdAt = ""
+        updatedAt = ""
+        v = -1
+        leagueID = ""
+    }
+    
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Match.self, from: data)
     }
@@ -145,7 +174,8 @@ extension Match {
         playersList: [JSONAny]? = nil,
         place: String? = nil,
         winner: JSONNull?? = nil,
-        score: JSONNull?? = nil,
+        //score: JSONNull?? = nil,
+        score: String? = "",
         fouls: JSONNull?? = nil,
         autoGoals: JSONNull?? = nil,
         league: String? = nil,
@@ -158,28 +188,52 @@ extension Match {
         v: Int? = nil,
         leagueID: String? = nil
         ) -> Match {
-        return Match(
-            id: id ?? self.id,
-            date: date ?? self.date,
-            stage: stage ?? self.stage,
-            played: played ?? self.played,
-            tour: tour ?? self.tour,
-            playersList: playersList ?? self.playersList,
-            place: place ?? self.place,
-            winner: winner ?? self.winner,
-            score: score ?? self.score,
-            fouls: fouls ?? self.fouls,
-            autoGoals: autoGoals ?? self.autoGoals,
-            league: league ?? self.league,
-            teamOne: teamOne ?? self.teamOne,
-            teamTwo: teamTwo ?? self.teamTwo,
-            events: events ?? self.events,
-            referees: referees ?? self.referees,
-            createdAt: createdAt ?? self.createdAt,
-            updatedAt: updatedAt ?? self.updatedAt,
-            v: v ?? self.v,
-            leagueID: leagueID ?? self.leagueID
-        )
+        
+        var match = Match()
+        match.id = id ?? self.id
+        match.date = date ?? self.date
+        match.stage = stage ?? self.stage
+        match.played = played ?? self.played
+        match.tour = tour ?? self.tour
+        match.playersList = playersList ?? self.playersList
+        match.place = place ?? self.place
+        match.winner = winner ?? self.winner
+        match.score = score ?? self.score
+        match.fouls = fouls ?? self.fouls
+        match.autoGoals = autoGoals ?? self.autoGoals
+        match.league = league ?? self.league
+        match.teamOne = teamOne ?? self.teamOne
+        match.teamTwo = teamTwo ?? self.teamTwo
+        match.events = events ?? self.events
+        match.referees = referees ?? self.referees
+        match.createdAt = createdAt ?? self.createdAt
+        match.updatedAt = updatedAt ?? self.updatedAt
+        match.v = v ?? self.v
+        match.leagueID = leagueID ?? self.leagueID
+        
+//        return Match(
+//            id: id ?? self.id,
+//            date: date ?? self.date,
+//            stage: stage ?? self.stage,
+//            played: played ?? self.played,
+//            tour: tour ?? self.tour,
+//            playersList: playersList ?? self.playersList,
+//            place: place ?? self.place,
+//            winner: winner ?? self.winner,
+//            score: score ?? self.score,
+//            fouls: fouls ?? self.fouls,
+//            autoGoals: autoGoals ?? self.autoGoals,
+//            league: league ?? self.league,
+//            teamOne: teamOne ?? self.teamOne,
+//            teamTwo: teamTwo ?? self.teamTwo,
+//            events: events ?? self.events,
+//            referees: referees ?? self.referees,
+//            createdAt: createdAt ?? self.createdAt,
+//            updatedAt: updatedAt ?? self.updatedAt,
+//            v: v ?? self.v,
+//            leagueID: leagueID ?? self.leagueID
+//        )
+        return match
     }
     
     func jsonData() throws -> Data {
@@ -192,6 +246,26 @@ extension Match {
 }
 
 extension Team {
+    
+    init() {
+        status = ""
+        place = -1
+        playoffPlace = nil
+        madeToPlayoff = false
+        group = ""
+        goals = -1
+        goalsReceived = -1
+        wins = -1
+        losses = -1
+        draws = -1
+        groupScore = -1
+        id = ""
+        name = ""
+        creator = ""
+        players = []
+        club = ""
+    }
+    
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Team.self, from: data)
     }
@@ -225,24 +299,44 @@ extension Team {
         players: [Player]? = nil,
         club: String? = nil
         ) -> Team {
-        return Team(
-            status: status ?? self.status,
-            place: place ?? self.place,
-            playoffPlace: playoffPlace ?? self.playoffPlace,
-            madeToPlayoff: madeToPlayoff ?? self.madeToPlayoff,
-            group: group ?? self.group,
-            goals: goals ?? self.goals,
-            goalsReceived: goalsReceived ?? self.goalsReceived,
-            wins: wins ?? self.wins,
-            losses: losses ?? self.losses,
-            draws: draws ?? self.draws,
-            groupScore: groupScore ?? self.groupScore,
-            id: id ?? self.id,
-            name: name ?? self.name,
-            creator: creator ?? self.creator,
-            players: players ?? self.players,
-            club: club ?? self.club
-        )
+        
+        var team = Team()
+        team.status = status ?? self.status
+        team.place = place ?? self.place
+        team.playoffPlace = playoffPlace ?? self.playoffPlace
+        team.madeToPlayoff = madeToPlayoff ?? self.madeToPlayoff
+        team.group = group ?? self.group
+        team.goals = goals ?? self.goals
+        team.goalsReceived = goalsReceived ?? self.goalsReceived
+        team.wins = wins ?? self.wins
+        team.losses = losses ?? self.losses
+        team.draws = draws ?? self.draws
+        team.groupScore = groupScore ?? self.groupScore
+        team.id = id ?? self.id
+        team.name = name ?? self.name
+        team.creator = creator ?? self.creator
+        team.players = players ?? self.players
+        team.club = club ?? self.club
+        
+//        return Team(
+//            status: status ?? self.status,
+//            place: place ?? self.place,
+//            playoffPlace: playoffPlace ?? self.playoffPlace,
+//            madeToPlayoff: madeToPlayoff ?? self.madeToPlayoff,
+//            group: group ?? self.group,
+//            goals: goals ?? self.goals,
+//            goalsReceived: goalsReceived ?? self.goalsReceived,
+//            wins: wins ?? self.wins,
+//            losses: losses ?? self.losses,
+//            draws: draws ?? self.draws,
+//            groupScore: groupScore ?? self.groupScore,
+//            id: id ?? self.id,
+//            name: name ?? self.name,
+//            creator: creator ?? self.creator,
+//            players: players ?? self.players,
+//            club: club ?? self.club
+//        )
+        return team
     }
     
     func jsonData() throws -> Data {

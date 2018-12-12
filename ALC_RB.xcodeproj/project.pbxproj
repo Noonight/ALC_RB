@@ -40,6 +40,7 @@
 		DB17385921BAA8A900017B6D /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB17385821BAA8A900017B6D /* ApiService.swift */; };
 		DB17385B21BAACB900017B6D /* Clubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB17385A21BAACB900017B6D /* Clubs.swift */; };
 		DB17385D21BAAFDC00017B6D /* UpcomingGameCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB17385C21BAAFDC00017B6D /* UpcomingGameCellPresenter.swift */; };
+		DB4A789121C0E7970071BA8F /* ViewCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4A789021C0E7970071BA8F /* ViewCenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		DB17385821BAA8A900017B6D /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		DB17385A21BAACB900017B6D /* Clubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clubs.swift; sourceTree = "<group>"; };
 		DB17385C21BAAFDC00017B6D /* UpcomingGameCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingGameCellPresenter.swift; sourceTree = "<group>"; };
+		DB4A789021C0E7970071BA8F /* ViewCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				CE77AC7A21B0F1BA00C0ED0D /* DateFormatter.swift */,
+				DB4A789021C0E7970071BA8F /* ViewCenter.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				DB17384B21BA56D400017B6D /* NewsAllTableViewController.swift in Sources */,
 				DB17385B21BAACB900017B6D /* Clubs.swift in Sources */,
 				CEA6EBB921A53FB9008F874D /* MvpView.swift in Sources */,
+				DB4A789121C0E7970071BA8F /* ViewCenter.swift in Sources */,
 				CEA6EB9C21A53CFE008F874D /* AppDelegate.swift in Sources */,
 				CE61551D21AFC33D008C4463 /* Announces.swift in Sources */,
 				CE60234321AE6A9F00B428EE /* UpcomingGamesTableViewController.swift in Sources */,

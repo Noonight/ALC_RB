@@ -22,11 +22,9 @@ class UpcomingGameTableViewCell: UITableViewCell, MvpView {
     
     let presenter = UpcomingGameCellPresenter()
     
-    var data: Match? {
-        didSet {
-            updateUI()
-        }
-    }
+    static let idCell = "cell_upcoming_game"
+    
+    var data = Match()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,20 +34,23 @@ class UpcomingGameTableViewCell: UITableViewCell, MvpView {
     
     func updateUI() {
         
-        if (data == nil) {
-            
-            print("data is nil")
-        }
-        mDate.text = data!.date.UTCToLocal(from: .utcTime, to: .local)
-        mTime.text = data!.date.UTCToLocal(from: .utcTime, to: .localTime)
-        mTour.text = data!.tour
-        mPlace.text = data!.place
+//        if (data == nil) {
+//
+//            print("data is nil")
+//        }
+        //mDate.text = data.date.UTCToLocal(from: .utcTime, to: .localTime)
+        print("Upcoming cell \(#function)")
+        print(data.date)
+        mDate.text = data.date.UTCToLocal(from: .utcTime, to: .local)
+        mTime.text = data.date.UTCToLocal(from: .utcTime, to: .localTime)
+        mTour.text = data.tour
+        mPlace.text = data.place
         //mImageTeam1.image = ApiService.getImage(imageName: data.teamOne.club, fun: <#T##(UIImage) -> ()#>)
-        presenter.getClub1Logo(club: data!.teamOne.club)
-        mTitleTeam1.text = data!.teamOne.name
-        mScore.text = data!.score as? String
-        presenter.getClub2Logo(club: data!.teamTwo.club)
-        mTitleTeam2.text = data!.teamTwo.name
+        presenter.getClub1Logo(club: data.teamOne.club)
+        mTitleTeam1.text = data.teamOne.name
+        mScore.text = data.score
+        presenter.getClub2Logo(club: data.teamTwo.club)
+        mTitleTeam2.text = data.teamTwo.name
         
     }
 
@@ -68,6 +69,7 @@ class UpcomingGameTableViewCell: UITableViewCell, MvpView {
     
     func setData(data: Match) {
         self.data = data
+        updateUI()
     }
 
 }

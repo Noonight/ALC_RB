@@ -12,6 +12,8 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
     
     let cellId = "cell_upcoming_game"
     
+    @IBOutlet var empty_view: UIView!
+    
     var tableData = UpcomingMatches()
     
     private let presenter = UpcomingGamesPresenter()
@@ -21,7 +23,7 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
         
         initPresenter()
         
-        //print(#function)
+        tableView.register(UpcomingGameTableViewCell.self, forCellReuseIdentifier: UpcomingGameTableViewCell.idCell)
     }
     
     func initPresenter() {
@@ -31,7 +33,25 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
     }
     
     func updateUI() {
-        tableView.reloadData()
+        
+        if (tableData.count == 0) {
+            showEmptyView()
+        }
+        hideEmptyView()
+        
+        self.tableView.reloadData()
+    }
+    
+    func showEmptyView() {
+        tableView.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
+        tableView.backgroundView?.addSubview(empty_view)
+        tableView.separatorStyle = .none
+        empty_view.setCenterFromParent()
+    }
+    
+    func hideEmptyView() {
+        tableView.backgroundView = nil
+        tableView.separatorStyle = .singleLine
     }
     
     func onGetUpcomingMatchesSuccesful(data: UpcomingMatches) {
@@ -49,12 +69,13 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? UpcomingGameTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: UpcomingGameTableViewCell.idCell, for: indexPath) as? UpcomingGameTableViewCell
         
         //cell!.configureCell(data: (tableData?.matches[indexPath.row])!)
         //cell?.data = tableData.matches[indexPath.row]
         
         cell?.setData(data: tableData.matches[indexPath.row])
+        cell?.data.date = "12.12.2018"
         
         return cell!
     }
