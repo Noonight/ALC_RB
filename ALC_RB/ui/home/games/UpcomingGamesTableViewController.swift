@@ -36,8 +36,9 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
         
         if (tableData.count == 0) {
             showEmptyView()
+        } else {
+            hideEmptyView()
         }
-        hideEmptyView()
         
         self.tableView.reloadData()
     }

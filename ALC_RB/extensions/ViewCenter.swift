@@ -22,7 +22,7 @@ extension UIView {
             self.centerXAnchor.constraint(equalTo: (superview?.centerXAnchor)!)
             self.centerYAnchor.constraint(equalTo: (superview?.centerYAnchor)!)
         } else {
-            print("superview is nil")
+            print("superview is nil, method \(#function) don't working see extension \(#file)")
         }
     }
 }
