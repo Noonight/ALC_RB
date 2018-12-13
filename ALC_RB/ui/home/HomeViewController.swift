@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "NewsTableViewController") as! NewsAnnounceTableViewController
         
-        self.add(childVC: viewController)
+        //self.add(childVC: viewController)
         
         return viewController
     }()
@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "UpcomingGamesTableViewController") as! UpcomingGamesTableViewController
         
-        self.add(childVC: viewController)
+        //self.add(childVC: viewController)
         
         return viewController
     }()

@@ -17,6 +17,10 @@ struct ApiRoute {
         return URL(string: "\(baseRoute)api/\(mod.rawValue)")!
     }
     
+    static func getApiLeagueURL(_ id: String) -> URL {
+        return URL(string: "\(baseRoute)api/\(Routes.leagueInfo.rawValue)/\(id)")!
+    }
+    
     static func getImageURL(image: String) -> URL {
         return URL(string: "\(baseRoute)\(image)")!
     }
@@ -29,4 +33,5 @@ enum Routes: String {
     case upcomingMatches = "matches/upcoming"
     case clubs = "clubs"
     case tournaments = "leagues/all"
+    case leagueInfo = "leagues/league"
 }

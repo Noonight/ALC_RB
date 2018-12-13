@@ -15,7 +15,7 @@ class NewsDetailViewController: UIViewController, MvpView {
     @IBOutlet weak var mImage: UIImageView?
     @IBOutlet weak var mText: UITextView?
     
-    struct Content {
+    struct NewsDetailContent {
         var cTitle: String? = String()
         var cDate: String? = String()
         var cText: String? = String()
@@ -29,7 +29,7 @@ class NewsDetailViewController: UIViewController, MvpView {
         }
     }
     
-    var content: Content? {
+    var content: NewsDetailContent? {
         didSet {
             refreshUI()
         }

@@ -18,6 +18,8 @@ class TournamentsTableViewController: UITableViewController, MvpView {
     
     let presenter = TournamentsPresenter()
     
+    let segueId = "TournamentsDetailSegue"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
@@ -37,6 +39,16 @@ class TournamentsTableViewController: UITableViewController, MvpView {
         presenter.getTournaments()
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  segue.identifier == segueId,
+            let destination = segue.destination as? LeagueDetailViewController,
+            let cellIndex = tableView.indexPathForSelectedRow?.row
+        {
+            destination.league = tournaments.leagues[cellIndex]
+            //destination.content = NewsDetailViewController.Content(
+        }
+    }
+    
     func updateUI() {
         tableView.reloadData()
     }
@@ -57,7 +69,7 @@ class TournamentsTableViewController: UITableViewController, MvpView {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_tournament", for: indexPath) as! TournamentTableViewCell
         //cell.img?.image =
-        cell.title?.text = tournaments.leagues[indexPath.row].tourney
+        cell.title?.text = tournaments.leagues[indexPath.row].tourney + ". " + tournaments.leagues[indexPath.row].name
         cell.date?.text = "\(tournaments.leagues[indexPath.row].beginDate) - \(tournaments.leagues[indexPath.row].endDate)"
         //cell.date?.text = "10.03.2018 - 10.04.2018"
         cell.commandNum?.text = "Количество команд: \(tournaments.leagues[indexPath.row].maxTeams)"

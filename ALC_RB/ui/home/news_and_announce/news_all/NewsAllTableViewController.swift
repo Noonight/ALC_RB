@@ -67,7 +67,7 @@ class NewsAllTableViewController: UITableViewController {
             let destination = segue.destination as? NewsDetailViewController,
             let cellIndex = tableView.indexPathForSelectedRow?.row
         {
-            destination.content = NewsDetailViewController.Content(
+            destination.content = NewsDetailViewController.NewsDetailContent(
                 title: tableData!.news[cellIndex].caption,
                 date: (tableData!.news[cellIndex].updatedAt).UTCToLocal(from: .utc, to: .local),
                 content: tableData!.news[cellIndex].content,
