@@ -18,11 +18,12 @@ struct Clubs: Codable {
 }
 
 struct Club: Codable {
-    let info, addLogo, addInfo, id: String
-    let name: String
-    let owner: Owner
-    let v: Int
-    let logo: String
+    var info, addLogo, addInfo, id: String
+    var name: String
+    var owner: Owner
+    var v: Int
+    var logo: String
+
     
     enum CodingKeys: String, CodingKey {
         case info, addLogo, addInfo
@@ -44,6 +45,7 @@ struct Owner: Codable {
     let v: Int
     let club: String
     let pastLeagues: [JSONAny]
+
     
     enum CodingKeys: String, CodingKey {
         case surname, name, lastname, birthdate, photo, desc, participationMatches
@@ -66,6 +68,11 @@ struct Participation: Codable {
 // MARK: Convenience initializers and mutators
 
 extension Clubs {
+    
+    init() {
+        clubs = [Club]()
+    }
+    
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Clubs.self, from: data)
     }
@@ -99,6 +106,18 @@ extension Clubs {
 }
 
 extension Club {
+    
+    init() {
+        info = ""
+        addLogo = ""
+        addInfo = ""
+        id = ""
+        name = ""
+        owner = Owner()
+        v = -1
+        logo = ""
+    }
+    
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Club.self, from: data)
     }
@@ -124,16 +143,16 @@ extension Club {
         v: Int? = nil,
         logo: String? = nil
         ) -> Club {
-        return Club(
-            info: info ?? self.info,
-            addLogo: addLogo ?? self.addLogo,
-            addInfo: addInfo ?? self.addInfo,
-            id: id ?? self.id,
-            name: name ?? self.name,
-            owner: owner ?? self.owner,
-            v: v ?? self.v,
-            logo: logo ?? self.logo
-        )
+        var club = Club()
+        club.info = info ?? self.info
+        club.addLogo = addLogo ?? self.addLogo
+        club.addInfo = addInfo ?? self.addInfo
+        club.id = id ?? self.id
+        club.name = name ?? self.name
+        club.owner = owner ?? self.owner
+        club.v = v ?? self.v
+        club.logo = logo ?? self.logo
+        return club
     }
     
     func jsonData() throws -> Data {
@@ -146,6 +165,29 @@ extension Club {
 }
 
 extension Owner {
+    
+    init() {
+        surname = ""
+        name = ""
+        lastname = ""
+        birthdate = ""
+        photo = ""
+        desc = ""
+        participationMatches = []//JSONAny()
+        id = ""
+        login = ""
+        password = ""
+        type = ""
+        pendingTeamInvites = []//JSONAny()
+        participation = []
+        createdAt = ""
+        updatedAt = ""
+        v = -1
+        club = ""
+        pastLeagues = []
+        
+    }
+    
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Owner.self, from: data)
     }

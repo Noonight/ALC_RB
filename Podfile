@@ -8,6 +8,7 @@ target 'ALC_RB' do
   # Pods for ALC_RB
   # pod 'SwipeViewController'  
   pod 'Alamofire', '~> 4.7'
+  pod 'AlamofireImage'
   #pod 'RxAlamofire'
   #pod 'RxSwift'
   #pod 'RxCocoa'

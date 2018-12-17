@@ -10,7 +10,8 @@ import UIKit
 
 class ClubTableViewCell: UITableViewCell {
 
-    
+    @IBOutlet weak var mImage: UIImageView!
+    @IBOutlet weak var mTitle: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

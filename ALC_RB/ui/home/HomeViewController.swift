@@ -62,7 +62,8 @@ class HomeViewController: UIViewController {
     }
     
     func add(childVC viewController: UIViewController) {
-        addChild(viewController)
+        //addChild(viewController) // xcode 10+
+        addChildViewController(viewController)
         
         viewContainer.addSubview(viewController.view)
         
@@ -72,6 +73,7 @@ class HomeViewController: UIViewController {
     
     func remove(childVC viewController: UIViewController) {
         viewController.view.removeFromSuperview()
-        viewController.removeFromParent()
+        //viewController.removeFromParent() // xcode 10+
+        viewController.removeFromParentViewController()
     }
 }
