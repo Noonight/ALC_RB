@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol MvpView {
+protocol MvpView {    
     func initPresenter() // add to viewDidLoad()
 }

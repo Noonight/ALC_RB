@@ -12,6 +12,8 @@ class ClubsTableViewController: UITableViewController, MvpView {
 
     let cellId = "cell_club"
     
+    let segueId = "TeamDetailSegue"
+    
     let presenter = ClubsPresenter()
     
     var clubs = Clubs()
@@ -116,16 +118,16 @@ extension ClubsTableViewController {
 extension ClubsTableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if  segue.identifier == newsDetailSegueIdentifier,
-//            let destination = segue.destination as? NewsDetailViewController,
-//            let cellIndex = tableView.indexPathForSelectedRow?.row
-//        {
-//            destination.content = NewsDetailViewController.NewsDetailContent(
-//                title: tableData!.news[cellIndex].caption,
-//                date: (tableData!.news[cellIndex].updatedAt).UTCToLocal(from: .utc, to: .local),
-//                content: tableData!.news[cellIndex].content,
-//                imagePath: tableData!.news[cellIndex].img)
-//        }
+        if  segue.identifier == segueId,
+            let destination = segue.destination as? ClubDetailViewController,
+            let cellIndex = tableView.indexPathForSelectedRow?.row
+        {
+            destination.content = ClubDetailContent(
+                image: (tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as! ClubTableViewCell).mImage.image!,
+                title: clubs.clubs[cellIndex].name,
+                owner: clubs.clubs[cellIndex].owner.surname,
+                text: clubs.clubs[cellIndex].info)
+        }
     }
     
 }

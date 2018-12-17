@@ -45,7 +45,7 @@ class NewsDetailViewController: UIViewController, MvpView {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print()
+        //print()
         
         initPresenter()
         

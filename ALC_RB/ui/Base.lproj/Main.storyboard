@@ -472,7 +472,7 @@
                                 <connections>
                                     <outlet property="mImage" destination="VgC-zL-Cbp" id="WJh-IR-TnB"/>
                                     <outlet property="mTitle" destination="sqy-2V-6NU" id="6Gd-TC-ivm"/>
-                                    <segue destination="3Vl-zP-x7d" kind="showDetail" action="showViewController:sender:" id="tCf-ZL-9by"/>
+                                    <segue destination="3Vl-zP-x7d" kind="showDetail" identifier="TeamDetailSegue" action="showViewController:sender:" id="tCf-ZL-9by"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -490,36 +490,36 @@
         <!--Team VC-->
         <scene sceneID="xCE-Pq-wc6">
             <objects>
-                <viewController id="3Vl-zP-x7d" userLabel="Team VC" sceneMemberID="viewController">
+                <viewController id="3Vl-zP-x7d" userLabel="Team VC" customClass="ClubDetailViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ago-da-fUr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_con" translatesAutoresizingMaskIntoConstraints="NO" id="d0t-L9-AHo">
-                                <rect key="frame" x="16" y="36" width="110" height="110"/>
+                                <rect key="frame" x="0.0" y="36" width="110" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="110" id="s5M-2E-yu6"/>
                                     <constraint firstAttribute="width" constant="110" id="u8I-OO-am8"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IQV-oA-e12">
-                                <rect key="frame" x="16" y="162" width="343" height="489"/>
+                                <rect key="frame" x="0.0" y="162" width="0.0" height="489"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="uJ5-YW-ddw">
-                                <rect key="frame" x="142" y="36" width="217" height="45"/>
+                                <rect key="frame" x="0.0" y="36" width="0.0" height="45"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OzA-mL-Eir">
-                                        <rect key="frame" x="0.0" y="0.0" width="217" height="23"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="23"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="owner" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kqb-mD-doo">
-                                        <rect key="frame" x="0.0" y="27" width="217" height="18"/>
+                                        <rect key="frame" x="0.0" y="27" width="0.0" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -540,6 +540,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5wQ-jA-UKH"/>
                     </view>
+                    <connections>
+                        <outlet property="mImage" destination="d0t-L9-AHo" id="flN-Rw-4KA"/>
+                        <outlet property="mOwner" destination="Kqb-mD-doo" id="Ppi-S6-uvs"/>
+                        <outlet property="mText" destination="IQV-oA-e12" id="d68-Xh-dzD"/>
+                        <outlet property="mTitle" destination="OzA-mL-Eir" id="HH7-Dv-914"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3ta-dg-j8T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
