@@ -34,4 +34,5 @@ enum Routes: String {
     case clubs = "clubs"
     case tournaments = "leagues/all"
     case leagueInfo = "leagues/league"
+    case getusers = "getusers"
 }

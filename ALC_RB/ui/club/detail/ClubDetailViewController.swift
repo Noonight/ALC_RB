@@ -41,6 +41,8 @@ class ClubDetailViewController: UIViewController {
         super.viewDidLoad()
         
         initPresenter()
+        
+        debugPrint(navigationController?.navigationBar ?? "no")
     }
     
     override func viewWillAppear(_ animated: Bool) {

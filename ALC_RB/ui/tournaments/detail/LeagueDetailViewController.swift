@@ -94,8 +94,8 @@ class LeagueDetailViewController: UIViewController, MvpView {
     }
     
     func add(_ viewController: UIViewController) {
-        //addChild(viewController) // xcode 10+
-        addChildViewController(viewController)
+        addChild(viewController) // xcode 10+
+        //addChildViewController(viewController)
         
         viewContainer.addSubview(viewController.view)
         
@@ -105,7 +105,7 @@ class LeagueDetailViewController: UIViewController, MvpView {
     
     func remove(_ viewController: UIViewController) {
         viewController.view.removeFromSuperview()
-        //viewController.removeFromParent() // xcode 10+
-        viewController.removeFromParentViewController()
+        viewController.removeFromParent() // xcode 10+
+        //viewController.removeFromParentViewController()
     }
 }
