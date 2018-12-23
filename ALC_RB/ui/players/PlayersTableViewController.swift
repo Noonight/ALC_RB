@@ -7,12 +7,20 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class PlayersTableViewController: UITableViewController {
 
     let presenter = PlayersPresenter()
+
+    let disposeBag = DisposeBag()
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     var players = Players()
+    
+    var searchedPlayers = Players()
     
     let cellId = "cell_players"
     
@@ -21,11 +29,36 @@ class PlayersTableViewController: UITableViewController {
         
         initPresenter()
         
+        configureSearchController()
+        
         tableView.tableFooterView = UIView()
     }
 
     func updateUI() {
         tableView.reloadData()
+    }
+    
+    func configureSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Поиск игроков"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        configureSearchAction()
+    }
+    
+    func configureSearchAction() {
+//        searchController.rx.
+//        let editText = UITextField(frame: CGRect(x: 0, y: 0, width: 150, height: view.frame.height))
+//        view.addSubview(editText)
+//
+//        editText.rx.text.orEmpty
+//            .debounce(1, scheduler: MainScheduler.instance)
+//            .
+//            .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+//            .subscribeOn(MainScheduler.instance)
+        
     }
 }
 
@@ -71,7 +104,7 @@ extension PlayersTableViewController {
 //            }
 //        }
         
-        debugPrint("section: \(indexPath.section), row: \(indexPath.row)")
+        //debugPrint("section: \(indexPath.section), row: \(indexPath.row)")
         
         return cell
     }
@@ -104,6 +137,12 @@ extension PlayersTableViewController {
 extension PlayersTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         debugPrint("\(indexPath.row)")
+    }
+}
+
+extension PlayersTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
     }
 }
 

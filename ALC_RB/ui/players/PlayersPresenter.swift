@@ -25,10 +25,10 @@ class PlayersPresenter: MvpPresenter<PlayersTableViewController> {
             .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
             .responsePlayers { response in
                 if let player = response.result.value {
-                    try! print(player.jsonString())
+                    //try! print(player.jsonString())
                     self.getView().onGetPlayersSuccess(player)
                 }
-                print(response.request)
+                //print(response.request)
         }
     }
     

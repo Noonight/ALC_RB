@@ -10,6 +10,6 @@ target 'ALC_RB' do
   pod 'Alamofire', '~> 4.7'
   pod 'AlamofireImage'
   #pod 'RxAlamofire'
-  #pod 'RxSwift'
-  #pod 'RxCocoa'
+  pod 'RxSwift'
+  pod 'RxCocoa'
 end
