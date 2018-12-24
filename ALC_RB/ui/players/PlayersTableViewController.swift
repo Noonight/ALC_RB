@@ -23,6 +23,7 @@ class PlayersTableViewController: UITableViewController {
     var searchedPlayers = Players()
     
     let cellId = "cell_players"
+    let segueId = "segue_player"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,5 +149,13 @@ extension PlayersTableViewController: UISearchResultsUpdating {
 
 extension PlayersTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueId,
+            let destination = segue.destination as? PlayerViewController,
+            let indexPath = tableView.indexPathForSelectedRow,
+            let cellIndex = tableView.indexPathForSelectedRow?.row {
+            destination.content = PlayerViewController.PlayerDetailContent(
+//                person: players.people[cellIndex], photo: tableView.cellForRow(at: indexPath) as 
+            )
+        }
     }
 }

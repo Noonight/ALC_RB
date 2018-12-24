@@ -627,6 +627,7 @@
                                     <outlet property="mBirthDate" destination="aAQ-gK-A5P" id="Jy5-kS-MMQ"/>
                                     <outlet property="mImage" destination="2Ht-3e-KBw" id="5aI-4t-bU9"/>
                                     <outlet property="mName" destination="jVK-M4-T1P" id="aPm-X0-djG"/>
+                                    <segue destination="qUi-Cc-iLw" kind="show" identifier="segue_player" id="TcK-xo-opv"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -640,6 +641,107 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u2x-JX-LRy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1116" y="-1273.313343328336"/>
+        </scene>
+        <!--Player VC-->
+        <scene sceneID="egi-Mw-4dL">
+            <objects>
+                <viewController id="qUi-Cc-iLw" userLabel="Player VC" customClass="PlayerViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GCs-7E-aoD" customClass="PlayerV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gR0-z6-sKs">
+                                <rect key="frame" x="16" y="80" width="343" height="100"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e0N-np-1XO">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="WHv-Dn-RIq"/>
+                                            <constraint firstAttribute="width" constant="100" id="c3Y-MW-hNz"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="fJh-ew-UVO">
+                                        <rect key="frame" x="116" y="0.0" width="227" height="69"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пупкин Алексей Иванович" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qxu-rP-jnd">
+                                                <rect key="frame" x="0.0" y="0.0" width="227" height="48"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20.10.2000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hlu-qO-DEl">
+                                                <rect key="frame" x="0.0" y="52" width="227" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.04767975956" green="0.46900761130000002" blue="0.74720400570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HBq-Cu-Hfp">
+                                <rect key="frame" x="0.0" y="222" width="375" height="396"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_player_past_league" rowHeight="50" id="g9v-fd-Buz" customClass="PlayerPastLeaguesTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g9v-fd-Buz" id="UIW-rN-V7b">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Кубок Бурятии по мини футболу. Первый этап. Золотая лига" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvX-Va-ayN">
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="49.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="fvX-Va-ayN" secondAttribute="trailing" id="MyC-dg-zxE"/>
+                                                <constraint firstItem="fvX-Va-ayN" firstAttribute="leading" secondItem="UIW-rN-V7b" secondAttribute="leadingMargin" id="fO4-4b-MDA"/>
+                                                <constraint firstAttribute="bottom" secondItem="fvX-Va-ayN" secondAttribute="bottom" id="kv9-s2-7Y9"/>
+                                                <constraint firstItem="fvX-Va-ayN" firstAttribute="top" secondItem="UIW-rN-V7b" secondAttribute="top" id="oaC-T3-bAj"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="mLeague" destination="fvX-Va-ayN" id="OJY-QJ-DAT"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Турниры" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X7l-bc-qQN">
+                                <rect key="frame" x="16" y="196" width="343" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="X7l-bc-qQN" firstAttribute="top" secondItem="gR0-z6-sKs" secondAttribute="bottom" constant="16" id="Am3-PU-hjB"/>
+                            <constraint firstItem="gR0-z6-sKs" firstAttribute="leading" secondItem="u8Y-tL-HYv" secondAttribute="leading" constant="16" id="DBN-bX-9gB"/>
+                            <constraint firstItem="HBq-Cu-Hfp" firstAttribute="leading" secondItem="u8Y-tL-HYv" secondAttribute="leading" id="OH5-tw-Qay"/>
+                            <constraint firstItem="HBq-Cu-Hfp" firstAttribute="bottom" secondItem="u8Y-tL-HYv" secondAttribute="bottom" id="POU-Un-8du"/>
+                            <constraint firstItem="X7l-bc-qQN" firstAttribute="leading" secondItem="u8Y-tL-HYv" secondAttribute="leading" constant="16" id="SUm-If-BSc"/>
+                            <constraint firstItem="HBq-Cu-Hfp" firstAttribute="trailing" secondItem="u8Y-tL-HYv" secondAttribute="trailing" id="Whq-1P-bNU"/>
+                            <constraint firstItem="HBq-Cu-Hfp" firstAttribute="top" secondItem="X7l-bc-qQN" secondAttribute="bottom" constant="8" id="WkT-58-SPb"/>
+                            <constraint firstItem="u8Y-tL-HYv" firstAttribute="trailing" secondItem="X7l-bc-qQN" secondAttribute="trailing" constant="16" id="WwK-rg-Ydu"/>
+                            <constraint firstAttribute="trailing" secondItem="gR0-z6-sKs" secondAttribute="trailing" constant="16" id="YJW-Kb-g1U"/>
+                            <constraint firstItem="gR0-z6-sKs" firstAttribute="top" secondItem="u8Y-tL-HYv" secondAttribute="top" constant="16" id="yTx-ej-P7P"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="u8Y-tL-HYv"/>
+                    </view>
+                    <connections>
+                        <outlet property="mBirthDate" destination="Hlu-qO-DEl" id="hZ9-u5-eWv"/>
+                        <outlet property="mName" destination="qxu-rP-jnd" id="cIU-C2-K8S"/>
+                        <outlet property="mPhoto" destination="e0N-np-1XO" id="XrZ-AH-Lpb"/>
+                        <outlet property="pastLeaguesTable" destination="HBq-Cu-Hfp" id="PQH-gV-mDP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lDm-ZX-hJy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-228" y="-1273.313343328336"/>
         </scene>
         <!--Players NC-->
         <scene sceneID="Vhx-Hg-Uce">

@@ -33,7 +33,7 @@ struct Person: Codable {
     let photo: String?
     let desc: String
     let participationMatches: [JSONAny]
-    let pastLeagues: [JSONAny]
+    let pastLeagues: [PastLeague]
     let id: String
     let login: String
     let password: String
@@ -146,7 +146,7 @@ extension Person {
         photo: String?? = nil,
         desc: String? = nil,
         participationMatches: [JSONAny]? = nil,
-        pastLeagues: [JSONAny]? = nil,
+        pastLeagues: [PastLeague]? = nil,
         id: String? = nil,
         login: String? = nil,
         password: String? = nil,
