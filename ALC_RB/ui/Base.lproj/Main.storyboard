@@ -19,50 +19,44 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_tournament" rowHeight="125" id="XbJ-5i-LXI" customClass="TournamentTableViewCell" customModule="ALC_RB" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="125"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell_tournament" id="XbJ-5i-LXI" customClass="TournamentTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XbJ-5i-LXI" id="jOR-lN-K8S">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="124.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleAspectFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aJF-iL-1LK">
-                                            <rect key="frame" x="0.0" y="0.0" width="341" height="124.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_con" translatesAutoresizingMaskIntoConstraints="NO" id="kTH-Xt-GGI">
-                                                    <rect key="frame" x="8" y="8" width="65" height="108.5"/>
+                                                    <rect key="frame" x="8" y="8" width="65" height="27.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="65" id="jl7-45-bYx"/>
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="5Mu-Xh-BsC">
-                                                    <rect key="frame" x="81" y="8" width="260" height="108.5"/>
+                                                    <rect key="frame" x="81" y="8" width="260" height="27.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="БайкалАвтоТрак - чемпионат Республики Бурятия по мини-футболу. Суперлига" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qv-SH-gmZ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="260" height="70"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="70" id="e5h-Zg-WUY"/>
-                                                            </constraints>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="БайкалАвтоТрак - чемпионат Республики Бурятия по мини-футболу. Суперлига" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qv-SH-gmZ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="260" height="19.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01.01.2019 - 01.01.2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0de-NT-ell">
-                                                            <rect key="frame" x="0.0" y="74" width="260" height="14.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="01.01.2019 - 01.01.2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0de-NT-ell">
+                                                            <rect key="frame" x="0.0" y="23.5" width="260" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Количество команд: 16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfk-yc-GA0">
-                                                            <rect key="frame" x="0.0" y="92.5" width="260" height="16"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Количество команд: 16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfk-yc-GA0">
+                                                            <rect key="frame" x="0.0" y="27.5" width="260" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="0de-NT-ell" secondAttribute="bottom" constant="20" symbolic="YES" id="L4t-sd-28U"/>
-                                                    </constraints>
                                                 </stackView>
                                             </subviews>
                                             <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="0.0"/>
@@ -646,14 +640,14 @@
         <scene sceneID="egi-Mw-4dL">
             <objects>
                 <viewController id="qUi-Cc-iLw" userLabel="Player VC" customClass="PlayerViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="GCs-7E-aoD" customClass="PlayerV">
+                    <view key="view" contentMode="scaleToFill" id="GCs-7E-aoD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gR0-z6-sKs">
                                 <rect key="frame" x="16" y="80" width="343" height="100"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e0N-np-1XO">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="e0N-np-1XO">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="WHv-Dn-RIq"/>
@@ -683,15 +677,15 @@
                                 <rect key="frame" x="0.0" y="222" width="375" height="396"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_player_past_league" rowHeight="50" id="g9v-fd-Buz" customClass="PlayerPastLeaguesTableViewCell" customModule="ALC_RB" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="50"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_player_past_league" id="g9v-fd-Buz" customClass="PlayerPastLeaguesTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="g9v-fd-Buz" id="UIW-rN-V7b">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Кубок Бурятии по мини футболу. Первый этап. Золотая лига" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvX-Va-ayN">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="49.5"/>
+                                                    <rect key="frame" x="15" y="8" width="345" height="27.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -700,8 +694,8 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="fvX-Va-ayN" secondAttribute="trailing" id="MyC-dg-zxE"/>
                                                 <constraint firstItem="fvX-Va-ayN" firstAttribute="leading" secondItem="UIW-rN-V7b" secondAttribute="leadingMargin" id="fO4-4b-MDA"/>
-                                                <constraint firstAttribute="bottom" secondItem="fvX-Va-ayN" secondAttribute="bottom" id="kv9-s2-7Y9"/>
-                                                <constraint firstItem="fvX-Va-ayN" firstAttribute="top" secondItem="UIW-rN-V7b" secondAttribute="top" id="oaC-T3-bAj"/>
+                                                <constraint firstAttribute="bottom" secondItem="fvX-Va-ayN" secondAttribute="bottom" constant="8" id="kv9-s2-7Y9"/>
+                                                <constraint firstItem="fvX-Va-ayN" firstAttribute="top" secondItem="UIW-rN-V7b" secondAttribute="top" constant="8" id="oaC-T3-bAj"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -733,12 +727,50 @@
                         <viewLayoutGuide key="safeArea" id="u8Y-tL-HYv"/>
                     </view>
                     <connections>
+                        <outlet property="empty_view" destination="Wky-Jy-VmL" id="b0A-Ll-nIm"/>
                         <outlet property="mBirthDate" destination="Hlu-qO-DEl" id="hZ9-u5-eWv"/>
                         <outlet property="mName" destination="qxu-rP-jnd" id="cIU-C2-K8S"/>
                         <outlet property="mPhoto" destination="e0N-np-1XO" id="XrZ-AH-Lpb"/>
                         <outlet property="pastLeaguesTable" destination="HBq-Cu-Hfp" id="PQH-gV-mDP"/>
                     </connections>
                 </viewController>
+                <view contentMode="scaleToFill" id="Wky-Jy-VmL">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ничего нет" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bz-4p-oyo">
+                            <rect key="frame" x="16" y="188" width="268" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="Z0H-5z-au5"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Здесь будут отображаться турниры" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GW6-Zs-FPy">
+                            <rect key="frame" x="16" y="224" width="268" height="44"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_empty" translatesAutoresizingMaskIntoConstraints="NO" id="GBp-Nr-70p">
+                            <rect key="frame" x="70" y="0.0" width="160" height="128"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="GW6-Zs-FPy" firstAttribute="top" secondItem="8bz-4p-oyo" secondAttribute="bottom" constant="15" id="1pi-wT-viV"/>
+                        <constraint firstItem="z8s-gK-wbp" firstAttribute="trailing" secondItem="GW6-Zs-FPy" secondAttribute="trailing" constant="16" id="Gyx-7L-std"/>
+                        <constraint firstItem="8bz-4p-oyo" firstAttribute="leading" secondItem="z8s-gK-wbp" secondAttribute="leading" constant="16" id="SAk-6Y-7BX"/>
+                        <constraint firstItem="8bz-4p-oyo" firstAttribute="top" secondItem="GBp-Nr-70p" secondAttribute="bottom" constant="60" id="Zxj-d1-gIM"/>
+                        <constraint firstItem="GBp-Nr-70p" firstAttribute="top" secondItem="z8s-gK-wbp" secondAttribute="top" id="bSg-gX-JhX"/>
+                        <constraint firstItem="GBp-Nr-70p" firstAttribute="leading" secondItem="z8s-gK-wbp" secondAttribute="leading" constant="70" id="gVc-Vo-P7U"/>
+                        <constraint firstItem="GBp-Nr-70p" firstAttribute="centerX" secondItem="8bz-4p-oyo" secondAttribute="centerX" id="lJp-rL-8MM"/>
+                        <constraint firstItem="z8s-gK-wbp" firstAttribute="trailing" secondItem="8bz-4p-oyo" secondAttribute="trailing" constant="16" id="pVG-lB-gsc"/>
+                        <constraint firstItem="GW6-Zs-FPy" firstAttribute="leading" secondItem="z8s-gK-wbp" secondAttribute="leading" constant="16" id="x1i-kC-pJh"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="z8s-gK-wbp"/>
+                </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lDm-ZX-hJy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-228" y="-1273.313343328336"/>

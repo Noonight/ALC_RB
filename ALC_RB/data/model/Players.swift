@@ -14,7 +14,7 @@ import Foundation
 import Alamofire
 
 struct Players: Codable {
-    let people: [Person]
+    var people: [Person]
     let count: Int
     
     
@@ -33,7 +33,7 @@ struct Person: Codable {
     let photo: String?
     let desc: String
     let participationMatches: [JSONAny]
-    let pastLeagues: [PastLeague]
+    var pastLeagues: [PastLeague]
     let id: String
     let login: String
     let password: String
@@ -64,6 +64,14 @@ struct Person: Codable {
         case updatedAt = "updatedAt"
         case v = "__v"
         case club = "club"
+    }
+    
+    func getFullName() -> String {
+        let fullName = "\(surname) \(name) \(lastname)"
+        if (fullName.count > 3) {
+            return fullName
+        }
+        return "Не указано"
     }
 }
 

@@ -20,7 +20,7 @@ class PlayersTableViewController: UITableViewController {
     
     var players = Players()
     
-    var searchedPlayers = Players()
+    var filteredPlayers = Players()
     
     let cellId = "cell_players"
     let segueId = "segue_player"
@@ -75,13 +75,16 @@ extension PlayersTableViewController: PlayersTableView {
         updateUI()
     }
 }
-
+// tableview datasource
 extension PlayersTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (isFiltering()) {
+            return filteredPlayers.people.count
+        }
         debugPrint(players.people.count)
         return players.people.count
     }
@@ -89,7 +92,13 @@ extension PlayersTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! PlayerTableViewCell
         
-        let player = players.people[indexPath.row]
+        let player: Person
+        if (isFiltering()) {
+            player = filteredPlayers.people[indexPath.row]
+        } else {
+            player = players.people[indexPath.row]
+        }
+        //let player = players.people[indexPath.row]
         
         configureCell(cell, player)
         
@@ -134,27 +143,52 @@ extension PlayersTableViewController {
         }
     }
 }
-
+//tableview delegate
 extension PlayersTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         debugPrint("\(indexPath.row)")
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-
+// search controller
 extension PlayersTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        
+        filterContentForQuery(searchController.searchBar.text!)
+    }
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForQuery(_ query: String, scope: String = "All") {
+        filteredPlayers.people = players.people.filter({ (person: Person) -> Bool in
+            return person.getFullName().lowercased().contains(query.lowercased())
+        })
+        updateUI()
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
     }
 }
-
+//segue
 extension PlayersTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == segueId,
             let destination = segue.destination as? PlayerViewController,
             let indexPath = tableView.indexPathForSelectedRow,
-            let cellIndex = tableView.indexPathForSelectedRow?.row {
+            let cellIndex = tableView.indexPathForSelectedRow?.row,
+            let cell = tableView.cellForRow(at: indexPath) as? PlayerTableViewCell
+        {
+            let person: Person
+            if isFiltering() {
+                person = filteredPlayers.people[cellIndex]
+            } else {
+                person = players.people[cellIndex]
+            }
             destination.content = PlayerViewController.PlayerDetailContent(
-//                person: players.people[cellIndex], photo: tableView.cellForRow(at: indexPath) as 
+                person: person, photo: cell.mImage.image!
             )
         }
     }

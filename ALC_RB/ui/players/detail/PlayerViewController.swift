@@ -15,6 +15,8 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var mBirthDate: UILabel!
     @IBOutlet weak var pastLeaguesTable: UITableView!
     
+    @IBOutlet var empty_view: UIView!
+    
     struct PlayerDetailContent {
         var person: Person
         var photo: UIImage
@@ -27,7 +29,7 @@ class PlayerViewController: UIViewController {
     
     var content: PlayerDetailContent? {
         didSet {
-            reloadUI()
+            //reloadUI()
         }
     }
     
@@ -35,13 +37,51 @@ class PlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareTableView()
+        reloadUI()
+        pastLeaguesTable.tableFooterView = UIView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+//        content?.person.pastLeagues = [
+//            PastLeague(name: "Кубок города", tourney: "t", teamName: "Валенки123", place: "У-У"),
+//            PastLeague(name: "Кубок поселка", tourney: "t", teamName: "Валенки123321", place: "У-У"),
+//            PastLeague(name: "Кубок республики", tourney: "t", teamName: "Валенки123231", place: "У-У")
+//        ]
+        reloadUI()
+    }
     func reloadUI() {
+        
+        if content?.person.pastLeagues.count == 0 {
+            showEmptyView()
+        } else {
+            hideEmptyView()
+        }
+        
         pastLeaguesTable.reloadData()
         mPhoto.image = content?.photo
         mName.text = content?.person.name
         mBirthDate.text = content?.person.birthdate.UTCToLocal(from: .utc, to: .local)
+    }
+    
+    func prepareTableView() {
+        pastLeaguesTable.dataSource = self
+        pastLeaguesTable.delegate = self
+    }
+}
+
+extension PlayerViewController: EmptyProtocol {
+    func showEmptyView() {
+        pastLeaguesTable.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: pastLeaguesTable.frame.width, height: pastLeaguesTable.frame.height))
+        pastLeaguesTable.backgroundView?.addSubview(empty_view)
+        pastLeaguesTable.separatorStyle = .none
+        empty_view.setCenterFromParent()
+    }
+    
+    func hideEmptyView() {
+        pastLeaguesTable.backgroundView = nil
+        pastLeaguesTable.separatorStyle = .singleLine
     }
 }
 
@@ -51,6 +91,7 @@ extension PlayerViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        debugPrint(content?.person.pastLeagues)
         return (content!.person.pastLeagues.count)
     }
     

@@ -62,6 +62,7 @@
 		DB6AA17E21C294A4007D4693 /* ClubsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA17D21C294A4007D4693 /* ClubsTableViewController.swift */; };
 		DB6AA18121C295C3007D4693 /* ClubsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA18021C295C3007D4693 /* ClubsPresenter.swift */; };
 		DB6AA18321C296DE007D4693 /* ClubTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA18221C296DE007D4693 /* ClubTableViewCell.swift */; };
+		DB78E13F21D529DC001C885D /* EmptyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78E13E21D529DC001C885D /* EmptyProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,6 +125,7 @@
 		DB6AA17D21C294A4007D4693 /* ClubsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubsTableViewController.swift; sourceTree = "<group>"; };
 		DB6AA18021C295C3007D4693 /* ClubsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubsPresenter.swift; sourceTree = "<group>"; };
 		DB6AA18221C296DE007D4693 /* ClubTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubTableViewCell.swift; sourceTree = "<group>"; };
+		DB78E13E21D529DC001C885D /* EmptyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +342,7 @@
 			children = (
 				CEA6EBB721A53F85008F874D /* mvp */,
 				CE0AF81621C78D9F00F8F6A2 /* ActivityIndicator.swift */,
+				DB78E13E21D529DC001C885D /* EmptyProtocol.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -588,6 +591,7 @@
 				DB2A35D621CA203B00E9E2C5 /* PlayersTableViewController.swift in Sources */,
 				DB17385021BA706E00017B6D /* AnnounceDateTableViewCell.swift in Sources */,
 				DB1816E621D11B29005375ED /* PlayerPastLeaguesTableViewCell.swift in Sources */,
+				DB78E13F21D529DC001C885D /* EmptyProtocol.swift in Sources */,
 				DB2A35DA21CA222B00E9E2C5 /* Players.swift in Sources */,
 				DB11CC9421C241E10083773E /* LeagueInfo.swift in Sources */,
 				CE61552521AFEB54008C4463 /* UserViewController.swift in Sources */,
