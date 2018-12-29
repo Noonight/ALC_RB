@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class NewsDetailViewController: UIViewController, MvpView {
 
@@ -59,6 +60,28 @@ class NewsDetailViewController: UIViewController, MvpView {
         mDate?.text = content?.cDate
         mText?.text = content?.cText
         presenter.getImage(imageName: (content?.cImagePath)!)
+        
+        //prepareImage()
+        mImage?.af_setImage(withURL: ApiRoute.getImageURL(image: (content?.cImagePath)!))
+    }
+    
+    func prepareImage() {
+        let width = view.frame.width
+        print("width is \(width)")
+        
+        var oldImage: UIImage?
+        presenter.getImage(imageName: (content?.cImagePath)!) { image in
+            oldImage = image
+            let oldWidth = oldImage?.cgImage?.width
+            let oldHeight = oldImage?.cgImage?.height
+            let newHeight = (Int(oldHeight!) / Int(oldWidth!)) * Int(width)
+            print("height is \(newHeight)")
+            //self.mImage?.image = oldImage?.af_imageAspectScaled(toFill: CGSize(width: Int(width), height: newHeight))
+            //self.mImage?.image = oldImage?.af_imageScaled(to: CGSize(width: Int(width), height: newHeight))
+            self.mImage?.image = oldImage?.cgImage?.scaleImageToSize(img: oldImage!, size: CGSize(width: Int(width), height: newHeight))
+        }
+        //mImage?.image?.af_inflate()
+        //mImage?.image?.af_imageAspectScaled(toFit: CGSize(width: view.frame.width, height: view.frame.height))
     }
     
     func initPresenter() {
@@ -69,7 +92,8 @@ class NewsDetailViewController: UIViewController, MvpView {
 
     
     func onGetImageSuccess(_ image: UIImage) {
-        mImage?.image = image
+        //mImage?.image = image
+        
         //mImage.st
     }
     
