@@ -9,6 +9,10 @@
 import Foundation
 import Alamofire
 
+protocol TournamentsView: MvpView {
+    func onGetTournamentSuccess(tournament: Tournaments)
+}
+
 class TournamentsPresenter: MvpPresenter<TournamentsTableViewController> {
     
     func getTournaments() {
@@ -17,6 +21,7 @@ class TournamentsPresenter: MvpPresenter<TournamentsTableViewController> {
             .request(ApiRoute.getApiURL(.tournaments))
             .responseTournaments { response in
                 if let tournaments = response.result.value {
+                    debugPrint(tournaments)
                     self.getView().onGetTournamentSuccess(tournament: tournaments)
                 }
         }

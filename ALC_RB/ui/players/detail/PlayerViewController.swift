@@ -16,6 +16,7 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var pastLeaguesTable: UITableView!
     
     @IBOutlet var empty_view: UIView!
+    @IBOutlet var tournament_label: UILabel!
     
     struct PlayerDetailContent {
         var person: Person
@@ -77,11 +78,13 @@ extension PlayerViewController: EmptyProtocol {
         pastLeaguesTable.backgroundView?.addSubview(empty_view)
         pastLeaguesTable.separatorStyle = .none
         empty_view.setCenterFromParent()
+        tournament_label.text = ""
     }
     
     func hideEmptyView() {
         pastLeaguesTable.backgroundView = nil
         pastLeaguesTable.separatorStyle = .singleLine
+        tournament_label.text = "Турниры"
     }
 }
 

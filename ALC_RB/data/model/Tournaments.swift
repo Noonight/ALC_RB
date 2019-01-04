@@ -14,7 +14,7 @@ import Foundation
 import Alamofire
 
 struct Tournaments: Codable {
-    let leagues: [League]
+    var leagues: [League]
     let count: Int
 }
 

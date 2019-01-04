@@ -54,6 +54,6 @@ class NewsDetailPresenter: MvpPresenter<NewsDetailViewController> {
                     //self.getView().hideLoading()
                 }
         }
-    }
+    }	
     
 }
