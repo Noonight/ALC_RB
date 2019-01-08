@@ -26,12 +26,12 @@ class TournamentsTableViewController: UITableViewController {
         super.viewDidLoad()
         initView()
         
-        tournaments.leagues = [
-            League(status: "Завершено", matches: [
-                   "match one",
-                   "match two"
-                ], id: "some id", tourney: "Турнир", name: "Имя", beginDate: "10.10.2010", endDate: "10.12.2012", maxTeams: 32, teams: [], transferBegin: "some date transfer", transferEnd: "some date transfer", playersMin: 16, playersMax: 64, playersCapacity: 92, yellowCardsToDisqual: 3, ageAllowedMin: 6, ageAllowedMax: 3)
-        ]
+//        tournaments.leagues = [
+//            League(status: "Завершено", matches: [
+//                   "match one",
+//                   "match two"
+//                ], id: "some id", tourney: "Турнир", name: "Имя", beginDate: "10.10.2010", endDate: "10.12.2012", maxTeams: 32, teams: [], transferBegin: "some date transfer", transferEnd: "some date transfer", playersMin: 16, playersMax: 64, playersCapacity: 92, yellowCardsToDisqual: 3, ageAllowedMin: 6, ageAllowedMax: 3)
+//        ]
         
         initPresenter()
     }

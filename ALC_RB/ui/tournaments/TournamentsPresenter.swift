@@ -20,10 +20,20 @@ class TournamentsPresenter: MvpPresenter<TournamentsTableViewController> {
         Alamofire
             .request(ApiRoute.getApiURL(.tournaments))
             .responseTournaments { response in
+                print(response.debugDescription)
+                print(response.description)
+                print(response.error.debugDescription)
+                try! debugPrint(response.result.value)
                 if let tournaments = response.result.value {
                     debugPrint(tournaments)
                     self.getView().onGetTournamentSuccess(tournament: tournaments)
                 }
+        }
+        
+        Alamofire
+            .request(ApiRoute.getApiURL(.tournaments))
+            .response { (response) in
+                print(response.response?.debugDescription)
         }
         
     }
