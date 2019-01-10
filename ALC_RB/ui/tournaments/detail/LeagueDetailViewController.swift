@@ -8,6 +8,17 @@
 
 import UIKit
 
+struct LeagueDetailModel {
+    var league = League()
+    var leagueInfo = LILeagueInfo()
+
+    init() { }
+    
+    init (_ league: League) {
+        self.league = league
+    }
+}
+
 class LeagueDetailViewController: UIViewController {
     
     private lazy var scheduleTable: ScheduleTableViewController = {
@@ -15,8 +26,8 @@ class LeagueDetailViewController: UIViewController {
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "ScheduleTableViewController") as! ScheduleTableViewController
         
-        viewController.league = league
-        viewController.leagueInfo = leagueInfo
+        viewController.leagueDetailModel.league = self.leagueDetailModel.league
+        viewController.leagueDetailModel.leagueInfo = self.leagueDetailModel.leagueInfo
         
         //self.add(viewController)
         
@@ -32,23 +43,6 @@ class LeagueDetailViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var mTitle: UILabel!
     
-    var league = League()
-    var leagueInfo = LILeagueInfo()
-    
-    struct LeagueDetailModel {
-        var league: League?
-        var leagueInfo: LILeagueInfo?
-        
-        init () {
-            league = League()
-            leagueInfo = LILeagueInfo()
-        }
-        
-        init (_ league: League) {
-            self.league = league
-        }
-    }
-    
     var leagueDetailModel = LeagueDetailModel()
     
     let presenter = LeagueDetailPresenter()
@@ -58,8 +52,8 @@ class LeagueDetailViewController: UIViewController {
         
         initPresenter()
         
-        updateUI()
         initFirst()
+        updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,30 +66,25 @@ class LeagueDetailViewController: UIViewController {
         navigationController?.navigationBar.hideBorderLine()
     }
     
-    
-    
     func initFirst() {
         add(scheduleTable)
     }
     
     func updateUI() {
-        mTitle.text = league.tourney
-        
-    }
-    
-    func onGetLeagueInfoSuccess(leagueInfo: LILeagueInfo) {
-        self.leagueInfo = leagueInfo
+        scheduleTable.leagueDetailModel = self.leagueDetailModel
+        mTitle.text = leagueDetailModel.league.tourney
     }
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         switch segmentControl.selectedSegmentIndex {
         case 0:
+//            remove()
+//            remove()
             add(scheduleTable)
-//            remove()
-//            remove()
 //            add()
             break
         case 1:
+            remove(scheduleTable)
             break
         case 2:
             break
@@ -123,13 +112,17 @@ class LeagueDetailViewController: UIViewController {
 }
 
 extension LeagueDetailViewController: LeagueDetailView {
-    func onGetLeagueInfoSeccess() {
-        
+    func onGetLeagueInfoSuccess(leagueInfo: LILeagueInfo) {
+        self.leagueDetailModel.leagueInfo = leagueInfo
+        //scheduleTable.leagueDetailModel = self.leagueDetailModel
+        //print(leagueInfo)
+        //try! debugPrint(leagueDetailModel.leagueInfo.jsonString())
+        updateUI()
     }
     
     func initPresenter() {
         presenter.attachView(view: self)
         
-        presenter.getTournamentInfo(id: league.id)
+        presenter.getTournamentInfo(id: leagueDetailModel.league.id)
     }
 }

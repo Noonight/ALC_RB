@@ -40,7 +40,7 @@ class TournamentsTableViewController: UITableViewController {
     
     private func initView() {
         
-        //tableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView()
         prepareActivityIndicator()
     }
 
@@ -75,9 +75,7 @@ extension TournamentsTableViewController: TournamentsView {
     
     func onGetTournamentSuccess(tournament: Tournaments) {
         self.tournaments = tournament
-        //debugPrint(tournaments.leagues)
         updateUI()
-        //showLoading()
     }
 }
 
@@ -128,8 +126,8 @@ extension TournamentsTableViewController {
             let destination = segue.destination as? LeagueDetailViewController,
             let cellIndex = tableView.indexPathForSelectedRow?.row
         {
-            destination.league = tournaments.leagues[cellIndex]
-            //destination.content = NewsDetailViewController.Content(
+            //destination.league = tournaments.leagues[cellIndex]
+            destination.leagueDetailModel = LeagueDetailModel(tournaments.leagues[cellIndex])
         }
     }
 }

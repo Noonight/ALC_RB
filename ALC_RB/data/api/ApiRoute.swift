@@ -24,6 +24,10 @@ struct ApiRoute {
     static func getImageURL(image: String) -> URL {
         return URL(string: "\(baseRoute)\(image)")!
     }
+    
+    static func getApiURL(_ mod: Routes, id: String) -> URL {
+        return URL(string: "\(baseRoute)api/\(mod.rawValue)/\(id)")!
+    }
 }
 
 enum Routes: String {
