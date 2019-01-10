@@ -9,6 +9,10 @@
 import Foundation
 import Alamofire
 
+protocol LeagueDetailView: MvpView {
+    func onGetLeagueInfoSeccess()
+}
+
 class LeagueDetailPresenter: MvpPresenter<LeagueDetailViewController> {
     
     func getTournamentInfo(id: String) {

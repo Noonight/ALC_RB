@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LeagueDetailViewController: UIViewController, MvpView {
+class LeagueDetailViewController: UIViewController {
     
     private lazy var scheduleTable: ScheduleTableViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -35,6 +35,22 @@ class LeagueDetailViewController: UIViewController, MvpView {
     var league = League()
     var leagueInfo = LILeagueInfo()
     
+    struct LeagueDetailModel {
+        var league: League?
+        var leagueInfo: LILeagueInfo?
+        
+        init () {
+            league = League()
+            leagueInfo = LILeagueInfo()
+        }
+        
+        init (_ league: League) {
+            self.league = league
+        }
+    }
+    
+    var leagueDetailModel = LeagueDetailModel()
+    
     let presenter = LeagueDetailPresenter()
     
     override func viewDidLoad() {
@@ -56,11 +72,7 @@ class LeagueDetailViewController: UIViewController, MvpView {
         navigationController?.navigationBar.hideBorderLine()
     }
     
-    func initPresenter() {
-        presenter.attachView(view: self)
-        
-        presenter.getTournamentInfo(id: league.id)
-    }
+    
     
     func initFirst() {
         add(scheduleTable)
@@ -107,5 +119,17 @@ class LeagueDetailViewController: UIViewController, MvpView {
         viewController.view.removeFromSuperview()
         viewController.removeFromParent() // xcode 10+
         //viewController.removeFromParentViewController()
+    }
+}
+
+extension LeagueDetailViewController: LeagueDetailView {
+    func onGetLeagueInfoSeccess() {
+        
+    }
+    
+    func initPresenter() {
+        presenter.attachView(view: self)
+        
+        presenter.getTournamentInfo(id: league.id)
     }
 }

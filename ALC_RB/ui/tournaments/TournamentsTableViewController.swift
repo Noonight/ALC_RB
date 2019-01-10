@@ -22,6 +22,8 @@ class TournamentsTableViewController: UITableViewController {
     
     let cellId = "cell_tournament"
     
+    let activityIndicator = UIActivityIndicatorView(style: .gray)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
@@ -38,16 +40,33 @@ class TournamentsTableViewController: UITableViewController {
     
     private func initView() {
         
-        tableView.tableFooterView = UIView()
-        
+        //tableView.tableFooterView = UIView()
+        prepareActivityIndicator()
     }
 
+    func prepareActivityIndicator() {
+        activityIndicator.hidesWhenStopped = true
+    }
+    
     func updateUI() {
         tableView.reloadData()
     }
 }
 
 extension TournamentsTableViewController: TournamentsView {
+    
+    func showLoading() {
+        tableView.backgroundView = activityIndicator
+        tableView.separatorStyle = .none
+        activityIndicator.startAnimating()
+    }
+    
+    func hideLoading() {
+        activityIndicator.stopAnimating()
+        tableView.separatorStyle = .singleLine
+        tableView.backgroundView = nil
+    }
+    
     func initPresenter() {
         presenter.attachView(view: self)
         
@@ -56,8 +75,9 @@ extension TournamentsTableViewController: TournamentsView {
     
     func onGetTournamentSuccess(tournament: Tournaments) {
         self.tournaments = tournament
-        debugPrint(tournaments.leagues)
+        //debugPrint(tournaments.leagues)
         updateUI()
+        //showLoading()
     }
 }
 
@@ -72,19 +92,27 @@ extension TournamentsTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TournamentTableViewCell
-        //cell.img?.image =
-        cell.title?.text = tournaments.leagues[indexPath.row].tourney + ". " + tournaments.leagues[indexPath.row].name
-        cell.date?.text = "\(tournaments.leagues[indexPath.row].beginDate) - \(tournaments.leagues[indexPath.row].endDate)"
+        let model = tournaments.leagues[indexPath.row]
+        
+        configureCell(cell, model)
+        
+        return cell
+    }
+    
+    func configureCell(_ cell: TournamentTableViewCell, _ model: League) {
+        cell.title?.text = model.tourney + ". " + model.name
+        cell.date?.text = "\(model.beginDate) - \(model.endDate)"
         //cell.date?.text = "10.03.2018 - 10.04.2018"
         //cell.commandNum?.text = "Количество команд: \(tournaments.leagues[indexPath.row].maxTeams)"
-        cell.commandNum?.text = String(tournaments.leagues[indexPath.row].maxTeams)
-        if (tournaments.leagues[indexPath.row].status == tournamentFinished) {
+        cell.commandNum?.text = String(model.maxTeams)
+        if (model.status == tournamentFinished) {
             cell.img?.image = UIImage(named: "ic_fin")
+            //cell.status.text = "Завершен"
+            cell.status.isHidden = false
         } else {
-            
+            //cell.status.text = ""
+            cell.status.isHidden = true
         }
-        //cell.img?.image
-        return cell
     }
 }
 

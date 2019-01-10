@@ -14,6 +14,7 @@ class TournamentTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel?
     @IBOutlet weak var date: UILabel?
     @IBOutlet weak var commandNum: UILabel?
+    @IBOutlet weak var status: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

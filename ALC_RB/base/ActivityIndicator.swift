@@ -10,9 +10,6 @@ import Foundation
 import UIKit
 
 protocol ActivityIndicator {
-    
-    var indicator: UIActivityIndicatorView { get }
-    
     func showLoading()
     func hideLoading()
 }

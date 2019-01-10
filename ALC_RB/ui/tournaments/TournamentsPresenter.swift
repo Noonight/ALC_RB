@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-protocol TournamentsView: MvpView {
+protocol TournamentsView: MvpView, ActivityIndicator {
     func onGetTournamentSuccess(tournament: Tournaments)
 }
 
@@ -17,23 +17,15 @@ class TournamentsPresenter: MvpPresenter<TournamentsTableViewController> {
     
     func getTournaments() {
         
+        self.getView().showLoading()
+        debugPrint("Indicator show loading start")
         Alamofire
             .request(ApiRoute.getApiURL(.tournaments))
             .responseTournaments { response in
-                print(response.debugDescription)
-                print(response.description)
-                print(response.error.debugDescription)
-                try! debugPrint(response.result.value)
                 if let tournaments = response.result.value {
-                    debugPrint(tournaments)
                     self.getView().onGetTournamentSuccess(tournament: tournaments)
+                    self.getView().hideLoading()
                 }
-        }
-        
-        Alamofire
-            .request(ApiRoute.getApiURL(.tournaments))
-            .response { (response) in
-                print(response.response?.debugDescription)
         }
         
     }
