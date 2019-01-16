@@ -38,7 +38,15 @@ class LeagueDetailViewController: UIViewController {
         
         return viewController
     }()
-//    private lazy var teamsTable
+    private lazy var teamsTable: TeamsLeagueTableViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        var viewController = storyboard.instantiateViewController(withIdentifier: "TeamsLeagueTableViewController") as! TeamsLeagueTableViewController
+        
+        viewController.leagueDetailModel = self.leagueDetailModel
+        
+        return viewController
+    }()
 //    private lazy var playersTable
 
     
@@ -83,13 +91,14 @@ class LeagueDetailViewController: UIViewController {
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         switch segmentControl.selectedSegmentIndex {
         case 0:
-//            remove()
+            remove(teamsTable)
 //            remove()
             add(scheduleTable)
 //            add()
             break
         case 1:
             remove(scheduleTable)
+            add(teamsTable)
             break
         case 2:
             break
