@@ -46,7 +46,12 @@ class ScheduleTableViewController: UITableViewController {
     func leagueInfoMatchesIsEmpty() -> Bool {
         //debugPrint(leagueDetailModel.leagueInfo.league.matches)
         print (leagueDetailModel.leagueInfo.league.matches.isEmpty ? " League matches is empty --- " : " League matches not empty +++ ")
-        return leagueDetailModel.leagueInfo.league.matches.isEmpty
+        if leagueDetailModel.league.matches.count > 0 {
+            return false
+        } else {
+            return true
+        }
+        //return leagueDetailModel.leagueInfo.league.matches.isEmpty
     }
     
     func checkEmptyView() {
@@ -60,6 +65,7 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     func updateUI() {
+        debugPrint(#function)
         checkEmptyView()
     }
 }
@@ -67,6 +73,7 @@ class ScheduleTableViewController: UITableViewController {
 extension ScheduleTableViewController: LeagueMainProtocol {
     func updateData(leagueDetailModel: LeagueDetailModel) {
         self.leagueDetailModel = leagueDetailModel
+        print(#function)
         updateUI()
     }
 }
@@ -124,6 +131,15 @@ extension ScheduleTableViewController {
     }
     
     func configureCell(_ cell: ScheduleTableViewCell, _ model: LILeague, _ match: LIMatch) {
+        
+        if match.played {
+            cell.accessoryType = .disclosureIndicator
+            //cell.selectionStyle = .default
+        } else {
+            cell.accessoryType = .none
+            //cell.selectionStyle = .none
+        }
+        
         //debugPrint(model.matches)
         cell.mDate.text = match.date.UTCToLocal(from: .utc, to: .local)
         cell.mTime.text = match.date.UTCToLocal(from: .utcTime, to: .localTime)
@@ -170,5 +186,21 @@ extension ScheduleTableViewController {
     enum TeamEnum: Int {
         case one = 1
         case two = 2
+    }
+}
+
+extension ScheduleTableViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+//        if leagueDetailModel.leagueInfo.league.matches[indexPath.row].played {
+//
+//        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if leagueDetailModel.leagueInfo.league.matches[indexPath.row].played {
+            return indexPath
+        }
+        return nil
     }
 }
