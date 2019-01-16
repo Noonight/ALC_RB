@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-protocol TournamentsView: MvpView, ActivityIndicator {
+protocol TournamentsView: MvpView, ActivityIndicatorProtocol {
     func onGetTournamentSuccess(tournament: Tournaments)
 }
 

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol ActivityIndicator {
+protocol ActivityIndicatorProtocol {
     func showLoading()
     func hideLoading()
 }

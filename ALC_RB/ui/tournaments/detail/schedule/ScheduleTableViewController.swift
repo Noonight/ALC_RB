@@ -21,6 +21,8 @@ class ScheduleTableViewController: UITableViewController {
         }
     }
     
+    let activityIndicator = UIActivityIndicatorView(style: .gray)
+    
     @IBOutlet var empty_view: UIView!
     
     override func viewDidLoad() {
@@ -40,7 +42,7 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     func initView() {
-        
+        //showLoading()
     }
     
     func leagueInfoMatchesIsEmpty() -> Bool {
@@ -55,6 +57,7 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     func checkEmptyView() {
+        //hideLoading()
         if leagueInfoMatchesIsEmpty() {
             showEmptyView()
         } else {
@@ -86,6 +89,20 @@ extension ScheduleTableViewController: ScheduleLeagueView {
     func initPresenter() {
         presenter.attachView(view: self)
         
+    }
+}
+
+extension ScheduleTableViewController: ActivityIndicatorProtocol {
+    func showLoading() {
+        tableView.backgroundView = activityIndicator
+        tableView.separatorStyle = .none
+        activityIndicator.startAnimating()
+    }
+    
+    func hideLoading() {
+        activityIndicator.stopAnimating()
+        tableView.separatorStyle = .singleLine
+        tableView.backgroundView = nil
     }
 }
 
