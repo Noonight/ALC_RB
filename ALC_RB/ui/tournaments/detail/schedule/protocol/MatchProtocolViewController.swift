@@ -24,5 +24,11 @@ class MatchProtocolViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initView()
+    }
+    
+    func initView() {
+        title = "Протокол"
     }
 }
