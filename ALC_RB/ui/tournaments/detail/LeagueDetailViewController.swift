@@ -19,6 +19,11 @@ struct LeagueDetailModel {
     }
 }
 
+protocol LeagueMainProtocol {
+    /// updating data in controller
+    func updateData(leagueDetailModel: LeagueDetailModel)
+}
+
 class LeagueDetailViewController: UIViewController {
     
     private lazy var scheduleTable: ScheduleTableViewController = {

@@ -13,27 +13,61 @@ class ScheduleTableViewController: UITableViewController {
 
     let cellId = "cell_schedule"
     
+    let presenter = ScheduleLeaguePresenter()
+    
     var leagueDetailModel = LeagueDetailModel() {
         didSet {
             updateUI()
         }
     }
     
-    let presenter = ScheduleLeaguePresenter()
+    @IBOutlet var empty_view: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initPresenter()
         
-        updateUI()
+        initView()
         
-//        try! debugPrint(leagueDetailModel.league.jsonString())
-//        try! debugPrint(leagueDetailModel.leagueInfo.jsonString())
+        //updateUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        //updateUI()
+    }
+    
+    func initView() {
+        
+    }
+    
+    func leagueInfoMatchesIsEmpty() -> Bool {
+        //debugPrint(leagueDetailModel.leagueInfo.league.matches)
+        print (leagueDetailModel.leagueInfo.league.matches.isEmpty ? " League matches is empty --- " : " League matches not empty +++ ")
+        return leagueDetailModel.leagueInfo.league.matches.isEmpty
+    }
+    
+    func checkEmptyView() {
+        if leagueInfoMatchesIsEmpty() {
+            showEmptyView()
+        } else {
+            hideEmptyView()
+            
+            tableView.reloadData()
+        }
     }
     
     func updateUI() {
-        tableView.reloadData()
+        checkEmptyView()
+    }
+}
+
+extension ScheduleTableViewController: LeagueMainProtocol {
+    func updateData(leagueDetailModel: LeagueDetailModel) {
+        self.leagueDetailModel = leagueDetailModel
+        updateUI()
     }
 }
 
@@ -45,6 +79,21 @@ extension ScheduleTableViewController: ScheduleLeagueView {
     func initPresenter() {
         presenter.attachView(view: self)
         
+    }
+}
+
+extension ScheduleTableViewController: EmptyProtocol {
+    func hideEmptyView() {
+        tableView.separatorStyle = .singleLine
+        tableView.backgroundView = nil
+    }
+    
+    func showEmptyView() {
+        tableView.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
+        tableView.backgroundView?.addSubview(empty_view)
+        empty_view.setCenterFromParent()
+
+        tableView.separatorStyle = .none
     }
 }
 
@@ -88,12 +137,16 @@ extension ScheduleTableViewController {
         cell.mTitleTeam1.text = getTeamTitle(league: model, match: match, team: .one)
         cell.mTitleTeam2.text = getTeamTitle(league: model, match: match, team: .two)
         cell.mScore.text = match.score ?? "-"
+//
+//        presenter.getClubImage(id: match.teamOne) { (image) in
+//            cell.mImageTeam1.image = image.af_imageRoundedIntoCircle()
+//        }
+//        presenter.getClubImage(id: match.teamTwo) { (image) in
+//            cell.mImageTeam2.image = image.af_imageRoundedIntoCircle()
+//        }
         
-        presenter.getClubImage(id: match.teamOne) { (image) in
-            cell.mImageTeam1.image = image.af_imageRoundedIntoCircle()
-        }
-        presenter.getClubImage(id: match.teamTwo) { (image) in
-            cell.mImageTeam2.image = image.af_imageRoundedIntoCircle()
+        presenter.getClubs(id: match.teamOne) { (clubs) in
+            //debugPrint(clubs.clubs.first?.logo)
         }
         
         //cell.mImageTeam1.af_setImage(withURL: ApiRoute.getImageURL(image: ))

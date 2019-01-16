@@ -26,6 +26,7 @@ struct ApiRoute {
     }
     
     static func getApiURL(_ mod: Routes, id: String) -> URL {
+        debugPrint("\(baseRoute)api/\(mod.rawValue)/\(id)")
         return URL(string: "\(baseRoute)api/\(mod.rawValue)/\(id)")!
     }
 }

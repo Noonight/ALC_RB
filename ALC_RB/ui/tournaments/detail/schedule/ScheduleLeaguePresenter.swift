@@ -28,19 +28,30 @@ class ScheduleLeaguePresenter: MvpPresenter<ScheduleTableViewController> {
 //
 //    }
     
-    func getClub(id: String, getting: @escaping (Clubs) -> ()) {
+    func getClubs(id: String, getting: @escaping (Clubs) -> ()) {
+        //debugPrint("presenter : getClubs called")
         Alamofire
             .request(ApiRoute.getApiURL(.clubs, id: id))
+            .validate()
             .responseClubs { response in
-                if let club = response.result.value {
-                    debugPrint("get club complete \(club.clubs.first?.logo)")
-                    getting(club)
+                switch response.result {
+                case .success:
+                    if let clubs = response.result.value {
+                        getting(clubs)
+                    }
+                case .failure:
+                    debugPrint("failure getting clubs with id : \(id) \n message is \(response.result.value)")
                 }
+                
+//                if let club = response.result.value {
+//                    debugPrint("get club complete \(club.clubs.first?.logo)")
+//                    getting(club)
+//                }
         }
     }
     
     func getClubImage(id club: String, getting: @escaping (UIImage) -> ()) {
-        getClub(id: club) { (clubs) in
+        getClubs(id: club) { (clubs) in
             Alamofire
                 .request(ApiRoute.getImageURL(image: (clubs.clubs.first?.logo)!))
                 .responseImage(completionHandler: { response in
