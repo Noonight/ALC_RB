@@ -43,6 +43,7 @@ class ScheduleTableViewController: UITableViewController {
     
     func initView() {
         //showLoading()
+        //title = " "
     }
     
     func leagueInfoMatchesIsEmpty() -> Bool {

@@ -11,7 +11,7 @@ import UIKit
 class TeamLeagueTableViewCell: UITableViewCell {
 
     @IBOutlet weak var position_label: UILabel!
-    @IBOutlet weak var title_label: UILabel!
+    @IBOutlet weak var team_btn: UIButton!
     @IBOutlet weak var games_label: UILabel!
     @IBOutlet weak var rm_label: UILabel!
     @IBOutlet weak var score_label: UILabel!

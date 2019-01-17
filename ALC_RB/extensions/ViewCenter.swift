@@ -28,7 +28,7 @@ extension UIView {
             
             center.x = (superview?.center.x)!
             center.y = (superview?.center.y)!
-            //self.alignmentRect(forFrame: (superview?.frame)!)
+//            self.alignmentRect(forFrame: (superview?.frame)!)
         } else {
             print("superview is nil, method \(#function) don't working see extension \(#file)")
         }

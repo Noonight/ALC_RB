@@ -95,7 +95,7 @@ extension TeamsLeagueTableViewController {
     
     func configureCell(_ cell: TeamLeagueTableViewCell, _ model: Team) {
         //cell.position_label.text = model.playoffPlace ?? "-"
-        cell.title_label.text = model.name
+        cell.team_btn.titleLabel?.text = model.name
         cell.games_label.text = String(model.wins + model.losses)
         cell.rm_label.text = String(model.goals - model.goalsReceived)
         cell.score_label.text = String(model.groupScore)
@@ -107,7 +107,7 @@ extension TeamsLeagueTableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return nil
-    }
+//    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+//        return nil
+//    }
 }

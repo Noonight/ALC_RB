@@ -30,5 +30,10 @@ class MatchProtocolViewController: UIViewController {
     
     func initView() {
         title = "Протокол"
+        navigationController?.navigationBar.topItem?.title = " "
+//        self.parent?.navigationItem.backBarButtonItem?.title = " "
+//        print(navigationController)
+//        print(navigationItem)
+//        print(parent?.navigationItem.backBarButtonItem)
     }
 }
