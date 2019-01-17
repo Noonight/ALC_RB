@@ -24,6 +24,7 @@ class TeamsLeagueTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
+        title = " "
     }
 }
 
@@ -95,7 +96,8 @@ extension TeamsLeagueTableViewController {
     
     func configureCell(_ cell: TeamLeagueTableViewCell, _ model: Team) {
         //cell.position_label.text = model.playoffPlace ?? "-"
-        cell.team_btn.titleLabel?.text = model.name
+        //cell.team_btn.titleLabel?.text = model.name
+        cell.team_btn.setTitle(model.name, for: .normal)
         cell.games_label.text = String(model.wins + model.losses)
         cell.rm_label.text = String(model.goals - model.goalsReceived)
         cell.score_label.text = String(model.groupScore)
