@@ -388,12 +388,15 @@
                                     <segment title="Состав"/>
                                     <segment title="Матчи"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentChanged:" destination="Keq-tZ-Yat" eventType="valueChanged" id="sXM-TJ-qFE"/>
+                                </connections>
                             </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vUD-mg-kKa">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="eOt-e0-fBF" firstAttribute="trailing" secondItem="vUD-mg-kKa" secondAttribute="trailing" id="9vu-gC-yrn"/>
                             <constraint firstItem="eOt-e0-fBF" firstAttribute="trailing" secondItem="Tka-77-rOe" secondAttribute="trailing" constant="8" id="AK9-4X-Cmz"/>
@@ -405,6 +408,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eOt-e0-fBF"/>
                     </view>
+                    <connections>
+                        <outlet property="segmentedControl" destination="Tka-77-rOe" id="htY-Yx-fs6"/>
+                        <outlet property="viewContainer" destination="vUD-mg-kKa" id="DsM-Wx-Jd4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pHg-wm-iBa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

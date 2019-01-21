@@ -61,6 +61,9 @@
 		DB4A789821C154E70071BA8F /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4A789721C154E70071BA8F /* NavigationBar.swift */; };
 		DB57C5D221F0BFD500BEA097 /* TeamLeagueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57C5D121F0BFD500BEA097 /* TeamLeagueDetailViewController.swift */; };
 		DB58E95C21E8A7FA00AF265E /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB58E95B21E8A7FA00AF265E /* EmptyView.xib */; };
+		DB59433421F212BE00945601 /* SegmentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59433321F212BE00945601 /* SegmentHelper.swift */; };
+		DB59433821F219FE00945601 /* PlayersTeamLeagueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59433721F219FE00945601 /* PlayersTeamLeagueDetailViewController.swift */; };
+		DB59433A21F21A2300945601 /* MatchesTeamLeagueDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59433921F21A2300945601 /* MatchesTeamLeagueDetailTableViewController.swift */; };
 		DB595C7221EF2214000282F4 /* MatchProtocolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB595C7121EF2214000282F4 /* MatchProtocolViewController.swift */; };
 		DB595C7521EF4EB6000282F4 /* TeamsLeagueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB595C7421EF4EB6000282F4 /* TeamsLeagueTableViewController.swift */; };
 		DB595C7821EF7373000282F4 /* TeamLeagueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB595C7721EF7373000282F4 /* TeamLeagueTableViewCell.swift */; };
@@ -132,6 +135,9 @@
 		DB4A789721C154E70071BA8F /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		DB57C5D121F0BFD500BEA097 /* TeamLeagueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamLeagueDetailViewController.swift; sourceTree = "<group>"; };
 		DB58E95B21E8A7FA00AF265E /* EmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyView.xib; sourceTree = "<group>"; };
+		DB59433321F212BE00945601 /* SegmentHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentHelper.swift; sourceTree = "<group>"; };
+		DB59433721F219FE00945601 /* PlayersTeamLeagueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTeamLeagueDetailViewController.swift; sourceTree = "<group>"; };
+		DB59433921F21A2300945601 /* MatchesTeamLeagueDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesTeamLeagueDetailTableViewController.swift; sourceTree = "<group>"; };
 		DB595C7121EF2214000282F4 /* MatchProtocolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchProtocolViewController.swift; sourceTree = "<group>"; };
 		DB595C7421EF4EB6000282F4 /* TeamsLeagueTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsLeagueTableViewController.swift; sourceTree = "<group>"; };
 		DB595C7721EF7373000282F4 /* TeamLeagueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamLeagueTableViewCell.swift; sourceTree = "<group>"; };
@@ -362,6 +368,7 @@
 				CEA6EBB721A53F85008F874D /* mvp */,
 				CE0AF81621C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift */,
 				DB78E13E21D529DC001C885D /* EmptyProtocol.swift */,
+				DB59433321F212BE00945601 /* SegmentHelper.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -468,6 +475,8 @@
 			isa = PBXGroup;
 			children = (
 				DB57C5D121F0BFD500BEA097 /* TeamLeagueDetailViewController.swift */,
+				DB59433521F219BE00945601 /* players */,
+				DB59433621F219CA00945601 /* matches */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -487,6 +496,22 @@
 				DB6D956321EDC42900E81026 /* EmptyView.swift */,
 			);
 			path = empty;
+			sourceTree = "<group>";
+		};
+		DB59433521F219BE00945601 /* players */ = {
+			isa = PBXGroup;
+			children = (
+				DB59433721F219FE00945601 /* PlayersTeamLeagueDetailViewController.swift */,
+			);
+			path = players;
+			sourceTree = "<group>";
+		};
+		DB59433621F219CA00945601 /* matches */ = {
+			isa = PBXGroup;
+			children = (
+				DB59433921F21A2300945601 /* MatchesTeamLeagueDetailTableViewController.swift */,
+			);
+			path = matches;
 			sourceTree = "<group>";
 		};
 		DB595C6E21EF21B6000282F4 /* protocol */ = {
@@ -678,6 +703,7 @@
 				DB2A35D821CA20C200E9E2C5 /* PlayersPresenter.swift in Sources */,
 				DB6AA18121C295C3007D4693 /* ClubsPresenter.swift in Sources */,
 				CE916AB021B4EE2D0025FECF /* NoSectionCellTableViewCell.swift in Sources */,
+				DB59433821F219FE00945601 /* PlayersTeamLeagueDetailViewController.swift in Sources */,
 				DB11CC8D21C22F890083773E /* ScheduleTableViewController.swift in Sources */,
 				CE61552221AFD329008C4463 /* AnnouncesTableViewCell.swift in Sources */,
 				DB17384B21BA56D400017B6D /* NewsAllTableViewController.swift in Sources */,
@@ -692,12 +718,14 @@
 				DB6AA17E21C294A4007D4693 /* ClubsTableViewController.swift in Sources */,
 				CE60234321AE6A9F00B428EE /* UpcomingGamesTableViewController.swift in Sources */,
 				DB17385521BA9B9A00017B6D /* UpcomingMatches.swift in Sources */,
+				DB59433A21F21A2300945601 /* MatchesTeamLeagueDetailTableViewController.swift in Sources */,
 				DB673F5121D7A39B006205A8 /* Image.swift in Sources */,
 				DB2A35E221CA6BDE00E9E2C5 /* NameService.swift in Sources */,
 				CE158CE421AD2CE000CEECFE /* TournamentsTableViewController.swift in Sources */,
 				CE158CE621AD3E8A00CEECFE /* TournamentTableViewCell.swift in Sources */,
 				CE0AF81D21C7A27900F8F6A2 /* ClubDetailPresenter.swift in Sources */,
 				CE61551F21AFC799008C4463 /* NewsAnnouncePresenter.swift in Sources */,
+				DB59433421F212BE00945601 /* SegmentHelper.swift in Sources */,
 				DB11CC9021C235460083773E /* ScheduleTableViewCell.swift in Sources */,
 				CE60234C21AE756C00B428EE /* NewsAnnounceTableViewController.swift in Sources */,
 				CE77AC7B21B0F1BA00C0ED0D /* DateFormatter.swift in Sources */,
