@@ -28,10 +28,25 @@ class ScheduleLeaguePresenter: MvpPresenter<ScheduleTableViewController> {
 //
 //    }
     
+//    func getClubs(id: String, gett: @escaping (Clubs) -> ()) {
+//        Alamofire.request(ApiRoute.getApiURL(.clubs))
+//            .validate()
+//            .responseClubs { response in
+//                switch response.result {
+//                case .success:
+//                    if let clubs = response.result.value {
+//                        gett(clubs)
+//                    }
+//                case .failure:
+//
+//                }
+//        }
+//    }
+    
     func getClubs(id: String, getting: @escaping (Clubs) -> ()) {
         //debugPrint("presenter : getClubs called")
         Alamofire
-            .request(ApiRoute.getApiURL(.clubs, id: id))
+            .request(ApiRoute.getApiURL(.clubs))
             .validate()
             .responseClubs { response in
                 switch response.result {

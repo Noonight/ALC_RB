@@ -8,6 +8,7 @@
 
 import UIKit
 import AlamofireImage
+import RxSwift
 
 class ScheduleTableViewController: UITableViewController {
 
@@ -179,13 +180,22 @@ extension ScheduleTableViewController {
 //            cell.mImageTeam2.image = image.af_imageRoundedIntoCircle()
 //        }
         
-        presenter.getClubs(id: match.teamOne) { (clubs) in
-            //debugPrint(clubs.clubs.first?.logo)
+        presenter.getClubImage(id: getClubIdByTeamId(match.teamOne, league: model)) { (image) in
+            cell.mImageTeam1.image = image.af_imageRoundedIntoCircle()
+        }
+        presenter.getClubImage(id: getClubIdByTeamId(match.teamTwo, league: model)) { (image) in
+            cell.mImageTeam2.image = image.af_imageRoundedIntoCircle()
         }
         
-        //cell.mImageTeam1.af_setImage(withURL: ApiRoute.getImageURL(image: ))
-        //print(title1 ?? "some error")
-        //cell?.mTitleTeam1.text = leagueInfo.league.teams[]
+        presenter.getClubs(id: <#T##String#>, getting: <#T##(Clubs) -> ()#>)
+        
+        debugPrint("\(getClubIdByTeamId(match.teamOne, league: model)) ----------------------")
+    }
+    
+    func getClubIdByTeamId(_ teamId: String, league: LILeague) -> String {
+        return league.teams.filter({ (team) -> Bool in
+            return team.id == teamId
+        }).first?.id ?? "club id \n not found"
     }
     
     func getTeamTitle(league: LILeague, match: LIMatch, team: TeamEnum) -> String {

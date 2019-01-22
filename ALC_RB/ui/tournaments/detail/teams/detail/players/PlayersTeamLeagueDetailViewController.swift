@@ -10,21 +10,29 @@ import UIKit
 
 class PlayersTeamLeagueDetailViewController: UIViewController {
 
+    @IBOutlet weak var photo_trainer_img: UIImageView!
+    @IBOutlet weak var name_trainer_label: UILabel!
+    
+    let cellId = "player_team_cell"
+    
+    var leagueDetailModel: LeagueDetailModel = LeagueDetailModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        initView()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func initView() {
+        //photo_trainer_img.af_setImage(withURL: leagueDetailModel)
     }
-    */
+    
+    func updateUI() {
+        
+    }
+}
 
+extension PlayersTeamLeagueDetailViewController: LeagueMainProtocol {
+    func updateData(leagueDetailModel: LeagueDetailModel) {
+        self.leagueDetailModel = leagueDetailModel
+    }
 }
