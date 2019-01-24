@@ -18,7 +18,7 @@ class TeamLeagueDetailViewController: UIViewController {
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "PlayersTeamLeagueDetailViewController") as! PlayersTeamLeagueDetailViewController
         
-        viewController.leagueDetailModel = self.leagueDetailModel
+        //viewController.leagueDetailModel = self.leagueDetailModel
         
         return viewController
     }()
@@ -27,13 +27,13 @@ class TeamLeagueDetailViewController: UIViewController {
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "MatchesTeamLeagueDetailTableViewController") as! MatchesTeamLeagueDetailTableViewController
         
-        viewController.leagueDetailModel = self.leagueDetailModel
+        //viewController.leagueDetailModel = self.leagueDetailModel
         
         return viewController
     }()
     var segmentHelper: SegmentHelper?
     
-    var leagueDetailModel = LeagueDetailModel()
+    var teamModel: LITeam = LITeam()
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -58,6 +58,10 @@ class TeamLeagueDetailViewController: UIViewController {
     func initView() {
         segmentHelper = SegmentHelper(self, viewContainer)
         firstSegmentInit()
+        
+        navigationController?.navigationBar.topItem?.title = " "
+        title = teamModel.name
+        //debugPrint(teamModel.name)
     }
     
     func firstSegmentInit() {

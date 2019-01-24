@@ -187,7 +187,7 @@ extension ScheduleTableViewController {
             cell.mImageTeam2.image = image.af_imageRoundedIntoCircle()
         }
         
-        presenter.getClubs(id: <#T##String#>, getting: <#T##(Clubs) -> ()#>)
+        //presenter.getClubs(id: <#T##String#>, getting: <#T##(Clubs) -> ()#>)
         
         debugPrint("\(getClubIdByTeamId(match.teamOne, league: model)) ----------------------")
     }

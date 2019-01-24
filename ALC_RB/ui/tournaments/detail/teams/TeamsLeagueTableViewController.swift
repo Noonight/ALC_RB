@@ -14,7 +14,7 @@ class TeamsLeagueTableViewController: UITableViewController {
     @IBOutlet weak var tableHeaderView: UIView!
     
     let cellId = "cell_league_team"
-    let segueId = "segue_league_team_protocol"
+    let segueId = "segue_team_league_detail"
     var leagueDetailModel = LeagueDetailModel() {
         didSet {
             updateUI()
@@ -25,6 +25,18 @@ class TeamsLeagueTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
         title = " "
+    }
+}
+
+extension TeamsLeagueTableViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  segue.identifier == segueId,
+            let destination = segue.destination as? TeamLeagueDetailViewController,
+            let cellIndex = tableView.indexPathForSelectedRow?.row
+        {
+            //destination.league = tournaments.leagues[cellIndex]
+            destination.teamModel = leagueDetailModel.leagueInfo.league.teams[cellIndex]
+        }
     }
 }
 

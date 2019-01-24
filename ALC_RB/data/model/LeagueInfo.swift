@@ -469,6 +469,26 @@ extension LIReferee {
 }
 
 extension LITeam {
+    
+    init() {
+        status = ""
+        place = -1
+        playoffPlace = nil
+        madeToPlayoff = false
+        group = ""
+        goals = -1
+        goalsReceived = -1
+        wins = -1
+        losses = -1
+        draws = -1
+        groupScore = -1
+        id = ""
+        name = ""
+        creator = ""
+        players = []
+        club = ""
+    }
+    
     init(data: Data) throws {
         self = try newJSONDecoder().decode(LITeam.self, from: data)
     }
