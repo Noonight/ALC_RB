@@ -113,6 +113,7 @@
 		DB11CC8F21C235460083773E /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		DB11CC9121C240410083773E /* LeagueDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailPresenter.swift; sourceTree = "<group>"; };
 		DB11CC9321C241E10083773E /* LeagueInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueInfo.swift; sourceTree = "<group>"; };
+		DB137B3A21FB151B00F7482B /* pre_commit.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = pre_commit.md; sourceTree = "<group>"; };
 		DB17384A21BA56D400017B6D /* NewsAllTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAllTableViewController.swift; sourceTree = "<group>"; };
 		DB17384D21BA6F8600017B6D /* AnnounceAllTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceAllTableViewController.swift; sourceTree = "<group>"; };
 		DB17384F21BA706E00017B6D /* AnnounceDateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceDateTableViewCell.swift; sourceTree = "<group>"; };
@@ -361,6 +362,7 @@
 				CEA6EB9B21A53CFE008F874D /* AppDelegate.swift */,
 				CEA6EBA221A53CFE008F874D /* Assets.xcassets */,
 				CEA6EBA721A53CFE008F874D /* Info.plist */,
+				DB137B3A21FB151B00F7482B /* pre_commit.md */,
 			);
 			path = ALC_RB;
 			sourceTree = "<group>";
