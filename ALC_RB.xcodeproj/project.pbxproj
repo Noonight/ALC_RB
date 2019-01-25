@@ -148,6 +148,7 @@
 		DB6AA18221C296DE007D4693 /* ClubTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubTableViewCell.swift; sourceTree = "<group>"; };
 		DB6D956321EDC42900E81026 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		DB78E13E21D529DC001C885D /* EmptyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyProtocol.swift; sourceTree = "<group>"; };
+		DBD9CCA021FB11A400055434 /* TEST bitbucket.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "TEST bitbucket.md"; sourceTree = "<group>"; };
 		E936F5C8B72023C5136763E0 /* Pods-ALC_RB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ALC_RB.release.xcconfig"; path = "Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.release.xcconfig"; sourceTree = "<group>"; };
 		F181E6D1A012D323B0FC0ECB /* Pods_ALC_RB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ALC_RB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -361,6 +362,7 @@
 				CEA6EB9B21A53CFE008F874D /* AppDelegate.swift */,
 				CEA6EBA221A53CFE008F874D /* Assets.xcassets */,
 				CEA6EBA721A53CFE008F874D /* Info.plist */,
+				DBD9CCA021FB11A400055434 /* TEST bitbucket.md */,
 			);
 			path = ALC_RB;
 			sourceTree = "<group>";
