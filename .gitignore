@@ -1,0 +1,26 @@
+xcschememanagement.plist
+ALC_RB.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+ALC_RB.xcworkspace/xcuserdata/ayur.xcuserdatad/UserInterfaceState.xcuserstate
+Pods/AlamofireImage/LICENSE
+Pods/AlamofireImage/README.md
+Pods/AlamofireImage/Source/AFIError.swift
+Pods/AlamofireImage/Source/Image.swift
+Pods/AlamofireImage/Source/ImageCache.swift
+Pods/AlamofireImage/Source/ImageDownloader.swift
+Pods/AlamofireImage/Source/ImageFilter.swift
+Pods/AlamofireImage/Source/Request+AlamofireImage.swift
+Pods/AlamofireImage/Source/UIButton+AlamofireImage.swift
+Pods/AlamofireImage/Source/UIImage+AlamofireImage.swift
+Pods/AlamofireImage/Source/UIImageView+AlamofireImage.swift
+Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Alamofire.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/AlamofireImage.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Pods-ALC_RB.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxAtomic.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxCocoa.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxSwift.xcscheme
+Pods/Target Support Files/AlamofireImage/AlamofireImage-dummy.m
+Pods/Target Support Files/AlamofireImage/AlamofireImage-prefix.pch
+Pods/Target Support Files/AlamofireImage/AlamofireImage-umbrella.h
+Pods/Target Support Files/AlamofireImage/AlamofireImage.modulemap
+Pods/Target Support Files/AlamofireImage/AlamofireImage.xcconfig
+Pods/Target Support Files/AlamofireImage/Info.plist
