@@ -19,6 +19,7 @@ class TeamLeagueDetailViewController: UIViewController {
         var viewController = storyboard.instantiateViewController(withIdentifier: "PlayersTeamLeagueDetailViewController") as! PlayersTeamLeagueDetailViewController
         
         //viewController.leagueDetailModel = self.leagueDetailModel
+        viewController.team = self.teamModel
         
         return viewController
     }()
@@ -28,6 +29,7 @@ class TeamLeagueDetailViewController: UIViewController {
         var viewController = storyboard.instantiateViewController(withIdentifier: "MatchesTeamLeagueDetailTableViewController") as! MatchesTeamLeagueDetailTableViewController
         
         //viewController.leagueDetailModel = self.leagueDetailModel
+        viewController.team = self.teamModel
         
         return viewController
     }()

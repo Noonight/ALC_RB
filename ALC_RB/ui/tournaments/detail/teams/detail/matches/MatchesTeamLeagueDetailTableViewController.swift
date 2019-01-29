@@ -12,7 +12,8 @@ class MatchesTeamLeagueDetailTableViewController: UITableViewController {
 
     let cellId = ""
     
-    var leagueDetailModel: LeagueDetailModel = LeagueDetailModel()
+    //var leagueDetailModel: LeagueDetailModel = LeagueDetailModel()
+    var team = LITeam()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +39,3 @@ extension MatchesTeamLeagueDetailTableViewController {
 }
 
 
-extension MatchesTeamLeagueDetailTableViewController: LeagueMainProtocol {
-    func updateData(leagueDetailModel: LeagueDetailModel) {
-        self.leagueDetailModel = leagueDetailModel
-    }
-}

@@ -22,6 +22,7 @@ struct ApiRoute {
     }
     
     static func getImageURL(image: String) -> URL {
+        print("\(baseRoute)\(image)")
         return URL(string: "\(baseRoute)\(image)")!
     }
     
@@ -40,4 +41,5 @@ enum Routes: String {
     case tournaments = "leagues/all"
     case leagueInfo = "leagues/league"
     case getusers = "getusers"
+    case soloUser = "getuser"
 }
