@@ -30,12 +30,16 @@ class TeamLeagueDetailViewController: UIViewController {
         
         //viewController.leagueDetailModel = self.leagueDetailModel
         viewController.team = self.teamModel
+        viewController.matches = self.teamMatches
+        viewController.league = self.league
         
         return viewController
     }()
     var segmentHelper: SegmentHelper?
     
     var teamModel: LITeam = LITeam()
+    var teamMatches: [LIMatch] = [LIMatch]()
+    var league = LILeague()
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {

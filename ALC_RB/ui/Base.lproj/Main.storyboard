@@ -396,7 +396,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="eOt-e0-fBF" firstAttribute="trailing" secondItem="vUD-mg-kKa" secondAttribute="trailing" id="9vu-gC-yrn"/>
                             <constraint firstItem="eOt-e0-fBF" firstAttribute="trailing" secondItem="Tka-77-rOe" secondAttribute="trailing" constant="8" id="AK9-4X-Cmz"/>
@@ -426,7 +426,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_team_match" rowHeight="150" id="JVx-nU-GEt" customClass="ScheduleTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_team_match" rowHeight="150" id="JVx-nU-GEt" customClass="MatchesTeamLeagueDetailTableViewCell" customModule="ALC_RB" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JVx-nU-GEt" id="5vo-wF-TsP">
@@ -522,15 +522,15 @@
                                     <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="mDate" destination="OPB-pU-hqV" id="Xfg-SD-I1N"/>
-                                    <outlet property="mImageTeam1" destination="y7w-Dg-30p" id="Snk-Qx-mb7"/>
-                                    <outlet property="mImageTeam2" destination="3oj-Mh-7ht" id="ZEk-yH-BRI"/>
-                                    <outlet property="mPlace" destination="gxF-p0-hCB" id="lcK-X4-P2M"/>
-                                    <outlet property="mScore" destination="oHY-X4-heW" id="aZy-DE-OOS"/>
-                                    <outlet property="mTime" destination="hHz-2g-trw" id="QHa-er-1zG"/>
-                                    <outlet property="mTitleTeam1" destination="C53-La-bhx" id="4ke-jp-MEA"/>
-                                    <outlet property="mTitleTeam2" destination="fhH-oD-bFk" id="r7e-nu-1YM"/>
-                                    <outlet property="mTour" destination="OYU-3K-KL3" id="abP-cE-A3I"/>
+                                    <outlet property="mDate" destination="OPB-pU-hqV" id="Acu-g2-ctV"/>
+                                    <outlet property="mImageTeam1" destination="y7w-Dg-30p" id="OzY-u4-8ZH"/>
+                                    <outlet property="mImageTeam2" destination="3oj-Mh-7ht" id="YFA-yi-Nyf"/>
+                                    <outlet property="mPlace" destination="gxF-p0-hCB" id="ZFM-Fv-KGU"/>
+                                    <outlet property="mScore" destination="oHY-X4-heW" id="paR-tV-IkP"/>
+                                    <outlet property="mTime" destination="hHz-2g-trw" id="bJe-Y6-GST"/>
+                                    <outlet property="mTitleTeam1" destination="C53-La-bhx" id="dv7-DT-0GX"/>
+                                    <outlet property="mTitleTeam2" destination="fhH-oD-bFk" id="oak-N8-86H"/>
+                                    <outlet property="mTour" destination="OYU-3K-KL3" id="KhP-qh-rbs"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1879,7 +1879,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Vbl-Fk-ddt">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="317.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="150.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9P3-cc-ZFM">
                                                 <rect key="frame" x="8" y="8" width="359" height="23"/>
@@ -1897,7 +1897,7 @@
                                                 <rect key="frame" x="8" y="67.5" width="359" height="50"/>
                                             </imageView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qh4-xh-2XM">
-                                                <rect key="frame" x="8" y="125.5" width="359" height="192"/>
+                                                <rect key="frame" x="8" y="125.5" width="359" height="25"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>

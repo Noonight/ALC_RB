@@ -35,7 +35,13 @@ extension TeamsLeagueTableViewController {
             let cellIndex = tableView.indexPathForSelectedRow?.row
         {
             //destination.league = tournaments.leagues[cellIndex]
-            destination.teamModel = leagueDetailModel.leagueInfo.league.teams[cellIndex]
+            let team = leagueDetailModel.leagueInfo.league.teams[cellIndex]
+            destination.teamModel = team
+            let matches = leagueDetailModel.leagueInfo.league.matches.filter { (match) -> Bool in
+                return match.teamOne == team.id || match.teamTwo == team.id
+            }
+            destination.teamMatches = matches
+            destination.league = leagueDetailModel.leagueInfo.league
         }
     }
 }

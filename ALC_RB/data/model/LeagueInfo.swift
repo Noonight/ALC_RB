@@ -82,6 +82,8 @@ struct LIMatch: Codable {
     let updatedAt: String
     let v: Int
     
+    
+    
     enum CodingKeys: String, CodingKey {
         case date = "date"
         case stage = "stage"
@@ -324,6 +326,29 @@ extension LILeague {
 }
 
 extension LIMatch {
+    
+    init() {
+        date = ""
+        stage = false
+        played = false
+        tour = ""
+        playersList = []
+        place = ""
+        winner = ""
+        score = ""
+        fouls = ""
+        autoGoals = ""
+        id = ""
+        league = ""
+        teamOne = ""
+        teamTwo = ""
+        events = []
+        referees = []
+        createdAt = ""
+        updatedAt = ""
+        v = -1
+    }
+    
     init(data: Data) throws {
         self = try newJSONDecoder().decode(LIMatch.self, from: data)
     }
