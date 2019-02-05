@@ -47,7 +47,15 @@ class LeagueDetailViewController: UIViewController {
         
         return viewController
     }()
-//    private lazy var playersTable
+    private lazy var playersTable: PlayersLeagueDetailViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        var viewController = storyboard.instantiateViewController(withIdentifier: "PlayersLeagueDetailViewController") as! PlayersLeagueDetailViewController
+        
+        viewController.leagueDetailModel = self.leagueDetailModel
+        
+        return viewController
+    }()
 
     
     //MARK: - Outlets    
@@ -92,15 +100,20 @@ class LeagueDetailViewController: UIViewController {
         switch segmentControl.selectedSegmentIndex {
         case 0:
             remove(teamsTable)
+            remove(playersTable)
 //            remove()
             add(scheduleTable)
 //            add()
             break
         case 1:
             remove(scheduleTable)
+            remove(playersTable)
             add(teamsTable)
             break
         case 2:
+            remove(scheduleTable)
+            remove(teamsTable)
+            add(playersTable)
             break
         default:
             break

@@ -63,6 +63,7 @@
 		DB4A789421C1084B0071BA8F /* TournamentsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4A789321C1084B0071BA8F /* TournamentsPresenter.swift */; };
 		DB4A789621C10C960071BA8F /* Tournaments.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4A789521C10C960071BA8F /* Tournaments.swift */; };
 		DB4A789821C154E70071BA8F /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4A789721C154E70071BA8F /* NavigationBar.swift */; };
+		DB55914B2209FB520034E3C5 /* PlayersLeagueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB55914A2209FB520034E3C5 /* PlayersLeagueTableViewCell.swift */; };
 		DB57C5D221F0BFD500BEA097 /* TeamLeagueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB57C5D121F0BFD500BEA097 /* TeamLeagueDetailViewController.swift */; };
 		DB58E95C21E8A7FA00AF265E /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB58E95B21E8A7FA00AF265E /* EmptyView.xib */; };
 		DB59433421F212BE00945601 /* SegmentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59433321F212BE00945601 /* SegmentHelper.swift */; };
@@ -79,6 +80,8 @@
 		DB6D956421EDC42900E81026 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D956321EDC42900E81026 /* EmptyView.swift */; };
 		DB78E13F21D529DC001C885D /* EmptyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78E13E21D529DC001C885D /* EmptyProtocol.swift */; };
 		DBFB838E2201CAB4008A8F79 /* MatchesTeamLeagueDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB838D2201CAB4008A8F79 /* MatchesTeamLeagueDetailPresenter.swift */; };
+		DBFB83912201CEAE008A8F79 /* PlayersLeagueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB83902201CEAE008A8F79 /* PlayersLeagueDetailViewController.swift */; };
+		DBFB83932201CFFC008A8F79 /* PlayersLeagueDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB83922201CFFC008A8F79 /* PlayersLeagueDetailPresenter.swift */; };
 		E36266006B773BB7B08340D9 /* Pods_ALC_RB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F181E6D1A012D323B0FC0ECB /* Pods_ALC_RB.framework */; };
 /* End PBXBuildFile section */
 
@@ -141,6 +144,7 @@
 		DB4A789321C1084B0071BA8F /* TournamentsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentsPresenter.swift; sourceTree = "<group>"; };
 		DB4A789521C10C960071BA8F /* Tournaments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tournaments.swift; sourceTree = "<group>"; };
 		DB4A789721C154E70071BA8F /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		DB55914A2209FB520034E3C5 /* PlayersLeagueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersLeagueTableViewCell.swift; sourceTree = "<group>"; };
 		DB57C5D121F0BFD500BEA097 /* TeamLeagueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamLeagueDetailViewController.swift; sourceTree = "<group>"; };
 		DB58E95B21E8A7FA00AF265E /* EmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyView.xib; sourceTree = "<group>"; };
 		DB59433321F212BE00945601 /* SegmentHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentHelper.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 		DB6D956321EDC42900E81026 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		DB78E13E21D529DC001C885D /* EmptyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyProtocol.swift; sourceTree = "<group>"; };
 		DBFB838D2201CAB4008A8F79 /* MatchesTeamLeagueDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesTeamLeagueDetailPresenter.swift; sourceTree = "<group>"; };
+		DBFB83902201CEAE008A8F79 /* PlayersLeagueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersLeagueDetailViewController.swift; sourceTree = "<group>"; };
+		DBFB83922201CFFC008A8F79 /* PlayersLeagueDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersLeagueDetailPresenter.swift; sourceTree = "<group>"; };
 		E936F5C8B72023C5136763E0 /* Pods-ALC_RB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ALC_RB.release.xcconfig"; path = "Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.release.xcconfig"; sourceTree = "<group>"; };
 		F181E6D1A012D323B0FC0ECB /* Pods_ALC_RB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ALC_RB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -234,6 +240,7 @@
 				DB11CC9121C240410083773E /* LeagueDetailPresenter.swift */,
 				DB11CC8B21C22F300083773E /* schedule */,
 				DB595C7321EF366E000282F4 /* teams */,
+				DBFB838F2201CE4C008A8F79 /* players */,
 			);
 			path = detail;
 			sourceTree = "<group>";
@@ -501,6 +508,14 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
+		DB5591492209FB1C0034E3C5 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				DB55914A2209FB520034E3C5 /* PlayersLeagueTableViewCell.swift */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
 		DB57C5CE21F0A67D00BEA097 /* detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -591,6 +606,16 @@
 				DB6AA18221C296DE007D4693 /* ClubTableViewCell.swift */,
 			);
 			path = cell;
+			sourceTree = "<group>";
+		};
+		DBFB838F2201CE4C008A8F79 /* players */ = {
+			isa = PBXGroup;
+			children = (
+				DB5591492209FB1C0034E3C5 /* cell */,
+				DBFB83902201CEAE008A8F79 /* PlayersLeagueDetailViewController.swift */,
+				DBFB83922201CFFC008A8F79 /* PlayersLeagueDetailPresenter.swift */,
+			);
+			path = players;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -731,6 +756,7 @@
 				DB2A35D621CA203B00E9E2C5 /* PlayersTableViewController.swift in Sources */,
 				DB57C5D221F0BFD500BEA097 /* TeamLeagueDetailViewController.swift in Sources */,
 				DB17385021BA706E00017B6D /* AnnounceDateTableViewCell.swift in Sources */,
+				DBFB83932201CFFC008A8F79 /* PlayersLeagueDetailPresenter.swift in Sources */,
 				DB1816E621D11B29005375ED /* PlayerPastLeaguesTableViewCell.swift in Sources */,
 				DB78E13F21D529DC001C885D /* EmptyProtocol.swift in Sources */,
 				DB2A35DA21CA222B00E9E2C5 /* Players.swift in Sources */,
@@ -751,6 +777,7 @@
 				CE61552221AFD329008C4463 /* AnnouncesTableViewCell.swift in Sources */,
 				DB17384B21BA56D400017B6D /* NewsAllTableViewController.swift in Sources */,
 				CE0AF81721C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift in Sources */,
+				DBFB83912201CEAE008A8F79 /* PlayersLeagueDetailViewController.swift in Sources */,
 				DB11CC8A21C225610083773E /* StackView.swift in Sources */,
 				DB4A789621C10C960071BA8F /* Tournaments.swift in Sources */,
 				049B9AD021F704EC00CDD104 /* ScheduleLeaguePresenter.swift in Sources */,
@@ -759,6 +786,7 @@
 				CEA6EBB921A53FB9008F874D /* MvpView.swift in Sources */,
 				DB4A789121C0E7970071BA8F /* ViewCenter.swift in Sources */,
 				CEA6EB9C21A53CFE008F874D /* AppDelegate.swift in Sources */,
+				DB55914B2209FB520034E3C5 /* PlayersLeagueTableViewCell.swift in Sources */,
 				CE61551D21AFC33D008C4463 /* Announces.swift in Sources */,
 				DB6AA17E21C294A4007D4693 /* ClubsTableViewController.swift in Sources */,
 				049B9ACF21F6F6E300CDD104 /* PlayersTeamLeagueDetailTableViewCell.swift in Sources */,
@@ -940,6 +968,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ALC_RB/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.test.ALC-RB";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -956,6 +985,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ALC_RB/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.test.ALC-RB";
 				PRODUCT_NAME = "$(TARGET_NAME)";
