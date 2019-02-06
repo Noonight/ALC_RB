@@ -1309,15 +1309,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TeN-V3-76x">
-                                <rect key="frame" x="80" y="28" width="287" height="30"/>
+                                <rect key="frame" x="80" y="28" width="287" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="По проведенным матчам"/>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ifz-G5-y8e">
-                                <rect key="frame" x="0.0" y="66" width="375" height="601"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ifz-G5-y8e">
+                                <rect key="frame" x="0.0" y="69" width="375" height="598"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <pickerView key="tableHeaderView" contentMode="scaleToFill" id="6Fz-16-OPK">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                </pickerView>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_players_tournament" rowHeight="62" id="Zda-ub-gzu" customClass="PlayersLeagueTableViewCell" customModule="ALC_RB" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="62"/>
+                                        <rect key="frame" x="0.0" y="72" width="375" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zda-ub-gzu" id="fMH-cP-NKG">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="61.5"/>
@@ -1327,6 +1332,7 @@
                                                     <rect key="frame" x="8" y="8" width="46" height="45.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="46" id="634-ue-1Y7"/>
+                                                        <constraint firstAttribute="height" constant="45.5" id="xdV-aE-kum"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Алексеев" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gST-i3-p2h">
@@ -1406,7 +1412,7 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Фильтр:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGl-vs-jdq">
-                                <rect key="frame" x="8" y="28" width="64" height="30"/>
+                                <rect key="frame" x="8" y="28" width="64" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1428,10 +1434,53 @@
                         <viewLayoutGuide key="safeArea" id="yO8-zK-eeZ"/>
                     </view>
                     <connections>
+                        <outlet property="empty_view" destination="Mhg-Gj-WBm" id="YhO-sB-VJs"/>
                         <outlet property="filter_type_btn" destination="TeN-V3-76x" id="pup-Yu-Nen"/>
+                        <outlet property="header_view" destination="KwX-ws-1NN" id="ngB-6D-ygd"/>
+                        <outlet property="picker_view" destination="6Fz-16-OPK" id="9FW-sP-evu"/>
                         <outlet property="table_view" destination="ifz-G5-y8e" id="D0L-A1-ljJ"/>
                     </connections>
                 </viewController>
+                <view contentMode="scaleToFill" id="Mhg-Gj-WBm">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ничего нет" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a59-UN-BCm">
+                            <rect key="frame" x="16" y="188" width="268" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="mD2-wm-49N"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Здесь будут отображаться матчи" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fr-8r-00C">
+                            <rect key="frame" x="16" y="224" width="268" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="Syz-yV-OlD"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_empty" translatesAutoresizingMaskIntoConstraints="NO" id="JXm-zR-r3R">
+                            <rect key="frame" x="70" y="0.0" width="160" height="128"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="JXm-zR-r3R" firstAttribute="centerX" secondItem="a59-UN-BCm" secondAttribute="centerX" id="1aQ-CO-GOz"/>
+                        <constraint firstItem="qBQ-kK-ecd" firstAttribute="trailing" secondItem="2fr-8r-00C" secondAttribute="trailing" constant="16" id="1nO-ap-IZg"/>
+                        <constraint firstItem="a59-UN-BCm" firstAttribute="leading" secondItem="qBQ-kK-ecd" secondAttribute="leading" constant="16" id="FmI-Io-VFv"/>
+                        <constraint firstItem="qBQ-kK-ecd" firstAttribute="trailing" secondItem="a59-UN-BCm" secondAttribute="trailing" constant="16" id="IGj-fd-bMj"/>
+                        <constraint firstItem="JXm-zR-r3R" firstAttribute="leading" secondItem="qBQ-kK-ecd" secondAttribute="leading" constant="70" id="KFf-dK-fUF"/>
+                        <constraint firstItem="a59-UN-BCm" firstAttribute="top" secondItem="JXm-zR-r3R" secondAttribute="bottom" constant="60" id="KhG-TL-M4w"/>
+                        <constraint firstItem="2fr-8r-00C" firstAttribute="leading" secondItem="qBQ-kK-ecd" secondAttribute="leading" constant="16" id="NEs-KQ-l4q"/>
+                        <constraint firstItem="2fr-8r-00C" firstAttribute="top" secondItem="a59-UN-BCm" secondAttribute="bottom" constant="15" id="PVU-wD-FES"/>
+                        <constraint firstItem="JXm-zR-r3R" firstAttribute="top" secondItem="qBQ-kK-ecd" secondAttribute="top" id="gLu-hA-TT4"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="qBQ-kK-ecd"/>
+                </view>
                 <view contentMode="scaleToFill" id="KwX-ws-1NN">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2036,7 +2085,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Vbl-Fk-ddt">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="317.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="150.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9P3-cc-ZFM">
                                                 <rect key="frame" x="8" y="8" width="359" height="23"/>
@@ -2054,7 +2103,7 @@
                                                 <rect key="frame" x="8" y="67.5" width="359" height="50"/>
                                             </imageView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qh4-xh-2XM">
-                                                <rect key="frame" x="8" y="125.5" width="359" height="192"/>
+                                                <rect key="frame" x="8" y="125.5" width="359" height="25"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
