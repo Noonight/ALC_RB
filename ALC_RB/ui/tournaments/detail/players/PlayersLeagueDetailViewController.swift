@@ -15,6 +15,7 @@ class PlayersLeagueDetailViewController: UIViewController {
     @IBOutlet weak var table_view: UITableView!
     @IBOutlet weak var empty_view: UIView!
     @IBOutlet weak var picker_view: UIPickerView!
+    @IBOutlet weak var picker_height: NSLayoutConstraint!
     
     let cellId = "cell_players_tournament"
     
@@ -24,10 +25,16 @@ class PlayersLeagueDetailViewController: UIViewController {
         }
     }
     
-    //var playersCount: Int = 0
     var playersArray: [LIPlayer] = [LIPlayer]()
     
     let presenter = PlayersLeagueDetailPresenter()
+    
+    var filterArguments = [PlayersLeagueDetailViewController.FilterType.matches.rawValue,
+                           PlayersLeagueDetailViewController.FilterType.goals.rawValue,
+                           PlayersLeagueDetailViewController.FilterType.yellow.rawValue,
+                           PlayersLeagueDetailViewController.FilterType.red.rawValue]
+    
+    var pickerIsShow = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +50,76 @@ class PlayersLeagueDetailViewController: UIViewController {
         
         table_view.dataSource = self
         table_view.delegate = self
+        
+        picker_view.dataSource = self
+        picker_view.delegate = self
     }
 
     func updateUI() {
         // some
+    }
+    
+    @IBAction func filter_btn_pressed(_ sender: UIButton) {
+        if !pickerViewIsHidden() {
+            hideFilterPicker()
+        } else {
+            showFilterPicker()
+        }
+    }
+}
+
+extension PlayersLeagueDetailViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        filter_type_btn.setTitle("\(filterArguments[row])", for: .normal)
+        filterTable(type: getCurrentFilter(selectedRow: row))
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return filterArguments.count
+    }
+    
+    func getCurrentFilter(selectedRow row: Int) -> FilterType {
+        switch row {
+        case 0:
+            return .matches
+        case 1:
+            return .goals
+        case 2:
+            return .yellow
+        case 3:
+            return .red
+        default:
+            return .matches
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return filterArguments[row]
+    }
+    
+    func showFilterPicker() {
+        picker_view.isHidden = false
+        picker_height.constant = 120
+//        UIView.animate(withDuration: 0.5) {
+//            self.picker_view.layoutIfNeeded()
+//        }
+    }
+    
+    func hideFilterPicker() {
+        picker_view.isHidden = true
+        picker_height.constant = 0
+//        UIView.animate(withDuration: 0.5) {
+//            self.picker_view.layoutIfNeeded()
+//        }
+    }
+    
+    func pickerViewIsHidden() -> Bool {
+        return picker_view.isHidden
     }
 }
 
@@ -86,17 +159,15 @@ extension PlayersLeagueDetailViewController {
             filterByYellowCards()
         case .red:
             filterByRedCards()
-        default:
-            table_view.reloadData()
         }
         table_view.reloadData()
     }
     
     enum FilterType : String {
-        case matches = "01"
-        case goals = "02"
-        case yellow = "03"
-        case red = "04"
+        case matches = "По проведенным матчам"
+        case goals = "По забитым мячам"
+        case yellow = "По количеству ЖК"
+        case red = "По количеству КК"
     }
 }
 
