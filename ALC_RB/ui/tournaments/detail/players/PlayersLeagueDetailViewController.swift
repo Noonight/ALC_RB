@@ -104,18 +104,27 @@ extension PlayersLeagueDetailViewController: UIPickerViewDataSource, UIPickerVie
     
     func showFilterPicker() {
         picker_view.isHidden = false
-        picker_height.constant = 120
-//        UIView.animate(withDuration: 0.5) {
-//            self.picker_view.layoutIfNeeded()
-//        }
+        self.view.layoutIfNeeded()
+        picker_view.layoutIfNeeded()
+        
+        UIView.animate(withDuration: 0.7) {
+            self.picker_height.constant = 120
+            self.view.layoutIfNeeded()
+            self.picker_view.layoutIfNeeded()
+        }
     }
     
     func hideFilterPicker() {
+        
+        self.view.layoutIfNeeded()
+        picker_view.layoutIfNeeded()
+        
+        UIView.animate(withDuration: 0.7) {
+            self.picker_height.constant = 0
+            self.view.layoutIfNeeded()
+            self.picker_view.layoutIfNeeded()
+        }
         picker_view.isHidden = true
-        picker_height.constant = 0
-//        UIView.animate(withDuration: 0.5) {
-//            self.picker_view.layoutIfNeeded()
-//        }
     }
     
     func pickerViewIsHidden() -> Bool {
