@@ -21,11 +21,17 @@ class PlayersLeagueDetailViewController: UIViewController {
     
     var leagueDetailModel = LeagueDetailModel() {
         didSet {
-            updateUI()
+            //updateUI()
         }
     }
     
-    var playersArray: [LIPlayer] = [LIPlayer]()
+    let backgroundView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    
+    var playersArray: [LIPlayer] = [LIPlayer]() {
+        didSet {
+            updateUI()
+        }
+    }
     
     let presenter = PlayersLeagueDetailPresenter()
     
@@ -33,8 +39,6 @@ class PlayersLeagueDetailViewController: UIViewController {
                            PlayersLeagueDetailViewController.FilterType.goals.rawValue,
                            PlayersLeagueDetailViewController.FilterType.yellow.rawValue,
                            PlayersLeagueDetailViewController.FilterType.red.rawValue]
-    
-    var pickerIsShow = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,10 +57,26 @@ class PlayersLeagueDetailViewController: UIViewController {
         
         picker_view.dataSource = self
         picker_view.delegate = self
+        
+        //header_view.frame.width = UIScreen.main.bounds.width
+        //header_view.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
     }
 
     func updateUI() {
-        // some
+        checkEmptyView()
+    }
+    
+    func checkEmptyView() {
+        if playersIsEmpty() {
+            showEmptyView()
+        } else {
+            hideEmptyView()
+            table_view.reloadData()
+        }
+    }
+    
+    func playersIsEmpty() -> Bool {
+        return playersArray.isEmpty
     }
     
     @IBAction func filter_btn_pressed(_ sender: UIButton) {
@@ -196,7 +216,12 @@ extension PlayersLeagueDetailViewController: LeagueMainProtocol {
 extension PlayersLeagueDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: table_view.frame.width, height: 37))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 37))
+        debugPrint(view.frame.width)
+//        debugPrint()
+        //header_view.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 37))
+        header_view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 37)
+//        header_view.frame.width = UIScreen.main.bounds.width
         view.addSubview(header_view)
         return view
     }
@@ -253,14 +278,20 @@ extension PlayersLeagueDetailViewController: UITableViewDelegate {
 
 extension PlayersLeagueDetailViewController: EmptyProtocol {
     func showEmptyView() {
-        table_view.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: table_view.frame.width, height: table_view.frame.height))
-        table_view.backgroundView?.addSubview(empty_view)
+        //debugPrint(table_view)
+        
+        view.addSubview(backgroundView)
+        //table_view.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: table_view.frame.width, height: table_view.frame.height))
+        backgroundView.addSubview(empty_view)
+        backgroundView.tintColor = .white
+        backgroundView.backgroundColor = .white
         table_view.separatorColor = .none
         empty_view.setCenterFromParent()
     }
     
     func hideEmptyView() {
-        table_view.backgroundView = nil
+        backgroundView.removeFromSuperview()
+        //table_view.backgroundView = nil
         table_view.separatorStyle = .singleLine
     }
 }
