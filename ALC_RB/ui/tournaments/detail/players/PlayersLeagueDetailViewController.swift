@@ -217,7 +217,7 @@ extension PlayersLeagueDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 37))
-        debugPrint(view.frame.width)
+        //debugPrint(view.frame.width)
 //        debugPrint()
         //header_view.frame(forAlignmentRect: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 37))
         header_view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 37)
