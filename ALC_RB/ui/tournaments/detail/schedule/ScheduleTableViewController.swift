@@ -13,6 +13,7 @@ import RxSwift
 class ScheduleTableViewController: UITableViewController {
 
     let cellId = "cell_schedule"
+    let segueId = "segue_schedule_protocol"
     
     let presenter = ScheduleLeaguePresenter()
     
@@ -125,7 +126,13 @@ extension ScheduleTableViewController: EmptyProtocol {
 
 extension ScheduleTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == segueId,
+            let destination = segue.destination as? MatchProtocolViewController,
+            let cellIndex = tableView.indexPathForSelectedRow?.row
+        {
+            destination.leagueDetailModel = self.leagueDetailModel
+            destination.match = self.leagueDetailModel.leagueInfo.league.matches[cellIndex]
+        }
     }
 }
 

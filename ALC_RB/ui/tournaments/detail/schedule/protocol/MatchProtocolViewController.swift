@@ -22,6 +22,13 @@ class MatchProtocolViewController: UIViewController {
     
     @IBOutlet weak var eventsBtn: UIButton!
     
+    var leagueDetailModel = LeagueDetailModel() {
+        didSet {
+            updateUI()
+        }
+    }
+    var match = LIMatch()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,9 +38,17 @@ class MatchProtocolViewController: UIViewController {
     func initView() {
         title = "Протокол"
         navigationController?.navigationBar.topItem?.title = " "
-//        self.parent?.navigationItem.backBarButtonItem?.title = " "
-//        print(navigationController)
-//        print(navigationItem)
-//        print(parent?.navigationItem.backBarButtonItem)
+    }
+    
+    func updateUI() {
+        debugPrint(leagueDetailModel)
+        debugPrint(match)
+    }
+}
+
+extension MatchProtocolViewController: LeagueMainProtocol {
+    func updateData(leagueDetailModel: LeagueDetailModel) {
+        self.leagueDetailModel = leagueDetailModel
+        updateUI()
     }
 }

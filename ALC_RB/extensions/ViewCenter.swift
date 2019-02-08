@@ -18,7 +18,7 @@ extension CGRect {
 extension UIView {
     func setCenterFromParent() {
         if (superview != nil) {
-            print(#function + " x = \(center.x), y = \(center.y) || parent: x = \(superview?.center.x), y = \(superview?.center.y)")
+            print(#function + " x = \(center.x), y = \(center.y) || parent: x = \(String(describing: superview?.center.x)), y = \(String(describing: superview?.center.y))")
             //self.center = (superview?.center)!
 //            var halfWidth = frame.width / 2
 //            var halfHeight = frame.height / 2

@@ -763,7 +763,6 @@
                     <constraints>
                         <constraint firstItem="s0a-G8-Kax" firstAttribute="leading" secondItem="RPD-0H-EtI" secondAttribute="trailing" constant="16" id="DGc-h9-e12"/>
                         <constraint firstAttribute="bottom" secondItem="QYB-AM-x2O" secondAttribute="bottom" constant="8" id="HFJ-gK-HrL"/>
-                        <constraint firstItem="RPD-0H-EtI" firstAttribute="leading" secondItem="QYB-AM-x2O" secondAttribute="trailing" constant="198" id="I3P-gh-Y7t"/>
                         <constraint firstAttribute="trailing" secondItem="YVA-ke-0gw" secondAttribute="trailing" constant="8" id="OBl-yh-koh"/>
                         <constraint firstItem="QYB-AM-x2O" firstAttribute="top" secondItem="6z1-t8-sqy" secondAttribute="bottom" constant="8" id="PlO-8g-81I"/>
                         <constraint firstAttribute="bottom" secondItem="g1g-ut-tVc" secondAttribute="bottom" constant="8" id="Sqn-UB-HUQ"/>
@@ -901,7 +900,7 @@
                                     <outlet property="mTitleTeam1" destination="0wv-zA-S46" id="Sil-Hv-uc3"/>
                                     <outlet property="mTitleTeam2" destination="RPo-C8-j2Z" id="Ei8-XV-xNh"/>
                                     <outlet property="mTour" destination="txL-ec-NEx" id="0Cc-rG-o3d"/>
-                                    <segue destination="rC7-tw-qtL" kind="show" id="ath-Bt-nm2"/>
+                                    <segue destination="rC7-tw-qtL" kind="show" identifier="segue_schedule_protocol" id="ath-Bt-nm2"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

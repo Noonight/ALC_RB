@@ -59,6 +59,7 @@ extension PlayersTeamLeagueDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: table_view.frame.width, height: 74))
+        table_header_view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 74)
         view.addSubview(table_header_view)
         return view
     }

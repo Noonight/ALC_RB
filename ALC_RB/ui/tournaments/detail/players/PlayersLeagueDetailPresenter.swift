@@ -72,7 +72,7 @@ class PlayersLeagueDetailPresenter: MvpPresenter<PlayersLeagueDetailViewControll
                             })
                     }
                 case .failure:
-                    debugPrint("get club failure \(response.request?.url)")
+                    debugPrint("get club failure \(String(describing: response.request?.url))")
         }
         }
     }

@@ -24,7 +24,7 @@ class MatchesTeamLeagueDetailPresenter: MvpPresenter<MatchesTeamLeagueDetailTabl
                         getting(clubs)
                     }
                 case .failure:
-                    debugPrint("failure getting clubs with id : \(id) \n message is \(response.result.value)")
+                    debugPrint("failure getting clubs with id : \(id) \n message is \(String(describing: response.result.value))")
                 }
         }
     }

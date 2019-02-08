@@ -94,7 +94,7 @@ extension PlayerViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        debugPrint(content?.person.pastLeagues)
+        //debugPrint(content?.person.pastLeagues)
         return (content!.person.pastLeagues.count)
     }
     

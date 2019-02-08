@@ -48,7 +48,7 @@ class UpcomingGameCellPresenter: MvpPresenter<UpcomingGameTableViewCell> {
                     
                 }
         }
-        print("DEBUG: club - \(club)")
+        //print("DEBUG: club - \(club)")
         return club!
     }
     
