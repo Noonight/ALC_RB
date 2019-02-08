@@ -31,21 +31,10 @@ class ScheduleTableViewController: UITableViewController {
         super.viewDidLoad()
         
         initPresenter()
-        
-        initView()
-        
-        //updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        //updateUI()
-    }
-    
-    func initView() {
-        //showLoading()
-        //title = " "
     }
     
     func leagueInfoMatchesIsEmpty() -> Bool {
@@ -71,7 +60,7 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     func updateUI() {
-        debugPrint(#function)
+        //debugPrint(#function)
         checkEmptyView()
     }
 }
@@ -132,6 +121,7 @@ extension ScheduleTableViewController {
         {
             destination.leagueDetailModel = self.leagueDetailModel
             destination.match = self.leagueDetailModel.leagueInfo.league.matches[cellIndex]
+            //destination.scheduleCell = self.scheduleCell
         }
     }
 }
@@ -160,43 +150,33 @@ extension ScheduleTableViewController {
         
         if match.played {
             cell.accessoryType = .disclosureIndicator
-            //cell.selectionStyle = .default
         } else {
             cell.accessoryType = .none
-            //cell.selectionStyle = .none
         }
         
-        //debugPrint(model.matches)
         cell.mDate.text = match.date.UTCToLocal(from: .utc, to: .local)
         cell.mTime.text = match.date.UTCToLocal(from: .utcTime, to: .localTime)
         cell.mTour.text = match.tour
         cell.mPlace.text = match.place
-
-//        let title1 = model.teams.filter { i -> Bool in
-//            i.id == model.matches[indexPath.row].teamOne
-//            }.first?.club
         
-        cell.mTitleTeam1.text = getTeamTitle(league: model, match: match, team: .one)
-        cell.mTitleTeam2.text = getTeamTitle(league: model, match: match, team: .two)
+        let titleTeamOne = getTeamTitle(league: model, match: match, team: .one)
+        cell.mTitleTeam1.text = titleTeamOne
+        //scheduleCell.mTitleTeam1 = titleTeamOne
+        
+        let titleTeamTwo = getTeamTitle(league: model, match: match, team: .two)
+        cell.mTitleTeam2.text = titleTeamTwo
+        //scheduleCell.mTitleTeam2 = titleTeamTwo
+        
         cell.mScore.text = match.score ?? "-"
-//
-//        presenter.getClubImage(id: match.teamOne) { (image) in
-//            cell.mImageTeam1.image = image.af_imageRoundedIntoCircle()
-//        }
-//        presenter.getClubImage(id: match.teamTwo) { (image) in
-//            cell.mImageTeam2.image = image.af_imageRoundedIntoCircle()
-//        }
         
         presenter.getClubImage(id: getClubIdByTeamId(match.teamOne, league: model)) { (image) in
             cell.mImageTeam1.image = image.af_imageRoundedIntoCircle()
+            //self.scheduleCell.mImageTeam1 = image
         }
         presenter.getClubImage(id: getClubIdByTeamId(match.teamTwo, league: model)) { (image) in
             cell.mImageTeam2.image = image.af_imageRoundedIntoCircle()
+            //self.scheduleCell.mImageTeam2 = image
         }
-        
-        //presenter.getClubs(id: <#T##String#>, getting: <#T##(Clubs) -> ()#>)
-        
-        debugPrint("\(getClubIdByTeamId(match.teamOne, league: model)) ----------------------")
     }
     
     func getClubIdByTeamId(_ teamId: String, league: LILeague) -> String {
@@ -227,9 +207,7 @@ extension ScheduleTableViewController {
 extension ScheduleTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        if leagueDetailModel.leagueInfo.league.matches[indexPath.row].played {
-//
-//        }
+        //scheduleCell = ScheduleCellModel(mTitleTeam1: (tableView.cellForRow(at: indexPath) as! ScheduleTableViewCell).mTitleTeam1.text ?? "", mImageTeam1: (tableView.cellForRow(at: indexPath) as! ScheduleTableViewCell).mImageTeam1.image!, mTitleTeam2: (tableView.cellForRow(at: indexPath) as! ScheduleTableViewCell).mTitleTeam2.text ?? "", mImageTeam2: (tableView.cellForRow(at: indexPath) as! ScheduleTableViewCell).mImageTeam2.image!)
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {

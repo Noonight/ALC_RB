@@ -22,33 +22,57 @@ class MatchProtocolViewController: UIViewController {
     
     @IBOutlet weak var eventsBtn: UIButton!
     
-    var leagueDetailModel = LeagueDetailModel() {
-        didSet {
-            updateUI()
-        }
-    }
+    var leagueDetailModel = LeagueDetailModel()
     var match = LIMatch()
+    
+    let presenter = MatchProtocolPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initPresenter()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         
-        initView()
-    }
-    
-    func initView() {
-        title = "Протокол"
         navigationController?.navigationBar.topItem?.title = " "
+        title = "Протокол"
+        
+        teamOneTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
+        
+        teamTwoTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .two)
+        
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamOne, league: leagueDetailModel.leagueInfo.league)) { (image) in
+            self.teamOneLogo.image = image.af_imageRoundedIntoCircle()
+        }
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamTwo, league: leagueDetailModel.leagueInfo.league)) { (image) in
+            self.teamTwoLogo.image = image.af_imageRoundedIntoCircle()
+        }
+        
+        let navigationMatchScoreBtn = UIBarButtonItem(title: "Счет", style: .plain, target: self, action: #selector(onMatchScoreBtnPressed(sender:)))
+        navigationItem.rightBarButtonItem = navigationMatchScoreBtn
     }
     
-    func updateUI() {
-        debugPrint(leagueDetailModel)
-        debugPrint(match)
+    @objc func onMatchScoreBtnPressed(sender: UIBarButtonItem) {
+        debugPrint("Hello from navigation bar button")
+    }
+    
+    @IBAction func teamOneBtnPressed(_ sender: UIButton) {
+        
+    }
+    @IBAction func teamTwoBtnPressed(_ sender: UIButton) {
+        
+    }
+    @IBAction func refereeBtnPressed(_ sender: UIButton) {
+        
+    }
+    @IBAction func eventsBtnPressed(_ sender: UIButton) {
+        
     }
 }
 
-extension MatchProtocolViewController: LeagueMainProtocol {
-    func updateData(leagueDetailModel: LeagueDetailModel) {
-        self.leagueDetailModel = leagueDetailModel
-        updateUI()
+extension MatchProtocolViewController: MvpView {
+    func initPresenter() {
+        presenter.attachView(view: self)
     }
 }
