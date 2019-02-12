@@ -126,6 +126,23 @@ struct LIReferee: Codable {
     let person: String
     let type: String
     
+    func getType() -> RefereeTeamTableViewController.TableStruct.RefereeType {
+        switch type {
+        case "Инспектор":
+            return .inspector
+        case "1 судья":
+            return .first
+        case "2 судья":
+            return .second
+        case "3 судья":
+            return .third
+        case "Хронометрист":
+            return .chrono
+        default:
+            return .first
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case person = "person"

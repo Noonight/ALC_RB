@@ -89,7 +89,7 @@ class MatchProtocolViewController: UIViewController {
         case segueTwoId:
             prepareSegueDataModel(destination: segue.destination, team: .two)
         case segueReferee:
-            break
+            prepareSegueDataModel(destination: segue.destination)
         case segueEvents:
             break
         default:
@@ -103,7 +103,9 @@ class MatchProtocolViewController: UIViewController {
             let controller = destination as! TeamProtocolTableViewController
             controller.players = getPlayersTeam(team: match.teamOne)
             controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
-//            case is 
+        case is RefereeTeamTableViewController:
+            let controller = destination as! RefereeTeamTableViewController
+            controller.destinationData = match.referees
         default:
             break
         }

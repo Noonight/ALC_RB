@@ -1276,22 +1276,50 @@
             </objects>
             <point key="canvasLocation" x="1480.8" y="-4220.2398800599703"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Ответственные лица-->
         <scene sceneID="kMX-RB-dk3">
             <objects>
-                <tableViewController id="8Gc-MA-pFE" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="RefereeTeamTableViewController" title="Ответственные лица" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8Gc-MA-pFE" customClass="RefereeTeamTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Tfa-Ok-wa4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="8uB-BR-4EB">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="referee_protocol_cell" rowHeight="56" id="8uB-BR-4EB" customClass="RefereeProtocolTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8uB-BR-4EB" id="kxu-aw-PRO">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="55.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="IZa-5o-bSu">
+                                            <rect key="frame" x="8" y="8" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="B7X-P0-Iai"/>
+                                                <constraint firstAttribute="width" constant="40" id="Lk9-W6-3jE"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Не назначено" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDw-r0-v6t">
+                                            <rect key="frame" x="64" y="19" width="287" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="IZa-5o-bSu" firstAttribute="leading" secondItem="kxu-aw-PRO" secondAttribute="leading" constant="8" id="1QG-Du-IGh"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="rDw-r0-v6t" secondAttribute="trailing" constant="8" id="CN6-3K-hwM"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="rDw-r0-v6t" secondAttribute="bottom" constant="8" id="SGk-Gt-78D"/>
+                                        <constraint firstItem="rDw-r0-v6t" firstAttribute="top" secondItem="kxu-aw-PRO" secondAttribute="topMargin" constant="8" id="W6G-hp-eDB"/>
+                                        <constraint firstItem="IZa-5o-bSu" firstAttribute="top" secondItem="kxu-aw-PRO" secondAttribute="top" constant="8" id="XcU-5s-HdV"/>
+                                        <constraint firstItem="rDw-r0-v6t" firstAttribute="leading" secondItem="IZa-5o-bSu" secondAttribute="trailing" constant="16" id="Zj7-lA-ONx"/>
+                                        <constraint firstAttribute="bottom" secondItem="IZa-5o-bSu" secondAttribute="bottom" constant="8" id="nRS-US-EQY"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="name_label" destination="rDw-r0-v6t" id="5Hq-AG-EyG"/>
+                                    <outlet property="photo_image" destination="IZa-5o-bSu" id="rkH-rj-glY"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1302,7 +1330,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jHW-M7-GYy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2342" y="-4082"/>
+            <point key="canvasLocation" x="2341.5999999999999" y="-4082.6086956521744"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="uJI-mp-Rzz">
