@@ -10,22 +10,29 @@ import UIKit
 
 class MatchProtocolViewController: UIViewController {
 
+    // MARK: - Variables
+    
+    let segueOneId = "team_one_protocol_segue"
+    let segueTwoId = "team_two_protocol_segue"
+    let segueReferee = "referee_protocol_segue"
+    let segueEvents = "events_protocol_segue"
+    
     @IBOutlet weak var teamOneLogo: UIImageView!
     @IBOutlet weak var teamOneTitle: UILabel!
-    @IBOutlet weak var teamOneBtn: UIButton!
-    
     @IBOutlet weak var teamTwoLogo: UIImageView!
     @IBOutlet weak var teamTwoTitle: UILabel!
+    
+    @IBOutlet weak var teamOneBtn: UIButton!
     @IBOutlet weak var teamTwoBtn: UIButton!
-    
-    @IBOutlet weak var responsiblePersonsBtn: UIButton!
-    
+    @IBOutlet weak var refereesBtn: UIButton!
     @IBOutlet weak var eventsBtn: UIButton!
     
     var leagueDetailModel = LeagueDetailModel()
     var match = LIMatch()
     
     let presenter = MatchProtocolPresenter()
+    
+    // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +60,8 @@ class MatchProtocolViewController: UIViewController {
         navigationItem.rightBarButtonItem = navigationMatchScoreBtn
     }
     
+    // MARK: - Button Actions
+    
     @objc func onMatchScoreBtnPressed(sender: UIBarButtonItem) {
         debugPrint("Hello from navigation bar button")
     }
@@ -68,6 +77,41 @@ class MatchProtocolViewController: UIViewController {
     }
     @IBAction func eventsBtnPressed(_ sender: UIButton) {
         
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case segueOneId:
+            //let destination = segue.destination as?  TeamProtocolTableViewController
+            prepareSegueDataModel(destination: segue.destination)
+        case segueTwoId:
+            break
+        case segueReferee:
+            break
+        case segueEvents:
+            break
+        default:
+            break
+        }
+    }
+    
+    func prepareSegueDataModel(destination: UIViewController) {
+        switch destination {
+        case is TeamProtocolTableViewController:
+            let controller = destination as! TeamProtocolTableViewController
+            controller.players = getPlayersTeam(team: match.teamOne)
+//            case is
+        default:
+            break
+        }
+    }
+    
+    func getPlayersTeam(team id: String) -> [LIPlayer] {
+        return (leagueDetailModel.leagueInfo.league.teams.filter({ (team) -> Bool in
+            return team.id == id
+        }).first?.players)!
     }
 }
 
