@@ -85,9 +85,9 @@ class MatchProtocolViewController: UIViewController {
         switch segue.identifier {
         case segueOneId:
             //let destination = segue.destination as?  TeamProtocolTableViewController
-            prepareSegueDataModel(destination: segue.destination)
+            prepareSegueDataModel(destination: segue.destination, team: .one)
         case segueTwoId:
-            break
+            prepareSegueDataModel(destination: segue.destination, team: .two)
         case segueReferee:
             break
         case segueEvents:
@@ -102,6 +102,25 @@ class MatchProtocolViewController: UIViewController {
         case is TeamProtocolTableViewController:
             let controller = destination as! TeamProtocolTableViewController
             controller.players = getPlayersTeam(team: match.teamOne)
+            controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
+//            case is 
+        default:
+            break
+        }
+    }
+    
+    func prepareSegueDataModel(destination: UIViewController, team: ClubTeamHelper.TeamEnum) {
+        switch destination {
+        case is TeamProtocolTableViewController:
+            let controller = destination as! TeamProtocolTableViewController
+            switch team {
+            case .one:
+                controller.players = getPlayersTeam(team: match.teamOne)
+                controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
+            case .two:
+                controller.players = getPlayersTeam(team: match.teamTwo)
+                controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .two)
+            }
 //            case is
         default:
             break

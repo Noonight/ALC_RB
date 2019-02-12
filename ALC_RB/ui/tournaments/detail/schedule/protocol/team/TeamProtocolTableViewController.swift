@@ -59,14 +59,6 @@ class TeamProtocolTableViewController: UITableViewController {
             } else {
                 cell.photo_image.image = UIImage(named: "ic_logo")
             }
-            //cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: player.person.photo ?? " "))
-//            if !(player.person.photo != nil) {
-//                self.presenter.getPlayerImage(photo: player.person.photo!, get_image: { (image) in
-//                    cell.photo_image.image = image.af_imageRoundedIntoCircle()
-//                })
-//            } else {
-//                cell.photo_image.image = UIImage(named: "ic_logo")
-//            }
         }) { (error) in
             debugPrint("get person info error")
         }
