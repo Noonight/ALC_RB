@@ -22,6 +22,7 @@ class RefereeTeamTableViewController: UITableViewController {
         }
         
         struct CellStruct {
+            var referee_id: String = ""
             var image: UIImage = UIImage(named: "ic_logo")!
             var name: String = "Не назначен"
             var image_path: String = ""
@@ -56,14 +57,34 @@ class RefereeTeamTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
-        
-        var mTitle = self.title
-        navigationController?.navigationBar.topItem?.title = " "
-        title = mTitle
+        prepareTableModel(destinationData: destinationData)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        super.viewWillAppear(true)
+        let mTitle = self.title
+        navigationController?.navigationBar.topItem?.title = " "
+        title = mTitle
+        tableView.tableFooterView = UIView()
+    }
+    
+    // MARK: - Prepare tableModel
+    
+    func prepareTableModel(destinationData: [LIReferee]) {
+        for ref in destinationData {
+            switch ref.getType() {
+            case .inspector:
+                tableModel.tableModel[0].referee_id = ref.person
+            case .first:
+                tableModel.tableModel[1].referee_id = ref.person
+            case .second:
+                tableModel.tableModel[2].referee_id = ref.person
+            case .third:
+                tableModel.tableModel[3].referee_id = ref.person
+            case .chrono:
+                tableModel.tableModel[4].referee_id = ref.person
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -158,8 +179,21 @@ class RefereeTeamTableViewController: UITableViewController {
     }
 
     func configureCell(cell: RefereeProtocolTableViewCell, model: TableStruct.CellStruct) {
-        cell.name_label.text = model.name
-        cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: model.image_path))
+        if model.referee_id.count > 2 {
+            presenter.getReferee(referee: model.referee_id, get_referee: { (referee) in
+                cell.name_label.text = referee.person.getFullName()
+                if referee.person.photo != nil {
+                    cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: referee.person.photo!))
+                    //cell.photo_image.image?.af_imageRoundedIntoCircle()
+                } else {
+                    cell.photo_image.image = UIImage(named: "ic_logo")
+                }
+            }) { (error) in
+                
+            }
+        } else {
+            debugPrint("referee id is empty")
+        }
     }
     
     // MARK: - Table view delegate
