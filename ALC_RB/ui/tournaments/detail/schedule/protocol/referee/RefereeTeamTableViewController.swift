@@ -24,9 +24,8 @@ class RefereeTeamTableViewController: UITableViewController {
         struct CellStruct {
             var image: UIImage = UIImage(named: "ic_logo")!
             var name: String = "Не назначен"
-            init() {
-                
-            }
+            var image_path: String = ""
+            init() { }
         }
         var tableModel: [CellStruct]
         var tableHeader = [
@@ -38,7 +37,7 @@ class RefereeTeamTableViewController: UITableViewController {
         ]
         
         init() {
-            tableModel = [CellStruct]()
+            tableModel = [CellStruct(), CellStruct(), CellStruct(), CellStruct(), CellStruct()]
         }
     }
     
@@ -57,6 +56,10 @@ class RefereeTeamTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
+        
+        var mTitle = self.title
+        navigationController?.navigationBar.topItem?.title = " "
+        title = mTitle
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,7 +83,8 @@ class RefereeTeamTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! RefereeProtocolTableViewCell
 
-        configureCell(cell: cell, model: destinationData[indexPath.section])
+//        configureCell(cell: cell, model: destinationData[indexPath.section])
+        configureCell(cell: cell, model: tableModel.tableModel[indexPath.section])
 
         return cell
     }
@@ -153,6 +157,11 @@ class RefereeTeamTableViewController: UITableViewController {
         
     }
 
+    func configureCell(cell: RefereeProtocolTableViewCell, model: TableStruct.CellStruct) {
+        cell.name_label.text = model.name
+        cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: model.image_path))
+    }
+    
     // MARK: - Table view delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
