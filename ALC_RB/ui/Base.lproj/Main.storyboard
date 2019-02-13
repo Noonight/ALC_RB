@@ -1332,22 +1332,60 @@
             </objects>
             <point key="canvasLocation" x="2341.5999999999999" y="-4082.6086956521744"/>
         </scene>
-        <!--Table View Controller-->
+        <!--События-->
         <scene sceneID="uJI-mp-Rzz">
             <objects>
-                <tableViewController id="S0d-pJ-MuF" sceneMemberID="viewController">
+                <tableViewController title="События" useStoryboardIdentifierAsRestorationIdentifier="YES" id="S0d-pJ-MuF" customClass="EventsMatchTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5VG-we-qfo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="nyc-Fn-Amm">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="event_protocol_cell" rowHeight="56" id="nyc-Fn-Amm" customClass="EventsProtocolTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nyc-Fn-Amm" id="Ct0-VI-JQe">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="55.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Suh-R3-bfu">
+                                            <rect key="frame" x="8" y="8" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="3I6-D5-KvZ"/>
+                                                <constraint firstAttribute="width" constant="40" id="HY8-dF-fUi"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Алексеев" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhK-7m-bNJ">
+                                            <rect key="frame" x="64" y="19" width="269.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Г" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dfy-4f-Pwn">
+                                            <rect key="frame" x="341.5" y="19" width="9.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="FhK-7m-bNJ" firstAttribute="top" secondItem="Ct0-VI-JQe" secondAttribute="topMargin" constant="8" id="4qs-1r-g6O"/>
+                                        <constraint firstItem="FhK-7m-bNJ" firstAttribute="leading" secondItem="Suh-R3-bfu" secondAttribute="trailing" constant="16" id="Djc-0Z-mRg"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="FhK-7m-bNJ" secondAttribute="bottom" constant="8" id="GNu-Pi-r1z"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Dfy-4f-Pwn" secondAttribute="bottom" constant="8" id="MsK-KJ-24E"/>
+                                        <constraint firstAttribute="bottom" secondItem="Suh-R3-bfu" secondAttribute="bottom" constant="8" id="Pa8-n6-Jf4"/>
+                                        <constraint firstItem="Suh-R3-bfu" firstAttribute="top" secondItem="Ct0-VI-JQe" secondAttribute="top" constant="8" id="QPo-zR-Zbp"/>
+                                        <constraint firstItem="Suh-R3-bfu" firstAttribute="leading" secondItem="Ct0-VI-JQe" secondAttribute="leading" constant="8" id="g14-eN-LgN"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Dfy-4f-Pwn" secondAttribute="trailing" constant="8" id="tnI-lO-TYV"/>
+                                        <constraint firstItem="Dfy-4f-Pwn" firstAttribute="top" secondItem="Ct0-VI-JQe" secondAttribute="topMargin" constant="8" id="tyY-hH-AlQ"/>
+                                        <constraint firstItem="Dfy-4f-Pwn" firstAttribute="leading" secondItem="FhK-7m-bNJ" secondAttribute="trailing" constant="8" id="yaa-fO-mMJ"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="name_label" destination="FhK-7m-bNJ" id="ooI-fH-bMb"/>
+                                    <outlet property="photo_image" destination="Suh-R3-bfu" id="dXX-yY-nab"/>
+                                    <outlet property="type_label" destination="Dfy-4f-Pwn" id="Xob-Ro-6bg"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1355,10 +1393,12 @@
                             <outlet property="delegate" destination="S0d-pJ-MuF" id="zjh-9C-tgd"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghA-dJ-g5O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3146" y="-4082"/>
+            <point key="canvasLocation" x="3144.8000000000002" y="-4082.6086956521744"/>
         </scene>
         <!--Home VC-->
         <scene sceneID="cve-Bg-B7G">

@@ -113,6 +113,35 @@ struct LIEvent: Codable {
     let player: String
     let time: String
     
+    func getEventType() -> EventType {
+        switch eventType {
+        case "goal":
+            return .goal
+        case "yellowCard":
+            return .yellowCard
+        case "redCard":
+            return .redCard
+        case "foul":
+            return .foul
+        case "autoGoal":
+            return .autoGoal
+        case "penalty":
+            return .penalty
+        default:
+            return EventType.non
+        }
+    }
+    
+    enum EventType: String {
+        case goal = "Г"
+        case yellowCard = "ЖК"
+        case redCard = "КК"
+        case foul = "Ф"
+        case autoGoal = "А"
+        case penalty = "П"
+        case non = "-"
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case eventType = "eventType"
@@ -435,6 +464,14 @@ extension LIMatch {
 }
 
 extension LIEvent {
+    
+    init() {
+        id = " "
+        eventType = " "
+        player = " "
+        time = " "
+    }
+    
     init(data: Data) throws {
         self = try newJSONDecoder().decode(LIEvent.self, from: data)
     }

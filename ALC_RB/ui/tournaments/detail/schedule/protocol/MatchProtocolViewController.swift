@@ -91,6 +91,7 @@ class MatchProtocolViewController: UIViewController {
         case segueReferee:
             prepareSegueDataModel(destination: segue.destination)
         case segueEvents:
+            prepareSegueDataModel(destination: segue.destination)
             break
         default:
             break
@@ -106,6 +107,9 @@ class MatchProtocolViewController: UIViewController {
         case is RefereeTeamTableViewController:
             let controller = destination as! RefereeTeamTableViewController
             controller.destinationData = match.referees
+        case is EventsMatchTableViewController:
+            let controller = destination as! EventsMatchTableViewController
+            controller.destinationModel = match.events
         default:
             break
         }
