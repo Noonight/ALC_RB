@@ -47,8 +47,9 @@ class EventsMatchTableViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: " ? ", style: .plain, target: self, action: #selector(handleNavBtn))
         
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([
-            NSAttributedString.Key.font : UIFont(name: "Helvetica-Bold", size: 26)
-            ], for: .normal)
+            NSAttributedString.Key.font : UIFont(name: "Helvetica-Bold", size: 26)], for: .normal)
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "Helvetica-Bold", size: 20)], for: UIControl.State.selected)
     }
     
     // MARK: - Action btn

@@ -8,6 +8,14 @@
 
 import UIKit
 
+class Menu: NSObject {
+    let name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+}
+
 class MenuLauncher: NSObject {
     
     let blackView = UIView()
@@ -19,6 +27,18 @@ class MenuLauncher: NSObject {
     }()
     let cellId = "menu_cell_id"
     
+    //let cellId = "cellId"
+    let menuSettings: [Menu] = {
+        return [
+            Menu(name: "Г - гол"),
+            Menu(name: "А - автогол"),
+            Menu(name: "Ф - фол"),
+            Menu(name: "КК - красная карточка"),
+            Menu(name: "ЖК - желтая карточка"),
+            Menu(name: "Д - дисквалификация")
+        ]
+    }()
+    
     func showMenu() {
         if let window = UIApplication.shared.keyWindow {
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
@@ -27,7 +47,7 @@ class MenuLauncher: NSObject {
             window.addSubview(blackView)
             window.addSubview(collectionView)
             
-            let height: CGFloat = 200
+            let height: CGFloat = 220
             let y = window.frame.height - height
             collectionView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
             
@@ -57,19 +77,30 @@ class MenuLauncher: NSObject {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(MenuLauncherCell.self, forCellWithReuseIdentifier: cellId)
     }
 }
 
 extension MenuLauncher: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return menuSettings.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuLauncherCell
+        
+        let menuGola = menuSettings[indexPath.item]
+        cell.setting = menuGola
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 30)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }
 
