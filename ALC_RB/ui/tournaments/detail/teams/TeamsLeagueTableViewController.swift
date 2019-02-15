@@ -26,11 +26,50 @@ class TeamsLeagueTableViewController: UITableViewController {
             tableHeaderView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: 37)
         }
     }
+    let menuLauncher = MenuLauncher()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
         title = " "
+        
+        menuLauncher.menuSettings = [
+            Menu(name: "№ - место в турнире"),
+            Menu(name: "И - количество проведенных матчей"),
+            Menu(name: "РМ - разница забитых и пропущенных мячей"),
+            Menu(name: "О - количество очков")
+        ]
+        setupNavBtn()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setupNavBtn()
+    }
+    
+    // MARK: - Setup nav button
+    
+    func setupNavBtn() {
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: " ? ", style: .plain, target: self, action: #selector(handleNavBtn))
+//        navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: " ? ", style: .plain, target: self, action: #selector(handleNavBtn))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: " ? ", style: .plain, target: self, action: #selector(handleNavBtn))
+        
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "Helvetica-Bold", size: 26)], for: .normal)
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "Helvetica-Bold", size: 20)], for: UIControl.State.selected)
+    }
+    
+    // MARK: - Action btn
+    
+    @objc func handleNavBtn() {
+        showMenu()
+    }
+    
+    // MARK: - Setup menu
+    
+    func showMenu() {
+        menuLauncher.showMenu()
     }
 }
 

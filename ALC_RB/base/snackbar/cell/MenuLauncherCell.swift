@@ -19,6 +19,7 @@ class MenuLauncherCell: BaseCell {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Menu 1-9"
+        label.numberOfLines = 2
         return label
     }()
     

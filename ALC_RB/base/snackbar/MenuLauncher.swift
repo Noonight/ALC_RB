@@ -28,7 +28,7 @@ class MenuLauncher: NSObject {
     let cellId = "menu_cell_id"
     
     //let cellId = "cellId"
-    let menuSettings: [Menu] = {
+    var menuSettings: [Menu] = {
         return [
             Menu(name: "Г - гол"),
             Menu(name: "А - автогол"),
@@ -100,7 +100,7 @@ extension MenuLauncher: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 8
     }
 }
 
