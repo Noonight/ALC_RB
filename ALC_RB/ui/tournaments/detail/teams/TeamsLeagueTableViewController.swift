@@ -20,6 +20,12 @@ class TeamsLeagueTableViewController: UITableViewController {
             updateUI()
         }
     }
+    var screenWidth: CGFloat = UIScreen.main.bounds.width {
+        didSet {
+            let screenWidth = UIScreen.main.bounds.width
+            tableHeaderView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: 37)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
