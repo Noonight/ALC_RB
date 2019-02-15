@@ -37,20 +37,30 @@ class ScoreMatchTableViewController: UITableViewController {
     let resultScoreSection = 1
     let resultScoreHeader = "Итоговый счет"
     
+    var teamOneCount = 0
+    var teamTwoCount = 0
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
         
+        //match.events.append(LIEvent(id: "apsifjsd0890", eventType: "yellowCard", player: "5be94d0206af116344942a58", time: "2 тайм"))
+        
         prepareTableStruct(leagueModel: leagueDetailModel, match: match)
+        
+//        tableStruct.events[1][0] = LIEvent(id: "eflgjko9u5ng0345jg904wjf0", eventType: "yellowCard", player: "5be94d0206af116344942a58", time: "2 тайм")
+//        tableStruct.events[1].append(LIEvent(id: "eflgjko9u5ng0345jg904wjf0", eventType: "yellowCard", player: "5be94d0206af116344942a58", time: "2 тайм"))
+//        tableStruct.events.append([LIEvent(id: "eflgjko9u5ng0345jg904wjf0", eventType: "yellowCard", player: "5be94d0206af116344942a58", time: "2 тайм")])
+//        tableStruct.events[0].append(LIEvent(id: "203jirjg0sd8jfipsdj08", eventType: "", player: <#T##String#>, time: <#T##String#>))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         tableView.tableFooterView = footer_view
-        footer_view.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 90)
+        footer_view.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 98)
         
         configureFooter(league: leagueDetailModel.leagueInfo.league, match: match)
     }
@@ -66,7 +76,9 @@ class ScoreMatchTableViewController: UITableViewController {
         footer_team_two_label.text = titleTeamTwo
         //scheduleCell.mTitleTeam2 = titleTeamTwo
         
-        footer_score_label.text = match.score ?? "-"
+//        footer_score_label.text = match.score ?? "-"
+        footer_score_label.text = parseScoreString(score: match.score ?? "-")
+//        footer_score_label.text = getScore(teamOne: teamOneCount, teamTwo: teamTwoCount)
         
         presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamOne, league: league)) { (image) in
             self.footer_team_one_image.image = image.af_imageRoundedIntoCircle()
@@ -78,13 +90,20 @@ class ScoreMatchTableViewController: UITableViewController {
         }
     }
     
+    func parseScoreString(score: String) -> String {
+        var scores = score.components(separatedBy: ":")
+        return "\(scores[0]) : \(scores[1])"
+    }
+    
     // MARK: - Prepare Table struct
     
     func findUniqueHeader(destination: [LIEvent]) -> [String] {
         var allEventTypes: [String] = []
         for event in destination {
             if !allEventTypes.contains(event.time) {
-                allEventTypes.append(event.time)
+                if event.getEventType() == LIEvent.EventType.goal {
+                    allEventTypes.append(event.time)
+                }
             }
         }
         return allEventTypes
@@ -126,18 +145,23 @@ class ScoreMatchTableViewController: UITableViewController {
     func configureCell(cell: ScoreMatchTableViewCell, league: LILeague, match: LIMatch, event: LIEvent) {
         
         let playerId = event.player
+//        print ("playerId =  \(playerId)")
+//        print ("team One = \(match.teamOne) --- team Two = \(match.teamTwo)")
+//        print(getTeamIdByPlayerId(league: league, match: match, player: playerId))
         
-        
+        if getTeamIdByPlayerId(league: league, match: match, player: playerId) == match.teamOne {
+            teamOneCount = teamOneCount + 1
+        } else if getTeamIdByPlayerId(league: league, match: match, player: playerId) == match.teamTwo {
+            teamTwoCount = teamTwoCount + 1
+        }
         
         let titleTeamOne = ClubTeamHelper.getTeamTitle(league: league, match: match, team: .one)
         cell.team_one_label.text = titleTeamOne
-        //scheduleCell.mTitleTeam1 = titleTeamOne
         
         let titleTeamTwo = ClubTeamHelper.getTeamTitle(league: league, match: match, team: .two)
         cell.team_two_label.text = titleTeamTwo
-        //scheduleCell.mTitleTeam2 = titleTeamTwo
         
-        cell.score_label.text = match.score ?? "-"
+        cell.score_label.text = getScore(teamOne: teamOneCount, teamTwo: teamTwoCount)
         
         presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamOne, league: league)) { (image) in
             cell.team_one_image.image = image.af_imageRoundedIntoCircle()
@@ -150,6 +174,10 @@ class ScoreMatchTableViewController: UITableViewController {
     }
     
     // MARK: - Configure cell helpers
+    
+    func getScore(teamOne: Int, teamTwo: Int) -> String {
+        return "\(teamOne) : \(teamTwo)"
+    }
     
     func getTeamIdByPlayerId(league: LILeague, match: LIMatch, player id: String) -> String {
         let playerId = id

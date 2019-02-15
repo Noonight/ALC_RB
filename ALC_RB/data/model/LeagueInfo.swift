@@ -76,7 +76,7 @@ struct LIMatch: Codable {
     let league: String
     let teamOne: String
     let teamTwo: String
-    let events: [LIEvent]
+    var events: [LIEvent]
     let referees: [LIReferee]
     let createdAt: String
     let updatedAt: String
