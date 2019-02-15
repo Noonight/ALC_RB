@@ -63,7 +63,7 @@ class MatchProtocolViewController: UIViewController {
     // MARK: - Button Actions
     
     @objc func onMatchScoreBtnPressed(sender: UIBarButtonItem) {
-        debugPrint("Hello from navigation bar button")
+        lazy let score: 
     }
     
     @IBAction func teamOneBtnPressed(_ sender: UIButton) {
