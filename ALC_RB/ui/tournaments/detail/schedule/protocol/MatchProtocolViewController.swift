@@ -63,7 +63,17 @@ class MatchProtocolViewController: UIViewController {
     // MARK: - Button Actions
     
     @objc func onMatchScoreBtnPressed(sender: UIBarButtonItem) {
-        lazy let score: 
+        var score: ScoreMatchTableViewController = {
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            
+            var controller = storyboard.instantiateViewController(withIdentifier: "ScoreMatchTableViewController") as! ScoreMatchTableViewController
+            controller.leagueDetailModel = self.leagueDetailModel
+            controller.match = self.match
+            return controller
+        }()
+//        navigationController?.showDetailViewController(score, sender: self)
+        navigationController?.show(score, sender: self)
+//        showDetailViewController(score, sender: self)
     }
     
     @IBAction func teamOneBtnPressed(_ sender: UIButton) {
@@ -110,6 +120,10 @@ class MatchProtocolViewController: UIViewController {
         case is EventsMatchTableViewController:
             let controller = destination as! EventsMatchTableViewController
             controller.destinationModel = match.events
+        case is ScoreMatchTableViewController:
+            let controller = destination as! ScoreMatchTableViewController
+            controller.leagueDetailModel = leagueDetailModel
+            controller.match = match
         default:
             break
         }
