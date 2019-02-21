@@ -30,7 +30,7 @@
 		CE61551D21AFC33D008C4463 /* Announces.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61551C21AFC33D008C4463 /* Announces.swift */; };
 		CE61551F21AFC799008C4463 /* NewsAnnouncePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61551E21AFC799008C4463 /* NewsAnnouncePresenter.swift */; };
 		CE61552221AFD329008C4463 /* AnnouncesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61552121AFD329008C4463 /* AnnouncesTableViewCell.swift */; };
-		CE61552521AFEB54008C4463 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61552421AFEB54008C4463 /* UserViewController.swift */; };
+		CE61552521AFEB54008C4463 /* UserLKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61552421AFEB54008C4463 /* UserLKViewController.swift */; };
 		CE6E380621B65E1E009C2D1F /* NewsDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E380521B65E1E009C2D1F /* NewsDetailPresenter.swift */; };
 		CE77AC7B21B0F1BA00C0ED0D /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AC7A21B0F1BA00C0ED0D /* DateFormatter.swift */; };
 		CE916AAC21B4E1FC0025FECF /* ApiRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE916AAB21B4E1FC0025FECF /* ApiRoute.swift */; };
@@ -91,6 +91,9 @@
 		DB78E13F21D529DC001C885D /* EmptyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78E13E21D529DC001C885D /* EmptyProtocol.swift */; };
 		DBA69210221E74A000BEFB26 /* DrawerMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA6920F221E74A000BEFB26 /* DrawerMenuTableViewCell.swift */; };
 		DBA69213221E759600BEFB26 /* MenuOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69212221E759600BEFB26 /* MenuOption.swift */; };
+		DBA69215221E95C400BEFB26 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69214221E95C400BEFB26 /* UIColor.swift */; };
+		DBA69218221EB83500BEFB26 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69217221EB83500BEFB26 /* AuthViewController.swift */; };
+		DBA6921A221EB85900BEFB26 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69219221EB85900BEFB26 /* RegistrationViewController.swift */; };
 		DBB208E5221180850010B600 /* TeamProtocolTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208E4221180850010B600 /* TeamProtocolTableViewController.swift */; };
 		DBB208E8221182870010B600 /* TeamProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208E7221182870010B600 /* TeamProtocolTableViewCell.swift */; };
 		DBB208EA221192F90010B600 /* TeamProtocolPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208E9221192F90010B600 /* TeamProtocolPresenter.swift */; };
@@ -129,7 +132,7 @@
 		CE61551C21AFC33D008C4463 /* Announces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announces.swift; sourceTree = "<group>"; };
 		CE61551E21AFC799008C4463 /* NewsAnnouncePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAnnouncePresenter.swift; sourceTree = "<group>"; };
 		CE61552121AFD329008C4463 /* AnnouncesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncesTableViewCell.swift; sourceTree = "<group>"; };
-		CE61552421AFEB54008C4463 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		CE61552421AFEB54008C4463 /* UserLKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLKViewController.swift; sourceTree = "<group>"; };
 		CE6E380521B65E1E009C2D1F /* NewsDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailPresenter.swift; sourceTree = "<group>"; };
 		CE77AC7A21B0F1BA00C0ED0D /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		CE916AAB21B4E1FC0025FECF /* ApiRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRoute.swift; sourceTree = "<group>"; };
@@ -193,6 +196,9 @@
 		DB78E13E21D529DC001C885D /* EmptyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyProtocol.swift; sourceTree = "<group>"; };
 		DBA6920F221E74A000BEFB26 /* DrawerMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuTableViewCell.swift; sourceTree = "<group>"; };
 		DBA69212221E759600BEFB26 /* MenuOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOption.swift; sourceTree = "<group>"; };
+		DBA69214221E95C400BEFB26 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		DBA69217221EB83500BEFB26 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		DBA69219221EB85900BEFB26 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		DBB208E4221180850010B600 /* TeamProtocolTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamProtocolTableViewController.swift; sourceTree = "<group>"; };
 		DBB208E7221182870010B600 /* TeamProtocolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamProtocolTableViewCell.swift; sourceTree = "<group>"; };
 		DBB208E9221192F90010B600 /* TeamProtocolPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamProtocolPresenter.swift; sourceTree = "<group>"; };
@@ -365,9 +371,9 @@
 		CE61552321AFEB3D008C4463 /* user */ = {
 			isa = PBXGroup;
 			children = (
-				DBA69211221E757800BEFB26 /* model */,
-				DBA6920E221E748500BEFB26 /* cell */,
-				CE61552421AFEB54008C4463 /* UserViewController.swift */,
+				DBA69216221EB81400BEFB26 /* lk */,
+				DBA6921C221EB86A00BEFB26 /* registration */,
+				DBA6921B221EB85D00BEFB26 /* auth */,
 			);
 			path = user;
 			sourceTree = "<group>";
@@ -393,6 +399,7 @@
 				DB2A35E121CA6BDE00E9E2C5 /* NameService.swift */,
 				DB673F5021D7A39B006205A8 /* Image.swift */,
 				DBC347602216F34B001D9B7D /* StringEx.swift */,
+				DBA69214221E95C400BEFB26 /* UIColor.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -719,6 +726,32 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		DBA69216221EB81400BEFB26 /* lk */ = {
+			isa = PBXGroup;
+			children = (
+				DBA69211221E757800BEFB26 /* model */,
+				DBA6920E221E748500BEFB26 /* cell */,
+				CE61552421AFEB54008C4463 /* UserLKViewController.swift */,
+			);
+			path = lk;
+			sourceTree = "<group>";
+		};
+		DBA6921B221EB85D00BEFB26 /* auth */ = {
+			isa = PBXGroup;
+			children = (
+				DBA69217221EB83500BEFB26 /* AuthViewController.swift */,
+			);
+			path = auth;
+			sourceTree = "<group>";
+		};
+		DBA6921C221EB86A00BEFB26 /* registration */ = {
+			isa = PBXGroup;
+			children = (
+				DBA69219221EB85900BEFB26 /* RegistrationViewController.swift */,
+			);
+			path = registration;
+			sourceTree = "<group>";
+		};
 		DBB208E322117F8F0010B600 /* team */ = {
 			isa = PBXGroup;
 			children = (
@@ -933,7 +966,7 @@
 				04C024EA221427F500A4A571 /* MenuLauncher.swift in Sources */,
 				04C024EC22142F6600A4A571 /* MenuLauncherCell.swift in Sources */,
 				DB11CC9421C241E10083773E /* LeagueInfo.swift in Sources */,
-				CE61552521AFEB54008C4463 /* UserViewController.swift in Sources */,
+				CE61552521AFEB54008C4463 /* UserLKViewController.swift in Sources */,
 				DB48BE7622002B42008B007D /* SoloClub.swift in Sources */,
 				DB4A789821C154E70071BA8F /* NavigationBar.swift in Sources */,
 				DB595C7521EF4EB6000282F4 /* TeamsLeagueTableViewController.swift in Sources */,
@@ -946,6 +979,7 @@
 				DB6AA18121C295C3007D4693 /* ClubsPresenter.swift in Sources */,
 				DB51CD9222150E3700A8D08E /* BaseCell.swift in Sources */,
 				CE916AB021B4EE2D0025FECF /* NoSectionCellTableViewCell.swift in Sources */,
+				DBA69215221E95C400BEFB26 /* UIColor.swift in Sources */,
 				DB59433821F219FE00945601 /* PlayersTeamLeagueDetailViewController.swift in Sources */,
 				DB11CC8D21C22F890083773E /* ScheduleTableViewController.swift in Sources */,
 				DBC347612216F34B001D9B7D /* StringEx.swift in Sources */,
@@ -973,12 +1007,14 @@
 				DB17385521BA9B9A00017B6D /* UpcomingMatches.swift in Sources */,
 				DB59433A21F21A2300945601 /* MatchesTeamLeagueDetailTableViewController.swift in Sources */,
 				DB673F5121D7A39B006205A8 /* Image.swift in Sources */,
+				DBA69218221EB83500BEFB26 /* AuthViewController.swift in Sources */,
 				DB2A35E221CA6BDE00E9E2C5 /* NameService.swift in Sources */,
 				CE158CE421AD2CE000CEECFE /* TournamentsTableViewController.swift in Sources */,
 				CE158CE621AD3E8A00CEECFE /* TournamentTableViewCell.swift in Sources */,
 				CE0AF81D21C7A27900F8F6A2 /* ClubDetailPresenter.swift in Sources */,
 				CE61551F21AFC799008C4463 /* NewsAnnouncePresenter.swift in Sources */,
 				DBA69213221E759600BEFB26 /* MenuOption.swift in Sources */,
+				DBA6921A221EB85900BEFB26 /* RegistrationViewController.swift in Sources */,
 				DB59433421F212BE00945601 /* SegmentHelper.swift in Sources */,
 				DB11CC9021C235460083773E /* ScheduleTableViewCell.swift in Sources */,
 				CE60234C21AE756C00B428EE /* NewsAnnounceTableViewController.swift in Sources */,
