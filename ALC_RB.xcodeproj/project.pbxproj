@@ -101,6 +101,7 @@
 		DBB208F0221315110010B600 /* RefereeProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208EF221315110010B600 /* RefereeProtocolTableViewCell.swift */; };
 		DBB208F2221316D90010B600 /* RefereeTeamPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208F1221316D90010B600 /* RefereeTeamPresenter.swift */; };
 		DBC347612216F34B001D9B7D /* StringEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC347602216F34B001D9B7D /* StringEx.swift */; };
+		DBC5C5F6221FDA8500B0A1B6 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5C5F5221FDA8500B0A1B6 /* ImagePicker.swift */; };
 		DBF4F00822157BF900066BE3 /* ScoreMatchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF4F00722157BF900066BE3 /* ScoreMatchPresenter.swift */; };
 		DBFB838E2201CAB4008A8F79 /* MatchesTeamLeagueDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB838D2201CAB4008A8F79 /* MatchesTeamLeagueDetailPresenter.swift */; };
 		DBFB83912201CEAE008A8F79 /* PlayersLeagueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB83902201CEAE008A8F79 /* PlayersLeagueDetailViewController.swift */; };
@@ -206,6 +207,7 @@
 		DBB208EF221315110010B600 /* RefereeProtocolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeProtocolTableViewCell.swift; sourceTree = "<group>"; };
 		DBB208F1221316D90010B600 /* RefereeTeamPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTeamPresenter.swift; sourceTree = "<group>"; };
 		DBC347602216F34B001D9B7D /* StringEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEx.swift; sourceTree = "<group>"; };
+		DBC5C5F5221FDA8500B0A1B6 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		DBF4F00722157BF900066BE3 /* ScoreMatchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreMatchPresenter.swift; sourceTree = "<group>"; };
 		DBFB838D2201CAB4008A8F79 /* MatchesTeamLeagueDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesTeamLeagueDetailPresenter.swift; sourceTree = "<group>"; };
 		DBFB83902201CEAE008A8F79 /* PlayersLeagueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersLeagueDetailViewController.swift; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 				DB78E13E21D529DC001C885D /* EmptyProtocol.swift */,
 				DB59433321F212BE00945601 /* SegmentHelper.swift */,
 				04DF5493220D6C25001323A6 /* ClubTeamHelper.swift */,
+				DBC5C5F5221FDA8500B0A1B6 /* ImagePicker.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -953,6 +956,7 @@
 				DB4A789421C1084B0071BA8F /* TournamentsPresenter.swift in Sources */,
 				DBF4F00822157BF900066BE3 /* ScoreMatchPresenter.swift in Sources */,
 				DB6AA18321C296DE007D4693 /* ClubTableViewCell.swift in Sources */,
+				DBC5C5F6221FDA8500B0A1B6 /* ImagePicker.swift in Sources */,
 				DB2A35D621CA203B00E9E2C5 /* PlayersTableViewController.swift in Sources */,
 				DB57C5D221F0BFD500BEA097 /* TeamLeagueDetailViewController.swift in Sources */,
 				DBA69210221E74A000BEFB26 /* DrawerMenuTableViewCell.swift in Sources */,

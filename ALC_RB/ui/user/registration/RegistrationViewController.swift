@@ -21,11 +21,14 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var birthdayPicker: UIDatePicker!
     @IBOutlet weak var barCompleteButton: UIBarButtonItem!
     
+    var imagePicker: ImagePicker?
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +43,9 @@ class RegistrationViewController: UIViewController {
         print("complete registration button pressed")
     }
     
+    @IBAction func imageTap(_ sender: UITapGestureRecognizer) {
+        imagePicker!.present(from: self.view)
+    }
     /*
     // MARK: - Navigation
 
@@ -50,4 +56,10 @@ class RegistrationViewController: UIViewController {
     }
     */
 
+}
+
+extension RegistrationViewController: ImagePickerDelegate {
+    func didSelect(image: UIImage?) {
+        photoImageView.image = image?.af_imageRoundedIntoCircle()
+    }
 }
