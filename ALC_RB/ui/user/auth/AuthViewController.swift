@@ -15,10 +15,17 @@ class AuthViewController: UIViewController {
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    let presenter = AuthPresenter()
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initPresenter()
+        
+        loginTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,18 +39,39 @@ class AuthViewController: UIViewController {
         
     }
     
-    func checkFields() {
-        
-    }
-    
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+}
 
+extension AuthViewController: MvpView {
+    func initPresenter() {
+        presenter.attachView(view: self)
+    }
+}
+
+extension AuthViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case loginTextField:
+            if loginTextField.isEmpty() {
+                showToast(message: "Login field is empty", seconds: 1.0)
+            } else {
+                passwordTextField.becomeFirstResponder()
+            }
+        case passwordTextField:
+            if passwordTextField.isEmpty() {
+                showToast(message: "Password field is empty", seconds: 1.0)
+            } else {
+                passwordTextField.resignFirstResponder()
+                // start sign in function
+            }
+        default:
+            textField.endEditing(true)
+        }
+        return true
+    }
 }

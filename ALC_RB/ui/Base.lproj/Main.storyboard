@@ -2415,7 +2415,7 @@
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" textContentType="family-name"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Имя" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qyt-nw-RhY">
                                                 <rect key="frame" x="16" y="159" width="288" height="30"/>
@@ -2424,7 +2424,7 @@
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" textContentType="given-name"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Отчество" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mje-64-Syy">
                                                 <rect key="frame" x="16" y="197" width="288" height="30"/>
@@ -2433,7 +2433,7 @@
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" textContentType="name"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Логин" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ucj-BO-9XC">
                                                 <rect key="frame" x="16" y="235" width="288" height="30"/>
@@ -2442,7 +2442,7 @@
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" textContentType="username"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kFd-UT-zLb">
                                                 <rect key="frame" x="16" y="273" width="288" height="30"/>
@@ -2451,7 +2451,7 @@
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" textContentType="password"/>
                                             </textField>
                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="hgp-Rn-6Qg">
                                                 <rect key="frame" x="16" y="336" width="288" height="216"/>
@@ -2529,11 +2529,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="NameTextField" destination="qyt-nw-RhY" id="ovQ-tP-NqM"/>
                         <outlet property="barCompleteButton" destination="qJk-kD-x8w" id="Q2n-J3-gwR"/>
                         <outlet property="birthdayPicker" destination="hgp-Rn-6Qg" id="DsC-Q5-Jvz"/>
                         <outlet property="familyTextField" destination="xGT-yl-wu4" id="dhj-8v-OPV"/>
                         <outlet property="loginTextField" destination="ucj-BO-9XC" id="MJe-Mg-O7F"/>
+                        <outlet property="nameTextField" destination="qyt-nw-RhY" id="ovQ-tP-NqM"/>
                         <outlet property="passwordTF" destination="kFd-UT-zLb" id="Ovf-Jx-MC6"/>
                         <outlet property="patronymicTextField" destination="Mje-64-Syy" id="xsP-ZK-HrB"/>
                         <outlet property="photoImageView" destination="DIA-GZ-Jra" id="fT2-hi-w6k"/>
