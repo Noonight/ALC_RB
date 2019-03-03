@@ -42,4 +42,8 @@ enum Routes: String {
     case leagueInfo = "leagues/league"
     case getusers = "getusers"
     case soloUser = "getuser"
+    
+    case post_auth = "signin"
+    case post_reg = "signup"
+    case post_edit_profile = "editPlayerInfo"
 }

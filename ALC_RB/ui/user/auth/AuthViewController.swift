@@ -17,6 +17,8 @@ class AuthViewController: UIViewController {
     
     let presenter = AuthPresenter()
     
+    let userDefaultHelper = UserDefaultsHelper()
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -26,6 +28,10 @@ class AuthViewController: UIViewController {
         
         loginTextField.delegate = self
         passwordTextField.delegate = self
+        
+        if userDefaultHelper.userIsAuthorized() {
+            replaceUserLKVC(authUser: userDefaultHelper.getAuthorizedUser()!)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +42,30 @@ class AuthViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func signInBtnPressed(_ sender: UIButton) {
+        signIn()
+        //authorizationComplete(authUser: AuthUser())
+    }
+
+    // MARK: - logic
+    
+    func signIn() {
+        if !fieldsIsEmpty() {
+            presenter.signIn(userData: SignIn(
+                login: loginTextField.text!,
+                password: passwordTextField.text!)
+            )
+        } else {
+            showToast(message: "Fields can't be empty")
+        }
         
+    }
+    
+    func fieldsIsEmpty() -> Bool {
+        if loginTextField.isEmpty() || passwordTextField.isEmpty() {
+            return true
+        } else {
+            return false
+        }
     }
     
     // MARK: - Navigation
@@ -47,9 +76,39 @@ class AuthViewController: UIViewController {
     }
 }
 
-extension AuthViewController: MvpView {
+extension AuthViewController: AuthView {
     func initPresenter() {
         presenter.attachView(view: self)
+    }
+    
+    func authorizationComplete(authUser: AuthUser) {
+//
+//        do {
+//            try UserDefaults().set(object: authUser, forKey: "authUser")
+//        } catch {
+//            print("error with set data about user from UserDefaults")
+//        }
+        
+        userDefaultHelper.deleteAuthorizedUser()
+        userDefaultHelper.setAuthorizedUser(user: authUser)
+        
+        replaceUserLKVC(authUser: authUser)
+    }
+    
+    func replaceUserLKVC(authUser: AuthUser) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "UserNC") as! UINavigationController
+        
+        let childViewController = viewController.children.first as! UserLKViewController
+        childViewController.authUser = authUser
+        
+        let countOfViewControllers = tabBarController?.viewControllers?.count
+        //        _ = tabBarController?.selectedViewController
+        tabBarController?.viewControllers![countOfViewControllers! - 1] = viewController
+    }
+    
+    func authorizationError(error: Error) {
+        showToast(message: "Неверные данные", seconds: 3.0)
     }
 }
 
@@ -67,6 +126,7 @@ extension AuthViewController: UITextFieldDelegate {
                 showToast(message: "Password field is empty", seconds: 1.0)
             } else {
                 passwordTextField.resignFirstResponder()
+                signIn()
                 // start sign in function
             }
         default:

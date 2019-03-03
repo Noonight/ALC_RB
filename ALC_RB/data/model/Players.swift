@@ -131,6 +131,28 @@ extension Players {
 }
 
 extension Person {
+    
+    init() {
+        surname = ""
+        name = ""
+        lastname = ""
+        birthdate = ""
+        photo = ""
+        desc = ""
+        participationMatches = []
+        pastLeagues = []
+        id = ""
+        login = ""
+        password = ""
+        type = ""
+        pendingTeamInvites = []
+        participation = []
+        createdAt = ""
+        updatedAt = ""
+        v = -1
+        club = ""
+    }
+    
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Person.self, from: data)
     }

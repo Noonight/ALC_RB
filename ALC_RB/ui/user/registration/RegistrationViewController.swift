@@ -25,6 +25,10 @@ class RegistrationViewController: UIViewController {
     
     let presenter = RegistrationPresenter()
     
+    var authUser: AuthUser?
+    
+    let userDefaultsHelper = UserDefaultsHelper()
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -75,9 +79,33 @@ class RegistrationViewController: UIViewController {
 
 // MARK: - Presenter init
 
-extension RegistrationViewController: MvpView {
+extension RegistrationViewController: RegistrationView {
     func initPresenter() {
         presenter.attachView(view: self)
+    }
+    
+    func registrationComplete(authUser: AuthUser) {
+        self.userDefaultsHelper.deleteAuthorizedUser()
+        self.userDefaultsHelper.setAuthorizedUser(user: authUser)
+        
+        replaceUserLKVC(authUser: authUser)
+    }
+    
+    func registrationError(error: Error) {
+        showToast(message: "Не удалось создать пользователя")
+        debugPrint(error)
+    }
+    
+    func replaceUserLKVC(authUser: AuthUser) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "UserNC") as! UINavigationController
+        
+        let childViewController = viewController.children.first as! UserLKViewController
+        childViewController.authUser = authUser
+        
+        let countOfViewControllers = tabBarController?.viewControllers?.count
+        //        _ = tabBarController?.selectedViewController
+        tabBarController?.viewControllers![countOfViewControllers! - 1] = viewController
     }
 }
 

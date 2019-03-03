@@ -23,13 +23,20 @@ class UserLKViewController: UIViewController {
     
     @IBOutlet weak var drawerLeadingConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var barMenuBtn: UIBarButtonItem!
+    
     @IBOutlet weak var containerView: UIView!
     
     let cellId = "drawer_menu_cell"
+    let segueEditProfile = "segue_edit_profile"
     
     var drawerIsOpened = false
     
     var segmentHelper: SegmentHelper?
+    
+    var authUser: AuthUser?
+    
+    let presenter = UserLKPresenter()
     
     // MARK: - Drawer controllers
     
@@ -54,18 +61,30 @@ class UserLKViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initPresenter()
+        
         tableView.delegate = self
         tableView.dataSource = self
         
         segmentHelper = SegmentHelper(self, containerView)
+        
+        authUser = UserDefaultsHelper().getAuthorizedUser()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        barMenuBtn.image = barMenuBtn.image?.af_imageAspectScaled(toFit: CGSize(width: 24, height: 24))
         showFirstItem()
+        
+        self.userHeaderMenuLabel.text = authUser?.person.getFullName()
+        self.presenter.getProfileImage(imagePath: authUser?.person.photo ?? "")
     }
     
     // MARK: - Drawer btn action
+    
+    @IBAction func drawerHeaderPressed(_ sender: UITapGestureRecognizer) {
+        print("Drawer header pressed \(UserDefaultsHelper().getAuthorizedUser())")
+    }
     
     @IBAction func menuPressed(_ sender: UIBarButtonItem) {
         setDrawerState()
@@ -73,6 +92,16 @@ class UserLKViewController: UIViewController {
 
     @IBAction func shadowBtnPressed(_ sender: UIButton) {
         setDrawerState()
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  segue.identifier == segueEditProfile,
+            let destination = segue.destination as? ChangeProfileViewController
+        {
+            destination.authUser = self.authUser
+        }
     }
     
     // MARK: - Drawer menu
@@ -94,7 +123,7 @@ class UserLKViewController: UIViewController {
             
         }
     
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             if self.drawerIsOpened {
                 self.drawerShadowButton.alpha = 0
             } else {
@@ -131,10 +160,41 @@ class UserLKViewController: UIViewController {
         case .Teams:
             print(menuOption.rawValue)
         case .SignOut:
-            print(menuOption.rawValue)
+            signOut()
         }
         setDrawerState()
     }
+    
+    func signOut() {
+        UserDefaultsHelper().deleteAuthorizedUser()
+        print(UserDefaultsHelper().getAuthorizedUser())
+        replaceUserLKVC()
+    }
+    
+    func replaceUserLKVC() {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "AuthNC") as! UINavigationController
+        
+        let countOfViewControllers = tabBarController?.viewControllers?.count
+        //        _ = tabBarController?.selectedViewController
+        tabBarController?.viewControllers![countOfViewControllers! - 1] = viewController
+    }
+}
+
+extension UserLKViewController: UserLKView {
+    func getProfileImageSuccessful(image: UIImage) {
+        self.userHeaderMenuImage.image = image.af_imageRoundedIntoCircle()
+    }
+    
+    func getProfileImageFailure(error: Error) {
+        Print.d(error)
+    }
+    
+    func initPresenter() {
+        self.presenter.attachView(view: self)
+    }
+    
+    
 }
 
 extension UserLKViewController: UITableViewDelegate, UITableViewDataSource {

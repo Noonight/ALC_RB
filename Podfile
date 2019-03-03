@@ -12,4 +12,5 @@ target 'ALC_RB' do
   #pod 'RxAlamofire'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'SwiftyJSON', '~> 4.0'
 end
