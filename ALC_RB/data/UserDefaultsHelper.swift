@@ -35,14 +35,12 @@ class UserDefaultsHelper {
         return nil
     }
     
-    func setAuthorizedUser(user: AuthUser) -> Bool {
+    func setAuthorizedUser(user: AuthUser) {
         do {
             try userDefaults.set(object: user, forKey: userKey)
-            return true
         } catch {
             print("Somer error with setting user in UserDefaults")
         }
-        return false
     }
     
     func deleteAuthorizedUser() {

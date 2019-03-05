@@ -12,8 +12,11 @@ struct ApiRoute {
     
     static let baseRoute = "http://footballapi.ibb.su/"
     
-    static func getApiURL(_ mod: Routes) -> URL {
-        print("\(baseRoute)api/\(mod.rawValue)")
+    static func getApiURL(_ mod: Routes, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) -> URL {
+        #if DEBUG
+        let className = (fileName as NSString).lastPathComponent
+        print("<\(className)> ->> \(functionName) [#\(lineNumber)]| \(baseRoute)api/\(mod.rawValue)\n")
+        #endif
         return URL(string: "\(baseRoute)api/\(mod.rawValue)")!
     }
     
@@ -21,13 +24,20 @@ struct ApiRoute {
         return URL(string: "\(baseRoute)api/\(Routes.leagueInfo.rawValue)/\(id)")!
     }
     
-    static func getImageURL(image: String) -> URL {
-        print("\(baseRoute)\(image)")
+    static func getImageURL(image: String, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) -> URL {
+        #if DEBUG
+        let className = (fileName as NSString).lastPathComponent
+        print("<\(className)> ->> \(functionName) [#\(lineNumber)]| \(baseRoute)\(image)\n")
+        #endif
         return URL(string: "\(baseRoute)\(image)")!
     }
+
     
-    static func getApiURL(_ mod: Routes, id: String) -> URL {
-        debugPrint("\(baseRoute)api/\(mod.rawValue)/\(id)")
+    static func getApiURL(_ mod: Routes, id: String, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) -> URL {
+        #if DEBUG
+        let className = (fileName as NSString).lastPathComponent
+        print("<\(className)> ->> \(functionName) [#\(lineNumber)]| \(baseRoute)api/\(mod.rawValue)/\(id)\n")
+        #endif
         return URL(string: "\(baseRoute)api/\(mod.rawValue)/\(id)")!
     }
 }

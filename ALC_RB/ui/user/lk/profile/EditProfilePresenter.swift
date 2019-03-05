@@ -8,26 +8,26 @@
 
 import UIKit
 
-protocol ChangeProfileView: MvpView {
+protocol EditProfileView: MvpView {
     
-    func changeProfileSuccessful(soloUser: SoloPerson)
-    
+    func changeProfileSuccessful(editedProfile: SoloPerson)
     func changeProfileFailure(error: Error)
     
     func getProfilePhotoSuccessful(image: UIImage)
-    
     func getProfilePhotoFailure(error: Error)
+    
+    func showLoadingProfileImage()
+    func hideLoadingProfileImage()
     
 }
 
-class ChangeProfilePresenter: MvpPresenter<ChangeProfileViewController> {
+class EditProfilePresenter: MvpPresenter<EditProfileViewController> {
     
     let apiService = ApiRequests()
     
     func editProfile(token: String, profileInfo: EditProfile, profileImage: UIImage) {
-        apiService.post_edit_profile(token: token, profileInfo: profileInfo, profileImage: profileImage, get_good: { (soloPerson) in
-            self.getView().changeProfileSuccessful(soloUser: soloPerson)
-            Print.l()
+        apiService.post_edit_profile(token: token, profileInfo: profileInfo, profileImage: profileImage, response_success: { (editedProfile) in
+            self.getView().changeProfileSuccessful(editedProfile: editedProfile)
         }) { (error) in
             self.getView().changeProfileFailure(error: error)
         }

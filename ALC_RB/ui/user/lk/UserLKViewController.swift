@@ -38,6 +38,8 @@ class UserLKViewController: UIViewController {
     
     let presenter = UserLKPresenter()
     
+    let userDefaultsHelper = UserDefaultsHelper()
+    
     // MARK: - Drawer controllers
     
     private lazy var newsTable: NewsAnnounceTableViewController = {
@@ -68,22 +70,30 @@ class UserLKViewController: UIViewController {
         
         segmentHelper = SegmentHelper(self, containerView)
         
-        authUser = UserDefaultsHelper().getAuthorizedUser()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        authUser = userDefaultsHelper.getAuthorizedUser()
+        
         barMenuBtn.image = barMenuBtn.image?.af_imageAspectScaled(toFit: CGSize(width: 24, height: 24))
         showFirstItem()
-        
+
         self.userHeaderMenuLabel.text = authUser?.person.getFullName()
-        self.presenter.getProfileImage(imagePath: authUser?.person.photo ?? "")
+        if authUser?.person.photo != nil {
+            self.presenter.getProfileImage(imagePath: (authUser?.person.photo!)!)
+        } else {
+//            self.userHeaderMenuImage.image = UIImage(named: "ic_user")
+            self.userHeaderMenuImage.image = UIImage(named: "ic_logo")?.af_imageRoundedIntoCircle()
+        }
+        
     }
     
     // MARK: - Drawer btn action
     
     @IBAction func drawerHeaderPressed(_ sender: UITapGestureRecognizer) {
-        print("Drawer header pressed \(UserDefaultsHelper().getAuthorizedUser())")
+        // show EditProfileViewcontroller
     }
     
     @IBAction func menuPressed(_ sender: UIBarButtonItem) {
@@ -98,7 +108,7 @@ class UserLKViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if  segue.identifier == segueEditProfile,
-            let destination = segue.destination as? ChangeProfileViewController
+            let destination = segue.destination as? EditProfileViewController
         {
             destination.authUser = self.authUser
         }
@@ -167,7 +177,6 @@ class UserLKViewController: UIViewController {
     
     func signOut() {
         UserDefaultsHelper().deleteAuthorizedUser()
-        print(UserDefaultsHelper().getAuthorizedUser())
         replaceUserLKVC()
     }
     
@@ -187,7 +196,8 @@ extension UserLKViewController: UserLKView {
     }
     
     func getProfileImageFailure(error: Error) {
-        Print.d(error)
+        Print.d(error: error)
+        self.userHeaderMenuImage.image = UIImage(named: "ic_user")
     }
     
     func initPresenter() {

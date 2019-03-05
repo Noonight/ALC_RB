@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class ChangeProfileViewController: UIViewController {
+class EditProfileViewController: UIViewController {
 
     // MARK: - Variables
     
@@ -20,13 +22,23 @@ class ChangeProfileViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var barSaveBtn: UIBarButtonItem!
     
-    let presenter = ChangeProfilePresenter()
+    let presenter = EditProfilePresenter()
     
     var imagePicker: ImagePicker?
     
     var authUser: AuthUser?
     
     let userDefaultHelper = UserDefaultsHelper()
+    
+    var profileInfoChanged = false
+    
+    // MARK: - Trash Variables
+    var trashImageView: UIImage?
+    var trashFamily: String?
+    var trashName: String?
+    var trashPatronymic: String?
+    var trashLogin: String?
+    var trashDatePicker: String?
     
     // MARK: - Life cycle
     
@@ -41,6 +53,8 @@ class ChangeProfileViewController: UIViewController {
         self.nameTF.delegate = self
         self.patronymicTF.delegate = self
         self.loginTF.delegate = self
+        
+        prepareRxFields()
         
         firstInit()
     }
@@ -60,49 +74,88 @@ class ChangeProfileViewController: UIViewController {
         self.familyTF.text = authUser?.person.surname
         self.patronymicTF.text = authUser?.person.lastname
         self.loginTF.text = authUser?.person.login
-        presenter.photoProfile(imagePath: (authUser?.person.photo!)!)
+        presenter.photoProfile(imagePath: (authUser?.person.photo as! String))
+    }
+    
+    func prepareRxFields() {
+//        datePicker.rx
+//            .controlEvent(UIControlEvents.editingDidEnd)
+//            .asObservable()
+//            .subscribe(onNext: <#T##((()) -> Void)?##((()) -> Void)?##(()) -> Void#>, onError: <#T##((Error) -> Void)?##((Error) -> Void)?##(Error) -> Void#>, onCompleted: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, onDisposed: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+//        nameTF.rx
+//            .controlEvent(UIControlEvents.editingDidEnd)
+//            .asObservable()
+//            .subscribe { (onNext) in
+//                self.profileInfoChanged = true
+//            }
+//
     }
     
     // MARK: - Actions
     
     @IBAction func onSaveBtnPressed(_ sender: UIBarButtonItem) {
+        
+        checkFieldsIsChanged()
         presenter.editProfile(token: (authUser?.token)!, profileInfo: EditProfile(
             name: nameTF.text!,
             surname: familyTF.text!,
             lastname: patronymicTF.text!,
             login: loginTF.text!,
             _id: (authUser?.person.id)!), profileImage: imageView.image!)
-        print("Save change")
+        if profileInfoChanged {
+            
+        }
+        
     }
     
     @IBAction func onImagePressed(_ sender: UITapGestureRecognizer) {
         imagePicker?.present(from: self.view)
     }
     
+    func checkFieldsIsChanged() {
+        
+    }
 }
 
-extension ChangeProfileViewController: ChangeProfileView {
+// MARK: - Presenter view ex methods
+extension EditProfileViewController: EditProfileView {
+    func showLoadingProfileImage() {
+        
+    }
+    
+    func hideLoadingProfileImage() {
+        
+    }
+    
     func getProfilePhotoSuccessful(image: UIImage) {
         self.imageView.image = image.af_imageRoundedIntoCircle()
     }
     
     func getProfilePhotoFailure(error: Error) {
-        Print.d(error)
+        Print.d(error: error)
+        if self.authUser?.person.photo == nil || self.authUser?.person.photo?.count ?? 0 < 2 {
+            self.imageView.image = UIImage(named: "ic_add_photo")
+        }
+        
     }
     
-    func changeProfileSuccessful(soloUser: SoloPerson) {
-        Print.l()
-        var user = self.userDefaultHelper.getAuthorizedUser()
-        user?.person = soloUser.person
-        self.userDefaultHelper.setAuthorizedUser(user: user!)
+    func changeProfileSuccessful(editedProfile: SoloPerson) {
         
+        var user = self.userDefaultHelper.getAuthorizedUser()
+        user?.person = editedProfile.person
+        self.userDefaultHelper.setAuthorizedUser(user: user!)
+
+        Print.debugLog(object: user)
+        Print.d(message: "good !!_!_!__!_!_-")
+        
+        navigationController?.popViewController(animated: true)
         self.dismiss(animated: true) {
-            Print.d("Dismiss complete")
+            Print.d(message: "Dismiss complete")
         }
     }
     
     func changeProfileFailure(error: Error) {
-        Print.d(error)
+        Print.d(error: error)
     }
     
     func initPresenter() {
@@ -110,13 +163,13 @@ extension ChangeProfileViewController: ChangeProfileView {
     }
 }
 
-extension ChangeProfileViewController: ImagePickerDelegate {
+extension EditProfileViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
         self.imageView.image = image?.af_imageRoundedIntoCircle()
     }
 }
 
-extension ChangeProfileViewController: UITextFieldDelegate {
+extension EditProfileViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case familyTF:

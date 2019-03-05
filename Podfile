@@ -13,4 +13,5 @@ target 'ALC_RB' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'MBProgressHUD', '~> 1.1.0'
 end

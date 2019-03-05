@@ -49,10 +49,10 @@ class ApiRequests {
         }
     }
     
-    func post_edit_profile(token: String, profileInfo: EditProfile, profileImage: UIImage, get_good: @escaping (SoloPerson) -> (), get_error: @escaping (Error) -> () ) {
+    func post_edit_profile(token: String, profileInfo: EditProfile, profileImage: UIImage, response_success: @escaping (SoloPerson) -> (), response_failure: @escaping (Error) -> () ) {
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in
-                multipartFormData.append(profileImage.jpegData(compressionQuality: 1.0)!, withName: "photo", fileName: "userImage", mimeType: "image/jpg")
+                multipartFormData.append(profileImage.jpegData(compressionQuality: 1.0)!, withName: "photo", fileName: "jpg", mimeType: "image/jpg")
                 for (key, value) in profileInfo.toParams() {
                     let strValue = value as! String
                     multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
@@ -67,23 +67,20 @@ class ApiRequests {
                 case .success(let upload, _, _):
 //                    upload.uploadProgress(closure: { (progress) in
 //                    })
-                    
+
                     upload.responseSoloPerson(completionHandler: { (response) in
                         switch response.result {
                         case .success:
-                            if let soloPerson = response.result.value {
-                                Print.l()
-                                get_good(soloPerson)
+                            if let editedPerson = response.result.value {
+                                response_success(editedPerson)
                             }
                         case .failure(let error):
-                            Print.l()
-                            get_error(error)
+                            response_failure(error)
                         }
                     })
                     
                 case .failure(let error):
-                    Print.l()
-                    get_error(error)
+                    response_failure(error)
                 }
             }
     }

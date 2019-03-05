@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.7.3)
   - AlamofireImage (3.4.1):
     - Alamofire (~> 4.7)
+  - MBProgressHUD (1.1.0)
   - RxAtomic (4.4.0)
   - RxCocoa (4.4.0):
     - RxSwift (~> 4.0)
@@ -12,6 +13,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - AlamofireImage
+  - MBProgressHUD (~> 1.1.0)
   - RxCocoa
   - RxSwift
   - SwiftyJSON (~> 4.0)
@@ -20,6 +22,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
+    - MBProgressHUD
     - RxAtomic
     - RxCocoa
     - RxSwift
@@ -28,11 +31,12 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 098b8bcb1ee29203894f6110c59afb7c548985aa
+PODFILE CHECKSUM: aaf9d477c33d2276faa3cc903b7209a87218013b
 
 COCOAPODS: 1.5.3

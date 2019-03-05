@@ -63,11 +63,12 @@
 		DB1CA1042226A42D005E1FB9 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1CA1032226A42D005E1FB9 /* UserDefaults.swift */; };
 		DB1CA1062226B8EE005E1FB9 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1CA1052226B8EE005E1FB9 /* UserDefaultsHelper.swift */; };
 		DB1CA1082226BC38005E1FB9 /* RuntimeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1CA1072226BC38005E1FB9 /* RuntimeError.swift */; };
-		DB1CA10B2226D71A005E1FB9 /* ChangeProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1CA10A2226D71A005E1FB9 /* ChangeProfileViewController.swift */; };
+		DB1CA10B2226D71A005E1FB9 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1CA10A2226D71A005E1FB9 /* EditProfileViewController.swift */; };
 		DB2A35D621CA203B00E9E2C5 /* PlayersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A35D521CA203B00E9E2C5 /* PlayersTableViewController.swift */; };
 		DB2A35D821CA20C200E9E2C5 /* PlayersPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A35D721CA20C200E9E2C5 /* PlayersPresenter.swift */; };
 		DB2A35DA21CA222B00E9E2C5 /* Players.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A35D921CA222B00E9E2C5 /* Players.swift */; };
 		DB2A35E021CA28A100E9E2C5 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A35DF21CA28A100E9E2C5 /* PlayerTableViewCell.swift */; };
+		DB2DEBBC222CE84B003FE599 /* EditedProfilePerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2DEBBB222CE84B003FE599 /* EditedProfilePerson.swift */; };
 		DB48BE7622002B42008B007D /* SoloClub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB48BE7522002B42008B007D /* SoloClub.swift */; };
 		DB48BE7822002BD1008B007D /* PlayersTeamLeagueDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB48BE7722002BD1008B007D /* PlayersTeamLeagueDetailPresenter.swift */; };
 		DB48BE7A22002FC4008B007D /* SoloPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB48BE7922002FC4008B007D /* SoloPerson.swift */; };
@@ -87,7 +88,7 @@
 		DB595C7221EF2214000282F4 /* MatchProtocolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB595C7121EF2214000282F4 /* MatchProtocolViewController.swift */; };
 		DB595C7521EF4EB6000282F4 /* TeamsLeagueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB595C7421EF4EB6000282F4 /* TeamsLeagueTableViewController.swift */; };
 		DB595C7821EF7373000282F4 /* TeamLeagueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB595C7721EF7373000282F4 /* TeamLeagueTableViewCell.swift */; };
-		DB59E5B9222802F000D1F62F /* ChangeProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59E5B8222802F000D1F62F /* ChangeProfilePresenter.swift */; };
+		DB59E5B9222802F000D1F62F /* EditProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59E5B8222802F000D1F62F /* EditProfilePresenter.swift */; };
 		DB59E5BC222829FC00D1F62F /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59E5BB222829FC00D1F62F /* Registration.swift */; };
 		DB59E5BE2228EB5C00D1F62F /* ImageUploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59E5BD2228EB5C00D1F62F /* ImageUploadHelper.swift */; };
 		DB59E5C022292B5900D1F62F /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59E5BF22292B5900D1F62F /* EditProfile.swift */; };
@@ -185,11 +186,12 @@
 		DB1CA1032226A42D005E1FB9 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		DB1CA1052226B8EE005E1FB9 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		DB1CA1072226BC38005E1FB9 /* RuntimeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeError.swift; sourceTree = "<group>"; };
-		DB1CA10A2226D71A005E1FB9 /* ChangeProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileViewController.swift; sourceTree = "<group>"; };
+		DB1CA10A2226D71A005E1FB9 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		DB2A35D521CA203B00E9E2C5 /* PlayersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTableViewController.swift; sourceTree = "<group>"; };
 		DB2A35D721CA20C200E9E2C5 /* PlayersPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersPresenter.swift; sourceTree = "<group>"; };
 		DB2A35D921CA222B00E9E2C5 /* Players.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Players.swift; sourceTree = "<group>"; };
 		DB2A35DF21CA28A100E9E2C5 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
+		DB2DEBBB222CE84B003FE599 /* EditedProfilePerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditedProfilePerson.swift; sourceTree = "<group>"; };
 		DB48BE7522002B42008B007D /* SoloClub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloClub.swift; sourceTree = "<group>"; };
 		DB48BE7722002BD1008B007D /* PlayersTeamLeagueDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTeamLeagueDetailPresenter.swift; sourceTree = "<group>"; };
 		DB48BE7922002FC4008B007D /* SoloPerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloPerson.swift; sourceTree = "<group>"; };
@@ -209,7 +211,7 @@
 		DB595C7121EF2214000282F4 /* MatchProtocolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchProtocolViewController.swift; sourceTree = "<group>"; };
 		DB595C7421EF4EB6000282F4 /* TeamsLeagueTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsLeagueTableViewController.swift; sourceTree = "<group>"; };
 		DB595C7721EF7373000282F4 /* TeamLeagueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamLeagueTableViewCell.swift; sourceTree = "<group>"; };
-		DB59E5B8222802F000D1F62F /* ChangeProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfilePresenter.swift; sourceTree = "<group>"; };
+		DB59E5B8222802F000D1F62F /* EditProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePresenter.swift; sourceTree = "<group>"; };
 		DB59E5BB222829FC00D1F62F /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		DB59E5BD2228EB5C00D1F62F /* ImageUploadHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadHelper.swift; sourceTree = "<group>"; };
 		DB59E5BF22292B5900D1F62F /* EditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 				DB48BE7922002FC4008B007D /* SoloPerson.swift */,
 				DB1CA0FC22254FD4005E1FB9 /* AuthUser.swift */,
 				DB59E5BA222829EA00D1F62F /* post */,
+				DB2DEBBB222CE84B003FE599 /* EditedProfilePerson.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -602,8 +605,8 @@
 		DB1CA1092226D704005E1FB9 /* profile */ = {
 			isa = PBXGroup;
 			children = (
-				DB1CA10A2226D71A005E1FB9 /* ChangeProfileViewController.swift */,
-				DB59E5B8222802F000D1F62F /* ChangeProfilePresenter.swift */,
+				DB1CA10A2226D71A005E1FB9 /* EditProfileViewController.swift */,
+				DB59E5B8222802F000D1F62F /* EditProfilePresenter.swift */,
 			);
 			path = profile;
 			sourceTree = "<group>";
@@ -968,6 +971,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -979,6 +983,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -1040,7 +1045,7 @@
 				DB78E13F21D529DC001C885D /* EmptyProtocol.swift in Sources */,
 				DB2A35DA21CA222B00E9E2C5 /* Players.swift in Sources */,
 				DBB208EA221192F90010B600 /* TeamProtocolPresenter.swift in Sources */,
-				DB1CA10B2226D71A005E1FB9 /* ChangeProfileViewController.swift in Sources */,
+				DB1CA10B2226D71A005E1FB9 /* EditProfileViewController.swift in Sources */,
 				DB48BE7822002BD1008B007D /* PlayersTeamLeagueDetailPresenter.swift in Sources */,
 				04C024EA221427F500A4A571 /* MenuLauncher.swift in Sources */,
 				04C024EC22142F6600A4A571 /* MenuLauncherCell.swift in Sources */,
@@ -1070,7 +1075,7 @@
 				DB17384B21BA56D400017B6D /* NewsAllTableViewController.swift in Sources */,
 				CE0AF81721C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift in Sources */,
 				DBFB83912201CEAE008A8F79 /* PlayersLeagueDetailViewController.swift in Sources */,
-				DB59E5B9222802F000D1F62F /* ChangeProfilePresenter.swift in Sources */,
+				DB59E5B9222802F000D1F62F /* EditProfilePresenter.swift in Sources */,
 				04C024E52213DE2D00A4A571 /* EventsMatchPresenter.swift in Sources */,
 				DB1CA1062226B8EE005E1FB9 /* UserDefaultsHelper.swift in Sources */,
 				DB11CC8A21C225610083773E /* StackView.swift in Sources */,
@@ -1119,6 +1124,7 @@
 				DBC5C5FA2220128100B0A1B6 /* UITextField.swift in Sources */,
 				CE47323E21A5513500199D79 /* HomeViewController.swift in Sources */,
 				DB2A35E021CA28A100E9E2C5 /* PlayerTableViewCell.swift in Sources */,
+				DB2DEBBC222CE84B003FE599 /* EditedProfilePerson.swift in Sources */,
 				CE0AF81A21C7A1C200F8F6A2 /* ClubDetailViewController.swift in Sources */,
 				04DF5494220D6C25001323A6 /* ClubTeamHelper.swift in Sources */,
 				DB17384E21BA6F8600017B6D /* AnnounceAllTableViewController.swift in Sources */,
