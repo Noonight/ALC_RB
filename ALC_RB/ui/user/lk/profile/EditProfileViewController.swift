@@ -56,6 +56,8 @@ class EditProfileViewController: UIViewController {
         
         prepareRxFields()
         
+        
+        
         firstInit()
     }
 
@@ -74,7 +76,10 @@ class EditProfileViewController: UIViewController {
         self.familyTF.text = authUser?.person.surname
         self.patronymicTF.text = authUser?.person.lastname
         self.loginTF.text = authUser?.person.login
-        presenter.photoProfile(imagePath: (authUser?.person.photo as! String))
+        
+        datePicker.date = (authUser?.person.birthdate.getDateOfType(type: .GMT))!
+
+        presenter.photoProfile(imagePath: authUser?.person.photo ?? "")
     }
     
     func prepareRxFields() {
@@ -96,12 +101,15 @@ class EditProfileViewController: UIViewController {
     @IBAction func onSaveBtnPressed(_ sender: UIBarButtonItem) {
         
         checkFieldsIsChanged()
+        
+        let dateOfBirth = datePicker.date.getStringOfType(type: .GMT)
         presenter.editProfile(token: (authUser?.token)!, profileInfo: EditProfile(
             name: nameTF.text!,
             surname: familyTF.text!,
             lastname: patronymicTF.text!,
             login: loginTF.text!,
-            _id: (authUser?.person.id)!), profileImage: imageView.image!)
+            _id: (authUser?.person.id)!,
+            birthdate: dateOfBirth), profileImage: imageView.image!)
         if profileInfoChanged {
             
         }
@@ -144,9 +152,6 @@ extension EditProfileViewController: EditProfileView {
         var user = self.userDefaultHelper.getAuthorizedUser()
         user?.person = editedProfile.person
         self.userDefaultHelper.setAuthorizedUser(user: user!)
-
-        Print.debugLog(object: user)
-        Print.d(message: "good !!_!_!__!_!_-")
         
         navigationController?.popViewController(animated: true)
         self.dismiss(animated: true) {

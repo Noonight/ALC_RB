@@ -32,7 +32,7 @@
 		CE61552221AFD329008C4463 /* AnnouncesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61552121AFD329008C4463 /* AnnouncesTableViewCell.swift */; };
 		CE61552521AFEB54008C4463 /* UserLKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61552421AFEB54008C4463 /* UserLKViewController.swift */; };
 		CE6E380621B65E1E009C2D1F /* NewsDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6E380521B65E1E009C2D1F /* NewsDetailPresenter.swift */; };
-		CE77AC7B21B0F1BA00C0ED0D /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AC7A21B0F1BA00C0ED0D /* DateFormatter.swift */; };
+		CE77AC7B21B0F1BA00C0ED0D /* DateFormatterStringEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77AC7A21B0F1BA00C0ED0D /* DateFormatterStringEx.swift */; };
 		CE916AAC21B4E1FC0025FECF /* ApiRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE916AAB21B4E1FC0025FECF /* ApiRoute.swift */; };
 		CE916AB021B4EE2D0025FECF /* NoSectionCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE916AAF21B4EE2D0025FECF /* NoSectionCellTableViewCell.swift */; };
 		CE916ABC21B520D90025FECF /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE916ABB21B520D90025FECF /* NewsDetailViewController.swift */; };
@@ -153,7 +153,7 @@
 		CE61552121AFD329008C4463 /* AnnouncesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncesTableViewCell.swift; sourceTree = "<group>"; };
 		CE61552421AFEB54008C4463 /* UserLKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLKViewController.swift; sourceTree = "<group>"; };
 		CE6E380521B65E1E009C2D1F /* NewsDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailPresenter.swift; sourceTree = "<group>"; };
-		CE77AC7A21B0F1BA00C0ED0D /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		CE77AC7A21B0F1BA00C0ED0D /* DateFormatterStringEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterStringEx.swift; sourceTree = "<group>"; };
 		CE916AAB21B4E1FC0025FECF /* ApiRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRoute.swift; sourceTree = "<group>"; };
 		CE916AAF21B4EE2D0025FECF /* NoSectionCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSectionCellTableViewCell.swift; sourceTree = "<group>"; };
 		CE916ABB21B520D90025FECF /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
@@ -434,7 +434,7 @@
 		CE77AC7921B0F1A200C0ED0D /* extensions */ = {
 			isa = PBXGroup;
 			children = (
-				CE77AC7A21B0F1BA00C0ED0D /* DateFormatter.swift */,
+				CE77AC7A21B0F1BA00C0ED0D /* DateFormatterStringEx.swift */,
 				DB4A789021C0E7970071BA8F /* ViewCenter.swift */,
 				DB4A789721C154E70071BA8F /* NavigationBar.swift */,
 				DB11CC8921C225610083773E /* StackView.swift */,
@@ -1110,7 +1110,7 @@
 				DB59433421F212BE00945601 /* SegmentHelper.swift in Sources */,
 				DB11CC9021C235460083773E /* ScheduleTableViewCell.swift in Sources */,
 				CE60234C21AE756C00B428EE /* NewsAnnounceTableViewController.swift in Sources */,
-				CE77AC7B21B0F1BA00C0ED0D /* DateFormatter.swift in Sources */,
+				CE77AC7B21B0F1BA00C0ED0D /* DateFormatterStringEx.swift in Sources */,
 				DBB208E5221180850010B600 /* TeamProtocolTableViewController.swift in Sources */,
 				DB1CA0FD22254FD4005E1FB9 /* AuthUser.swift in Sources */,
 				04DF5492220D6861001323A6 /* MatchProtocolPresenter.swift in Sources */,

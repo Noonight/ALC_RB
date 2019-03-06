@@ -14,13 +14,15 @@ struct EditProfile {
     var lastname = ""
     var login = ""
     var _id = ""
+    var birthdate = ""
     
-    init(name: String, surname: String, lastname: String, login: String, _id: String) {
+    init(name: String, surname: String, lastname: String, login: String, _id: String, birthdate: String) {
         self.name = name
         self.surname = surname
         self.lastname = lastname
         self.login = login
         self._id = _id
+        self.birthdate = birthdate
     }
     
     func toParams() -> [String: Any] {
@@ -29,7 +31,8 @@ struct EditProfile {
             Fields.surname.value() : self.surname,
             Fields.lastname.value() : self.lastname,
             Fields.login.value() : self.login,
-            Fields._id.value() : self._id
+            Fields._id.value() : self._id,
+            Fields.birthdate.value() : self.birthdate
         ]
     }
     
@@ -39,6 +42,7 @@ struct EditProfile {
         case lastname = "lastname"
         case login = "login"
         case _id = "_id"
+        case birthdate = "birthdate"
         
         func value() -> String {
             return self.rawValue

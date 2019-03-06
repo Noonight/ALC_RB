@@ -13,6 +13,8 @@ enum DateFormats: String {
     case utcTime = "yyyy-MM-dd'T'HH:mm"
     case local = "dd.MM.yyyy"
     case localTime = "HH:mm"
+    case ddMMMMyyyy = "dd MMMM yyyy"
+    case GMT = "EEE MMM dd HH:mm:ss zzz yyyy"
 }
 
 extension String {
@@ -40,6 +42,31 @@ extension String {
         dateFormatter.dateFormat = to
 
         return dateFormatter.string(from: dt ?? Date())
+    }
+    
+    func getDateOfType(type: DateFormats) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = type.rawValue
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
+        
+        guard let date = dateFormatter.date(from: self) else {
+            Print.d(message: "DEBUG: date format exception String -> Date")
+            return Date()
+        }
+        return date
+    }
+}
+
+extension Date {
+    func getStringOfType(type: DateFormats) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = type.rawValue
+        
+        guard let date: String = dateFormatter.string(from: self) else {
+            Print.d(message: "DEBUG: date format exception Date -> String")
+            return ""
+        }
+        return date
     }
 }
 
