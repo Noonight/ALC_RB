@@ -56,4 +56,5 @@ enum Routes: String {
     case post_auth = "signin"
     case post_reg = "signup"
     case post_edit_profile = "editPlayerInfo"
+    case post_team_acceptrequest = "team/acceptrequest"
 }

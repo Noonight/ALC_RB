@@ -12,6 +12,8 @@ import SwiftyJSON
 
 class ApiRequests {
     
+    // MARK: - POST requests
+    
     func post_authorization(userData: SignIn, get_auth_user: @escaping (AuthUser) -> (), get_error: @escaping (Error) -> ()) {
         let params: [String: Any] = [
             SignIn.Fields.login.rawValue: userData.login,
@@ -33,18 +35,37 @@ class ApiRequests {
         }
     }
     
-    func post_registration(userData: Registration, get_reg_auth_user: @escaping (AuthUser) -> (), get_error: @escaping (Error) -> ()) {
+    func post_registration(userData: Registration, profileImage: UIImage, response_success: @escaping (AuthUser) -> (), response_failure: @escaping (Error) -> ()) {
         Alamofire
-            .request(ApiRoute.getApiURL(.post_reg), method: .post, parameters: userData.toParams(), encoding: JSONEncoding.default, headers: [:])
-            .validate()
-            .responseAuthUser { (response) in
-                switch response.result {
-                case .success:
-                    if let authUser = response.result.value {
-                        get_reg_auth_user(authUser)
-                    }
+            .upload(multipartFormData: { (multipartFormData) in
+                multipartFormData.append(profileImage.jpegData(compressionQuality: 1.0)!, withName: "photo", fileName: "jpg", mimeType: "image/jpg")
+                for (key, value) in userData.toParams() {
+                    let strValue = value as! String
+                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
+                }
+            },
+                    usingThreshold: UInt64(),
+                    to: ApiRoute.getApiURL(.post_reg),
+                    method: .post)
+            { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    //                    upload.uploadProgress(closure: { (progress) in
+                    //                    })
+                    
+                    upload.responseAuthUser(completionHandler: { (response) in
+                        switch response.result {
+                        case .success:
+                            if let newUser = response.result.value {
+                                response_success(newUser)
+                            }
+                        case .failure(let error):
+                            response_failure(error)
+                        }
+                    })
+                    
                 case .failure(let error):
-                    get_error(error)
+                    response_failure(error)
                 }
         }
     }
@@ -85,6 +106,41 @@ class ApiRequests {
             }
     }
     
+    func post_teamAcceptRequest(token: String, acceptInfo: AcceptRequest, response_success: @escaping (AuthUser) -> (), response_failure: @escaping (Error) -> ()) {
+        Alamofire
+            .upload(multipartFormData: { (multipartFormData) in
+                for (key, value) in acceptInfo.toParams() {
+                    let strValue = value as! String
+                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
+                }
+            },
+                    usingThreshold: UInt64(),
+                    to: ApiRoute.getApiURL(.post_team_acceptrequest),
+                    method: .post,
+                    headers: ["auth" : token])
+            { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    
+                    upload.responseAuthUser(completionHandler: { (response) in
+                        switch response.result {
+                        case .success:
+                            if let user = response.result.value {
+                                response_success(user)
+                            }
+                        case .failure(let error):
+                            response_failure(error)
+                        }
+                    })
+
+                case .failure(let error):
+                    response_failure(error)
+                }
+        }
+    }
+    
+    // MARK: - GET requests
+    
     func get_image(imagePath: String, get_success: @escaping (UIImage) -> (), get_failure: @escaping (Error) -> ()) {
         Alamofire
             .request(ApiRoute.getImageURL(image: imagePath))
@@ -98,6 +154,93 @@ class ApiRequests {
                 case .failure(let error):
                     get_failure(error)
                 }
+        }
+    }
+    
+    func get_tournamets(get_success: @escaping (Tournaments) -> (), get_failure: @escaping (Error) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.tournaments))
+            .responseTournaments { response in
+                switch response.result {
+                case .success:
+                    if let tournaments = response.result.value {
+                        get_success(tournaments)
+                    }
+                case .failure(let error):
+                    get_failure(error)
+                }
+        }
+    }
+    
+    func get_tournamentLeague(id: String, get_success: @escaping (LILeagueInfo) -> (), get_error: @escaping (Error) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiLeagueURL(id))
+            .responseLILeagueInfo { response in
+                switch response.result {
+                case .success:
+                    if let leagueInfo = response.result.value {
+                        get_success(leagueInfo)
+                    }
+                case .failure(let error):
+                    get_error(error)
+                }
+        }
+    }
+    
+    func get_players(limit: Int, offset: Int, get_success: @escaping (Players) -> (), get_failure: @escaping (Error) -> ()) {
+        let parameters: Parameters = [
+            "type": "player",
+            "limit": limit,
+            "offset": offset
+        ]
+        
+        Alamofire
+            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+            .responsePlayers { response in
+                switch response.result {
+                case .success:
+                    if let players = response.result.value {
+                        get_success(players)
+                    }
+                case .failure(let error):
+                    get_failure(error)
+                }
+        }
+    }
+    
+    func get_playersWithQuery(query: String, get_success: @escaping (Players) -> (), get_failure: @escaping (Error) -> ()) {
+        let parameters: Parameters = [
+            "type": "player",
+            "search": query
+        ]
+        
+        Alamofire
+            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+            .responsePlayers { response in
+                switch response.result {
+                case .success:
+                    if let players = response.result.value {
+                        get_success(players)
+                    }
+                case .failure(let error):
+                    get_failure(error)
+                }
+        }
+    }
+    
+    func get_clubs(get_success: @escaping (Clubs) -> (), get_failure: @escaping (Error) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.clubs))
+            .responseClubs { response in
+                switch response.result {
+                case .success:
+                    if let clubs = response.result.value {
+                        get_success(clubs)
+                    }
+                case .failure(let error):
+                    get_failure(error)
+                }
+                
         }
     }
     

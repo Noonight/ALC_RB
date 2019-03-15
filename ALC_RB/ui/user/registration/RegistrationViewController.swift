@@ -49,8 +49,6 @@ class RegistrationViewController: UIViewController {
         super.viewWillAppear(true)
         navigationController?.isNavigationBarHidden = false
         barCompleteButton.image =  barCompleteButton.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
-        
-//        nameTextField.becomeFirstResponder()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,7 +58,19 @@ class RegistrationViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func completeRegistration(_ sender: UIBarButtonItem) {
-        print("complete registration button pressed")
+        if (!self.fieldsIsEmpty()) {
+            let dateOfBirth = birthdayPicker.date.getStringOfType(type: .GMT)
+            presenter.registration(userData: Registration(
+                type: "player",
+                name: nameTextField.getTextOrEmptyString(),
+                surName: familyTextField.getTextOrEmptyString(),
+                lastName: patronymicTextField.getTextOrEmptyString(),
+                login: loginTextField.text!,
+                password: passwordTF.text!,
+                birthdate: dateOfBirth), profileImage: photoImageView.image ?? UIImage())
+        } else {
+            showToast(message: "Заполните все поля")
+        }
     }
     
     @IBAction func imageTap(_ sender: UITapGestureRecognizer) {
@@ -74,7 +84,15 @@ class RegistrationViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     
-    
+    // MARK: - Helpers
+
+    func fieldsIsEmpty() -> Bool {
+        if familyTextField.isEmpty() || nameTextField.isEmpty() || patronymicTextField.isEmpty() || loginTextField.isEmpty() || passwordTF.isEmpty() {
+            return true
+        }
+        return false
+    }
+
 }
 
 // MARK: - Presenter init
@@ -88,12 +106,14 @@ extension RegistrationViewController: RegistrationView {
         self.userDefaultsHelper.deleteAuthorizedUser()
         self.userDefaultsHelper.setAuthorizedUser(user: authUser)
         
+        Print.d(object: authUser)
+        
         replaceUserLKVC(authUser: authUser)
     }
     
     func registrationError(error: Error) {
         showToast(message: "Не удалось создать пользователя")
-        debugPrint(error)
+        Print.d(object: error)
     }
     
     func replaceUserLKVC(authUser: AuthUser) {

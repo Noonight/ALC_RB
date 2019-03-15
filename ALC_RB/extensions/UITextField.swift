@@ -12,4 +12,8 @@ extension UITextField {
     func isEmpty() -> Bool {
         return text?.isEmpty ?? true
     }
+    
+    func getTextOrEmptyString() -> String {
+        return text ?? ""
+    }
 }

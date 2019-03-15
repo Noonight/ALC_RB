@@ -58,6 +58,14 @@ class UserLKViewController: UIViewController {
         return viewController
     }()
     
+    private lazy var invitation: InvitationLKTableViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        var viewController = storyboard.instantiateViewController(withIdentifier: "InvitationLKTableViewController") as! InvitationLKTableViewController
+        
+        return viewController
+    }()
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -117,7 +125,7 @@ class UserLKViewController: UIViewController {
     // MARK: - Drawer menu
     
     func showFirstItem() {
-        segmentHelper?.add(newsTable)
+        segmentHelper?.add(invitation)
         tableView.selectRow(at: IndexPath.init(row: 0, section: 0), animated: true, scrollPosition: UITableView.ScrollPosition.top)
     }
     
@@ -159,10 +167,12 @@ class UserLKViewController: UIViewController {
         switch menuOption {
         case .Invites:
             segmentHelper?.remove(tournaments)
-            segmentHelper?.add(newsTable)
+            segmentHelper?.add(invitation)
+//            segmentHelper?.remove(tournaments)
+//            segmentHelper?.add(newsTable)
             print(menuOption.rawValue)
         case .Tournaments:
-            segmentHelper?.remove(newsTable)
+            segmentHelper?.remove(invitation)
             segmentHelper?.add(tournaments)
             print(menuOption.rawValue)
         case .Clubs:
