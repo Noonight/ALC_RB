@@ -66,6 +66,14 @@ class UserLKViewController: UIViewController {
         return viewController
     }()
     
+    private lazy var ongoingLeagues: OngoingLeaguesLKTableViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        var viewController = storyboard.instantiateViewController(withIdentifier: "OngoingLeaguesLKTableViewController") as! OngoingLeaguesLKTableViewController
+        
+        return viewController
+    }()
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -166,14 +174,15 @@ class UserLKViewController: UIViewController {
     func didSelectMenuOption(menuOption: MenuOption) {
         switch menuOption {
         case .Invites:
-            segmentHelper?.remove(tournaments)
+            segmentHelper?.remove(ongoingLeagues)
             segmentHelper?.add(invitation)
+            title = invitation.title
 //            segmentHelper?.remove(tournaments)
 //            segmentHelper?.add(newsTable)
             print(menuOption.rawValue)
         case .Tournaments:
             segmentHelper?.remove(invitation)
-            segmentHelper?.add(tournaments)
+            segmentHelper?.add(ongoingLeagues)
             print(menuOption.rawValue)
         case .Clubs:
             print(menuOption.rawValue)

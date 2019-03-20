@@ -106,6 +106,40 @@ class ApiRequests {
             }
     }
     
+    func post_editClubInfo(token: String, clubInfo: EditClubInfo, clubImage: UIImage, response_success: @escaping (SoloClub) -> (), response_failure: @escaping (Error) -> ()) {
+        Alamofire
+            .upload(multipartFormData: { (multipartFormData) in
+                multipartFormData.append(clubImage.jpegData(compressionQuality: 1.0)!, withName: "logo", fileName: "jpg", mimeType: "image/jpg")
+                for (key, value) in clubInfo.toParams() {
+                    let strValue = value as! String
+                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
+                }
+            },
+                    usingThreshold: UInt64(),
+                    to: ApiRoute.getApiURL(.post_edit_club_info),
+                    method: .post,
+                    headers: ["auth" : token])
+            { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    
+                    upload.responseSoloClub(completionHandler: { (response) in
+                        switch response.result {
+                        case .success:
+                            if let soloClub = response.result.value {
+                                response_success(soloClub)
+                            }
+                        case .failure(let error):
+                            response_failure(error)
+                        }
+                    })
+                    
+                case .failure(let error):
+                    response_failure(error)
+                }
+        }
+    }
+    
     func post_teamAcceptRequest(token: String, acceptInfo: AcceptRequest, response_success: @escaping (AuthUser) -> (), response_failure: @escaping (Error) -> ()) {
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in

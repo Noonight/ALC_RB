@@ -46,6 +46,8 @@ class InvitationLKTableViewController: UITableViewController {
         }
     }
     
+    var pendingTeamInviteList: [PendingTeamInvite] = []
+    
     let userDefault = UserDefaultsHelper()
     
     let cellId = "invitation_cell"
@@ -62,13 +64,15 @@ class InvitationLKTableViewController: UITableViewController {
         super.viewDidLoad()
         initPresenter()
         
-        var user = userDefault.getAuthorizedUser()
-        user?.person.pendingTeamInvites = [
-            PendingTeamInvite("12swdf234te5g34t3", "5be94d1a06af116344942a92", "5be94d1a06af116344942b2a"),
-            PendingTeamInvite("12swdf234te5g34asdt3", "5be94d1a06af116344942a92", "5be94d1a06af116344942a93"),
-            PendingTeamInvite("12swdf234te5123g34t3", "5be94d1a06af116344942a92", "5be94d1a06af116344942aad")
-        ]
-        userDefault.setAuthorizedUser(user: user!)
+//        var user = userDefault.getAuthorizedUser()
+//        user?.person.pendingTeamInvites = [
+//            PendingTeamInvite("12swdf234te5g34t3", "5be94d1a06af116344942a92", "5be94d1a06af116344942b2a"),
+//            PendingTeamInvite("12swdf234te5g34asdt3", "5be94d1a06af116344942a92", "5be94d1a06af116344942a93"),
+//            PendingTeamInvite("12swdf234te5123g34t3", "5be94d1a06af116344942a92", "5be94d1a06af116344942aad")
+//        ]
+//        userDefault.setAuthorizedUser(user: user!)
+        
+        
         
         activityIndicator.hidesWhenStopped = true
     }
@@ -88,9 +92,14 @@ class InvitationLKTableViewController: UITableViewController {
         }
         
 //        showHudTable(message: "Загрузка")
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
 //            self.tableView.reloadData()
-//        }
+//            self.showLoading()
+        }
+    }
+    
+    func checkPendingTeamInviteList() {
+        
     }
     
     // MARK: - Table view data source

@@ -2550,7 +2550,7 @@
         <!--User VC-->
         <scene sceneID="sUy-e4-y0B">
             <objects>
-                <viewController storyboardIdentifier="UserLKViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ztZ-hc-O5Z" userLabel="User VC" customClass="UserLKViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserLKViewController" title=" " useStoryboardIdentifierAsRestorationIdentifier="YES" id="ztZ-hc-O5Z" userLabel="User VC" customClass="UserLKViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KNU-Ug-L6F">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2723,10 +2723,210 @@
             </objects>
             <point key="canvasLocation" x="624" y="-540"/>
         </scene>
-        <!--InvitationLK Table View Controller-->
+        <!--Турниры-->
+        <scene sceneID="fw6-Y6-Tjo">
+            <objects>
+                <tableViewController storyboardIdentifier="OngoingLeaguesLKTableViewController" title="Турниры" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lik-yG-8IT" customClass="OngoingLeaguesLKTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="mtJ-yw-zgj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ongoing_cell" rowHeight="160" id="VBs-al-fd7" customClass="OngoingLeagueTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="320" height="160"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VBs-al-fd7" id="ShI-WI-hhh">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="159.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Кубок Бурятии по мини футболу. Первый этап. Золотая лига" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g3L-ni-Au2">
+                                            <rect key="frame" x="8" y="8" width="304" height="41"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27.01.2018 - 27.02.2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rje-wH-GjH">
+                                            <rect key="frame" x="8" y="57" width="304" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.04767975956" green="0.46900761130000002" blue="0.74720400570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_con" translatesAutoresizingMaskIntoConstraints="NO" id="hGm-nW-VpM">
+                                            <rect key="frame" x="8" y="91.5" width="60" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="hrH-O9-k9L"/>
+                                                <constraint firstAttribute="height" constant="60" id="uTd-9k-Jbp"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Лара" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTD-Tw-KVV">
+                                            <rect key="frame" x="84" y="111" width="212" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Rje-wH-GjH" firstAttribute="top" secondItem="g3L-ni-Au2" secondAttribute="bottom" constant="8" id="1tQ-w0-gf6"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="lTD-Tw-KVV" secondAttribute="trailing" constant="8" id="7PX-Su-Dlk"/>
+                                        <constraint firstItem="Rje-wH-GjH" firstAttribute="leading" secondItem="ShI-WI-hhh" secondAttribute="leading" constant="8" id="Ios-jB-O57"/>
+                                        <constraint firstItem="lTD-Tw-KVV" firstAttribute="centerY" secondItem="hGm-nW-VpM" secondAttribute="centerY" id="N3x-xL-VGL"/>
+                                        <constraint firstAttribute="trailing" secondItem="g3L-ni-Au2" secondAttribute="trailing" constant="8" id="V2a-tk-GQ3"/>
+                                        <constraint firstItem="hGm-nW-VpM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Rje-wH-GjH" secondAttribute="bottom" constant="8" id="Yq0-Qr-L5R"/>
+                                        <constraint firstAttribute="trailing" secondItem="Rje-wH-GjH" secondAttribute="trailing" constant="8" id="ccy-Q3-fxV"/>
+                                        <constraint firstItem="hGm-nW-VpM" firstAttribute="leading" secondItem="ShI-WI-hhh" secondAttribute="leading" constant="8" id="d8v-kT-yIK"/>
+                                        <constraint firstItem="g3L-ni-Au2" firstAttribute="leading" secondItem="ShI-WI-hhh" secondAttribute="leading" constant="8" id="evw-qs-VOI"/>
+                                        <constraint firstAttribute="bottom" secondItem="hGm-nW-VpM" secondAttribute="bottom" constant="8" id="l1n-SL-lLw"/>
+                                        <constraint firstItem="g3L-ni-Au2" firstAttribute="top" secondItem="ShI-WI-hhh" secondAttribute="top" constant="8" id="lsv-yK-OGl"/>
+                                        <constraint firstItem="lTD-Tw-KVV" firstAttribute="leading" secondItem="hGm-nW-VpM" secondAttribute="trailing" constant="16" id="yJ4-f3-LH5"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="userTournamentCommandTitle_label" destination="lTD-Tw-KVV" id="ou6-cE-rxW"/>
+                                    <outlet property="userTournamentDate_label" destination="Rje-wH-GjH" id="ape-fN-KNc"/>
+                                    <outlet property="userTournamentLogo_image" destination="hGm-nW-VpM" id="A9x-Yt-xKE"/>
+                                    <outlet property="userTournamentTitle_label" destination="g3L-ni-Au2" id="yo5-ub-a9l"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="lik-yG-8IT" id="TIJ-L7-Aar"/>
+                            <outlet property="delegate" destination="lik-yG-8IT" id="8tH-Qe-KsX"/>
+                        </connections>
+                    </tableView>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yg9-HX-xSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2340" y="-541"/>
+        </scene>
+        <!--Клуб-->
+        <scene sceneID="CMc-7h-5ka">
+            <objects>
+                <viewController storyboardIdentifier="ClubLKViewController" title="Клуб" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iNJ-sh-b1V" customClass="ClubLKViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iQ7-5f-Hku">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_con" translatesAutoresizingMaskIntoConstraints="NO" id="Q03-hS-faN">
+                                <rect key="frame" x="8" y="72" width="75" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="Shc-XL-79P"/>
+                                    <constraint firstAttribute="height" constant="75" id="Z0s-QZ-Kzg"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ВСГУТУ" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZL-C5-foz">
+                                <rect key="frame" x="99" y="99.5" width="213" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="d9d-bP-FTS">
+                                <rect key="frame" x="8" y="163" width="304" height="348"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bhB-27-fc7" firstAttribute="bottom" secondItem="d9d-bP-FTS" secondAttribute="bottom" constant="8" id="7xt-hS-Wv5"/>
+                            <constraint firstItem="yZL-C5-foz" firstAttribute="leading" secondItem="Q03-hS-faN" secondAttribute="trailing" constant="16" id="C1E-hz-c3C"/>
+                            <constraint firstItem="Q03-hS-faN" firstAttribute="leading" secondItem="bhB-27-fc7" secondAttribute="leading" constant="8" id="DLk-7M-Bfp"/>
+                            <constraint firstItem="bhB-27-fc7" firstAttribute="trailing" secondItem="d9d-bP-FTS" secondAttribute="trailing" constant="8" id="Oum-eg-nab"/>
+                            <constraint firstItem="yZL-C5-foz" firstAttribute="centerY" secondItem="Q03-hS-faN" secondAttribute="centerY" id="QU9-De-dc1"/>
+                            <constraint firstItem="Q03-hS-faN" firstAttribute="top" secondItem="bhB-27-fc7" secondAttribute="top" constant="8" id="YGT-UX-xUt"/>
+                            <constraint firstItem="d9d-bP-FTS" firstAttribute="leading" secondItem="bhB-27-fc7" secondAttribute="leading" constant="8" id="fzW-9e-waT"/>
+                            <constraint firstItem="d9d-bP-FTS" firstAttribute="top" secondItem="Q03-hS-faN" secondAttribute="bottom" constant="16" id="uDO-Gj-4Wy"/>
+                            <constraint firstItem="bhB-27-fc7" firstAttribute="trailing" secondItem="yZL-C5-foz" secondAttribute="trailing" constant="8" id="wBo-G5-W3X"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bhB-27-fc7"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Клуб" id="3qR-5f-sJo">
+                        <barButtonItem key="rightBarButtonItem" image="ic_settings" id="ijE-eb-I3I">
+                            <connections>
+                                <segue destination="db5-Tq-mPk" kind="show" identifier="segue_editClub" id="68e-Kx-StH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="commandDescription_label" destination="d9d-bP-FTS" id="Ghr-AH-K5r"/>
+                        <outlet property="commandLogo_image" destination="Q03-hS-faN" id="hDn-pg-Gov"/>
+                        <outlet property="commandTitle_label" destination="yZL-C5-foz" id="wpX-o9-uBy"/>
+                        <outlet property="settingBarBtn" destination="ijE-eb-I3I" id="Xwv-ae-bJn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dEM-vA-DUn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3144" y="-540"/>
+        </scene>
+        <!--Редактировать клуб-->
+        <scene sceneID="8MX-88-hFB">
+            <objects>
+                <viewController storyboardIdentifier="ClubEditLKViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="db5-Tq-mPk" customClass="ClubEditLKViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QxN-Ad-QNw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_con" translatesAutoresizingMaskIntoConstraints="NO" id="o4i-ZX-WEK">
+                                <rect key="frame" x="117.5" y="94" width="85" height="85"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="0Ob-yx-fHI"/>
+                                    <constraint firstAttribute="height" constant="85" id="eAY-Yh-pgF"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Название" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lrO-zA-YJ8">
+                                <rect key="frame" x="18" y="209" width="284" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Описание" translatesAutoresizingMaskIntoConstraints="NO" id="tyX-Zj-CFb">
+                                <rect key="frame" x="18" y="247" width="284" height="264"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="v90-Ub-J9n" firstAttribute="bottom" secondItem="tyX-Zj-CFb" secondAttribute="bottom" constant="8" id="9vb-DG-mHI"/>
+                            <constraint firstItem="v90-Ub-J9n" firstAttribute="trailing" secondItem="lrO-zA-YJ8" secondAttribute="trailing" constant="18" id="Acq-ZP-YkL"/>
+                            <constraint firstItem="lrO-zA-YJ8" firstAttribute="top" secondItem="o4i-ZX-WEK" secondAttribute="bottom" constant="30" id="El8-0S-yMa"/>
+                            <constraint firstItem="lrO-zA-YJ8" firstAttribute="leading" secondItem="v90-Ub-J9n" secondAttribute="leading" constant="18" id="L4j-25-WNB"/>
+                            <constraint firstItem="tyX-Zj-CFb" firstAttribute="leading" secondItem="v90-Ub-J9n" secondAttribute="leading" constant="18" id="M6W-Pu-bYL"/>
+                            <constraint firstItem="v90-Ub-J9n" firstAttribute="trailing" secondItem="tyX-Zj-CFb" secondAttribute="trailing" constant="18" id="ZAz-sa-lAP"/>
+                            <constraint firstItem="tyX-Zj-CFb" firstAttribute="top" secondItem="lrO-zA-YJ8" secondAttribute="bottom" constant="8" id="p9x-H5-mcB"/>
+                            <constraint firstItem="o4i-ZX-WEK" firstAttribute="centerX" secondItem="v90-Ub-J9n" secondAttribute="centerX" id="upI-Tp-iHM"/>
+                            <constraint firstItem="o4i-ZX-WEK" firstAttribute="top" secondItem="v90-Ub-J9n" secondAttribute="top" constant="30" id="vOa-aQ-7ag"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="v90-Ub-J9n"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Редактировать клуб" id="2xG-y5-aAX">
+                        <barButtonItem key="rightBarButtonItem" image="ic_tick" id="YAO-Ka-d40">
+                            <connections>
+                                <action selector="saveBarBtnPressed:" destination="db5-Tq-mPk" id="l94-F3-mrU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="clubDescription_textView" destination="tyX-Zj-CFb" id="9NZ-c7-2cS"/>
+                        <outlet property="clubImage_image" destination="o4i-ZX-WEK" id="xVz-Z6-Z00"/>
+                        <outlet property="clubTitle_label" destination="lrO-zA-YJ8" id="ill-UG-pT4"/>
+                        <outlet property="saveBarBtn_save" destination="YAO-Ka-d40" id="n2h-Za-jIb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mxj-XO-uyO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3144" y="237"/>
+        </scene>
+        <!--Приглашения на турнир-->
         <scene sceneID="adn-YE-GRM">
             <objects>
-                <tableViewController storyboardIdentifier="InvitationLKTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4eH-Ib-0Tk" customClass="InvitationLKTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="InvitationLKTableViewController" title="Приглашения на турнир" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4eH-Ib-0Tk" customClass="InvitationLKTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="43n-iD-6bB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2852,6 +3052,8 @@
                             <outlet property="delegate" destination="4eH-Ib-0Tk" id="Pyi-tF-Oiu"/>
                         </connections>
                     </tableView>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="empty_view" destination="OFm-i4-uTr" id="bCP-6f-9ot"/>
                     </connections>
@@ -2902,7 +3104,7 @@
                 </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aad-gO-kdr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1477.5" y="-1275"/>
+            <point key="canvasLocation" x="1479" y="-540"/>
         </scene>
         <!--Tournaments NC-->
         <scene sceneID="Pml-zE-jre">
@@ -3171,7 +3373,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Vbl-Fk-ddt">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="150.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="351"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9P3-cc-ZFM">
                                                 <rect key="frame" x="8" y="8" width="304" height="23"/>
@@ -3189,7 +3391,7 @@
                                                 <rect key="frame" x="8" y="67.5" width="304" height="50"/>
                                             </imageView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qh4-xh-2XM">
-                                                <rect key="frame" x="8" y="125.5" width="304" height="25"/>
+                                                <rect key="frame" x="8" y="125.5" width="304" height="225.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -3619,6 +3821,7 @@
         <image name="ic_logo" width="196" height="140"/>
         <image name="ic_menu4" width="36" height="36"/>
         <image name="ic_players" width="48" height="48"/>
+        <image name="ic_settings" width="36" height="36"/>
         <image name="ic_tick" width="36" height="36"/>
         <image name="ic_user" width="48" height="48"/>
         <image name="imageView:DIA-GZ-Jra:image" width="48" height="48">

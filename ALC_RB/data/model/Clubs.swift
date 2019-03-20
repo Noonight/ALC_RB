@@ -39,7 +39,7 @@ struct Owner: Codable {
     let photo, desc: String
     let participationMatches: [JSONAny]
     let id, login, password, type: String
-    let pendingTeamInvites: [JSONAny]
+    let pendingTeamInvites: [PendingTeamInvite]
     let participation: [Participation]
     let createdAt, updatedAt: String
     let v: Int
@@ -215,7 +215,7 @@ extension Owner {
         login: String? = nil,
         password: String? = nil,
         type: String? = nil,
-        pendingTeamInvites: [JSONAny]? = nil,
+        pendingTeamInvites: [PendingTeamInvite]? = nil,
         participation: [Participation]? = nil,
         createdAt: String? = nil,
         updatedAt: String? = nil,

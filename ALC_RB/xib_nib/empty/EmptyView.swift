@@ -11,10 +11,10 @@ import UIKit
 class EmptyView: UIView {
     
     @IBOutlet var root_view: UIView!
-    @IBOutlet weak var content_view: UIView!
-    @IBOutlet weak var empty_img: UIImageView!
-    @IBOutlet weak var nothing_label: UILabel!
-    @IBOutlet weak var text_label: UILabel!
+    @IBOutlet var content_view: UIView!
+    @IBOutlet var empty_img: UIImageView!
+    @IBOutlet var nothing_label: UILabel!
+    @IBOutlet var text_label: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,10 +29,23 @@ class EmptyView: UIView {
     func initView() {
         Bundle.main.loadNibNamed("EmptyView", owner: self, options: nil)
 //        content_view.translatesAutoresizingMaskIntoConstraints = false
-        root_view.frame = self.frame
-        addSubview(content_view)
-//        content_view.setCenterFromParent()
-        //content_view.frame = self.bounds
-        //content_view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        root_view.fixInView(self)
+    }
+    
+    func setText(text: String) {
+        text_label.text = text
+    }
+}
+
+extension UIView
+{
+    func fixInView(_ container: UIView!) -> Void{
+        self.translatesAutoresizingMaskIntoConstraints = false;
+        self.frame = container.frame;
+        container.addSubview(self);
+        NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal, toItem: container, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: self, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: container, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
     }
 }
