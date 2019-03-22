@@ -71,8 +71,9 @@ class InvitationLKTableViewController: UITableViewController {
 //            PendingTeamInvite("12swdf234te5123g34t3", "5be94d1a06af116344942a92", "5be94d1a06af116344942aad")
 //        ]
 //        userDefault.setAuthorizedUser(user: user!)
-        
-        
+        var user = userDefault.getAuthorizedUser()
+        user?.person.pendingTeamInvites = []
+        userDefault.setAuthorizedUser(user: user!)
         
         activityIndicator.hidesWhenStopped = true
     }
@@ -80,6 +81,26 @@ class InvitationLKTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+//        if userDefault.getAuthorizedUser()?.person.pendingTeamInvites.count ?? 0 > 0 {
+//            hideEmptyView()
+//            if tableModel.isEmpty() {
+//                showLoading()
+//            } else {
+//                hideLoading()
+//            }
+//        } else {
+//            showEmptyView()
+//        }
+        
+//        showHudTable(message: "Загрузка")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+//            self.tableView.reloadData()
+//            self.showLoading()
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         if userDefault.getAuthorizedUser()?.person.pendingTeamInvites.count ?? 0 > 0 {
             hideEmptyView()
             if tableModel.isEmpty() {
@@ -89,12 +110,6 @@ class InvitationLKTableViewController: UITableViewController {
             }
         } else {
             showEmptyView()
-        }
-        
-//        showHudTable(message: "Загрузка")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-//            self.tableView.reloadData()
-//            self.showLoading()
         }
     }
     

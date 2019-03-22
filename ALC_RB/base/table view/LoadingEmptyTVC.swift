@@ -10,9 +10,9 @@ import UIKit
 
 class LoadingEmptyTVC: UITableViewController {
 
-    let emptyView = EmptyView()
-    let backgroundView = UIView()
-    var emptyStr = "Здесь будут отображаться ..."
+    let emptyView = EmptyViewNew()
+    var backgroundView: UIView?
+    var emptyStr = "Здесь будет отображаться ..."
     
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     
@@ -66,40 +66,133 @@ class LoadingEmptyTVC: UITableViewController {
         self.emptyStr = text
     }
     
+//    func showEmptyView(view: UIView) {
+////        emptyView.backgroundColor = UIColor.clear
+//
+//        backgroundView = UIView()
+//
+//        backgroundView?.frame = view.frame
+//
+////        emptyView.backgroundColor = .clear
+////        emptyView.containerView.backgroundColor = .clear
+//        backgroundView?.backgroundColor = .white
+//        backgroundView?.addSubview(emptyView)
+//
+//        view.addSubview(backgroundView!)
+//
+//        backgroundView?.translatesAutoresizingMaskIntoConstraints = true
+//
+//        emptyView.setCenterFromParentTrue()
+//        emptyView.containerView.setCenterFromParentTrue()
+//
+////        view.translatesAutoresizingMaskIntoConstraints = false
+////
+////        view.topAnchor.constraint(equalTo: (backgroundView?.topAnchor)!).isActive = true
+////        view.leftAnchor.constraint(equalTo: (backgroundView?.leftAnchor)!).isActive = true
+////        view.rightAnchor.constraint(equalTo: (backgroundView?.rightAnchor)!).isActive = true
+////        view.bottomAnchor.constraint(equalTo: (backgroundView?.bottomAnchor)!).isActive = true
+//
+////        backgroundView?.translatesAutoresizingMaskIntoConstraints = false
+////
+////        backgroundView?.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
+////        backgroundView?.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor).isActive = true
+//    }
+    
 }
 
 extension LoadingEmptyTVC : EmptyProtocol {
+//    func showEmptyView() {
+//
+//        backgroundView = UIView()
+//
+////        backgroundView?.frame = view.frame
+//
+////        Print.m("Screen frame = \(UIScreen.main.bounds)")
+////        Print.m("Background view frame = \(backgroundView?.frame)")
+////        Print.m("view frame of view controller = \(view.frame)")
+////        Print.m("empty view frame = \(emptyView.frame)")
+//
+//
+//        view.addSubview(backgroundView!)
+//
+//        view.translatesAutoresizingMaskIntoConstraints = true
+//        backgroundView?.translatesAutoresizingMaskIntoConstraints = true
+//
+//        view?.topAnchor.constraint(equalTo: (backgroundView?.topAnchor)!).isActive = true
+//        view?.leftAnchor.constraint(equalTo: (backgroundView?.leftAnchor)!).isActive = true
+//        view?.rightAnchor.constraint(equalTo: (backgroundView?.rightAnchor)!).isActive = true
+//        view?.bottomAnchor.constraint(equalTo: (backgroundView?.bottomAnchor)!).isActive = true
+//
+//        backgroundView?.addSubview(emptyView)
+//
+//        backgroundView?.backgroundColor = .red
+//
+//        tableView.backgroundColor = .blue
+//
+//        view.backgroundColor = UIColor.darkText
+//
+//        emptyView.setCenterFromParentTrue()
+//
+////        backgroundView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height)
+////        backgroundView.backgroundColor = .white
+////        backgroundView.addSubview(emptyView)
+//
+//        emptyView.textLabel.text = emptyStr
+//
+//        tableView.isScrollEnabled = false
+//        tableView.separatorStyle = .none
+//
+////        emptyView.setCenterFromParent()
+//
+//
+////        view.addConstraints([
+////            NSLayoutConstraint(item: view, attribute: .left, relatedBy: .equal, toItem: emptyView, attribute: .left, multiplier: 1.0, constant: 0),
+////            NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: emptyView, attribute: .top, multiplier: 1.0, constant: 0),
+////            NSLayoutConstraint(item: view, attribute: .right, relatedBy: .equal, toItem: emptyView, attribute: .right, multiplier: 1.0, constant: 0),
+////            NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: emptyView, attribute: .bottom, multiplier: 1.0, constant: 0)
+////            ])
+//
+////        emptyView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+////        emptyView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+////        emptyView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+////        emptyView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+//
+////        emptyView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+////        emptyView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+//
+//
+//        view.bringSubviewToFront(backgroundView!)
+//    }
+    
     func showEmptyView() {
-//        backgroundView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height)
-//        backgroundView.backgroundColor = .white
-//        backgroundView.addSubview(emptyView)
+        backgroundView = UIView()
         
-        emptyView.text_label.text = emptyStr
+        backgroundView?.frame = view.frame
+        
+        //        emptyView.backgroundColor = .clear
+        //        emptyView.containerView.backgroundColor = .clear
+        backgroundView?.backgroundColor = .white
+        backgroundView?.addSubview(emptyView)
+        
+        view.addSubview(backgroundView!)
+        
+        backgroundView?.translatesAutoresizingMaskIntoConstraints = true
+        
+        emptyView.setText(text: emptyStr)
+        
+        emptyView.setCenterFromParentTrue()
+        emptyView.containerView.setCenterFromParentTrue()
         
         tableView.isScrollEnabled = false
-        tableView.separatorStyle = .none
-        
-//        emptyView.setCenterFromParent()
-        
-        view.addSubview(emptyView)
-        
-//        view.addConstraints([
-//            NSLayoutConstraint(item: view, attribute: .left, relatedBy: .equal, toItem: emptyView, attribute: .left, multiplier: 1.0, constant: 0),
-//            NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: emptyView, attribute: .top, multiplier: 1.0, constant: 0),
-//            NSLayoutConstraint(item: view, attribute: .right, relatedBy: .equal, toItem: emptyView, attribute: .right, multiplier: 1.0, constant: 0),
-//            NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: emptyView, attribute: .bottom, multiplier: 1.0, constant: 0)
-//            ])
-
-        emptyView.frame = view.frame
-        
-        view.bringSubviewToFront(emptyView)
     }
     
     func hideEmptyView() {
         tableView.separatorStyle = .singleLine
         tableView.isScrollEnabled = true
         
-        emptyView.removeFromSuperview()
+        if let backgroundView = backgroundView {
+            backgroundView.removeFromSuperview()
+        }
     }
 }
 

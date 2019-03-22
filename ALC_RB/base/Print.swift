@@ -54,4 +54,11 @@ class Print {
         print("<\(className)> ->> \(functionName) [#\(lineNumber)]| \(error)\n")
         #endif
     }
+    
+    public static func m(_ m: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+        #if DEBUG
+        let className = (fileName as NSString).lastPathComponent
+        print("<\(className)> ->> \(functionName) [#\(lineNumber)]| \(m)\n")
+        #endif
+    }
 }

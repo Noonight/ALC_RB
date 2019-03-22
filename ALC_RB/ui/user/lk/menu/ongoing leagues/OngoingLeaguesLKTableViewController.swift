@@ -29,6 +29,7 @@ class OngoingLeaguesLKTableViewController: LoadingEmptyTVC {
     // MARK: - Variables
     
     let cellId = "ongoing_cell"
+    let emptyMsg = "Вы пока не заявлены ни на один турнир"
     
     let userDefaults = UserDefaultsHelper()
     
@@ -48,22 +49,35 @@ class OngoingLeaguesLKTableViewController: LoadingEmptyTVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        setEmptyText(text: emptyMsg)
         
-        if userDefaults.getAuthorizedUser()?.person.pendingTeamInvites.count ?? 0 > 0 {
+        let user = userDefaults.getAuthorizedUser()?.person
+        if user?.participation.count ?? 0 > 0 {
             hideEmptyView()
             if tableModel.isEmpty() {
                 showLoading()
             } else {
                 hideLoading()
             }
+        } else {
+            showEmptyView()
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.hideLoading()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+//        if userDefaults.getAuthorizedUser()?.person.pendingTeamInvites.count ?? 0 > 0 {
+//            hideEmptyView()
+//            if tableModel.isEmpty() {
+//                showLoading()
+//            } else {
+//                hideLoading()
+//            }
+//        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
             self.hideEmptyView()
         }
     }
@@ -75,19 +89,19 @@ class OngoingLeaguesLKTableViewController: LoadingEmptyTVC {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return userDefaults.getAuthorizedUser()?.person.participation.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! OngoingLeagueTableViewCell
-        //let model =
+        let model = userDefaults.getAuthorizedUser()?.person.participation[indexPath.row]
         
-        //configureCell(model: , cell: )
+        configureCell(model: model!, cell: cell)
         
         return cell
     }
     
-    func configureCell(model: PendingTeamInvite, cell: OngoingLeagueTableViewCell) {
+    func configureCell(model: Participation, cell: OngoingLeagueTableViewCell) {
         
     }
     

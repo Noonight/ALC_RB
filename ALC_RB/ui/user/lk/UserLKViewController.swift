@@ -42,22 +42,6 @@ class UserLKViewController: UIViewController {
     
     // MARK: - Drawer controllers
     
-    private lazy var newsTable: NewsAnnounceTableViewController = {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
-        var viewController = storyboard.instantiateViewController(withIdentifier: "NewsTableViewController") as! NewsAnnounceTableViewController
-        
-        return viewController
-    }()
-    
-    private lazy var tournaments: TournamentsTableViewController = {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
-        var viewController = storyboard.instantiateViewController(withIdentifier: "TournamentsTableViewController") as! TournamentsTableViewController
-        
-        return viewController
-    }()
-    
     private lazy var invitation: InvitationLKTableViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
@@ -70,6 +54,14 @@ class UserLKViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "OngoingLeaguesLKTableViewController") as! OngoingLeaguesLKTableViewController
+        
+        return viewController
+    }()
+    
+    private lazy var club: ClubLKViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        var viewController = storyboard.instantiateViewController(withIdentifier: "ClubLKViewController") as! ClubLKViewController
         
         return viewController
     }()
@@ -94,7 +86,7 @@ class UserLKViewController: UIViewController {
         authUser = userDefaultsHelper.getAuthorizedUser()
         
         barMenuBtn.image = barMenuBtn.image?.af_imageAspectScaled(toFit: CGSize(width: 24, height: 24))
-        showFirstItem()
+//        showFirstItem()
 
         self.userHeaderMenuLabel.text = authUser?.person.getFullName()
         if authUser?.person.photo != nil {
@@ -175,19 +167,21 @@ class UserLKViewController: UIViewController {
         switch menuOption {
         case .Invites:
             segmentHelper?.remove(ongoingLeagues)
+            segmentHelper?.remove(club)
             segmentHelper?.add(invitation)
             title = invitation.title
-//            segmentHelper?.remove(tournaments)
-//            segmentHelper?.add(newsTable)
-            print(menuOption.rawValue)
         case .Tournaments:
             segmentHelper?.remove(invitation)
+            segmentHelper?.remove(club)
             segmentHelper?.add(ongoingLeagues)
-            print(menuOption.rawValue)
+            title = ongoingLeagues.title
         case .Clubs:
-            print(menuOption.rawValue)
+            segmentHelper?.remove(invitation)
+            segmentHelper?.remove(ongoingLeagues)
+            segmentHelper?.add(club)
+            title = club.title
         case .Teams:
-            print(menuOption.rawValue)
+            Print.d(object: menuOption.rawValue)
         case .SignOut:
             signOut()
         }

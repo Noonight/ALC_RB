@@ -39,13 +39,20 @@ class EmptyView: UIView {
 
 extension UIView
 {
-    func fixInView(_ container: UIView!) -> Void{
-        self.translatesAutoresizingMaskIntoConstraints = false;
-        self.frame = container.frame;
+    func fixInView(_ container: UIView!) -> Void{        
+//        self.translatesAutoresizingMaskIntoConstraints = true;
+//        self.frame = container.frame;
         container.addSubview(self);
-        NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal, toItem: container, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: self, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
-        NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: container, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+        container.translatesAutoresizingMaskIntoConstraints = true
+        translatesAutoresizingMaskIntoConstraints = true
+//        container.leftAnchor.constraint(equalTo: <#T##NSLayoutAnchor<NSLayoutXAxisAnchor>#>)
+//        self.leftAnchor.constraint(equalTo: container.leftAnchor).isActive = true
+//        self.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
+//        self.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
+//        self.rightAnchor.constraint(equalTo: container.rightAnchor).isActive = true
+//        NSLayoutConstraint(item: self, attribute: .leading, relatedBy: .equal, toItem: container, attribute: .leading, multiplier: 1.0, constant: 0).isActive = true
+//        NSLayoutConstraint(item: self, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1.0, constant: 0).isActive = true
+//        NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+//        NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: container, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
     }
 }

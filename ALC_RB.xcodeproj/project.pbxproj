@@ -111,6 +111,9 @@
 		DB6AA18321C296DE007D4693 /* ClubTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA18221C296DE007D4693 /* ClubTableViewCell.swift */; };
 		DB6D956421EDC42900E81026 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D956321EDC42900E81026 /* EmptyView.swift */; };
 		DB78E13F21D529DC001C885D /* EmptyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78E13E21D529DC001C885D /* EmptyProtocol.swift */; };
+		DB87FE7C2243B522001EBA7C /* BaseStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87FE7B2243B522001EBA7C /* BaseStateViewController.swift */; };
+		DB87FE7F2243D493001EBA7C /* EmptyViewNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB87FE7E2243D493001EBA7C /* EmptyViewNew.xib */; };
+		DB87FE812243D9E2001EBA7C /* EmptyViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87FE802243D9E2001EBA7C /* EmptyViewNew.swift */; };
 		DB938DCA2239410A003FBE52 /* MBProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB938DC92239410A003FBE52 /* MBProgressHud.swift */; };
 		DBA69210221E74A000BEFB26 /* DrawerMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA6920F221E74A000BEFB26 /* DrawerMenuTableViewCell.swift */; };
 		DBA69213221E759600BEFB26 /* MenuOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69212221E759600BEFB26 /* MenuOption.swift */; };
@@ -249,6 +252,9 @@
 		DB6AA18221C296DE007D4693 /* ClubTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubTableViewCell.swift; sourceTree = "<group>"; };
 		DB6D956321EDC42900E81026 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		DB78E13E21D529DC001C885D /* EmptyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyProtocol.swift; sourceTree = "<group>"; };
+		DB87FE7B2243B522001EBA7C /* BaseStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStateViewController.swift; sourceTree = "<group>"; };
+		DB87FE7E2243D493001EBA7C /* EmptyViewNew.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyViewNew.xib; sourceTree = "<group>"; };
+		DB87FE802243D9E2001EBA7C /* EmptyViewNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewNew.swift; sourceTree = "<group>"; };
 		DB938DC92239410A003FBE52 /* MBProgressHud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBProgressHud.swift; sourceTree = "<group>"; };
 		DBA6920F221E74A000BEFB26 /* DrawerMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuTableViewCell.swift; sourceTree = "<group>"; };
 		DBA69212221E759600BEFB26 /* MenuOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOption.swift; sourceTree = "<group>"; };
@@ -545,6 +551,7 @@
 		CEA6EBB421A53F15008F874D /* base */ = {
 			isa = PBXGroup;
 			children = (
+				DB87FE7A2243B4FF001EBA7C /* view controller */,
 				DBE0E7A5223BDE3500CC0EE2 /* table view */,
 				DBC3476222170985001D9B7D /* snackbar */,
 				CEA6EBB721A53F85008F874D /* mvp */,
@@ -742,6 +749,7 @@
 		DB58E95821E8A45400AF265E /* empty */ = {
 			isa = PBXGroup;
 			children = (
+				DB87FE7D2243D47F001EBA7C /* new */,
 				DB58E95B21E8A7FA00AF265E /* EmptyView.xib */,
 				DB6D956321EDC42900E81026 /* EmptyView.swift */,
 			);
@@ -846,6 +854,23 @@
 				DB6AA18221C296DE007D4693 /* ClubTableViewCell.swift */,
 			);
 			path = cell;
+			sourceTree = "<group>";
+		};
+		DB87FE7A2243B4FF001EBA7C /* view controller */ = {
+			isa = PBXGroup;
+			children = (
+				DB87FE7B2243B522001EBA7C /* BaseStateViewController.swift */,
+			);
+			path = "view controller";
+			sourceTree = "<group>";
+		};
+		DB87FE7D2243D47F001EBA7C /* new */ = {
+			isa = PBXGroup;
+			children = (
+				DB87FE7E2243D493001EBA7C /* EmptyViewNew.xib */,
+				DB87FE802243D9E2001EBA7C /* EmptyViewNew.swift */,
+			);
+			path = new;
 			sourceTree = "<group>";
 		};
 		DBA6920E221E748500BEFB26 /* cell */ = {
@@ -1052,6 +1077,7 @@
 				CEA6EBA621A53CFE008F874D /* LaunchScreen.storyboard in Resources */,
 				CEA6EBA321A53CFE008F874D /* Assets.xcassets in Resources */,
 				CEA6EBA121A53CFE008F874D /* Main.storyboard in Resources */,
+				DB87FE7F2243D493001EBA7C /* EmptyViewNew.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1172,6 +1198,7 @@
 				DB641F8A222BB283004AC6CB /* UserLKPresenter.swift in Sources */,
 				DB11CC8D21C22F890083773E /* ScheduleTableViewController.swift in Sources */,
 				DBC347612216F34B001D9B7D /* StringEx.swift in Sources */,
+				DB87FE7C2243B522001EBA7C /* BaseStateViewController.swift in Sources */,
 				DBB208ED221306170010B600 /* RefereeTeamTableViewController.swift in Sources */,
 				CE61552221AFD329008C4463 /* AnnouncesTableViewCell.swift in Sources */,
 				DB4B1A472240AB3A00A9FB97 /* ClubLKPresenter.swift in Sources */,
@@ -1201,6 +1228,7 @@
 				DB6AA17E21C294A4007D4693 /* ClubsTableViewController.swift in Sources */,
 				DB5AAC082236A1380097963E /* InvitationLKPresenter.swift in Sources */,
 				DB5AAC0B2236A1AE0097963E /* InvitationTableViewCell.swift in Sources */,
+				DB87FE812243D9E2001EBA7C /* EmptyViewNew.swift in Sources */,
 				049B9ACF21F6F6E300CDD104 /* PlayersTeamLeagueDetailTableViewCell.swift in Sources */,
 				CE60234321AE6A9F00B428EE /* UpcomingGamesTableViewController.swift in Sources */,
 				DB17385521BA9B9A00017B6D /* UpcomingMatches.swift in Sources */,
