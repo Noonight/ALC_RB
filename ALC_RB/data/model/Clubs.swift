@@ -57,7 +57,13 @@ struct Owner: Codable {
 }
 
 struct Participation: Codable {
-    let id, league, team: String
+    var id, league, team: String
+    
+    init(league: String, id: String, team: String) {
+        self.league = league
+        self.id = id
+        self.team = team
+    }
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
@@ -255,6 +261,17 @@ extension Owner {
 }
 
 extension Participation {
+    
+//    init(id: String, league: String, team: String) {
+//        self.id = id
+//        self.league = league
+//        self.team = team
+//    }
+//
+//    init(id: String, league: String, team: String) {
+//        <#statements#>
+//    }
+    
     init(data: Data) throws {
         self = try newJSONDecoder().decode(Participation.self, from: data)
     }
@@ -276,8 +293,8 @@ extension Participation {
         team: String? = nil
         ) -> Participation {
         return Participation(
-            id: id ?? self.id,
             league: league ?? self.league,
+            id: id ?? self.id,
             team: team ?? self.team
         )
     }

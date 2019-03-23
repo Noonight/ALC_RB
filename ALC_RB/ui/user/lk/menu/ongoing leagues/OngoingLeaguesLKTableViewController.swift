@@ -51,8 +51,40 @@ class OngoingLeaguesLKTableViewController: LoadingEmptyTVC {
         initPresenter()
         setEmptyText(text: emptyMsg)
         
-        let user = userDefaults.getAuthorizedUser()?.person
-        if user?.participation.count ?? 0 > 0 {
+        tableView.tableFooterView = UIView()
+        
+//        var userSet = userDefaults.getAuthorizedUser()
+//        userSet?.person.participation = [
+//            Participation(league: "5be94d1a06af116344942a92", id: "23rsdfgdwef", team: "5be94d1a06af116344942aad"),
+//            Participation(league: "5be94d1a06af116344942a92", id: "123fsdfewf23", team: "5be94d1a06af116344942ae7"),
+//            Participation(league: "5be94d1a06af116344942a92", id: "asd23f4g34fs", team: "5be94d1a06af116344942a93"),
+//        ]
+//        userDefaults.setAuthorizedUser(user: userSet!)
+        
+        
+//        let user = userDefaults.getAuthorizedUser()?.person
+//
+//        if user?.participation.count ?? 0 > 0 {
+//            hideEmptyView()
+//            if tableModel.isEmpty() {
+//                showLoading()
+//            } else {
+//                hideLoading()
+//            }
+//        } else {
+//            showEmptyView()
+//        }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        if userDefaults.getAuthorizedUser()?.person.participation.count ?? 0 > 0 {
             hideEmptyView()
             if tableModel.isEmpty() {
                 showLoading()
@@ -61,24 +93,6 @@ class OngoingLeaguesLKTableViewController: LoadingEmptyTVC {
             }
         } else {
             showEmptyView()
-        }
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-//        if userDefaults.getAuthorizedUser()?.person.pendingTeamInvites.count ?? 0 > 0 {
-//            hideEmptyView()
-//            if tableModel.isEmpty() {
-//                showLoading()
-//            } else {
-//                hideLoading()
-//            }
-//        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            self.hideEmptyView()
         }
     }
 
@@ -103,6 +117,40 @@ class OngoingLeaguesLKTableViewController: LoadingEmptyTVC {
     
     func configureCell(model: Participation, cell: OngoingLeagueTableViewCell) {
         
+        if !tableModel.isEmpty() {
+            let league = tableModel.tournaments?.leagues.filter({ (league) -> Bool in
+                return league.id == model.league
+            }).first
+            let team = league?.teams.filter({ (team) -> Bool in
+                return team.id == model.team
+            }).first
+            let club = tableModel.clubs?.clubs.filter({ (club) -> Bool in
+                return club.id == team?.club
+            }).first
+            
+            
+            
+            if let league = league {
+                
+                Print.m("\(league.beginDate) ->> \(league.endDate)")
+                
+                cell.userTournamentTitle_label.text = "\(league.name). \(league.tourney)"
+                cell.userTournamentDate_label.text = "\(league.beginDate.UTCToLocal(from: .leagueDate, to: .local)) - \(league.endDate.UTCToLocal(from: .leagueDate, to: .local))"
+            }
+            
+            if let team = team {
+                cell.userTournamentCommandTitle_label.text = team.name
+            }
+            
+            if let club = club {
+                presenter.getClubImage(imagePath: club.logo ?? "", get_success: { (image) in
+                    cell.userTournamentLogo_image.image = image.af_imageRoundedIntoCircle()
+                }) { (error) in
+                    Print.m(error)
+                }
+            }
+        }
+        
     }
     
     // MARK: - Table view delegate
@@ -113,6 +161,7 @@ class OngoingLeaguesLKTableViewController: LoadingEmptyTVC {
 }
 
 extension OngoingLeaguesLKTableViewController: OngoingLeaguesLKView {
+    
     func getClubsSuccess(clubs: Clubs) {
         tableModel.clubs = clubs
     }
@@ -132,5 +181,6 @@ extension OngoingLeaguesLKTableViewController: OngoingLeaguesLKView {
     func initPresenter() {
         presenter.attachView(view: self)
         presenter.getTournaments()
+        presenter.getClubs()
     }
 }

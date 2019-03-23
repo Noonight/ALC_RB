@@ -71,9 +71,9 @@ class InvitationLKTableViewController: UITableViewController {
 //            PendingTeamInvite("12swdf234te5123g34t3", "5be94d1a06af116344942a92", "5be94d1a06af116344942aad")
 //        ]
 //        userDefault.setAuthorizedUser(user: user!)
-        var user = userDefault.getAuthorizedUser()
-        user?.person.pendingTeamInvites = []
-        userDefault.setAuthorizedUser(user: user!)
+//        var user = userDefault.getAuthorizedUser()
+//        user?.person.pendingTeamInvites = []
+//        userDefault.setAuthorizedUser(user: user!)
         
         activityIndicator.hidesWhenStopped = true
     }

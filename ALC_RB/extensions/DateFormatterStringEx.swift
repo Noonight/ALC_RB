@@ -15,6 +15,8 @@ enum DateFormats: String {
     case localTime = "HH:mm"
     case ddMMMMyyyy = "dd MMMM yyyy"
     case GMT = "EEE MMM dd HH:mm:ss zzz yyyy"
+    
+    case leagueDate = "yyyy-MM-dd"
 }
 
 extension String {
