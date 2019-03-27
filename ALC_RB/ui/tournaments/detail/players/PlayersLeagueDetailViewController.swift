@@ -17,6 +17,8 @@ class PlayersLeagueDetailViewController: UIViewController {
     @IBOutlet weak var picker_view: UIPickerView!
     @IBOutlet weak var picker_height: NSLayoutConstraint!
     
+    @IBOutlet weak var filterLabel: UILabel!
+    
     let cellId = "cell_players_tournament"
     
     var leagueDetailModel = LeagueDetailModel() {
@@ -25,7 +27,7 @@ class PlayersLeagueDetailViewController: UIViewController {
         }
     }
     
-    let backgroundView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+    let backgroundView = UIView()
     
     var playersArray: [LIPlayer] = [LIPlayer]() {
         didSet {
@@ -48,6 +50,8 @@ class PlayersLeagueDetailViewController: UIViewController {
             playersArray += i.players
             //print("\(i.players)")
         }
+        
+        table_view.tableFooterView = UIView()
         
         filterTable(type: .matches)
         filterTable(type: .matches)
@@ -279,20 +283,53 @@ extension PlayersLeagueDetailViewController: UITableViewDelegate {
 extension PlayersLeagueDetailViewController: EmptyProtocol {
     func showEmptyView() {
         //debugPrint(table_view)
+  
+        let newEmptyView = EmptyViewNew()
+        
+        backgroundView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: table_view.frame.height + 31)
+        
+        //        backgroundView = UIView()
+//        backgroundView.frame = view.frame
+        
+//        backgroundView.backgroundColor = .white
+//        backgroundView.addSubview(newEmptyView)
         
         view.addSubview(backgroundView)
-        //table_view.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: table_view.frame.width, height: table_view.frame.height))
-        backgroundView.addSubview(empty_view)
+        
+        newEmptyView.setText(text: "Здесь будут отображаться игроки")
+        
+//        backgroundView.translatesAutoresizingMaskIntoConstraints = true
+        
+//        newEmptyView.setCenterFromParent()
+//        newEmptyView.containerView.setCenterFromParent()
+        
+//        backgroundView.setCenterFromParent()
+        
+//        view.bringSubviewToFront(backgroundView)
+        
+//        view.addSubview(backgroundView)
+//        //table_view.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: table_view.frame.width, height: table_view.frame.height))
+        backgroundView.addSubview(newEmptyView)
         backgroundView.tintColor = .white
         backgroundView.backgroundColor = .white
         table_view.separatorColor = .none
-        empty_view.setCenterFromParent()
+        newEmptyView.setCenterFromParent()
+        newEmptyView.containerView.setCenterFromParent()
+        
+        filter_type_btn.isHidden = true
+        header_view.isHidden = true
+        filterLabel.isHidden = true
+        
+        backgroundView.setCenterFromParent()
     }
     
     func hideEmptyView() {
         backgroundView.removeFromSuperview()
-        //table_view.backgroundView = nil
+        table_view.backgroundView = nil
         table_view.separatorStyle = .singleLine
+        filter_type_btn.isHidden = false
+        header_view.isHidden = false
+        filterLabel.isHidden = false
     }
 }
 

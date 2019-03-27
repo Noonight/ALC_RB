@@ -25,6 +25,8 @@ class ScheduleTableViewController: UITableViewController {
     
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     
+    var backgroundView = UIView()
+    
     @IBOutlet var empty_view: UIView!
     
     override func viewDidLoad() {
@@ -101,13 +103,36 @@ extension ScheduleTableViewController: ActivityIndicatorProtocol {
 extension ScheduleTableViewController: EmptyProtocol {
     func hideEmptyView() {
         tableView.separatorStyle = .singleLine
-        tableView.backgroundView = nil
+//        tableView.backgroundView = nil
+        backgroundView.removeFromSuperview()
     }
     
     func showEmptyView() {
-        tableView.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
-        tableView.backgroundView?.addSubview(empty_view)
-        empty_view.setCenterFromParent()
+        
+        let newEmptyView = EmptyViewNew()
+        
+        //        backgroundView = UIView()
+        backgroundView.frame = tableView.frame
+        
+        backgroundView.backgroundColor = .white
+        backgroundView.addSubview(newEmptyView)
+        
+        tableView.addSubview(backgroundView)
+        
+        newEmptyView.setText(text: "Здесь будут отображаться матчи")
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = true
+        
+        newEmptyView.setCenterFromParent()
+        newEmptyView.containerView.setCenterFromParent()
+        
+        backgroundView.setCenterFromParent()
+        
+        tableView.bringSubviewToFront(backgroundView)
+        
+//        tableView.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
+//        tableView.backgroundView?.addSubview(empty_view)
+//        empty_view.setCenterFromParent()
 
         tableView.separatorStyle = .none
     }

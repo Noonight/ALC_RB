@@ -1895,6 +1895,7 @@
                     </view>
                     <connections>
                         <outlet property="empty_view" destination="Mhg-Gj-WBm" id="YhO-sB-VJs"/>
+                        <outlet property="filterLabel" destination="qGl-vs-jdq" id="HKa-qR-N6y"/>
                         <outlet property="filter_type_btn" destination="TeN-V3-76x" id="pup-Yu-Nen"/>
                         <outlet property="header_view" destination="KwX-ws-1NN" id="ngB-6D-ygd"/>
                         <outlet property="picker_height" destination="aXS-tL-ZLz" id="fmp-H6-ojJ"/>

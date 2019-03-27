@@ -18,6 +18,8 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
     
     private let presenter = UpcomingGamesPresenter()
     
+    var backgroundView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,14 +46,37 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
     }
     
     func showEmptyView() {
-        tableView.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
-        tableView.backgroundView?.addSubview(empty_view)
+        
+        let newEmptyView = EmptyViewNew()
+        
+        //        backgroundView = UIView()
+        backgroundView.frame = tableView.frame
+        
+        backgroundView.backgroundColor = .white
+        backgroundView.addSubview(newEmptyView)
+        
+        tableView.addSubview(backgroundView)
+        
+        newEmptyView.setText(text: "На этой неделе нет матчей")
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = true
+        
+        newEmptyView.setCenterFromParent()
+        newEmptyView.containerView.setCenterFromParent()
+        
+        backgroundView.setCenterFromParent()
+        
+        tableView.bringSubviewToFront(backgroundView)
+        
+//        tableView.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
+//        tableView.backgroundView?.addSubview(empty_view)
         tableView.separatorStyle = .none
-        empty_view.setCenterFromParent()
+//        empty_view.setCenterFromParent()
     }
     
     func hideEmptyView() {
-        tableView.backgroundView = nil
+//        tableView.backgroundView = nil
+        backgroundView.removeFromSuperview()
         tableView.separatorStyle = .singleLine
     }
     

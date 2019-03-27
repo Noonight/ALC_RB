@@ -28,6 +28,8 @@ class TeamsLeagueTableViewController: UITableViewController {
     }
     let menuLauncher = MenuLauncher()
     
+    var backgroundView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
@@ -58,6 +60,11 @@ class TeamsLeagueTableViewController: UITableViewController {
             NSAttributedString.Key.font : UIFont(name: "Helvetica-Bold", size: 26)], for: .normal)
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([
             NSAttributedString.Key.font : UIFont(name: "Helvetica-Bold", size: 20)], for: UIControl.State.selected)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
     }
     
     // MARK: - Action btn
@@ -120,10 +127,32 @@ extension TeamsLeagueTableViewController: LeagueMainProtocol {
 
 extension TeamsLeagueTableViewController: EmptyProtocol {
     func showEmptyView() {
+        
+        let newEmptyView = EmptyViewNew()
+        
+        //        backgroundView = UIView()
+        backgroundView.frame = tableView.frame
+        
+        backgroundView.backgroundColor = .white
+        backgroundView.addSubview(newEmptyView)
+        
+        tableView.addSubview(backgroundView)
+        
+        newEmptyView.setText(text: "Здесь будут отображаться команды")
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = true
+        
+        newEmptyView.setCenterFromParent()
+        newEmptyView.containerView.setCenterFromParent()
+        
+        backgroundView.setCenterFromParent()
+        
+        tableView.bringSubviewToFront(backgroundView)
+        
         //if tableView.is
-        tableView.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
-        tableView.backgroundView?.addSubview(emptyView)
-        emptyView.setCenterFromParent()
+//        tableView.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
+//        tableView.backgroundView?.addSubview(emptyView)
+//        emptyView.setCenterFromParent()
         tableView.separatorStyle = .none
         tableHeaderView.isHidden = true
         //tableHeaderView.backgroundColor = UIColor.lightGray
@@ -132,7 +161,8 @@ extension TeamsLeagueTableViewController: EmptyProtocol {
     
     func hideEmptyView() {
         tableView.separatorStyle = .singleLine
-        tableView.backgroundView = nil
+//        tableView.backgroundView = nil
+        backgroundView.removeFromSuperview()
         tableHeaderView.isHidden = false
     }
 }
