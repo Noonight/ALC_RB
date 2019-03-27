@@ -23,8 +23,8 @@ extension UIView {
 
 //            superview?.translatesAutoresizingMaskIntoConstraints = true
             
-            print(#function + " x = \(center.x), y = \(center.y) || super view: x = \(String(describing: superview?.center.x)), y = \(String(describing: superview?.center.y))")
-            Print.m("Super view width and height / 2 ->> \((superview?.frame.width)! / 2) ->> \((superview?.frame.height)! / 2)")
+//            print(#function + " x = \(center.x), y = \(center.y) || super view: x = \(String(describing: superview?.center.x)), y = \(String(describing: superview?.center.y))")
+//            Print.m("Super view width and height / 2 ->> \((superview?.frame.width)! / 2) ->> \((superview?.frame.height)! / 2)")
             //self.center = (superview?.center)!
 //            var halfWidth = frame.width / 2
 //            var halfHeight = frame.height / 2

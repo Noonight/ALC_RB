@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClubEditLKViewController: UIViewController {
+class ClubEditLKViewController: BaseStateViewController {
 
     // MARK: - Variables
     
@@ -22,6 +22,8 @@ class ClubEditLKViewController: UIViewController {
     var club: Club?
     
     var imagePicker: ImagePicker?
+    
+    let userDefaults = UserDefaultsHelper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +65,13 @@ class ClubEditLKViewController: UIViewController {
     
     @IBAction func saveBarBtnPressed(_ sender: UIBarButtonItem) {
 //        Print.m("save btn pressed yeah!!")
+        presenter.editClubInfo(
+            token: (userDefaults.getAuthorizedUser()?.token)!,
+            clubInfo: EditClubInfo(
+                name: clubTitle_label.text!,
+                _id: (userDefaults.getAuthorizedUser()?.person.club!)!,
+                info: clubDescription_textView.text!),
+            image: clubImage.image!)
     }
 
     @IBAction func onImageAreaPressed(_ sender: UITapGestureRecognizer) {
@@ -73,6 +82,19 @@ class ClubEditLKViewController: UIViewController {
 }
 
 extension ClubEditLKViewController : ClubEditLKView {
+    func editClubInfoSuccess(soloClub: SoloClub) {
+        self.club = soloClub.club
+        updateUI()
+        dismiss(animated: true) {
+            Print.m("Dismiss view controller")
+        }
+    }
+    
+    func editClubInfoFailure(error: Error) {
+        Print.m(error)
+        showToast(message: "Ошибка что - то пошло не так!")
+    }
+    
     func getClubLogoSuccess(image: UIImage) {
         clubImage.image = image.af_imageRoundedIntoCircle()
     }

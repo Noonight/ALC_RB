@@ -14,14 +14,21 @@ protocol ClubEditLKView : MvpView {
     func getClubLogoSuccess(image: UIImage)
     func getClubLogoFailure(error: Error)
     
+    func editClubInfoSuccess(soloClub: SoloClub)
+    func editClubInfoFailure(error: Error)
+    
 }
 
 class ClubEditLKPresenter : MvpPresenter<ClubEditLKViewController> {
     
     let apiService = ApiRequests()
     
-    func editClubInfo() {
-        
+    func editClubInfo(token: String, clubInfo: EditClubInfo, image: UIImage) {
+        apiService.post_editClubInfo(token: token, clubInfo: clubInfo, clubImage: image, response_success: { (soloClub) in
+            self.getView().editClubInfoSuccess(soloClub: soloClub)
+        }) { (error) in
+            self.getView().editClubInfoFailure(error: error)
+        }
     }
     
     func getClubLogo(byPath image: String) {

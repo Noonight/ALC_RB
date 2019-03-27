@@ -8,11 +8,13 @@
 
 import UIKit
 
-class LoadingEmptyTVC: UITableViewController {
+class BaseStateTableViewController: UITableViewController {
 
     let emptyView = EmptyViewNew()
     var backgroundView: UIView?
-    var emptyStr = "Здесь будет отображаться ..."
+    var emptyMessage = "Здесь будет отображаться ..."
+    
+    var state = BaseState.normal
     
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     
@@ -23,47 +25,46 @@ class LoadingEmptyTVC: UITableViewController {
 //        emptyView
     }
     
-    func prepareEmptyView() {
-        emptyView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
-        
-        let emptyImage = UIImageView(image: UIImage(named: "ic_empty"))
-        emptyImage.translatesAutoresizingMaskIntoConstraints = false
-        emptyImage.contentMode = .scaleAspectFit
-        emptyImage.addConstraint(NSLayoutConstraint(item: emptyImage, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 160))
-        emptyImage.addConstraint(NSLayoutConstraint(item: emptyImage, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 160))
-        
-        let emptyLabel = UILabel(frame: .zero)
-        emptyLabel.text = "Здесь ничего нет"
-        
-        let textLabel = UILabel(frame: .zero)
-        textLabel.text = emptyStr
-        textLabel.numberOfLines = 3
-        textLabel.textColor = UIColor.lightText
-        
-        emptyView.addSubview(emptyImage)
-        emptyView.addSubview(emptyLabel)
-        emptyView.addSubview(textLabel)
-        
-        emptyView.translatesAutoresizingMaskIntoConstraints = true
-        
-        emptyView.addConstraints([
-            NSLayoutConstraint(item: emptyView, attribute: .centerX, relatedBy: .equal, toItem: emptyImage, attribute: .centerX, multiplier: 1.0, constant: 0),
-            NSLayoutConstraint(item: emptyView, attribute: .centerX, relatedBy: .equal, toItem: emptyLabel, attribute: .centerX, multiplier: 1.0, constant: 0),
-            NSLayoutConstraint(item: emptyView, attribute: .centerX, relatedBy: .equal, toItem: textLabel, attribute: .centerX, multiplier: 1.0, constant: 0),
-            
-            NSLayoutConstraint(item: emptyView, attribute: .top, relatedBy: .equal, toItem: emptyImage, attribute: .top, multiplier: 1.0, constant: 8),
-            NSLayoutConstraint(item: emptyImage, attribute: .bottom, relatedBy: .lessThanOrEqual, toItem: emptyLabel, attribute: .top, multiplier: 1.0, constant: 40),
-            NSLayoutConstraint(item: emptyLabel, attribute: .left, relatedBy: .equal, toItem: emptyView, attribute: .left, multiplier: 1.0, constant: 16),
-            NSLayoutConstraint(item: emptyLabel, attribute: .right, relatedBy: .equal, toItem: emptyView, attribute: .right, multiplier: 1.0, constant: 16),
-            NSLayoutConstraint(item: emptyLabel, attribute: .bottom, relatedBy: .equal, toItem: textLabel, attribute: .top, multiplier: 1.0, constant: 16),
-            NSLayoutConstraint(item: textLabel, attribute: .left, relatedBy: .equal, toItem: emptyView, attribute: .left, multiplier: 1.0, constant: 16),
-            NSLayoutConstraint(item: textLabel, attribute: .right, relatedBy: .equal, toItem: emptyView, attribute: .right, multiplier: 1.0, constant: 16)/*,
-            NSLayoutConstraint(item: textLabel, attribute: .bottom, relatedBy: .lessThanOrEqual, toItem: emptyView, attribute: .bottom, multiplier: 1.0, constant: 16)*/
-            ])
-    }
+//    func prepareEmptyView() {
+//        emptyView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+//
+//        let emptyImage = UIImageView(image: UIImage(named: "ic_empty"))
+//        emptyImage.translatesAutoresizingMaskIntoConstraints = false
+//        emptyImage.contentMode = .scaleAspectFit
+//        emptyImage.addConstraint(NSLayoutConstraint(item: emptyImage, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 160))
+//        emptyImage.addConstraint(NSLayoutConstraint(item: emptyImage, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 160))
+//
+//        let emptyLabel = UILabel(frame: .zero)
+//        emptyLabel.text = "Здесь ничего нет"
+//
+//        let textLabel = UILabel(frame: .zero)
+//        textLabel.numberOfLines = 3
+//        textLabel.textColor = UIColor.lightText
+//
+//        emptyView.addSubview(emptyImage)
+//        emptyView.addSubview(emptyLabel)
+//        emptyView.addSubview(textLabel)
+//
+//        emptyView.translatesAutoresizingMaskIntoConstraints = true
+//
+//        emptyView.addConstraints([
+//            NSLayoutConstraint(item: emptyView, attribute: .centerX, relatedBy: .equal, toItem: emptyImage, attribute: .centerX, multiplier: 1.0, constant: 0),
+//            NSLayoutConstraint(item: emptyView, attribute: .centerX, relatedBy: .equal, toItem: emptyLabel, attribute: .centerX, multiplier: 1.0, constant: 0),
+//            NSLayoutConstraint(item: emptyView, attribute: .centerX, relatedBy: .equal, toItem: textLabel, attribute: .centerX, multiplier: 1.0, constant: 0),
+//
+//            NSLayoutConstraint(item: emptyView, attribute: .top, relatedBy: .equal, toItem: emptyImage, attribute: .top, multiplier: 1.0, constant: 8),
+//            NSLayoutConstraint(item: emptyImage, attribute: .bottom, relatedBy: .lessThanOrEqual, toItem: emptyLabel, attribute: .top, multiplier: 1.0, constant: 40),
+//            NSLayoutConstraint(item: emptyLabel, attribute: .left, relatedBy: .equal, toItem: emptyView, attribute: .left, multiplier: 1.0, constant: 16),
+//            NSLayoutConstraint(item: emptyLabel, attribute: .right, relatedBy: .equal, toItem: emptyView, attribute: .right, multiplier: 1.0, constant: 16),
+//            NSLayoutConstraint(item: emptyLabel, attribute: .bottom, relatedBy: .equal, toItem: textLabel, attribute: .top, multiplier: 1.0, constant: 16),
+//            NSLayoutConstraint(item: textLabel, attribute: .left, relatedBy: .equal, toItem: emptyView, attribute: .left, multiplier: 1.0, constant: 16),
+//            NSLayoutConstraint(item: textLabel, attribute: .right, relatedBy: .equal, toItem: emptyView, attribute: .right, multiplier: 1.0, constant: 16)/*,
+//            NSLayoutConstraint(item: textLabel, attribute: .bottom, relatedBy: .lessThanOrEqual, toItem: emptyView, attribute: .bottom, multiplier: 1.0, constant: 16)*/
+//            ])
+//    }
 
-    func setEmptyText(text: String) {
-        self.emptyStr = text
+    func setEmptyMessage(message new: String) {
+        self.emptyMessage = new
     }
     
 //    func showEmptyView(view: UIView) {
@@ -100,7 +101,31 @@ class LoadingEmptyTVC: UITableViewController {
     
 }
 
-extension LoadingEmptyTVC : EmptyProtocol {
+extension BaseStateTableViewController : BaseStateActions {
+    func setState(state: BaseState) {
+        if self.state != state {
+            switch state {
+            case .normal:
+                hideLoading()
+                hideEmptyView()
+                self.state = .normal
+            case .loading:
+                showLoading()
+                hideEmptyView()
+                self.state = .loading
+            case .error(let message):
+                showToast(message: message)
+                self.state = .error(message: message)
+            case .empty:
+                showEmptyView()
+                hideLoading()
+                self.state = .empty
+            }
+        }
+    }
+}
+
+extension BaseStateTableViewController : EmptyProtocol {
 //    func showEmptyView() {
 //
 //        backgroundView = UIView()
@@ -178,7 +203,7 @@ extension LoadingEmptyTVC : EmptyProtocol {
         
         backgroundView?.translatesAutoresizingMaskIntoConstraints = true
         
-        emptyView.setText(text: emptyStr)
+        emptyView.setText(text: emptyMessage)
         
         emptyView.setCenterFromParentTrue()
         emptyView.containerView.setCenterFromParentTrue()
@@ -196,7 +221,7 @@ extension LoadingEmptyTVC : EmptyProtocol {
     }
 }
 
-extension LoadingEmptyTVC : ActivityIndicatorProtocol {
+extension BaseStateTableViewController : ActivityIndicatorProtocol {
     func showLoading() {
         activityIndicator.frame = view.frame
         activityIndicator.backgroundColor = .white

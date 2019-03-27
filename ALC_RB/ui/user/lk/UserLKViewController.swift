@@ -66,6 +66,16 @@ class UserLKViewController: UIViewController {
         return viewController
     }()
     
+    
+    
+    private lazy var commands: CommandsLKTableViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        var viewController = storyboard.instantiateViewController(withIdentifier: "CommandsLKTableViewController") as! CommandsLKTableViewController
+        
+        return viewController
+    }()
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -168,20 +178,27 @@ class UserLKViewController: UIViewController {
         case .Invites:
             segmentHelper?.remove(ongoingLeagues)
             segmentHelper?.remove(club)
+            segmentHelper?.remove(commands)
             segmentHelper?.add(invitation)
-            title = invitation.title
+            navigationItem.title = invitation.title
         case .Tournaments:
             segmentHelper?.remove(invitation)
             segmentHelper?.remove(club)
+            segmentHelper?.remove(commands)
             segmentHelper?.add(ongoingLeagues)
-            title = ongoingLeagues.title
+            navigationItem.title = ongoingLeagues.title
         case .Clubs:
             segmentHelper?.remove(invitation)
             segmentHelper?.remove(ongoingLeagues)
+            segmentHelper?.remove(commands)
             segmentHelper?.add(club)
-            title = club.title
+            navigationItem.title = club.title
         case .Teams:
-            Print.d(object: menuOption.rawValue)
+            segmentHelper?.remove(invitation)
+            segmentHelper?.remove(ongoingLeagues)
+            segmentHelper?.remove(club)
+            segmentHelper?.add(commands)
+            navigationItem.title = commands.title
         case .SignOut:
             signOut()
         }

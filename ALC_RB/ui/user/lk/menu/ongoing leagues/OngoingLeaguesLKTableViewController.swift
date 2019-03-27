@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OngoingLeaguesLKTableViewController: LoadingEmptyTVC {
+class OngoingLeaguesLKTableViewController: BaseStateTableViewController {
 
     struct TableModel {
         var tournaments: Tournaments?
@@ -49,7 +49,7 @@ class OngoingLeaguesLKTableViewController: LoadingEmptyTVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
-        setEmptyText(text: emptyMsg)
+        setEmptyMessage(message: emptyMsg)
         
         tableView.tableFooterView = UIView()
         

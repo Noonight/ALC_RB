@@ -75,19 +75,43 @@ class PlayerViewController: UIViewController {
         pastLeaguesTable.dataSource = self
         pastLeaguesTable.delegate = self
     }
+    
+    var backgroundView: UIView = UIView()
 }
 
 extension PlayerViewController: EmptyProtocol {
     func showEmptyView() {
-        pastLeaguesTable.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: pastLeaguesTable.frame.width, height: pastLeaguesTable.frame.height))
-        pastLeaguesTable.backgroundView?.addSubview(empty_view)
+        let newEmptyView = EmptyViewNew()
+        
+//        backgroundView = UIView()
+        backgroundView.frame = pastLeaguesTable.frame
+        
+        backgroundView.backgroundColor = .white
+        backgroundView.addSubview(newEmptyView)
+        
+        pastLeaguesTable.addSubview(backgroundView)
+        
+        newEmptyView.setText(text: "Здесь будут отображаться турниры игрока")
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = true
+        
+        newEmptyView.setCenterFromParent()
+        newEmptyView.containerView.setCenterFromParent()
+        
+        backgroundView.setCenterFromParent()
+        
+        pastLeaguesTable.bringSubviewToFront(backgroundView)
+        
+//        pastLeaguesTable.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: pastLeaguesTable.frame.width, height: pastLeaguesTable.frame.height))
+//        pastLeaguesTable.backgroundView?.addSubview(empty_view)
         pastLeaguesTable.separatorStyle = .none
-        empty_view.setCenterFromParent()
+//        empty_view.setCenterFromParent()
         tournament_label.text = ""
     }
     
     func hideEmptyView() {
-        pastLeaguesTable.backgroundView = nil
+        backgroundView.removeFromSuperview()
+//        pastLeaguesTable.backgroundView = nil
         pastLeaguesTable.separatorStyle = .singleLine
         tournament_label.text = "Турниры"
     }

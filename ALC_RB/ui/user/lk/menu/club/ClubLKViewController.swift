@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClubLKViewController: UIViewController {
+class ClubLKViewController: BaseStateViewController {
 
     // MARK: - Variables
     
@@ -35,12 +35,26 @@ class ClubLKViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
+        
+        setEmptyMessage(message: "Вы пока не состоите ни в одном клубе")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        presenter.getClubs()
         navigationController?.navigationBar.topItem?.rightBarButtonItem = settingBarBtn
         settingBarBtn.image = settingBarBtn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+//        updateUI()
+        setState(state: .loading)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.updateUI()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -50,11 +64,12 @@ class ClubLKViewController: UIViewController {
     
     func updateUI() {
         if club != nil {
+            setState(state: .normal)
             presenter.getImage(imagePath: club!.logo)
             commandTitle_label.text = club!.name
             commandDescription_label.text = club!.info
         } else {
-            
+            setState(state: .empty)
         }
     }
     
@@ -96,6 +111,6 @@ extension ClubLKViewController: ClubLKView {
     
     func initPresenter() {
         presenter.attachView(view: self)
-        presenter.getClubs()
+        
     }
 }

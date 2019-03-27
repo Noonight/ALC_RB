@@ -8,11 +8,26 @@
 
 import UIKit
 
-enum BaseState {
+enum BaseState : Equatable {
     case loading
     case error(message: String)
-    case empty(message: String)
+    case empty
     case normal
+    
+    static func ==(lhs: BaseState, rhs: BaseState) -> Bool {
+        switch (lhs, rhs) {
+        case (.loading, .loading):
+            return true
+        case (let .error(messageLeft), let .error(messageRight)):
+            return false
+        case (.empty, .empty):
+            return true
+        case (.normal, .normal):
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 protocol BaseStateActions {
@@ -24,28 +39,87 @@ protocol BaseStateActions {
 class BaseStateViewController : UIViewController {
     
     let activityIndicator = UIActivityIndicatorView(style: .gray)
-    let emptyView = EmptyView()
+    let emptyView = EmptyViewNew()
     var backgroundView: UIView?
     
+    var state = BaseState.normal
+    
+    var emptyMessage: String = "Здесь будет контент. Возможно забыли настроить сообщение!"
+    
+    func setEmptyMessage(message new: String) {
+        self.emptyMessage = new
+    }
     
 }
 
 extension BaseStateViewController : BaseStateActions {
     func setState(state: BaseState) {
-        switch state {
-        case .normal:
-            Print.m("Normal state")
-        case .loading:
-            view.addSubview(activityIndicator)
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-            activityIndicator.startAnimating()
-            view.bringSubviewToFront(activityIndicator)
-            Print.m("Loading state")
-        case .error(let message):
-            Print.m("Error state with message ->> \(message)")
-        case .empty(let message):
-            Print.m("Empty state with message ->> \(message)")
+        if self.state != state {
+            switch state {
+            case .normal:
+                hideLoading()
+                hideEmptyView()
+                self.state = .normal
+            case .loading:
+                showLoading()
+                hideEmptyView()
+                self.state = .loading
+            case .error(let message):
+                showToast(message: message)
+                self.state = .error(message: message)
+            case .empty:
+                showEmptyView()
+                hideLoading()
+                self.state = .empty
+            }
         }
+        
+    }
+}
+
+extension BaseStateViewController : EmptyProtocol {
+    func showEmptyView() {
+        backgroundView = UIView()
+        
+        backgroundView?.frame = view.frame
+        
+        //        emptyView.backgroundColor = .clear
+        //        emptyView.containerView.backgroundColor = .clear
+        backgroundView?.backgroundColor = .white
+        backgroundView?.addSubview(emptyView)
+        
+        view.addSubview(backgroundView!)
+        
+        backgroundView?.translatesAutoresizingMaskIntoConstraints = true
+        
+        emptyView.setText(text: emptyMessage)
+        
+        emptyView.setCenterFromParentTrue()
+        emptyView.containerView.setCenterFromParentTrue()
+        
+    }
+    
+    func hideEmptyView() {
+        if let backgroundView = backgroundView {
+            backgroundView.removeFromSuperview()
+        }
+    }
+}
+
+extension BaseStateViewController : ActivityIndicatorProtocol {
+    func showLoading() {
+        activityIndicator.frame = view.frame
+        activityIndicator.backgroundColor = .white
+        
+        view.addSubview(activityIndicator)
+        view.bringSubviewToFront(activityIndicator)
+        
+        activityIndicator.startAnimating()
+    }
+    
+    func hideLoading() {
+        activityIndicator.stopAnimating()
+        
+        activityIndicator.removeFromSuperview()
     }
 }

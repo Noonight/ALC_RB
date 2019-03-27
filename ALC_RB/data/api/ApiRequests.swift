@@ -107,6 +107,10 @@ class ApiRequests {
     }
     
     func post_editClubInfo(token: String, clubInfo: EditClubInfo, clubImage: UIImage, response_success: @escaping (SoloClub) -> (), response_failure: @escaping (Error) -> ()) {
+        
+        Print.m("token - >> \(token)")
+        Print.m("club - >> \(clubInfo)")
+        
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in
                 multipartFormData.append(clubImage.jpegData(compressionQuality: 1.0)!, withName: "logo", fileName: "jpg", mimeType: "image/jpg")
@@ -124,6 +128,9 @@ class ApiRequests {
                 case .success(let upload, _, _):
                     
                     upload.responseSoloClub(completionHandler: { (response) in
+                        
+                        Print.m(response)
+                        
                         switch response.result {
                         case .success:
                             if let soloClub = response.result.value {

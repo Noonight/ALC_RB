@@ -55,7 +55,27 @@ struct Team: Codable {
     var players: [Player]
     var club: String
     
+    func getTeamStatus() -> TeamStatus {
+        if status == TeamStatus.approved.rawValue {
+            return TeamStatus.approved
+        }
+        if status == TeamStatus.rejected.rawValue {
+            return TeamStatus.rejected
+        }
+        if status == TeamStatus.pending.rawValue {
+            return TeamStatus.pending
+        }
+        
+        return TeamStatus.fail
+    }
     
+    enum TeamStatus: String {
+        case approved = "Approved"
+        case pending = "Pending"
+        case rejected = "Rejected"
+        
+        case fail = "Error"
+    }
     
     enum CodingKeys: String, CodingKey {
         case status, place, playoffPlace, madeToPlayoff, group, goals, goalsReceived, wins, losses, draws, groupScore
@@ -80,6 +100,10 @@ struct Player: Codable {
 
 enum InviteStatus: String, Codable {
     case accepted = "Accepted"
+    case approved = "Approved"
+    
+    case rejected = "Rejected"
+    case pending = "Pending"
 }
 
 // MARK: Convenience initializers and mutators
