@@ -268,6 +268,8 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         default:
             break
         }
+        
+        cell.selectionStyle = .none
 
         return cell
     }
