@@ -3048,6 +3048,7 @@
                                                     <constraint firstItem="BAM-K9-T3R" firstAttribute="centerY" secondItem="bFQ-ZJ-2TN" secondAttribute="centerY" id="rG7-h5-Dls"/>
                                                     <constraint firstAttribute="height" constant="32" id="xaq-qK-Zsv"/>
                                                     <constraint firstAttribute="trailing" secondItem="BAM-K9-T3R" secondAttribute="trailing" id="xof-Db-8dC"/>
+                                                    <constraint firstItem="BAM-K9-T3R" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="u1V-HB-Tvq" secondAttribute="trailing" constant="8" symbolic="YES" id="yAt-7v-I0b"/>
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dyU-72-E9w">
@@ -3153,6 +3154,7 @@
                                                 <constraints>
                                                     <constraint firstItem="TSp-9m-lRA" firstAttribute="centerY" secondItem="sTE-65-Q0t" secondAttribute="centerY" id="0B0-XA-jkx"/>
                                                     <constraint firstItem="TSp-9m-lRA" firstAttribute="leading" secondItem="sTE-65-Q0t" secondAttribute="leading" id="38C-C3-pMH"/>
+                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="TSp-9m-lRA" secondAttribute="trailing" constant="20" symbolic="YES" id="CvQ-PL-0vA"/>
                                                     <constraint firstAttribute="height" constant="32" id="alG-Zv-x0F"/>
                                                 </constraints>
                                             </view>
@@ -3364,17 +3366,92 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="В разработке" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kD8-dr-84Y">
-                                <rect key="frame" x="106" y="281" width="108" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PiD-y5-k5T">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OGE-FV-uBN">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="398"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Название" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GoW-mt-bFO">
+                                                <rect key="frame" x="16" y="32" width="288" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Турнир" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yas-cF-93z">
+                                                <rect key="frame" x="16" y="78" width="288" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UB1-x7-hnf">
+                                                <rect key="frame" x="0.0" y="104" width="320" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="rKj-rd-jiP"/>
+                                                </constraints>
+                                            </pickerView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Клуб" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2LO-fs-CLw">
+                                                <rect key="frame" x="16" y="170" width="288" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Eb-4x-5SU">
+                                                <rect key="frame" x="0.0" y="196" width="320" height="120"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="120" id="GDW-rd-4EP"/>
+                                                </constraints>
+                                            </pickerView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVq-oJ-J74">
+                                                <rect key="frame" x="16" y="310" width="288" height="72"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="72" id="dR3-7E-wte"/>
+                                                </constraints>
+                                                <string key="text">Для участия в турнире команда должна включать минимум 5 игроков. Добавить игроков можно в разделе Игроки или в разделе Команды профиля.</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="UB1-x7-hnf" secondAttribute="trailing" id="1Et-Rx-WPZ"/>
+                                            <constraint firstItem="9Eb-4x-5SU" firstAttribute="top" secondItem="2LO-fs-CLw" secondAttribute="bottom" constant="8" id="35U-Iv-vdh"/>
+                                            <constraint firstItem="UB1-x7-hnf" firstAttribute="top" secondItem="Yas-cF-93z" secondAttribute="bottom" constant="8" id="90C-Ft-gO5"/>
+                                            <constraint firstItem="2LO-fs-CLw" firstAttribute="top" secondItem="UB1-x7-hnf" secondAttribute="bottom" constant="16" id="BP3-zu-X81"/>
+                                            <constraint firstItem="2LO-fs-CLw" firstAttribute="leading" secondItem="OGE-FV-uBN" secondAttribute="leading" constant="16" id="I3O-EN-OWP"/>
+                                            <constraint firstAttribute="trailing" secondItem="Yas-cF-93z" secondAttribute="trailing" constant="16" id="Iff-Vw-kU7"/>
+                                            <constraint firstItem="9Eb-4x-5SU" firstAttribute="leading" secondItem="OGE-FV-uBN" secondAttribute="leading" id="Ix0-QW-Wnf"/>
+                                            <constraint firstItem="tVq-oJ-J74" firstAttribute="leading" secondItem="OGE-FV-uBN" secondAttribute="leading" constant="16" id="JBS-bG-aNB"/>
+                                            <constraint firstAttribute="bottom" secondItem="tVq-oJ-J74" secondAttribute="bottom" constant="16" id="Max-f3-DpU"/>
+                                            <constraint firstAttribute="trailing" secondItem="tVq-oJ-J74" secondAttribute="trailing" constant="16" id="OJz-hi-MHQ"/>
+                                            <constraint firstItem="GoW-mt-bFO" firstAttribute="leading" secondItem="OGE-FV-uBN" secondAttribute="leading" constant="16" id="OvF-4m-BI8"/>
+                                            <constraint firstItem="GoW-mt-bFO" firstAttribute="top" secondItem="OGE-FV-uBN" secondAttribute="top" constant="32" id="Ssc-Ig-16y"/>
+                                            <constraint firstItem="Yas-cF-93z" firstAttribute="leading" secondItem="OGE-FV-uBN" secondAttribute="leading" constant="16" id="Znx-sC-w3Q"/>
+                                            <constraint firstAttribute="trailing" secondItem="9Eb-4x-5SU" secondAttribute="trailing" id="cn0-sG-NZp"/>
+                                            <constraint firstAttribute="trailing" secondItem="GoW-mt-bFO" secondAttribute="trailing" constant="16" id="huw-yd-lVG"/>
+                                            <constraint firstItem="Yas-cF-93z" firstAttribute="top" secondItem="GoW-mt-bFO" secondAttribute="bottom" constant="16" id="rLh-l1-1kO"/>
+                                            <constraint firstItem="UB1-x7-hnf" firstAttribute="leading" secondItem="OGE-FV-uBN" secondAttribute="leading" id="s0m-aC-h4w"/>
+                                            <constraint firstAttribute="trailing" secondItem="2LO-fs-CLw" secondAttribute="trailing" constant="16" id="wr8-uL-qvJ"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="OGE-FV-uBN" secondAttribute="bottom" id="1qv-qp-fZd"/>
+                                    <constraint firstItem="OGE-FV-uBN" firstAttribute="leading" secondItem="PiD-y5-k5T" secondAttribute="leading" id="OmN-gs-va8"/>
+                                    <constraint firstAttribute="trailing" secondItem="OGE-FV-uBN" secondAttribute="trailing" id="UwB-Yk-GIK"/>
+                                    <constraint firstItem="OGE-FV-uBN" firstAttribute="top" secondItem="PiD-y5-k5T" secondAttribute="top" id="jnj-R3-gWz"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="kD8-dr-84Y" firstAttribute="centerY" secondItem="KCl-Xt-cJT" secondAttribute="centerY" id="8RH-Ac-CY2"/>
-                            <constraint firstItem="kD8-dr-84Y" firstAttribute="centerX" secondItem="KCl-Xt-cJT" secondAttribute="centerX" id="TEZ-BS-gTo"/>
+                            <constraint firstItem="PiD-y5-k5T" firstAttribute="leading" secondItem="KCl-Xt-cJT" secondAttribute="leading" id="KqQ-AT-1mw"/>
+                            <constraint firstItem="OGE-FV-uBN" firstAttribute="height" secondItem="j2u-Xh-pDN" secondAttribute="height" priority="250" constant="-170" id="Ult-f4-fJx"/>
+                            <constraint firstItem="KCl-Xt-cJT" firstAttribute="bottom" secondItem="PiD-y5-k5T" secondAttribute="bottom" id="VjC-hg-DTa"/>
+                            <constraint firstItem="PiD-y5-k5T" firstAttribute="top" secondItem="KCl-Xt-cJT" secondAttribute="top" id="YIO-jy-n5Q"/>
+                            <constraint firstItem="OGE-FV-uBN" firstAttribute="width" secondItem="j2u-Xh-pDN" secondAttribute="width" id="cSS-s1-VIq"/>
+                            <constraint firstItem="KCl-Xt-cJT" firstAttribute="trailing" secondItem="PiD-y5-k5T" secondAttribute="trailing" id="cVO-Lm-Xjd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KCl-Xt-cJT"/>
                     </view>
@@ -3387,7 +3464,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ls8-vx-D2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3979" y="238"/>
+            <point key="canvasLocation" x="3978.75" y="237.67605633802816"/>
         </scene>
         <!--Приглашения на турнир-->
         <scene sceneID="adn-YE-GRM">
