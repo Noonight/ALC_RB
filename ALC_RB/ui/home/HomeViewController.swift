@@ -34,10 +34,20 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var viewContainer: UIView!
 
+//    let advertising = Advertising(adImage: UIImage(named: "ic_logo")!, adText: "Some test text")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         firstInit()
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+//        advertising.showAd()
+        
     }
     
     private func firstInit() {

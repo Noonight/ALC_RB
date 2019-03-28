@@ -121,6 +121,9 @@
 		DB87FE812243D9E2001EBA7C /* EmptyViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87FE802243D9E2001EBA7C /* EmptyViewNew.swift */; };
 		DB8B6C7E224BF0C0001A667D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB8B6C7D224BF0C0001A667D /* Colors.xcassets */; };
 		DB938DCA2239410A003FBE52 /* MBProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB938DC92239410A003FBE52 /* MBProgressHud.swift */; };
+		DB99BB6C224CB46700EE30D7 /* AdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB99BB6B224CB46700EE30D7 /* AdView.xib */; };
+		DB99BB6E224CB48300EE30D7 /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB99BB6D224CB48300EE30D7 /* AdView.swift */; };
+		DB99BB71224CD60C00EE30D7 /* Advertising.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB99BB70224CD60C00EE30D7 /* Advertising.swift */; };
 		DBA69210221E74A000BEFB26 /* DrawerMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA6920F221E74A000BEFB26 /* DrawerMenuTableViewCell.swift */; };
 		DBA69213221E759600BEFB26 /* MenuOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69212221E759600BEFB26 /* MenuOption.swift */; };
 		DBA69215221E95C400BEFB26 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69214221E95C400BEFB26 /* UIColor.swift */; };
@@ -268,6 +271,9 @@
 		DB87FE802243D9E2001EBA7C /* EmptyViewNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewNew.swift; sourceTree = "<group>"; };
 		DB8B6C7D224BF0C0001A667D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		DB938DC92239410A003FBE52 /* MBProgressHud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBProgressHud.swift; sourceTree = "<group>"; };
+		DB99BB6B224CB46700EE30D7 /* AdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdView.xib; sourceTree = "<group>"; };
+		DB99BB6D224CB48300EE30D7 /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
+		DB99BB70224CD60C00EE30D7 /* Advertising.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertising.swift; sourceTree = "<group>"; };
 		DBA6920F221E74A000BEFB26 /* DrawerMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuTableViewCell.swift; sourceTree = "<group>"; };
 		DBA69212221E759600BEFB26 /* MenuOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOption.swift; sourceTree = "<group>"; };
 		DBA69214221E95C400BEFB26 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -564,6 +570,7 @@
 		CEA6EBB421A53F15008F874D /* base */ = {
 			isa = PBXGroup;
 			children = (
+				DB99BB6F224CD5F600EE30D7 /* ad */,
 				DB87FE7A2243B4FF001EBA7C /* view controller */,
 				DBE0E7A5223BDE3500CC0EE2 /* table view */,
 				DBC3476222170985001D9B7D /* snackbar */,
@@ -771,6 +778,7 @@
 		DB58E95721E8A44500AF265E /* xib_nib */ = {
 			isa = PBXGroup;
 			children = (
+				DB99BB6A224CB41B00EE30D7 /* ad */,
 				DB58E95821E8A45400AF265E /* empty */,
 			);
 			path = xib_nib;
@@ -912,6 +920,23 @@
 				DB87FE802243D9E2001EBA7C /* EmptyViewNew.swift */,
 			);
 			path = new;
+			sourceTree = "<group>";
+		};
+		DB99BB6A224CB41B00EE30D7 /* ad */ = {
+			isa = PBXGroup;
+			children = (
+				DB99BB6B224CB46700EE30D7 /* AdView.xib */,
+				DB99BB6D224CB48300EE30D7 /* AdView.swift */,
+			);
+			path = ad;
+			sourceTree = "<group>";
+		};
+		DB99BB6F224CD5F600EE30D7 /* ad */ = {
+			isa = PBXGroup;
+			children = (
+				DB99BB70224CD60C00EE30D7 /* Advertising.swift */,
+			);
+			path = ad;
 			sourceTree = "<group>";
 		};
 		DBA6920E221E748500BEFB26 /* cell */ = {
@@ -1118,6 +1143,7 @@
 				DB58E95C21E8A7FA00AF265E /* EmptyView.xib in Resources */,
 				CEA6EBA621A53CFE008F874D /* LaunchScreen.storyboard in Resources */,
 				CEA6EBA321A53CFE008F874D /* Assets.xcassets in Resources */,
+				DB99BB6C224CB46700EE30D7 /* AdView.xib in Resources */,
 				DB8B6C7E224BF0C0001A667D /* Colors.xcassets in Resources */,
 				CEA6EBA121A53CFE008F874D /* Main.storyboard in Resources */,
 				DB87FE7F2243D493001EBA7C /* EmptyViewNew.xib in Resources */,
@@ -1205,6 +1231,7 @@
 				DBC5C5F6221FDA8500B0A1B6 /* ImagePicker.swift in Sources */,
 				DB2A35D621CA203B00E9E2C5 /* PlayersTableViewController.swift in Sources */,
 				DB57C5D221F0BFD500BEA097 /* TeamLeagueDetailViewController.swift in Sources */,
+				DB99BB6E224CB48300EE30D7 /* AdView.swift in Sources */,
 				DBA69210221E74A000BEFB26 /* DrawerMenuTableViewCell.swift in Sources */,
 				DB52EAE82248E412004F7869 /* CommandsLKTableViewCell.swift in Sources */,
 				DBCB1EBF2223FE3F005A6976 /* ApiRequests.swift in Sources */,
@@ -1241,6 +1268,7 @@
 				CE916AB021B4EE2D0025FECF /* NoSectionCellTableViewCell.swift in Sources */,
 				DBA69215221E95C400BEFB26 /* UIColor.swift in Sources */,
 				DB59433821F219FE00945601 /* PlayersTeamLeagueDetailViewController.swift in Sources */,
+				DB99BB71224CD60C00EE30D7 /* Advertising.swift in Sources */,
 				DB641F8A222BB283004AC6CB /* UserLKPresenter.swift in Sources */,
 				DB11CC8D21C22F890083773E /* ScheduleTableViewController.swift in Sources */,
 				DBC347612216F34B001D9B7D /* StringEx.swift in Sources */,
