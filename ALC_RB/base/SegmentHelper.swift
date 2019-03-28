@@ -21,14 +21,21 @@ class SegmentHelper {
     }
     
     func add(_ viewController: UIViewController) {
-        rootViewController?.addChild(viewController)
-        rootViewContainer?.addSubview(viewController.view)
-        viewController.view.frame = (rootViewContainer?.bounds)!
-        viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        let childsViewControllers = rootViewController?.children
+        
+        if !childsViewControllers!.contains(viewController) {
+            rootViewController?.addChild(viewController)
+            rootViewContainer?.addSubview(viewController.view)
+            viewController.view.frame = (rootViewContainer?.bounds)!
+            viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        }
     }
     
     func remove(_ viewController: UIViewController) {
-        viewController.view.removeFromSuperview()
-        viewController.removeFromParent()
+        let childViewControllers = rootViewController?.children
+        if childViewControllers!.contains(viewController) {
+            viewController.view.removeFromSuperview()
+            viewController.removeFromParent()
+        }
     }
 }

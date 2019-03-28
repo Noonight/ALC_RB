@@ -3363,7 +3363,19 @@
                     <view key="view" contentMode="scaleToFill" id="j2u-Xh-pDN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="В разработке" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kD8-dr-84Y">
+                                <rect key="frame" x="106" y="281" width="108" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kD8-dr-84Y" firstAttribute="centerY" secondItem="KCl-Xt-cJT" secondAttribute="centerY" id="8RH-Ac-CY2"/>
+                            <constraint firstItem="kD8-dr-84Y" firstAttribute="centerX" secondItem="KCl-Xt-cJT" secondAttribute="centerX" id="TEZ-BS-gTo"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="KCl-Xt-cJT"/>
                     </view>
                     <navigationItem key="navigationItem" title="Создать команду" id="4ld-k1-ogV">
