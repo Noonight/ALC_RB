@@ -53,13 +53,14 @@
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="r8C-84-Ayn" secondAttribute="trailing" constant="16" id="1a9-er-OBc"/>
                 <constraint firstItem="5r5-is-Gcj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="KpV-bK-Tdk"/>
-                <constraint firstItem="r8C-84-Ayn" firstAttribute="top" secondItem="LJF-JH-yuS" secondAttribute="bottom" constant="45" id="MQK-RM-Cmy"/>
+                <constraint firstItem="r8C-84-Ayn" firstAttribute="top" relation="greaterThanOrEqual" secondItem="LJF-JH-yuS" secondAttribute="bottom" constant="8" id="MQK-RM-Cmy"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="5r5-is-Gcj" secondAttribute="trailing" constant="16" id="QzZ-cj-CYD"/>
                 <constraint firstItem="5r5-is-Gcj" firstAttribute="top" secondItem="r8C-84-Ayn" secondAttribute="bottom" constant="15" id="YS2-gG-np7"/>
                 <constraint firstItem="LJF-JH-yuS" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="Ya7-DF-Vcd"/>
                 <constraint firstItem="LJF-JH-yuS" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="lKo-WL-nmd"/>
                 <constraint firstItem="r8C-84-Ayn" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="tWE-xX-dJw"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="5r5-is-Gcj" secondAttribute="bottom" constant="8" id="voa-WO-8JY"/>
+                <constraint firstItem="r8C-84-Ayn" firstAttribute="top" relation="lessThanOrEqual" secondItem="LJF-JH-yuS" secondAttribute="bottom" constant="45" id="xcg-UJ-PDE"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

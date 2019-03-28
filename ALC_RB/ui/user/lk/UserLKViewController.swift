@@ -40,6 +40,8 @@ class UserLKViewController: UIViewController {
     
     let userDefaultsHelper = UserDefaultsHelper()
     
+    var firstInit = true
+    
     // MARK: - Drawer controllers
     
     private lazy var invitation: InvitationLKTableViewController = {
@@ -108,6 +110,14 @@ class UserLKViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        if firstInit {
+            showFirstItem()
+            firstInit = false
+        }
+    }
+    
     // MARK: - Drawer btn action
     
     @IBAction func drawerHeaderPressed(_ sender: UITapGestureRecognizer) {
@@ -137,6 +147,7 @@ class UserLKViewController: UIViewController {
     func showFirstItem() {
         segmentHelper?.add(invitation)
         tableView.selectRow(at: IndexPath.init(row: 0, section: 0), animated: true, scrollPosition: UITableView.ScrollPosition.top)
+        navigationItem.title = invitation.title
     }
     
     func setDrawerState() {
