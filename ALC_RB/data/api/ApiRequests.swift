@@ -180,6 +180,22 @@ class ApiRequests {
         }
     }
     
+    func post_createTeam(token: String, teamInfo: CreateTeamInfo, response_success: @escaping () -> (), response_failure: @escaping (Error) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.post_create_team), method: HTTPMethod.post, parameters: teamInfo.toParams(), encoding: JSONEncoding.default, headers: ["auth" : token])
+            .validate()
+//            .responseAuthUser { (response) in
+//                switch response.result {
+//                case .success:
+//                    if let authUser = response.result.value {
+//                        get_auth_user(authUser)
+//                    }
+//                case .failure(let error):
+//                    print(error)
+//                    get_error(error)
+//                }
+    }
+    
     // MARK: - GET requests
     
     func get_image(imagePath: String, get_success: @escaping (UIImage) -> (), get_failure: @escaping (Error) -> ()) {
