@@ -2982,7 +2982,7 @@
                                     <outlet property="tournamentDate_label" destination="V8l-AJ-T2z" id="IYy-FZ-cOi"/>
                                     <outlet property="tournamentTitle_label" destination="5yH-c3-8UJ" id="vxJ-No-zv0"/>
                                     <outlet property="tournamentTransfer_label" destination="YFh-fD-Qo8" id="eX4-Zp-z85"/>
-                                    <segue destination="Fie-qf-cde" kind="show" id="KfW-5Y-VBr"/>
+                                    <segue destination="Fie-qf-cde" kind="show" identifier="segue_edit_team" id="KfW-5Y-VBr"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -3013,7 +3013,7 @@
         <!--Редактировать команду-->
         <scene sceneID="mKH-fF-PCq">
             <objects>
-                <viewController id="Fie-qf-cde" sceneMemberID="viewController">
+                <viewController title="Редактировать команду" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Fie-qf-cde" customClass="CommandEditLKViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Aa-st-2qB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3039,6 +3039,9 @@
                                                         <state key="normal" title="ДОБАВИТЬ ИГРОКА">
                                                             <color key="titleColor" red="0.035294117647058823" green="0.68627450980392157" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="onAddPlayerBtnPressed:" destination="Fie-qf-cde" eventType="touchUpInside" id="u3f-Lb-uTR"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3058,7 +3061,7 @@
                                                     <constraint firstAttribute="height" constant="200" id="Cle-Gh-1a9"/>
                                                 </constraints>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="88" id="ti3-Wg-0jd">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="command_player_cell" rowHeight="88" id="ti3-Wg-0jd" customClass="CommandPlayersTableViewCell" customModule="ALC_RB" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="320" height="88"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ti3-Wg-0jd" id="R9M-HU-2MC">
@@ -3123,6 +3126,9 @@
                                                                         <constraint firstAttribute="width" constant="24" id="wOf-DL-p5c"/>
                                                                     </constraints>
                                                                     <state key="normal" image="ic_close"/>
+                                                                    <connections>
+                                                                        <action selector="onPlayerDeleteBtnPressed:" destination="ti3-Wg-0jd" eventType="touchUpInside" id="gzI-QC-gYa"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <constraints>
@@ -3137,6 +3143,13 @@
                                                                 <constraint firstItem="pLt-Se-jqB" firstAttribute="leading" secondItem="R9M-HU-2MC" secondAttribute="leading" id="xP1-gu-qSj"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="playerCommandNumLabel" destination="LGv-NT-tTx" id="TqM-Tm-xKZ"/>
+                                                            <outlet property="playerDeleteBtn" destination="Q7j-yp-C9y" id="LgG-oN-wVr"/>
+                                                            <outlet property="playerImage" destination="Dxg-sA-h1o" id="ezk-vH-z4d"/>
+                                                            <outlet property="playerNameLabel" destination="gk4-a3-rIg" id="2lZ-t5-rNu"/>
+                                                            <outlet property="playerNumberTextField" destination="rFx-U8-tDf" id="wPn-ha-oiz"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
@@ -3270,6 +3283,11 @@
                     <navigationItem key="navigationItem" title="Редактировать команду" id="hlY-ds-qcK">
                         <barButtonItem key="rightBarButtonItem" image="ic_tick" id="y0i-95-IIO"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="commandInvitePlayers" destination="oXt-EF-w5O" id="5dd-7u-ztQ"/>
+                        <outlet property="commandPlayers" destination="dyU-72-E9w" id="Xu7-T0-AWH"/>
+                        <outlet property="saveBtn" destination="y0i-95-IIO" id="F4a-fa-ICx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvh-zj-nEX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

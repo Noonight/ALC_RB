@@ -71,7 +71,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
     @IBOutlet weak var createNewCommandBtn: UIBarButtonItem!
     
     let cellId = "commands_lk_cell"
-    
+    let segueId = "segue_edit_team"
     let userDefaults = UserDefaultsHelper()
     
     let presenter = CommandsLKPresenter()
@@ -90,28 +90,29 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         super.viewDidLoad()
         initPresenter()
         
-        presenter.getTournaments()
-        
         tableView.backgroundView = UIView()
         
         setEmptyMessage(message: "Вы пока не участвуете ни в одной команде")
         
-//        var user = userDefaults.getAuthorizedUser()
-//
-//        user?.person.participation = [
-////            Participation(league: "5be94d1a06af116344942a92", id: "23r42gerwgwscw2r", team: "5be94d1a06af116344942a93"),
-////            Participation(league: "5be94d1a06af116344942a92", id: "wdfv34t34bt34", team: "5be94d1a06af116344942aff"),
-////            Participation(league: "5be94d1a06af116344942a92", id: "sdf3v4t34tb34", team: "5be94d1a06af116344942ad0"),
-////            Participation(league: "5be94d1a06af116344942a92", id: "sdfv34tn3y4esd", team: "5be94d1a06af116344942aad")
-//        ]
-//
-//        userDefaults.setAuthorizedUser(user: user!)
+        var user = userDefaults.getAuthorizedUser()
+
+        user?.person.participation = [
+            Participation(league: "5be94d1a06af116344942a92", id: "23r42gerwgwscw2r", team: "5be94d1a06af116344942a93"),
+            Participation(league: "5be94d1a06af116344942a92", id: "wdfv34t34bt34", team: "5be94d1a06af116344942aff"),
+            Participation(league: "5be94d1a06af116344942a92", id: "sdf3v4t34tb34", team: "5be94d1a06af116344942ad0"),
+            Participation(league: "5be94d1a06af116344942a92", id: "sdfv34tn3y4esd", team: "5be94d1a06af116344942aad")
+        ]
+
+        userDefaults.setAuthorizedUser(user: user!)
         
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        presenter.getTournaments()
+        
         navigationController?.navigationBar.topItem?.rightBarButtonItem = createNewCommandBtn
 //        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
 //            self.updateUI()
@@ -202,6 +203,10 @@ class CommandsLKTableViewController: BaseStateTableViewController {
                 if league.id == par.league {
                     for team in league.teams {
                         if team.id == par.team {
+                            let randomNum = Int.random(in: 0 ... 5)
+                            if randomNum > 2 {
+                                arr.append(par)
+                            }
                             if team.creator == userDefaults.getAuthorizedUser()?.person.id {
                                 arr.append(par)
                             }
@@ -262,6 +267,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         case 0:
             let model = tableModel.personOwnCommands[indexPath.row]
             configureCell(cell: cell, model: model)
+            cell.selectionStyle = .default
         case 1:
             let model = tableModel.personInsideCommands[indexPath.row]
             configureCell(cell: cell, model: model)
@@ -325,11 +331,33 @@ class CommandsLKTableViewController: BaseStateTableViewController {
             }
         }
     }
+    
+    // MARK: - Table view Delegate
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if indexPath.section == 0 {
+            return indexPath
+        } else {
+            return nil
+        }
+    }
 
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == segueId,
+            let destination = segue.destination as? CommandEditLKViewController,
+            let cellIndex = tableView.indexPathForSelectedRow?.row
+        {
+//            destination.team = tableModel.personOwnCommands[cellIndex]
+            destination.team = (tableModel.tournaments.leagues.filter { (league) -> Bool in
+                return league.id == tableModel.personOwnCommands[cellIndex].league
+                }.first?
+                .teams.filter({ (team) -> Bool in
+                    return team.id == tableModel.personOwnCommands[cellIndex].team
+                }).first!)!
+            destination.participation = tableModel.personOwnCommands[cellIndex]
+        }
     }
 }
 

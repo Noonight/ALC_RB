@@ -85,11 +85,25 @@ struct Team: Codable {
 }
 
 struct Player: Codable {
-    let inviteStatus: InviteStatus
-    let number: String
-    let activeYellowCards, yellowCards, redCards, activeDisquals: Int
-    let disquals, matches, goals: Int
-    let id, playerID: String
+    var inviteStatus: InviteStatus
+    var number: String
+    var activeYellowCards, yellowCards, redCards, activeDisquals: Int
+    var disquals, matches, goals: Int
+    var id, playerID: String
+    
+    init() {
+        inviteStatus = .pending
+        number = ""
+        activeYellowCards = -1
+        yellowCards = -1
+        redCards = -1
+        activeDisquals = -1
+        disquals = -1
+        matches = -1
+        goals = -1
+        id = ""
+        playerID = ""
+    }
     
     enum CodingKeys: String, CodingKey {
         case inviteStatus, number, activeYellowCards, yellowCards, redCards, activeDisquals, disquals, matches, goals
@@ -401,19 +415,21 @@ extension Player {
         id: String? = nil,
         playerID: String? = nil
         ) -> Player {
-        return Player(
-            inviteStatus: inviteStatus ?? self.inviteStatus,
-            number: number ?? self.number,
-            activeYellowCards: activeYellowCards ?? self.activeYellowCards,
-            yellowCards: yellowCards ?? self.yellowCards,
-            redCards: redCards ?? self.redCards,
-            activeDisquals: activeDisquals ?? self.activeDisquals,
-            disquals: disquals ?? self.disquals,
-            matches: matches ?? self.matches,
-            goals: goals ?? self.goals,
-            id: id ?? self.id,
-            playerID: playerID ?? self.playerID
-        )
+        var player = Player()
+        player.inviteStatus = inviteStatus ?? self.inviteStatus
+        player.number = number ?? self.number
+        player.activeYellowCards = activeYellowCards ?? self.activeYellowCards
+        player.yellowCards = yellowCards ?? self.yellowCards
+        player.redCards = redCards ?? self.redCards
+        player.activeDisquals = activeDisquals ?? self.activeDisquals
+        player.inviteStatus = inviteStatus ?? self.inviteStatus
+        player.disquals = disquals ?? self.disquals
+        player.number = number ?? self.number
+        player.matches = matches ?? self.matches
+        player.goals = goals ?? self.goals
+        player.id = id ?? self.id
+        player.playerID = playerID ?? self.playerID
+        return player
     }
     
     func jsonData() throws -> Data {
