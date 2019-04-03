@@ -180,20 +180,49 @@ class ApiRequests {
         }
     }
     
-    func post_createTeam(token: String, teamInfo: CreateTeamInfo, response_success: @escaping () -> (), response_failure: @escaping (Error) -> ()) {
+    func post_createTeam(token: String, teamInfo: CreateTeamInfo, response_success: @escaping (SoloTeam) -> (), response_failure: @escaping (Error) -> (), response_failure_message: @escaping (ErrorMessage) -> ()) {
         Alamofire
-            .request(ApiRoute.getApiURL(.post_create_team), method: HTTPMethod.post, parameters: teamInfo.toParams(), encoding: JSONEncoding.default, headers: ["auth" : token])
-            .validate()
-//            .responseAuthUser { (response) in
-//                switch response.result {
-//                case .success:
-//                    if let authUser = response.result.value {
-//                        get_auth_user(authUser)
-//                    }
-//                case .failure(let error):
-//                    print(error)
-//                    get_error(error)
-//                }
+            .upload(multipartFormData: { (multipartFormData) in
+                for (key, value) in teamInfo.toParams() {
+                    let strValue = value as! String
+                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
+                }
+            },
+                    usingThreshold: UInt64(),
+                    to: ApiRoute.getApiURL(.post_create_team),
+                    method: .post,
+                    headers: ["auth" : token])
+            { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    
+                    upload.responseSoloTeam(completionHandler: { (response) in
+                        switch response.result {
+                        case .success:
+                            if let soloTeam = response.result.value {
+                                response_success(soloTeam)
+                            }
+                        case .failure(let error):
+                            upload.responseErrorMessage(completionHandler: { (response) in
+                                switch response.result {
+                                case .success:
+                                    if let errorMessage = response.result.value {
+                                        response_failure_message(errorMessage)
+                                    }
+                                case .failure(let error):
+                                    response_failure(error)
+                                }
+                            })
+//                            response_failure(error)
+                        }
+                    })
+                    
+                    
+                    
+                case .failure(let error):
+                    response_failure(error)
+                }
+        }
     }
     
     // MARK: - GET requests

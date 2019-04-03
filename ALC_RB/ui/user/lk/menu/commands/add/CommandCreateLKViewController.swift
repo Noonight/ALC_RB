@@ -43,6 +43,14 @@ class CommandCreateLKViewController: BaseStateViewController {
         }
     }
     
+    let fieldsCantBeEmpty = "Заполните все поля."
+    let teamCreatedMessage = "Команда успешно создана.\n Название: "
+    
+    let userDefaults = UserDefaultsHelper()
+    
+    var tournamentItem: League?
+    var clubItem: Club?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
@@ -51,14 +59,20 @@ class CommandCreateLKViewController: BaseStateViewController {
         
 //        tournamentPickerHelper.setRows(rows: <#T##[League]#>)
         tournamentPickerHelper.setSelectRowPickerHelper(selectRowProtocol: self)
+        clubPickerHelper.setSelectRowPickerHelper(selectRowProtocol: self)
         
         tournamentPickerView.delegate = tournamentPickerHelper
         tournamentPickerView.dataSource = tournamentPickerHelper
+        
+        clubPickerView.delegate = clubPickerHelper
+        clubPickerView.dataSource = clubPickerHelper
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         saveBtn.image = saveBtn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
+        
+        updateUI()
     }
     
     func updateUI() {
@@ -68,6 +82,22 @@ class CommandCreateLKViewController: BaseStateViewController {
             tournamentPickerHelper.setRows(rows: viewModel.tournaments.leagues)
             clubPickerHelper.setRows(rows: viewModel.clubs.clubs)
         }
+    }
+    
+    // MARK: - Toolbar actions
+    
+    @IBAction func onSaveBtnPressed(_ sender: UIBarButtonItem) {
+        if !nameTextField.isEmpty() && tournamentItem != nil && clubItem != nil {
+            presenter.createTeam(token: userDefaults.getAuthorizedUser()?.token ?? "", teamInfo: CreateTeamInfo(
+                name: nameTextField.text!,
+                _id: (tournamentItem?.id)!,
+                club: (clubItem?.id)!,
+                creator: (userDefaults.getAuthorizedUser()?.person.id)!)
+            )
+        } else {
+            showToast(message: "\(fieldsCantBeEmpty)")
+        }
+        
     }
 
     // MARK: - Tournament picker view
@@ -143,11 +173,35 @@ class CommandCreateLKViewController: BaseStateViewController {
 
 extension CommandCreateLKViewController : SelectRowTournamentPickerHelper {
     func onSelectRow(row: Int, element: League) {
+        tournamentItem = element
         tournamentBtn.setTitle(element.name, for: .normal)
     }
 }
 
+extension CommandCreateLKViewController : SelectRowClubPickerHelper {
+    func onSelectRow(row: Int, element: Club) {
+        clubItem = element
+        clubBtn.setTitle(element.name, for: .normal)
+    }
+}
+
 extension CommandCreateLKViewController : CommandCreateLKView {
+    func onCreateTeamSuccess(team: SoloTeam) {
+        showToast(message: "\(teamCreatedMessage)\(team.team.name)", seconds: 5)
+        dismiss(animated: true) {
+            Print.m("Dismiss complete")
+        }
+    }
+    
+    func onCreateTeamFailure(error: Error) {
+        Print.m(error)
+        showToast(message: "Ошибка! Что-то пошло не так.")
+    }
+    
+    func onCreateTeamMessage(message: ErrorMessage) {
+        showToast(message: message.message, seconds: 5)
+    }
+    
     func onGetTournamentsSuccess(tournaments: Tournaments) {
         viewModel.tournaments = tournaments
     }

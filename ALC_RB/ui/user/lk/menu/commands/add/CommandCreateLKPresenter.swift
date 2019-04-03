@@ -17,6 +17,9 @@ protocol CommandCreateLKView : MvpView {
     func onGetClubsSuccess(clubs: Clubs)
     func onGetClubsFailure(error: Error)
     
+    func onCreateTeamSuccess(team: SoloTeam)
+    func onCreateTeamFailure(error: Error)
+    func onCreateTeamMessage(message: ErrorMessage)
 }
 
 class CommandCreateLKPresenter : MvpPresenter<CommandCreateLKViewController> {
@@ -39,8 +42,14 @@ class CommandCreateLKPresenter : MvpPresenter<CommandCreateLKViewController> {
         }
     }
     
-    func createClub() {
-        apiService.post
+    func createTeam(token: String, teamInfo: CreateTeamInfo) {
+        apiService.post_createTeam(token: token, teamInfo: teamInfo, response_success: { (soloTeam) in
+            self.getView().onCreateTeamSuccess(team: soloTeam)
+        }, response_failure: { (error) in
+            self.getView().onCreateTeamFailure(error: error)
+        }) { (errorMessage) in
+            self.getView().onCreateTeamMessage(message: errorMessage)
+        }
     }
     
 }

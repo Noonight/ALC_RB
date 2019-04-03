@@ -37,7 +37,7 @@ class TournamentPickerHelper : NSObject, UIPickerViewDelegate, UIPickerViewDataS
         if let rows = rows {
             return rows[row].name
         }
-        return " <<--->>"
+        return " <<--->> "
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

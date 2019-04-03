@@ -123,7 +123,10 @@
 		DB8A68A1224E568900D3972A /* ClubPickerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8A68A0224E568900D3972A /* ClubPickerHelper.swift */; };
 		DB8A68A3224E583F00D3972A /* CreateTeamInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8A68A2224E583F00D3972A /* CreateTeamInfo.swift */; };
 		DB8B6C7E224BF0C0001A667D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB8B6C7D224BF0C0001A667D /* Colors.xcassets */; };
+		DB8D30BE22537180006355A7 /* SoloTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8D30BD22537180006355A7 /* SoloTeam.swift */; };
+		DB8D30C022537328006355A7 /* SingleLineMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8D30BF22537328006355A7 /* SingleLineMessage.swift */; };
 		DB938DCA2239410A003FBE52 /* MBProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB938DC92239410A003FBE52 /* MBProgressHud.swift */; };
+		DB98FACA225462AB002933D0 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FAC9225462AB002933D0 /* ErrorMessage.swift */; };
 		DB99BB6C224CB46700EE30D7 /* AdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB99BB6B224CB46700EE30D7 /* AdView.xib */; };
 		DB99BB6E224CB48300EE30D7 /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB99BB6D224CB48300EE30D7 /* AdView.swift */; };
 		DB99BB71224CD60C00EE30D7 /* Advertising.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB99BB70224CD60C00EE30D7 /* Advertising.swift */; };
@@ -276,7 +279,10 @@
 		DB8A68A0224E568900D3972A /* ClubPickerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubPickerHelper.swift; sourceTree = "<group>"; };
 		DB8A68A2224E583F00D3972A /* CreateTeamInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTeamInfo.swift; sourceTree = "<group>"; };
 		DB8B6C7D224BF0C0001A667D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		DB8D30BD22537180006355A7 /* SoloTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloTeam.swift; sourceTree = "<group>"; };
+		DB8D30BF22537328006355A7 /* SingleLineMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLineMessage.swift; sourceTree = "<group>"; };
 		DB938DC92239410A003FBE52 /* MBProgressHud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBProgressHud.swift; sourceTree = "<group>"; };
+		DB98FAC9225462AB002933D0 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		DB99BB6B224CB46700EE30D7 /* AdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdView.xib; sourceTree = "<group>"; };
 		DB99BB6D224CB48300EE30D7 /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
 		DB99BB70224CD60C00EE30D7 /* Advertising.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertising.swift; sourceTree = "<group>"; };
@@ -440,8 +446,11 @@
 				DB48BE7522002B42008B007D /* SoloClub.swift */,
 				DB48BE7922002FC4008B007D /* SoloPerson.swift */,
 				DB1CA0FC22254FD4005E1FB9 /* AuthUser.swift */,
-				DB59E5BA222829EA00D1F62F /* post */,
 				DB2DEBBB222CE84B003FE599 /* EditedProfilePerson.swift */,
+				DB8D30BD22537180006355A7 /* SoloTeam.swift */,
+				DB8D30BF22537328006355A7 /* SingleLineMessage.swift */,
+				DB98FAC9225462AB002933D0 /* ErrorMessage.swift */,
+				DB59E5BA222829EA00D1F62F /* post */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1294,8 +1303,10 @@
 				DBB208ED221306170010B600 /* RefereeTeamTableViewController.swift in Sources */,
 				CE61552221AFD329008C4463 /* AnnouncesTableViewCell.swift in Sources */,
 				DB4B1A472240AB3A00A9FB97 /* ClubLKPresenter.swift in Sources */,
+				DB8D30BE22537180006355A7 /* SoloTeam.swift in Sources */,
 				DB17384B21BA56D400017B6D /* NewsAllTableViewController.swift in Sources */,
 				CE0AF81721C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift in Sources */,
+				DB98FACA225462AB002933D0 /* ErrorMessage.swift in Sources */,
 				DBFB83912201CEAE008A8F79 /* PlayersLeagueDetailViewController.swift in Sources */,
 				DB59E5B9222802F000D1F62F /* EditProfilePresenter.swift in Sources */,
 				04C024E52213DE2D00A4A571 /* EventsMatchPresenter.swift in Sources */,
@@ -1360,6 +1371,7 @@
 				DB4B1A4E224114D100A9FB97 /* EditClubInfo.swift in Sources */,
 				DB2A35E021CA28A100E9E2C5 /* PlayerTableViewCell.swift in Sources */,
 				DB2DEBBC222CE84B003FE599 /* EditedProfilePerson.swift in Sources */,
+				DB8D30C022537328006355A7 /* SingleLineMessage.swift in Sources */,
 				CE0AF81A21C7A1C200F8F6A2 /* ClubDetailViewController.swift in Sources */,
 				04DF5494220D6C25001323A6 /* ClubTeamHelper.swift in Sources */,
 				DB17384E21BA6F8600017B6D /* AnnounceAllTableViewController.swift in Sources */,

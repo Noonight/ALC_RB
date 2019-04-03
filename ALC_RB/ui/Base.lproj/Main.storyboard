@@ -2864,10 +2864,10 @@
             </objects>
             <point key="canvasLocation" x="3144" y="-540"/>
         </scene>
-        <!-- -->
+        <!--Команды-->
         <scene sceneID="rx4-9P-tFK">
             <objects>
-                <tableViewController storyboardIdentifier="CommandsLKTableViewController" title=" " useStoryboardIdentifierAsRestorationIdentifier="YES" id="efu-UH-kJW" customClass="CommandsLKTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CommandsLKTableViewController" title="Команды" useStoryboardIdentifierAsRestorationIdentifier="YES" id="efu-UH-kJW" customClass="CommandsLKTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="30Q-m1-vAT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3445,7 +3445,11 @@
                         <viewLayoutGuide key="safeArea" id="KCl-Xt-cJT"/>
                     </view>
                     <navigationItem key="navigationItem" title="Создать команду" id="4ld-k1-ogV">
-                        <barButtonItem key="rightBarButtonItem" image="ic_tick" id="M46-LR-aBe"/>
+                        <barButtonItem key="rightBarButtonItem" image="ic_tick" id="M46-LR-aBe">
+                            <connections>
+                                <action selector="onSaveBtnPressed:" destination="V6h-1D-JjW" id="kNZ-f5-B7r"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="clubBtn" destination="Tnu-DS-0Hx" id="Inf-Jm-8Rj"/>
