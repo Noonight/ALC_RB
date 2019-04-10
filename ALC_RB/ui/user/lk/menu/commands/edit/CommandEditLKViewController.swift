@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommandEditLKViewController: UIViewController {
+class CommandEditLKViewController: BaseStateViewController {
 
     @IBOutlet weak var saveBtn: UIBarButtonItem!
     @IBOutlet weak var commandPlayers: UITableView!
@@ -17,6 +17,7 @@ class CommandEditLKViewController: UIViewController {
     let presenter = CommandEditLKPresenter()
     
     let commandPlayersTableViewHelper = CommandPlayersTableViewHelper()
+    let commandInvPlayersTableViewHelper = CommandInvitePlayersTableViewHelper()
     
     var participation: Participation?
     
@@ -28,20 +29,28 @@ class CommandEditLKViewController: UIViewController {
         super.viewDidLoad()
         initPresenter()
         
+        presenter.getPersons()
+        
         saveBtn.image = saveBtn.image?.af_imageScaled(to: CGSize(width: 24, height: 24))
         
         commandPlayers.dataSource = commandPlayersTableViewHelper
         commandPlayers.delegate = commandPlayersTableViewHelper
+        
+        commandInvitePlayers.dataSource = commandInvPlayersTableViewHelper
+        commandInvitePlayers.delegate = commandInvPlayersTableViewHelper
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        Print.m("team is \(team)")
+        Print.m("participation is \(participation)")
     }
 
     // MARK: - Toolbar Actions
     
     @IBAction func onAddPlayerBtnPressed(_ sender: UIButton) {
-        
+        Print.m("add btn")
     }
     
     // MARK: - Helpers functions
@@ -51,11 +60,40 @@ class CommandEditLKViewController: UIViewController {
 
 extension CommandEditLKViewController: CommandEditLKView {
     func onGetPersonsComplete(players: Players) {
-        commandPlayersTableViewHelper.setTableData(tableData: [CommandPlayersTableViewCell.CellModel(player: Player(), playerImage: UIImage(named: "ic_logo2")!, person: Person())])
+        let teamPlayers = team.players
+        var array : [CommandPlayersTableViewCell.CellModel] = []
+        
+        var arrayInv: [CommandInvitePlayersTableViewCell.CellModel] = []
+        
+        for player in teamPlayers {
+            for person in players.people {
+                if player.playerID == person.id {
+                    if player.inviteStatus == .accepted || player.inviteStatus == .approved {
+                        array.append(CommandPlayersTableViewCell.CellModel(
+                            player: player,
+                            playerImagePath: person.photo ?? "",
+                            person: person)
+                        )
+                    } else if player.inviteStatus == .pending {
+                    arrayInv.append(CommandInvitePlayersTableViewCell.CellModel(
+                        player: player,
+                        person: person,
+                        playerImagePath: person.photo ?? "")
+                        )
+                    }
+                }
+            }
+        }
+        
+        commandPlayersTableViewHelper.setTableData(tableData: array)
+        commandPlayers.reloadData()
+        
+        commandInvPlayersTableViewHelper.setTableData(tableData: arrayInv)
+        commandInvitePlayers.reloadData()
     }
     
     func onGetPersonsFailure(error: Error) {
-        
+        Print.m(error)
     }
     
     func initPresenter() {

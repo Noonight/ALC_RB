@@ -135,6 +135,7 @@
 		DB99BB6C224CB46700EE30D7 /* AdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB99BB6B224CB46700EE30D7 /* AdView.xib */; };
 		DB99BB6E224CB48300EE30D7 /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB99BB6D224CB48300EE30D7 /* AdView.swift */; };
 		DB99BB71224CD60C00EE30D7 /* Advertising.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB99BB70224CD60C00EE30D7 /* Advertising.swift */; };
+		DBA119F8225735830006904D /* CommandInvitePlayersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA119F7225735830006904D /* CommandInvitePlayersTableViewCell.swift */; };
 		DBA69210221E74A000BEFB26 /* DrawerMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA6920F221E74A000BEFB26 /* DrawerMenuTableViewCell.swift */; };
 		DBA69213221E759600BEFB26 /* MenuOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69212221E759600BEFB26 /* MenuOption.swift */; };
 		DBA69215221E95C400BEFB26 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69214221E95C400BEFB26 /* UIColor.swift */; };
@@ -296,6 +297,7 @@
 		DB99BB6B224CB46700EE30D7 /* AdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdView.xib; sourceTree = "<group>"; };
 		DB99BB6D224CB48300EE30D7 /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
 		DB99BB70224CD60C00EE30D7 /* Advertising.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertising.swift; sourceTree = "<group>"; };
+		DBA119F7225735830006904D /* CommandInvitePlayersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandInvitePlayersTableViewCell.swift; sourceTree = "<group>"; };
 		DBA6920F221E74A000BEFB26 /* DrawerMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuTableViewCell.swift; sourceTree = "<group>"; };
 		DBA69212221E759600BEFB26 /* MenuOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOption.swift; sourceTree = "<group>"; };
 		DBA69214221E95C400BEFB26 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -983,6 +985,7 @@
 			isa = PBXGroup;
 			children = (
 				DB98FAD42254B0BC002933D0 /* CommandInvitePlayersTableViewHelper.swift */,
+				DBA119F62257355C0006904D /* cell */,
 			);
 			path = invite;
 			sourceTree = "<group>";
@@ -1010,6 +1013,14 @@
 				DB99BB70224CD60C00EE30D7 /* Advertising.swift */,
 			);
 			path = ad;
+			sourceTree = "<group>";
+		};
+		DBA119F62257355C0006904D /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				DBA119F7225735830006904D /* CommandInvitePlayersTableViewCell.swift */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 		DBA6920E221E748500BEFB26 /* cell */ = {
@@ -1368,6 +1379,7 @@
 				DB98FACF2254AF35002933D0 /* CommandEditLKPresenter.swift in Sources */,
 				DB52EAE32248E2C7004F7869 /* CommandCreateLKViewController.swift in Sources */,
 				DB17385B21BAACB900017B6D /* Clubs.swift in Sources */,
+				DBA119F8225735830006904D /* CommandInvitePlayersTableViewCell.swift in Sources */,
 				DB48BE7A22002FC4008B007D /* SoloPerson.swift in Sources */,
 				CEA6EBB921A53FB9008F874D /* MvpView.swift in Sources */,
 				DB4A789121C0E7970071BA8F /* ViewCenter.swift in Sources */,

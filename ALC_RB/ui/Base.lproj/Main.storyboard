@@ -3022,7 +3022,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Roq-3z-1Yz">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="496"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="608"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bFQ-ZJ-2TN">
                                                 <rect key="frame" x="14" y="8" width="292" height="32"/>
@@ -3055,10 +3055,10 @@
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dyU-72-E9w">
-                                                <rect key="frame" x="0.0" y="44" width="320" height="200"/>
+                                                <rect key="frame" x="0.0" y="44" width="320" height="256"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="Cle-Gh-1a9"/>
+                                                    <constraint firstAttribute="height" constant="256" id="Cle-Gh-1a9"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="command_player_cell" rowHeight="88" id="ti3-Wg-0jd" customClass="CommandPlayersTableViewCell" customModule="ALC_RB" customModuleProvider="target">
@@ -3126,9 +3126,6 @@
                                                                         <constraint firstAttribute="width" constant="24" id="wOf-DL-p5c"/>
                                                                     </constraints>
                                                                     <state key="normal" image="ic_close"/>
-                                                                    <connections>
-                                                                        <action selector="onPlayerDeleteBtnPressed:" destination="ti3-Wg-0jd" eventType="touchUpInside" id="gzI-QC-gYa"/>
-                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <constraints>
@@ -3154,7 +3151,7 @@
                                                 </prototypes>
                                             </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sTE-65-Q0t">
-                                                <rect key="frame" x="14" y="252" width="292" height="32"/>
+                                                <rect key="frame" x="14" y="308" width="292" height="32"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Приглашенные игроки" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSp-9m-lRA">
                                                         <rect key="frame" x="0.0" y="7.5" width="153.5" height="17"/>
@@ -3172,13 +3169,13 @@
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oXt-EF-w5O">
-                                                <rect key="frame" x="0.0" y="288" width="320" height="200"/>
+                                                <rect key="frame" x="0.0" y="344" width="320" height="256"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="BSH-Wa-AGE"/>
+                                                    <constraint firstAttribute="height" constant="256" id="BSH-Wa-AGE"/>
                                                 </constraints>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="88" id="J9n-R3-SXj">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="command_invite_players_cell" rowHeight="88" id="J9n-R3-SXj" customClass="CommandInvitePlayersTableViewCell" customModule="ALC_RB" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="320" height="88"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J9n-R3-SXj" id="PQH-Wq-NGy">
@@ -3239,6 +3236,12 @@
                                                                 <constraint firstItem="gE9-1r-khg" firstAttribute="leading" secondItem="h9J-sG-weZ" secondAttribute="trailing" constant="8" id="qf8-TK-wid"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="playerCommandNum" destination="8sl-7R-Qjk" id="Pxw-6f-paZ"/>
+                                                            <outlet property="playerDeleteBtn" destination="gE9-1r-khg" id="XgR-cv-WUi"/>
+                                                            <outlet property="playerImage" destination="KDW-6S-SoD" id="IMT-oG-Zh3"/>
+                                                            <outlet property="playerName" destination="jIT-Ih-GI3" id="CBW-du-0Lw"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>

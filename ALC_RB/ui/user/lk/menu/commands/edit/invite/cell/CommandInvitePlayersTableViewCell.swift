@@ -1,25 +1,25 @@
 //
-//  CommandPlayersTableViewCell.swift
+//  CommandInvitePlayersTableViewCellTableViewCell.swift
 //  ALC_RB
 //
-//  Created by ayur on 03.04.2019.
+//  Created by ayur on 05.04.2019.
 //  Copyright © 2019 test. All rights reserved.
 //
 
 import UIKit
 import Alamofire
 
-class CommandPlayersTableViewCell: UITableViewCell {
+class CommandInvitePlayersTableViewCell: UITableViewCell {
 
     struct CellModel {
         var player: Player?
         var person: Person?
         var playerImagePath: String?
         
-        init(player: Player, playerImagePath: String, person: Person) {
+        init(player: Player, person: Person, playerImagePath: String) {
             self.player = player
-            self.playerImagePath = playerImagePath
             self.person = person
+            self.playerImagePath = playerImagePath
         }
         
         init() {
@@ -36,16 +36,14 @@ class CommandPlayersTableViewCell: UITableViewCell {
     }
     
     @IBOutlet weak var playerImage: UIImageView!
-    @IBOutlet weak var playerNameLabel: UILabel!
-    @IBOutlet weak var playerNumberTextField: UITextField!
-    @IBOutlet weak var playerCommandNumLabel: UILabel!
+    @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var playerDeleteBtn: UIButton!
+    @IBOutlet weak var playerCommandNum: UILabel!
     
-    private func updateCell() {
+    func updateCell() {
         playerImage.af_setImage(withURL: ApiRoute.getImageURL(image: (cellModel?.playerImagePath)!))
         playerImage.image = playerImage.image?.af_imageRoundedIntoCircle()
-//        playerImage.image = cellModel?.playerImage?.af_imageRoundedIntoCircle()
-        playerNameLabel.text = cellModel?.person?.getFullName()
-        playerNumberTextField.text = cellModel?.player?.number
+        playerName.text = cellModel?.person?.getFullName()
+        
     }
 }
