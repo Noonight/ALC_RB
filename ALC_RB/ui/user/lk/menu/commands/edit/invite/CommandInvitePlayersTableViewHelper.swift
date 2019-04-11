@@ -9,14 +9,24 @@
 import Foundation
 import UIKit
 
+protocol OnCommandInvitePlayerDeleteBtnPressedProtocol {
+    func onDeleteInvBtnPressed(index: IndexPath, model: CommandInvitePlayersTableViewCell.CellModel)
+}
+
 class CommandInvitePlayersTableViewHelper: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     let cellId = "command_invite_players_cell"
+    
+    private var deleteBtnProtocol: OnCommandInvitePlayerDeleteBtnPressedProtocol?
     
     private var tableData: [CommandInvitePlayersTableViewCell.CellModel] = []
     
     func setTableData(tableData: [CommandInvitePlayersTableViewCell.CellModel]) {
         self.tableData = tableData
+    }
+    
+    func setDeleteBtnProtocol(deleteBtnDelegate: OnCommandInvitePlayerDeleteBtnPressedProtocol) {
+        self.deleteBtnProtocol = deleteBtnDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -34,12 +44,27 @@ class CommandInvitePlayersTableViewHelper: NSObject, UITableViewDataSource, UITa
     
     func configureCell(cell: CommandInvitePlayersTableViewCell, model: CommandInvitePlayersTableViewCell.CellModel, tag: Int) {
         cell.cellModel = model
-        cell.playerDeleteBtn.tag = tag
+//        cell.playerDeleteBtn.tag = tag
         
-        cell.playerDeleteBtn.addTarget(self, action: #selector(deleteBtnPressed(_:)), for: .touchUpInside)
+        cell.cellModel?.number = model.number
+        
+//        cell.playerCommandNum.text = String(tag + 1)
+        
+//        cell.playerDeleteBtn.addTarget(self, action: #selector(deleteBtnPressed(_:)), for: .touchUpInside)
     }
     
-    @objc func deleteBtnPressed(_ sender: UIButton) {
-        Print.m("tag: \(sender.tag) delete pressed")
+//    @objc func deleteBtnPressed(_ sender: UIButton) {
+////        Print.m("tag: \(sender.tag) delete pressed")
+//        deleteBtnProtocol?.onDeleteInvBtnPressed(index: )
+//    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            deleteBtnProtocol?.onDeleteInvBtnPressed(index: indexPath, model: tableData[indexPath.row])
+            
+            tableData.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 }

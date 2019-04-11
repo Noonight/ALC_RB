@@ -13,6 +13,9 @@ protocol CommandEditLKView: MvpView {
     func onGetPersonsComplete(players: Players)
     func onGetPersonsFailure(error: Error)
     
+    func onEditCommandSuccess(editTeamResponse: EditTeamResponse)
+    func onEditCommandFailure(error: Error)
+    
 }
 
 class CommandEditLKPresenter: MvpPresenter<CommandEditLKViewController> {
@@ -25,6 +28,14 @@ class CommandEditLKPresenter: MvpPresenter<CommandEditLKViewController> {
         }, get_failure: { (error) in
             self.getView().onGetPersonsFailure(error: error)
         })
+    }
+    
+    func editCommand(token: String, editTeam: EditTeam) {
+        apiService.post_editTeam(token: token, editTeam: editTeam, response_success: { (editTeamResponse) in
+            self.getView().onEditCommandSuccess(editTeamResponse: editTeamResponse)
+        }) { (error) in
+            self.getView().onEditCommandFailure(error: error)
+        }
     }
     
 }

@@ -180,6 +180,48 @@ class ApiRequests {
         }
     }
     
+    func post_editTeam(token: String, editTeam: EditTeam, response_success: @escaping (EditTeamResponse) -> (), response_failure: @escaping (Error) -> ()) {
+        Alamofire
+            .upload(multipartFormData: { (multipartFormData) in
+//                for (key, value) in editTeam.toParams() {
+//                    let strValue = value as! String
+//                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
+//                }
+                multipartFormData.append(editTeam._id.data(using: String.Encoding.utf8)!, withName: EditTeam.Fields._id.value())
+                multipartFormData.append(editTeam.teamId.data(using: String.Encoding.utf8)!, withName: EditTeam.Fields.teamId.value())
+                
+                let dataArray = try! JSONSerialization.data(withJSONObject: editTeam.players, options: .prettyPrinted)
+//                let encodedData = NSKeyedArchiver.archivedData(withRootObject: editTeam.players)
+//                let jsonString = String(data: dataArray, encoding: .utf8)!
+//                multipartFormData.append(jsonString.data(using: String.Encoding.utf8)!, withName: EditTeam.Fields.players.value())
+                
+                multipartFormData.append(dataArray, withName: EditTeam.Fields.players.value())
+            },
+                    usingThreshold: UInt64(),
+                    to: ApiRoute.getApiURL(.post_edit_team),
+                    method: .post,
+                    headers: ["auth" : token])
+            { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    
+                    upload.responseEditTeamResponse(completionHandler: { (response) in
+                        switch response.result {
+                        case .success:
+                            if let editTeamResponse = response.result.value {
+                                response_success(editTeamResponse)
+                            }
+                        case .failure(let error):
+                            response_failure(error)
+                        }
+                    })
+                    
+                case .failure(let error):
+                    response_failure(error)
+                }
+        }
+    }
+    
     func post_createTeam(token: String, teamInfo: CreateTeamInfo, response_success: @escaping (SoloTeam) -> (), response_failure: @escaping (Error) -> (), response_failure_message: @escaping (ErrorMessage) -> ()) {
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in

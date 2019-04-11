@@ -59,4 +59,5 @@ enum Routes: String {
     case post_team_acceptrequest = "team/acceptrequest"
     case post_edit_club_info = "clubs/edit"
     case post_create_team = "leagues/addrequest"
+    case post_edit_team = "team/edit"
 }

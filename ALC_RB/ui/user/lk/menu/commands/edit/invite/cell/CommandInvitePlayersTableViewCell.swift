@@ -15,6 +15,7 @@ class CommandInvitePlayersTableViewCell: UITableViewCell {
         var player: Player?
         var person: Person?
         var playerImagePath: String?
+        var number: Int = 0
         
         init(player: Player, person: Person, playerImagePath: String) {
             self.player = player
@@ -26,6 +27,7 @@ class CommandInvitePlayersTableViewCell: UITableViewCell {
             player = Player()
             person = Person()
             playerImagePath = ""
+            number = 0
         }
     }
     
@@ -37,13 +39,13 @@ class CommandInvitePlayersTableViewCell: UITableViewCell {
     
     @IBOutlet weak var playerImage: UIImageView!
     @IBOutlet weak var playerName: UILabel!
-    @IBOutlet weak var playerDeleteBtn: UIButton!
+//    @IBOutlet weak var playerDeleteBtn: UIButton!
     @IBOutlet weak var playerCommandNum: UILabel!
     
     func updateCell() {
         playerImage.af_setImage(withURL: ApiRoute.getImageURL(image: (cellModel?.playerImagePath)!))
         playerImage.image = playerImage.image?.af_imageRoundedIntoCircle()
         playerName.text = cellModel?.person?.getFullName()
-        
+        playerCommandNum.text = String(cellModel!.number)
     }
 }

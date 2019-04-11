@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol OnCommandPlayerDeleteBtnPressedProtocol {
-    func onDeleteBtnPressed(sender: UIButton)
+    func onDeleteBtnPressed(index: IndexPath, model: CommandPlayersTableViewCell.CellModel)
 }
 
 class CommandPlayersTableViewHelper: NSObject, UITableViewDelegate, UITableViewDataSource {
@@ -45,15 +45,27 @@ class CommandPlayersTableViewHelper: NSObject, UITableViewDelegate, UITableViewD
     
     func configureCell(cell: CommandPlayersTableViewCell, model: CommandPlayersTableViewCell.CellModel, tag: Int) {
         cell.cellModel = model
-        cell.playerDeleteBtn.tag = tag
+//        cell.playerDeleteBtn.tag = tag
         
-        cell.playerCommandNumLabel.text = String(tag + 1)
+        cell.cellModel?.number = model.number
         
-        cell.playerDeleteBtn.addTarget(self, action: #selector(deleteBtnPressed(_:)), for: .touchUpInside)
+//        cell.playerCommandNumLabel.text = String(tag + 1)
+        
+//        cell.playerDeleteBtn.addTarget(self, action: #selector(deleteBtnPressed(_:)), for: .touchUpInside)
     }
     
-    @objc func deleteBtnPressed(_ sender: UIButton) {
-        Print.m("tag: \(sender.tag) delete pressed")
-        deleteBtnProtocol?.onDeleteBtnPressed(sender: sender)
+//    @objc func deleteBtnPressed(_ sender: UIButton) {
+////        Print.m("tag: \(sender.tag) delete pressed")
+//        deleteBtnProtocol?.onDeleteBtnPressed(sender)
+//    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            deleteBtnProtocol?.onDeleteBtnPressed(index: indexPath, model: tableData[indexPath.row])
+            
+            tableData.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 }
