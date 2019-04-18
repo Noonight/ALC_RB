@@ -301,7 +301,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
             var playerList: [Player] = []
             
             for player in team.players {
-                if player.inviteStatus == InviteStatus.accepted || player.inviteStatus == InviteStatus.approved {
+                if player.getInviteStatus() == InviteStatus.accepted || player.getInviteStatus() == InviteStatus.approved {
                     playerList.append(player)
                 }
             }

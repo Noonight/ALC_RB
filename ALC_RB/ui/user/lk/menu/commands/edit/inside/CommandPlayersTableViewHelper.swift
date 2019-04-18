@@ -13,6 +13,10 @@ protocol OnCommandPlayerDeleteBtnPressedProtocol {
     func onDeleteBtnPressed(index: IndexPath, model: CommandPlayersTableViewCell.CellModel)
 }
 
+protocol OnCommandPlayerEditNumberCompleteProtocol {
+    func onEditNumberComplete(model: CommandPlayersTableViewCell.CellModel)
+}
+
 class CommandPlayersTableViewHelper: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     let cellId = "command_player_cell"
@@ -20,10 +24,16 @@ class CommandPlayersTableViewHelper: NSObject, UITableViewDelegate, UITableViewD
     
     private var deleteBtnProtocol: OnCommandPlayerDeleteBtnPressedProtocol?
     
+    private var editNumberCompleteProtocol: OnCommandPlayerEditNumberCompleteProtocol?
+    
     private var tableData: [CommandPlayersTableViewCell.CellModel] = []
     
     func setDeleteBtnProtocol(deleteBtnDelegate: OnCommandPlayerDeleteBtnPressedProtocol) {
         self.deleteBtnProtocol = deleteBtnDelegate
+    }
+    
+    func setEditNumberCompleteProtocol(editNumberProtocol: OnCommandPlayerEditNumberCompleteProtocol) {
+        self.editNumberCompleteProtocol = editNumberProtocol
     }
     
     func setTableData(tableData: [CommandPlayersTableViewCell.CellModel]) {
@@ -49,15 +59,14 @@ class CommandPlayersTableViewHelper: NSObject, UITableViewDelegate, UITableViewD
         
         cell.cellModel?.number = model.number
         
+        cell.playerNumberTextField.tag = tag
+        
+        try cell.setPlayerNumberTextDidEnd(didEndProtocol: self.editNumberCompleteProtocol!)
+        
 //        cell.playerCommandNumLabel.text = String(tag + 1)
         
 //        cell.playerDeleteBtn.addTarget(self, action: #selector(deleteBtnPressed(_:)), for: .touchUpInside)
     }
-    
-//    @objc func deleteBtnPressed(_ sender: UIButton) {
-////        Print.m("tag: \(sender.tag) delete pressed")
-//        deleteBtnProtocol?.onDeleteBtnPressed(sender)
-//    }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {

@@ -85,14 +85,14 @@ struct Team: Codable {
 }
 
 struct Player: Codable {
-    var inviteStatus: InviteStatus
+    var inviteStatus: String
     var number: String
     var activeYellowCards, yellowCards, redCards, activeDisquals: Int
     var disquals, matches, goals: Int
     var id, playerID: String
     
     init() {
-        inviteStatus = .pending
+        inviteStatus = InviteStatus.pending.rawValue
         number = ""
         activeYellowCards = -1
         yellowCards = -1
@@ -103,6 +103,38 @@ struct Player: Codable {
         goals = -1
         id = ""
         playerID = ""
+    }
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            CodingKeys.inviteStatus.rawValue : inviteStatus,
+            CodingKeys.number.rawValue : number,
+            CodingKeys.activeYellowCards.rawValue : activeYellowCards,
+            CodingKeys.yellowCards.rawValue : yellowCards,
+            CodingKeys.redCards.rawValue : redCards,
+            CodingKeys.activeDisquals.rawValue : activeDisquals,
+            CodingKeys.disquals.rawValue : disquals,
+            CodingKeys.matches.rawValue : matches,
+            CodingKeys.goals.rawValue : goals,
+            CodingKeys.id.rawValue : id,
+            CodingKeys.playerID.rawValue : playerID
+        ]
+    }
+    
+    func getInviteStatus() -> InviteStatus {
+        if inviteStatus.contains(InviteStatus.accepted.rawValue) {
+            return InviteStatus.accepted
+        }
+        if inviteStatus.contains(InviteStatus.approved.rawValue) {
+            return InviteStatus.approved
+        }
+        if inviteStatus.contains(InviteStatus.rejected.rawValue) {
+            return InviteStatus.rejected
+        }
+        if inviteStatus.contains(InviteStatus.pending.rawValue) {
+            return InviteStatus.pending
+        }
+        return .noData
     }
     
     enum CodingKeys: String, CodingKey {
@@ -118,6 +150,8 @@ enum InviteStatus: String, Codable {
     
     case rejected = "Rejected"
     case pending = "Pending"
+    
+    case noData = "No data"
 }
 
 // MARK: Convenience initializers and mutators
@@ -403,7 +437,7 @@ extension Player {
     }
     
     func with(
-        inviteStatus: InviteStatus? = nil,
+        inviteStatus: String? = nil,
         number: String? = nil,
         activeYellowCards: Int? = nil,
         yellowCards: Int? = nil,

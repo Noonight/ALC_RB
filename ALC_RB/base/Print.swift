@@ -61,4 +61,10 @@ class Print {
         print("<\(className)> ->> \(functionName) [#\(lineNumber)]| \(m)\n")
         #endif
     }
-}
+    
+    public static func j(_ j: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+        #if DEBUG
+        let className = (fileName as NSString).lastPathComponent
+        print("<\(className)> ->> \(functionName) [#\(lineNumber)]| \(String(data: try! JSONSerialization.data(withJSONObject: j, options: .prettyPrinted), encoding: .utf8)!)\n")
+        #endif
+    }}

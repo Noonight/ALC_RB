@@ -15,6 +15,7 @@ protocol CommandEditLKView: MvpView {
     
     func onEditCommandSuccess(editTeamResponse: EditTeamResponse)
     func onEditCommandFailure(error: Error)
+    func onEditCommandSingleLineMessageSuccess(singleLineMessage: SingleLineMessage)
     
 }
 
@@ -33,8 +34,10 @@ class CommandEditLKPresenter: MvpPresenter<CommandEditLKViewController> {
     func editCommand(token: String, editTeam: EditTeam) {
         apiService.post_editTeam(token: token, editTeam: editTeam, response_success: { (editTeamResponse) in
             self.getView().onEditCommandSuccess(editTeamResponse: editTeamResponse)
-        }) { (error) in
+        }, response_failure: { (error) in
             self.getView().onEditCommandFailure(error: error)
+        }) { (singleLineResponse) in
+            self.getView().onEditCommandSingleLineMessageSuccess(singleLineMessage: singleLineResponse)
         }
     }
     

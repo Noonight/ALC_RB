@@ -36,11 +36,17 @@ class CommandPlayersTableViewCell: UITableViewCell {
         }
     }
     
+    private var playerNumberTextDidEndProtocol: OnCommandPlayerEditNumberCompleteProtocol?
+    
     @IBOutlet weak var playerImage: UIImageView!
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var playerNumberTextField: UITextField!
     @IBOutlet weak var playerCommandNumLabel: UILabel!
 //    @IBOutlet weak var playerDeleteBtn: UIButton!
+    
+    func setPlayerNumberTextDidEnd(didEndProtocol: OnCommandPlayerEditNumberCompleteProtocol) {
+        self.playerNumberTextDidEndProtocol = didEndProtocol
+    }
     
     private func updateCell() {
         playerImage.af_setImage(withURL: ApiRoute.getImageURL(image: (cellModel?.playerImagePath)!))
@@ -51,4 +57,10 @@ class CommandPlayersTableViewCell: UITableViewCell {
         let strNumber: String = String(cellModel!.number)
         playerCommandNumLabel.text = strNumber
     }
+    
+    @IBAction func onPlayerNumberTextEditComplete(_ sender: UITextField) {
+        cellModel?.player?.number = sender.text ?? "-1"// Something went wrong
+        playerNumberTextDidEndProtocol?.onEditNumberComplete(model: cellModel!)
+    }
+    
 }

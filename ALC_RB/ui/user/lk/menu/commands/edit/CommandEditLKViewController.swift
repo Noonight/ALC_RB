@@ -42,6 +42,7 @@ class CommandEditLKViewController: BaseStateViewController {
         commandPlayers.delegate = commandPlayersTableViewHelper
         
         commandPlayersTableViewHelper.setDeleteBtnProtocol(deleteBtnDelegate: self)
+        commandPlayersTableViewHelper.setEditNumberCompleteProtocol(editNumberProtocol: self)
         
         commandInvitePlayers.dataSource = commandInvPlayersTableViewHelper
         commandInvitePlayers.delegate = commandInvPlayersTableViewHelper
@@ -72,7 +73,7 @@ class CommandEditLKViewController: BaseStateViewController {
             editTeam: EditTeam(
                 _id: (participation?.league)!,
                 teamId: (participation?.team)!,
-                players: mutablePlayers)
+                players: EditTeam.Players(players: mutablePlayers))
         )
     }
 }
@@ -93,7 +94,7 @@ extension CommandEditLKViewController: CommandEditLKView {
                     let randNum = Int.random(in: 0...5)
     
                     // TEST
-                    if player.inviteStatus == .pending || randNum > 2 {
+                    if player.getInviteStatus() == .pending || randNum > 2 {
                         arrayInv.append(CommandInvitePlayersTableViewCell.CellModel(
                             player: player,
                             person: person,
@@ -101,13 +102,13 @@ extension CommandEditLKViewController: CommandEditLKView {
                         )
                     }
                     
-                    if player.inviteStatus == .accepted || player.inviteStatus == .approved {
+                    if player.getInviteStatus() == .accepted || player.getInviteStatus() == .approved {
                         array.append(CommandPlayersTableViewCell.CellModel(
                             player: player,
                             playerImagePath: person.photo ?? "",
                             person: person)
                         )
-                    } else if player.inviteStatus == .pending || randNum > 2 {
+                    } else if player.getInviteStatus() == .pending || randNum > 2 {
                     arrayInv.append(CommandInvitePlayersTableViewCell.CellModel(
                         player: player,
                         person: person,
@@ -141,6 +142,10 @@ extension CommandEditLKViewController: CommandEditLKView {
     func onEditCommandFailure(error: Error) {
         Print.m(error)
     }
+    
+    func onEditCommandSingleLineMessageSuccess(singleLineMessage: SingleLineMessage) {
+        showToast(message: singleLineMessage.message)
+    }
 }
 
 extension CommandEditLKViewController: OnCommandPlayerDeleteBtnPressedProtocol {
@@ -161,6 +166,17 @@ extension CommandEditLKViewController: OnCommandInvitePlayerDeleteBtnPressedProt
         for i in 0...mutablePlayers.count - 1 {
             if model.player?.id == mutablePlayers[i].id {
                 mutablePlayers.remove(at: i)
+                break
+            }
+        }
+    }
+}
+
+extension CommandEditLKViewController: OnCommandPlayerEditNumberCompleteProtocol {
+    func onEditNumberComplete(model: CommandPlayersTableViewCell.CellModel) {
+        for i in 0...mutablePlayers.count - 1 {
+            if model.player?.id == mutablePlayers[i].id {
+                mutablePlayers[i].number = model.player!.number
                 break
             }
         }
