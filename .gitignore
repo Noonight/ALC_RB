@@ -24,3 +24,5 @@ Pods/Target Support Files/AlamofireImage/AlamofireImage-umbrella.h
 Pods/Target Support Files/AlamofireImage/AlamofireImage.modulemap
 Pods/Target Support Files/AlamofireImage/AlamofireImage.xcconfig
 Pods/Target Support Files/AlamofireImage/Info.plist
+Pods/
+UserInterfaceState.xcuserstate
