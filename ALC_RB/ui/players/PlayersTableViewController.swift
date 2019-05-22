@@ -46,6 +46,7 @@ class PlayersTableViewController: UITableViewController {
         if #available(iOS 11.0, *) {
             navigationItem.searchController = searchController
         } else {
+            tableView.tableHeaderView = searchController.searchBar
             // Fallback on earlier versions
         }
         definesPresentationContext = true

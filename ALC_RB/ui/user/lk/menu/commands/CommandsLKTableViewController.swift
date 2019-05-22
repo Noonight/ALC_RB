@@ -358,6 +358,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
                 }).first!)!
             destination.participation = tableModel.personOwnCommands[cellIndex]
         }
+        
     }
 }
 

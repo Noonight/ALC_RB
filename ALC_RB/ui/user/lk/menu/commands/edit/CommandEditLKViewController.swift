@@ -14,6 +14,8 @@ class CommandEditLKViewController: BaseStateViewController {
     @IBOutlet weak var commandPlayers: UITableView!
     @IBOutlet weak var commandInvitePlayers: UITableView!
     
+    let segueAddPlayers = "segue_add_player_to_team"
+    
     let presenter = CommandEditLKPresenter()
     
     let commandPlayersTableViewHelper = CommandPlayersTableViewHelper()
@@ -146,6 +148,17 @@ extension CommandEditLKViewController: CommandEditLKView {
     func onEditCommandSingleLineMessageSuccess(singleLineMessage: SingleLineMessage) {
         showToast(message: singleLineMessage.message)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueAddPlayers,
+            let destination = segue.destination as? CommandAddPlayerTableViewController
+        {
+            destination.tableModel = CommandAddPlayerTableViewController.TableModel(
+//                team: self.team,
+//                players: self.mutablePlayers
+            )
+        }
+    }
 }
 
 extension CommandEditLKViewController: OnCommandPlayerDeleteBtnPressedProtocol {
@@ -171,6 +184,7 @@ extension CommandEditLKViewController: OnCommandInvitePlayerDeleteBtnPressedProt
         }
     }
 }
+
 
 extension CommandEditLKViewController: OnCommandPlayerEditNumberCompleteProtocol {
     func onEditNumberComplete(model: CommandPlayersTableViewCell.CellModel) {

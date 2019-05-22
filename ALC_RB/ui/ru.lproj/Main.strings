@@ -1,0 +1,618 @@
+
+/* Class = "UILabel"; text = "01.01.2019 - 01.01.2020"; ObjectID = "0de-NT-ell"; */
+"0de-NT-ell.text" = "01.01.2019 - 01.01.2020";
+
+/* Class = "UINavigationItem"; title = "Игроки"; ObjectID = "0vw-4m-Wob"; */
+"0vw-4m-Wob.title" = "Игроки";
+
+/* Class = "UILabel"; text = "Команда оне"; ObjectID = "0wv-zA-S46"; */
+"0wv-zA-S46.text" = "Команда один";
+
+/* Class = "UILabel"; text = "БайкалАвтоТрак - чемпионат Республики Бурятия по мини-футболу"; ObjectID = "1Qo-Zm-g9a"; */
+"1Qo-Zm-g9a.text" = "БайкалАвтоТрак - чемпионат Республики Бурятия по мини-футболу";
+
+/* Class = "UILabel"; text = "10.11.2018"; ObjectID = "257-aO-Ymy"; */
+"257-aO-Ymy.text" = "10.11.2018";
+
+/* Class = "UITextField"; placeholder = "Пароль"; ObjectID = "2Xl-8L-pQK"; */
+"2Xl-8L-pQK.placeholder" = "Пароль";
+
+/* Class = "UILabel"; text = "Здесь будут отображаться игроки"; ObjectID = "2fr-8r-00C"; */
+"2fr-8r-00C.text" = "Здесь будут отображаться игроки";
+
+/* Class = "UILabel"; text = "БайкалАвтоТрак - чемпионат Республики Бурятия по мини-футболу. Суперлига"; ObjectID = "2qv-SH-gmZ"; */
+"2qv-SH-gmZ.text" = "БайкалАвтоТрак - чемпионат Республики Бурятия по мини-футболу. Суперлига";
+
+/* Class = "UILabel"; text = "И"; ObjectID = "2w7-yP-pA5"; */
+"2w7-yP-pA5.text" = "И";
+
+/* Class = "UINavigationItem"; title = "Редактировать клуб"; ObjectID = "2xG-y5-aAX"; */
+"2xG-y5-aAX.title" = "Редактировать клуб";
+
+/* Class = "UINavigationItem"; title = "Клуб"; ObjectID = "3qR-5f-sJo"; */
+"3qR-5f-sJo.title" = "Клуб";
+
+/* Class = "UILabel"; text = "И снова гол. Кокорин !!!"; ObjectID = "410-ru-cfV"; */
+"410-ru-cfV.text" = "И снова гол. Кокорин !!!";
+
+/* Class = "UITableViewController"; title = "Приглашения на турнир"; ObjectID = "4eH-Ib-0Tk"; */
+"4eH-Ib-0Tk.title" = "Приглашения на турнир";
+
+/* Class = "UINavigationItem"; title = "Создать команду"; ObjectID = "4ld-k1-ogV"; */
+"4ld-k1-ogV.title" = "Создать команду";
+
+/* Class = "UILabel"; text = "27.01.2019"; ObjectID = "4yK-Qh-HvH"; */
+"4yK-Qh-HvH.text" = "27.01.2019";
+
+/* Class = "UILabel"; text = "Дата рождения"; ObjectID = "5B5-bn-jgS"; */
+"5B5-bn-jgS.text" = "Дата рождения";
+
+/* Class = "UILabel"; text = "1"; ObjectID = "5Y5-rY-jht"; */
+"5Y5-rY-jht.text" = "1";
+
+/* Class = "UILabel"; text = "Кубок Бурятии по мини-футболу. Первый этап. Золотая лига"; ObjectID = "5yH-c3-8UJ"; */
+"5yH-c3-8UJ.text" = "Кубок Бурятии по мини-футболу. Первый этап. Золотая лига";
+
+/* Class = "UILabel"; text = "1 : 0"; ObjectID = "6AQ-ml-Te3"; */
+"6AQ-ml-Te3.text" = "1 : 0";
+
+/* Class = "UINavigationItem"; title = "Редактировать профиль"; ObjectID = "6IR-N8-VEG"; */
+"6IR-N8-VEG.title" = "Редактировать профиль";
+
+/* Class = "UIViewController"; title = "Регистрация"; ObjectID = "7RJ-Ni-GCU"; */
+"7RJ-Ni-GCU.title" = "Регистрация";
+
+/* Class = "UILabel"; text = "Итоговый счет"; ObjectID = "7im-wF-xgq"; */
+"7im-wF-xgq.text" = "Итоговый счет";
+
+/* Class = "UILabel"; text = "Команда"; ObjectID = "7sv-xl-Uar"; */
+"7sv-xl-Uar.text" = "Команда";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "88J-yV-BOt"; */
+"88J-yV-BOt.text" = "0";
+
+/* Class = "UITableViewController"; title = "Ответственные лица"; ObjectID = "8Gc-MA-pFE"; */
+"8Gc-MA-pFE.title" = "Ответственные лица";
+
+/* Class = "UILabel"; text = "Ничего нет"; ObjectID = "8bz-4p-oyo"; */
+"8bz-4p-oyo.text" = "Ничего нет";
+
+/* Class = "UILabel"; text = "Игрок"; ObjectID = "8jW-g8-zmu"; */
+"8jW-g8-zmu.text" = "Игрок";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "8sl-7R-Qjk"; */
+"8sl-7R-Qjk.text" = "0";
+
+/* Class = "UILabel"; text = "КК"; ObjectID = "98e-ql-p9M"; */
+"98e-ql-p9M.text" = "КК";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "9P3-cc-ZFM"; */
+"9P3-cc-ZFM.text" = "Label";
+
+/* Class = "UILabel"; text = "Кубок бурятии по мини-футболу. Первый этап. Золотая лига"; ObjectID = "9YS-oM-DoE"; */
+"9YS-oM-DoE.text" = "Кубок бурятии по мини-футболу. Первый этап. Золотая лига";
+
+/* Class = "UILabel"; text = "Ничего нет"; ObjectID = "9fP-Lo-7BU"; */
+"9fP-Lo-7BU.text" = "Ничего нет";
+
+/* Class = "UINavigationItem"; title = "ЛК"; ObjectID = "AFh-FZ-88S"; */
+"AFh-FZ-88S.title" = "ЛК";
+
+/* Class = "UILabel"; text = "Кижинга"; ObjectID = "AQV-BX-MqC"; */
+"AQV-BX-MqC.text" = "Кижинга";
+
+/* Class = "UILabel"; text = "AY USER"; ObjectID = "B2C-LJ-P3q"; */
+"B2C-LJ-P3q.text" = "AY USER";
+
+/* Class = "UIButton"; normalTitle = "ДОБАВИТЬ ИГРОКА"; ObjectID = "BAM-K9-T3R"; */
+"BAM-K9-T3R.normalTitle" = "ДОБАВИТЬ ИГРОКА";
+
+/* Class = "UILabel"; text = "ВСГУТУ"; ObjectID = "BKK-3C-CMA"; */
+"BKK-3C-CMA.text" = "ВСГУТУ";
+
+/* Class = "UILabel"; text = "1"; ObjectID = "Bde-Eb-Bjf"; */
+"Bde-Eb-Bjf.text" = "1";
+
+/* Class = "UILabel"; text = "Команда оне"; ObjectID = "C53-La-bhx"; */
+"C53-La-bhx.text" = "Команда один";
+
+/* Class = "UIViewController"; title = "Изменить данные пользователя"; ObjectID = "CEK-64-wqt"; */
+"CEK-64-wqt.title" = "Изменить данные пользователя";
+
+/* Class = "UILabel"; text = "И"; ObjectID = "Ca2-Q6-Y6O"; */
+"Ca2-Q6-Y6O.text" = "И";
+
+/* Class = "UILabel"; text = "Ответственные лица"; ObjectID = "CmB-fE-gKY"; */
+"CmB-fE-gKY.text" = "Ответственные лица";
+
+/* Class = "UILabel"; text = "Г"; ObjectID = "Dfy-4f-Pwn"; */
+"Dfy-4f-Pwn.text" = "Г";
+
+/* Class = "UILabel"; text = "24:00"; ObjectID = "ECT-bz-jnr"; */
+"ECT-bz-jnr.text" = "24:00";
+
+/* Class = "UILabel"; text = "Адамов"; ObjectID = "Edb-GR-gtH"; */
+"Edb-GR-gtH.text" = "Адамов";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "Eol-kH-U83"; */
+"Eol-kH-U83.text" = "0";
+
+/* Class = "UITextField"; placeholder = "Фамилия"; ObjectID = "Evc-2b-piX"; */
+"Evc-2b-piX.placeholder" = "Фамилия";
+
+/* Class = "UILabel"; text = "Лара"; ObjectID = "F3P-bX-Mch"; */
+"F3P-bX-Mch.text" = "Лара";
+
+/* Class = "UILabel"; text = "2"; ObjectID = "Fex-M6-o87"; */
+"Fex-M6-o87.text" = "2";
+
+/* Class = "UILabel"; text = "Алексеев"; ObjectID = "FhK-7m-bNJ"; */
+"FhK-7m-bNJ.text" = "Алексеев";
+
+/* Class = "UIViewController"; title = "Редактировать команду"; ObjectID = "Fie-qf-cde"; */
+"Fie-qf-cde.title" = "Редактировать команду";
+
+/* Class = "UINavigationItem"; title = "Команды"; ObjectID = "GOt-gt-eFa"; */
+"GOt-gt-eFa.title" = "Команды";
+
+/* Class = "UILabel"; text = "Здесь будут отображаться турниры"; ObjectID = "GW6-Zs-FPy"; */
+"GW6-Zs-FPy.text" = "Здесь будут отображаться турниры";
+
+/* Class = "UITextField"; placeholder = "Название"; ObjectID = "GoW-mt-bFO"; */
+"GoW-mt-bFO.placeholder" = "Название";
+
+/* Class = "UILabel"; text = "Завершен"; ObjectID = "Gwn-VP-c5t"; */
+"Gwn-VP-c5t.text" = "Завершен";
+
+/* Class = "UILabel"; text = "Имя тренера"; ObjectID = "HZ1-NL-w7b"; */
+"HZ1-NL-w7b.text" = "Имя тренера";
+
+/* Class = "UILabel"; text = "20.10.2000"; ObjectID = "Hlu-qO-DEl"; */
+"Hlu-qO-DEl.text" = "20.10.2000";
+
+/* Class = "UILabel"; text = "Ничего нет"; ObjectID = "I5z-zA-HcF"; */
+"I5z-zA-HcF.text" = "Ничего нет";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "IQV-oA-e12"; */
+"IQV-oA-e12.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UILabel"; text = "КСК ЗММК"; ObjectID = "IyV-LV-4B2"; */
+"IyV-LV-4B2.text" = "КСК ЗММК";
+
+/* Class = "UILabel"; text = "Menu item"; ObjectID = "JhW-kl-bU8"; */
+"JhW-kl-bU8.text" = "Menu item";
+
+/* Class = "UILabel"; text = "№"; ObjectID = "K7r-ly-0y3"; */
+"K7r-ly-0y3.text" = "№";
+
+/* Class = "UILabel"; text = "owner"; ObjectID = "Kqb-mD-doo"; */
+"Kqb-mD-doo.text" = "owner";
+
+/* Class = "UILabel"; text = "2"; ObjectID = "LGv-NT-tTx"; */
+"LGv-NT-tTx.text" = "2";
+
+/* Class = "UILabel"; text = "№:"; ObjectID = "LSO-xR-kBX"; */
+"LSO-xR-kBX.text" = "№:";
+
+/* Class = "UITextField"; placeholder = "Отчество"; ObjectID = "Mje-64-Syy"; */
+"Mje-64-Syy.placeholder" = "Отчество";
+
+/* Class = "UILabel"; text = "Лара"; ObjectID = "Mvv-ah-CV9"; */
+"Mvv-ah-CV9.text" = "Лара";
+
+/* Class = "UILabel"; text = "Здесь будут отображаться приглашения от команд"; ObjectID = "NCG-5Y-LoG"; */
+"NCG-5Y-LoG.text" = "Здесь будут отображаться приглашения от команд";
+
+/* Class = "UILabel"; text = "Кижинга"; ObjectID = "NJM-qc-EmX"; */
+"NJM-qc-EmX.text" = "Кижинга";
+
+/* Class = "UILabel"; text = "31.12.2018"; ObjectID = "OPB-pU-hqV"; */
+"OPB-pU-hqV.text" = "31.12.2018";
+
+/* Class = "UILabel"; text = "12 тур"; ObjectID = "OYU-3K-KL3"; */
+"OYU-3K-KL3.text" = "12 тур";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "OzA-mL-Eir"; */
+"OzA-mL-Eir.text" = "Title";
+
+/* Class = "UILabel"; text = "Авторизуясь, вы соглашаетесь на обработку ваших персональных данных"; ObjectID = "P2J-Jk-GBn"; */
+"P2J-Jk-GBn.text" = "Авторизуясь, вы соглашаетесь на обработку ваших персональных данных";
+
+/* Class = "UISegmentedControl"; PD3-2a-Fqy.segmentTitles[0] = "Новости"; ObjectID = "PD3-2a-Fqy"; */
+"PD3-2a-Fqy.segmentTitles[0]" = "Новости";
+
+/* Class = "UISegmentedControl"; PD3-2a-Fqy.segmentTitles[1] = "Ближайшие матчи"; ObjectID = "PD3-2a-Fqy"; */
+"PD3-2a-Fqy.segmentTitles[1]" = "Ближайшие матчи";
+
+/* Class = "UILabel"; text = "Команда"; ObjectID = "PdL-4i-u1D"; */
+"PdL-4i-u1D.text" = "Команда";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "QCY-eC-yB0"; */
+"QCY-eC-yB0.title" = " ";
+
+/* Class = "UILabel"; text = "-1"; ObjectID = "QRJ-c0-2te"; */
+"QRJ-c0-2te.text" = "-1";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "QWj-Ux-XPy"; */
+"QWj-Ux-XPy.text" = "0";
+
+/* Class = "UILabel"; text = "Игрок"; ObjectID = "QYB-AM-x2O"; */
+"QYB-AM-x2O.text" = "Игрок";
+
+/* Class = "UILabel"; text = "Дата рождения"; ObjectID = "Qiw-iV-Ggc"; */
+"Qiw-iV-Ggc.text" = "Дата рождения";
+
+/* Class = "UILabel"; text = "И"; ObjectID = "RPD-0H-EtI"; */
+"RPD-0H-EtI.text" = "И";
+
+/* Class = "UILabel"; text = "Команда тво"; ObjectID = "RPo-C8-j2Z"; */
+"RPo-C8-j2Z.text" = "Команда тво";
+
+/* Class = "UILabel"; text = "27.01.2018 - 27.02.2018"; ObjectID = "Rje-wH-GjH"; */
+"Rje-wH-GjH.text" = "27.01.2018 - 27.02.2018";
+
+/* Class = "UITableViewController"; title = "События"; ObjectID = "S0d-pJ-MuF"; */
+"S0d-pJ-MuF.title" = "События";
+
+/* Class = "UILabel"; text = "Список объявлений пуст"; ObjectID = "SMZ-KI-49O"; */
+"SMZ-KI-49O.text" = "Список объявлений пуст";
+
+/* Class = "UILabel"; text = "Приглашенные игроки"; ObjectID = "TSp-9m-lRA"; */
+"TSp-9m-lRA.text" = "Приглашенные игроки";
+
+/* Class = "UILabel"; text = "10.11.2018"; ObjectID = "TUb-H3-FB4"; */
+"TUb-H3-FB4.text" = "10.11.2018";
+
+/* Class = "UITextField"; placeholder = "Логин"; ObjectID = "TWP-aj-nKo"; */
+"TWP-aj-nKo.placeholder" = "Логин";
+
+/* Class = "UILabel"; text = "4 : 3"; ObjectID = "TaH-8X-8Ml"; */
+"TaH-8X-8Ml.text" = "4 : 3";
+
+/* Class = "UIButton"; normalTitle = "По проведенным матчам"; ObjectID = "TeN-V3-76x"; */
+"TeN-V3-76x.normalTitle" = "По проведенным матчам";
+
+/* Class = "UISegmentedControl"; Tka-77-rOe.segmentTitles[0] = "Состав"; ObjectID = "Tka-77-rOe"; */
+"Tka-77-rOe.segmentTitles[0]" = "Состав";
+
+/* Class = "UISegmentedControl"; Tka-77-rOe.segmentTitles[1] = "Матчи"; ObjectID = "Tka-77-rOe"; */
+"Tka-77-rOe.segmentTitles[1]" = "Матчи";
+
+/* Class = "UIButton"; normalTitle = "Клуб"; ObjectID = "Tnu-DS-0Hx"; */
+"Tnu-DS-0Hx.normalTitle" = "Клуб";
+
+/* Class = "UIButton"; normalTitle = "ПРИНЯТЬ"; ObjectID = "Tss-y3-CqN"; */
+"Tss-y3-CqN.normalTitle" = "ПРИНЯТЬ";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "U6L-rw-cd9"; */
+"U6L-rw-cd9.text" = "0";
+
+/* Class = "UIViewController"; title = "Создать команду"; ObjectID = "V6h-1D-JjW"; */
+"V6h-1D-JjW.title" = "Создать команду";
+
+/* Class = "UILabel"; text = "27.01.2018-28.02.2018"; ObjectID = "V8l-AJ-T2z"; */
+"V8l-AJ-T2z.text" = "27.01.2018-28.02.2018";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "W1E-g6-iuZ"; */
+"W1E-g6-iuZ.title" = " ";
+
+/* Class = "UILabel"; text = "О"; ObjectID = "WFh-fc-QRQ"; */
+"WFh-fc-QRQ.text" = "О";
+
+/* Class = "UILabel"; text = "31.12.2018"; ObjectID = "WGS-At-wdL"; */
+"WGS-At-wdL.text" = "31.12.2018";
+
+/* Class = "UILabel"; text = "Тренер"; ObjectID = "WO4-0j-p7M"; */
+"WO4-0j-p7M.text" = "Тренер";
+
+/* Class = "UILabel"; text = "Ничего нет"; ObjectID = "Wjg-3D-s67"; */
+"Wjg-3D-s67.text" = "Ничего нет";
+
+/* Class = "UILabel"; text = "Г"; ObjectID = "Wud-VI-vmX"; */
+"Wud-VI-vmX.text" = "Г";
+
+/* Class = "UILabel"; text = "Турниры"; ObjectID = "X7l-bc-qQN"; */
+"X7l-bc-qQN.text" = "Турниры";
+
+/* Class = "UILabel"; text = "Игрок"; ObjectID = "XCr-uJ-rAf"; */
+"XCr-uJ-rAf.text" = "Игрок";
+
+/* Class = "UILabel"; text = "Ничего нет"; ObjectID = "XJ1-Kf-UGA"; */
+"XJ1-Kf-UGA.text" = "Ничего нет";
+
+/* Class = "UILabel"; text = "№:"; ObjectID = "Xfr-dF-KOC"; */
+"Xfr-dF-KOC.text" = "№:";
+
+/* Class = "UILabel"; text = "27.01.2018-28.02.2018"; ObjectID = "YFh-fD-Qo8"; */
+"YFh-fD-Qo8.text" = "27.01.2018-28.02.2018";
+
+/* Class = "UILabel"; text = "Д"; ObjectID = "YVA-ke-0gw"; */
+"YVA-ke-0gw.text" = "Д";
+
+/* Class = "UILabel"; text = "Количество команд: "; ObjectID = "Yfk-yc-GA0"; */
+"Yfk-yc-GA0.text" = "Количество команд: ";
+
+/* Class = "UITextField"; placeholder = "Отчество"; ObjectID = "ZFY-07-wgT"; */
+"ZFY-07-wgT.placeholder" = "Отчество";
+
+/* Class = "UILabel"; text = "5"; ObjectID = "Zb7-AX-68e"; */
+"Zb7-AX-68e.text" = "5";
+
+/* Class = "UILabel"; text = "Ничего нет"; ObjectID = "a59-UN-BCm"; */
+"a59-UN-BCm.text" = "Ничего нет";
+
+/* Class = "UILabel"; text = "20.10.1990"; ObjectID = "aAQ-gK-A5P"; */
+"aAQ-gK-A5P.text" = "20.10.1990";
+
+/* Class = "UILabel"; text = "Команда"; ObjectID = "aBd-tH-njl"; */
+"aBd-tH-njl.text" = "Команда";
+
+/* Class = "UILabel"; text = "Кижинга"; ObjectID = "aQN-HB-Ijd"; */
+"aQN-HB-Ijd.text" = "Кижинга";
+
+/* Class = "UILabel"; text = "ЖК"; ObjectID = "b53-h0-5vd"; */
+"b53-h0-5vd.text" = "ЖК";
+
+/* Class = "UILabel"; text = "И снова гол. Кокорин !!!"; ObjectID = "bS0-BC-wfp"; */
+"bS0-BC-wfp.text" = "И снова гол. Кокорин !!!";
+
+/* Class = "UILabel"; text = "4"; ObjectID = "bSy-To-5k8"; */
+"bSy-To-5k8.text" = "4";
+
+/* Class = "UILabel"; text = "КСК ЗММК"; ObjectID = "bug-6f-GBa"; */
+"bug-6f-GBa.text" = "КСК ЗММК";
+
+/* Class = "UILabel"; text = "16"; ObjectID = "cXV-HM-2xh"; */
+"cXV-HM-2xh.text" = "16";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "cYZ-pn-GUw"; */
+"cYZ-pn-GUw.text" = "-";
+
+/* Class = "UIButton"; normalTitle = "Турнир"; ObjectID = "ca7-Zu-O2A"; */
+"ca7-Zu-O2A.normalTitle" = "Турнир";
+
+/* Class = "UILabel"; text = "31.12.2018"; ObjectID = "d3Y-qP-Qlp"; */
+"d3Y-qP-Qlp.text" = "31.12.2018";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "d9d-bP-FTS"; */
+"d9d-bP-FTS.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UILabel"; text = "Тренер:"; ObjectID = "dL0-WO-NP9"; */
+"dL0-WO-NP9.text" = "Тренер:";
+
+/* Class = "UILabel"; text = "1"; ObjectID = "dRG-Bg-xVG"; */
+"dRG-Bg-xVG.text" = "1";
+
+/* Class = "UILabel"; text = "И снова гол. Кокорин !!!"; ObjectID = "deH-4j-Vvn"; */
+"deH-4j-Vvn.text" = "И снова гол. Кокорин !!!";
+
+/* Class = "UILabel"; text = "ВСГУТУ"; ObjectID = "djX-W2-fWt"; */
+"djX-W2-fWt.text" = "ВСГУТУ";
+
+/* Class = "UILabel"; text = "И"; ObjectID = "dop-qd-wPM"; */
+"dop-qd-wPM.text" = "И";
+
+/* Class = "UITableViewController"; title = "Команды"; ObjectID = "efu-UH-kJW"; */
+"efu-UH-kJW.title" = "Команды";
+
+/* Class = "UITextField"; placeholder = "Имя"; ObjectID = "feO-Bv-Vw8"; */
+"feO-Bv-Vw8.placeholder" = "Имя";
+
+/* Class = "UILabel"; text = "Список новостей пуст"; ObjectID = "fgj-Dl-cNP"; */
+"fgj-Dl-cNP.text" = "Список новостей пуст";
+
+/* Class = "UILabel"; text = "Команда тво"; ObjectID = "fhH-oD-bFk"; */
+"fhH-oD-bFk.text" = "Команда тво";
+
+/* Class = "UILabel"; text = "События"; ObjectID = "fi7-nL-qka"; */
+"fi7-nL-qka.text" = "События";
+
+/* Class = "UILabel"; text = "Кубок Бурятии по мини футболу. Первый этап. Золотая лига"; ObjectID = "fvX-Va-ayN"; */
+"fvX-Va-ayN.text" = "Кубок Бурятии по мини футболу. Первый этап. Золотая лига";
+
+/* Class = "UILabel"; text = "12 тур"; ObjectID = "fwG-9G-9Jd"; */
+"fwG-9G-9Jd.text" = "12 тур";
+
+/* Class = "UILabel"; text = "ЖК"; ObjectID = "g1g-ut-tVc"; */
+"g1g-ut-tVc.text" = "ЖК";
+
+/* Class = "UILabel"; text = "Кубок Бурятии по мини футболу. Первый этап. Золотая лига"; ObjectID = "g3L-ni-Au2"; */
+"g3L-ni-Au2.text" = "Кубок Бурятии по мини футболу. Первый этап. Золотая лига";
+
+/* Class = "UILabel"; text = "Алексеев"; ObjectID = "gST-i3-p2h"; */
+"gST-i3-p2h.text" = "Алексеев";
+
+/* Class = "UIButton"; normalTitle = "Лара"; ObjectID = "gWS-vG-fNM"; */
+"gWS-vG-fNM.normalTitle" = "Лара";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "gba-rZ-hmu"; */
+"gba-rZ-hmu.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Регистрация"; ObjectID = "gfZ-Pw-Zi5"; */
+"gfZ-Pw-Zi5.title" = "Регистрация";
+
+/* Class = "UIButton"; normalTitle = "Зарегистрироваться"; ObjectID = "gho-7Y-SJT"; */
+"gho-7Y-SJT.normalTitle" = "Зарегистрироваться";
+
+/* Class = "UILabel"; text = "Игрок"; ObjectID = "gk4-a3-rIg"; */
+"gk4-a3-rIg.text" = "Игрок";
+
+/* Class = "UILabel"; text = "Здесь будут отображаться матчи"; ObjectID = "gvy-MR-ps4"; */
+"gvy-MR-ps4.text" = "Здесь будут отображаться матчи";
+
+/* Class = "UILabel"; text = "КСК ЗММК"; ObjectID = "gxF-p0-hCB"; */
+"gxF-p0-hCB.text" = "КСК ЗММК";
+
+/* Class = "UILabel"; text = "РМ"; ObjectID = "h6j-aw-Z3q"; */
+"h6j-aw-Z3q.text" = "РМ";
+
+/* Class = "UILabel"; text = "24:00"; ObjectID = "hHz-2g-trw"; */
+"hHz-2g-trw.text" = "24:00";
+
+/* Class = "UINavigationItem"; title = "Редактировать команду"; ObjectID = "hlY-ds-qcK"; */
+"hlY-ds-qcK.title" = "Редактировать команду";
+
+/* Class = "UINavigationItem"; title = "Hello"; ObjectID = "hoK-nF-jNV"; */
+"hoK-nF-jNV.title" = "Hello";
+
+/* Class = "UILabel"; text = "Игроки"; ObjectID = "iKx-Re-ej3"; */
+"iKx-Re-ej3.text" = "Игроки";
+
+/* Class = "UIViewController"; title = "Клуб"; ObjectID = "iNJ-sh-b1V"; */
+"iNJ-sh-b1V.title" = "Клуб";
+
+/* Class = "UILabel"; text = "Игрок"; ObjectID = "jIT-Ih-GI3"; */
+"jIT-Ih-GI3.text" = "Игрок";
+
+/* Class = "UINavigationItem"; title = "Клубы"; ObjectID = "jLB-J1-CcU"; */
+"jLB-J1-CcU.title" = "Клубы";
+
+/* Class = "UILabel"; text = "ФИО ФИО ФИО ФИО ФИО ФИОФИО ФИОФИОФИОФИОФОИФОИОФИОФИОФОИО"; ObjectID = "jVK-M4-T1P"; */
+"jVK-M4-T1P.text" = "ФИО ФИО ФИО ФИО ФИО ФИОФИО ФИОФИОФИОФИОФОИФОИОФИОФИОФОИО";
+
+/* Class = "UITextField"; placeholder = "Пароль"; ObjectID = "kFd-UT-zLb"; */
+"kFd-UT-zLb.placeholder" = "Пароль";
+
+/* Class = "UILabel"; text = "10.11.2018"; ObjectID = "l0U-q4-BgQ"; */
+"l0U-q4-BgQ.text" = "10.11.2018";
+
+/* Class = "UILabel"; text = "Лара"; ObjectID = "lTD-Tw-KVV"; */
+"lTD-Tw-KVV.text" = "Лара";
+
+/* Class = "UITableViewController"; title = "Турниры"; ObjectID = "lik-yG-8IT"; */
+"lik-yG-8IT.title" = "Турниры";
+
+/* Class = "UITextField"; placeholder = "Название"; ObjectID = "lrO-zA-YJ8"; */
+"lrO-zA-YJ8.placeholder" = "Название";
+
+/* Class = "UILabel"; text = "4 : 3"; ObjectID = "m14-AC-KNy"; */
+"m14-AC-KNy.text" = "4 : 3";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "m4W-gn-bSG"; */
+"m4W-gn-bSG.text" = "0";
+
+/* Class = "UITextField"; placeholder = "Логин"; ObjectID = "m9T-Zi-Z8U"; */
+"m9T-Zi-Z8U.placeholder" = "Логин";
+
+/* Class = "UILabel"; text = "На этой неделе нет матчей"; ObjectID = "mWz-W2-2m7"; */
+"mWz-W2-2m7.text" = "На этой неделе нет матчей";
+
+/* Class = "UILabel"; text = "ВСГУТУ"; ObjectID = "mfo-kr-n4z"; */
+"mfo-kr-n4z.text" = "ВСГУТУ";
+
+/* Class = "UIButton"; normalTitle = "ОТКЛОНИТЬ"; ObjectID = "mfq-JN-NwS"; */
+"mfq-JN-NwS.normalTitle" = "ОТКЛОНИТЬ";
+
+/* Class = "UILabel"; text = "Команда:"; ObjectID = "nTD-JW-0Ux"; */
+"nTD-JW-0Ux.text" = "Команда:";
+
+/* Class = "UILabel"; text = "4 : 3"; ObjectID = "oHY-X4-heW"; */
+"oHY-X4-heW.text" = "4 : 3";
+
+/* Class = "UILabel"; text = "Завершен"; ObjectID = "oum-ZE-TO5"; */
+"oum-ZE-TO5.text" = "Завершен";
+
+/* Class = "UISegmentedControl"; ovm-Xc-AHE.segmentTitles[0] = "Расписание"; ObjectID = "ovm-Xc-AHE"; */
+"ovm-Xc-AHE.segmentTitles[0]" = "Расписание";
+
+/* Class = "UISegmentedControl"; ovm-Xc-AHE.segmentTitles[1] = "Команды"; ObjectID = "ovm-Xc-AHE"; */
+"ovm-Xc-AHE.segmentTitles[1]" = "Команды";
+
+/* Class = "UISegmentedControl"; ovm-Xc-AHE.segmentTitles[2] = "Игроки"; ObjectID = "ovm-Xc-AHE"; */
+"ovm-Xc-AHE.segmentTitles[2]" = "Игроки";
+
+/* Class = "UILabel"; text = "Адамов"; ObjectID = "pHa-XD-BBZ"; */
+"pHa-XD-BBZ.text" = "Адамов";
+
+/* Class = "UILabel"; text = "Алексеев"; ObjectID = "pw5-as-Gp0"; */
+"pw5-as-Gp0.text" = "Алексеев";
+
+/* Class = "UILabel"; text = "Начало:"; ObjectID = "qEW-zF-y2c"; */
+"qEW-zF-y2c.text" = "Начало:";
+
+/* Class = "UILabel"; text = "Фильтр:"; ObjectID = "qGl-vs-jdq"; */
+"qGl-vs-jdq.text" = "Фильтр:";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "qh4-xh-2XM"; */
+"qh4-xh-2XM.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UILabel"; text = "1 : 0"; ObjectID = "qvH-z7-qxX"; */
+"qvH-z7-qxX.text" = "1 : 0";
+
+/* Class = "UILabel"; text = "Пупкин Алексей Иванович"; ObjectID = "qxu-rP-jnd"; */
+"qxu-rP-jnd.text" = "Пупкин Алексей Иванович";
+
+/* Class = "UIButton"; normalTitle = "ВОЙТИ"; ObjectID = "qy0-Zi-YmT"; */
+"qy0-Zi-YmT.normalTitle" = "ВОЙТИ";
+
+/* Class = "UITextField"; placeholder = "Имя"; ObjectID = "qyt-nw-RhY"; */
+"qyt-nw-RhY.placeholder" = "Имя";
+
+/* Class = "UILabel"; text = "Не назначен"; ObjectID = "rDw-r0-v6t"; */
+"rDw-r0-v6t.text" = "Не назначен";
+
+/* Class = "UITextField"; placeholder = "00"; ObjectID = "rFx-U8-tDf"; */
+"rFx-U8-tDf.placeholder" = "00";
+
+/* Class = "UILabel"; text = "Г"; ObjectID = "s0a-G8-Kax"; */
+"s0a-G8-Kax.text" = "Г";
+
+/* Class = "UILabel"; text = "Количество игроков:"; ObjectID = "sCJ-En-D10"; */
+"sCJ-En-D10.text" = "Количество игроков:";
+
+/* Class = "UILabel"; text = "27.01.2018 - 28.02.2018"; ObjectID = "sPj-b9-a2H"; */
+"sPj-b9-a2H.text" = "27.01.2018 - 28.02.2018";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "sY0-m2-qky"; */
+"sY0-m2-qky.title" = " ";
+
+/* Class = "UILabel"; text = "Team name"; ObjectID = "sqy-2V-6NU"; */
+"sqy-2V-6NU.text" = "Team name";
+
+/* Class = "UILabel"; text = "Для участия в турнире команда должна включать минимум 5 игроков. Добавить игроков можно в разделе Игроки или в разделе Команды профиля."; ObjectID = "tVq-oJ-J74"; */
+"tVq-oJ-J74.text" = "Для участия в турнире команда должна включать минимум 5 игроков. Добавить игроков можно в разделе Игроки или в разделе Команды профиля.";
+
+/* Class = "UILabel"; text = "Трансферный период:"; ObjectID = "tkR-YN-5HL"; */
+"tkR-YN-5HL.text" = "Трансферный период:";
+
+/* Class = "UILabel"; text = "12 тур"; ObjectID = "txL-ec-NEx"; */
+"txL-ec-NEx.text" = "12 тур";
+
+/* Class = "UITextView"; text = "Описание"; ObjectID = "tyX-Zj-CFb"; */
+"tyX-Zj-CFb.text" = "Описание";
+
+/* Class = "UILabel"; text = "Состав"; ObjectID = "u1V-HB-Tvq"; */
+"u1V-HB-Tvq.text" = "Состав";
+
+/* Class = "UITextField"; placeholder = "Логин"; ObjectID = "ucj-BO-9XC"; */
+"ucj-BO-9XC.placeholder" = "Логин";
+
+/* Class = "UILabel"; text = "Игроки"; ObjectID = "w6k-v2-QMZ"; */
+"w6k-v2-QMZ.text" = "Игроки";
+
+/* Class = "UITableViewController"; title = "Счет"; ObjectID = "wu7-2g-B8M"; */
+"wu7-2g-B8M.title" = "Счет";
+
+/* Class = "UITextField"; placeholder = "Фамилия"; ObjectID = "xGT-yl-wu4"; */
+"xGT-yl-wu4.placeholder" = "Фамилия";
+
+/* Class = "UILabel"; text = "И снова гол. Кокорин !!!"; ObjectID = "xvI-nM-2fi"; */
+"xvI-nM-2fi.text" = "И снова гол. Кокорин !!!";
+
+/* Class = "UILabel"; text = "ВСГУТУ"; ObjectID = "yZL-C5-foz"; */
+"yZL-C5-foz.text" = "ВСГУТУ";
+
+/* Class = "UINavigationItem"; title = "Вход"; ObjectID = "ykK-xT-XbU"; */
+"ykK-xT-XbU.title" = "Вход";
+
+/* Class = "UILabel"; text = "Здесь будут отображаться команды"; ObjectID = "z1b-cu-v8f"; */
+"z1b-cu-v8f.text" = "Здесь будут отображаться команды";
+
+/* Class = "UINavigationItem"; title = "Турниры"; ObjectID = "z4u-L9-Fbg"; */
+"z4u-L9-Fbg.title" = "Турниры";
+
+/* Class = "UILabel"; text = "24:00"; ObjectID = "zCt-g4-MAt"; */
+"zCt-g4-MAt.text" = "24:00";
+
+/* Class = "UIViewController"; title = " "; ObjectID = "ztZ-hc-O5Z"; */
+"ztZ-hc-O5Z.title" = " ";

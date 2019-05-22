@@ -16,6 +16,12 @@
 		04C024EC22142F6600A4A571 /* MenuLauncherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C024EB22142F6600A4A571 /* MenuLauncherCell.swift */; };
 		04DF5492220D6861001323A6 /* MatchProtocolPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5491220D6861001323A6 /* MatchProtocolPresenter.swift */; };
 		04DF5494220D6C25001323A6 /* ClubTeamHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5493220D6C25001323A6 /* ClubTeamHelper.swift */; };
+		1801B87F2271872300BE0F7C /* CommandAddPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1801B87E2271872300BE0F7C /* CommandAddPlayerPresenter.swift */; };
+		1823DC2622952762000A1055 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1823DC2422952762000A1055 /* LoadingCell.swift */; };
+		1823DC2722952762000A1055 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1823DC2522952762000A1055 /* LoadingCell.xib */; };
+		188F097B227BFF8700B827AC /* CommandAddPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */; };
+		18EB8B9F226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EB8B9E226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift */; };
+		18EB8BA2227056100087BD99 /* CommandAddPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EB8BA1227056100087BD99 /* CommandAddPlayerTableViewCell.swift */; };
 		CE0AF81721C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0AF81621C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift */; };
 		CE0AF81A21C7A1C200F8F6A2 /* ClubDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0AF81921C7A1C200F8F6A2 /* ClubDetailViewController.swift */; };
 		CE0AF81D21C7A27900F8F6A2 /* ClubDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0AF81C21C7A27900F8F6A2 /* ClubDetailPresenter.swift */; };
@@ -176,6 +182,14 @@
 		04C024EB22142F6600A4A571 /* MenuLauncherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLauncherCell.swift; sourceTree = "<group>"; };
 		04DF5491220D6861001323A6 /* MatchProtocolPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchProtocolPresenter.swift; sourceTree = "<group>"; };
 		04DF5493220D6C25001323A6 /* ClubTeamHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubTeamHelper.swift; sourceTree = "<group>"; };
+		1801B87E2271872300BE0F7C /* CommandAddPlayerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerPresenter.swift; sourceTree = "<group>"; };
+		18063EDB2282C49B0072FACD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		18063EDC2282C49B0072FACD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		1823DC2422952762000A1055 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
+		1823DC2522952762000A1055 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
+		188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerViewModel.swift; sourceTree = "<group>"; };
+		18EB8B9E226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerTableViewController.swift; sourceTree = "<group>"; };
+		18EB8BA1227056100087BD99 /* CommandAddPlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		86FFA841A8CBD98081CB4DE1 /* Pods-ALC_RB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ALC_RB.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.debug.xcconfig"; sourceTree = "<group>"; };
 		CE0AF81621C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorProtocol.swift; sourceTree = "<group>"; };
 		CE0AF81921C7A1C200F8F6A2 /* ClubDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubDetailViewController.swift; sourceTree = "<group>"; };
@@ -375,6 +389,42 @@
 			isa = PBXGroup;
 			children = (
 				04C024E72213E12C00A4A571 /* EventsProtocolTableViewCell.swift */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		1823DC21229526F6000A1055 /* loading cell */ = {
+			isa = PBXGroup;
+			children = (
+				1823DC2422952762000A1055 /* LoadingCell.swift */,
+				1823DC2522952762000A1055 /* LoadingCell.xib */,
+			);
+			path = "loading cell";
+			sourceTree = "<group>";
+		};
+		188F0979227BFF6900B827AC /* view model */ = {
+			isa = PBXGroup;
+			children = (
+				188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */,
+			);
+			path = "view model";
+			sourceTree = "<group>";
+		};
+		18EB8B9D226EF8080087BD99 /* add player */ = {
+			isa = PBXGroup;
+			children = (
+				188F0979227BFF6900B827AC /* view model */,
+				18EB8BA0227055F70087BD99 /* cell */,
+				18EB8B9E226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift */,
+				1801B87E2271872300BE0F7C /* CommandAddPlayerPresenter.swift */,
+			);
+			path = "add player";
+			sourceTree = "<group>";
+		};
+		18EB8BA0227055F70087BD99 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				18EB8BA1227056100087BD99 /* CommandAddPlayerTableViewCell.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -602,6 +652,7 @@
 		CEA6EBB421A53F15008F874D /* base */ = {
 			isa = PBXGroup;
 			children = (
+				1823DC21229526F6000A1055 /* loading cell */,
 				DB99BB6F224CD5F600EE30D7 /* ad */,
 				DB87FE7A2243B4FF001EBA7C /* view controller */,
 				DBE0E7A5223BDE3500CC0EE2 /* table view */,
@@ -970,10 +1021,11 @@
 		DB98FACB225470CF002933D0 /* edit */ = {
 			isa = PBXGroup;
 			children = (
-				DB98FAD02254B03C002933D0 /* inside */,
-				DB98FAD32254B074002933D0 /* invite */,
 				DB98FACC2254717B002933D0 /* CommandEditLKViewController.swift */,
 				DB98FACE2254AF35002933D0 /* CommandEditLKPresenter.swift */,
+				DB98FAD02254B03C002933D0 /* inside */,
+				DB98FAD32254B074002933D0 /* invite */,
+				18EB8B9D226EF8080087BD99 /* add player */,
 			);
 			path = edit;
 			sourceTree = "<group>";
@@ -1214,6 +1266,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = CEA6EB8F21A53CFE008F874D;
 			productRefGroup = CEA6EB9921A53CFE008F874D /* Products */;
@@ -1236,6 +1289,7 @@
 				DB99BB6C224CB46700EE30D7 /* AdView.xib in Resources */,
 				DB8B6C7E224BF0C0001A667D /* Colors.xcassets in Resources */,
 				CEA6EBA121A53CFE008F874D /* Main.storyboard in Resources */,
+				1823DC2722952762000A1055 /* LoadingCell.xib in Resources */,
 				DB87FE7F2243D493001EBA7C /* EmptyViewNew.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1345,6 +1399,7 @@
 				04C024EC22142F6600A4A571 /* MenuLauncherCell.swift in Sources */,
 				DBC5C6002220360B00B0A1B6 /* RegistrationPresenter.swift in Sources */,
 				DB59E5C022292B5900D1F62F /* EditProfile.swift in Sources */,
+				188F097B227BFF8700B827AC /* CommandAddPlayerViewModel.swift in Sources */,
 				DB11CC9421C241E10083773E /* LeagueInfo.swift in Sources */,
 				CE61552521AFEB54008C4463 /* UserLKViewController.swift in Sources */,
 				DB48BE7622002B42008B007D /* SoloClub.swift in Sources */,
@@ -1369,6 +1424,7 @@
 				DB87FE7C2243B522001EBA7C /* BaseStateViewController.swift in Sources */,
 				DBB208ED221306170010B600 /* RefereeTeamTableViewController.swift in Sources */,
 				CE61552221AFD329008C4463 /* AnnouncesTableViewCell.swift in Sources */,
+				1823DC2622952762000A1055 /* LoadingCell.swift in Sources */,
 				DB4B1A472240AB3A00A9FB97 /* ClubLKPresenter.swift in Sources */,
 				DB8D30BE22537180006355A7 /* SoloTeam.swift in Sources */,
 				DB17384B21BA56D400017B6D /* NewsAllTableViewController.swift in Sources */,
@@ -1383,6 +1439,7 @@
 				DB8A68A1224E568900D3972A /* ClubPickerHelper.swift in Sources */,
 				DB59E5BE2228EB5C00D1F62F /* ImageUploadHelper.swift in Sources */,
 				049B9AD021F704EC00CDD104 /* ScheduleLeaguePresenter.swift in Sources */,
+				18EB8B9F226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift in Sources */,
 				DB98FACF2254AF35002933D0 /* CommandEditLKPresenter.swift in Sources */,
 				DB52EAE32248E2C7004F7869 /* CommandCreateLKViewController.swift in Sources */,
 				DB17385B21BAACB900017B6D /* Clubs.swift in Sources */,
@@ -1423,6 +1480,7 @@
 				DB59433421F212BE00945601 /* SegmentHelper.swift in Sources */,
 				DB11CC9021C235460083773E /* ScheduleTableViewCell.swift in Sources */,
 				CE60234C21AE756C00B428EE /* NewsAnnounceTableViewController.swift in Sources */,
+				18EB8BA2227056100087BD99 /* CommandAddPlayerTableViewCell.swift in Sources */,
 				DB5A00CF2237F1AF00B93EF5 /* AcceptRequest.swift in Sources */,
 				CE77AC7B21B0F1BA00C0ED0D /* DateFormatterStringEx.swift in Sources */,
 				DBB208E5221180850010B600 /* TeamProtocolTableViewController.swift in Sources */,
@@ -1437,6 +1495,7 @@
 				DB98FAD22254B06D002933D0 /* CommandPlayersTableViewHelper.swift in Sources */,
 				CE916AAC21B4E1FC0025FECF /* ApiRoute.swift in Sources */,
 				DB595C7221EF2214000282F4 /* MatchProtocolViewController.swift in Sources */,
+				1801B87F2271872300BE0F7C /* CommandAddPlayerPresenter.swift in Sources */,
 				DB6D956421EDC42900E81026 /* EmptyView.swift in Sources */,
 				DBC5C5FA2220128100B0A1B6 /* UITextField.swift in Sources */,
 				CE47323E21A5513500199D79 /* HomeViewController.swift in Sources */,
@@ -1466,6 +1525,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CEA6EBA021A53CFE008F874D /* Base */,
+				18063EDB2282C49B0072FACD /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1474,6 +1534,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CEA6EBA521A53CFE008F874D /* Base */,
+				18063EDC2282C49B0072FACD /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1485,6 +1546,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1547,6 +1609,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1602,14 +1665,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WPQL85C5GY;
+				DEVELOPMENT_TEAM = MT83Z9G3C6;
 				INFOPLIST_FILE = ALC_RB/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.test.ALC-RB";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1619,14 +1682,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WPQL85C5GY;
+				DEVELOPMENT_TEAM = MT83Z9G3C6;
 				INFOPLIST_FILE = ALC_RB/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.test.ALC-RB";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
