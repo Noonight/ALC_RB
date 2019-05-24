@@ -1597,11 +1597,12 @@
         <!--Main Tab Bar Controller-->
         <scene sceneID="VFP-fV-QdH">
             <objects>
-                <tabBarController id="67f-Sq-Qh7" userLabel="Main Tab Bar Controller" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="o00-2z-J5o">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="67f-Sq-Qh7" userLabel="Main Tab Bar Controller" sceneMemberID="viewController">
+                    <tabBar key="tabBar" autoresizesSubviews="NO" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="o00-2z-J5o">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <edgeInsets key="layoutMargins" top="16" left="8" bottom="12" right="8"/>
                         <color key="selectedImageTintColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
@@ -2007,7 +2008,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7hd-qi-iyc" userLabel="Teams NC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="ic_club" id="xpz-ja-5Hq">
-                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5BH-Yu-Odg">
@@ -2236,7 +2237,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sPa-qT-CdH" userLabel="Players NC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="ic_players" id="aG6-h3-6PK">
-                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NCh-XS-9eq">
@@ -3793,7 +3794,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="427-kr-52D" userLabel="Tournaments NC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="ic_cup" id="5a4-aj-G08">
-                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="s8s-e8-JKs">
@@ -4274,7 +4275,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JoN-yP-8jZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="ic_home" id="doP-UK-cdq">
-                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Veh-6h-cEH">
@@ -4316,8 +4317,7 @@
             <objects>
                 <navigationController storyboardIdentifier="AuthNC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NU4-Op-Ygr" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="ic_user" id="UVK-ho-yJP">
-                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="0.0"/>
-                        <inset key="largeContentSizeImageInsets" minX="0.0" minY="7" maxX="0.0" maxY="0.0"/>
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RaP-mj-2iM">
