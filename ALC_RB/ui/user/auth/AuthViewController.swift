@@ -14,6 +14,7 @@ class AuthViewController: UIViewController {
     
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var backgroundImage: UIImageView!
     
     let presenter = AuthPresenter()
     
@@ -37,6 +38,10 @@ class AuthViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.isNavigationBarHidden = true
+        
+//        self.view.addGestureRecognizer(UIGestureRecognizer(target: self.view, action: Selector("endEditing:")))
+        
+//        self.backgroundImage.addGestureRecognizer(UIGestureRecognizer(target: self.backgroundImage, action: Selector("endEditing:")))
     }
     
     // MARK: - Actions
@@ -55,7 +60,7 @@ class AuthViewController: UIViewController {
                 password: passwordTextField.text!)
             )
         } else {
-            showToast(message: "Fields can't be empty")
+            showToast(message: "Заполните все поля")
         }
         
     }
@@ -116,19 +121,21 @@ extension AuthViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case loginTextField:
-            if loginTextField.isEmpty() {
-                showToast(message: "Login field is empty", seconds: 1.0)
-            } else {
-                passwordTextField.becomeFirstResponder()
-            }
+//            if loginTextField.isEmpty() {
+//                showToast(message: "Login field is empty", seconds: 1.0)
+//            } else {
+//                passwordTextField.becomeFirstResponder()
+//            }
+            textField.endEditing(true)
         case passwordTextField:
-            if passwordTextField.isEmpty() {
-                showToast(message: "Password field is empty", seconds: 1.0)
-            } else {
-                passwordTextField.resignFirstResponder()
-                signIn()
-                // start sign in function
-            }
+//            if passwordTextField.isEmpty() {
+//                showToast(message: "Password field is empty", seconds: 1.0)
+//            } else {
+//                passwordTextField.resignFirstResponder()
+//                signIn()
+//                // start sign in function
+//            }
+            textField.endEditing(true)
         default:
             textField.endEditing(true)
         }

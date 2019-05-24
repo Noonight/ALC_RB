@@ -21,6 +21,8 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var birthdayPicker: UIDatePicker!
     @IBOutlet weak var barCompleteButton: UIBarButtonItem!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     var imagePicker: ImagePicker?
     
     let presenter = RegistrationPresenter()
@@ -43,12 +45,16 @@ class RegistrationViewController: UIViewController {
         patronymicTextField.delegate = self
         loginTextField.delegate = self
         passwordTF.delegate = self
+        
+        scrollView.keyboardDismissMode = .onDrag
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.isNavigationBarHidden = false
         barCompleteButton.image =  barCompleteButton.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
+        
+        self.view.addGestureRecognizer(UIGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -141,40 +147,41 @@ extension RegistrationViewController: ImagePickerDelegate {
 
 extension RegistrationViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case familyTextField:
-            if !familyTextField.isEmpty() {
-                nameTextField.becomeFirstResponder()
-                break
-            }
-            showToast(message: "Family field is empty", seconds: 1.0)
-        case nameTextField:
-            if !nameTextField.isEmpty() {
-                patronymicTextField.becomeFirstResponder()
-                break
-            }
-            showToast(message: "First name field is empty", seconds: 1.0)
-        case patronymicTextField:
-            if !patronymicTextField.isEmpty() {
-                loginTextField.becomeFirstResponder()
-                break
-            }
-            showToast(message: "Patronymic field is empty", seconds: 1.0)
-        case loginTextField:
-            if !loginTextField.isEmpty() {
-                passwordTF.becomeFirstResponder()
-                break
-            }
-            showToast(message: "Login field is empty", seconds: 1.0)
-        case passwordTF:
-            if !passwordTF.isEmpty() {
-                passwordTF.resignFirstResponder()
-                break
-            }
-            showToast(message: "Password field is empty", seconds: 1.0)
-        default:
-            textField.endEditing(true)
-        }
+//        switch textField {
+//        case familyTextField:
+//            if !familyTextField.isEmpty() {
+//                nameTextField.becomeFirstResponder()
+//                break
+//            }
+//            showToast(message: "Family field is empty", seconds: 1.0)
+//        case nameTextField:
+//            if !nameTextField.isEmpty() {
+//                patronymicTextField.becomeFirstResponder()
+//                break
+//            }
+//            showToast(message: "First name field is empty", seconds: 1.0)
+//        case patronymicTextField:
+//            if !patronymicTextField.isEmpty() {
+//                loginTextField.becomeFirstResponder()
+//                break
+//            }
+//            showToast(message: "Patronymic field is empty", seconds: 1.0)
+//        case loginTextField:
+//            if !loginTextField.isEmpty() {
+//                passwordTF.becomeFirstResponder()
+//                break
+//            }
+//            showToast(message: "Login field is empty", seconds: 1.0)
+//        case passwordTF:
+//            if !passwordTF.isEmpty() {
+//                passwordTF.resignFirstResponder()
+//                break
+//            }
+//            showToast(message: "Password field is empty", seconds: 1.0)
+//        default:
+//            textField.endEditing(true)
+//        }
+        textField.endEditing(true)
         return true
     }
 }

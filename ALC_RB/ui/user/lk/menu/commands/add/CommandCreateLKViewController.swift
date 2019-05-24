@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommandCreateLKViewController: BaseStateViewController {
+class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegate {
 
     struct ViewModel {
         var tournaments = Tournaments()
@@ -45,6 +45,7 @@ class CommandCreateLKViewController: BaseStateViewController {
     
     let fieldsCantBeEmpty = "Заполните все поля."
     let teamCreatedMessage = "Команда успешно создана.\n Название: "
+    let chooseTournament = "Выберите турнир."
     
     let userDefaults = UserDefaultsHelper()
     
@@ -56,6 +57,8 @@ class CommandCreateLKViewController: BaseStateViewController {
         initPresenter()
         presenter.getTournaments()
         presenter.getClubs()
+        
+        nameTextField.delegate = self
         
 //        tournamentPickerHelper.setRows(rows: <#T##[League]#>)
         tournamentPickerHelper.setSelectRowPickerHelper(selectRowProtocol: self)
@@ -94,6 +97,8 @@ class CommandCreateLKViewController: BaseStateViewController {
                 club: (clubItem?.id)!,
                 creator: (userDefaults.getAuthorizedUser()?.person.id)!)
             )
+        } else if !nameTextField.isEmpty() && tournamentItem == nil || clubItem == nil {
+            showToast(message: "\(chooseTournament)")
         } else {
             showToast(message: "\(fieldsCantBeEmpty)")
         }
@@ -167,6 +172,11 @@ class CommandCreateLKViewController: BaseStateViewController {
             self.clubPickerView.layoutIfNeeded()
         }
         clubPickerView.isHidden = true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return true
     }
     
 }

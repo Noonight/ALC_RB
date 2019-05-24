@@ -22,6 +22,8 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var barSaveBtn: UIBarButtonItem!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     let presenter = EditProfilePresenter()
     
     var imagePicker: ImagePicker?
@@ -56,7 +58,7 @@ class EditProfileViewController: UIViewController {
         
         prepareRxFields()
         
-        
+        scrollView.keyboardDismissMode = .onDrag
         
         firstInit()
     }
@@ -176,34 +178,35 @@ extension EditProfileViewController: ImagePickerDelegate {
 
 extension EditProfileViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case familyTF:
-            if !familyTF.isEmpty() {
-                familyTF.resignFirstResponder()
-                break
-            }
-            showToast(message: "Family field is empty", seconds: 1.0)
-        case nameTF:
-            if !nameTF.isEmpty() {
-                nameTF.resignFirstResponder()
-                break
-            }
-            showToast(message: "First name field is empty", seconds: 1.0)
-        case patronymicTF:
-            if !patronymicTF.isEmpty() {
-                patronymicTF.resignFirstResponder()
-                break
-            }
-            showToast(message: "Patronymic field is empty", seconds: 1.0)
-        case loginTF:
-            if !loginTF.isEmpty() {
-                loginTF.resignFirstResponder()
-                break
-            }
-            showToast(message: "Login field is empty", seconds: 1.0)
-        default:
-            textField.endEditing(true)
-        }
+//        switch textField {
+//        case familyTF:
+//            if !familyTF.isEmpty() {
+//                familyTF.resignFirstResponder()
+//                break
+//            }
+//            showToast(message: "Family field is empty", seconds: 1.0)
+//        case nameTF:
+//            if !nameTF.isEmpty() {
+//                nameTF.resignFirstResponder()
+//                break
+//            }
+//            showToast(message: "First name field is empty", seconds: 1.0)
+//        case patronymicTF:
+//            if !patronymicTF.isEmpty() {
+//                patronymicTF.resignFirstResponder()
+//                break
+//            }
+//            showToast(message: "Patronymic field is empty", seconds: 1.0)
+//        case loginTF:
+//            if !loginTF.isEmpty() {
+//                loginTF.resignFirstResponder()
+//                break
+//            }
+//            showToast(message: "Login field is empty", seconds: 1.0)
+//        default:
+//            textField.endEditing(true)
+//        }
+        textField.endEditing(true)
         return true
     }
 }
