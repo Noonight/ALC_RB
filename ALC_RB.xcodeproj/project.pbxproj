@@ -17,6 +17,8 @@
 		04DF5492220D6861001323A6 /* MatchProtocolPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5491220D6861001323A6 /* MatchProtocolPresenter.swift */; };
 		04DF5494220D6C25001323A6 /* ClubTeamHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5493220D6C25001323A6 /* ClubTeamHelper.swift */; };
 		1801B87F2271872300BE0F7C /* CommandAddPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1801B87E2271872300BE0F7C /* CommandAddPlayerPresenter.swift */; };
+		18076941229E7D4900A10996 /* AddPlayerToTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18076940229E7D4900A10996 /* AddPlayerToTeam.swift */; };
+		18076943229E81A000A10996 /* AddPlayerToTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18076942229E81A000A10996 /* AddPlayerToTeamResponse.swift */; };
 		1823DC2622952762000A1055 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1823DC2422952762000A1055 /* LoadingCell.swift */; };
 		1823DC2722952762000A1055 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1823DC2522952762000A1055 /* LoadingCell.xib */; };
 		188F097B227BFF8700B827AC /* CommandAddPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */; };
@@ -185,6 +187,8 @@
 		1801B87E2271872300BE0F7C /* CommandAddPlayerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerPresenter.swift; sourceTree = "<group>"; };
 		18063EDB2282C49B0072FACD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		18063EDC2282C49B0072FACD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		18076940229E7D4900A10996 /* AddPlayerToTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerToTeam.swift; sourceTree = "<group>"; };
+		18076942229E81A000A10996 /* AddPlayerToTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerToTeamResponse.swift; sourceTree = "<group>"; };
 		1823DC2422952762000A1055 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		1823DC2522952762000A1055 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerViewModel.swift; sourceTree = "<group>"; };
@@ -518,6 +522,7 @@
 				DB98FAC9225462AB002933D0 /* ErrorMessage.swift */,
 				DB59E5BA222829EA00D1F62F /* post */,
 				DBD4D024225F946D00C8C8B3 /* EditTeamResponse.swift */,
+				18076942229E81A000A10996 /* AddPlayerToTeamResponse.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -939,6 +944,7 @@
 				DB4B1A4D224114D100A9FB97 /* EditClubInfo.swift */,
 				DB8A68A2224E583F00D3972A /* CreateTeamInfo.swift */,
 				DB9EC0D2225F47DC00FC3A9E /* EditTeam.swift */,
+				18076940229E7D4900A10996 /* AddPlayerToTeam.swift */,
 			);
 			path = post;
 			sourceTree = "<group>";
@@ -1376,6 +1382,7 @@
 				DB2A35D621CA203B00E9E2C5 /* PlayersTableViewController.swift in Sources */,
 				DB57C5D221F0BFD500BEA097 /* TeamLeagueDetailViewController.swift in Sources */,
 				DB99BB6E224CB48300EE30D7 /* AdView.swift in Sources */,
+				18076941229E7D4900A10996 /* AddPlayerToTeam.swift in Sources */,
 				DBA69210221E74A000BEFB26 /* DrawerMenuTableViewCell.swift in Sources */,
 				DB52EAE82248E412004F7869 /* CommandsLKTableViewCell.swift in Sources */,
 				DBCB1EBF2223FE3F005A6976 /* ApiRequests.swift in Sources */,
@@ -1484,6 +1491,7 @@
 				DB5A00CF2237F1AF00B93EF5 /* AcceptRequest.swift in Sources */,
 				CE77AC7B21B0F1BA00C0ED0D /* DateFormatterStringEx.swift in Sources */,
 				DBB208E5221180850010B600 /* TeamProtocolTableViewController.swift in Sources */,
+				18076943229E81A000A10996 /* AddPlayerToTeamResponse.swift in Sources */,
 				DB1CA0FD22254FD4005E1FB9 /* AuthUser.swift in Sources */,
 				DB8A68A3224E583F00D3972A /* CreateTeamInfo.swift in Sources */,
 				04DF5492220D6861001323A6 /* MatchProtocolPresenter.swift in Sources */,

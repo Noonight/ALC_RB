@@ -56,6 +56,8 @@ class CommandEditLKViewController: BaseStateViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        Print.m("We are in CommandEditLKViewController")
+        
 //        Print.m("team is \(team)")
 //        Print.m("participation is \(participation)")
     }
@@ -154,9 +156,11 @@ extension CommandEditLKViewController: CommandEditLKView {
             let destination = segue.destination as? CommandAddPlayerTableViewController
         {
             destination.tableModel = CommandAddPlayerTableViewController.TableModel(
-//                team: self.team,
+//                team: self.team
 //                players: self.mutablePlayers
             )
+            destination.team = self.team
+            destination.leagueId = self.participation?.league
         }
     }
 }

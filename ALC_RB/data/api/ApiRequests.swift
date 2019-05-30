@@ -281,6 +281,40 @@ class ApiRequests {
         }
     }
     
+    func post_addPlayerToTeam(token: String, addPlayerToTeam: AddPlayerToTeam, response_success: @escaping (SingleLineMessage) -> (), response_failure: @escaping (Error) -> (), response_single_line_message: @escaping (SingleLineMessage) -> ()) {
+        
+        
+        let header: HTTPHeaders = [
+            "Content-Type" : "application/json",
+            "auth" : "\(token)"
+        ]
+        
+        Alamofire
+            .request(ApiRoute.getApiURL(.post_add_player_team), method: .post, parameters: addPlayerToTeam.toParams(), encoding: JSONEncoding.default, headers: header)
+            .responseSingleLineMessage(completionHandler: { (response) in
+                switch response.result {
+                case .success:
+                    let statusCode = response.response?.statusCode ?? 0
+                    switch statusCode {
+                    case 200...299:
+                        if let singleLineMessage = response.result.value {
+                            response_success(singleLineMessage)
+                        }
+                    default:
+                        if let singleLineMessage = response.result.value {
+                            response_single_line_message(singleLineMessage)
+                        }
+                    }
+                case.failure(let error):
+                    if let singleLineMessage = response.result.value {
+                        response_single_line_message(singleLineMessage)
+                    } else {
+                        response_failure(error)
+                    }
+                }
+            })
+    }
+    
     // MARK: - GET requests
     
     func get_image(imagePath: String, get_success: @escaping (UIImage) -> (), get_failure: @escaping (Error) -> ()) {

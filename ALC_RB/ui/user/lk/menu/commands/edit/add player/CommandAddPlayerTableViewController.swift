@@ -15,22 +15,6 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     }
     
     struct TableModel {
-//        var team = Team()
-//        var players: [Player] = []
-//        var persons: [Person] = []
-//
-//        init() {}
-//
-//        init(team: Team, players: [Player]) {
-//            self.team = team
-//            self.players = players
-//        }
-//
-//        init(team: Team, players: [Player], persons: [Person]) {
-//            self.team = team
-//            self.players = players
-//            self.persons = persons
-//        }
         var players = Players()
         
         init() {}
@@ -40,19 +24,26 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
         }
     }
     
+    let userDefaultsHelper = UserDefaultsHelper()
+    var team = Team()
+    var leagueId: String!
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    
     var tableModel = TableModel() {
         didSet {
             updateUI()
         }
     }
+    var filteredPlayers = Players()
     
     let presenter = CommandAddPlayerPresenter()
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
+        
+        configureSearchController()
         
 //        let loadingCellNib = UINib.init(nibName: LoadingCell.NibParams.nibName, bundle: nil)
 //        self.tableView.register(loadingCellNib, forCellReuseIdentifier: CellIdentifiers.loading)
@@ -68,14 +59,33 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     }
 
     // MARK: - Helpers
+
+    func configureSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Поиск игроков"
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+        } else {
+            tableView.tableHeaderView = searchController.searchBar
+            // Fallback on earlier versions
+        }
+        definesPresentationContext = true
+    }
     
     func updateUI() {
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+//        tableView.reloadData()
     }
     
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering() {
+            return filteredPlayers.people.count
+        }
         return tableModel.players.people.count + 1
     }
 
@@ -87,19 +97,45 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
 //        }
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.list, for: indexPath) as! CommandAddPlayerTableViewCell
         
-        if isLoadingCell(for: indexPath) {
-            cell.configure(with: .none)
-//            cell.backAction = self
-//            cell.cell_loadMore_btn.addTarget(self, action: #selector(onLoadMoreBtnPressed(sender:)), for: .touchUpInside)
-            cell.cell_loadMore_btn.addTarget(self, action: #selector(onLoadMoreBtnPressed), for: .touchUpInside)
-
+        let player: Person
+        if isFiltering() {
+            player = filteredPlayers.people[indexPath.row]
+            cell.configure(with: player)
+            
+            cell.cell_add_player_btn.tag = indexPath.row
+            cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
         } else {
-            cell.configure(with: tableModel.players.people[indexPath.row])
+            player = tableModel.players.people[indexPath.row]
+            
+            if isLoadingCell(for: indexPath) {
+                cell.configure(with: .none)
+                //            cell.backAction = self
+                //            cell.cell_loadMore_btn.addTarget(self, action: #selector(onLoadMoreBtnPressed(sender:)), for: .touchUpInside)
+                cell.cell_loadMore_btn.addTarget(self, action: #selector(onLoadMoreBtnPressed), for: .touchUpInside)
+                
+            } else {
+                cell.configure(with: player)
+                cell.cell_add_player_btn.tag = indexPath.row
+                cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
+                cell.tag = indexPath.row
+            }
         }
-        
 //        cell.configure(with: tableModel.players.people[indexPath.row])
         
         return cell
+    }
+    
+    // it is for add player to team
+    var currentAddId: Int?
+    
+    @objc func onAddPlayerBtnPressed(sender: UIButton) {
+        Print.m("tag of button is \(sender.tag). item on this tag is \(tableModel.players.people[sender.tag])")
+        presenter.addPlayerToTeamForLeague(token: userDefaultsHelper.getAuthorizedUser()!.token, addPlayerToTeam: AddPlayerToTeam(
+            _id: leagueId,
+            teamId: team.id,
+            playerId: tableModel.players.people[sender.tag].id)
+        )
+        currentAddId = sender.tag
     }
     
     @objc func onLoadMoreBtnPressed(sender: UIButton) {
@@ -114,6 +150,11 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
         if currentCount() == totalCount() {
             sender.setTitle("Конец", for: .normal)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        Print.m("cell did select")
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -156,6 +197,27 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
 //    }
 //}
 
+extension CommandAddPlayerTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForQuery(searchController.searchBar.text!)
+    }
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForQuery(_ query: String, scope: String = "All") {
+        filteredPlayers.people = tableModel.players.people.filter({ (person: Person) -> Bool in
+            return person.getFullName().lowercased().contains(query.lowercased())
+        })
+        updateUI()
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+}
+
 private extension CommandAddPlayerTableViewController {
     func isLoadingCell (for indexPath: IndexPath) -> Bool {
         return indexPath.row == tableModel.players.people.count
@@ -168,15 +230,47 @@ private extension CommandAddPlayerTableViewController {
     func currentCount() -> Int {
         return tableModel.players.people.count
     }
+    
+    func deleteLastChosenRow() {
+        tableView.beginUpdates()
+        tableModel.players.people.remove(at: currentAddId!)
+        tableView.deleteRows(at: [IndexPath(row: currentAddId!, section: 0)], with: .automatic)
+        tableView.endUpdates()
+    }
 }
 
 extension CommandAddPlayerTableViewController : CommandAddPlayerView {
+    func onFetchQueryPersonsSuccess(players: Players) {
+        // asd
+    }
+    
+    func onFetchQueryPersonsFailure(error: Error) {
+        // dsa
+    }
+    
+    func onRequestAddPlayerToTeamSuccess(singleLineMessage: SingleLineMessage) {
+        deleteLastChosenRow()
+//        showToast(message: "add player to team good")
+    }
+    
+    func onRequestAddPlayerToTeamFailure(singleLineMessage: SingleLineMessage) {
+        // somwthing
+        showToast(message: "Ошибка: \(singleLineMessage.message)")
+    }
+    
+    func onRequestAddPlayerToTeamError(error: Error) {
+        showToast(message: "Неизвестная ошибка.")
+        Print.m(error)
+        // something
+    }
+    
     func onFetchPersonsSuccess(players: Players) {
         self.setState(state: .normal)
         if tableModel.players.count == 0 {
             tableModel.players = players
+        } else {
+            tableModel.players.people.append(contentsOf: players.people)
         }
-        tableModel.players.people.append(contentsOf: players.people)
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

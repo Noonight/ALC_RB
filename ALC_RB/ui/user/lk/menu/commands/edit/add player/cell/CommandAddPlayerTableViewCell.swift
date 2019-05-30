@@ -16,6 +16,7 @@ class CommandAddPlayerTableViewCell: UITableViewCell {
     @IBOutlet weak var player_date_of_birth: UILabel!
     @IBOutlet weak var cell_loading_indicator: UIActivityIndicatorView!
     @IBOutlet weak var cell_loadMore_btn: UIButton!
+    @IBOutlet weak var cell_add_player_btn: UIButton!
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -36,6 +37,8 @@ class CommandAddPlayerTableViewCell: UITableViewCell {
             player_date_of_birth.alpha = 1
             cell_loadMore_btn.isEnabled = false
             cell_loadMore_btn.alpha = 0
+            cell_add_player_btn.alpha = 1
+            cell_add_player_btn.isEnabled = true
 //            cell_loading_indicator.stopAnimating()
             if person.photo != nil {
                 player_image.af_setImage(withURL: ApiRoute.getImageURL(image: (person.photo)!))
@@ -46,6 +49,8 @@ class CommandAddPlayerTableViewCell: UITableViewCell {
             player_name.text = person.getFullName()
             player_date_of_birth.text = person.birthdate.UTCToLocal(from: .utc, to: .local)
         } else {
+            cell_add_player_btn.alpha = 0
+            cell_add_player_btn.isEnabled = false
             player_image.alpha = 0
             player_name.alpha = 0
             player_date_of_birth.alpha = 0

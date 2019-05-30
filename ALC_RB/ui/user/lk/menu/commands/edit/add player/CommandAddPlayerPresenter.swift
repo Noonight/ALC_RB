@@ -11,6 +11,13 @@ import Foundation
 protocol CommandAddPlayerView: MvpView {
     func onFetchPersonsSuccess(players: Players)
     func onFetchPersonsFailure(error: Error)
+    
+    func onRequestAddPlayerToTeamSuccess(singleLineMessage: SingleLineMessage)
+    func onRequestAddPlayerToTeamFailure(singleLineMessage: SingleLineMessage)
+    func onRequestAddPlayerToTeamError(error: Error)
+    
+    func onFetchQueryPersonsSuccess(players: Players)
+    func onFetchQueryPersonsFailure(error: Error)
 }
 
 class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewController> {
@@ -24,4 +31,21 @@ class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewControlle
         }
     }
     
+    func addPlayerToTeamForLeague(token: String, addPlayerToTeam: AddPlayerToTeam) {
+        apiService.post_addPlayerToTeam(token: token, addPlayerToTeam: addPlayerToTeam, response_success: { (singleLineMessage) in
+            self.getView().onRequestAddPlayerToTeamSuccess(singleLineMessage: singleLineMessage)
+        }, response_failure: { (error) in
+            self.getView().onRequestAddPlayerToTeamError(error: error)
+        }) { (singleLineMessage) in
+            self.getView().onRequestAddPlayerToTeamFailure(singleLineMessage: singleLineMessage)
+        }
+    }
+    
+    func findPersons(query: String) {
+        apiService.get_playersWithQuery(query: query, get_success: { (players) in
+            
+        }) { (error) in
+            
+        }
+    }
 }
