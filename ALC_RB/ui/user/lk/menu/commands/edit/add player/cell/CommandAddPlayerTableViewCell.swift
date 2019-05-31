@@ -27,7 +27,7 @@ class CommandAddPlayerTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         cell_loading_indicator.hidesWhenStopped = true
-        cell_loading_indicator.startAnimating()
+//        cell_loading_indicator.startAnimating()
     }
     
     func configure(with person: Person?) {

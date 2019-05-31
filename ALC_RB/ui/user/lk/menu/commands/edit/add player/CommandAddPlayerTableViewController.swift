@@ -29,6 +29,7 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     var leagueId: String!
     
     let searchController = UISearchController(searchResultsController: nil)
+    var currentTimeOfSearch = CACurrentMediaTime()
     
     var tableModel = TableModel() {
         didSet {
@@ -43,8 +44,11 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
         super.viewDidLoad()
         initPresenter()
         
+        presenter.fetchPersons(offset: 0)
+        
         configureSearchController()
         
+        tableView.tableFooterView = UIView()
 //        let loadingCellNib = UINib.init(nibName: LoadingCell.NibParams.nibName, bundle: nil)
 //        self.tableView.register(loadingCellNib, forCellReuseIdentifier: CellIdentifiers.loading)
 
@@ -55,7 +59,6 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
         
         setState(state: .loading)
         
-        presenter.fetchPersons(offset: 0)
     }
 
     // MARK: - Helpers
@@ -74,9 +77,9 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     }
     
     func updateUI() {
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             self.tableView.reloadData()
-        }
+//        }
 //        tableView.reloadData()
     }
     
@@ -84,7 +87,7 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering() {
-            return filteredPlayers.people.count
+            return filteredPlayers.count
         }
         return tableModel.players.people.count + 1
     }
@@ -105,8 +108,6 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
             cell.cell_add_player_btn.tag = indexPath.row
             cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
         } else {
-            player = tableModel.players.people[indexPath.row]
-            
             if isLoadingCell(for: indexPath) {
                 cell.configure(with: .none)
                 //            cell.backAction = self
@@ -114,6 +115,8 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
                 cell.cell_loadMore_btn.addTarget(self, action: #selector(onLoadMoreBtnPressed), for: .touchUpInside)
                 
             } else {
+                player = tableModel.players.people[indexPath.row]
+                
                 cell.configure(with: player)
                 cell.cell_add_player_btn.tag = indexPath.row
                 cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
@@ -129,11 +132,18 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     var currentAddId: Int?
     
     @objc func onAddPlayerBtnPressed(sender: UIButton) {
-        Print.m("tag of button is \(sender.tag). item on this tag is \(tableModel.players.people[sender.tag])")
+        var personId: String!
+        if isFiltering() {
+            personId = filteredPlayers.people[sender.tag].id
+            Print.m("tag of button is \(sender.tag). item on this tag is \(filteredPlayers.people[sender.tag])")
+        } else {
+            personId = tableModel.players.people[sender.tag].id
+            Print.m("tag of button is \(sender.tag). item on this tag is \(tableModel.players.people[sender.tag])")
+        }
         presenter.addPlayerToTeamForLeague(token: userDefaultsHelper.getAuthorizedUser()!.token, addPlayerToTeam: AddPlayerToTeam(
             _id: leagueId,
             teamId: team.id,
-            playerId: tableModel.players.people[sender.tag].id)
+            playerId: personId)
         )
         currentAddId = sender.tag
     }
@@ -207,15 +217,67 @@ extension CommandAddPlayerTableViewController: UISearchResultsUpdating {
     }
     
     func filterContentForQuery(_ query: String, scope: String = "All") {
-        filteredPlayers.people = tableModel.players.people.filter({ (person: Person) -> Bool in
-            return person.getFullName().lowercased().contains(query.lowercased())
-        })
+//        if (CACurrentMediaTime() - currentTimeOfSearch) > 5 {
+            if query.count > 1 {
+                Print.m("Query is \(query)")
+                presenter.findPersons(query: query)
+            }
         updateUI()
+//        }
     }
     
     func isFiltering() -> Bool {
-        return searchController.isActive && !searchBarIsEmpty()
+        let isFilter = searchController.isActive && !searchBarIsEmpty()
+        return isFilter
     }
+    
+    
+    func saveCurrentTime() {
+        currentTimeOfSearch = CACurrentMediaTime()
+        
+        
+    }
+    
+//    struct CurrentDate {
+//        private enum Statics {
+//            static let difference = 5 // 5.0 seconds
+//        }
+//
+//        var hour: Int!
+//        var minute: Int!
+//        var seconds: Int!
+//
+//        init(hour: Int, minute: Int, seconds: Int) {
+//            self.hour = hour
+//            self.minute = minute
+//            self.seconds = seconds
+//        }
+//
+//        func saveCurrentDate(date: Date = Date(), calendar: Calendar = Calendar.current) -> CurrentDate {
+//            return CurrentDate(
+//                hour: calendar.component(.hour, from: date),
+//                minute: calendar.component(.minute, from: date),
+//                seconds: calendar.component(.second, from: date)
+//            )
+//        }
+//
+//        func difference(with nextDate: CurrentDate) -> Bool {
+//            CACurrentMediaTime() - CACurrentMediaTime()
+//            if hour == nextDate.hour {
+//                if minute == nextDate.minute {
+//                    if (nextDate.seconds - seconds) > 5 {
+//                        return true
+//                    } else {
+//                        return false
+//                    }
+//                } else {
+//                    return true
+//                }
+//            } else {
+//                return true
+//            }
+//        }
+//    }
 }
 
 private extension CommandAddPlayerTableViewController {
@@ -242,10 +304,14 @@ private extension CommandAddPlayerTableViewController {
 extension CommandAddPlayerTableViewController : CommandAddPlayerView {
     func onFetchQueryPersonsSuccess(players: Players) {
         // asd
+        Print.m(players)
+        filteredPlayers = players
+//        updateUI()
     }
     
     func onFetchQueryPersonsFailure(error: Error) {
         // dsa
+        setState(state: BaseState.error(message: error.localizedDescription))
     }
     
     func onRequestAddPlayerToTeamSuccess(singleLineMessage: SingleLineMessage) {

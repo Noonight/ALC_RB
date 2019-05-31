@@ -43,9 +43,9 @@ class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewControlle
     
     func findPersons(query: String) {
         apiService.get_playersWithQuery(query: query, get_success: { (players) in
-            
+            self.getView().onFetchQueryPersonsSuccess(players: players)
         }) { (error) in
-            
+            self.getView().onFetchQueryPersonsFailure(error: error)
         }
     }
 }
