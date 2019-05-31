@@ -56,9 +56,12 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        setState(state: .loading)
-        
+        if tableModel.players.people.count < 2 {
+            setState(state: .loading)
+            searchController.searchBar.text = ""
+            searchController.isActive = false
+            presenter.fetchPersons(offset: currentCount())
+        }
     }
 
     // MARK: - Helpers
@@ -237,47 +240,6 @@ extension CommandAddPlayerTableViewController: UISearchResultsUpdating {
         
         
     }
-    
-//    struct CurrentDate {
-//        private enum Statics {
-//            static let difference = 5 // 5.0 seconds
-//        }
-//
-//        var hour: Int!
-//        var minute: Int!
-//        var seconds: Int!
-//
-//        init(hour: Int, minute: Int, seconds: Int) {
-//            self.hour = hour
-//            self.minute = minute
-//            self.seconds = seconds
-//        }
-//
-//        func saveCurrentDate(date: Date = Date(), calendar: Calendar = Calendar.current) -> CurrentDate {
-//            return CurrentDate(
-//                hour: calendar.component(.hour, from: date),
-//                minute: calendar.component(.minute, from: date),
-//                seconds: calendar.component(.second, from: date)
-//            )
-//        }
-//
-//        func difference(with nextDate: CurrentDate) -> Bool {
-//            CACurrentMediaTime() - CACurrentMediaTime()
-//            if hour == nextDate.hour {
-//                if minute == nextDate.minute {
-//                    if (nextDate.seconds - seconds) > 5 {
-//                        return true
-//                    } else {
-//                        return false
-//                    }
-//                } else {
-//                    return true
-//                }
-//            } else {
-//                return true
-//            }
-//        }
-//    }
 }
 
 private extension CommandAddPlayerTableViewController {

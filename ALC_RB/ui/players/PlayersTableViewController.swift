@@ -69,6 +69,19 @@ class PlayersTableViewController: UITableViewController {
 }
 
 extension PlayersTableViewController: PlayersTableView {
+    func onRequestQueryPersonsSuccess(players: Players) {
+        filteredPlayers = players
+        updateUI()
+    }
+    
+    func onRequestQueryPersonsFailure(error: Error) {
+        // some
+        let alert = UIAlertController(title: "\(error.localizedDescription)", message: nil, preferredStyle: .alert)
+        present(alert, animated: true) {
+//            alert.dismiss(animated: true, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+        }
+    }
+    
     func initPresenter() {
         presenter.attachView(view: self)
         
@@ -166,15 +179,19 @@ extension PlayersTableViewController: UISearchResultsUpdating {
     }
     
     func filterContentForQuery(_ query: String, scope: String = "All") {
-        filteredPlayers.people = players.people.filter({ (person: Person) -> Bool in
-            return person.getFullName().lowercased().contains(query.lowercased())
-        })
+        if query.count >= 2 {
+            presenter.searchPlayers(query: query)
+        }
+//        filteredPlayers.people = players.people.filter({ (person: Person) -> Bool in
+//            return person.getFullName().lowercased().contains(query.lowercased())
+//        })
         updateUI()
     }
     
     func isFiltering() -> Bool {
         return searchController.isActive && !searchBarIsEmpty()
     }
+    
 }
 //segue
 extension PlayersTableViewController {

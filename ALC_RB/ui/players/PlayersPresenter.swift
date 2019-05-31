@@ -12,9 +12,14 @@ import AlamofireImage
 
 protocol PlayersTableView: MvpView {
     func onGetPlayersSuccess(_ players: Players)
+    
+    func onRequestQueryPersonsSuccess(players: Players)
+    func onRequestQueryPersonsFailure(error: Error)
 }
 
 class PlayersPresenter: MvpPresenter<PlayersTableViewController> {
+    
+    let apiService = ApiRequests()
     
     func getPlayers() {
         let parameters: Parameters = [
@@ -49,17 +54,10 @@ class PlayersPresenter: MvpPresenter<PlayersTableViewController> {
     }
     
     func searchPlayers(query: String) {
-        let parameters: Parameters = [
-            "type": "player",
-            "search": query
-        ]
-        
-        Alamofire
-            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
-            .responsePlayers { response in
-                if let player = response.result.value {
-                    self.getView().onGetPlayersSuccess(player)
-                }
+        apiService.get_playersWithQuery(query: query, get_success: { (players) in
+            self.getView().onRequestQueryPersonsSuccess(players: players)
+        }) { (error) in
+            self.getView().onRequestQueryPersonsFailure(error: error)
         }
     }
     
