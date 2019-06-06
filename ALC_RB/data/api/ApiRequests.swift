@@ -205,7 +205,7 @@ class ApiRequests {
         
 //        dump(editTeam.toParams())
         
-        let request = Alamofire
+        _ = Alamofire
             .request(ApiRoute.getApiURL(.post_edit_team), method: .post, parameters: editTeam.toParams(), encoding: JSONEncoding.default, headers: header)
 //            .responseJSON { (response) in
 //                debugPrint(response)
@@ -258,7 +258,7 @@ class ApiRequests {
                             if let soloTeam = response.result.value {
                                 response_success(soloTeam)
                             }
-                        case .failure(let error):
+                        case .failure(let _):
                             upload.responseErrorMessage(completionHandler: { (response) in
                                 switch response.result {
                                 case .success:
@@ -359,6 +359,29 @@ class ApiRequests {
                     }
                 case .failure(let error):
                     get_error(error)
+                }
+        }
+    }
+    
+    func get_referees(get_success: @escaping (Players) -> (), get_failure: @escaping (Error) -> ()) {
+        let parameters: Parameters = [
+            "type": "referee"//,
+//            "limit": 32575,
+//            "offset": 0
+        ]
+        
+        Alamofire
+            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+            .responsePlayers { response in
+//                dump(response)
+//                Print.m(response.result)
+                switch response.result {
+                case .success:
+                    if let players = response.result.value {
+                        get_success(players)
+                    }
+                case .failure(let error):
+                    get_failure(error)
                 }
         }
     }

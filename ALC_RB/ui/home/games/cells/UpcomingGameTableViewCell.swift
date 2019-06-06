@@ -46,11 +46,12 @@ class UpcomingGameTableViewCell: UITableViewCell, MvpView {
         mTour.text = data.tour
         mPlace.text = data.place
         //mImageTeam1.image = ApiService.getImage(imageName: data.teamOne.club, fun: <#T##(UIImage) -> ()#>)
-        presenter.getClub1Logo(club: data.teamOne.club)
-        mTitleTeam1.text = data.teamOne.name
+        // MARK: - TODO do fix model or create new model for comming matches like in android
+//        presenter.getClub1Logo(club: data.teamOne.club)
+//        mTitleTeam1.text = data.teamOne.name
         mScore.text = data.score
-        presenter.getClub2Logo(club: data.teamTwo.club)
-        mTitleTeam2.text = data.teamTwo.name
+//        presenter.getClub2Logo(club: data.teamTwo.club)
+//        mTitleTeam2.text = data.teamTwo.name
         
     }
 

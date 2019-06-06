@@ -17,8 +17,6 @@ struct Players: Codable {
     var people: [Person]
     let count: Int
     
-    
-    
     enum CodingKeys: String, CodingKey {
         case people = "people"
         case count = "count"
@@ -26,24 +24,24 @@ struct Players: Codable {
 }
 
 struct Person: Codable {
-    let surname: String
-    let name: String
-    let lastname: String
-    let birthdate: String
-    let photo: String?
-    let desc: String
+    var surname: String
+    var name: String
+    var lastname: String
+    var birthdate: String
+    var photo: String?
+    var desc: String
     var participationMatches: [Match]
     var pastLeagues: [PastLeague]
-    let id: String
-    let login: String
-    let password: String
-    let type: String
+    var id: String
+    var login: String
+    var password: String
+    var type: String
     var pendingTeamInvites: [PendingTeamInvite]
     var participation: [Participation]
-    let createdAt: String
-    let updatedAt: String
-    let v: Int
-    let club: String?
+    var createdAt: String
+    var updatedAt: String
+    var v: Int
+    var club: String?
     
     enum CodingKeys: String, CodingKey {
         case surname = "surname"
@@ -64,6 +62,28 @@ struct Person: Codable {
         case updatedAt = "updatedAt"
         case v = "__v"
         case club = "club"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.surname = try container.decodeIfPresent(String.self, forKey: .surname) ?? ""
+        self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
+        self.lastname = try container.decodeIfPresent(String.self, forKey: .lastname) ?? ""
+        self.birthdate = try container.decodeIfPresent(String.self, forKey: .birthdate) ?? ""
+        self.photo = try container.decodeIfPresent(String.self, forKey: .photo) ?? ""
+        self.desc = try container.decodeIfPresent(String.self, forKey: .desc) ?? ""
+        self.participationMatches = try container.decodeIfPresent([Match].self, forKey: .participationMatches) ?? []
+        self.pastLeagues = try container.decodeIfPresent([PastLeague].self, forKey: .pastLeagues) ?? []
+        self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
+        self.login = try container.decodeIfPresent(String.self, forKey: .login) ?? ""
+        self.password = try container.decodeIfPresent(String.self, forKey: .password) ?? ""
+        self.type = try container.decodeIfPresent(String.self, forKey: .type) ?? ""
+        self.pendingTeamInvites = try container.decodeIfPresent([PendingTeamInvite].self, forKey: .pendingTeamInvites) ?? []
+        self.participation = try container.decodeIfPresent([Participation].self, forKey: .participation) ?? []
+        self.createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) ?? ""
+        self.updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
+        self.v = try container.decodeIfPresent(Int.self, forKey: .v) ?? -1
+        self.club = try container.decodeIfPresent(String.self, forKey: .club) ?? ""
     }
     
     func getFullName() -> String {
@@ -238,26 +258,27 @@ extension Person {
         v: Int? = nil,
         club: String?? = nil
         ) -> Person {
-        return Person(
-            surname: surname ?? self.surname,
-            name: name ?? self.name,
-            lastname: lastname ?? self.lastname,
-            birthdate: birthdate ?? self.birthdate,
-            photo: photo ?? self.photo,
-            desc: desc ?? self.desc,
-            participationMatches: participationMatches ?? self.participationMatches,
-            pastLeagues: pastLeagues ?? self.pastLeagues,
-            id: id ?? self.id,
-            login: login ?? self.login,
-            password: password ?? self.password,
-            type: type ?? self.type,
-            pendingTeamInvites: pendingTeamInvites ?? self.pendingTeamInvites,
-            participation: participation ?? self.participation,
-            createdAt: createdAt ?? self.createdAt,
-            updatedAt: updatedAt ?? self.updatedAt,
-            v: v ?? self.v,
-            club: club ?? self.club
-        )
+        var person = Person()
+        person.surname = surname ?? self.surname
+        person.name = name ?? self.name
+        person.lastname = lastname ?? self.lastname
+        person.birthdate = birthdate ?? self.birthdate
+        person.photo = photo ?? self.photo
+        person.desc = desc ?? self.desc
+        person.participationMatches = participationMatches ?? self.participationMatches
+        person.pastLeagues = pastLeagues ?? self.pastLeagues
+        person.id = id ?? self.id
+        person.login = login ?? self.login
+        person.password = password ?? self.password
+        person.type = type ?? self.type
+        person.pendingTeamInvites = pendingTeamInvites ?? self.pendingTeamInvites
+        person.participation = participation ?? self.participation
+        person.createdAt = createdAt ?? self.createdAt
+        person.updatedAt = updatedAt ?? self.updatedAt
+        person.v = v ?? self.v
+        person.club = club ?? self.club
+        
+        return person
     }
     
     func jsonData() throws -> Data {

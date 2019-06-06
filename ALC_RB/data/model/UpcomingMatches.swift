@@ -21,19 +21,55 @@ struct UpcomingMatches: Codable {
 struct Match: Codable {
     var id, date: String
     var stage, played: Bool
-    var tour: String
-    var playersList: [JSONAny]
+    var tour: String?
+//    var playersList: [JSONAny] // mb String
+    var playersList: [String]
     var place: String
-    var winner/*, score*/, fouls, autoGoals: JSONNull?
+//    var winner/*, score*/, fouls, autoGoals: JSONNull? // String without fouls
+    var winner, autoGoals: String?
+    var fouls: JSONNull?
+    
     var score: String
     var league: String
-    var teamOne, teamTwo: Team
-    var events, referees: [JSONAny]
+//    var teamOne, teamTwo: Team // mb String
+    var teamOne, teamTwo: String
+//    var events, referees: [JSONAny] // events and person mb
+    var events: [LIEvent]
+    var referees: [Person]
+    
     var createdAt, updatedAt: String
     var v: Int
     var leagueID: String
     
-    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
+        self.date = try container.decodeIfPresent(String.self, forKey: .date) ?? ""
+        self.stage = try container.decodeIfPresent(Bool.self, forKey: .stage) ?? false
+        self.played = try container.decodeIfPresent(Bool.self, forKey: .played) ?? false
+        self.tour = try container.decodeIfPresent(String.self, forKey: .tour) ?? ""
+//        self.playersList = try container.decodeIfPresent([JSONAny].self, forKey: .playersList) ?? []
+        self.playersList = try container.decodeIfPresent([String].self, forKey: .playersList) ?? []
+
+        self.place = try container.decodeIfPresent(String.self, forKey: .place) ?? ""
+//        self.winner = try container.decodeIfPresent(JSONNull.self, forKey: .winner) ?? JSONNull()
+        self.winner = try container.decodeIfPresent(String.self, forKey: .winner) ?? ""
+
+        self.fouls = try container.decodeIfPresent(JSONNull.self, forKey: .fouls) ?? JSONNull()
+//        self.autoGoals = try container.decodeIfPresent(JSONNull.self, forKey: .autoGoals) ?? JSONNull()
+        self.autoGoals = try container.decodeIfPresent(String.self, forKey: .autoGoals) ?? ""
+
+        self.score = try container.decodeIfPresent(String.self, forKey: .score) ?? ""
+        self.league = try container.decodeIfPresent(String.self, forKey: .league) ?? ""
+        self.teamOne = try container.decodeIfPresent(String.self, forKey: .teamOne) ?? ""
+        self.teamTwo = try container.decodeIfPresent(String.self, forKey: .teamTwo) ?? ""
+        self.events = try container.decodeIfPresent([LIEvent].self, forKey: .events) ?? []
+        self.referees = try container.decodeIfPresent([Person].self, forKey: .referees) ?? []
+        self.createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) ?? ""
+        self.updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
+        self.v = try container.decodeIfPresent(Int.self, forKey: .v) ?? -1
+        self.leagueID = try container.decodeIfPresent(String.self, forKey: .leagueID) ?? ""
+    }
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
@@ -212,8 +248,10 @@ extension Match {
         fouls = nil
         autoGoals = nil
         league = ""
-        teamOne = Team()
-        teamTwo = Team()
+//        teamOne = Team()
+//        teamTwo = Team()
+        teamOne = ""
+        teamTwo = ""
         events = []
         referees = []
         createdAt = ""
@@ -243,18 +281,30 @@ extension Match {
         stage: Bool? = nil,
         played: Bool? = nil,
         tour: String? = nil,
-        playersList: [JSONAny]? = nil,
+//        playersList: [JSONAny]? = nil,
+        playersList: [String]? = nil,
+
         place: String? = nil,
-        winner: JSONNull?? = nil,
+//        winner: JSONNull?? = nil,
+        winner: String? = nil,
+
         //score: JSONNull?? = nil,
         score: String? = "",
         fouls: JSONNull?? = nil,
-        autoGoals: JSONNull?? = nil,
+//        autoGoals: JSONNull?? = nil,
+        autoGoals: String? = nil,
+
         league: String? = nil,
-        teamOne: Team? = nil,
-        teamTwo: Team? = nil,
-        events: [JSONAny]? = nil,
-        referees: [JSONAny]? = nil,
+//        teamOne: Team? = nil,
+//        teamTwo: Team? = nil,
+        teamOne: String? = nil,
+        teamTwo: String? = nil,
+
+//        events: [JSONAny]? = nil,
+//        referees: [JSONAny]? = nil,
+        events: [LIEvent]? = nil,
+        referees: [Person]? = nil,
+        
         createdAt: String? = nil,
         updatedAt: String? = nil,
         v: Int? = nil,

@@ -14,6 +14,7 @@ enum MenuOption: Int, CustomStringConvertible {
     case Tournaments
     case Clubs
     case Teams
+    case Referees
     case SignOut
     
     var description: String {
@@ -22,6 +23,7 @@ enum MenuOption: Int, CustomStringConvertible {
         case .Tournaments: return "Турниры"
         case .Clubs: return "Клубы"
         case .Teams: return "Команды"
+        case .Referees: return "Судьи"
         case .SignOut: return "Выйти"
         }
     }
@@ -32,6 +34,7 @@ enum MenuOption: Int, CustomStringConvertible {
         case .Tournaments: return UIImage(named: "ic_trophy") ?? UIImage()
         case .Clubs: return UIImage(named: "ic_cl") ?? UIImage()
         case .Teams: return UIImage(named: "ic_commands") ?? UIImage()
+        case .Referees: return #imageLiteral(resourceName: "ic_referee")
         case .SignOut: return UIImage(named: "ic_sign_out2") ?? UIImage()
         }
     }

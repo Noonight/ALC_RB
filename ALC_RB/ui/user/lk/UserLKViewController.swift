@@ -78,6 +78,14 @@ class UserLKViewController: UIViewController {
         return viewController
     }()
     
+    private lazy var referees: RefereesLKTableViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        var viewController = storyboard.instantiateViewController(withIdentifier: "RefereesLKTableViewController") as! RefereesLKTableViewController
+        
+        return viewController
+    }()
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -210,6 +218,13 @@ class UserLKViewController: UIViewController {
             segmentHelper?.remove(club)
             segmentHelper?.add(commands)
             navigationItem.title = commands.title
+        case .Referees:
+            segmentHelper?.remove(invitation)
+            segmentHelper?.remove(ongoingLeagues)
+            segmentHelper?.remove(club)
+            segmentHelper?.remove(commands)
+            segmentHelper?.add(referees)
+            navigationItem.title = referees.title
         case .SignOut:
             signOut()
         }
@@ -230,8 +245,16 @@ class UserLKViewController: UIViewController {
         tabBarController?.viewControllers![countOfViewControllers! - 1] = viewController
     }
 }
-
+// MARK: - Presenter
 extension UserLKViewController: UserLKView {
+    func fetchRefereesSuccess(referees: Players) {
+//        self.referees = referees
+    }
+    
+    func fetchRefereesFailure(error: Error) {
+        Print.m("referees")
+    }
+    
     func getProfileImageSuccessful(image: UIImage) {
         self.userHeaderMenuImage.image = image.af_imageRoundedIntoCircle()
     }
