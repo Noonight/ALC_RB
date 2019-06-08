@@ -14,6 +14,9 @@ class RefereesLKTableViewController: BaseStateTableViewController {
     private enum CellIdentifiers {
         static let cell = "referee_cell"
     }
+    private enum StaticParams {
+        static let emptyMessage = "Здесь будут отображаться судьи"
+    }
     
     private var viewModel: RefereesViewModel!
     private let disposeBag = DisposeBag()
@@ -26,42 +29,52 @@ class RefereesLKTableViewController: BaseStateTableViewController {
         
         tableView.tableFooterView = UIView()
         
+        setEmptyMessage(message: StaticParams.emptyMessage)
+        
         viewModel = RefereesViewModel(dataManager: ApiRequests())
         
         setupBindings()
         
-        viewModel.fetch()
+//        viewModel.fetch()
+        viewModel.fetchTest()
     }
     
     func setupBindings() {
         viewModel.refreshing
             .subscribe { (event) in
                 event.element! ? self.setState(state: .loading) : self.setState(state: .normal)
-                
-//                self.setState(state: .loading)
             }.disposed(by: disposeBag)
         
         viewModel.error
             .observeOn(MainScheduler.instance)
             .subscribe { (event) in
-//                Print.m(event.element)
                 self.setState(state: .error(message: event.element.debugDescription))
-            }.disposed(by: disposeBag)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.referees
+            .subscribe { (players) in
+                if players.element?.people.count == 0 {
+                    self.setState(state: .empty)
+                }
+            }
+            .disposed(by: disposeBag)
         
         viewModel.referees
             .map { (players) -> [Person] in
                 return players.people
             }
             .bind(to: tableView.rx.items(cellIdentifier: CellIdentifiers.cell, cellType: RefereeLKTableViewCell.self)) {  (row,referee,cell) in
+                Print.m(referee)
                 cell.configure(with: referee)
             }
             .disposed(by: disposeBag)
-    }
-    
-    // MARK: - Table view data source
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        
+        tableView.rx.itemSelected
+            .subscribe { (indexPath) in
+                self.tableView.deselectRow(at: indexPath.element!, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Navigation
