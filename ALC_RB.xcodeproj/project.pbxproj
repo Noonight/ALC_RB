@@ -27,6 +27,7 @@
 		188F097B227BFF8700B827AC /* CommandAddPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */; };
 		18EB8B9F226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EB8B9E226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift */; };
 		18EB8BA2227056100087BD99 /* CommandAddPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EB8BA1227056100087BD99 /* CommandAddPlayerTableViewCell.swift */; };
+		18FE29BF22AE1C420094C4D8 /* MenuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FE29BE22AE1C420094C4D8 /* MenuHelper.swift */; };
 		CE0AF81721C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0AF81621C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift */; };
 		CE0AF81A21C7A1C200F8F6A2 /* ClubDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0AF81921C7A1C200F8F6A2 /* ClubDetailViewController.swift */; };
 		CE0AF81D21C7A27900F8F6A2 /* ClubDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0AF81C21C7A27900F8F6A2 /* ClubDetailPresenter.swift */; };
@@ -149,7 +150,7 @@
 		DB9EC0D3225F47DC00FC3A9E /* EditTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9EC0D2225F47DC00FC3A9E /* EditTeam.swift */; };
 		DBA119F8225735830006904D /* CommandInvitePlayersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA119F7225735830006904D /* CommandInvitePlayersTableViewCell.swift */; };
 		DBA69210221E74A000BEFB26 /* DrawerMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA6920F221E74A000BEFB26 /* DrawerMenuTableViewCell.swift */; };
-		DBA69213221E759600BEFB26 /* MenuOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69212221E759600BEFB26 /* MenuOption.swift */; };
+		DBA69213221E759600BEFB26 /* MenuOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69212221E759600BEFB26 /* MenuOptions.swift */; };
 		DBA69215221E95C400BEFB26 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69214221E95C400BEFB26 /* UIColor.swift */; };
 		DBA69218221EB83500BEFB26 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69217221EB83500BEFB26 /* AuthViewController.swift */; };
 		DBA6921A221EB85900BEFB26 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69219221EB85900BEFB26 /* RegistrationViewController.swift */; };
@@ -200,6 +201,7 @@
 		188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerViewModel.swift; sourceTree = "<group>"; };
 		18EB8B9E226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerTableViewController.swift; sourceTree = "<group>"; };
 		18EB8BA1227056100087BD99 /* CommandAddPlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerTableViewCell.swift; sourceTree = "<group>"; };
+		18FE29BE22AE1C420094C4D8 /* MenuHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHelper.swift; sourceTree = "<group>"; };
 		86FFA841A8CBD98081CB4DE1 /* Pods-ALC_RB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ALC_RB.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.debug.xcconfig"; sourceTree = "<group>"; };
 		CE0AF81621C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorProtocol.swift; sourceTree = "<group>"; };
 		CE0AF81921C7A1C200F8F6A2 /* ClubDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubDetailViewController.swift; sourceTree = "<group>"; };
@@ -326,7 +328,7 @@
 		DB9EC0D2225F47DC00FC3A9E /* EditTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeam.swift; sourceTree = "<group>"; };
 		DBA119F7225735830006904D /* CommandInvitePlayersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandInvitePlayersTableViewCell.swift; sourceTree = "<group>"; };
 		DBA6920F221E74A000BEFB26 /* DrawerMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuTableViewCell.swift; sourceTree = "<group>"; };
-		DBA69212221E759600BEFB26 /* MenuOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOption.swift; sourceTree = "<group>"; };
+		DBA69212221E759600BEFB26 /* MenuOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOptions.swift; sourceTree = "<group>"; };
 		DBA69214221E95C400BEFB26 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		DBA69217221EB83500BEFB26 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		DBA69219221EB85900BEFB26 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -1122,7 +1124,8 @@
 		DBA69211221E757800BEFB26 /* menu */ = {
 			isa = PBXGroup;
 			children = (
-				DBA69212221E759600BEFB26 /* MenuOption.swift */,
+				DBA69212221E759600BEFB26 /* MenuOptions.swift */,
+				18FE29BE22AE1C420094C4D8 /* MenuHelper.swift */,
 				DB5AAC0422369F6F0097963E /* invitation */,
 				DBE0E7A0223BDDAC00CC0EE2 /* ongoing leagues */,
 				DB4B1A432240AAE000A9FB97 /* club */,
@@ -1502,10 +1505,11 @@
 				DBA69218221EB83500BEFB26 /* AuthViewController.swift in Sources */,
 				CE158CE421AD2CE000CEECFE /* TournamentsTableViewController.swift in Sources */,
 				CE158CE621AD3E8A00CEECFE /* TournamentTableViewCell.swift in Sources */,
+				18FE29BF22AE1C420094C4D8 /* MenuHelper.swift in Sources */,
 				DB98FAD52254B0BC002933D0 /* CommandInvitePlayersTableViewHelper.swift in Sources */,
 				CE0AF81D21C7A27900F8F6A2 /* ClubDetailPresenter.swift in Sources */,
 				CE61551F21AFC799008C4463 /* NewsAnnouncePresenter.swift in Sources */,
-				DBA69213221E759600BEFB26 /* MenuOption.swift in Sources */,
+				DBA69213221E759600BEFB26 /* MenuOptions.swift in Sources */,
 				187BFB2922A540DC00E19A3B /* RefereesLKTableViewController.swift in Sources */,
 				DBA6921A221EB85900BEFB26 /* RegistrationViewController.swift in Sources */,
 				DBE0E7AA223C063200CC0EE2 /* OngoingLeagueTableViewCell.swift in Sources */,

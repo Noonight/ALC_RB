@@ -35,8 +35,7 @@ class RefereesLKTableViewController: BaseStateTableViewController {
         
         setupBindings()
         
-//        viewModel.fetch()
-        viewModel.fetchTest()
+        viewModel.fetch()
     }
     
     func setupBindings() {

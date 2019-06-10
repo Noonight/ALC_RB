@@ -33,6 +33,7 @@ class UserLKViewController: UIViewController {
     var drawerIsOpened = false
     
     var segmentHelper: SegmentHelper?
+    var menuHelper: MenuHelper?
     
     var authUser: AuthUser?
     
@@ -93,17 +94,23 @@ class UserLKViewController: UIViewController {
         
         initPresenter()
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        
         segmentHelper = SegmentHelper(self, containerView)
+        menuHelper = MenuHelper()
         
+        menuHelper?.playerMenuOptionActions = playerSelectMenuOption(menuOption:)
+        menuHelper?.refereeMenuOptionActions = refereeSelectMenuOption(menuOption:)
+        menuHelper?.mainRefereeMenuOptionActions = mainRefereeMenuOption(menuOption:)
+        
+        tableView.delegate = menuHelper
+        tableView.dataSource = menuHelper
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         authUser = userDefaultsHelper.getAuthorizedUser()
+        
+        menuHelper?.userType = authUser?.person.getUserType()
         
         barMenuBtn.image = barMenuBtn.image?.af_imageAspectScaled(toFit: CGSize(width: 24, height: 24))
 //        showFirstItem()
@@ -153,9 +160,18 @@ class UserLKViewController: UIViewController {
     // MARK: - Drawer menu
     
     func showFirstItem() {
-        segmentHelper?.add(invitation)
+        if authUser?.person.getUserType() == Person.TypeOfPerson.player {
+            segmentHelper?.add(invitation)
+            navigationItem.title = invitation.title
+        } else if authUser?.person.getUserType() == Person.TypeOfPerson.referee {
+//            segmentHelper?.add(designatedMatch)
+//            navigationItem.title = designantedMatch.title
+        } else if authUser?.person.getUserType() == Person.TypeOfPerson.mainReferee {
+//            segmentHelper?.add(schedule)
+//            navigationItem.title = schedule.title
+        }
+        // set pointer of choose at first item that equal first item in person's menu
         tableView.selectRow(at: IndexPath.init(row: 0, section: 0), animated: true, scrollPosition: UITableView.ScrollPosition.top)
-        navigationItem.title = invitation.title
     }
     
     func setDrawerState() {
@@ -192,7 +208,7 @@ class UserLKViewController: UIViewController {
         }
     }
 
-    func didSelectMenuOption(menuOption: MenuOption) {
+    func playerSelectMenuOption(menuOption: PlayerMenuOption) {
         switch menuOption {
         case .Invites:
             segmentHelper?.remove(ongoingLeagues)
@@ -218,11 +234,41 @@ class UserLKViewController: UIViewController {
             segmentHelper?.remove(club)
             segmentHelper?.add(commands)
             navigationItem.title = commands.title
+//        case .Referees:
+//            segmentHelper?.remove(invitation)
+//            segmentHelper?.remove(ongoingLeagues)
+//            segmentHelper?.remove(club)
+//            segmentHelper?.remove(commands)
+//            segmentHelper?.add(referees)
+//            navigationItem.title = referees.title
+        case .SignOut:
+            signOut()
+        }
+        setDrawerState()
+    }
+    
+    func refereeSelectMenuOption(menuOption: RefereeMenuOption) {
+        switch menuOption {
+        case .DesignatedMatches:
+//            segmentHelper?.remove(referees)
+            // shedule
+//            segmentHelper?.add(schedule)
+//            navigationItem.title = schedule.title
+            Print.m("Schedule")
+        case .SignOut:
+            signOut()
+        }
+        setDrawerState()
+    }
+    
+    func mainRefereeMenuOption(menuOption: MainRefereeMenuOption) {
+        switch menuOption {
+        case .Schedule:
+            segmentHelper?.remove(referees)
+//            segmentHelper?.add(schedule)
+//            navigationItem.title = schedule.title
         case .Referees:
-            segmentHelper?.remove(invitation)
-            segmentHelper?.remove(ongoingLeagues)
-            segmentHelper?.remove(club)
-            segmentHelper?.remove(commands)
+//            segmentHelper?.remove(schedule)
             segmentHelper?.add(referees)
             navigationItem.title = referees.title
         case .SignOut:
@@ -271,24 +317,24 @@ extension UserLKViewController: UserLKView {
     
 }
 
-extension UserLKViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! DrawerMenuTableViewCell
-        
-        let menuOption = MenuOption(rawValue: indexPath.row)
-        cell.image_view.image = menuOption?.image
-        cell.name_label.text = menuOption?.description
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let menuOption = MenuOption(rawValue: indexPath.row)
-        didSelectMenuOption(menuOption: menuOption!)
-//        tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
+//extension UserLKViewController: UITableViewDelegate, UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 5
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! DrawerMenuTableViewCell
+//
+//        let menuOption = PlayerMenuOption(rawValue: indexPath.row)
+//        cell.image_view.image = menuOption?.image
+//        cell.name_label.text = menuOption?.description
+//
+//        return cell
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let menuOption = PlayerMenuOption(rawValue: indexPath.row)
+//        didSelectMenuOption(menuOption: menuOption!)
+////        tableView.deselectRow(at: indexPath, animated: true)
+//    }
+//}

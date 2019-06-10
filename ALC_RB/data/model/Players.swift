@@ -43,6 +43,13 @@ struct Person: Codable {
     var v: Int
     var club: String?
     
+    enum TypeOfPerson: String {
+        case player = "player"
+        case referee = "referee"
+        case mainReferee = "mainReferee"
+        case notFind = "error type"
+    }
+    
     enum CodingKeys: String, CodingKey {
         case surname = "surname"
         case name = "name"
@@ -92,6 +99,19 @@ struct Person: Codable {
             return fullName
         }
         return "Не указано"
+    }
+    
+    func getUserType() -> TypeOfPerson {
+        if type == TypeOfPerson.player.rawValue {
+            return TypeOfPerson.player
+        }
+        if type == TypeOfPerson.referee.rawValue {
+            return TypeOfPerson.referee
+        }
+        if type == TypeOfPerson.mainReferee.rawValue {
+            return TypeOfPerson.mainReferee
+        }
+        return TypeOfPerson.notFind
     }
 }
 
