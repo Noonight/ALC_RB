@@ -99,6 +99,27 @@ struct ActiveMatch: Codable {
     var updatedAt: String
     var v: Int
     
+    init(id: String, date: String, stage: Bool, played: Bool, tour: String, playersList: [String], place: String, autoGoals: String, score: String, league: String, teamOne: Team, teamTwo: Team, events: [LIEvent], referees: [Referee], penalty: String, createdAt: String, updatedAt: String, v: Int) {
+        self.id = id
+        self.date = date
+        self.stage = stage
+        self.played = played
+        self.tour = tour
+        self.playersList = playersList
+        self.place = place
+        self.autoGoals = autoGoals
+        self.score = score
+        self.league = league
+        self.teamOne = teamOne
+        self.teamTwo = teamTwo
+        self.events = events
+        self.referees = referees
+        self.penalty = penalty
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.v = v
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""

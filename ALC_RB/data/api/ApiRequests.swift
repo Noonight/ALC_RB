@@ -489,7 +489,29 @@ class ApiRequests {
         
         group.enter()
         get_activeMatches(get_success: { (activeMatches) in
-            fActiveMatches = activeMatches
+            
+            var tmpActiveMatch1 = ActiveMatch()
+            
+            var tmpTeam1 = Team()
+            tmpTeam1.club = "5be94cd706af1163449429eb"
+            tmpActiveMatch1.teamOne = tmpTeam1
+            var tmpTeam2 = Team()
+            tmpTeam2.club = "5c12554c8962d414ff27f8d1"
+            tmpActiveMatch1.teamTwo = tmpTeam2
+            
+            var tmpRef1 = Referee().with(id: "Some id", type: Referee.RefereeType.referee1.rawValue, person: "5bf26cc5bd6d4060caa005ba")
+            var tmpTimekeeper = Referee().with(id: "Some id too", type: Referee.RefereeType.timekeeper.rawValue, person: "5bf26cd0bd6d4060caa005bb")
+            
+            tmpActiveMatch1.referees.append(tmpRef1)
+            tmpActiveMatch1.referees.append(tmpTimekeeper)
+            
+//            var tmpActiveMatch2 = ActiveMatch()
+            
+            
+            let tmpActiveMatches = ActiveMatches(matches: [tmpActiveMatch1], count: 1)
+//            fActiveMatches = activeMatches
+            
+            fActiveMatches = tmpActiveMatches
             
             if fActiveMatches.matches.count > 0 {
                 for element in fActiveMatches.matches {

@@ -42,7 +42,7 @@ class ScheduleRefViewModel {
         dataManager.getActiveMatchesForView(get_success: { (activeMatches, referees, clubs) in
             
 //            Print.m(ScheduleRefViewModel.DataModel(activeMatches: activeMatches, referees: referees, clubs: clubs))
-            dump(ScheduleRefViewModel.DataModel(activeMatches: activeMatches, referees: referees, clubs: clubs))
+//            dump(ScheduleRefViewModel.DataModel(activeMatches: activeMatches, referees: referees, clubs: clubs))
             
             self.refreshing.onNext(false)
             self.dataModel.onNext(ScheduleRefViewModel.DataModel(
@@ -50,6 +50,7 @@ class ScheduleRefViewModel {
                 referees: referees,
                 clubs: clubs)
             )
+//            Print.m(self.dataModel)
             
         }) { (error) in
             self.error.onNext(error)

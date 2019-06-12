@@ -53,6 +53,7 @@ class ScheduleRefTableViewCell: UITableViewCell {
     
     func configure(with cellModel: CellModel) {
         reset()
+        Print.m(cellModel)
         date_label.text = cellModel.activeMatch.date.UTCToLocal(from: .utc, to: .localTime)
         time_label.text = cellModel.activeMatch.date.UTCToLocal(from: .utc, to: .local)
         league_label.text = cellModel.activeMatch.tour
@@ -61,12 +62,26 @@ class ScheduleRefTableViewCell: UITableViewCell {
         teamNameOne_label.text = cellModel.activeMatch.teamOne.name
         teamNameTwo_label.text = cellModel.activeMatch.teamTwo.name
         if cellModel.clubTeamOne.logo.count > 1 {
-            teamLogoOne_image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.clubTeamOne.logo))
-            teamLogoOne_image.image = teamLogoOne_image.image?.af_imageRoundedIntoCircle()
+//            teamLogoOne_image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.clubTeamOne.logo))
+//            let image = teamLogoOne_image.image
+//            teamLogoOne_image.image = image?.af_imageRoundedIntoCircle()
+            
+            teamLogoOne_image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.clubTeamOne.logo), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true) { (response) in
+                self.teamLogoOne_image.image = response.result.value?.af_imageRoundedIntoCircle()
+            }
+            
+//            teamLogoOne_image.image = teamLogoOne_image.image?.af_imageRoundedIntoCircle()
         }
         if cellModel.clubTeamTwo.logo.count > 1 {
-            teamLogoTwo_image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.clubTeamTwo.logo))
-            teamLogoTwo_image.image = teamLogoTwo_image.image?.af_imageRoundedIntoCircle()
+//            teamLogoTwo_image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.clubTeamTwo.logo))
+//            let image = teamLogoTwo_image.image
+//            teamLogoTwo_image.image = image?.af_imageRoundedIntoCircle()
+            
+            teamLogoTwo_image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.clubTeamTwo.logo), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true) { (response) in
+                self.teamLogoTwo_image.image = response.result.value?.af_imageRoundedIntoCircle()
+            }
+            
+//            teamLogoTwo_image.image = teamLogoTwo_image.image?.af_imageRoundedIntoCircle()
         }
         if cellModel.activeMatch.score == "" {
             score_label.text = cellModel.activeMatch.score
