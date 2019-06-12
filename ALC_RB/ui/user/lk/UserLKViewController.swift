@@ -79,6 +79,14 @@ class UserLKViewController: UIViewController {
         return viewController
     }()
     
+    private lazy var schedule: ScheduleRefTableViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        var viewController = storyboard.instantiateViewController(withIdentifier: "ScheduleRefTableViewController") as! ScheduleRefTableViewController
+        
+        return viewController
+    }()
+    
     private lazy var referees: RefereesLKTableViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
@@ -265,10 +273,10 @@ class UserLKViewController: UIViewController {
         switch menuOption {
         case .Schedule:
             segmentHelper?.remove(referees)
-//            segmentHelper?.add(schedule)
-//            navigationItem.title = schedule.title
+            segmentHelper?.add(schedule)
+            navigationItem.title = schedule.title
         case .Referees:
-//            segmentHelper?.remove(schedule)
+            segmentHelper?.remove(schedule)
             segmentHelper?.add(referees)
             navigationItem.title = referees.title
         case .SignOut:

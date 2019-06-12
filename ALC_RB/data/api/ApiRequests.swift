@@ -317,6 +317,27 @@ class ApiRequests {
     
     // MARK: - GET requests
     
+    func get_activeMatches(limit: Int = 30, offset: Int = 0, played: Bool = false, get_success: @escaping (ActiveMatches) -> (), get_failure: @escaping (Error) -> ()) {
+        let parameters: Parameters = [
+            "limit": limit,
+            "offset": offset,
+            "played": played
+        ]
+        
+        Alamofire
+            .request(ApiRoute.getApiURL(.activeMatches), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+            .responseActiveMatches { (response) in
+                switch response.result {
+                case .success:
+                    if let activeMatches = response.result.value {
+                        get_success(activeMatches)
+                    }
+                case .failure(let error):
+                    get_failure(error)
+                }
+        }
+    }
+    
     func get_image(imagePath: String, get_success: @escaping (UIImage) -> (), get_failure: @escaping (Error) -> ()) {
         Alamofire
             .request(ApiRoute.getImageURL(image: imagePath))
@@ -440,6 +461,86 @@ class ApiRequests {
                     get_failure(error)
                 }
                 
+        }
+    }
+    
+    func get_clubById(id: String, get_success: @escaping (SoloClub) -> (), get_failure: @escaping (Error) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.clubs, id: id))
+            .responseSoloClub { (response) in
+                switch response.result {
+                case .success:
+                    if let club = response.result.value {
+                        get_success(club)
+                    }
+                case .failure(let error):
+                    get_failure(error)
+                }
+        }
+    }
+    
+    func getActiveMatchesForView(get_success: @escaping (ActiveMatches, Players, [SoloClub]) -> (), get_failure: @escaping (Error) -> ()) {
+        
+        var fActiveMatches = ActiveMatches()
+        var fReferees = Players()
+        var fClubs: [SoloClub] = []
+        
+        let group = DispatchGroup()
+        
+        group.enter()
+        get_activeMatches(get_success: { (activeMatches) in
+            fActiveMatches = activeMatches
+            
+            if fActiveMatches.matches.count > 0 {
+                for element in fActiveMatches.matches {
+                    
+                    if element.teamOne.club.count > 1 {
+                        group.enter()
+                        self.get_clubById(id: element.teamOne.club, get_success: { (club) in
+                            
+                            fClubs.append(club)
+                            
+                            group.leave()
+                            
+                        }, get_failure: { (error) in
+                            get_failure(error)
+                        })
+                    }
+                    
+                    if element.teamTwo.club.count > 1 {
+                        group.enter()
+                        self.get_clubById(id: element.teamTwo.club, get_success: { (club) in
+                            
+                            fClubs.append(club)
+                            
+                            group.leave()
+                            
+                        }, get_failure: { (error) in
+                            get_failure(error)
+                        })
+                    }
+                    
+                }
+            }
+            
+            group.leave()
+            
+        }) { (error) in
+            get_failure(error)
+        }
+        
+        group.enter()
+        get_referees(get_success: { (referees) in
+            fReferees = referees
+            
+            group.leave()
+            
+        }) { (error) in
+            get_failure(error)
+        }
+        
+        group.notify(queue: .main) {
+            get_success(fActiveMatches, fReferees, fClubs)
         }
     }
     
