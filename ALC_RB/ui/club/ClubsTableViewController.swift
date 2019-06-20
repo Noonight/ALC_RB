@@ -97,13 +97,20 @@ extension ClubsTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ClubTableViewCell
+
+        cell.configure(with: clubs.clubs[indexPath.row])
         
-        cell.mTitle?.text = clubs.clubs[indexPath.row].name
-        //print(clubs.clubs[indexPath.row].name)
-//        cell.imageView?.image
-        presenter.getImage(imageName: clubs.clubs[indexPath.row].logo) { (image) in
-            cell.mImage?.image = image.af_imageRoundedIntoCircle()
-        }
+//        cell.mTitle?.text = clubs.clubs[indexPath.row].name
+//        //print(clubs.clubs[indexPath.row].name)
+////        cell.imageView?.image
+//        cell.imageView?.image = #imageLiteral(resourceName: "ic_con")
+//        cell.imageView?.af_setImage(withURL: ApiRoute.getImageURL(image: clubs.clubs[indexPath.row].logo), placeholderImage: #imageLiteral(resourceName: "ic_con"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true, completion: { (response) in
+//            cell.imageView?.image = response.result.value?.af_imageRoundedIntoCircle()
+//        })
+//        presenter.getImage(imageName: clubs.clubs[indexPath.row].logo) { (image) in
+//            cell.mImage?.image = image.af_imageRoundedIntoCircle()
+//        }
+        
         return cell
     }
     
