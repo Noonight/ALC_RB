@@ -84,7 +84,7 @@ struct Team: Codable {
     var place: Int
     var playoffPlace: JSONNull?
     var madeToPlayoff: Bool
-    var group: String
+    var group: String?
     var goals, goalsReceived, wins, losses: Int
     var draws, groupScore: Int
     var id, name, creator: String

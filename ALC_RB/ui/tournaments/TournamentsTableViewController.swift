@@ -8,8 +8,13 @@
 
 import UIKit
 
-class TournamentsTableViewController: UITableViewController {
-
+class TournamentsTableViewController: BaseStateTableViewController {
+    private enum Variables {
+        static let errorAlertTitle = "Ошибка!"
+        static let errorAlertOk = "Ок"
+        static let errorAlertRefresh = "Перезагрузка"
+    }
+    
     //MARK: - Properties
     
     let tournamentFinished = "Finished"
@@ -22,31 +27,36 @@ class TournamentsTableViewController: UITableViewController {
     
     let cellId = "cell_tournament"
     
-    let activityIndicator = UIActivityIndicatorView(style: .gray)
+//    let activityIndicator = UIActivityIndicatorView(style: .gray)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
         
-//        tournaments.leagues = [
-//            League(status: "Завершено", matches: [
-//                   "match one",
-//                   "match two"
-//                ], id: "some id", tourney: "Турнир", name: "Имя", beginDate: "10.10.2010", endDate: "10.12.2012", maxTeams: 32, teams: [], transferBegin: "some date transfer", transferEnd: "some date transfer", playersMin: 16, playersMax: 64, playersCapacity: 92, yellowCardsToDisqual: 3, ageAllowedMin: 6, ageAllowedMax: 3)
-//        ]
+        //        tournaments.leagues = [
+        //            League(status: "Завершено", matches: [
+        //                   "match one",
+        //                   "match two"
+        //                ], id: "some id", tourney: "Турнир", name: "Имя", beginDate: "10.10.2010", endDate: "10.12.2012", maxTeams: 32, teams: [], transferBegin: "some date transfer", transferEnd: "some date transfer", playersMin: 16, playersMax: 64, playersCapacity: 92, yellowCardsToDisqual: 3, ageAllowedMin: 6, ageAllowedMax: 3)
+        //        ]
         
         initPresenter()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.getTournaments()
     }
     
     private func initView() {
         
         tableView.tableFooterView = UIView()
-        prepareActivityIndicator()
+//        prepareActivityIndicator()
     }
-
-    func prepareActivityIndicator() {
-        activityIndicator.hidesWhenStopped = true
-    }
+    
+//    func prepareActivityIndicator() {
+//        activityIndicator.hidesWhenStopped = true
+//    }
     
     func updateUI() {
         tableView.reloadData()
@@ -55,22 +65,21 @@ class TournamentsTableViewController: UITableViewController {
 
 extension TournamentsTableViewController: TournamentsView {
     
-    func showLoading() {
-        tableView.backgroundView = activityIndicator
-        tableView.separatorStyle = .none
-        activityIndicator.startAnimating()
-    }
-    
-    func hideLoading() {
-        activityIndicator.stopAnimating()
-        tableView.separatorStyle = .singleLine
-        tableView.backgroundView = nil
-    }
+//    func showLoading() {
+//        tableView.backgroundView = activityIndicator
+//        tableView.separatorStyle = .none
+//        activityIndicator.startAnimating()
+//    }
+//
+//    func hideLoading() {
+//        activityIndicator.stopAnimating()
+//        tableView.separatorStyle = .singleLine
+//        tableView.backgroundView = nil
+//    }
     
     func initPresenter() {
         presenter.attachView(view: self)
         
-        presenter.getTournaments()
     }
     
     func onGetTournamentSuccess(tournament: Tournaments) {
@@ -79,11 +88,24 @@ extension TournamentsTableViewController: TournamentsView {
     }
     
     func onGetTournamentFailure(error: Error) {
+        showAlert(title: Variables.errorAlertTitle, message: error.localizedDescription, actions:
+            [
+                UIAlertAction(title: Variables.errorAlertOk, style: .default, handler: nil),
+                UIAlertAction(title: Variables.errorAlertRefresh, style: .default, handler: { (action) in
+                    self.presenter.getTournaments()
+                })
+            ]
+        )
         Print.m(error.localizedDescription)
     }
 }
 
 extension TournamentsTableViewController {
+    
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 100
+//    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

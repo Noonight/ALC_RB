@@ -28,6 +28,7 @@
 		187BFB2B22A5569D00E19A3B /* RefereesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187BFB2A22A5569D00E19A3B /* RefereesViewModel.swift */; };
 		187BFB2E22A570F200E19A3B /* RefereeLKTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187BFB2D22A570F200E19A3B /* RefereeLKTableViewCell.swift */; };
 		188F097B227BFF8700B827AC /* CommandAddPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */; };
+		18A82A5B22BB7B26006FA050 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A82A5A22BB7B26006FA050 /* AlertHelper.swift */; };
 		18EB8B9F226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EB8B9E226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift */; };
 		18EB8BA2227056100087BD99 /* CommandAddPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EB8BA1227056100087BD99 /* CommandAddPlayerTableViewCell.swift */; };
 		18FE29BF22AE1C420094C4D8 /* MenuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FE29BE22AE1C420094C4D8 /* MenuHelper.swift */; };
@@ -210,6 +211,7 @@
 		187BFB2A22A5569D00E19A3B /* RefereesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereesViewModel.swift; sourceTree = "<group>"; };
 		187BFB2D22A570F200E19A3B /* RefereeLKTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeLKTableViewCell.swift; sourceTree = "<group>"; };
 		188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerViewModel.swift; sourceTree = "<group>"; };
+		18A82A5A22BB7B26006FA050 /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
 		18EB8B9E226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerTableViewController.swift; sourceTree = "<group>"; };
 		18EB8BA1227056100087BD99 /* CommandAddPlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		18FE29BE22AE1C420094C4D8 /* MenuHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHelper.swift; sourceTree = "<group>"; };
@@ -726,6 +728,7 @@
 				DB59E5BD2228EB5C00D1F62F /* ImageUploadHelper.swift */,
 				DB641F87222BA63D004AC6CB /* Print.swift */,
 				DB641F8B222C0921004AC6CB /* UserLifeHelper.swift */,
+				18A82A5A22BB7B26006FA050 /* AlertHelper.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -1592,6 +1595,7 @@
 				CE916AAC21B4E1FC0025FECF /* ApiRoute.swift in Sources */,
 				DB595C7221EF2214000282F4 /* MatchProtocolViewController.swift in Sources */,
 				1801B87F2271872300BE0F7C /* CommandAddPlayerPresenter.swift in Sources */,
+				18A82A5B22BB7B26006FA050 /* AlertHelper.swift in Sources */,
 				DB6D956421EDC42900E81026 /* EmptyView.swift in Sources */,
 				DBC5C5FA2220128100B0A1B6 /* UITextField.swift in Sources */,
 				CE47323E21A5513500199D79 /* HomeViewController.swift in Sources */,
