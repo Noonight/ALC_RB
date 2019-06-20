@@ -236,7 +236,7 @@ class ApiRequests {
         
     }
     
-    func post_createTeam(token: String, teamInfo: CreateTeamInfo, response_success: @escaping (SoloTeam) -> (), response_failure: @escaping (Error) -> (), response_failure_message: @escaping (ErrorMessage) -> ()) {
+    func post_createTeam(token: String, teamInfo: CreateTeamInfo, response_success: @escaping (SoloTeam) -> (), response_failure: @escaping (Error) -> (), response_failure_message: @escaping (SingleLineMessage) -> ()) {
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in
                 for (key, value) in teamInfo.toParams() {
@@ -259,11 +259,11 @@ class ApiRequests {
                                 response_success(soloTeam)
                             }
                         case .failure(let _):
-                            upload.responseErrorMessage(completionHandler: { (response) in
+                            upload.responseSingleLineMessage(completionHandler: { (response) in
                                 switch response.result {
                                 case .success:
-                                    if let errorMessage = response.result.value {
-                                        response_failure_message(errorMessage)
+                                    if let singleLineMessage = response.result.value {
+                                        response_failure_message(singleLineMessage)
                                     }
                                 case .failure(let error):
                                     response_failure(error)
@@ -294,6 +294,7 @@ class ApiRequests {
             .responseSingleLineMessage(completionHandler: { (response) in
                 switch response.result {
                 case .success:
+                    Print.m(response.result.error)
                     let statusCode = response.response?.statusCode ?? 0
                     switch statusCode {
                     case 200...299:

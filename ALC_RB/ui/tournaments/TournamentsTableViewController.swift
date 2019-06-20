@@ -77,6 +77,10 @@ extension TournamentsTableViewController: TournamentsView {
         self.tournaments = tournament
         updateUI()
     }
+    
+    func onGetTournamentFailure(error: Error) {
+        Print.m(error.localizedDescription)
+    }
 }
 
 extension TournamentsTableViewController {

@@ -11,6 +11,7 @@ import Alamofire
 
 protocol TournamentsView: MvpView, ActivityIndicatorProtocol {
     func onGetTournamentSuccess(tournament: Tournaments)
+    func onGetTournamentFailure(error: Error)
 }
 
 class TournamentsPresenter: MvpPresenter<TournamentsTableViewController> {
@@ -22,10 +23,17 @@ class TournamentsPresenter: MvpPresenter<TournamentsTableViewController> {
         Alamofire
             .request(ApiRoute.getApiURL(.tournaments))
             .responseTournaments { response in
-                if let tournaments = response.result.value {
-                    self.getView().onGetTournamentSuccess(tournament: tournaments)
-                    self.getView().hideLoading()
+                switch response.result {
+                case .success:
+                    if let tournaments = response.result.value {
+                        self.getView().onGetTournamentSuccess(tournament: tournaments)
+                        self.getView().hideLoading()
+                    }
+                case .failure(let error):
+                    Print.m(error)
+                    self.getView().onGetTournamentFailure(error: error)
                 }
+                
         }
         
     }

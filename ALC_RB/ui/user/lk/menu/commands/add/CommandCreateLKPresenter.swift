@@ -19,7 +19,7 @@ protocol CommandCreateLKView : MvpView {
     
     func onCreateTeamSuccess(team: SoloTeam)
     func onCreateTeamFailure(error: Error)
-    func onCreateTeamMessage(message: ErrorMessage)
+    func onCreateTeamMessage(message: SingleLineMessage)
 }
 
 class CommandCreateLKPresenter : MvpPresenter<CommandCreateLKViewController> {
@@ -47,8 +47,8 @@ class CommandCreateLKPresenter : MvpPresenter<CommandCreateLKViewController> {
             self.getView().onCreateTeamSuccess(team: soloTeam)
         }, response_failure: { (error) in
             self.getView().onCreateTeamFailure(error: error)
-        }) { (errorMessage) in
-            self.getView().onCreateTeamMessage(message: errorMessage)
+        }) { (singleLineMessage) in
+            self.getView().onCreateTeamMessage(message: singleLineMessage)
         }
     }
     

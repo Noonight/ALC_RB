@@ -14,7 +14,7 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
     
     @IBOutlet var empty_view: UIView!
     
-    var tableData = UpcomingMatches()
+    var tableData = MmUpcomingMatches()
     
     private let presenter = UpcomingGamesPresenter()
     
@@ -25,11 +25,18 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
         
         initPresenter()
         
-        tableView.register(UpcomingGameTableViewCell.self, forCellReuseIdentifier: UpcomingGameTableViewCell.idCell)
+//        tableView.register(UpcomingGameTableViewCell.self, forCellReuseIdentifier: UpcomingGameTableViewCell.idCell)
+        
+        tableView.tableFooterView = UIView()
     }
     
     func initPresenter() {
         presenter.attachView(view: self)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         presenter.getUpcomingGames()
     }
@@ -80,10 +87,23 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
         tableView.separatorStyle = .singleLine
     }
     
-    func onGetUpcomingMatchesSuccesful(data: UpcomingMatches) {
+    func onGetUpcomingMatchesSuccesful(data: MmUpcomingMatches) {
         tableData = data
         //try! print(tableData.jsonString())
         updateUI()
+    }
+    
+    func onGetUpcomingMatchesFailure(error: Error) {
+        Print.m(error)
+        let alert = UIAlertController(title: "Ошибка!", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (alertAction) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Перезагрузить", style: .default, handler: { (action) in
+            self.presenter.getUpcomingGames()
+        }))
+        self.present(alert, animated: true, completion: nil)
+//        show(alert, sender: self)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -91,18 +111,49 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.matches.count
+        return tableData.matches?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: UpcomingGameTableViewCell.idCell, for: indexPath) as? UpcomingGameTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: UpcomingGameTableViewCell.idCell, for: indexPath) as! UpcomingGameTableViewCell
         
         //cell!.configureCell(data: (tableData?.matches[indexPath.row])!)
         //cell?.data = tableData.matches[indexPath.row]
         
-        cell?.setData(data: tableData.matches[indexPath.row])
-        cell?.data.date = "12.12.2018"
+//        let model = tableData.matches![indexPath.row]
+        if let model = tableData.matches?[indexPath.row] {
+            if let date =  model.date {
+                cell.mDate.text = date.UTCToLocal(from: .utc, to: .local)
+
+            }
+            cell.mTime.text = model.date!.UTCToLocal(from: .utc, to: .localTime)
+            cell.mTour.text = model.tour
+            cell.mPlace.text = model.place
+            cell.mTitleTeam1.text = model.teamOne?.name
+            cell.mTitleTeam2.text = model.teamTwo?.name
+            cell.mScore.text = model.score ?? " - "
+            
+            presenter.findClub(clubId: (model.teamOne?.club)!) { (club) in
+                cell.mImageTeam1.af_setImage(withURL: ApiRoute.getImageURL(image: club!.logo), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true, completion: { (response) in
+                    cell.mImageTeam1.image = response.result.value?.af_imageRoundedIntoCircle()
+                })
+            }
+            
+            presenter.findClub(clubId: (model.teamTwo?.club)!) { (club) in
+                cell.mImageTeam2.af_setImage(withURL: ApiRoute.getImageURL(image: club!.logo), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true, completion: { (response) in
+                    cell.mImageTeam2.image = response.result.value?.af_imageRoundedIntoCircle()
+                })
+            }
+        }
         
-        return cell!
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 98
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

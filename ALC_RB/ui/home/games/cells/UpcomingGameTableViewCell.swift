@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UpcomingGameTableViewCell: UITableViewCell, MvpView {
+class UpcomingGameTableViewCell: UITableViewCell {//, MvpView {
 
     @IBOutlet weak var mDate: UILabel!
     @IBOutlet weak var mTime: UILabel!
@@ -20,57 +20,48 @@ class UpcomingGameTableViewCell: UITableViewCell, MvpView {
     @IBOutlet weak var mTitleTeam2: UILabel!
     @IBOutlet weak var mImageTeam2: UIImageView!
     
-    let presenter = UpcomingGameCellPresenter()
+//    let presenter = UpcomingGameCellPresenter()
     
     static let idCell = "cell_upcoming_game"
     
-    var data = Match()
+//    var data : Match?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        initPresenter()
-    }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        // Initialization code
+//        initPresenter()
+//    }
     
-    func updateUI() {
-        
-//        if (data == nil) {
-//
-//            print("data is nil")
+//    func updateUI() {
+//        if let data = data {
+//            mDate.text = data.date.UTCToLocal(from: .utcTime, to: .local)
+//                    mTime.text = data.date.UTCToLocal(from: .utcTime, to: .localTime)
+//                    mTour.text = data.tour
+//                    mPlace.text = data.place
+////            presenter.getClub1Logo(club: data.teamOne.club)
+//                    mTitleTeam1.text = data.teamOne.name
+//                    mScore.text = data.score
+////            presenter.getClub2Logo(club: data.teamTwo.club)
+//                    mTitleTeam2.text = data.teamTwo.name
 //        }
-        //mDate.text = data.date.UTCToLocal(from: .utcTime, to: .localTime)
-        print("Upcoming cell \(#function)")
-        print(data.date)
-        mDate.text = data.date.UTCToLocal(from: .utcTime, to: .local)
-        mTime.text = data.date.UTCToLocal(from: .utcTime, to: .localTime)
-        mTour.text = data.tour
-        mPlace.text = data.place
-        //mImageTeam1.image = ApiService.getImage(imageName: data.teamOne.club, fun: <#T##(UIImage) -> ()#>)
-        // MARK: - TODO do fix model or create new model for comming matches like in android
-//        presenter.getClub1Logo(club: data.teamOne.club)
-//        mTitleTeam1.text = data.teamOne.name
-        mScore.text = data.score
-//        presenter.getClub2Logo(club: data.teamTwo.club)
-//        mTitleTeam2.text = data.teamTwo.name
-        
-    }
+//    }
 
-    func onGetClub1LogoSuccess(image: UIImage) {
-        mImageTeam1.image = image
-    }
-    
-    func onGetClub2LogoSuccess(image: UIImage) {
-        mImageTeam2.image = image
-    }
-    
-    func initPresenter() {
-        presenter.attachView(view: self)
-        updateUI()
-    }
-    
-    func setData(data: Match) {
-        self.data = data
-        updateUI()
-    }
+//    func onGetClub1LogoSuccess(image: UIImage) {
+//        mImageTeam1.image = image
+//    }
+//
+//    func onGetClub2LogoSuccess(image: UIImage) {
+//        mImageTeam2.image = image
+//    }
+//
+//    func initPresenter() {
+//        presenter.attachView(view: self)
+//        updateUI()
+//    }
+//
+//    func setData(data: Match) {
+//        self.data = data
+//        updateUI()
+//    }
 
 }

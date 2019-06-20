@@ -21,21 +21,21 @@ struct UpcomingMatches: Codable {
 struct Match: Codable {
     var id, date: String
     var stage, played: Bool
-    var tour: String?
+    var tour: String
 //    var playersList: [JSONAny] // mb String
     var playersList: [String]
     var place: String
 //    var winner/*, score*/, fouls, autoGoals: JSONNull? // String without fouls
-    var winner, autoGoals: String?
-    var fouls: JSONNull?
+    var winner, autoGoals: String
+    var fouls: String
     
     var score: String
     var league: String
-//    var teamOne, teamTwo: Team // mb String
-    var teamOne, teamTwo: String
+    var teamOne, teamTwo: Team // mb String
+//    var teamOne, teamTwo: String
 //    var events, referees: [JSONAny] // events and person mb
     var events: [LIEvent]
-    var referees: [Person]
+    var referees: [Referee]
     
     var createdAt, updatedAt: String
     var v: Int
@@ -55,16 +55,16 @@ struct Match: Codable {
 //        self.winner = try container.decodeIfPresent(JSONNull.self, forKey: .winner) ?? JSONNull()
         self.winner = try container.decodeIfPresent(String.self, forKey: .winner) ?? ""
 
-        self.fouls = try container.decodeIfPresent(JSONNull.self, forKey: .fouls) ?? JSONNull()
+        self.fouls = try container.decodeIfPresent(String.self, forKey: .fouls) ?? ""
 //        self.autoGoals = try container.decodeIfPresent(JSONNull.self, forKey: .autoGoals) ?? JSONNull()
         self.autoGoals = try container.decodeIfPresent(String.self, forKey: .autoGoals) ?? ""
 
         self.score = try container.decodeIfPresent(String.self, forKey: .score) ?? ""
         self.league = try container.decodeIfPresent(String.self, forKey: .league) ?? ""
-        self.teamOne = try container.decodeIfPresent(String.self, forKey: .teamOne) ?? ""
-        self.teamTwo = try container.decodeIfPresent(String.self, forKey: .teamTwo) ?? ""
+        self.teamOne = try container.decodeIfPresent(Team.self, forKey: .teamOne) ?? Team()
+        self.teamTwo = try container.decodeIfPresent(Team.self, forKey: .teamTwo) ?? Team()
         self.events = try container.decodeIfPresent([LIEvent].self, forKey: .events) ?? []
-        self.referees = try container.decodeIfPresent([Person].self, forKey: .referees) ?? []
+        self.referees = try container.decodeIfPresent([Referee].self, forKey: .referees) ?? []
         self.createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) ?? ""
         self.updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
         self.v = try container.decodeIfPresent(Int.self, forKey: .v) ?? -1
@@ -243,15 +243,15 @@ extension Match {
         tour = ""
         playersList = []
         place = ""
-        winner = nil
+        winner = ""
         score = ""
-        fouls = nil
-        autoGoals = nil
+        fouls = ""
+        autoGoals = ""
         league = ""
-//        teamOne = Team()
-//        teamTwo = Team()
-        teamOne = ""
-        teamTwo = ""
+        teamOne = Team()
+        teamTwo = Team()
+//        teamOne = ""
+//        teamTwo = ""
         events = []
         referees = []
         createdAt = ""
@@ -290,20 +290,20 @@ extension Match {
 
         //score: JSONNull?? = nil,
         score: String? = "",
-        fouls: JSONNull?? = nil,
+        fouls: String? = "",
 //        autoGoals: JSONNull?? = nil,
         autoGoals: String? = nil,
 
         league: String? = nil,
 //        teamOne: Team? = nil,
 //        teamTwo: Team? = nil,
-        teamOne: String? = nil,
-        teamTwo: String? = nil,
+        teamOne: Team? = nil,
+        teamTwo: Team? = nil,
 
 //        events: [JSONAny]? = nil,
 //        referees: [JSONAny]? = nil,
         events: [LIEvent]? = nil,
-        referees: [Person]? = nil,
+        referees: [Referee]? = nil,
         
         createdAt: String? = nil,
         updatedAt: String? = nil,

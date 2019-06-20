@@ -208,7 +208,8 @@ extension CommandCreateLKViewController : CommandCreateLKView {
         showToast(message: "Ошибка! Что-то пошло не так.")
     }
     
-    func onCreateTeamMessage(message: ErrorMessage) {
+    func onCreateTeamMessage(message: SingleLineMessage) {
+        Print.m(message)
         showToast(message: message.message, seconds: 5)
     }
     

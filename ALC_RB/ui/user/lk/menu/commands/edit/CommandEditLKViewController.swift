@@ -50,7 +50,6 @@ class CommandEditLKViewController: BaseStateViewController {
         commandInvitePlayers.delegate = commandInvPlayersTableViewHelper
         
         commandInvPlayersTableViewHelper.setDeleteBtnProtocol(deleteBtnDelegate: self)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -180,7 +179,8 @@ extension CommandEditLKViewController: OnCommandPlayerDeleteBtnPressedProtocol {
 extension CommandEditLKViewController: OnCommandInvitePlayerDeleteBtnPressedProtocol {
     func onDeleteInvBtnPressed(index: IndexPath, model: CommandInvitePlayersTableViewCell.CellModel) {
         Print.m("player invite table \(index.row)")
-        for i in 0...mutablePlayers.count - 1 {
+        dump(mutablePlayers)
+        for i in 0...mutablePlayers.count/* - 1*/ {
             if model.player?.id == mutablePlayers[i].id {
                 mutablePlayers.remove(at: i)
                 break

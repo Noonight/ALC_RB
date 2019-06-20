@@ -14,8 +14,8 @@ import Foundation
 import Alamofire
 
 struct Tournaments: Codable {
-    let leagues: [League]
-    let count: Int
+    var leagues: [League]
+    var count: Int
     
     enum CodingKeys: String, CodingKey {
         case leagues = "leagues"
@@ -24,23 +24,45 @@ struct Tournaments: Codable {
 }
 
 struct League: Codable {
-    let status: String
-    let matches: [String]
-    let id: String
-    let tourney: String
-    let name: String
-    let beginDate: String
-    let endDate: String
-    let transferBegin: String
-    let transferEnd: String
-    let playersMin: Int
-    let playersMax: Int
-    let playersCapacity: Int
-    let yellowCardsToDisqual: Int?
-    let ageAllowedMin: Int
-    let ageAllowedMax: Int
-    let maxTeams: Int
-    let teams: [Team]
+    var status: String
+    var matches: [String]
+    var id: String
+    var tourney: String
+    var name: String
+    var beginDate: String
+    var endDate: String
+    var transferBegin: String
+    var transferEnd: String
+    var playersMin: Int?
+    var playersMax: Int?
+    var playersCapacity: Int
+    var yellowCardsToDisqual: Int64?
+    var ageAllowedMin: Int
+    var ageAllowedMax: Int
+    var maxTeams: Int
+    var teams: [Team]
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.status = try container.decodeIfPresent(String.self, forKey: .status) ?? ""
+        self.matches = try container.decodeIfPresent([String].self, forKey: .matches) ?? []
+        self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
+        self.tourney = try container.decodeIfPresent(String.self, forKey: .tourney) ?? ""
+        self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
+        self.beginDate = try container.decodeIfPresent(String.self, forKey: .beginDate) ?? ""
+        self.endDate = try container.decodeIfPresent(String.self, forKey: .endDate) ?? ""
+        self.transferBegin = try container.decodeIfPresent(String.self, forKey: .transferBegin) ?? ""
+        self.transferEnd = try container.decodeIfPresent(String.self, forKey: .transferEnd) ?? ""
+        self.playersMin = try container.decodeIfPresent(Int.self, forKey: .playersMin) ?? 0
+        self.playersMax = try container.decodeIfPresent(Int.self, forKey: .playersMax) ?? 0
+        self.playersCapacity = try container.decodeIfPresent(Int.self, forKey: .playersCapacity) ?? 0
+        self.yellowCardsToDisqual = try container.decodeIfPresent(Int64.self, forKey: .yellowCardsToDisqual) ?? 0
+        self.ageAllowedMin = try container.decodeIfPresent(Int.self, forKey: .ageAllowedMin) ?? 0
+        self.ageAllowedMax = try container.decodeIfPresent(Int.self, forKey: .ageAllowedMax) ?? 0
+        self.maxTeams = try container.decodeIfPresent(Int.self, forKey: .maxTeams) ?? 0
+        self.teams = try container.decodeIfPresent([Team].self, forKey: .teams) ?? []
+    }
     
     enum CodingKeys: String, CodingKey {
         case status = "status"
@@ -222,31 +244,51 @@ extension League {
         playersMin: Int? = nil,
         playersMax: Int? = nil,
         playersCapacity: Int? = nil,
-        yellowCardsToDisqual: Int?? = nil,
+        yellowCardsToDisqual: Int64?? = nil,
         ageAllowedMin: Int? = nil,
         ageAllowedMax: Int? = nil,
         maxTeams: Int? = nil,
         teams: [Team]? = nil
         ) -> League {
-        return League(
-            status: status ?? self.status,
-            matches: matches ?? self.matches,
-            id: id ?? self.id,
-            tourney: tourney ?? self.tourney,
-            name: name ?? self.name,
-            beginDate: beginDate ?? self.beginDate,
-            endDate: endDate ?? self.endDate,
-            transferBegin: transferBegin ?? self.transferBegin,
-            transferEnd: transferEnd ?? self.transferEnd,
-            playersMin: playersMin ?? self.playersMin,
-            playersMax: playersMax ?? self.playersMax,
-            playersCapacity: playersCapacity ?? self.playersCapacity,
-            yellowCardsToDisqual: yellowCardsToDisqual ?? self.yellowCardsToDisqual,
-            ageAllowedMin: ageAllowedMin ?? self.ageAllowedMin,
-            ageAllowedMax: ageAllowedMax ?? self.ageAllowedMax,
-            maxTeams: maxTeams ?? self.maxTeams,
-            teams: teams ?? self.teams
-        )
+        var league = League()
+        league.status = status ?? self.status
+        league.matches = matches ?? self.matches
+        league.id = id ?? self.id
+        league.tourney = tourney ?? self.tourney
+        league.name = name ?? self.name
+        league.beginDate = beginDate ?? self.beginDate
+        league.endDate = endDate ?? self.endDate
+        league.transferBegin = transferBegin ?? self.transferBegin
+        league.transferEnd = transferEnd ?? self.transferEnd
+        league.playersMin = playersMin ?? self.playersMin
+        league.playersMax = playersMax ?? self.playersMax
+        league.playersCapacity = playersCapacity ?? self.playersCapacity
+        league.yellowCardsToDisqual = yellowCardsToDisqual ?? self.yellowCardsToDisqual
+        league.ageAllowedMin = ageAllowedMin ?? self.ageAllowedMin
+        league.ageAllowedMax = ageAllowedMax ?? self.ageAllowedMax
+        league.maxTeams = maxTeams ?? self.maxTeams
+        league.teams = teams ?? self.teams
+        
+        return league
+//        return League(
+//            status: status ?? self.status,
+//            matches: matches ?? self.matches,
+//            id: id ?? self.id,
+//            tourney: tourney ?? self.tourney,
+//            name: name ?? self.name,
+//            beginDate: beginDate ?? self.beginDate,
+//            endDate: endDate ?? self.endDate,
+//            transferBegin: transferBegin ?? self.transferBegin,
+//            transferEnd: transferEnd ?? self.transferEnd,
+//            playersMin: playersMin ?? self.playersMin,
+//            playersMax: playersMax ?? self.playersMax,
+//            playersCapacity: playersCapacity ?? self.playersCapacity,
+//            yellowCardsToDisqual: yellowCardsToDisqual ?? self.yellowCardsToDisqual,
+//            ageAllowedMin: ageAllowedMin ?? self.ageAllowedMin,
+//            ageAllowedMax: ageAllowedMax ?? self.ageAllowedMax,
+//            maxTeams: maxTeams ?? self.maxTeams,
+//            teams: teams ?? self.teams
+//        )
     }
     
     func jsonData() throws -> Data {

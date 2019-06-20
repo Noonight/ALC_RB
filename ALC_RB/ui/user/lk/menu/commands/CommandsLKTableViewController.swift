@@ -89,19 +89,20 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         initPresenter()
         
         tableView.backgroundView = UIView()
+        tableView.tableFooterView = UIView()
         
         setEmptyMessage(message: "Вы пока не участвуете ни в одной команде")
         
-        var user = userDefaults.getAuthorizedUser()
-
-        user?.person.participation = [
-            Participation(league: "5be94d1a06af116344942a92", id: "23r42gerwgwscw2r", team: "5be94d1a06af116344942a93"),
-            Participation(league: "5be94d1a06af116344942a92", id: "wdfv34t34bt34", team: "5be94d1a06af116344942aff"),
-            Participation(league: "5be94d1a06af116344942a92", id: "sdf3v4t34tb34", team: "5be94d1a06af116344942ad0"),
-            Participation(league: "5be94d1a06af116344942a92", id: "sdfv34tn3y4esd", team: "5be94d1a06af116344942aad")
-        ]
-
-        userDefaults.setAuthorizedUser(user: user!)
+//        var user = userDefaults.getAuthorizedUser()
+//
+//        user?.person.participation = [
+//            Participation(league: "5be94d1a06af116344942a92", id: "23r42gerwgwscw2r", team: "5be94d1a06af116344942a93"),
+//            Participation(league: "5be94d1a06af116344942a92", id: "wdfv34t34bt34", team: "5be94d1a06af116344942aff"),
+//            Participation(league: "5be94d1a06af116344942a92", id: "sdf3v4t34tb34", team: "5be94d1a06af116344942ad0"),
+//            Participation(league: "5be94d1a06af116344942a92", id: "sdfv34tn3y4esd", team: "5be94d1a06af116344942aad")
+//        ]
+//
+//        userDefaults.setAuthorizedUser(user: user!)
         
         
     }
@@ -203,10 +204,10 @@ class CommandsLKTableViewController: BaseStateTableViewController {
                 if league.id == par.league {
                     for team in league.teams {
                         if team.id == par.team {
-                            let randomNum = Int.random(in: 0 ... 5)
-                            if randomNum > 2 {
-                                arr.append(par)
-                            }
+//                            let randomNum = Int.random(in: 0 ... 5)
+//                            if randomNum > 2 {
+//                                arr.append(par)
+//                            }
                             if team.creator == userDefaults.getAuthorizedUser()?.person.id {
                                 arr.append(par)
                             }
@@ -228,9 +229,9 @@ class CommandsLKTableViewController: BaseStateTableViewController {
                 if league.id == par.league {
                     for team in league.teams {
                         if team.id == par.team {
-//                            if team.creator != userDefaults.getAuthorizedUser()?.person.id {
+                            if team.creator != userDefaults.getAuthorizedUser()?.person.id {
                                 arr.append(par)
-//                            }
+                            }
                         }
                     }
                 }

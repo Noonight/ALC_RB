@@ -19,8 +19,11 @@
 		1801B87F2271872300BE0F7C /* CommandAddPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1801B87E2271872300BE0F7C /* CommandAddPlayerPresenter.swift */; };
 		18076941229E7D4900A10996 /* AddPlayerToTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18076940229E7D4900A10996 /* AddPlayerToTeam.swift */; };
 		18076943229E81A000A10996 /* AddPlayerToTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18076942229E81A000A10996 /* AddPlayerToTeamResponse.swift */; };
+		180F236722B25F1700ADE8FD /* EditScheduleLKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */; };
+		180F236922B262AD00ADE8FD /* EditScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */; };
 		1823DC2622952762000A1055 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1823DC2422952762000A1055 /* LoadingCell.swift */; };
 		1823DC2722952762000A1055 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1823DC2522952762000A1055 /* LoadingCell.xib */; };
+		184A8E4022BB6DB20027BC8E /* mmUpcomingMatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A8E3F22BB6DB20027BC8E /* mmUpcomingMatches.swift */; };
 		187BFB2922A540DC00E19A3B /* RefereesLKTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187BFB2822A540DC00E19A3B /* RefereesLKTableViewController.swift */; };
 		187BFB2B22A5569D00E19A3B /* RefereesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187BFB2A22A5569D00E19A3B /* RefereesViewModel.swift */; };
 		187BFB2E22A570F200E19A3B /* RefereeLKTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187BFB2D22A570F200E19A3B /* RefereeLKTableViewCell.swift */; };
@@ -198,8 +201,11 @@
 		18063EDC2282C49B0072FACD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		18076940229E7D4900A10996 /* AddPlayerToTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerToTeam.swift; sourceTree = "<group>"; };
 		18076942229E81A000A10996 /* AddPlayerToTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerToTeamResponse.swift; sourceTree = "<group>"; };
+		180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleLKViewController.swift; sourceTree = "<group>"; };
+		180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewModel.swift; sourceTree = "<group>"; };
 		1823DC2422952762000A1055 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		1823DC2522952762000A1055 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
+		184A8E3F22BB6DB20027BC8E /* mmUpcomingMatches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mmUpcomingMatches.swift; sourceTree = "<group>"; };
 		187BFB2822A540DC00E19A3B /* RefereesLKTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereesLKTableViewController.swift; sourceTree = "<group>"; };
 		187BFB2A22A5569D00E19A3B /* RefereesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereesViewModel.swift; sourceTree = "<group>"; };
 		187BFB2D22A570F200E19A3B /* RefereeLKTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeLKTableViewCell.swift; sourceTree = "<group>"; };
@@ -415,6 +421,15 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
+		180F236522B25EA000ADE8FD /* edit */ = {
+			isa = PBXGroup;
+			children = (
+				180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */,
+				180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */,
+			);
+			path = edit;
+			sourceTree = "<group>";
+		};
 		1823DC21229526F6000A1055 /* loading cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -561,6 +576,7 @@
 				DB59E5BA222829EA00D1F62F /* post */,
 				DBD4D024225F946D00C8C8B3 /* EditTeamResponse.swift */,
 				18076942229E81A000A10996 /* AddPlayerToTeamResponse.swift */,
+				184A8E3F22BB6DB20027BC8E /* mmUpcomingMatches.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -835,6 +851,7 @@
 				DB4ACEE822AF711A00B9C58A /* ScheduleRefTableViewController.swift */,
 				DB495B7822AF77CB00FCC6F5 /* ScheduleRefViewModel.swift */,
 				DB495B7C22AFE57700FCC6F5 /* cell */,
+				180F236522B25EA000ADE8FD /* edit */,
 			);
 			path = schedule;
 			sourceTree = "<group>";
@@ -1320,7 +1337,7 @@
 					CEA6EB9721A53CFE008F874D = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1010;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -1370,7 +1387,8 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
@@ -1383,6 +1401,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
@@ -1393,7 +1412,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C11ED1E2DE4486EC022A9E5B /* [CP] Check Pods Manifest.lock */ = {
@@ -1434,6 +1453,7 @@
 				DBB208F2221316D90010B600 /* RefereeTeamPresenter.swift in Sources */,
 				DB4A789421C1084B0071BA8F /* TournamentsPresenter.swift in Sources */,
 				DBF4F00822157BF900066BE3 /* ScoreMatchPresenter.swift in Sources */,
+				180F236722B25F1700ADE8FD /* EditScheduleLKViewController.swift in Sources */,
 				DB641F88222BA63D004AC6CB /* Print.swift in Sources */,
 				DB6AA18321C296DE007D4693 /* ClubTableViewCell.swift in Sources */,
 				DBE0E7A7223BDE5800CC0EE2 /* BaseStateTableViewController.swift in Sources */,
@@ -1453,6 +1473,7 @@
 				DBC5C5FC222015A300B0A1B6 /* UIViewController.swift in Sources */,
 				DB8A689F224E0D5C00D3972A /* TournamentPickerView.swift in Sources */,
 				DB78E13F21D529DC001C885D /* EmptyProtocol.swift in Sources */,
+				180F236922B262AD00ADE8FD /* EditScheduleViewModel.swift in Sources */,
 				DB5BDB9B2247CD230014C003 /* CommandsLKPresenter.swift in Sources */,
 				DB2A35DA21CA222B00E9E2C5 /* Players.swift in Sources */,
 				DBB208EA221192F90010B600 /* TeamProtocolPresenter.swift in Sources */,
@@ -1484,6 +1505,7 @@
 				DBA69215221E95C400BEFB26 /* UIColor.swift in Sources */,
 				DB59433821F219FE00945601 /* PlayersTeamLeagueDetailViewController.swift in Sources */,
 				DB99BB71224CD60C00EE30D7 /* Advertising.swift in Sources */,
+				184A8E4022BB6DB20027BC8E /* mmUpcomingMatches.swift in Sources */,
 				DB641F8A222BB283004AC6CB /* UserLKPresenter.swift in Sources */,
 				DB11CC8D21C22F890083773E /* ScheduleTableViewController.swift in Sources */,
 				DBC347612216F34B001D9B7D /* StringEx.swift in Sources */,
@@ -1740,15 +1762,15 @@
 			baseConfigurationReference = 86FFA841A8CBD98081CB4DE1 /* Pods-ALC_RB.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2Y3DD742JQ;
 				INFOPLIST_FILE = ALC_RB/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.baikalweb.alf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "ru.baikalweb.alf AppStore";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1759,15 +1781,15 @@
 			baseConfigurationReference = E936F5C8B72023C5136763E0 /* Pods-ALC_RB.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2Y3DD742JQ;
 				INFOPLIST_FILE = ALC_RB/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ru.baikalweb.alf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "ru.baikalweb.alf AppStore";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

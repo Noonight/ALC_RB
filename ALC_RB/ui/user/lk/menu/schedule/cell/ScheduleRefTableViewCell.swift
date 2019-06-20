@@ -53,7 +53,7 @@ class ScheduleRefTableViewCell: UITableViewCell {
     
     func configure(with cellModel: CellModel) {
         reset()
-        Print.m(cellModel)
+//        Print.m(cellModel)
         date_label.text = cellModel.activeMatch.date.UTCToLocal(from: .utc, to: .localTime)
         time_label.text = cellModel.activeMatch.date.UTCToLocal(from: .utc, to: .local)
         league_label.text = cellModel.activeMatch.tour
