@@ -29,12 +29,12 @@ class PlayersTeamLeagueDetailViewController: UIViewController {
     }
     
     func initView() {
-        presenter.getClubOwnerImage(club: team.club, get_image: { (image) in
+        presenter.getClubOwnerImage(club: team.club!, get_image: { (image) in
             self.photo_trainer_img.image = image//.af_imageRoundedIntoCircle()
         }) {
             // noting but if something went wrong make it
         }
-        presenter.getTeamCreatorName(creator: team.creator) { (name) in
+        presenter.getTeamCreatorName(creator: team.creator!) { (name) in
             self.name_trainer_label.text = name
         }
         
@@ -69,13 +69,13 @@ extension PlayersTeamLeagueDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return team.players.count
+        return team.players!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId) as! PlayersTeamLeagueDetailTableViewCell
         
-        let model = team.players[indexPath.row]
+        let model = team.players![indexPath.row]
         
         configureCell(cell: cell, model: model)
         

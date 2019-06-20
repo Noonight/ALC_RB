@@ -27,6 +27,8 @@ class TournamentsTableViewController: BaseStateTableViewController {
     
     let cellId = "cell_tournament"
     
+    var firstLoad = true
+    
 //    let activityIndicator = UIActivityIndicatorView(style: .gray)
     
     override func viewDidLoad() {
@@ -45,7 +47,13 @@ class TournamentsTableViewController: BaseStateTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.getTournaments()
+        if firstLoad {
+            presenter.getTournaments(refreshing: firstLoad)
+        } else {
+            presenter.getTournaments(refreshing: firstLoad)
+        }
+//        presenter.getTournaments()
+        
     }
     
     private func initView() {
@@ -84,18 +92,25 @@ extension TournamentsTableViewController: TournamentsView {
     
     func onGetTournamentSuccess(tournament: Tournaments) {
         self.tournaments = tournament
+        if firstLoad {
+            firstLoad = !firstLoad
+        }
         updateUI()
     }
     
     func onGetTournamentFailure(error: Error) {
-        showAlert(title: Variables.errorAlertTitle, message: error.localizedDescription, actions:
-            [
-                UIAlertAction(title: Variables.errorAlertOk, style: .default, handler: nil),
-                UIAlertAction(title: Variables.errorAlertRefresh, style: .default, handler: { (action) in
-                    self.presenter.getTournaments()
-                })
-            ]
-        )
+//        showAlert(title: Variables.errorAlertTitle, message: error.localizedDescription, actions:
+//            [
+//                UIAlertAction(title: Variables.errorAlertOk, style: .default, handler: nil),
+//                UIAlertAction(title: Variables.errorAlertRefresh, style: .default, handler: { (action) in
+//                    self.presenter.getTournaments()
+//                })
+//            ]
+//        )
+        showRefreshAlert(message: error.localizedDescription) {
+            self.firstLoad = true
+            self.presenter.getTournaments(refreshing: self.firstLoad)
+        }
         Print.m(error.localizedDescription)
     }
 }
@@ -129,6 +144,7 @@ extension TournamentsTableViewController {
         //cell.date?.text = "10.03.2018 - 10.04.2018"
         //cell.commandNum?.text = "Количество команд: \(tournaments.leagues[indexPath.row].maxTeams)"
         cell.commandNum?.text = String(model.maxTeams)
+        cell.img?.image = #imageLiteral(resourceName: "ic_con")
         if (model.status == tournamentFinished) {
             cell.img?.image = UIImage(named: "ic_fin")
             //cell.status.text = "Завершен"

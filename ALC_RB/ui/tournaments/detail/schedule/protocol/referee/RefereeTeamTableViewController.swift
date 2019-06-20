@@ -57,6 +57,7 @@ class RefereeTeamTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
+        tableView.tableFooterView = UIView()
         prepareTableModel(destinationData: destinationData)
     }
     

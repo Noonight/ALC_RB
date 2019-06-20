@@ -32,6 +32,8 @@ class ScheduleTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.tableFooterView = UIView()
+        
         initPresenter()
     }
     
@@ -41,7 +43,10 @@ class ScheduleTableViewController: UITableViewController {
     
     func leagueInfoMatchesIsEmpty() -> Bool {
         //debugPrint(leagueDetailModel.leagueInfo.league.matches)
-        print (leagueDetailModel.leagueInfo.league.matches.isEmpty ? " League matches is empty --- " : " League matches not empty +++ ")
+//        Print.m(leagueDetailModel.leagueInfo.league.matches.isEmpty ? " League matches is empty --- " : " League matches not empty +++ ")
+//        dump(leagueDetailModel.league.matches)
+        Print.m("count of matches is \(leagueDetailModel.league.matches.count)")
+
         if leagueDetailModel.league.matches.count > 0 {
             return false
         } else {
@@ -145,7 +150,7 @@ extension ScheduleTableViewController {
             let cellIndex = tableView.indexPathForSelectedRow?.row
         {
             destination.leagueDetailModel = self.leagueDetailModel
-            destination.match = self.leagueDetailModel.leagueInfo.league.matches[cellIndex]
+            destination.match = self.leagueDetailModel.leagueInfo.league.matches![cellIndex]
             //destination.scheduleCell = self.scheduleCell
         }
     }
@@ -157,14 +162,16 @@ extension ScheduleTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return leagueDetailModel.leagueInfo.league.matches.count
+//        return leagueDetailModel.leagueInfo.league.matches.count
+        return (leagueDetailModel.leagueInfo.league.matches?.count)!
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ScheduleTableViewCell
         
         let model = leagueDetailModel.leagueInfo.league
-        let match = leagueDetailModel.leagueInfo.league.matches[indexPath.row]
+//        Print.m(model)
+        let match = (leagueDetailModel.leagueInfo.league.matches?[indexPath.row])!
         
         configureCell(cell, model, match)
         
@@ -179,8 +186,8 @@ extension ScheduleTableViewController {
             cell.accessoryType = .none
         }
         
-        cell.mDate.text = match.date.UTCToLocal(from: .utc, to: .local)
-        cell.mTime.text = match.date.UTCToLocal(from: .utcTime, to: .localTime)
+        cell.mDate.text = match.date?.UTCToLocal(from: .utc, to: .local)
+        cell.mTime.text = match.date?.UTCToLocal(from: .utcTime, to: .localTime)
         cell.mTour.text = match.tour
         cell.mPlace.text = match.place
         
@@ -194,18 +201,20 @@ extension ScheduleTableViewController {
         
         cell.mScore.text = match.score ?? "-"
         
-        presenter.getClubImage(id: getClubIdByTeamId(match.teamOne, league: model)) { (image) in
+        
+        
+        presenter.getClubImage(id: getClubIdByTeamId(match.teamOne ?? "", league: model)) { (image) in
             cell.mImageTeam1.image = image.af_imageRoundedIntoCircle()
             //self.scheduleCell.mImageTeam1 = image
         }
-        presenter.getClubImage(id: getClubIdByTeamId(match.teamTwo, league: model)) { (image) in
+        presenter.getClubImage(id: getClubIdByTeamId(match.teamTwo ?? "", league: model)) { (image) in
             cell.mImageTeam2.image = image.af_imageRoundedIntoCircle()
             //self.scheduleCell.mImageTeam2 = image
         }
     }
     
     func getClubIdByTeamId(_ teamId: String, league: LILeague) -> String {
-        return league.teams.filter({ (team) -> Bool in
+        return league.teams?.filter({ (team) -> Bool in
             return team.id == teamId
         }).first?.id ?? "club id \n not found"
     }
@@ -213,11 +222,11 @@ extension ScheduleTableViewController {
     func getTeamTitle(league: LILeague, match: LIMatch, team: TeamEnum) -> String {
         switch team {
         case .one:
-            return league.teams.filter({ (team) -> Bool in
+            return league.teams?.filter({ (team) -> Bool in
                 return team.id == match.teamOne
             }).first?.name ?? "Team name \n one not found"
         case .two:
-            return league.teams.filter({ (team) -> Bool in
+            return league.teams?.filter({ (team) -> Bool in
                 return team.id == match.teamTwo
             }).first?.name ?? "Team name \n two not found"
         }
@@ -236,7 +245,7 @@ extension ScheduleTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if leagueDetailModel.leagueInfo.league.matches[indexPath.row].played {
+        if (leagueDetailModel.leagueInfo.league.matches?[indexPath.row].played)! {
             return indexPath
         }
         return nil

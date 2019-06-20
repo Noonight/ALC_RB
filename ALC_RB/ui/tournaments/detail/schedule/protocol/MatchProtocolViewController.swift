@@ -49,10 +49,10 @@ class MatchProtocolViewController: UIViewController {
         
         teamTwoTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .two)
         
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamOne, league: leagueDetailModel.leagueInfo.league)) { (image) in
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamOne!, league: leagueDetailModel.leagueInfo.league)) { (image) in
             self.teamOneLogo.image = image.af_imageRoundedIntoCircle()
         }
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamTwo, league: leagueDetailModel.leagueInfo.league)) { (image) in
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamTwo!, league: leagueDetailModel.leagueInfo.league)) { (image) in
             self.teamTwoLogo.image = image.af_imageRoundedIntoCircle()
         }
         
@@ -110,7 +110,7 @@ class MatchProtocolViewController: UIViewController {
         switch destination {
         case is TeamProtocolTableViewController:
             let controller = destination as! TeamProtocolTableViewController
-            controller.players = getPlayersTeam(team: match.teamOne)
+            controller.players = getPlayersTeam(team: match.teamOne!)
             controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
         case is RefereeTeamTableViewController:
             let controller = destination as! RefereeTeamTableViewController
@@ -133,10 +133,10 @@ class MatchProtocolViewController: UIViewController {
             let controller = destination as! TeamProtocolTableViewController
             switch team {
             case .one:
-                controller.players = getPlayersTeam(team: match.teamOne)
+                controller.players = getPlayersTeam(team: match.teamOne!)
                 controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
             case .two:
-                controller.players = getPlayersTeam(team: match.teamTwo)
+                controller.players = getPlayersTeam(team: match.teamTwo!)
                 controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .two)
             }
         default:
@@ -145,7 +145,7 @@ class MatchProtocolViewController: UIViewController {
     }
     
     func getPlayersTeam(team id: String) -> [LIPlayer] {
-        return (leagueDetailModel.leagueInfo.league.teams.filter({ (team) -> Bool in
+        return (leagueDetailModel.leagueInfo.league.teams?.filter({ (team) -> Bool in
             return team.id == id
         }).first?.players)!
     }

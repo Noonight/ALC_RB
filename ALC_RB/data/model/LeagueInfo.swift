@@ -22,23 +22,23 @@ struct LILeagueInfo: Codable {
 }
 
 struct LILeague: Codable {
-    let status: String
-    let matches: [LIMatch]
-    let id: String
-    let tourney: String
-    let name: String
-    let beginDate: String
-    let endDate: String
-    let maxTeams: Int
-    let teams: [LITeam]
-    let transferBegin: String
-    let transferEnd: String
-    let playersMin: Int
-    let playersMax: Int
-    let playersCapacity: Int
-    let yellowCardsToDisqual: Int
-    let ageAllowedMin: Int
-    let ageAllowedMax: Int
+    let status: String?
+    let matches: [LIMatch]?
+    let id: String?
+    let tourney: String?
+    let name: String?
+    let beginDate: String?
+    let endDate: String?
+    let maxTeams: Int?
+    let teams: [LITeam]?
+    let transferBegin: String?
+    let transferEnd: String?
+    let playersMin: Int?
+    let playersMax: Int?
+    let playersCapacity: Int?
+    let yellowCardsToDisqual: Int?
+    let ageAllowedMin: Int?
+    let ageAllowedMax: Int?
     
     enum CodingKeys: String, CodingKey {
         case status = "status"
@@ -62,7 +62,7 @@ struct LILeague: Codable {
 }
 
 struct LIMatch: Codable {
-    let date: String
+    let date: String?
     let stage: Bool
     let played: Bool
     let tour: String
@@ -74,8 +74,8 @@ struct LIMatch: Codable {
     let autoGoals: String?
     let id: String
     let league: String
-    let teamOne: String
-    let teamTwo: String
+    let teamOne: String?
+    let teamTwo: String?
     var events: [LIEvent]
     let referees: [LIReferee]
     let createdAt: String
@@ -180,22 +180,22 @@ struct LIReferee: Codable {
 }
 
 struct LITeam: Codable {
-    let status: String
-    let place: Int
+    let status: String?
+    let place: Int?
     let playoffPlace: JSONNull?
-    let madeToPlayoff: Bool
-    let group: String
-    let goals: Int
-    let goalsReceived: Int
-    let wins: Int
-    let losses: Int
-    let draws: Int
-    let groupScore: Int
-    let players: [LIPlayer]
-    let id: String
-    let name: String
-    let creator: String
-    let club: String
+    let madeToPlayoff: Bool?
+    let group: String?
+    let goals: Int?
+    let goalsReceived: Int?
+    let wins: Int?
+    let losses: Int?
+    let draws: Int?
+    let groupScore: Int?
+    let players: [LIPlayer]?
+    let id: String?
+    let name: String?
+    let creator: String?
+    let club: String?
     
     enum CodingKeys: String, CodingKey {
         case status = "status"

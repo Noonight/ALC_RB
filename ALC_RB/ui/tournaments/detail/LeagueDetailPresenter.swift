@@ -11,6 +11,7 @@ import Alamofire
 
 protocol LeagueDetailView: MvpView {
     func onGetLeagueInfoSuccess(leagueInfo: LILeagueInfo)
+    func onGetLeagueInfoFailure(error: Error)
 }
 
 class LeagueDetailPresenter: MvpPresenter<LeagueDetailViewController> {
@@ -19,12 +20,19 @@ class LeagueDetailPresenter: MvpPresenter<LeagueDetailViewController> {
         Alamofire
             .request(ApiRoute.getApiLeagueURL(id))
             .responseLILeagueInfo { response in
-                if let leagueInfo = response.result.value {
-                    debugPrint("getting league info about id : \(id) completed")
-                    //try! debugPrint(leagueInfo.jsonString())
-                    self.getView().onGetLeagueInfoSuccess(leagueInfo: leagueInfo)
-                    debugPrint("on Get League Info Success")
+                switch response.result {
+                case .success:
+                    if let leagueInfo = response.result.value {
+                        debugPrint("getting league info about id : \(id) completed")
+                        //try! debugPrint(leagueInfo.jsonString())
+                        self.getView().onGetLeagueInfoSuccess(leagueInfo: leagueInfo)
+                        debugPrint("on Get League Info Success")
+                    }
+                case .failure(let error):
+                    Print.m(error)
+                    self.getView().onGetLeagueInfoFailure(error: error)
                 }
+                
         }
     }
     

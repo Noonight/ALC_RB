@@ -77,14 +77,14 @@ class ScoreMatchTableViewController: UITableViewController {
         //scheduleCell.mTitleTeam2 = titleTeamTwo
         
 //        footer_score_label.text = match.score ?? "-"
-        footer_score_label.text = parseScoreString(score: match.score ?? "-")
+        footer_score_label.text = parseScoreString(score: match.score ?? "0:0")
 //        footer_score_label.text = getScore(teamOne: teamOneCount, teamTwo: teamTwoCount)
         
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamOne, league: league)) { (image) in
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamOne!, league: league)) { (image) in
             self.footer_team_one_image.image = image.af_imageRoundedIntoCircle()
             //self.scheduleCell.mImageTeam1 = image
         }
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamTwo, league: league)) { (image) in
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamTwo!, league: league)) { (image) in
             self.footer_team_two_image.image = image.af_imageRoundedIntoCircle()
             //self.scheduleCell.mImageTeam2 = image
         }
@@ -163,11 +163,11 @@ class ScoreMatchTableViewController: UITableViewController {
         
         cell.score_label.text = getScore(teamOne: teamOneCount, teamTwo: teamTwoCount)
         
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamOne, league: league)) { (image) in
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamOne!, league: league)) { (image) in
             cell.team_one_image.image = image.af_imageRoundedIntoCircle()
             //self.scheduleCell.mImageTeam1 = image
         }
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamTwo, league: league)) { (image) in
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamTwo!, league: league)) { (image) in
             cell.team_two_image.image = image.af_imageRoundedIntoCircle()
             //self.scheduleCell.mImageTeam2 = image
         }
@@ -184,31 +184,31 @@ class ScoreMatchTableViewController: UITableViewController {
         let teamOne = match.teamOne
         let teamTwo = match.teamTwo
         
-        let teamOnePlayers = league.teams.filter { (team) -> Bool in
+        let teamOnePlayers = league.teams?.filter { (team) -> Bool in
             return team.id == teamOne
         }
-        let teamTwoPlayers = league.teams.filter { (team) -> Bool in
+        let teamTwoPlayers = league.teams?.filter { (team) -> Bool in
             return team.id == teamTwo
         }
         
         var result = teamOne
         
-        if (teamOnePlayers.contains(where: { (team) -> Bool in
-            return team.players.contains(where: { (player) -> Bool in
+        if (teamOnePlayers?.contains(where: { (team) -> Bool in
+            return team.players!.contains(where: { (player) -> Bool in
                 return player.id == playerId
             })
-        })) {
+        }) ?? false) {
             result = teamOne
         }
-        if (teamTwoPlayers.contains(where: { (team) -> Bool in
-            return team.players.contains(where: { (player) -> Bool in
+        if (teamTwoPlayers?.contains(where: { (team) -> Bool in
+            return team.players!.contains(where: { (player) -> Bool in
                 return player.id == playerId
             })
-        })) {
+        }) ?? false) {
             result = teamTwo
         }
         
-        return result
+        return result!
     }
     
     // MARK: - Table view delegate

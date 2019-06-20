@@ -25,6 +25,11 @@ protocol LeagueMainProtocol {
 }
 
 class LeagueDetailViewController: UIViewController {
+    private enum Variables {
+        static let errorAlertTitle = "Ошибка!"
+        static let errorAlertOk = "Ок"
+        static let errorAlertRefresh = "Перезагрузка"
+    }
     
     private lazy var scheduleTable: ScheduleTableViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -32,6 +37,7 @@ class LeagueDetailViewController: UIViewController {
         var viewController = storyboard.instantiateViewController(withIdentifier: "ScheduleTableViewController") as! ScheduleTableViewController
         
         viewController.leagueDetailModel.league = self.leagueDetailModel.league
+//        dump(self.leagueDetailModel)
         viewController.leagueDetailModel.leagueInfo = self.leagueDetailModel.leagueInfo
         
         //self.add(viewController)
@@ -80,6 +86,7 @@ class LeagueDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         initView()
+        presenter.getTournamentInfo(id: leagueDetailModel.league.id)
     }
     
     func initView() {
@@ -139,17 +146,31 @@ class LeagueDetailViewController: UIViewController {
 }
 
 extension LeagueDetailViewController: LeagueDetailView {
+    func onGetLeagueInfoFailure(error: Error) {
+//        showAlert(title: Variables.errorAlertTitle, message: error.localizedDescription, actions:
+//            [
+//                UIAlertAction(title: Variables.errorAlertOk, style: .default, handler: nil),
+//                UIAlertAction(title: Variables.errorAlertRefresh, style: .default, handler: { (alertAction) in
+//
+//                })
+//            ]
+//        )
+        showRefreshAlert(message: error.localizedDescription) {
+            self.presenter.getTournamentInfo(id: self.leagueDetailModel.league.id)
+        }
+    }
+    
     func onGetLeagueInfoSuccess(leagueInfo: LILeagueInfo) {
         self.leagueDetailModel.leagueInfo = leagueInfo
+//        self.scheduleTable.leagueDetailModel.leagueInfo = leagueInfo
         //scheduleTable.leagueDetailModel = self.leagueDetailModel
         //print(leagueInfo)
         //try! debugPrint(leagueDetailModel.leagueInfo.jsonString())
+        scheduleTable.updateData(leagueDetailModel: self.leagueDetailModel)
         updateUI()
     }
     
     func initPresenter() {
         presenter.attachView(view: self)
-        
-        presenter.getTournamentInfo(id: leagueDetailModel.league.id)
     }
 }

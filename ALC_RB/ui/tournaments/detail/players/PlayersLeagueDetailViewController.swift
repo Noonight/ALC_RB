@@ -46,8 +46,8 @@ class PlayersLeagueDetailViewController: UIViewController {
         super.viewDidLoad()
         initPresenter()
         
-        for i in leagueDetailModel.leagueInfo.league.teams {
-            playersArray += i.players
+        for i in leagueDetailModel.leagueInfo.league.teams! {
+            playersArray += i.players!
             //print("\(i.players)")
         }
         
@@ -263,10 +263,10 @@ extension PlayersLeagueDetailViewController: UITableViewDataSource {
     
     func getClubByUserId(user id: String) -> String {
         let teams = leagueDetailModel.leagueInfo.league.teams
-        for i in teams {
-            for j in i.players {
+        for i in teams! {
+            for j in i.players! {
                 if j.playerId == id {
-                    return i.club
+                    return i.club!
                 }
             }
         }

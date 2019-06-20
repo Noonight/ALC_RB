@@ -44,8 +44,8 @@ extension MatchesTeamLeagueDetailTableViewController {
     }
     
     func configureCell(cell: MatchesTeamLeagueDetailTableViewCell, match: LIMatch, league: LILeague) {
-        cell.mDate.text = match.date.UTCToLocal(from: .utc, to: .local)
-        cell.mTime.text = match.date.UTCToLocal(from: .utcTime, to: .localTime)
+        cell.mDate.text = match.date?.UTCToLocal(from: .utc, to: .local)
+        cell.mTime.text = match.date?.UTCToLocal(from: .utcTime, to: .localTime)
         cell.mTour.text = match.tour
         cell.mPlace.text = match.place
         
@@ -53,16 +53,16 @@ extension MatchesTeamLeagueDetailTableViewController {
         cell.mTitleTeam2.text = getTeamTitle(league: league, match: match, team: .two)
         cell.mScore.text = match.score ?? "-"
         
-        presenter.getClubImage(id: getClubIdByTeamId(match.teamOne, league: league)) { (image) in
+        presenter.getClubImage(id: getClubIdByTeamId(match.teamOne!, league: league)) { (image) in
             cell.mImageTeam1.image = image.af_imageRoundedIntoCircle()
         }
-        presenter.getClubImage(id: getClubIdByTeamId(match.teamTwo, league: league)) { (image) in
+        presenter.getClubImage(id: getClubIdByTeamId(match.teamTwo!, league: league)) { (image) in
             cell.mImageTeam2.image = image.af_imageRoundedIntoCircle()
         }
     }
     
     func getClubIdByTeamId(_ teamId: String, league: LILeague) -> String {
-        return league.teams.filter({ (team) -> Bool in
+        return league.teams?.filter({ (team) -> Bool in
             return team.id == teamId
         }).first?.id ?? "club id \n not found"
     }
@@ -70,11 +70,11 @@ extension MatchesTeamLeagueDetailTableViewController {
     func getTeamTitle(league: LILeague, match: LIMatch, team: TeamEnum) -> String {
         switch team {
         case .one:
-            return league.teams.filter({ (team) -> Bool in
+            return league.teams?.filter({ (team) -> Bool in
                 return team.id == match.teamOne
             }).first?.name ?? "Team name \n one not found"
         case .two:
-            return league.teams.filter({ (team) -> Bool in
+            return league.teams?.filter({ (team) -> Bool in
                 return team.id == match.teamTwo
             }).first?.name ?? "Team name \n two not found"
         }
