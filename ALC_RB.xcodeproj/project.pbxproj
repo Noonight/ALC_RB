@@ -24,6 +24,9 @@
 		1823DC2622952762000A1055 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1823DC2422952762000A1055 /* LoadingCell.swift */; };
 		1823DC2722952762000A1055 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1823DC2522952762000A1055 /* LoadingCell.xib */; };
 		184A8E4022BB6DB20027BC8E /* mmUpcomingMatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A8E3F22BB6DB20027BC8E /* mmUpcomingMatches.swift */; };
+		18717A5422BCD46600CD36C9 /* MyMatchesRefTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18717A5322BCD46600CD36C9 /* MyMatchesRefTableViewController.swift */; };
+		18717A5622BCD55100CD36C9 /* MyMatchesRefViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18717A5522BCD55100CD36C9 /* MyMatchesRefViewModel.swift */; };
+		18717A5922BCD58500CD36C9 /* MyMatchesRefTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18717A5822BCD58500CD36C9 /* MyMatchesRefTableViewCell.swift */; };
 		187BFB2922A540DC00E19A3B /* RefereesLKTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187BFB2822A540DC00E19A3B /* RefereesLKTableViewController.swift */; };
 		187BFB2B22A5569D00E19A3B /* RefereesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187BFB2A22A5569D00E19A3B /* RefereesViewModel.swift */; };
 		187BFB2E22A570F200E19A3B /* RefereeLKTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187BFB2D22A570F200E19A3B /* RefereeLKTableViewCell.swift */; };
@@ -208,6 +211,9 @@
 		1823DC2422952762000A1055 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		1823DC2522952762000A1055 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		184A8E3F22BB6DB20027BC8E /* mmUpcomingMatches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mmUpcomingMatches.swift; sourceTree = "<group>"; };
+		18717A5322BCD46600CD36C9 /* MyMatchesRefTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMatchesRefTableViewController.swift; sourceTree = "<group>"; };
+		18717A5522BCD55100CD36C9 /* MyMatchesRefViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMatchesRefViewModel.swift; sourceTree = "<group>"; };
+		18717A5822BCD58500CD36C9 /* MyMatchesRefTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMatchesRefTableViewCell.swift; sourceTree = "<group>"; };
 		187BFB2822A540DC00E19A3B /* RefereesLKTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereesLKTableViewController.swift; sourceTree = "<group>"; };
 		187BFB2A22A5569D00E19A3B /* RefereesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereesViewModel.swift; sourceTree = "<group>"; };
 		187BFB2D22A570F200E19A3B /* RefereeLKTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeLKTableViewCell.swift; sourceTree = "<group>"; };
@@ -441,6 +447,24 @@
 				1823DC2522952762000A1055 /* LoadingCell.xib */,
 			);
 			path = "loading cell";
+			sourceTree = "<group>";
+		};
+		18717A5222BCD43800CD36C9 /* my matches */ = {
+			isa = PBXGroup;
+			children = (
+				18717A5322BCD46600CD36C9 /* MyMatchesRefTableViewController.swift */,
+				18717A5522BCD55100CD36C9 /* MyMatchesRefViewModel.swift */,
+				18717A5722BCD57100CD36C9 /* cell */,
+			);
+			path = "my matches";
+			sourceTree = "<group>";
+		};
+		18717A5722BCD57100CD36C9 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				18717A5822BCD58500CD36C9 /* MyMatchesRefTableViewCell.swift */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 		187BFB2722A5409700E19A3B /* referees */ = {
@@ -1185,6 +1209,7 @@
 				DB5BDB972247CB990014C003 /* commands */,
 				DB4ACEE722AF6F6F00B9C58A /* schedule */,
 				187BFB2722A5409700E19A3B /* referees */,
+				18717A5222BCD43800CD36C9 /* my matches */,
 			);
 			path = menu;
 			sourceTree = "<group>";
@@ -1556,6 +1581,7 @@
 				DB6AA17E21C294A4007D4693 /* ClubsTableViewController.swift in Sources */,
 				DB5AAC082236A1380097963E /* InvitationLKPresenter.swift in Sources */,
 				DB5AAC0B2236A1AE0097963E /* InvitationTableViewCell.swift in Sources */,
+				18717A5622BCD55100CD36C9 /* MyMatchesRefViewModel.swift in Sources */,
 				DB87FE812243D9E2001EBA7C /* EmptyViewNew.swift in Sources */,
 				DBD4D025225F946D00C8C8B3 /* EditTeamResponse.swift in Sources */,
 				049B9ACF21F6F6E300CDD104 /* PlayersTeamLeagueDetailTableViewCell.swift in Sources */,
@@ -1606,6 +1632,7 @@
 				DB4B1A4E224114D100A9FB97 /* EditClubInfo.swift in Sources */,
 				187BFB2E22A570F200E19A3B /* RefereeLKTableViewCell.swift in Sources */,
 				DB2A35E021CA28A100E9E2C5 /* PlayerTableViewCell.swift in Sources */,
+				18717A5922BCD58500CD36C9 /* MyMatchesRefTableViewCell.swift in Sources */,
 				DB2DEBBC222CE84B003FE599 /* EditedProfilePerson.swift in Sources */,
 				DB8D30C022537328006355A7 /* SingleLineMessage.swift in Sources */,
 				CE0AF81A21C7A1C200F8F6A2 /* ClubDetailViewController.swift in Sources */,
@@ -1621,6 +1648,7 @@
 				DB641F8C222C0921004AC6CB /* UserLifeHelper.swift in Sources */,
 				187BFB2B22A5569D00E19A3B /* RefereesViewModel.swift in Sources */,
 				DBFB838E2201CAB4008A8F79 /* MatchesTeamLeagueDetailPresenter.swift in Sources */,
+				18717A5422BCD46600CD36C9 /* MyMatchesRefTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -575,4 +575,92 @@ class ApiRequests {
         }
     }
     
+    func get_forMyMatches(participationMatches: [ParticipationMatch], get_success: @escaping ([MyMatchesRefTableViewCell.CellModel]) -> (), get_failure: @escaping (Error) -> ()) {
+        var fParticipationMatches: [ParticipationMatch] = []
+        var fClubs: [Club] = []
+        
+        var models: [MyMatchesRefTableViewCell.CellModel] = []
+        
+        var tmpTournaments = Tournaments()
+        
+        let dispatchGroup = DispatchGroup()
+        
+        fParticipationMatches = participationMatches
+        
+        if fParticipationMatches.count > 0 {
+            dispatchGroup.enter()
+            get_tournamets(get_success: { (tournaments) in
+                tmpTournaments = tournaments
+            
+                for parMatch in fParticipationMatches {
+                    
+                    if parMatch.league.count > 1
+                    {
+                        dispatchGroup.enter()
+                        let tmpTeams = tmpTournaments.leagues.filter({ (league) -> Bool in
+                            return league.id == parMatch.league
+                        }).first?.teams
+                        
+                        var tmpClub1: Club?
+                        
+                        if parMatch.teamOne.count > 1
+                        {
+                            dispatchGroup.enter()
+                            let tmpClubId = tmpTeams?.filter({ (team) -> Bool in
+                                return parMatch.teamOne == team.id
+                            }).first?.club
+                            dispatchGroup.leave()
+                            if tmpClubId?.count ?? 0 > 1 {
+                                dispatchGroup.enter()
+                                self.get_clubById(id: tmpClubId!, get_success: { (soloClub) in
+                                    fClubs.append(soloClub.club)
+                                    tmpClub1 = soloClub.club
+                                    dispatchGroup.leave()
+                                }, get_failure: { (error) in
+                                    get_failure(error)
+                                })
+                            }
+                        }
+                        
+                        var tmpClub2: Club?
+
+                        
+                        if parMatch.teamTwo.count > 1
+                        {
+                            dispatchGroup.enter()
+                            let tmpClubId = tmpTeams?.filter({ (team) -> Bool in
+                                return parMatch.teamOne == team.id
+                            }).first?.club
+                            dispatchGroup.leave()
+                            if tmpClubId?.count ?? 0 > 1 {
+                                dispatchGroup.enter()
+                                self.get_clubById(id: tmpClubId!, get_success: { (soloClub) in
+                                    fClubs.append(soloClub.club)
+                                    tmpClub2 = soloClub.club
+                                    dispatchGroup.leave()
+                                }, get_failure: { (error) in
+                                    get_failure(error)
+                                })
+                            }
+                        }
+                        
+                        models.append(MyMatchesRefTableViewCell.CellModel(participationMatch: parMatch, club1: tmpClub1, club2: tmpClub2))
+
+                        dispatchGroup.leave()
+                    }
+                }
+                
+                dispatchGroup.leave()
+                
+            }) { (error) in
+                get_failure(error)
+            }
+            
+            dispatchGroup.notify(queue: .main) {
+                get_success(models)
+            }
+        }
+        
+    }
+    
 }

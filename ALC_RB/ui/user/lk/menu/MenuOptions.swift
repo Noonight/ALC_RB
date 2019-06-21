@@ -42,19 +42,19 @@ enum PlayerMenuOption: Int, CustomStringConvertible {
 
 enum RefereeMenuOption: Int, CustomStringConvertible {
     
-    case DesignatedMatches
+    case MyMatches
     case SignOut
     
     var description: String {
         switch self {
-        case .DesignatedMatches: return "Мои матчи"
+        case .MyMatches: return "Мои матчи"
         case .SignOut: return "Выйти"
         }
     }
     
     var image: UIImage {
         switch self {
-        case .DesignatedMatches: return #imageLiteral(resourceName: "ic_whistle") // tmp solve
+        case .MyMatches: return #imageLiteral(resourceName: "ic_whistle") // tmp solve
         case .SignOut: return UIImage(named: "ic_sign_out2") ?? UIImage()
         }
     }

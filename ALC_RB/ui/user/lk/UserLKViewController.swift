@@ -95,6 +95,14 @@ class UserLKViewController: UIViewController {
         return viewController
     }()
     
+    private lazy var myMatches: MyMatchesRefTableViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        var viewController = storyboard.instantiateViewController(withIdentifier: "MyMatchesRefTableViewController") as! MyMatchesRefTableViewController
+        
+        return viewController
+    }()
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -117,6 +125,8 @@ class UserLKViewController: UIViewController {
         super.viewWillAppear(true)
         
         authUser = userDefaultsHelper.getAuthorizedUser()
+        
+//        dump(authUser)
         
         menuHelper?.userType = authUser?.person.getUserType()
         
@@ -172,8 +182,8 @@ class UserLKViewController: UIViewController {
             segmentHelper?.add(invitation)
             navigationItem.title = invitation.title
         } else if authUser?.person.getUserType() == Person.TypeOfPerson.referee {
-//            segmentHelper?.add(designatedMatch)
-//            navigationItem.title = designantedMatch.title
+            segmentHelper?.add(myMatches)
+            navigationItem.title = myMatches.title
         } else if authUser?.person.getUserType() == Person.TypeOfPerson.mainReferee {
             segmentHelper?.add(schedule)
             navigationItem.title = schedule.title
@@ -257,12 +267,12 @@ class UserLKViewController: UIViewController {
     
     func refereeSelectMenuOption(menuOption: RefereeMenuOption) {
         switch menuOption {
-        case .DesignatedMatches:
+        case .MyMatches:
 //            segmentHelper?.remove(referees)
             // shedule
-//            segmentHelper?.add(schedule)
-//            navigationItem.title = schedule.title
-            Print.m("Schedule")
+            segmentHelper?.add(myMatches)
+            navigationItem.title = myMatches.title
+//            Print.m("Schedule")
         case .SignOut:
             signOut()
         }
@@ -301,13 +311,13 @@ class UserLKViewController: UIViewController {
 }
 // MARK: - Presenter
 extension UserLKViewController: UserLKView {
-    func fetchRefereesSuccess(referees: Players) {
-//        self.referees = referees
-    }
-    
-    func fetchRefereesFailure(error: Error) {
-        Print.m("referees")
-    }
+//    func fetchRefereesSuccess(referees: Players) {
+////        self.referees = referees
+//    }
+//    
+//    func fetchRefereesFailure(error: Error) {
+//        Print.m("referees")
+//    }
     
     func getProfileImageSuccessful(image: UIImage) {
         self.userHeaderMenuImage.image = image.af_imageRoundedIntoCircle()
@@ -321,8 +331,6 @@ extension UserLKViewController: UserLKView {
     func initPresenter() {
         self.presenter.attachView(view: self)
     }
-    
-    
 }
 
 //extension UserLKViewController: UITableViewDelegate, UITableViewDataSource {

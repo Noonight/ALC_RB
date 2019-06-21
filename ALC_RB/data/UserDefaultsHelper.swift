@@ -16,7 +16,7 @@ class UserDefaultsHelper {
     func userIsAuthorized() -> Bool {
         do {
             let user = try self.userDefaults.get(objectType: AuthUser.self, forKey: userKey)
-            Print.d(object: user)
+//            Print.d(object: user)
             if user != nil {
                 return true
             }
