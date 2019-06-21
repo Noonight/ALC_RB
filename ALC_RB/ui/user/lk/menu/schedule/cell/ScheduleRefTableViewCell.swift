@@ -31,6 +31,9 @@ class ScheduleRefTableViewCell: UITableViewCell {
     @IBOutlet weak var refereeThree_label: UILabel!
     @IBOutlet weak var timekeeper_label: UILabel!
 
+    let darkGrayColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+    let redColor = #colorLiteral(red: 1, green: 0.231372549, blue: 0.1882352941, alpha: 1)
+    
     struct CellModel {
         var activeMatch: ActiveMatch
         var clubTeamOne: Club
@@ -54,10 +57,13 @@ class ScheduleRefTableViewCell: UITableViewCell {
     func configure(with cellModel: CellModel) {
         reset()
 //        Print.m(cellModel)
-        date_label.text = cellModel.activeMatch.date.UTCToLocal(from: .utc, to: .localTime)
-        time_label.text = cellModel.activeMatch.date.UTCToLocal(from: .utc, to: .local)
+        date_label.text = cellModel.activeMatch.date.UTCToLocal(from: .utc, to: .local)
+        time_label.text = cellModel.activeMatch.date.UTCToLocal(from: .utc, to: .localTime)
         league_label.text = cellModel.activeMatch.tour
         stadium_label.text = cellModel.activeMatch.place
+        
+        Print.m(cellModel.activeMatch.teamOne.name)
+        Print.m(cellModel.activeMatch.teamTwo.name)
         
         teamNameOne_label.text = cellModel.activeMatch.teamOne.name
         teamNameTwo_label.text = cellModel.activeMatch.teamTwo.name
@@ -84,19 +90,39 @@ class ScheduleRefTableViewCell: UITableViewCell {
 //            teamLogoTwo_image.image = teamLogoTwo_image.image?.af_imageRoundedIntoCircle()
         }
         if cellModel.activeMatch.score == "" {
+            score_label.text = " - "
+        } else {
             score_label.text = cellModel.activeMatch.score
         }
+//        if cellModel.activeMatch.score.count > 0 {
+//            score_label.text = cellModel.activeMatch.score
+//        }
+        
+        
+        
         if cellModel.referee1 != nil {
+            refereeOne_label.textColor = darkGrayColor
             refereeOne_label.text = cellModel.referee1?.getFullName()
+        } else {
+            refereeOne_label.textColor = redColor
         }
         if cellModel.referee2 != nil {
+            refereeTwo_label.textColor = darkGrayColor
             refereeTwo_label.text = cellModel.referee2?.getFullName()
+        } else {
+            refereeTwo_label.textColor = redColor
         }
         if cellModel.referee3 != nil {
+            refereeThree_label.textColor = darkGrayColor
             refereeThree_label.text = cellModel.referee3?.getFullName()
+        } else {
+            refereeThree_label.textColor = redColor
         }
         if cellModel.timekeeper != nil {
+            timekeeper_label.textColor = darkGrayColor
             timekeeper_label.text = cellModel.timekeeper?.getFullName()
+        } else {
+            timekeeper_label.textColor = redColor
         }
     }
     
