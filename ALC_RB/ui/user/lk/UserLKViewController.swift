@@ -175,8 +175,8 @@ class UserLKViewController: UIViewController {
 //            segmentHelper?.add(designatedMatch)
 //            navigationItem.title = designantedMatch.title
         } else if authUser?.person.getUserType() == Person.TypeOfPerson.mainReferee {
-//            segmentHelper?.add(schedule)
-//            navigationItem.title = schedule.title
+            segmentHelper?.add(schedule)
+            navigationItem.title = schedule.title
         }
         // set pointer of choose at first item that equal first item in person's menu
         tableView.selectRow(at: IndexPath.init(row: 0, section: 0), animated: true, scrollPosition: UITableView.ScrollPosition.top)
