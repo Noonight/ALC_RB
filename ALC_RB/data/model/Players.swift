@@ -30,7 +30,7 @@ struct Person: Codable {
     var birthdate: String
     var photo: String?
     var desc: String
-    var participationMatches: [Match]
+    var participationMatches: [ParticipationMatch]
     var pastLeagues: [PastLeague]
     var id: String
     var login: String
@@ -79,7 +79,7 @@ struct Person: Codable {
         self.birthdate = try container.decodeIfPresent(String.self, forKey: .birthdate) ?? ""
         self.photo = try container.decodeIfPresent(String.self, forKey: .photo) ?? ""
         self.desc = try container.decodeIfPresent(String.self, forKey: .desc) ?? ""
-        self.participationMatches = try container.decodeIfPresent([Match].self, forKey: .participationMatches) ?? []
+        self.participationMatches = try container.decodeIfPresent([ParticipationMatch].self, forKey: .participationMatches) ?? []
         self.pastLeagues = try container.decodeIfPresent([PastLeague].self, forKey: .pastLeagues) ?? []
         self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
         self.login = try container.decodeIfPresent(String.self, forKey: .login) ?? ""
@@ -265,7 +265,7 @@ extension Person {
         birthdate: String? = nil,
         photo: String?? = nil,
         desc: String? = nil,
-        participationMatches: [Match]? = nil,
+        participationMatches: [ParticipationMatch]? = nil,
         pastLeagues: [PastLeague]? = nil,
         id: String? = nil,
         login: String? = nil,
