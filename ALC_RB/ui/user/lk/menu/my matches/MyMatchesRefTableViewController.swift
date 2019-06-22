@@ -64,16 +64,34 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
     
     // MARK: - Binds
     func bindViews() {
+        
         viewModel.refreshing
             .subscribe { (refreshing) in
                 refreshing.element! ? (self.setState(state: .loading)) : (self.setState(state: .normal))
             }
             .disposed(by: disposeBag)
+        
         viewModel.error
             .subscribe { (error) in
                 self.setState(state: .error(message: error.element!.localizedDescription))
             }
             .disposed(by: disposeBag)
+        
+        viewModel.tableModel
+            .bind(to: tableView.rx.items(cellIdentifier: CellIdentifiers.cell, cellType: MyMatchesRefTableViewCell.self)) {  (row, model, cell) in
+                cell.configure(with: model)
+            }
+            .disposed(by: disposeBag)
+        
+        tableView.rx.itemSelected
+            .subscribe { (indexPath) in
+                self.tableView.deselectRow(at: indexPath.element!, animated: true)
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 84
     }
     
     // MARK: - Navigation

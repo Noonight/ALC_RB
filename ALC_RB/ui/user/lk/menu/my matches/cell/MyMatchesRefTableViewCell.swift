@@ -28,10 +28,42 @@ class MyMatchesRefTableViewCell: UITableViewCell {
         var participationMatch: ParticipationMatch?
         var club1: Club?
         var club2: Club?
+        var team1Name, team2Name: String?
+        
+        init(participationMatch: ParticipationMatch, club1: Club, club2: Club, team1Name: String, team2Name: String) {
+            self.participationMatch = participationMatch
+            self.club1 = club1
+            self.club2 = club2
+            self.team1Name = team1Name
+            self.team2Name = team2Name
+        }
+        
+        init(participationMatch: ParticipationMatch) {
+            self.participationMatch = participationMatch
+        }
     }
     
     func configure(with cellModel: CellModel) {
+        reset()
         
+        dateLabel.text = cellModel.participationMatch?.date.UTCToLocal(from: .utc, to: .local)
+        timeLabel.text = cellModel.participationMatch?.date.UTCToLocal(from: .utc, to: .localTime)
+        tourLabel.text = cellModel.participationMatch?.tour
+        placeLabel.text = cellModel.participationMatch?.place
+        
+        team1NameLabel.text = cellModel.participationMatch?.teamOne
+        team1Image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.club1?.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.3), runImageTransitionIfCached: true) { response in
+            self.team1Image.image = response.result.value?.af_imageRoundedIntoCircle()
+        }
+        
+        team2NameLabel.text = cellModel.participationMatch?.teamTwo
+        team2Image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.club2?.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.3), runImageTransitionIfCached: true) { response in
+            self.team2Image.image = response.result.value?.af_imageRoundedIntoCircle()
+        }
+        
+        if cellModel.participationMatch?.score.count ?? 0 > 1 {
+            scoreLabel.text = cellModel.participationMatch?.score
+        }
     }
     
     func reset() {
