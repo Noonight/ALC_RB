@@ -52,14 +52,21 @@ class MyMatchesRefTableViewCell: UITableViewCell {
         placeLabel.text = cellModel.participationMatch?.place
         
         team1NameLabel.text = cellModel.participationMatch?.teamOne
-        team1Image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.club1?.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.3), runImageTransitionIfCached: true) { response in
-            self.team1Image.image = response.result.value?.af_imageRoundedIntoCircle()
-        }
+//        team1Image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.club1?.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.3), runImageTransitionIfCached: true) { response in
+//            self.team1Image.image = response.result.value?.af_imageRoundedIntoCircle()
+//        }
+//        team1Image.loadImageWith(url: ApiRoute.getImageURL(image: cellModel.club1?.logo ?? ""))
+        
+        team1Image.cacheImage(urlString: ApiRoute.getImageURL(image: cellModel.club1?.logo ?? "").absoluteString)
         
         team2NameLabel.text = cellModel.participationMatch?.teamTwo
-        team2Image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.club2?.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.3), runImageTransitionIfCached: true) { response in
-            self.team2Image.image = response.result.value?.af_imageRoundedIntoCircle()
-        }
+//        team2Image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.club2?.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.3), runImageTransitionIfCached: true) { response in
+//            self.team2Image.image = response.result.value?.af_imageRoundedIntoCircle()
+//        }
+        
+//        team2Image.loadImageWith(url: ApiRoute.getImageURL(image: cellModel.club2?.logo ?? ""))
+        
+        team2Image.cacheImage(urlString: ApiRoute.getImageURL(image: cellModel.club2?.logo ?? "").absoluteString)
         
         if cellModel.participationMatch?.score.count ?? 0 > 1 {
             scoreLabel.text = cellModel.participationMatch?.score

@@ -28,8 +28,8 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = nil
-        tableView.delegate = nil
+//        tableView.dataSource = nil
+//        tableView.delegate = nil
         
         viewModel = MyMatchesRefViewModel(dataManager: ApiRequests())
         
