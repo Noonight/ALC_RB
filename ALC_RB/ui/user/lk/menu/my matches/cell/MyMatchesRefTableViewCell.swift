@@ -44,14 +44,14 @@ class MyMatchesRefTableViewCell: UITableViewCell {
     }
     
     func configure(with cellModel: CellModel) {
-        reset()
+//        reset()
         
         dateLabel.text = cellModel.participationMatch?.date.UTCToLocal(from: .utc, to: .local)
         timeLabel.text = cellModel.participationMatch?.date.UTCToLocal(from: .utc, to: .localTime)
         tourLabel.text = cellModel.participationMatch?.tour
         placeLabel.text = cellModel.participationMatch?.place
         
-        team1NameLabel.text = cellModel.participationMatch?.teamOne
+        team1NameLabel.text = cellModel.team1Name
 //        team1Image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.club1?.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.3), runImageTransitionIfCached: true) { response in
 //            self.team1Image.image = response.result.value?.af_imageRoundedIntoCircle()
 //        }
@@ -59,7 +59,7 @@ class MyMatchesRefTableViewCell: UITableViewCell {
         
         team1Image.cacheImage(urlString: ApiRoute.getImageURL(image: cellModel.club1?.logo ?? "").absoluteString)
         
-        team2NameLabel.text = cellModel.participationMatch?.teamTwo
+        team2NameLabel.text = cellModel.team2Name
 //        team2Image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.club2?.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.3), runImageTransitionIfCached: true) { response in
 //            self.team2Image.image = response.result.value?.af_imageRoundedIntoCircle()
 //        }
@@ -79,10 +79,12 @@ class MyMatchesRefTableViewCell: UITableViewCell {
         tourLabel.text = ""
         placeLabel.text = ""
         
-        team1Image.image = nil
+//        team1Image.image = nil
+        team1Image.image = #imageLiteral(resourceName: "ic_logo")
         team1NameLabel.text = ""
         scoreLabel.text = " - "
-        team2Image.image = nil
+//        team2Image.image = nil
+        team2Image.image = #imageLiteral(resourceName: "ic_logo")
         team2NameLabel.text = ""
     }
     
