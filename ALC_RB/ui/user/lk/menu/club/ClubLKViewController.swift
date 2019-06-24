@@ -16,6 +16,7 @@ class ClubLKViewController: BaseStateViewController {
     @IBOutlet weak var commandTitle_label: UILabel!
     @IBOutlet weak var commandDescription_label: UITextView!
     @IBOutlet weak var settingBarBtn: UIBarButtonItem!
+    @IBOutlet weak var addBarBtn: UIBarButtonItem!
     
     let segueId = "segue_editClub"
     
@@ -37,12 +38,16 @@ class ClubLKViewController: BaseStateViewController {
         initPresenter()
         
         setEmptyMessage(message: "Вы пока не состоите ни в одном клубе")
+        navigationController?.navigationBar.topItem?.rightBarButtonItems = [addBarBtn, settingBarBtn]
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         presenter.getClubs()
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = settingBarBtn
+        if navigationController?.navigationBar.topItem?.rightBarButtonItems?.count != 2 {
+            navigationController?.navigationBar.topItem?.rightBarButtonItems = [addBarBtn, settingBarBtn]
+        }
+//        navigationController?.navigationBar.topItem?.rightBarButtonItem = settingBarBtn
         settingBarBtn.image = settingBarBtn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
         
         
@@ -63,6 +68,7 @@ class ClubLKViewController: BaseStateViewController {
     }
     
     func updateUI() {
+        updateNavBar()
         if club != nil {
             setState(state: .normal)
             presenter.getImage(imagePath: club!.logo)
@@ -70,6 +76,16 @@ class ClubLKViewController: BaseStateViewController {
             commandDescription_label.text = club!.info
         } else {
             setState(state: .empty)
+        }
+    }
+    
+    func updateNavBar() {
+        if club != nil {
+            settingBarBtn.isEnabled = true
+            addBarBtn.isEnabled = false
+        } else {
+            settingBarBtn.isEnabled = false
+            addBarBtn.isEnabled = true
         }
     }
     
@@ -100,6 +116,7 @@ extension ClubLKViewController: ClubLKView {
         }.first
         if let club = club {
             self.club = club
+//            self.updateNavBar()
         }
         
     }

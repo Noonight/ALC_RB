@@ -76,6 +76,8 @@ class InvitationLKTableViewController: UITableViewController {
 //        userDefault.setAuthorizedUser(user: user!)
         
         activityIndicator.hidesWhenStopped = true
+        
+        tableView.tableFooterView = UIView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -126,6 +128,10 @@ class InvitationLKTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userDefault.getAuthorizedUser()?.person.pendingTeamInvites.count ?? 0
     }
+    
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 224
+//    }
 
     // MARK: - Table view delegate
     
