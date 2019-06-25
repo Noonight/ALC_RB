@@ -64,7 +64,7 @@ class PlayersLeagueDetailPresenter: MvpPresenter<PlayersLeagueDetailViewControll
                 case .success:
                     if let club = response.result.value {
                         Alamofire
-                            .request(ApiRoute.getImageURL(image: club.club.addLogo))
+                            .request(ApiRoute.getImageURL(image: club.club.addLogo ?? ""))
                             .responseImage(completionHandler: { (reseponseImage) in
                                 if let img = reseponseImage.result.value {
                                     get_club_image(img)

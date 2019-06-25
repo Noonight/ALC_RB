@@ -134,13 +134,13 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
             cell.mScore.text = model.score ?? " - "
             
             presenter.findClub(clubId: (model.teamOne?.club)!) { (club) in
-                cell.mImageTeam1.af_setImage(withURL: ApiRoute.getImageURL(image: club!.logo), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true, completion: { (response) in
+                cell.mImageTeam1.af_setImage(withURL: ApiRoute.getImageURL(image: club!.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true, completion: { (response) in
                     cell.mImageTeam1.image = response.result.value?.af_imageRoundedIntoCircle()
                 })
             }
             
             presenter.findClub(clubId: (model.teamTwo?.club)!) { (club) in
-                cell.mImageTeam2.af_setImage(withURL: ApiRoute.getImageURL(image: club!.logo), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true, completion: { (response) in
+                cell.mImageTeam2.af_setImage(withURL: ApiRoute.getImageURL(image: club!.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true, completion: { (response) in
                     cell.mImageTeam2.image = response.result.value?.af_imageRoundedIntoCircle()
                 })
             }

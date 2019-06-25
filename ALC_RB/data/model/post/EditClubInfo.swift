@@ -21,8 +21,8 @@ struct EditClubInfo {
     
     func toParams() -> [String: Any] {
         return [
-            Fields.name.value() : self.name,
             Fields._id.value() : self._id,
+            Fields.name.value() : self.name,
             Fields.info.value() : self.info
         ]
     }

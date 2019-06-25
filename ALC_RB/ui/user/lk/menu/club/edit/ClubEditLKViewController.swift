@@ -9,7 +9,7 @@
 import UIKit
 
 class ClubEditLKViewController: BaseStateViewController, UITextFieldDelegate {
-
+    
     // MARK: - Variables
     
     @IBOutlet weak var clubImage: UIImageView!
@@ -77,21 +77,22 @@ class ClubEditLKViewController: BaseStateViewController, UITextFieldDelegate {
             clubDescription_textView.text = club.info
             presenter.getClubLogo(byPath: club.logo ?? "")
         } else {
-            showToast(message: "Что-то пошло не так. Ошибка!")
+            //            showToast(message: "Что-то пошло не так. Ошибка!")
+            showAlert(message: "Что - то пошло не так")
         }
-//        if club != nil {
-//            clubTitle_label.text = club?.name
-//            clubDescription_textView.text = club?.info
-//            presenter.getClubLogo(byPath: club?.logo ?? "")
-//        } else {
-//            showToast(message: "Что-то пошло не так. Ошибка!")
-//        }
+        //        if club != nil {
+        //            clubTitle_label.text = club?.name
+        //            clubDescription_textView.text = club?.info
+        //            presenter.getClubLogo(byPath: club?.logo ?? "")
+        //        } else {
+        //            showToast(message: "Что-то пошло не так. Ошибка!")
+        //        }
     }
     
     // MARK: - Actions
     
     @IBAction func saveBarBtnPressed(_ sender: UIBarButtonItem) {
-//        Print.m("save btn pressed yeah!!")
+        //        Print.m("save btn pressed yeah!!")
         presenter.editClubInfo(
             token: (userDefaults.getAuthorizedUser()?.token)!,
             clubInfo: EditClubInfo(
@@ -100,9 +101,9 @@ class ClubEditLKViewController: BaseStateViewController, UITextFieldDelegate {
                 info: clubDescription_textView.text!),
             image: clubImage.image!)
     }
-
+    
     @IBAction func onImageAreaPressed(_ sender: UITapGestureRecognizer) {
-//        Print.m("image pressed")
+        //        Print.m("image pressed")
         imagePicker?.present(from: self.view)
     }
     
@@ -117,6 +118,8 @@ extension ClubEditLKViewController : ClubEditLKView {
     func editClubInfoSuccess(soloClub: SoloClub) {
         self.club = soloClub.club
         updateUI()
+        showToast(message: "Изменение клуба прошло успешно")
+        navigationController?.popViewController(animated: true)
         dismiss(animated: true) {
             Print.m("Dismiss view controller")
         }
@@ -124,7 +127,23 @@ extension ClubEditLKViewController : ClubEditLKView {
     
     func editClubInfoFailure(error: Error) {
         Print.m(error)
-        showToast(message: "Ошибка что - то пошло не так!")
+        showRepeatAlert(message: error.localizedDescription) {
+            if let cache = self.presenter.editClubInfoCache {
+                self.presenter.editClubInfo(
+                    token: (self.userDefaults.getAuthorizedUser()?.token)!,
+                    clubInfo: cache.editClubInfo,
+                    image: cache.image
+                )
+            } else {
+                self.presenter.editClubInfo(
+                    token: (self.userDefaults.getAuthorizedUser()?.token)!,
+                    clubInfo: EditClubInfo(
+                        name: self.clubTitle_label.text!,
+                        _id: (self.userDefaults.getAuthorizedUser()?.person.club!)!,
+                        info: self.clubDescription_textView.text!),
+                    image: self.clubImage.image!)
+            }
+        }
     }
     
     func getClubLogoSuccess(image: UIImage) {

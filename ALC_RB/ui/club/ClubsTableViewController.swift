@@ -25,6 +25,11 @@ class ClubsTableViewController: UITableViewController, MvpView {
         
         initView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        presenter.getClubs()
+    }
 
     func initView() {
         tableView.tableFooterView = UIView()
@@ -41,8 +46,6 @@ extension ClubsTableViewController {
     
     func initPresenter() {
         presenter.attachView(view: self)
-        
-        presenter.getClubs()
     }
 }
 
@@ -131,9 +134,9 @@ extension ClubsTableViewController {
         {
             destination.content = ClubDetailContent(
                 image: (tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as! ClubTableViewCell).mImage.image!,
-                title: clubs.clubs[cellIndex].name,
-                owner: clubs.clubs[cellIndex].owner.surname,
-                text: clubs.clubs[cellIndex].info)
+                title: clubs.clubs[cellIndex].name ?? "",
+                owner: clubs.clubs[cellIndex].owner?.surname ?? "",
+                text: clubs.clubs[cellIndex].info ?? "")
         }
     }
     

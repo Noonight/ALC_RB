@@ -35,7 +35,7 @@ class PlayersTeamLeagueDetailPresenter: MvpPresenter<PlayersTeamLeagueDetailView
     func getClubImage(club id: String, get_image: @escaping (UIImage) -> ()) {
         getClub(club: id) { (soloClub) in
             Alamofire
-                .request(ApiRoute.getImageURL(image: soloClub.club.logo))
+                .request(ApiRoute.getImageURL(image: soloClub.club.logo ?? ""))
                 .responseImage(completionHandler: { (response) in
                     if let img = response.result.value {
                         //debugPrint("getting Image club complete. \(#file) -> \(#function)")
@@ -48,7 +48,7 @@ class PlayersTeamLeagueDetailPresenter: MvpPresenter<PlayersTeamLeagueDetailView
     func getClubOwnerImage(club id: String, get_image: @escaping (UIImage) -> (), get_error: @escaping () -> ()) {
         getClub(club: id) { (soloClub) in
             Alamofire
-                .request(ApiRoute.getImageURL(image: soloClub.club.owner.photo))
+                .request(ApiRoute.getImageURL(image: soloClub.club.owner?.photo ?? ""))
                 .validate()
                 .responseImage(completionHandler: { (response) in
                     switch response.result {

@@ -10,7 +10,8 @@ import UIKit
 
 extension UIViewController {
     
-    func showAlert(title: String, message: String) {
+    // default title is "Error"
+    func showAlert(title: String = "Ошибка", message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -18,9 +19,9 @@ extension UIViewController {
     
     func showAlert(title: String, message: String, actions: [UIAlertAction]) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            for action in actions {
-                alert.addAction(action)
-            }
+        for action in actions {
+            alert.addAction(action)
+        }
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -29,10 +30,21 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (alertAction) in
             alert.dismiss(animated: true, completion: nil)
         }))
-        alert.addAction(UIAlertAction(title: "Перезагрузить", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Перезагрузить", style: .destructive, handler: { (action) in
             refresh_closure()
         }))
         self.present(alert, animated: true, completion: nil)
         
+    }
+    
+    func showRepeatAlert(title: String = "Ошибка!", message: String, repeat_closure: @escaping () -> ()) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (alertAction) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Повторить", style: .destructive, handler: { (action) in
+            repeat_closure()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }

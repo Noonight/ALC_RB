@@ -79,7 +79,8 @@ class OngoingLeaguesLKTableViewController: BaseStateTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-
+        presenter.getTournaments()
+        presenter.getClubs()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -180,7 +181,5 @@ extension OngoingLeaguesLKTableViewController: OngoingLeaguesLKView {
     
     func initPresenter() {
         presenter.attachView(view: self)
-        presenter.getTournaments()
-        presenter.getClubs()
     }
 }

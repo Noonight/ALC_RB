@@ -19,6 +19,7 @@
 		1801B87F2271872300BE0F7C /* CommandAddPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1801B87E2271872300BE0F7C /* CommandAddPlayerPresenter.swift */; };
 		18076941229E7D4900A10996 /* AddPlayerToTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18076940229E7D4900A10996 /* AddPlayerToTeam.swift */; };
 		18076943229E81A000A10996 /* AddPlayerToTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18076942229E81A000A10996 /* AddPlayerToTeamResponse.swift */; };
+		180C084D22C1F74A00ADC90D /* CreateClub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180C084C22C1F74A00ADC90D /* CreateClub.swift */; };
 		180F236722B25F1700ADE8FD /* EditScheduleLKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */; };
 		180F236922B262AD00ADE8FD /* EditScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */; };
 		1823DC2622952762000A1055 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1823DC2422952762000A1055 /* LoadingCell.swift */; };
@@ -31,7 +32,7 @@
 		187BFB2B22A5569D00E19A3B /* RefereesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187BFB2A22A5569D00E19A3B /* RefereesViewModel.swift */; };
 		187BFB2E22A570F200E19A3B /* RefereeLKTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187BFB2D22A570F200E19A3B /* RefereeLKTableViewCell.swift */; };
 		18870B3122C0DD0000126A87 /* ClubCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18870B3022C0DD0000126A87 /* ClubCreateViewController.swift */; };
-		18870B3322C0DD1300126A87 /* ClubCreateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18870B3222C0DD1300126A87 /* ClubCreateViewModel.swift */; };
+		18870B3322C0DD1300126A87 /* ClubCreatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18870B3222C0DD1300126A87 /* ClubCreatePresenter.swift */; };
 		188F097B227BFF8700B827AC /* CommandAddPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */; };
 		18A82A5B22BB7B26006FA050 /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A82A5A22BB7B26006FA050 /* AlertHelper.swift */; };
 		18D89EA422BCA021007FF537 /* ParticipationMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D89EA322BCA021007FF537 /* ParticipationMatch.swift */; };
@@ -210,6 +211,7 @@
 		18063EDC2282C49B0072FACD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		18076940229E7D4900A10996 /* AddPlayerToTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerToTeam.swift; sourceTree = "<group>"; };
 		18076942229E81A000A10996 /* AddPlayerToTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerToTeamResponse.swift; sourceTree = "<group>"; };
+		180C084C22C1F74A00ADC90D /* CreateClub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClub.swift; sourceTree = "<group>"; };
 		180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleLKViewController.swift; sourceTree = "<group>"; };
 		180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewModel.swift; sourceTree = "<group>"; };
 		1823DC2422952762000A1055 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
@@ -222,7 +224,7 @@
 		187BFB2A22A5569D00E19A3B /* RefereesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereesViewModel.swift; sourceTree = "<group>"; };
 		187BFB2D22A570F200E19A3B /* RefereeLKTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeLKTableViewCell.swift; sourceTree = "<group>"; };
 		18870B3022C0DD0000126A87 /* ClubCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubCreateViewController.swift; sourceTree = "<group>"; };
-		18870B3222C0DD1300126A87 /* ClubCreateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubCreateViewModel.swift; sourceTree = "<group>"; };
+		18870B3222C0DD1300126A87 /* ClubCreatePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubCreatePresenter.swift; sourceTree = "<group>"; };
 		188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerViewModel.swift; sourceTree = "<group>"; };
 		18A82A5A22BB7B26006FA050 /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
 		18D89EA322BCA021007FF537 /* ParticipationMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipationMatch.swift; sourceTree = "<group>"; };
@@ -497,7 +499,7 @@
 			isa = PBXGroup;
 			children = (
 				18870B3022C0DD0000126A87 /* ClubCreateViewController.swift */,
-				18870B3222C0DD1300126A87 /* ClubCreateViewModel.swift */,
+				18870B3222C0DD1300126A87 /* ClubCreatePresenter.swift */,
 			);
 			path = create;
 			sourceTree = "<group>";
@@ -1067,6 +1069,7 @@
 				DB8A68A2224E583F00D3972A /* CreateTeamInfo.swift */,
 				DB9EC0D2225F47DC00FC3A9E /* EditTeam.swift */,
 				18076940229E7D4900A10996 /* AddPlayerToTeam.swift */,
+				180C084C22C1F74A00ADC90D /* CreateClub.swift */,
 			);
 			path = post;
 			sourceTree = "<group>";
@@ -1569,7 +1572,7 @@
 				DB641F8A222BB283004AC6CB /* UserLKPresenter.swift in Sources */,
 				DB11CC8D21C22F890083773E /* ScheduleTableViewController.swift in Sources */,
 				DBC347612216F34B001D9B7D /* StringEx.swift in Sources */,
-				18870B3322C0DD1300126A87 /* ClubCreateViewModel.swift in Sources */,
+				18870B3322C0DD1300126A87 /* ClubCreatePresenter.swift in Sources */,
 				DB87FE7C2243B522001EBA7C /* BaseStateViewController.swift in Sources */,
 				DBB208ED221306170010B600 /* RefereeTeamTableViewController.swift in Sources */,
 				CE61552221AFD329008C4463 /* AnnouncesTableViewCell.swift in Sources */,
@@ -1612,6 +1615,7 @@
 				DB5AAC082236A1380097963E /* InvitationLKPresenter.swift in Sources */,
 				DB5AAC0B2236A1AE0097963E /* InvitationTableViewCell.swift in Sources */,
 				18717A5622BCD55100CD36C9 /* MyMatchesRefViewModel.swift in Sources */,
+				180C084D22C1F74A00ADC90D /* CreateClub.swift in Sources */,
 				DB87FE812243D9E2001EBA7C /* EmptyViewNew.swift in Sources */,
 				DBD4D025225F946D00C8C8B3 /* EditTeamResponse.swift in Sources */,
 				049B9ACF21F6F6E300CDD104 /* PlayersTeamLeagueDetailTableViewCell.swift in Sources */,

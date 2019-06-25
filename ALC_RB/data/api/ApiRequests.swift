@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import RxSwift
 
 class ApiRequests {
     
@@ -126,7 +127,7 @@ class ApiRequests {
             { (result) in
                 switch result {
                 case .success(let upload, _, _):
-                    
+            
                     upload.responseSoloClub(completionHandler: { (response) in
                         
 //                        Print.m(response)
@@ -138,6 +139,80 @@ class ApiRequests {
                             }
                         case .failure(let error):
                             response_failure(error)
+                        }
+                    })
+                    
+                case .failure(let error):
+                    response_failure(error)
+                }
+        }
+    }
+    
+    
+    
+//    func rx_post_createClub(token: String, createClub: CreateClub, image: UIImage?) -> Observable<SoloClub> {
+//        
+//        return Observable.create { observer -> Disposable in
+//            self.post_createClub(token: token, createClub: createClub, image: image, response_success: { soloClub in
+//                observer.onNext(soloClub)
+//            }, response_message: { message in
+////                observer.onError(<#T##error: Error##Error#>)
+////                observer.onError(message)
+//            }, response_failure: { error in
+//                observer.onError(error)
+//            })
+//        }
+//        return Observable.create({ observer -> Disposable in
+//            post_createClub(token: token, createClub: createClub, image: image, response_success: { soloClub in
+//                observer.onNext(soloClub)
+//            }, response_message: { message in
+//                //                observer.onError(<#T##error: Error##Error#>)
+//                //                observer.onError(message)
+//            }, response_failure: { error in
+//                observer.onError(error)
+//            })
+//        })
+//        return Disposables.create() as! Observable<SoloClub>
+//        
+//    }
+    
+    func post_createClub(token: String, createClub: CreateClub, image: UIImage?, response_success: @escaping (SoloClub) -> (), response_message: @escaping (SingleLineMessage) -> (), response_failure: @escaping (Error) -> ()) {
+        Alamofire
+            .upload(multipartFormData: { (multipartFormData) in
+                if let image = image {
+                    multipartFormData.append(image.jpegData(compressionQuality: 1.0)!, withName: "logo", fileName: "jpg", mimeType: "image/jpg")
+                }
+                for (key, value) in createClub.toParams() {
+                    let strValue = value as! String
+                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
+                }
+            },
+                    usingThreshold: UInt64(),
+                    to: ApiRoute.getApiURL(.post_create_club),
+                    method: .post,
+                    headers: ["auth" : token])
+            { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    
+                    upload.responseSoloClub(completionHandler: { (response) in
+                        switch response.result {
+                        case .success:
+                            if let club = response.result.value {
+                                response_success(club)
+                            }
+                        case .failure(let error):
+                            upload.responseSingleLineMessage(completionHandler: { (response) in
+                                switch response.result {
+                                case .success:
+                                    if let message = response.result.value {
+                                        response_message(message)
+                                    }
+                                case .failure(let error):
+                                    Print.m(error)
+                                    response_failure(error)
+                                }
+                            })
                         }
                     })
                     

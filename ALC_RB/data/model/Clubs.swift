@@ -18,12 +18,23 @@ struct Clubs: Codable {
 }
 
 struct Club: Codable {
-    var info, addLogo, addInfo, id: String
-    var name: String
-    var owner: Owner
-    var v: Int
-    var logo: String
+    var info, addLogo, addInfo, id: String?
+    var name: String?
+    var owner: Owner?
+    var v: Int?
+    var logo: String?
 
+    
+    init(info: String, addLogo: String, addInfo:String, id: String, name: String, owner: Owner, v: Int, logo: String) {
+        self.info = info
+        self.addLogo = addLogo
+        self.addInfo = addInfo
+        self.id = id
+        self.name = name
+        self.owner = owner
+        self.v = v
+        self.logo = logo
+    }
     
     enum CodingKeys: String, CodingKey {
         case info, addLogo, addInfo
@@ -35,16 +46,16 @@ struct Club: Codable {
 }
 
 struct Owner: Codable {
-    let surname, name, lastname, birthdate: String
-    let photo, desc: String
-    let participationMatches: [JSONAny]
-    let id, login, password, type: String
-    let pendingTeamInvites: [PendingTeamInvite]
-    let participation: [Participation]
-    let createdAt, updatedAt: String
-    let v: Int
-    let club: String
-    let pastLeagues: [JSONAny]
+    let surname, name, lastname, birthdate: String?
+    let photo, desc: String?
+    let participationMatches: [JSONAny]?
+    let id, login, password, type: String?
+    let pendingTeamInvites: [PendingTeamInvite]?
+    let participation: [Participation]?
+    let createdAt, updatedAt: String?
+    let v: Int?
+    let club: String?
+    let pastLeagues: [JSONAny]?
 
     
     enum CodingKeys: String, CodingKey {

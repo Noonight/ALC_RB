@@ -115,13 +115,14 @@ extension ClubLKViewController: ClubLKView {
             self.setState(state: .normal)
             updateNavBar()
             
-            presenter.getImage(imagePath: club.logo)
+            presenter.getImage(imagePath: club.logo ?? "")
             commandTitle_label.text = club.name
             commandDescription_label.text = club.info
             
 //            self.updateNavBar()
         } else {
             self.setState(state: .empty)
+            updateNavBar()
         }
         
     }
