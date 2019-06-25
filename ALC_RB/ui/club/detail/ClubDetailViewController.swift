@@ -52,6 +52,7 @@ class ClubDetailViewController: UIViewController {
     
     func updateUI() {
         mImage?.image = content?.cImage
+        mImage?.cropAndRound()
         mTitle?.text = content?.cTitle
         mOwner?.text = content?.cOwner
         mText?.text = content?.cText

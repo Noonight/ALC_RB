@@ -24,11 +24,7 @@ class ClubLKViewController: BaseStateViewController {
     
     let userDefaults = UserDefaultsHelper()
     
-    var club: Club? {
-        didSet {
-            updateUI()
-        }
-    }
+    var club: Club?
     var clubs: Clubs?
     
     // MARK: - Life cycle
@@ -56,28 +52,28 @@ class ClubLKViewController: BaseStateViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
 //        updateUI()
-        setState(state: .loading)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.updateUI()
-        }
+//        setState(state: .loading)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//            self.updateUI()
+//        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
+        navigationController?.navigationBar.topItem?.rightBarButtonItems = nil
     }
     
-    func updateUI() {
-        updateNavBar()
-        if club != nil {
-            setState(state: .normal)
-            presenter.getImage(imagePath: club!.logo)
-            commandTitle_label.text = club!.name
-            commandDescription_label.text = club!.info
-        } else {
-            setState(state: .empty)
-        }
-    }
+//    func updateUI() {
+//        updateNavBar()
+//        if club != nil {
+//            setState(state: .normal)
+//            presenter.getImage(imagePath: club!.logo)
+//            commandTitle_label.text = club!.name
+//            commandDescription_label.text = club!.info
+//        } else {
+//            setState(state: .empty)
+//        }
+//    }
     
     func updateNavBar() {
         if club != nil {
@@ -116,14 +112,26 @@ extension ClubLKViewController: ClubLKView {
         }.first
         if let club = club {
             self.club = club
+            self.setState(state: .normal)
+            updateNavBar()
+            
+            presenter.getImage(imagePath: club.logo)
+            commandTitle_label.text = club.name
+            commandDescription_label.text = club.info
+            
 //            self.updateNavBar()
+        } else {
+            self.setState(state: .empty)
         }
         
     }
     
     func getClubsFailure(error: Error) {
         Print.d(error: error)
-        showToast(message: "Клуб не найден")
+//        showToast(message: "Клуб не найден")
+        showRefreshAlert(message: error.localizedDescription) {
+            self.presenter.getClubs()
+        }
     }
     
     func initPresenter() {

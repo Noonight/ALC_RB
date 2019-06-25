@@ -153,9 +153,11 @@ extension PlayersTableViewController {
         }
         
         if (player.photo?.count ?? "".count > 3) {
-            presenter.getImage(imageName: player.photo ?? "") { image in
-                cell.mImage.image = image.af_imageRoundedIntoCircle()
-            }
+            cell.mImage.cacheImage(urlString: ApiRoute.getImageURL(image: player.photo ?? "").absoluteString)
+            cell.mImage.cropAndRound()
+//            presenter.getImage(imageName: player.photo ?? "") { image in
+//                cell.mImage.image = image.af_imageRoundedIntoCircle()
+//            }
         } else {
             cell.mImage.image = UIImage(named: "ic_logo")
         }

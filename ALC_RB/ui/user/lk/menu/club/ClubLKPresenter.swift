@@ -24,6 +24,7 @@ class ClubLKPresenter: MvpPresenter<ClubLKViewController> {
     let apiService = ApiRequests()
     
     func getClubs() {
+        self.getView().setState(state: .loading)
         apiService.get_clubs(get_success: { (clubs) in
             self.getView().getClubsSuccess(clubs: clubs)
         }) { (error) in
