@@ -42,6 +42,12 @@ struct League: Codable {
     var maxTeams: Int
     var teams: [Team]
     
+    func betweenBeginEndDate() -> Bool {
+        let firstDate = beginDate.toDate(type: .leagueDate)!
+        let lastDate = endDate.toDate(type: .leagueDate)!
+        return Date().isBetween(firstDate, and: lastDate)
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         

@@ -289,12 +289,23 @@ class CommandsLKTableViewController: BaseStateTableViewController {
             return team.id == model.team
         }).first
         if let tournament = tournament {
-            cell.tournamentTitle_label.text = "\(tournament.name). \(tournament.tourney)"
+            if tournament.tourney.contains(".") {
+                cell.tournamentTitle_label.text = "\(tournament.tourney) \(tournament.name)"
+            } else {
+                cell.tournamentTitle_label.text = "\(tournament.tourney). \(tournament.name)"
+            }
             
             cell.tournamentDate_label.text = "\(tournament.beginDate.UTCToLocal(from: .leagueDate, to: .local)) - \(tournament.endDate.UTCToLocal(from: .leagueDate, to: .local))"
             
             cell.tournamentTransfer_label.text = "\(tournament.transferBegin.UTCToLocal(from: .leagueDate, to: .local)) - \(tournament.transferEnd.UTCToLocal(from: .leagueDate, to: .local))"
             
+            if tournament.betweenBeginEndDate() {
+                cell.tournamentTitle_label.textColor = .red
+                cell.tournamentTransfer_label.textColor = .red
+            } else {
+                cell.tournamentTitle_label.textColor = .black
+                cell.tournamentTransfer_label.textColor = .black
+            }
         }
         if let team = team {
             cell.commandTitle_label.text = team.name

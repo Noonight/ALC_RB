@@ -57,6 +57,16 @@ extension String {
         }
         return date
     }
+    
+    func toDate(type: DateFormats) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = type.rawValue
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        
+        let dt = dateFormatter.date(from: self)
+        
+        return dt
+    }
 }
 
 extension Date {
@@ -69,6 +79,10 @@ extension Date {
             return ""
         }
         return date
+    }
+    
+    func isBetween(_ date1: Date, and date2: Date) -> Bool {
+        return (min(date1, date2) ... max(date1, date2)).contains(self)
     }
 }
 

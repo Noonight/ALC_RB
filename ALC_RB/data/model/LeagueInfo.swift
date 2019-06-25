@@ -27,8 +27,8 @@ struct LILeague: Codable {
     let id: String?
     let tourney: String?
     let name: String?
-    let beginDate: String?
-    let endDate: String?
+    var beginDate: String?
+    var endDate: String?
     let maxTeams: Int?
     let teams: [LITeam]?
     let transferBegin: String?
