@@ -48,6 +48,25 @@ struct League: Codable {
         return Date().isBetween(firstDate, and: lastDate)
     }
     
+    func getStatus() -> Statuses {
+        if status == Statuses.finished.rawValue {
+            return Statuses.finished
+        } else if status == Statuses.playoff.rawValue {
+            return Statuses.playoff
+        } else if status == Statuses.groups.rawValue {
+            return Statuses.groups
+        } else {
+            return Statuses.pending
+        }
+    }
+    
+    enum Statuses : String {
+        case finished = "Finished"
+        case playoff = "Playoff"
+        case groups = "Groups"
+        case pending = "Pending"
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         

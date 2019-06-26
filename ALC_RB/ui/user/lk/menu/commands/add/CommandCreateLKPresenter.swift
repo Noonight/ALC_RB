@@ -26,6 +26,8 @@ class CommandCreateLKPresenter : MvpPresenter<CommandCreateLKViewController> {
     
     let apiService = ApiRequests()
     
+    var createTeamCache: CreateTeamInfo?
+    
     func getTournaments() {
         apiService.get_tournamets(get_success: { (tournaments) in
             self.getView().onGetTournamentsSuccess(tournaments: tournaments)
@@ -43,6 +45,7 @@ class CommandCreateLKPresenter : MvpPresenter<CommandCreateLKViewController> {
     }
     
     func createTeam(token: String, teamInfo: CreateTeamInfo) {
+        self.createTeamCache = teamInfo
         apiService.post_createTeam(token: token, teamInfo: teamInfo, response_success: { (soloTeam) in
             self.getView().onCreateTeamSuccess(team: soloTeam)
         }, response_failure: { (error) in

@@ -31,7 +31,7 @@ extension UIViewController {
         
         present(alert, animated: true)
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.5) {
             alert.dismiss(animated: true)
         }
     }

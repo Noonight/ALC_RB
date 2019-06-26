@@ -112,6 +112,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         
         Print.m("We are in CommandLKTableViewController")
         
+//        createNewCommandBtn.isEnabled = false
         presenter.getTournaments()
         
         navigationController?.navigationBar.topItem?.rightBarButtonItem = createNewCommandBtn
@@ -145,6 +146,8 @@ class CommandsLKTableViewController: BaseStateTableViewController {
     
     var preparingByTournaments = 0
     
+    var tmpParticipationCount = 0
+    
     func updateUI() {
         Print.m("Update ui start")
         if userDefaults.getAuthorizedUser()?.person.participation.count ?? 0 > 0 {
@@ -156,11 +159,33 @@ class CommandsLKTableViewController: BaseStateTableViewController {
                 Print.m("table model commands not empty ->> \(!tableModel.commandsIsEmpty())")
                 //            Print.m("table model not empty")
                 setState(state: .normal)
+                createNewCommandBtn.isEnabled = true
                 tableView.reloadData()
                 
                 Print.m(tableModel.personOwnCommands)
                 Print.m(tableModel.personInsideCommands)
                 
+            } else if userDefaults.getAuthorizedUser()?.person.participation.count ?? 0 > tmpParticipationCount {
+                if tableModel.tournaments.leagues.count > 0 {
+                    Print.m("we are here")
+                    let group = DispatchGroup()
+                    group.enter()
+                    
+                    DispatchQueue.main.async {
+                        self.preparePersonCommands()
+                        group.leave()
+                    }
+                    
+                    group.notify(queue: .main) {
+//                        self.preparingByTournaments = 1
+                        self.tmpParticipationCount = self.userDefaults.getAuthorizedUser()?.person.participation.count ?? 0
+
+                        self.updateUI()
+                    }
+                }
+                Print.m("Set state to loading")
+                setState(state: .loading)
+                createNewCommandBtn.isEnabled = false
             } else {
                 // preparing person commands
                 if tableModel.tournaments.leagues.count > 0 && preparingByTournaments == 0 {
@@ -175,12 +200,14 @@ class CommandsLKTableViewController: BaseStateTableViewController {
                     
                     group.notify(queue: .main) {
                         self.preparingByTournaments = 1
-                        
+                        self.tmpParticipationCount = self.userDefaults.getAuthorizedUser()?.person.participation.count ?? 0
+
                         self.updateUI()
                     }
                 }
                 Print.m("Set state to loading")
                 setState(state: .loading)
+                createNewCommandBtn.isEnabled = false
             }
         } else {
             setState(state: .empty)
@@ -376,6 +403,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
 
 extension CommandsLKTableViewController : CommandsLKView {
     func getTournamentsSuccess(tournaments: Tournaments) {
+        tableModel.tournaments = Tournaments()
         tableModel.tournaments = tournaments
     }
     

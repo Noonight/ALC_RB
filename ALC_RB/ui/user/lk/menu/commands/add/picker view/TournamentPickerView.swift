@@ -19,10 +19,15 @@ class TournamentPickerHelper : NSObject, UIPickerViewDelegate, UIPickerViewDataS
     
     public func setRows (rows: [League]) {
         self.rows = rows
+//        dump(rows)
     }
     
     public func setSelectRowPickerHelper(selectRowProtocol: SelectRowTournamentPickerHelper) {
         self.selectRowProtocol = selectRowProtocol
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 60
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -30,12 +35,45 @@ class TournamentPickerHelper : NSObject, UIPickerViewDelegate, UIPickerViewDataS
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        Print.m(rows)
         return rows?.count ?? 0
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let label: UILabel
+        
+        if let view = view {
+            label = view as! UILabel
+        }
+        else {
+            label = UILabel(frame: CGRect(x: 0, y: 0, width: pickerView.frame.width, height: 400))
+        }
+        
+//        label.text = rows[row]
+        if let rows = rows {
+            //            return rows[row].name
+            if rows[row].tourney.contains(".") {
+                label.text = "\(rows[row].tourney) \(rows[row].name)"
+            } else {
+                label.text = "\(rows[row].tourney). \(rows[row].name)"
+            }
+        }
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        label.sizeToFit()
+        label.textAlignment = .center
+        
+        return label
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if let rows = rows {
-            return rows[row].name
+//            return rows[row].name
+            if rows[row].tourney.contains(".") {
+                return "\(rows[row].tourney) \(rows[row].name)"
+            } else {
+                return "\(rows[row].tourney). \(rows[row].name)"
+            }
         }
         return " <<--->> "
     }
