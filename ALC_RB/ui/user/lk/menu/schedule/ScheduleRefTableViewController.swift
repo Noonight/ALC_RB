@@ -24,6 +24,14 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
     private var viewModel: ScheduleRefViewModel!
     private let disposeBag = DisposeBag()
     
+    private lazy var editSchedule: EditScheduleLKViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        var viewController = storyboard.instantiateViewController(withIdentifier: "EditScheduleLKViewController") as! EditScheduleLKViewController
+        
+        return viewController
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -217,6 +225,17 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
         
         tableView.rx.itemSelected
             .subscribe { (indexPath) in
+                
+                let cell = self.tableView.cellForRow(at: indexPath.element!) as? ScheduleRefTableViewCell
+//                self.editSchedule.viewModel.comingModel.value(cell!.cellModel!)
+                self.editSchedule.viewModel.comingModel.value = (cell?.cellModel!)!
+                self.editSchedule.viewModel.activeMatch.onNext(cell!.cellModel!.activeMatch)
+//                self.editSchedule.viewModel.activeMatch.onNext(cell?.cellModel?.activeMatch)
+//                self.editSchedule.viewModel.referees.onNext(cell?.cellModel.)
+                
+                self.show(self.editSchedule, sender: self)
+                
+                
                 self.tableView.deselectRow(at: indexPath.element!, animated: true)
             }
             .disposed(by: disposeBag)
@@ -231,7 +250,9 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
                 .map { (dataModel) -> ActiveMatch in
                     return dataModel.activeMatches.matches[cellId.row]
                 }
+                .takeLast(1)
                 .subscribe { (activeMatchEvent) in
+                    Print.m(activeMatchEvent.element!)
                     destination.viewModel.activeMatch.onNext(activeMatchEvent.element!)
                 }
                 .disposed(by: self.disposeBag)

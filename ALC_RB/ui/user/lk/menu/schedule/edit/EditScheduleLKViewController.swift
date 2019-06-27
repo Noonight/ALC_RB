@@ -35,8 +35,27 @@ class EditScheduleLKViewController: BaseStateViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        setupReferee()
+        
         mainRefShowProtocol_btn.image = mainRefShowProtocol_btn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
         save_btn.image = save_btn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
+    }
+    
+    func setupReferee() {
+        for ref in viewModel.comingModel.value.activeMatch.referees {
+            switch ref.getRefereeType() {
+            case .referee1:
+                self.referee1_btn.setTitle(ref.person, for: .normal)
+            case .referee2:
+                self.referee2_btn.setTitle(ref.person, for: .normal)
+            case .referee3:
+                self.referee3_btn.setTitle(ref.person, for: .normal)
+            case .timekeeper:
+                self.timekeeper_btn.setTitle(ref.person, for: .normal)
+            case .invalid:
+                self.setState(state: .error(message: "Ошибка преобразования рефери."))
+            }
+        }
     }
     
     func setupBindings() {

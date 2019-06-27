@@ -36,6 +36,8 @@ class EditScheduleViewModel {
     var activeMatch: PublishSubject<ActiveMatch> = PublishSubject()
     var referees: PublishSubject<Players> = PublishSubject()
     
+    var comingModel: Variable<ScheduleRefTableViewCell.CellModel> = Variable<ScheduleRefTableViewCell.CellModel>(ScheduleRefTableViewCell.CellModel())
+    
     var sliderData: PublishSubject<SlidersData> = PublishSubject()
     
     private let dataManager: ApiRequests

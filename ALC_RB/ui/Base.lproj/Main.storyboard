@@ -3711,7 +3711,6 @@
                                     <outlet property="teamNameTwo_label" destination="cuG-h7-FXs" id="snS-dS-w6L"/>
                                     <outlet property="time_label" destination="jkj-GW-dyX" id="LVs-Qc-tHr"/>
                                     <outlet property="timekeeper_label" destination="AaP-wV-k45" id="8B8-4n-SC0"/>
-                                    <segue destination="cZY-Zf-FZI" kind="show" id="lrc-0S-aqu"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

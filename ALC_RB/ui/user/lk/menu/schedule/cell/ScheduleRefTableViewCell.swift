@@ -43,6 +43,16 @@ class ScheduleRefTableViewCell: UITableViewCell {
         var referee3: Person?
         var timekeeper: Person?
         
+        init() {
+            self.activeMatch = ActiveMatch()
+            self.clubTeamOne = Club()
+            self.clubTeamTwo = Club()
+            self.referee1 = nil
+            self.referee2 = nil
+            self.referee3 = nil
+            self.timekeeper = nil
+        }
+        
         init(activeMatch: ActiveMatch, clubTeamOne: Club, clubTeamTwo: Club, referee1: Person?, referee2: Person?, referee3: Person?, timekeeper: Person?) {
             self.activeMatch = activeMatch
             self.clubTeamOne = clubTeamOne
@@ -54,7 +64,10 @@ class ScheduleRefTableViewCell: UITableViewCell {
         }
     }
     
+    var cellModel: CellModel?
+    
     func configure(with cellModel: CellModel) {
+        self.cellModel = cellModel
         reset()
 //        Print.m(cellModel)
         date_label.text = cellModel.activeMatch.date.UTCToLocal(from: .utcTime, to: .local)
