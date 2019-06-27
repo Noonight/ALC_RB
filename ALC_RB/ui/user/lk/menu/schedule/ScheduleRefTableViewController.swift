@@ -152,6 +152,12 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
                 }
                 return cellModels
             })
+            .map({ cellModel -> [ScheduleRefTableViewCell.CellModel] in
+                return cellModel.sorted(by: { (lModel, rModel) -> Bool in
+                    Print.m(lModel.activeMatch.date)
+                    return lModel.activeMatch.date.getDateOfType(type: .utcTime) < rModel.activeMatch.date.getDateOfType(type: .utcTime)
+                })
+            })
             //            .flatMap({ (dataModel) -> PublishSubject<[ScheduleRefTableViewCell.CellModel]> in
             //
             //                let subject: PublishSubject<[ScheduleRefTableViewCell.CellModel]> = PublishSubject()
