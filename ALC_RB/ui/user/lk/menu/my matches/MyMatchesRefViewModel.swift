@@ -24,13 +24,18 @@ class MyMatchesRefViewModel {
     
     func fetch()
     {
-        refreshing.onNext(true)
-        
-        self.dataManager?.get_forMyMatches(participationMatches: participationMatches.value, get_success: { (cellModels) in
-            self.tableModel.onNext(cellModels)
-            self.refreshing.onNext(false)
-        }, get_failure: { (error) in
-            self.error.onNext(error)
-        })
+        if participationMatches.value.count > 0 {
+            refreshing.onNext(true)
+            
+            self.dataManager?.get_forMyMatches(participationMatches: participationMatches.value, get_success: { (cellModels) in
+                self.tableModel.onNext(cellModels)
+                self.refreshing.onNext(false)
+            }, get_failure: { (error) in
+                self.error.onNext(error)
+            })
+        } else {
+            self.tableModel.onNext([])
+//            self.error.onNext(Error)
+        }
     }
 }

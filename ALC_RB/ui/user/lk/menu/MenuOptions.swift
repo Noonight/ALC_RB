@@ -63,12 +63,14 @@ enum RefereeMenuOption: Int, CustomStringConvertible {
 enum MainRefereeMenuOption: Int, CustomStringConvertible {
     
     case Schedule
+    case MyMatches
     case Referees
     case SignOut
     
     var description: String {
         switch self {
         case .Schedule: return "Распиание"
+        case .MyMatches: return "Мои матчи"
         case .Referees: return "Судьи"
         case .SignOut: return "Выйти"
         }
@@ -77,6 +79,7 @@ enum MainRefereeMenuOption: Int, CustomStringConvertible {
     var image: UIImage {
         switch self {
         case .Schedule: return #imageLiteral(resourceName: "ic_timetable") // tmp solve
+        case .MyMatches: return #imageLiteral(resourceName: "ic_whistle")
         case .Referees: return #imageLiteral(resourceName: "ic_referee") // tmp solve
         case .SignOut: return UIImage(named: "ic_sign_out2") ?? UIImage()
         }

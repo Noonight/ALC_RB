@@ -283,9 +283,16 @@ class UserLKViewController: UIViewController {
         switch menuOption {
         case .Schedule:
             segmentHelper?.remove(referees)
+            segmentHelper?.remove(myMatches)
             segmentHelper?.add(schedule)
             navigationItem.title = schedule.title
+        case .MyMatches:
+            segmentHelper?.remove(referees)
+            segmentHelper?.remove(schedule)
+            segmentHelper?.add(myMatches)
+            navigationItem.title = myMatches.title
         case .Referees:
+            segmentHelper?.remove(myMatches)
             segmentHelper?.remove(schedule)
             segmentHelper?.add(referees)
             navigationItem.title = referees.title

@@ -32,7 +32,7 @@ class MenuHelper: NSObject, UITableViewDelegate, UITableViewDataSource {
             return 2
         }
         if userType == Person.TypeOfPerson.mainReferee {
-            return 3
+            return 4
         }
         return 0
     }

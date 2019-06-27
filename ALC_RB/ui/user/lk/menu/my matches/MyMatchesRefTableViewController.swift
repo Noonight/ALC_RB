@@ -35,6 +35,8 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         
         tableView.tableFooterView = UIView()
         
+        setEmptyMessage(message: "Здвесь будут отображаться ваши матчи")
+        
         bindViews()
     }
     
@@ -82,6 +84,13 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
                 cell.configure(with: model)
             }
             .disposed(by: disposeBag)
+        
+        viewModel.tableModel
+            .subscribe { (tableModel) in
+                if tableModel.element?.count == 0 {
+                    self.setState(state: .empty)
+                }
+            }
         
         tableView.rx.itemSelected
             .subscribe { (indexPath) in
