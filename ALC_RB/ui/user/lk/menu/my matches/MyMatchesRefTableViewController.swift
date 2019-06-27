@@ -14,12 +14,29 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
     private enum CellIdentifiers {
         static let cell = "cell_my_matches"
     }
+    private enum SegueIdentifiers {
+        static let showProtocol = "segue_showProtocol"
+    }
     private enum AlertLets {
         static let alertTitle = "Ошибка!"
         static let alertMessage = "Не получилось получить данные пользователя. Нажмите 'Перезагрузить' чтобы попробовать снова"
         static let okBtn = "Ок"
         static let refreshBtn = "Перезагрузить"
     }
+    
+    private lazy var refProtocol: MatchProtocolViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        var viewController = storyboard.instantiateViewController(withIdentifier: "MatchProtocolViewControllerProtocol") as! MatchProtocolViewController
+        
+//        viewController.leagueDetailModel.league = self.leagueDetailModel.league
+        //        dump(self.leagueDetailModel)
+//        viewController.leagueDetailModel.leagueInfo = self.leagueDetailModel.leagueInfo
+        
+        //self.add(viewController)
+        
+        return viewController
+    }()
     
     var viewModel: MyMatchesRefViewModel!
     let disposeBag = DisposeBag()
@@ -43,9 +60,19 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setupUser()
+        // issue: cell not worked when we go back
+        navigationItem.title = self.title
         
-        viewModel.fetch()
+        setupUser()
+        if viewModel.firstInit.value {
+            viewModel.fetch()
+            viewModel.firstInit.value = false
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        viewWillDisappear(animated)
+//        viewModel.firstInit.value = true
     }
     
     func setupUser() {
@@ -80,6 +107,11 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
             .disposed(by: disposeBag)
         
         viewModel.tableModel
+            .map({ (cellModel) -> [MyMatchesRefTableViewCell.CellModel] in
+                return cellModel.sorted(by: { (lModel, rModel) -> Bool in
+                    return lModel.participationMatch!.date.getDateOfType(type: .utcTime) < rModel.participationMatch!.date.getDateOfType(type: .utcTime)
+                })
+            })
             .bind(to: tableView.rx.items(cellIdentifier: CellIdentifiers.cell, cellType: MyMatchesRefTableViewCell.self)) {  (row, model, cell) in
                 cell.configure(with: model)
             }
@@ -95,6 +127,9 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         tableView.rx.itemSelected
             .subscribe { (indexPath) in
                 self.tableView.deselectRow(at: indexPath.element!, animated: true)
+                if (self.tableView.cellForRow(at: indexPath.element!) as? MyMatchesRefTableViewCell)?.accessoryType == .disclosureIndicator {
+                    self.show(self.refProtocol, sender: self)
+                }
             }
             .disposed(by: disposeBag)
     }
@@ -105,6 +140,15 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIdentifiers.showProtocol,
+            let destination = segue.destination as? MatchProtocolViewController,
+            let cellIndex = tableView.indexPathForSelectedRow
+        {
+//            destination.leagueDetailModel =
+            let cell = (tableView.cellForRow(at: cellIndex) as? MyMatchesRefTableViewCell)?.cellModel!.participationMatch!.leagueID
+//            destination.leagueDetailModel = self.leagueDetailModel
+//            destination.match = self.leagueDetailModel.leagueInfo.league.matches![cellIndex]
+            //destination.scheduleCell = self.scheduleCell
+        }
     }
-    
 }

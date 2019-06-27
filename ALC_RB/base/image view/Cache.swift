@@ -8,4 +8,4 @@
 
 import UIKit
 
-let imageCache2 = NSCache<AnyObject, AnyObject>()
+//let imageCache2 = NSCache<AnyObject, AnyObject>()

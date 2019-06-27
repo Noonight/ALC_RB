@@ -95,7 +95,7 @@ struct Person: Codable {
     
     func getFullName() -> String {
         let fullName = "\(surname) \(name) \(lastname)"
-        if (fullName.count > 3) {
+        if (fullName.count > 0) {
             return fullName
         }
         return "Не указано"

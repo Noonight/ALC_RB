@@ -706,7 +706,7 @@ class ApiRequests {
                                     {
                                         dispatchGroup.enter()
                                         let tmpTeam2 = tmpTeams?.filter({ (team) -> Bool in
-                                            return parMatch.teamOne == team.id
+                                            return parMatch.teamTwo == team.id
                                         }).first
                                         let tmpClubId = tmpTeam2?.club
                                         dispatchGroup.leave()
@@ -716,7 +716,7 @@ class ApiRequests {
                                             self.get_clubById(id: tmpClubId!, get_success: { (soloClub) in
                                                 fClubs.append(soloClub.club)
                                                 tmpClub2 = soloClub.club
-                                                
+                                                                                                
                                                 models.append(MyMatchesRefTableViewCell.CellModel(
                                                     participationMatch: parMatch,
                                                     club1: tmpClub1!,

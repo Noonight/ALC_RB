@@ -15,6 +15,7 @@ class MyMatchesRefViewModel {
     var error: PublishSubject<Error> = PublishSubject()
     var participationMatches: Variable<[ParticipationMatch]> = Variable<[ParticipationMatch]>([])
     var tableModel: PublishSubject<[MyMatchesRefTableViewCell.CellModel]> = PublishSubject()
+    var firstInit: Variable<Bool> = Variable<Bool>(true)
     
     var dataManager: ApiRequests?
     

@@ -43,33 +43,53 @@ class MyMatchesRefTableViewCell: UITableViewCell {
         }
     }
     
+    var cellModel: CellModel?
+    
     func configure(with cellModel: CellModel) {
 //        reset()
+        self.cellModel = cellModel
         
-        dateLabel.text = cellModel.participationMatch?.date.UTCToLocal(from: .utc, to: .local)
-        timeLabel.text = cellModel.participationMatch?.date.UTCToLocal(from: .utc, to: .localTime)
+        var containReferee = cellModel.participationMatch?.referees.filter({ referee -> Bool in
+            return referee.getRefereeType() == Referee.RefereeType.referee3
+        })/*.contains(where: { (referee) -> Bool in
+            if let personId = UserDefaultsHelper().getAuthorizedUser()?.person.id {
+                Print.m("\(referee.id) = \(personId)")
+
+                return referee.id == personId
+            }
+            return false
+        })*/
+        
+        if containReferee!.count > 0 {
+            accessoryType = .disclosureIndicator
+        }
+        
+        dateLabel.text = cellModel.participationMatch?.date.UTCToLocal(from: .utcTime, to: .local)
+        timeLabel.text = cellModel.participationMatch?.date.UTCToLocal(from: .utcTime, to: .localTime)
         tourLabel.text = cellModel.participationMatch?.tour
         placeLabel.text = cellModel.participationMatch?.place
         
         team1NameLabel.text = cellModel.team1Name
-//        team1Image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.club1?.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.3), runImageTransitionIfCached: true) { response in
-//            self.team1Image.image = response.result.value?.af_imageRoundedIntoCircle()
-//        }
+        team1Image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.club1?.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.3), runImageTransitionIfCached: true) { response in
+            self.team1Image.image = response.result.value?.af_imageRoundedIntoCircle()
+        }
 //        team1Image.loadImageWith(url: ApiRoute.getImageURL(image: cellModel.club1?.logo ?? ""))
         
-        team1Image.cacheImage(urlString: ApiRoute.getImageURL(image: cellModel.club1?.logo ?? "").absoluteString)
+//        team1Image.cacheImage(urlString: ApiRoute.getImageURL(image: cellModel.club1?.logo ?? "").absoluteString)
         
         team2NameLabel.text = cellModel.team2Name
-//        team2Image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.club2?.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.3), runImageTransitionIfCached: true) { response in
-//            self.team2Image.image = response.result.value?.af_imageRoundedIntoCircle()
-//        }
+        team2Image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.club2?.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.3), runImageTransitionIfCached: true) { response in
+            self.team2Image.image = response.result.value?.af_imageRoundedIntoCircle()
+        }
         
 //        team2Image.loadImageWith(url: ApiRoute.getImageURL(image: cellModel.club2?.logo ?? ""))
         
-        team2Image.cacheImage(urlString: ApiRoute.getImageURL(image: cellModel.club2?.logo ?? "").absoluteString)
+//        team2Image.cacheImage(urlString: ApiRoute.getImageURL(image: cellModel.club2?.logo ?? "").absoluteString)
         
         if cellModel.participationMatch?.score.count ?? 0 > 1 {
             scoreLabel.text = cellModel.participationMatch?.score
+        } else {
+            scoreLabel.text = " - "
         }
     }
     
