@@ -32,6 +32,8 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
         return viewController
     }()
     
+    var tmpReferee: Players?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,6 +83,7 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
         
         viewModel.dataModel
             .subscribe { (dataModel) in
+                self.tmpReferee = dataModel.element?.referees
                 if dataModel.element?.activeMatches.matches.count ?? 0 < 1 {
                     self.setState(state: .empty)
                 }
@@ -228,12 +231,24 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
                 
                 let cell = self.tableView.cellForRow(at: indexPath.element!) as? ScheduleRefTableViewCell
 //                self.editSchedule.viewModel.comingModel.value(cell!.cellModel!)
-                self.editSchedule.viewModel.comingModel.value = (cell?.cellModel!)!
-                self.editSchedule.viewModel.activeMatch.onNext(cell!.cellModel!.activeMatch)
+                if let cellModel = cell?.cellModel {
+                    self.editSchedule.viewModel!.comingCellModel.value = cellModel
+                    if let referees = self.tmpReferee {
+                        self.editSchedule.viewModel?.comingReferees.value = referees
+                        self.show(self.editSchedule, sender: self)
+                    }
+//                    self.viewModel.dataModel
+//                        .subscribe({ dataModel in
+//                            self.editSchedule.viewModel?.comingReferees.value = dataModel.element!.referees
+//                        })
+//                        .disposed(by: self.disposeBag)
+                } else {
+                    self.showAlert(message: "Нету модели данных")
+                }
+//                self.editSchedule.viewModel.activeMatch.onNext(cell!.cellModel!.activeMatch)
 //                self.editSchedule.viewModel.activeMatch.onNext(cell?.cellModel?.activeMatch)
 //                self.editSchedule.viewModel.referees.onNext(cell?.cellModel.)
                 
-                self.show(self.editSchedule, sender: self)
                 
                 
                 self.tableView.deselectRow(at: indexPath.element!, animated: true)
@@ -241,7 +256,7 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
             .disposed(by: disposeBag)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Segues.edit,
             let destination = segue.destination as? EditScheduleLKViewController,
             let cellId = tableView.indexPathForSelectedRow
@@ -266,6 +281,6 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
                 }
                 .disposed(by: self.disposeBag)
         }
-    }
+    }*/
     
 }

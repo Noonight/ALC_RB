@@ -21,6 +21,12 @@ struct Players: Codable {
         case people = "people"
         case count = "count"
     }
+    
+    func findPersonBy(fullName: String) -> Person? {
+        return people.filter({ person -> Bool in
+            return person.compareFullName(with: fullName)
+        }).first
+    }
 }
 
 struct Person: Codable {
@@ -91,6 +97,10 @@ struct Person: Codable {
         self.updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
         self.v = try container.decodeIfPresent(Int.self, forKey: .v) ?? -1
         self.club = try container.decodeIfPresent(String.self, forKey: .club) ?? ""
+    }
+    
+    func compareFullName(with fullName: String) -> Bool {
+        return fullName.lowercased() == getFullName().lowercased()
     }
     
     func getFullName() -> String {

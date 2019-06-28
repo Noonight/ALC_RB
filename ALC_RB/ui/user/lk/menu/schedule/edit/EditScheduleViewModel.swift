@@ -33,10 +33,11 @@ class EditScheduleViewModel {
     
     var refreshing: PublishSubject<Bool> = PublishSubject()
     var error: PublishSubject<Error> = PublishSubject()
-    var activeMatch: PublishSubject<ActiveMatch> = PublishSubject()
-    var referees: PublishSubject<Players> = PublishSubject()
+//    var activeMatch: PublishSubject<ActiveMatch> = PublishSubject()
+//    var referees: PublishSubject<Players> = PublishSubject()
     
-    var comingModel: Variable<ScheduleRefTableViewCell.CellModel> = Variable<ScheduleRefTableViewCell.CellModel>(ScheduleRefTableViewCell.CellModel())
+    var comingCellModel: Variable<ScheduleRefTableViewCell.CellModel> = Variable<ScheduleRefTableViewCell.CellModel>(ScheduleRefTableViewCell.CellModel())
+    var comingReferees: Variable<Players> = Variable<Players>(Players())
     
     var sliderData: PublishSubject<SlidersData> = PublishSubject()
     
@@ -50,7 +51,7 @@ class EditScheduleViewModel {
         self.refreshing.onNext(true)
         dataManager.get_referees(get_success: { (referees) in
             
-            self.referees.onNext(referees)
+//            self.referees.onNext(referees)
             self.refreshing.onNext(false)
 
         }) { (error) in
