@@ -32,8 +32,10 @@ class EditScheduleLKViewController: BaseStateViewController {
     
     var viewModel: EditScheduleViewModel? = EditScheduleViewModel(dataManager: ApiRequests())
     private let disposeBag = DisposeBag()
+    private let userDefaults = UserDefaultsHelper()
     
 //    private var
+    var filteredRefereesWithFullName: [String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +49,12 @@ class EditScheduleLKViewController: BaseStateViewController {
         super.viewWillAppear(animated)
         
         setupUI()
+        
+        filteredRefereesWithFullName = viewModel?.comingReferees.value.people.filter({ person -> Bool in
+            return person.getFullName().count > 2
+        }).map({ person -> String in
+            return person.getFullName()
+        })
         
         mainRefShowProtocol_btn.image = mainRefShowProtocol_btn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
         save_btn.image = save_btn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
@@ -68,8 +76,6 @@ class EditScheduleLKViewController: BaseStateViewController {
         setupReferee()
         setupShowProtocolBtn()
         
-        setupSliders()
-        
 //        Print.m(viewModel?.comingReferees.value)
     }
     
@@ -84,24 +90,23 @@ class EditScheduleLKViewController: BaseStateViewController {
         viewModel!.comingCellModel.value.activeMatch.played ? (mainRefShowProtocol_btn.isEnabled = false) : (mainRefShowProtocol_btn.isEnabled = true)
     }
     
-    func setupSliders() {
-        
-    }
-    
     func setupReferee() {
         for ref in viewModel!.comingCellModel.value.activeMatch.referees {
+            let refPerson = viewModel?.comingReferees.value.people.filter({ person -> Bool in
+                return person.id == ref.person
+            }).first
             switch ref.getRefereeType() {
             case .referee1:
-                self.referee1_btn.setTitle(ref.person, for: .normal)
+                self.referee1_btn.setTitle(refPerson?.getFullName(), for: .normal)
                 self.referee1_btn.setTitleColor(Colors.YES_REF, for: .normal)
             case .referee2:
-                self.referee2_btn.setTitle(ref.person, for: .normal)
+                self.referee2_btn.setTitle(refPerson?.getFullName(), for: .normal)
                 self.referee2_btn.setTitleColor(Colors.YES_REF, for: .normal)
             case .referee3:
-                self.referee3_btn.setTitle(ref.person, for: .normal)
+                self.referee3_btn.setTitle(refPerson?.getFullName(), for: .normal)
                 self.referee3_btn.setTitleColor(Colors.YES_REF, for: .normal)
             case .timekeeper:
-                self.timekeeper_btn.setTitle(ref.person, for: .normal)
+                self.timekeeper_btn.setTitle(refPerson?.getFullName(), for: .normal)
                 self.timekeeper_btn.setTitleColor(Colors.YES_REF, for: .normal)
             case .invalid:
                 showRepeatAlert(message: "Не удалось настроить интерфейс") {
@@ -160,52 +165,105 @@ class EditScheduleLKViewController: BaseStateViewController {
     }
     
     @IBAction func onReferee1BtnPressed(_ sender: UIButton) {
-        ActionSheetStringPicker.show(
-            withTitle: Texts.REFEREES,
-            rows: viewModel?.comingReferees.value.people.filter({ person -> Bool in
-                return person.getFullName().count > 2
-            }).map({ person -> String in
-                return person.getFullName()
-            }),
-            initialSelection: 1,
-            doneBlock: { (picker, indexes, values) in
-                
-                Print.m("we find person in referees array with name - \(values).\nThe person is \(self.viewModel?.comingReferees.value.findPersonBy(fullName: values as! String))")
-        }, cancel: { (picker) in
-            Print.m("cancel")
-        }, origin: sender)
+        showRefereesPicker(sender: sender)
     }
     
     @IBAction func onReferee2BtnPressed(_ sender: UIButton) {
-        
+        showRefereesPicker(sender: sender)
     }
     
     @IBAction func onReferee3BtnPressed(_ sender: UIButton) {
-        
+        showRefereesPicker(sender: sender)
     }
     
     @IBAction func onTimekeeperBtnPressed(_ sender: UIButton) {
-        
+        showRefereesPicker(sender: sender)
     }
     
     @IBAction func onMainRefShowProtocolBtnPressed(_ sender: UIBarButtonItem) {
         
     }
     
+    // dictionary {person, type} of referee
+    func getRefereesArray() -> [EditMatchReferee] {
+        func getPersonId(_ fullName: String) -> String? {
+            return self.viewModel?.comingReferees.value.findPersonBy(fullName: fullName)?.id
+        }
+        func isCorrectTitle(btn: UIButton) -> Bool {
+            return btn.title(for: .normal) != Texts.NO_REF ? true : false
+        }
+        
+        var resultArray: [EditMatchReferee] = []
+        
+        if isCorrectTitle(btn: referee1_btn) {
+            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(referee1_btn.title(for: .normal)!)!))
+        }
+        if isCorrectTitle(btn: referee2_btn) {
+            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee2.rawValue, person: getPersonId(referee2_btn.title(for: .normal)!)!))
+        }
+        if isCorrectTitle(btn: referee3_btn) {
+            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee3.rawValue, person: getPersonId(referee3_btn.title(for: .normal)!)!))
+        }
+        if isCorrectTitle(btn: timekeeper_btn) {
+            resultArray.append(EditMatchReferee(type: Referee.RefereeType.timekeeper.rawValue, person: getPersonId(timekeeper_btn.title(for: .normal)!)!))
+        }
+        return resultArray
+    }
+    
     @IBAction func onSaveBtnPressed(_ sender: UIBarButtonItem) {
+        viewModel?.editMatchReferees(
+            token: (userDefaults.getAuthorizedUser()?.token)!,
+            editMatchReferees: EditMatchReferees(
+                id: (viewModel?.comingCellModel.value.activeMatch.id)!,
+                referees: getRefereesArray()
+            ),
+            success: { soloMatch in
+                self.setMatchValue(
+                    id: soloMatch.match!.id,
+                    match: soloMatch
+                )
+            },
+            message: { message in
+                self.showAlert(title: "Сообщение", message: message.message)
+            },
+            failure: { error in
+                self.showRepeatAlert(message: error.localizedDescription, repeat_closure: {
+                    self.viewModel?.editMatchReferees(
+                        token: self.userDefaults.getAuthorizedUser()!.token,
+                        editMatchReferees: self.viewModel!.cache!,
+                        success: { soloMatch in
+                            
+                        },
+                        message: { message in
+                            
+                        },
+                        failure: { error in
+                            
+                        }
+                    )
+                })
+            }
+        )
+    }
+    
+    // edit match for userDefaults value at id match
+    func setMatchValue(id: String, match: SoloMatch) {
+        
+    }
+    
+    func showRefereesPicker(sender: UIButton) {
+        
+        let acp = ActionSheetStringPicker(title: Texts.REFEREES, rows: filteredRefereesWithFullName, initialSelection: 0, doneBlock: { (picker, index, value) in
+            sender.setTitleAndColorWith(title: (self.viewModel?.comingReferees.value.findPersonBy(fullName: value as! String)?.getFullName())!, color: Colors.YES_REF)
+        }, cancel: { (picker) in
+            
+        }, origin: self)
+        
+        acp?.addCustomButton(withTitle: "Отчистить", actionBlock: {
+            sender.setTitleAndColorWith(title: Texts.NO_REF, color: Colors.NO_REF)
+        })
+        acp?.show()
         
     }
     
 }
-
-//extension EditScheduleLKViewController : ActionSheetCustomPickerDelegate {
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        <#code#>
-//    }
-//    
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//
-//    }
-//
-//
-//}

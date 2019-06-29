@@ -391,6 +391,49 @@ class ApiRequests {
             })
     }
     
+    func post_matchSetReferee(token: String, editMatchReferees: EditMatchReferees, response_success: @escaping (SoloMatch) -> (), response_message: @escaping (SingleLineMessage) -> (), response_failure: @escaping (Error) -> ()) {
+        
+        Alamofire
+            .upload(multipartFormData: { (multipartFormData) in
+                for (key, value) in editMatchReferees.toParams() {
+                    let strValue = value as! String
+                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
+                }
+            },
+                    usingThreshold: UInt64(),
+                    to: ApiRoute.getApiURL(.post_create_team),
+                    method: .post,
+                    headers: ["auth" : token])
+            { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    
+                    upload.responseSoloMatch(completionHandler: { response in
+                        switch response.result {
+                        case .success:
+                            if let soloMatch = response.result.value {
+                                response_success(soloMatch)
+                            }
+                        case .failure(let error):
+                            upload.responseSingleLineMessage(completionHandler: { response in
+                                switch response.result {
+                                case .success:
+                                    if let message = response.result.value {
+                                        response_message(message)
+                                    }
+                                case .failure(let error):
+                                    response_failure(error)
+                                }
+                            })
+                        }
+                    })
+                    
+                case .failure(let error):
+                    response_failure(error)
+                }
+        }
+    }
+    
     // MARK: - GET requests
     
     func get_activeMatches(limit: Int = 30, offset: Int = 0, played: String = "false", get_success: @escaping (ActiveMatches) -> (), get_failure: @escaping (Error) -> ()) {

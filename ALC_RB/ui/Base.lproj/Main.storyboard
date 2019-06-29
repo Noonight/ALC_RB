@@ -3911,28 +3911,28 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ogs-7O-9Ke">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ogs-7O-9Ke">
                                                 <rect key="frame" x="103" y="11.5" width="209" height="30"/>
                                                 <state key="normal" title="First item"/>
                                                 <connections>
                                                     <action selector="onReferee1BtnPressed:" destination="cZY-Zf-FZI" eventType="touchUpInside" id="Enm-1r-fkA"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixi-0K-0cn">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixi-0K-0cn">
                                                 <rect key="frame" x="106" y="85.5" width="206" height="30"/>
                                                 <state key="normal" title="First item"/>
                                                 <connections>
                                                     <action selector="onReferee3BtnPressed:" destination="cZY-Zf-FZI" eventType="touchUpInside" id="aKh-MF-FF2"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="89g-Au-JEB">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="89g-Au-JEB">
                                                 <rect key="frame" x="146" y="122.5" width="166" height="30"/>
                                                 <state key="normal" title="First item"/>
                                                 <connections>
                                                     <action selector="onTimekeeperBtnPressed:" destination="cZY-Zf-FZI" eventType="touchUpInside" id="byd-qo-jHQ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKK-j8-w7D">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKK-j8-w7D">
                                                 <rect key="frame" x="106" y="48.5" width="206" height="30"/>
                                                 <state key="normal" title="First item"/>
                                                 <connections>

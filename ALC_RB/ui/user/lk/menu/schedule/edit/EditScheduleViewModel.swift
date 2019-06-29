@@ -43,6 +43,8 @@ class EditScheduleViewModel {
     
     private let dataManager: ApiRequests
     
+    var cache: EditMatchReferees?
+    
     init(dataManager: ApiRequests) {
         self.dataManager = dataManager
     }
@@ -57,6 +59,10 @@ class EditScheduleViewModel {
         }) { (error) in
             self.error.onNext(error)
         }
+    }
+    
+    func editMatchReferees(token: String, editMatchReferees: EditMatchReferees, success: @escaping (SoloMatch)->(), message: @escaping (SingleLineMessage)->(), failure: @escaping (Error)->()) {
+        self.cache = editMatchReferees
     }
     
 }
