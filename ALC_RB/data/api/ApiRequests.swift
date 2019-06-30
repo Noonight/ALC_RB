@@ -393,44 +393,106 @@ class ApiRequests {
     
     func post_matchSetReferee(token: String, editMatchReferees: EditMatchReferees, response_success: @escaping (SoloMatch) -> (), response_message: @escaping (SingleLineMessage) -> (), response_failure: @escaping (Error) -> ()) {
         
-        Alamofire
-            .upload(multipartFormData: { (multipartFormData) in
-                for (key, value) in editMatchReferees.toParams() {
-                    let strValue = value as! String
-                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
-                }
-            },
-                    usingThreshold: UInt64(),
-                    to: ApiRoute.getApiURL(.post_create_team),
-                    method: .post,
-                    headers: ["auth" : token])
-            { (result) in
-                switch result {
-                case .success(let upload, _, _):
-                    
-                    upload.responseSoloMatch(completionHandler: { response in
-                        switch response.result {
-                        case .success:
-                            if let soloMatch = response.result.value {
-                                response_success(soloMatch)
-                            }
-                        case .failure(let error):
-                            upload.responseSingleLineMessage(completionHandler: { response in
-                                switch response.result {
-                                case .success:
-                                    if let message = response.result.value {
-                                        response_message(message)
-                                    }
-                                case .failure(let error):
-                                    response_failure(error)
-                                }
-                            })
-                        }
-                    })
-                    
+        let header: HTTPHeaders = [
+            "Content-Type" : "application/json",
+            "auth" : "\(token)"
+        ]
+        
+//        Alamofire
+//            .upload(multipartFormData: { (multipartFormData) in
+//                multipartFormData.append(editMatchReferees.id.data(using: String.Encoding.utf8)!, withName: EditMatchReferees.Fields.id.value())
+//
+////                let encode = try? JSONEncoder().encode(editMatchReferees.referees.getArrayOfRefereesInDictionary())
+//                let encodedReferees = try? JSONEncoder().encode(editMatchReferees.referees)
+//                if let referees = encodedReferees {
+//                    multipartFormData.append(referees, withName: EditMatchReferees.Fields.referees.value())
+//                } else {
+//                    Print.m("fail convert refere to referee")
+//                    return
+//                }
+//            },
+//                    usingThreshold: UInt64(),
+//                    to: ApiRoute.getApiURL(.post_edit_match_referee),
+//                    method: .post,
+//                    headers: ["auth" : token])
+//            { (result) in
+//                switch result {
+//                case .success(let upload, _, _):
+//
+//                    upload.responseJSON(completionHandler: { (response) in
+//                        if response.error != nil {
+//                            Print.m(response.error)
+//                            return
+//                        }
+//                        dump(response)
+//                        Print.m(response.result.value)
+//                    })
+//
+//                    upload.responseSoloMatch(completionHandler: { response in
+//                        switch response.result {
+//                        case .success:
+//                            if let soloMatch = response.result.value {
+//                                response_success(soloMatch)
+//                            }
+//                        case .failure(let error):
+//                            upload.responseSingleLineMessage(completionHandler: { response in
+//                                switch response.result {
+//                                case .success:
+//                                    if let message = response.result.value {
+//                                        response_message(message)
+//                                    }
+//                                case .failure(let error):
+//                                    response_failure(error)
+//                                }
+//                            })
+//                        }
+//                    })
+//
+//                case .failure(let error):
+//                    response_failure(error)
+//                }
+//        }
+        
+        let request = Alamofire
+            .request(ApiRoute.getApiURL(.post_edit_match_referee), method: .post, parameters: editMatchReferees.toParams(), encoding: JSONEncoding.default, headers: header)
+        
+            request
+            .responseSoloMatch(completionHandler: { response in
+                switch response.result {
+                case .success:
+                    if let soloMatch = response.result.value {
+                        response_success(soloMatch)
+                    }
                 case .failure(let error):
-                    response_failure(error)
+                    responseMessage(success: { message in
+                        response_message(message)
+                    }, failure: { error in
+                        response_failure(error)
+                    })
                 }
+            })
+//            .responseSingleLineMessage(completionHandler: { response in
+//                switch response.result {
+//                case .success:
+//                    if let message = response.result.value {
+//                        response_message(message)
+//                    }
+//                case .failure(let error):
+//                    response_failure(error)
+//                }
+//            })
+        
+        func responseMessage(success: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
+            request.responseSingleLineMessage { response in
+                switch response.result {
+                case .success:
+                    if let message = response.result.value {
+                        success(message)
+                    }
+                case .failure(let error):
+                    failure(error)
+                }
+            }
         }
     }
     

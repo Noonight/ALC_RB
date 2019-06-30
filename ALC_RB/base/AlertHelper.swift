@@ -22,6 +22,17 @@ extension UIViewController {
         for action in actions {
             alert.addAction(action)
         }
+        if alert.actions.count == 0 {
+            alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
+        }
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showAlert(title: String, message: String, closure: @escaping () -> ()) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: { alert in
+            closure()
+        }))
         self.present(alert, animated: true, completion: nil)
     }
     

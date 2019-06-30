@@ -16,6 +16,7 @@ class EditScheduleLKViewController: BaseStateViewController {
         static let NO_REF = "Не назначен"
         static let REFEREES = "Рефери"
         static let NO_REF_FIO = "ФИО не указано"
+        static let EDITED_SAVED = "Изменения сохранены"
     }
     private enum Colors {
         static let NO_REF = #colorLiteral(red: 1, green: 0.3098039216, blue: 0.2666666667, alpha: 1)
@@ -34,7 +35,6 @@ class EditScheduleLKViewController: BaseStateViewController {
     private let disposeBag = DisposeBag()
     private let userDefaults = UserDefaultsHelper()
     
-//    private var
     var filteredRefereesWithFullName: [String]?
     
     override func viewDidLoad() {
@@ -75,8 +75,6 @@ class EditScheduleLKViewController: BaseStateViewController {
         clearUI()
         setupReferee()
         setupShowProtocolBtn()
-        
-//        Print.m(viewModel?.comingReferees.value)
     }
     
     func clearUI() {
@@ -112,7 +110,6 @@ class EditScheduleLKViewController: BaseStateViewController {
                 showRepeatAlert(message: "Не удалось настроить интерфейс") {
                     self.setupUI()
                 }
-//                self.setState(state: .error(message: "Ошибка преобразования рефери."))
             }
         }
     }
@@ -132,36 +129,6 @@ class EditScheduleLKViewController: BaseStateViewController {
             }
             .disposed(by: disposeBag)
         
-//        viewModel.comingCellModel.value.activeMatch
-//            .map { (activeMatch) -> Bool in
-//                return activeMatch.played
-//            }
-//            .subscribe { (played) in
-//                played.element! ? (self.mainRefShowProtocol_btn.isEnabled = false) : (self.mainRefShowProtocol_btn.isEnabled = true)
-//            }
-//            .disposed(by: disposeBag)
-        
-//        viewModel.activeMatch
-//            .map { (activeMatch) -> [Referee] in
-//                return activeMatch.referees
-//            }
-//            .subscribe { (referees) in
-//                for ref in referees.element! {
-//                    switch ref.getRefereeType() {
-//                    case .referee1:
-//                        self.referee1_btn.setTitle(ref.person, for: .normal)
-//                    case .referee2:
-//                        self.referee2_btn.setTitle(ref.person, for: .normal)
-//                    case .referee3:
-//                        self.referee3_btn.setTitle(ref.person, for: .normal)
-//                    case .timekeeper:
-//                        self.timekeeper_btn.setTitle(ref.person, for: .normal)
-//                    case .invalid:
-//                        self.setState(state: .error(message: "Ошибка преобразования рефери."))
-//                    }
-//                }
-//            }
-//            .disposed(by: self.disposeBag)
     }
     
     @IBAction func onReferee1BtnPressed(_ sender: UIButton) {
@@ -215,55 +182,78 @@ class EditScheduleLKViewController: BaseStateViewController {
             token: (userDefaults.getAuthorizedUser()?.token)!,
             editMatchReferees: EditMatchReferees(
                 id: (viewModel?.comingCellModel.value.activeMatch.id)!,
-                referees: getRefereesArray()
+                referees: EditMatchReferees.Referees(referees: getRefereesArray())
             ),
             success: { soloMatch in
-                self.setMatchValue(
-                    id: soloMatch.match!.id,
-                    match: soloMatch
-                )
+                self.onResponseSuccess(soloMatch: soloMatch)
             },
-            message: { message in
-                self.showAlert(title: "Сообщение", message: message.message)
+            message_single: { message in
+                self.onResponseMessage(message: message)
             },
             failure: { error in
-                self.showRepeatAlert(message: error.localizedDescription, repeat_closure: {
-                    self.viewModel?.editMatchReferees(
-                        token: self.userDefaults.getAuthorizedUser()!.token,
-                        editMatchReferees: self.viewModel!.cache!,
-                        success: { soloMatch in
-                            
-                        },
-                        message: { message in
-                            
-                        },
-                        failure: { error in
-                            
-                        }
-                    )
-                })
+                self.onResponseFailure(error: error)
             }
         )
     }
     
+    // MARK: - Edit Match Response
+    func onResponseSuccess(soloMatch: SoloMatch) {
+        self.setMatchValue(
+            id: soloMatch.match!.id,
+            match: soloMatch
+        )
+//        showAlert(title: Texts.EDITED_SAVED, message: "", escaping: )
+        showAlert(title: Texts.EDITED_SAVED, message: "") {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func onResponseMessage(message: SingleLineMessage) {
+        self.showAlert(title: "Сообщение", message: message.message)
+    }
+    
+    func onResponseFailure(error: Error) {
+        self.showRepeatAlert(message: error.localizedDescription, repeat_closure: {
+            self.viewModel?.editMatchReferees(
+                token: self.userDefaults.getAuthorizedUser()!.token,
+                editMatchReferees: self.viewModel!.cache!,
+                success: { soloMatch in
+                    self.onResponseSuccess(soloMatch: soloMatch)
+                },
+                message_single: { message in
+                    self.onResponseMessage(message: message)
+                },
+                failure: { error in
+                    self.onResponseFailure(error: error)
+                }
+            )
+        })
+    }
+    
     // edit match for userDefaults value at id match
     func setMatchValue(id: String, match: SoloMatch) {
+        var user = userDefaults.getAuthorizedUser()
         
+        for i in 0..<user!.person.participationMatches.count {
+            if user?.person.participationMatches[i].id == id {
+                user?.person.participationMatches[i] = match.match!
+            }
+        }
+        userDefaults.setAuthorizedUser(user: user!)
     }
     
     func showRefereesPicker(sender: UIButton) {
         
-        let acp = ActionSheetStringPicker(title: Texts.REFEREES, rows: filteredRefereesWithFullName, initialSelection: 0, doneBlock: { (picker, index, value) in
+        let acp = ActionSheetStringPicker(title: "", rows: filteredRefereesWithFullName, initialSelection: 0, doneBlock: { (picker, index, value) in
             sender.setTitleAndColorWith(title: (self.viewModel?.comingReferees.value.findPersonBy(fullName: value as! String)?.getFullName())!, color: Colors.YES_REF)
         }, cancel: { (picker) in
             
-        }, origin: self)
+        }, origin: sender)
         
-        acp?.addCustomButton(withTitle: "Отчистить", actionBlock: {
+        acp?.addCustomButton(withTitle: "Снять", actionBlock: {
             sender.setTitleAndColorWith(title: Texts.NO_REF, color: Colors.NO_REF)
         })
         acp?.show()
         
     }
-    
 }

@@ -47,7 +47,10 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
         viewModel = ScheduleRefViewModel(dataManager: ApiRequests())
         
         setupBindings()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         viewModel.fetch()
     }
     
@@ -64,23 +67,6 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
             }
             .disposed(by: disposeBag)
         
-        //        viewModel.activeMatches
-        //            .subscribe { (activeMatches) in
-        //                if activeMatches.element?.count == 0 {
-        //                    self.setState(state: .empty)
-        //                }
-        //            }
-        //            .disposed(by: disposeBag)
-        
-        //        viewModel.activeMatches
-        //            .map { (activeMatches) -> [ActiveMatch] in
-        //                return activeMatches.matches
-        //            }
-        //            .bind(to: tableView.rx.items(cellIdentifier: CellIdentifiers.cell, cellType: RefereeLKTableViewCell.self)) {  (row,activeMatch,cell) in
-        //                cell.configure(with: activeMatch)
-        //            }
-        //            .disposed(by: disposeBag)
-        
         viewModel.dataModel
             .subscribe { (dataModel) in
                 self.tmpReferee = dataModel.element?.referees
@@ -89,10 +75,6 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
                 }
             }
             .disposed(by: disposeBag)
-        
-        //        viewModel.dataModel.subscribe { (event) in
-        //            Print.m(event.element)
-        //            }.disposed(by: disposeBag)
         
         viewModel.dataModel
             .map({ (dataModel) -> [ScheduleRefTableViewCell.CellModel] in
@@ -158,8 +140,6 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
                     let cell = ScheduleRefTableViewCell.CellModel(activeMatch: element, clubTeamOne: teamOne!, clubTeamTwo: teamTwo!, referee1: ref1, referee2: ref2, referee3: ref3, timekeeper: timekeep)
                     cellModels.append(cell)
                     
-                    //                    dump(cellModels)
-                    
                 }
                 return cellModels
             })
@@ -169,57 +149,7 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
                     return lModel.activeMatch.date.getDateOfType(type: .utcTime) < rModel.activeMatch.date.getDateOfType(type: .utcTime)
                 })
             })
-            //            .flatMap({ (dataModel) -> PublishSubject<[ScheduleRefTableViewCell.CellModel]> in
-            //
-            //                let subject: PublishSubject<[ScheduleRefTableViewCell.CellModel]> = PublishSubject()
-            //                var cellModels: [ScheduleRefTableViewCell.CellModel] = []
-            //
-            //                let activeMatches = dataModel.activeMatches
-            //                for element in activeMatches.matches {
-            //
-            //                    let teamOne = dataModel.clubs.filter({ (soloClub) -> Bool in
-            //                        if element.teamOne.club == soloClub.club.id {
-            //                            return true
-            //                        }
-            //                        return false
-            //                    }).first?.club ?? nil
-            //                    let teamTwo = dataModel.clubs.filter({ (soloClub) -> Bool in
-            //                        if element.teamTwo.club == soloClub.club.id {
-            //                            return true
-            //                        }
-            //                        return false
-            //                    }).first?.club ?? nil
-            //
-            //                    let referee1 = element.referees.filter({ (referee) -> Bool in
-            //                        return referee.getRefereeType() == Referee.RefereeType.referee1
-            //                    }).first
-            //
-            //                    var ref1: Person?
-            //                    if referee1 != nil {
-            //                        ref1 = dataModel.referees.people.filter({ (person) -> Bool in
-            //                            return referee1?.person == person.id
-            //                        }).first
-            //                    }
-            //
-            ////                    let referee1 = dataModel.referees.people.filter({ (person) -> Bool in
-            ////                        if person.id == element.referees
-            ////                    })
-            //
-            //                    let cell = ScheduleRefTableViewCell.CellModel(activeMatch: element, clubTeamOne: teamOne!, clubTeamTwo: teamTwo!, referee1: ref1, referee2: nil, referee3: nil, timekeeper: nil)
-            //                    cellModels.append(cell)
-            //
-            //                    dump(cellModels)
-            //
-            //                }
-            //
-            //                subject.onNext(cellModels)
-            //
-            //                dump(subject)
-            //
-            //                return subject
-            //            })
             .bind(to: tableView.rx.items(cellIdentifier: CellIdentifiers.cell, cellType: ScheduleRefTableViewCell.self)) {  (row,cellModel,cell) in
-                //                cell.configure(with: activeMatch)
                 cell.configure(with: cellModel)
             }
             .disposed(by: disposeBag)
@@ -230,24 +160,15 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
             .subscribe { (indexPath) in
                 
                 let cell = self.tableView.cellForRow(at: indexPath.element!) as? ScheduleRefTableViewCell
-//                self.editSchedule.viewModel.comingModel.value(cell!.cellModel!)
                 if let cellModel = cell?.cellModel {
                     self.editSchedule.viewModel!.comingCellModel.value = cellModel
                     if let referees = self.tmpReferee {
                         self.editSchedule.viewModel?.comingReferees.value = referees
                         self.show(self.editSchedule, sender: self)
                     }
-//                    self.viewModel.dataModel
-//                        .subscribe({ dataModel in
-//                            self.editSchedule.viewModel?.comingReferees.value = dataModel.element!.referees
-//                        })
-//                        .disposed(by: self.disposeBag)
                 } else {
                     self.showAlert(message: "Нету модели данных")
                 }
-//                self.editSchedule.viewModel.activeMatch.onNext(cell!.cellModel!.activeMatch)
-//                self.editSchedule.viewModel.activeMatch.onNext(cell?.cellModel?.activeMatch)
-//                self.editSchedule.viewModel.referees.onNext(cell?.cellModel.)
                 
                 
                 
@@ -255,32 +176,4 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
             }
             .disposed(by: disposeBag)
     }
-    
-    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Segues.edit,
-            let destination = segue.destination as? EditScheduleLKViewController,
-            let cellId = tableView.indexPathForSelectedRow
-        {
-            self.viewModel.dataModel
-                .map { (dataModel) -> ActiveMatch in
-                    return dataModel.activeMatches.matches[cellId.row]
-                }
-                .takeLast(1)
-                .subscribe { (activeMatchEvent) in
-                    Print.m(activeMatchEvent.element!)
-                    destination.viewModel.activeMatch.onNext(activeMatchEvent.element!)
-                }
-                .disposed(by: self.disposeBag)
-            
-            self.viewModel.dataModel
-                .map { (dataModel) -> Players in
-                    return dataModel.referees
-                }
-                .subscribe { (referees) in
-                    destination.viewModel.referees.onNext(referees.element!)
-                }
-                .disposed(by: self.disposeBag)
-        }
-    }*/
-    
 }
