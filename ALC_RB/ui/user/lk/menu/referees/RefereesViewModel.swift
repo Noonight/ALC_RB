@@ -24,7 +24,7 @@ class RefereesViewModel {
         refreshing.onNext(true)
         
         dataManager.get_referees(get_success: { (referees) in
-            Print.m(referees)
+//            Print.m(referees)
             self.refreshing.onNext(false)
             self.referees.onNext(referees)
         }) { (error) in

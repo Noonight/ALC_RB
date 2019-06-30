@@ -34,7 +34,10 @@ class RefereesLKTableViewController: BaseStateTableViewController {
         viewModel = RefereesViewModel(dataManager: ApiRequests())
         
         setupBindings()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         viewModel.fetch()
     }
     
@@ -64,7 +67,7 @@ class RefereesLKTableViewController: BaseStateTableViewController {
                 return players.people
             }
             .bind(to: tableView.rx.items(cellIdentifier: CellIdentifiers.cell, cellType: RefereeLKTableViewCell.self)) {  (row,referee,cell) in
-                Print.m(referee)
+//                Print.m(referee)
                 cell.configure(with: referee)
             }
             .disposed(by: disposeBag)
@@ -79,5 +82,6 @@ class RefereesLKTableViewController: BaseStateTableViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
     }
 }
