@@ -33,8 +33,11 @@ class RefereeEditMatchesLKTableViewCell: UITableViewCell {
     
     var cellModel: CellModel!
     
+    var comingTargetPerson: Person?
+    
     func configure(model: CellModel) {
         self.cellModel = model
+//        Print.m(comingTargetPerson)
         reset()
         
         dateLabel.text = cellModel.activeMatch.date.UTCToLocal(from: .utcTime, to: .local)
@@ -70,7 +73,9 @@ class RefereeEditMatchesLKTableViewCell: UITableViewCell {
         
         func configureLabelSwitcher(referee: Person?, switcher: LabelSwitchView) {
             if referee != nil {
-                if referee?.id == UserDefaultsHelper().getAuthorizedUser()?.person.id {
+//                if referee?.id == UserDefaultsHelper().getAuthorizedUser()?.person.id {
+//                Print.m("Referee full name \(referee?.getFullName()) -> target person full name \(comingTargetPerson?.getFullName())")
+                if referee?.id == comingTargetPerson?.id {
                     switcher.configure(state: .switcher(true)) // user is appointed in match
                 } else {
                     switcher.configure(state: .name((referee?.getFullName())!))

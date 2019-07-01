@@ -42,6 +42,7 @@ class RefereeEditMatchesLKTableViewController: BaseStateTableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        Print.m(comingPerson)
         if let refId = comingPerson {
 //            if comingPerson?.getFullName().count ?? 0 > 2 {
 //                refereeFullName.text = comingPerson?.getFullName()
@@ -70,6 +71,7 @@ class RefereeEditMatchesLKTableViewController: BaseStateTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.cell, for: indexPath) as! RefereeEditMatchesLKTableViewCell
         let model = tableModel[indexPath.row]
         
+        cell.comingTargetPerson = comingPerson
         cell.configure(model: model)
         cell.saveBtn.tag = indexPath.row
         cell.saveBtn.addTarget(self, action: #selector(onSaveBtnPressed), for: .touchUpInside)
