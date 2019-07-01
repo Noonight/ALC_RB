@@ -68,7 +68,7 @@ class LabelSwitchView: UIView {
     func reset() {
         appoint_switch.isHidden = true
         name_label.isHidden = false
-        name_label.text = "Empty"
+        name_label.text = ""
     }
     
     func showSwitcher(_ isOn: Bool) {

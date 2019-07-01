@@ -80,7 +80,7 @@ class RefereeEditMatchesLKTableViewController: BaseStateTableViewController {
     }
     
     @objc func onSaveBtnPressed(_ sender: UIButton) {
-        Print.m(sender.tag)
+//        Print.m(sender.tag)
         showAlert(title: "Сохранить изменения?", message: "", actions:
             [
                 UIAlertAction(title: "Отмена", style: .cancel, handler: { alert in
@@ -88,6 +88,7 @@ class RefereeEditMatchesLKTableViewController: BaseStateTableViewController {
                 }),
                 UIAlertAction(title: "Сохранить", style: .destructive, handler: { alert in
                     let editedMatch = EditMatchReferees(id: (self.tableView.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as? RefereeEditMatchesLKTableViewCell)!.cellModel.activeMatch.id, referees: EditMatchReferees.Referees(referees: self.getRefereesArray(tag: sender.tag)))
+                    dump(editedMatch)
                     self.presenter.requestEditMatchReferee(
                         token: (self.userDefaults.getAuthorizedUser()?.token)!,
                         editMatchReferees: editedMatch)
@@ -98,28 +99,56 @@ class RefereeEditMatchesLKTableViewController: BaseStateTableViewController {
     }
     
     func getRefereesArray(tag: Int) -> [EditMatchReferee] {
+//        Print.m(tag)
         func getPersonId(_ fullName: String) -> String? {
             return self.comingReferees!.findPersonBy(fullName: fullName)?.id
         }
-        func isCorrectTitle(labelSwitch: LabelSwitchView) -> Bool {
-            return labelSwitch.name != Texts.EMPTY ? true : false
+        func isCorrectTitleOrSwitchIsOn(labelSwitch: LabelSwitchView) -> Bool {
+//            Print.m("\(labelSwitch.name) \(labelSwitch.name?.count ?? 0 > 2 ? true : false)")
+//            return labelSwitch.name != Texts.EMPTY ? true : false
+            if labelSwitch.name?.count ?? 0 > 2 || labelSwitch.isAppointed {
+                return true
+            }
+            return false
+//            return labelSwitch.name?.count ?? 0 > 2 ? true : false
         }
         
         var resultArray: [EditMatchReferee] = []
         
         let cell = tableView.cellForRow(at: IndexPath(row: tag, section: 0)) as! RefereeEditMatchesLKTableViewCell
+//        Print.m(cell.cellModel)
         
-        if isCorrectTitle(labelSwitch: cell.refereeOneSwitch) {
-            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(cell.refereeOneSwitch.name!)!))
+        if isCorrectTitleOrSwitchIsOn(labelSwitch: cell.refereeOneSwitch) {
+            if cell.refereeOneSwitch.isAppointed {
+                resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: (comingPerson?.id)!))
+            } else {
+                resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(cell.refereeOneSwitch.name!)!))
+            }
+//            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(cell.refereeOneSwitch.name!)!))
         }
-        if isCorrectTitle(labelSwitch: cell.refereeTwoSwitch) {
-            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(cell.refereeTwoSwitch.name!)!))
+        if isCorrectTitleOrSwitchIsOn(labelSwitch: cell.refereeTwoSwitch) {
+            if cell.refereeTwoSwitch.isAppointed {
+                resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee2.rawValue, person: (comingPerson?.id)!))
+            } else {
+                resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee2.rawValue, person: getPersonId(cell.refereeTwoSwitch.name!)!))
+            }
+//            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee2.rawValue, person: getPersonId(cell.refereeTwoSwitch.name!)!))
         }
-        if isCorrectTitle(labelSwitch: cell.refereeThreeSwitch) {
-            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(cell.refereeThreeSwitch.name!)!))
+        if isCorrectTitleOrSwitchIsOn(labelSwitch: cell.refereeThreeSwitch) {
+            if cell.refereeThreeSwitch.isAppointed {
+                resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee3.rawValue, person: (comingPerson?.id)!))
+            } else {
+                resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee3.rawValue, person: getPersonId(cell.refereeThreeSwitch.name!)!))
+            }
+//            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee3.rawValue, person: getPersonId(cell.refereeThreeSwitch.name!)!))
         }
-        if isCorrectTitle(labelSwitch: cell.timeKeeperSwitch) {
-            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(cell.timeKeeperSwitch.name!)!))
+        if isCorrectTitleOrSwitchIsOn(labelSwitch: cell.timeKeeperSwitch) {
+            if cell.timeKeeperSwitch.isAppointed {
+                resultArray.append(EditMatchReferee(type: Referee.RefereeType.timekeeper.rawValue, person: (comingPerson?.id)!))
+            } else {
+                resultArray.append(EditMatchReferee(type: Referee.RefereeType.timekeeper.rawValue, person: getPersonId(cell.timeKeeperSwitch.name!)!))
+            }
+//            resultArray.append(EditMatchReferee(type: Referee.RefereeType.timekeeper.rawValue, person: getPersonId(cell.timeKeeperSwitch.name!)!))
         }
         
         return resultArray
@@ -163,9 +192,13 @@ extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
     }
     
     func onFetchModelSuccess(dataModel: [RefereeEditMatchesLKTableViewCell.CellModel]) {
-        tableModel = dataModel
-        tableView.reloadData()
-        setState(state: .normal)
+        if dataModel.count > 0 {
+            tableModel = dataModel
+            tableView.reloadData()
+            setState(state: .normal)
+        } else {
+            setState(state: .empty)
+        }
     }
     
     func onFetchModelFailure(error: Error) {

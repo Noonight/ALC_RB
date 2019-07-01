@@ -45,8 +45,8 @@ class RefereeEditMatchesLKTableViewCell: UITableViewCell {
         leagueLabel.text = cellModel.activeMatch.tour
         placeLabel.text = cellModel.activeMatch.place
         
-        Print.m(cellModel.activeMatch.teamOne.name)
-        Print.m(cellModel.activeMatch.teamTwo.name)
+//        Print.m(cellModel.activeMatch.teamOne.name)
+//        Print.m(cellModel.activeMatch.teamTwo.name)
         
         teamOneLabel.text = cellModel.activeMatch.teamOne.name
         teamTwoLabel.text = cellModel.activeMatch.teamTwo.name

@@ -54,9 +54,9 @@ class RefereeEditMatchesLKPresenter: MvpPresenter<RefereeEditMatchesLKTableViewC
             
             cellModels.append(contentsOf: refInside)
             cellModels.append(contentsOf: matchWithoutRef)
-            if cellModels.count == 0 {
-                self.getView().setState(state: .empty)
-            }
+//            if cellModels.count == 0 {
+//                self.getView().setState(state: .empty)
+//            }
             self.getView().onFetchModelSuccess(dataModel: cellModels)
             
         }) { (error) in

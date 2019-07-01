@@ -28,22 +28,22 @@
                     <rect key="frame" x="15" y="9.5" width="300" height="311.5"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="253" image="ic_empty" translatesAutoresizingMaskIntoConstraints="NO" id="fQB-A6-sJM">
-                            <rect key="frame" x="70" y="8" width="160" height="160"/>
+                            <rect key="frame" x="70" y="0.0" width="160" height="160"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="160" id="4w5-XI-VZA"/>
                                 <constraint firstAttribute="width" constant="160" id="odA-V8-sey"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Ничего нет" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ghl-Ny-ElS">
-                            <rect key="frame" x="8" y="218" width="284" height="21.5"/>
+                            <rect key="frame" x="8" y="200" width="284" height="19.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Здесь будут отображаться матчи Здесь будут отображаться матчи" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8e-fx-yOg">
-                            <rect key="frame" x="8" y="241.5" width="284" height="70"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Здесь будут отображаться матчи Здесь будут отображаться матчи Здесь будут отображаться матчи" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8e-fx-yOg">
+                            <rect key="frame" x="8" y="221.5" width="284" height="90"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="70" id="8Cl-lW-ff8"/>
+                                <constraint firstAttribute="height" constant="90" id="8Cl-lW-ff8"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -61,10 +61,10 @@
                         <constraint firstItem="Ghl-Ny-ElS" firstAttribute="centerX" secondItem="TdE-r2-zLf" secondAttribute="centerX" id="PTp-xb-IDd"/>
                         <constraint firstItem="z8e-fx-yOg" firstAttribute="centerX" secondItem="TdE-r2-zLf" secondAttribute="centerX" id="PVp-dT-651"/>
                         <constraint firstAttribute="trailing" secondItem="z8e-fx-yOg" secondAttribute="trailing" constant="8" id="Yoz-cm-ql7"/>
-                        <constraint firstItem="fQB-A6-sJM" firstAttribute="top" secondItem="TdE-r2-zLf" secondAttribute="top" constant="8" id="ipz-Hq-sP8"/>
+                        <constraint firstItem="fQB-A6-sJM" firstAttribute="top" secondItem="TdE-r2-zLf" secondAttribute="top" id="ipz-Hq-sP8"/>
                         <constraint firstAttribute="width" constant="300" id="j5p-QR-XN1"/>
                         <constraint firstItem="z8e-fx-yOg" firstAttribute="leading" secondItem="TdE-r2-zLf" secondAttribute="leading" constant="8" id="jRu-kt-UGZ"/>
-                        <constraint firstItem="Ghl-Ny-ElS" firstAttribute="top" secondItem="fQB-A6-sJM" secondAttribute="bottom" constant="50" id="p7g-IL-Duw"/>
+                        <constraint firstItem="Ghl-Ny-ElS" firstAttribute="top" secondItem="fQB-A6-sJM" secondAttribute="bottom" constant="40" id="p7g-IL-Duw"/>
                     </constraints>
                 </view>
             </subviews>
