@@ -42,7 +42,8 @@ extension UIView
     func fixInView(_ container: UIView!) -> Void{        
 //        self.translatesAutoresizingMaskIntoConstraints = true;
 //        self.frame = container.frame;
-        container.addSubview(self);
+        container.addSubview(self)
+        
         container.translatesAutoresizingMaskIntoConstraints = true
         translatesAutoresizingMaskIntoConstraints = true
 //        container.leftAnchor.constraint(equalTo: <#T##NSLayoutAnchor<NSLayoutXAxisAnchor>#>)

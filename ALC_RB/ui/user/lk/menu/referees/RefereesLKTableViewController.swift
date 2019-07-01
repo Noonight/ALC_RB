@@ -90,7 +90,7 @@ class RefereesLKTableViewController: BaseStateTableViewController {
             let cellIndex = tableView.indexPathForSelectedRow
         {
             let cell = tableView.cellForRow(at: cellIndex) as! RefereeLKTableViewCell
-            destination.comingRefId = cell.model?.id
+            destination.comingPerson = cell.model!
         }
     }
 }

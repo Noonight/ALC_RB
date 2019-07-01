@@ -25,7 +25,11 @@ class RefereeLKTableViewCell: UITableViewCell {
         } else {
             refereeImage.image = #imageLiteral(resourceName: "ic_logo")
         }
-        refereeName.text = person.getFullName()
+        if person.getFullName().count > 2 {
+            refereeName.text = person.getFullName()
+        } else {
+            refereeName.text = "Не указано"
+        }
     }
     
     
