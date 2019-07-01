@@ -14,6 +14,9 @@ class RefereesLKTableViewController: BaseStateTableViewController {
     private enum CellIdentifiers {
         static let cell = "referee_cell"
     }
+    private enum Segues {
+        static let segue = "segue_ref_matches"
+    }
     private enum StaticParams {
         static let emptyMessage = "Здесь будут отображаться судьи"
     }
@@ -82,6 +85,12 @@ class RefereesLKTableViewController: BaseStateTableViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == Segues.segue,
+            let destination = segue.destination as? RefereeEditMatchesLKTableViewController,
+            let cellIndex = tableView.indexPathForSelectedRow
+        {
+            let cell = tableView.cellForRow(at: cellIndex) as! RefereeLKTableViewCell
+            destination.comingRefId = cell.model?.id
+        }
     }
 }

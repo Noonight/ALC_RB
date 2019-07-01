@@ -192,8 +192,6 @@
 		DBC5C6002220360B00B0A1B6 /* RegistrationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5C5FF2220360B00B0A1B6 /* RegistrationPresenter.swift */; };
 		DBCB1EBF2223FE3F005A6976 /* ApiRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCB1EBE2223FE3F005A6976 /* ApiRequests.swift */; };
 		DBD4D025225F946D00C8C8B3 /* EditTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD4D024225F946D00C8C8B3 /* EditTeamResponse.swift */; };
-		DBD5E6D522C910C6009050BF /* UITitleLabelSwitch.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBD5E6D422C910C6009050BF /* UITitleLabelSwitch.xib */; };
-		DBD5E6D722C910DF009050BF /* UITitleLabelSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5E6D622C910DF009050BF /* UITitleLabelSwitch.swift */; };
 		DBE0E7A2223BDDE800CC0EE2 /* OngoingLeaguesLKTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE0E7A1223BDDE800CC0EE2 /* OngoingLeaguesLKTableViewController.swift */; };
 		DBE0E7A4223BDE0000CC0EE2 /* OngoingLeaguesLKPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE0E7A3223BDE0000CC0EE2 /* OngoingLeaguesLKPresenter.swift */; };
 		DBE0E7A7223BDE5800CC0EE2 /* BaseStateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE0E7A6223BDE5800CC0EE2 /* BaseStateTableViewController.swift */; };
@@ -396,8 +394,6 @@
 		DBC5C5FF2220360B00B0A1B6 /* RegistrationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationPresenter.swift; sourceTree = "<group>"; };
 		DBCB1EBE2223FE3F005A6976 /* ApiRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequests.swift; sourceTree = "<group>"; };
 		DBD4D024225F946D00C8C8B3 /* EditTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamResponse.swift; sourceTree = "<group>"; };
-		DBD5E6D422C910C6009050BF /* UITitleLabelSwitch.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UITitleLabelSwitch.xib; sourceTree = "<group>"; };
-		DBD5E6D622C910DF009050BF /* UITitleLabelSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITitleLabelSwitch.swift; sourceTree = "<group>"; };
 		DBE0E7A1223BDDE800CC0EE2 /* OngoingLeaguesLKTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingLeaguesLKTableViewController.swift; sourceTree = "<group>"; };
 		DBE0E7A3223BDE0000CC0EE2 /* OngoingLeaguesLKPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingLeaguesLKPresenter.swift; sourceTree = "<group>"; };
 		DBE0E7A6223BDE5800CC0EE2 /* BaseStateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStateTableViewController.swift; sourceTree = "<group>"; };
@@ -1183,7 +1179,6 @@
 			children = (
 				DB932DE322C8FF9000C060C2 /* RefereeEditMatchesLKTableViewController.swift */,
 				DB932DE622C900C800C060C2 /* RefereeEditMatchesLKPresenter.swift */,
-				DBD5E6D322C9046B009050BF /* custom */,
 				DB932DE822C9021100C060C2 /* cell */,
 			);
 			path = edit;
@@ -1367,15 +1362,6 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
-		DBD5E6D322C9046B009050BF /* custom */ = {
-			isa = PBXGroup;
-			children = (
-				DBD5E6D422C910C6009050BF /* UITitleLabelSwitch.xib */,
-				DBD5E6D622C910DF009050BF /* UITitleLabelSwitch.swift */,
-			);
-			path = custom;
-			sourceTree = "<group>";
-		};
 		DBE0E7A0223BDDAC00CC0EE2 /* ongoing leagues */ = {
 			isa = PBXGroup;
 			children = (
@@ -1475,7 +1461,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBD5E6D522C910C6009050BF /* UITitleLabelSwitch.xib in Resources */,
 				DB58E95C21E8A7FA00AF265E /* EmptyView.xib in Resources */,
 				CEA6EBA621A53CFE008F874D /* LaunchScreen.storyboard in Resources */,
 				CEA6EBA321A53CFE008F874D /* Assets.xcassets in Resources */,
@@ -1692,7 +1677,6 @@
 				DB52EAE52248E2E6004F7869 /* CommandCreateLKPresenter.swift in Sources */,
 				DB59433421F212BE00945601 /* SegmentHelper.swift in Sources */,
 				DB11CC9021C235460083773E /* ScheduleTableViewCell.swift in Sources */,
-				DBD5E6D722C910DF009050BF /* UITitleLabelSwitch.swift in Sources */,
 				CE60234C21AE756C00B428EE /* NewsAnnounceTableViewController.swift in Sources */,
 				18EB8BA2227056100087BD99 /* CommandAddPlayerTableViewCell.swift in Sources */,
 				DB5A00CF2237F1AF00B93EF5 /* AcceptRequest.swift in Sources */,

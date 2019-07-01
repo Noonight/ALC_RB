@@ -14,8 +14,11 @@ class RefereeLKTableViewCell: UITableViewCell {
     @IBOutlet weak var refereeImage: UIImageView!
     @IBOutlet weak var refereeName: UILabel!
     
+    var model: Person?
+    
     func configure(with person: Person) {
         reset()
+        model = person
         if person.photo != nil {
             refereeImage.af_setImage(withURL: ApiRoute.getImageURL(image: person.photo!), placeholderImage: #imageLiteral(resourceName: "ic_logo"))
             refereeImage.image = refereeImage.image?.af_imageRoundedIntoCircle()
