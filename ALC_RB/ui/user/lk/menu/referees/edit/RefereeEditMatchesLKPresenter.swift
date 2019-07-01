@@ -11,12 +11,30 @@ import UIKit
 protocol RefereeEditMatchesView: MvpView {
     func onFetchModelSuccess(dataModel: [RefereeEditMatchesLKTableViewCell.CellModel])
     func onFetchModelFailure(error: Error)
+    
+    func onResponseEditMatchSuccess(soloMatch: SoloMatch)
+    func onResponseEditMatchMessage(message: SingleLineMessage)
+    func onResponseEditMatchFailure(error: Error)
 }
 
 class RefereeEditMatchesLKPresenter: MvpPresenter<RefereeEditMatchesLKTableViewController> {
     let dataManager = ApiRequests()
     
-//    var cache: [RefereeEditMatchesLKTableViewCell.CellModel]?
+    var cache: EditMatchReferees?
+    
+    func requestEditMatchReferee(token: String, editMatchReferees: EditMatchReferees) {
+        self.cache = editMatchReferees
+        dataManager.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees, response_success: { soloMatch in
+            self.getView().onResponseEditMatchSuccess(soloMatch: soloMatch)
+//            success(soloMatch)
+        }, response_message: { message in
+            self.getView().onResponseEditMatchMessage(message: message)
+//            message_single(message)
+        }) { error in
+//            failure(error)
+            self.getView().onResponseEditMatchFailure(error: error)
+        }
+    }
     
     func fetch(refId: String) {
         Print.m("fetching")

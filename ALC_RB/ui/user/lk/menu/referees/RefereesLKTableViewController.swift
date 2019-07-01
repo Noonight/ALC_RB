@@ -24,6 +24,8 @@ class RefereesLKTableViewController: BaseStateTableViewController {
     private var viewModel: RefereesViewModel!
     private let disposeBag = DisposeBag()
     
+    private var tmpReferees: Players?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,6 +61,7 @@ class RefereesLKTableViewController: BaseStateTableViewController {
         
         viewModel.referees
             .subscribe { (players) in
+                self.tmpReferees = players.element
                 if players.element?.people.count == 0 {
                     self.setState(state: .empty)
                 }
@@ -77,6 +80,7 @@ class RefereesLKTableViewController: BaseStateTableViewController {
         
         tableView.rx.itemSelected
             .subscribe { (indexPath) in
+                
                 self.tableView.deselectRow(at: indexPath.element!, animated: true)
             }
             .disposed(by: disposeBag)
@@ -91,6 +95,7 @@ class RefereesLKTableViewController: BaseStateTableViewController {
         {
             let cell = tableView.cellForRow(at: cellIndex) as! RefereeLKTableViewCell
             destination.comingPerson = cell.model!
+            destination.comingReferees = self.tmpReferees
         }
     }
 }

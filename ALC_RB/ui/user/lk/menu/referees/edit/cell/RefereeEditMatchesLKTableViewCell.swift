@@ -29,6 +29,8 @@ class RefereeEditMatchesLKTableViewCell: UITableViewCell {
     @IBOutlet weak var refereeThreeSwitch: LabelSwitchView!
     @IBOutlet weak var timeKeeperSwitch: LabelSwitchView!
     
+    @IBOutlet weak var saveBtn: UIButton!
+    
     var cellModel: CellModel!
     
     func configure(model: CellModel) {

@@ -12,11 +12,18 @@ class RefereeEditMatchesLKTableViewController: BaseStateTableViewController {
     enum CellIdentifiers {
         static let cell = "cell_referee_matches"
     }
+    enum Texts {
+        static let EDITED_SAVED = "Изменения сохранены"
+        static let SAVE_CHANGES_QUESTION = "Сохранить изменения?"
+        static let EMPTY = "Empty"
+    }
     
     let presenter = RefereeEditMatchesLKPresenter()
     
     var comingPerson: Person?
+    var comingReferees: Players?
     var tableModel: [RefereeEditMatchesLKTableViewCell.CellModel] = []
+    let userDefaults = UserDefaultsHelper()
 
 //    var refereeFullName: UILabel {
 //        let refFullName = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
@@ -63,19 +70,96 @@ class RefereeEditMatchesLKTableViewController: BaseStateTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.cell, for: indexPath) as! RefereeEditMatchesLKTableViewCell
         let model = tableModel[indexPath.row]
         
-//        cell.refereeOneSwitch.frame = CGRect(x: 0, y: 0, width: 500, height: 51)
-        
         cell.configure(model: model)
-
+        cell.saveBtn.tag = indexPath.row
+        cell.saveBtn.addTarget(self, action: #selector(onSaveBtnPressed), for: .touchUpInside)
+        
         return cell
     }
     
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//    }
+    @objc func onSaveBtnPressed(_ sender: UIButton) {
+        Print.m(sender.tag)
+        showAlert(title: "Сохранить изменения?", message: "", actions:
+            [
+                UIAlertAction(title: "Отмена", style: .cancel, handler: { alert in
+                    self.tableView.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .none)
+                }),
+                UIAlertAction(title: "Сохранить", style: .destructive, handler: { alert in
+                    let editedMatch = EditMatchReferees(id: (self.tableView.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as? RefereeEditMatchesLKTableViewCell)!.cellModel.activeMatch.id, referees: EditMatchReferees.Referees(referees: self.getRefereesArray(tag: sender.tag)))
+                    self.presenter.requestEditMatchReferee(
+                        token: (self.userDefaults.getAuthorizedUser()?.token)!,
+                        editMatchReferees: editedMatch)
+                })
+                
+            ]
+        )
+    }
+    
+    func getRefereesArray(tag: Int) -> [EditMatchReferee] {
+        func getPersonId(_ fullName: String) -> String? {
+            return self.comingReferees!.findPersonBy(fullName: fullName)?.id
+        }
+        func isCorrectTitle(labelSwitch: LabelSwitchView) -> Bool {
+            return labelSwitch.name != Texts.EMPTY ? true : false
+        }
+        
+        var resultArray: [EditMatchReferee] = []
+        
+        let cell = tableView.cellForRow(at: IndexPath(row: tag, section: 0)) as! RefereeEditMatchesLKTableViewCell
+        
+        if isCorrectTitle(labelSwitch: cell.refereeOneSwitch) {
+            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(cell.refereeOneSwitch.name!)!))
+        }
+        if isCorrectTitle(labelSwitch: cell.refereeTwoSwitch) {
+            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(cell.refereeTwoSwitch.name!)!))
+        }
+        if isCorrectTitle(labelSwitch: cell.refereeThreeSwitch) {
+            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(cell.refereeThreeSwitch.name!)!))
+        }
+        if isCorrectTitle(labelSwitch: cell.timeKeeperSwitch) {
+            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(cell.timeKeeperSwitch.name!)!))
+        }
+        
+        return resultArray
+    }
 }
 
 extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
+    func onResponseEditMatchSuccess(soloMatch: SoloMatch) {
+        self.setMatchValue(
+            id: soloMatch.match!.id,
+            match: soloMatch
+        )
+        showAlert(title: Texts.EDITED_SAVED, message: "") {
+//            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    func onResponseEditMatchMessage(message: SingleLineMessage) {
+        self.showAlert(title: "Сообщение", message: message.message)
+    }
+    
+    func onResponseEditMatchFailure(error: Error) {
+        self.showRepeatAlert(message: error.localizedDescription, repeat_closure: {
+            self.presenter.requestEditMatchReferee(
+                token: (self.userDefaults.getAuthorizedUser()?.token)!,
+                editMatchReferees: self.presenter.cache!
+            )
+        })
+    }
+    
+    // edit match for userDefaults value at id match
+    func setMatchValue(id: String, match: SoloMatch) {
+        var user = userDefaults.getAuthorizedUser()
+        
+        for i in 0..<user!.person.participationMatches.count {
+            if user?.person.participationMatches[i].id == id {
+                user?.person.participationMatches[i] = match.match!
+            }
+        }
+        userDefaults.setAuthorizedUser(user: user!)
+    }
+    
     func onFetchModelSuccess(dataModel: [RefereeEditMatchesLKTableViewCell.CellModel]) {
         tableModel = dataModel
         tableView.reloadData()
@@ -89,7 +173,6 @@ extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
                 self.presenter.fetch(refId: refId.id)
             }
         }
-//        setState(state: .error(message: error.localizedDescription))
     }
     
     func initPresenter() {

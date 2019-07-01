@@ -56,6 +56,7 @@ class LabelSwitchView: UIView {
     }
     
     func configure(state: State) {
+        reset()
         switch state {
         case .switcher(let isOn):
             showSwitcher(isOn)
@@ -64,7 +65,11 @@ class LabelSwitchView: UIView {
         }
     }
     
-//    func
+    func reset() {
+        appoint_switch.isHidden = true
+        name_label.isHidden = false
+        name_label.text = "Empty"
+    }
     
     func showSwitcher(_ isOn: Bool) {
         appoint_switch.isOn = isOn
