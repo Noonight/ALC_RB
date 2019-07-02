@@ -761,6 +761,7 @@ class ApiRequests {
     
     func get_forMyMatches(participationMatches: [ParticipationMatch], get_success: @escaping ([MyMatchesRefTableViewCell.CellModel]) -> (), get_failure: @escaping (Error) -> ()) {
         var fParticipationMatches: [ParticipationMatch] = []
+//        Print.m(participationMatches)
         var fClubs: [Club] = []
         
         var models: [MyMatchesRefTableViewCell.CellModel] = []
@@ -770,6 +771,7 @@ class ApiRequests {
         let dispatchGroup = DispatchGroup()
         
         fParticipationMatches = participationMatches
+//        Print.m(fParticipationMatches)
         
         if fParticipationMatches.count > 0 {
             dispatchGroup.enter()
@@ -780,11 +782,12 @@ class ApiRequests {
                     
                     if parMatch.league.count > 1
                     {
+//                        Print.m("Par match league > 1")
                         dispatchGroup.enter()
                         let tmpTeams = tmpTournaments.leagues.filter({ (league) -> Bool in
                             return league.id == parMatch.league
                         }).first?.teams
-                        
+//                        Print.m(tmpTeams)
                         var tmpClub1: Club?
                         
                         if parMatch.teamOne.count > 1
@@ -794,6 +797,7 @@ class ApiRequests {
                                 return parMatch.teamOne == team.id
                             }).first
                             let tmpClubId = tmpTeam1?.club
+//                            Print.m(tmpClubId)
                             dispatchGroup.leave()
 //                            Print.m(tmpClubId)
                             if tmpClubId?.count ?? 0 > 1
@@ -821,7 +825,16 @@ class ApiRequests {
                                             self.get_clubById(id: tmpClubId!, get_success: { (soloClub) in
                                                 fClubs.append(soloClub.club)
                                                 tmpClub2 = soloClub.club
-                                                                                                
+                                                
+//                                                let value = MyMatchesRefTableViewCell.CellModel(
+//                                                    participationMatch: parMatch,
+//                                                    club1: tmpClub1!,
+//                                                    club2: tmpClub2!,
+//                                                    team1Name: tmpTeam1!.name,
+//                                                    team2Name: tmpTeam2!.name)
+                                                
+//                                                dump(value)
+                                                
                                                 models.append(MyMatchesRefTableViewCell.CellModel(
                                                     participationMatch: parMatch,
                                                     club1: tmpClub1!,
@@ -829,6 +842,9 @@ class ApiRequests {
                                                     team1Name: tmpTeam1!.name,
                                                     team2Name: tmpTeam2!.name)
                                                 )
+//                                                Print.m(models)
+//                                                dump(models)
+                                                get_success(models)
                                                 
                                                 dispatchGroup.leave()
                                             }, get_failure: { (error) in
@@ -856,6 +872,7 @@ class ApiRequests {
             
             dispatchGroup.notify(queue: .main) {
 //                Print.m(models)
+                Print.m(models)
                 get_success(models)
             }
         }

@@ -15,7 +15,7 @@ class MyMatchesRefViewModel {
     var error: PublishSubject<Error> = PublishSubject()
     var participationMatches: Variable<[ParticipationMatch]> = Variable<[ParticipationMatch]>([])
     var tableModel: PublishSubject<[MyMatchesRefTableViewCell.CellModel]> = PublishSubject()
-    var firstInit: Variable<Bool> = Variable<Bool>(true)
+//    var firstInit: Variable<Bool> = Variable<Bool>(true)
     
     var dataManager: ApiRequests?
     
@@ -25,12 +25,14 @@ class MyMatchesRefViewModel {
     
     func fetch()
     {
+        Print.m(participationMatches.value)
         if participationMatches.value.count > 0 {
             refreshing.onNext(true)
             
             self.dataManager?.get_forMyMatches(participationMatches: participationMatches.value, get_success: { (cellModels) in
                 self.tableModel.onNext(cellModels)
                 self.refreshing.onNext(false)
+                Print.m(cellModels)
             }, get_failure: { (error) in
                 self.error.onNext(error)
             })

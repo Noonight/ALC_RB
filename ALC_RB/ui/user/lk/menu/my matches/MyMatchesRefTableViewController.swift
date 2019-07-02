@@ -63,11 +63,20 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         // issue: cell not worked when we go back
         navigationItem.title = self.title
         
-        setupUser()
-        if viewModel.firstInit.value {
+//        setupUser()
+//        dump(userDefaults.getAuthorizedUser())
+//        Print.m(userDefaults.getAuthorizedUser()?.person.participationMatches)
+        viewModel.participationMatches.value = (userDefaults.getAuthorizedUser()?.person.participationMatches)!.filter({ pMatch -> Bool in
+            return pMatch.referees.contains(where: { referee -> Bool in
+//                Print.m("\(referee.person) == \(UserDefaultsHelper().getAuthorizedUser()?.person.id)")
+                return referee.person == userDefaults.getAuthorizedUser()?.person.id
+            })
+        })
+//        if viewModel.firstInit.value {
             viewModel.fetch()
-            viewModel.firstInit.value = false
-        }
+//        Print.m(viewModel.participationMatches.value)
+//            viewModel.firstInit.value = false
+//        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -77,7 +86,12 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
     
     func setupUser() {
         do {
-            viewModel.participationMatches.value = (userDefaults.getAuthorizedUser()?.person.participationMatches)!
+            viewModel.participationMatches.value = (userDefaults.getAuthorizedUser()?.person.participationMatches)!.filter({ pMatch -> Bool in
+                return pMatch.referees.contains(where: { referee -> Bool in
+                    Print.m("\(referee.person) == \(UserDefaultsHelper().getAuthorizedUser()?.person.id)")
+                    return referee.person == UserDefaultsHelper().getAuthorizedUser()?.person.id
+                })
+            })
 //            viewModel.participationMatches.onNext((userDefaults.getAuthorizedUser()?.person.participationMatches)!)
         } catch {
             showAlert(title: AlertLets.alertTitle, message: AlertLets.alertMessage, actions:

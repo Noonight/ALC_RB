@@ -49,20 +49,34 @@ class MyMatchesRefTableViewCell: UITableViewCell {
 //        reset()
         self.cellModel = cellModel
         
-        var containReferee = cellModel.participationMatch?.referees.filter({ referee -> Bool in
-            return referee.getRefereeType() == Referee.RefereeType.referee3
-        })/*.contains(where: { (referee) -> Bool in
-            if let personId = UserDefaultsHelper().getAuthorizedUser()?.person.id {
-                Print.m("\(referee.id) = \(personId)")
-
-                return referee.id == personId
-            }
-            return false
-        })*/
+        var userRef3 = cellModel.participationMatch?.referees.filter({ referee -> Bool in
+            Print.m(referee.person == UserDefaultsHelper().getAuthorizedUser()?.person.id)
+            return referee.getRefereeType() == Referee.RefereeType.referee3 && UserDefaultsHelper().getAuthorizedUser()?.person.id == referee.person
+        }).first
+//        var containReferee = cellModel.participationMatch?.referees.filter({ referee -> Bool in
+//            Print.m(referee.getRefereeType() == Referee.RefereeType.referee3)
+//            return referee.getRefereeType() == Referee.RefereeType.referee3
+//        })/*.contains(where: { (referee) -> Bool in
+//            if let personId = UserDefaultsHelper().getAuthorizedUser()?.person.id {
+//                Print.m("\(referee.id) = \(personId)")
+//
+//                return referee.id == personId
+//            }
+//            return false
+//        })*/
         
-        if containReferee!.count > 0 {
+        if userRef3 != nil {
             accessoryType = .disclosureIndicator
+        } else {
+            accessoryType = .none
         }
+        
+//        if containReferee!.count > 0 {
+//            Print.m(containReferee!.count > 0)
+//            accessoryType = .disclosureIndicator
+//        }
+        
+        
         
         dateLabel.text = cellModel.participationMatch?.date.UTCToLocal(from: .utcTime, to: .local)
         timeLabel.text = cellModel.participationMatch?.date.UTCToLocal(from: .utcTime, to: .localTime)

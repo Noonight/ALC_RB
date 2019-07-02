@@ -181,14 +181,32 @@ extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
     
     // edit match for userDefaults value at id match
     func setMatchValue(id: String, match: SoloMatch) {
+//        Print.m(match)
         var user = userDefaults.getAuthorizedUser()
+//        dump(user?.person)
         
-        for i in 0..<user!.person.participationMatches.count {
-            if user?.person.participationMatches[i].id == id {
-                user?.person.participationMatches[i] = match.match!
+        if user?.person.participationMatches.contains(where: { pMatch -> Bool in
+            return pMatch.id == match.match?.id
+        }) ?? false {
+//            user?.person.participationMatches.filter({ pMatch -> Bool in
+//                return pMatch.id == match.match?.id
+//            }).first
+            user?.person.participationMatches.removeAll(where: { pMatch -> Bool in
+                return pMatch.id == match.match?.id
+            })
+            if match.match?.referees.count ?? 0 > 0 {
+                user?.person.participationMatches.append(match.match!)
             }
+//            for i in 0..<user!.person.participationMatches.count {
+//                if user?.person.participationMatches[i].id == match.match?.id {
+//                    user?.person.participationMatches[i] = match.match!
+//                }
+//            }
+        } else {
+            user?.person.participationMatches.append(match.match!)
         }
         userDefaults.setAuthorizedUser(user: user!)
+//        dump(userDefaults.getAuthorizedUser()?.person)
     }
     
     func onFetchModelSuccess(dataModel: [RefereeEditMatchesLKTableViewCell.CellModel]) {
