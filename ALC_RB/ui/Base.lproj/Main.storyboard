@@ -338,7 +338,7 @@
                     <autoresizingMask key="autoresizingMask"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ничего нет" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJ1-Kf-UGA">
-                            <rect key="frame" x="16" y="76" width="268" height="21"/>
+                            <rect key="frame" x="16" y="188" width="268" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="nEw-d1-Kr2"/>
                             </constraints>
@@ -347,7 +347,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Здесь будут отображаться команды" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1b-cu-v8f">
-                            <rect key="frame" x="16" y="112" width="268" height="21"/>
+                            <rect key="frame" x="16" y="224" width="268" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="LMd-Dq-xje"/>
                             </constraints>
@@ -356,7 +356,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_empty" translatesAutoresizingMaskIntoConstraints="NO" id="TJY-eB-Zxb">
-                            <rect key="frame" x="70" y="0.0" width="160" height="16"/>
+                            <rect key="frame" x="70" y="0.0" width="160" height="128"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -558,7 +558,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="76"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="X5I-hD-GZf">
-                                        <rect key="frame" x="8" y="8" width="60" height="60"/>
+                                        <rect key="frame" x="8" y="8" width="60.000000000000057" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="8mZ-85-lBs"/>
                                             <constraint firstAttribute="height" constant="60" id="ZZK-F4-eGR"/>
@@ -803,14 +803,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="fZq-mQ-8Jc">
-                                            <rect key="frame" x="8" y="8.5" width="54" height="54"/>
+                                            <rect key="frame" x="8" y="8.5" width="54.000000000000057" height="54"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="54" id="Gzw-u2-6Xg"/>
                                                 <constraint firstAttribute="width" constant="54" id="VXn-Ww-jlf"/>
                                             </constraints>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="rhX-Lk-BwJ">
-                                            <rect key="frame" x="258" y="8.5" width="54" height="54"/>
+                                            <rect key="frame" x="258" y="8.5" width="54.000000000000057" height="54"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="54" id="3tY-sy-VHR"/>
                                                 <constraint firstAttribute="height" constant="54" id="7gF-Q8-7kW"/>
@@ -886,14 +886,14 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="YGI-o7-hEa">
-                            <rect key="frame" x="8" y="36" width="54" height="54"/>
+                            <rect key="frame" x="8" y="36" width="54.000000000000057" height="54"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="54" id="bzO-1Q-5EU"/>
                                 <constraint firstAttribute="width" constant="54" id="zQb-aN-U8e"/>
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="vNs-MA-Njo">
-                            <rect key="frame" x="313" y="36" width="54" height="54"/>
+                            <rect key="frame" x="313" y="36" width="54.000000000000057" height="54"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="54" id="FC7-4w-cof"/>
                                 <constraint firstAttribute="height" constant="54" id="Thr-6X-Fb9"/>
@@ -1020,7 +1020,7 @@
                                                     <rect key="frame" x="8" y="30" width="270" height="111.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="999" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="hJx-Os-KX5">
-                                                            <rect key="frame" x="0.0" y="31" width="50" height="50"/>
+                                                            <rect key="frame" x="0.0" y="31" width="50.000000000000057" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="50" id="9z2-aN-Y90"/>
                                                                 <constraint firstAttribute="height" constant="50" id="EWc-Er-Zfb"/>
@@ -1046,7 +1046,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="999" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="mvK-Nz-RTQ">
-                                                            <rect key="frame" x="220" y="31" width="50" height="50"/>
+                                                            <rect key="frame" x="220" y="31" width="50.000000000000057" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="50" id="3WW-tQ-mie"/>
                                                                 <constraint firstAttribute="height" constant="50" id="uoc-uv-lfE"/>
@@ -1100,7 +1100,7 @@
                     <autoresizingMask key="autoresizingMask"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ничего нет" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fP-Lo-7BU">
-                            <rect key="frame" x="16" y="76" width="268" height="21"/>
+                            <rect key="frame" x="16" y="188" width="268" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="smG-FK-Ozw"/>
                             </constraints>
@@ -1109,7 +1109,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Здесь будут отображаться матчи" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvy-MR-ps4">
-                            <rect key="frame" x="16" y="112" width="268" height="21"/>
+                            <rect key="frame" x="16" y="224" width="268" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="du2-wE-6RZ"/>
                             </constraints>
@@ -1118,7 +1118,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_empty" translatesAutoresizingMaskIntoConstraints="NO" id="fe0-69-G8S">
-                            <rect key="frame" x="70" y="0.0" width="160" height="16"/>
+                            <rect key="frame" x="70" y="0.0" width="160" height="128"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1159,7 +1159,7 @@
                                         <rect key="frame" x="8" y="37" width="304" height="58"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="zeQ-FP-zX8">
-                                                <rect key="frame" x="4" y="4" width="50" height="50"/>
+                                                <rect key="frame" x="4" y="4" width="50.000000000000057" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="Mwk-NA-6Ow"/>
                                                     <constraint firstAttribute="height" constant="50" id="ueG-co-WWK"/>
@@ -1202,7 +1202,7 @@
                                         <rect key="frame" x="8" y="103" width="304" height="58"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="OOl-UZ-ItS">
-                                                <rect key="frame" x="4" y="4" width="50" height="50"/>
+                                                <rect key="frame" x="4" y="4" width="50.000000000000057" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="1dC-fT-Wa8"/>
                                                     <constraint firstAttribute="height" constant="50" id="4Bj-Br-dmy"/>
@@ -1502,7 +1502,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Suh-R3-bfu">
-                                            <rect key="frame" x="8" y="8" width="40" height="40"/>
+                                            <rect key="frame" x="8" y="8" width="40.000000000000057" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="3I6-D5-KvZ"/>
                                                 <constraint firstAttribute="width" constant="40" id="HY8-dF-fUi"/>
@@ -1912,7 +1912,7 @@
                     <autoresizingMask key="autoresizingMask"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ничего нет" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a59-UN-BCm">
-                            <rect key="frame" x="16" y="76" width="268" height="21"/>
+                            <rect key="frame" x="16" y="188" width="268" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="mD2-wm-49N"/>
                             </constraints>
@@ -1921,7 +1921,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Здесь будут отображаться игроки" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fr-8r-00C">
-                            <rect key="frame" x="16" y="112" width="268" height="21"/>
+                            <rect key="frame" x="16" y="224" width="268" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="Syz-yV-OlD"/>
                             </constraints>
@@ -1930,7 +1930,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_empty" translatesAutoresizingMaskIntoConstraints="NO" id="JXm-zR-r3R">
-                            <rect key="frame" x="70" y="0.0" width="160" height="16"/>
+                            <rect key="frame" x="70" y="0.0" width="160" height="128"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2044,7 +2044,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="2Ht-3e-KBw">
-                                            <rect key="frame" x="16" y="11" width="68" height="68"/>
+                                            <rect key="frame" x="16" y="11" width="68.000000000000057" height="68"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="68" id="Cd0-uY-Ik5"/>
                                                 <constraint firstAttribute="width" constant="68" id="i5c-ek-t8J"/>
@@ -2199,7 +2199,7 @@
                     <autoresizingMask key="autoresizingMask"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ничего нет" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8bz-4p-oyo">
-                            <rect key="frame" x="16" y="76" width="268" height="21"/>
+                            <rect key="frame" x="16" y="188" width="268" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="Z0H-5z-au5"/>
                             </constraints>
@@ -2214,7 +2214,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_empty" translatesAutoresizingMaskIntoConstraints="NO" id="GBp-Nr-70p">
-                            <rect key="frame" x="70" y="0.0" width="160" height="16"/>
+                            <rect key="frame" x="70" y="0.0" width="160" height="128"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3776,7 +3776,7 @@
                                             <rect key="frame" x="8" y="30.5" width="304" height="45"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="VKN-CM-68U">
-                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="45.000000000000057" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="AgR-Sq-hU2"/>
                                                         <constraint firstAttribute="width" constant="45" id="E0e-Js-8Va"/>
@@ -3801,7 +3801,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="HuG-HN-6eF">
-                                                    <rect key="frame" x="259" y="0.0" width="45" height="45"/>
+                                                    <rect key="frame" x="259" y="0.0" width="45.000000000000057" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="WFf-EE-u1a"/>
                                                         <constraint firstAttribute="width" constant="45" id="hIo-dh-I4f"/>
@@ -4269,7 +4269,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="PeE-qW-Fz6">
-                                            <rect key="frame" x="16" y="8" width="50" height="50"/>
+                                            <rect key="frame" x="16" y="8" width="50.000000000000057" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="VET-4v-LpQ"/>
                                                 <constraint firstAttribute="width" constant="50" id="jxT-j0-h27"/>
@@ -5135,10 +5135,10 @@
                                                     <rect key="frame" x="8" y="49" width="304" height="40.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="999" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ycK-9M-b73">
-                                                            <rect key="frame" x="0.0" y="12" width="16" height="16"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="51.500000000000057" height="40.5"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1" verticalHuggingPriority="251" horizontalCompressionResistancePriority="999" text="Команда" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PdL-4i-u1D">
-                                                            <rect key="frame" x="46.5" y="10.5" width="67" height="19.5"/>
+                                                            <rect key="frame" x="55.5" y="10.5" width="67" height="19.5"/>
                                                             <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="8"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <nil key="textColor"/>
@@ -5151,13 +5151,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Команда" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBd-tH-njl">
-                                                            <rect key="frame" x="190.5" y="10.5" width="67" height="19.5"/>
+                                                            <rect key="frame" x="181.5" y="10.5" width="67" height="19.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="999" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Xts-GM-oga">
-                                                            <rect key="frame" x="288" y="12" width="16" height="16"/>
+                                                            <rect key="frame" x="252.49999999999997" y="0.0" width="51.500000000000085" height="40.5"/>
                                                         </imageView>
                                                     </subviews>
                                                 </stackView>
@@ -5201,7 +5201,7 @@
                     <autoresizingMask key="autoresizingMask"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ничего нет" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wjg-3D-s67">
-                            <rect key="frame" x="16" y="76" width="268" height="21"/>
+                            <rect key="frame" x="16" y="188" width="268" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="WlP-WR-2S5"/>
                             </constraints>
@@ -5210,7 +5210,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="На этой неделе нет матчей" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mWz-W2-2m7">
-                            <rect key="frame" x="16" y="112" width="268" height="21"/>
+                            <rect key="frame" x="16" y="224" width="268" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="qOb-ei-5bo"/>
                             </constraints>
@@ -5219,7 +5219,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_empty" translatesAutoresizingMaskIntoConstraints="NO" id="ye5-cK-eSl">
-                            <rect key="frame" x="70" y="0.0" width="160" height="16"/>
+                            <rect key="frame" x="70" y="0.0" width="160" height="128"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -5460,13 +5460,13 @@
         <!--Счет protocol-->
         <scene sceneID="7aK-DX-Nn7">
             <objects>
-                <tableViewController storyboardIdentifier="ScoreMatchTableViewControllerProtocol" title="Счет" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PS9-Pi-IFS" userLabel="Счет protocol" customClass="ScoreMatchTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EditScoreMatchTableViewController" title="Счет" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PS9-Pi-IFS" userLabel="Счет protocol" customClass="EditScoreMatchTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Xwd-12-rGa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="score_match_cell" rowHeight="70" id="qDY-61-m5y" customClass="ScoreMatchTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="score_match_cell" rowHeight="70" id="qDY-61-m5y" customClass="EditScoreMatchTableViewCell" customModule="ALC_RB" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qDY-61-m5y" id="g1g-Bw-tBZ">
@@ -5474,14 +5474,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="oky-2a-dex">
-                                            <rect key="frame" x="8" y="8.5" width="54" height="54"/>
+                                            <rect key="frame" x="8" y="8.5" width="54.000000000000057" height="54"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="54" id="0bj-Ua-Wvo"/>
                                                 <constraint firstAttribute="width" constant="54" id="weL-qQ-Kdc"/>
                                             </constraints>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="sd8-JD-dNb">
-                                            <rect key="frame" x="258" y="8.5" width="54" height="54"/>
+                                            <rect key="frame" x="258" y="8.5" width="54.000000000000057" height="54"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="54" id="Y9r-wu-Z6G"/>
                                                 <constraint firstAttribute="width" constant="54" id="qQ2-d1-G5c"/>
@@ -5557,14 +5557,14 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="581-NK-JyW">
-                            <rect key="frame" x="8" y="36" width="54" height="54"/>
+                            <rect key="frame" x="8" y="36" width="54.000000000000057" height="54"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="54" id="2KX-M1-ljO"/>
                                 <constraint firstAttribute="height" constant="54" id="CLJ-eP-6Q4"/>
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="f0q-KU-D2j">
-                            <rect key="frame" x="313" y="36" width="54" height="54"/>
+                            <rect key="frame" x="313" y="36" width="54.000000000000057" height="54"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="54" id="l1l-O8-iET"/>
                                 <constraint firstAttribute="height" constant="54" id="qkc-l2-hb9"/>
@@ -5641,13 +5641,13 @@
         <!--Match Protocol VC protocol-->
         <scene sceneID="jHZ-Ra-BH0">
             <objects>
-                <viewController storyboardIdentifier="MatchProtocolViewControllerProtocol" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oVX-Z1-ulC" userLabel="Match Protocol VC protocol" customClass="MatchProtocolViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditMatchProtocolViewControllerProtocol" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oVX-Z1-ulC" userLabel="Match Protocol VC protocol" customClass="EditMatchProtocolViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tIV-BU-1Na">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QTa-TW-dQD">
-                                <rect key="frame" x="0.0" y="20" width="320" height="169"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="169"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Игроки" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRO-Xt-yjD">
                                         <rect key="frame" x="12" y="8" width="63" height="21"/>
@@ -5758,7 +5758,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N3s-5t-1Y2">
-                                <rect key="frame" x="0.0" y="197" width="320" height="57"/>
+                                <rect key="frame" x="0.0" y="241" width="320" height="57"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ответственные лица" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPb-Ur-K7h">
                                         <rect key="frame" x="12" y="18" width="166" height="21"/>
@@ -5792,7 +5792,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RwK-hO-Z0y">
-                                <rect key="frame" x="0.0" y="262" width="320" height="306"/>
+                                <rect key="frame" x="0.0" y="306" width="320" height="213"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="События" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9YG-f7-Cbz">
                                         <rect key="frame" x="12" y="18" width="71" height="21"/>
@@ -5838,7 +5838,8 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pEt-fS-cuE"/>
                     </view>
-                    <nil key="simulatedTopBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="eventsBtn" destination="hfh-jI-568" id="Y3O-qb-Fje"/>
                         <outlet property="refereesBtn" destination="CMP-pX-EhQ" id="taV-LL-Ewr"/>
@@ -5857,13 +5858,13 @@
         <!--Team Protocol TVC protocol-->
         <scene sceneID="uuf-FM-uD0">
             <objects>
-                <tableViewController storyboardIdentifier="TeamProtocolTableViewControllerProtocol" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zNG-Y0-YKN" userLabel="Team Protocol TVC protocol" customClass="TeamProtocolTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EditTeamProtocolTableViewControllerProtocol" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zNG-Y0-YKN" userLabel="Team Protocol TVC protocol" customClass="EditTeamProtocolTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5qE-td-EDp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="team_protocol_cell" rowHeight="56" id="7Dq-qH-9dg" customClass="TeamProtocolTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="team_protocol_cell" rowHeight="56" id="7Dq-qH-9dg" customClass="EditTeamProtocolTableViewCell" customModule="ALC_RB" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7Dq-qH-9dg" id="OEz-O4-ZLy">
@@ -5871,7 +5872,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ead-on-xeu">
-                                            <rect key="frame" x="8" y="8" width="40" height="40"/>
+                                            <rect key="frame" x="8" y="8" width="40.000000000000057" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="aMp-5i-oQL"/>
                                                 <constraint firstAttribute="height" constant="40" id="tqM-J6-zif"/>
@@ -5932,13 +5933,13 @@
         <!--Ответственные лица protocol-->
         <scene sceneID="XAt-4Q-aTH">
             <objects>
-                <tableViewController storyboardIdentifier="RefereeTeamTableViewControllerProtocol" title="Ответственные лица" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7CY-FX-t7V" userLabel="Ответственные лица protocol" customClass="RefereeTeamTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EditRefereeTeamTableViewControllerProtocol" title="Ответственные лица" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7CY-FX-t7V" userLabel="Ответственные лица protocol" customClass="EditRefereeTeamTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pgh-IT-4Dm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="referee_protocol_cell" rowHeight="56" id="Nvw-k0-DiQ" customClass="RefereeProtocolTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="referee_protocol_cell" rowHeight="56" id="Nvw-k0-DiQ" customClass="EditRefereeProtocolTableViewCell" customModule="ALC_RB" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nvw-k0-DiQ" id="3ML-7u-eee">
@@ -5946,7 +5947,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Pzf-ic-zhn">
-                                            <rect key="frame" x="8" y="8" width="40" height="40"/>
+                                            <rect key="frame" x="8" y="8" width="40.000000000000057" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="hxN-OZ-YhM"/>
                                                 <constraint firstAttribute="height" constant="40" id="qM6-Fb-0dp"/>
@@ -5988,13 +5989,13 @@
         <!--События protocol-->
         <scene sceneID="g4Y-m1-pEV">
             <objects>
-                <tableViewController title="События" useStoryboardIdentifierAsRestorationIdentifier="YES" id="etU-Aw-AwJ" userLabel="События protocol" customClass="EventsMatchTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="События" useStoryboardIdentifierAsRestorationIdentifier="YES" id="etU-Aw-AwJ" userLabel="События protocol" customClass="EditEventsMatchTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="kjP-6G-Apb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="event_protocol_cell" rowHeight="56" id="rsB-jj-Ztt" customClass="EventsProtocolTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="event_protocol_cell" rowHeight="56" id="rsB-jj-Ztt" customClass="EditEventsProtocolTableViewCell">
                                 <rect key="frame" x="0.0" y="28" width="320" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rsB-jj-Ztt" id="iZv-Es-bok">
@@ -6002,7 +6003,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="0DP-qV-S1b">
-                                            <rect key="frame" x="8" y="8" width="40" height="40"/>
+                                            <rect key="frame" x="8" y="8" width="40.000000000000057" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="DX1-Cd-YKP"/>
                                                 <constraint firstAttribute="width" constant="40" id="osk-mc-dva"/>

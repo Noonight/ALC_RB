@@ -24,10 +24,10 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         static let refreshBtn = "Перезагрузить"
     }
     
-    private lazy var refProtocol: MatchProtocolViewController = {
+    private lazy var refProtocol: EditMatchProtocolViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
-        var viewController = storyboard.instantiateViewController(withIdentifier: "MatchProtocolViewControllerProtocol") as! MatchProtocolViewController
+        var viewController = storyboard.instantiateViewController(withIdentifier: "EditMatchProtocolViewControllerProtocol") as! EditMatchProtocolViewController
         
 //        viewController.leagueDetailModel.league = self.leagueDetailModel.league
         //        dump(self.leagueDetailModel)
@@ -141,7 +141,7 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentifiers.showProtocol,
-            let destination = segue.destination as? MatchProtocolViewController,
+            let destination = segue.destination as? EditMatchProtocolViewController,
             let cellIndex = tableView.indexPathForSelectedRow
         {
 //            destination.leagueDetailModel =

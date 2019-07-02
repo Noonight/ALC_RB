@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,23 +25,23 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="TdE-r2-zLf">
-                    <rect key="frame" x="15" y="9.5" width="300" height="311.5"/>
+                    <rect key="frame" x="15" y="-15.5" width="300" height="312"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="253" image="ic_empty" translatesAutoresizingMaskIntoConstraints="NO" id="fQB-A6-sJM">
-                            <rect key="frame" x="70" y="0.0" width="160" height="160"/>
+                            <rect key="frame" x="70" y="0.0" width="160" height="160.5"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="160" id="4w5-XI-VZA"/>
                                 <constraint firstAttribute="width" constant="160" id="odA-V8-sey"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Ничего нет" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ghl-Ny-ElS">
-                            <rect key="frame" x="8" y="200" width="284" height="19.5"/>
+                            <rect key="frame" x="8" y="200.5" width="284" height="19.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Здесь будут отображаться матчи Здесь будут отображаться матчи Здесь будут отображаться матчи" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8e-fx-yOg">
-                            <rect key="frame" x="8" y="221.5" width="284" height="90"/>
+                            <rect key="frame" x="8" y="222" width="284" height="90"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="90" id="8Cl-lW-ff8"/>
                             </constraints>
@@ -73,6 +73,7 @@
                 <constraint firstItem="TdE-r2-zLf" firstAttribute="centerY" secondItem="xwb-9f-dGT" secondAttribute="centerY" id="2XR-7I-OhY"/>
                 <constraint firstItem="TdE-r2-zLf" firstAttribute="centerX" secondItem="xwb-9f-dGT" secondAttribute="centerX" id="aof-8I-Uic"/>
             </constraints>
+            <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="xwb-9f-dGT"/>
             <point key="canvasLocation" x="80" y="-2822.7886056971515"/>
