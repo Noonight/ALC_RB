@@ -67,6 +67,7 @@ class EditMatchProtocolViewController: UIViewController {
             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
             
             let controller = storyboard.instantiateViewController(withIdentifier: "EditScoreMatchTableViewController") as! EditScoreMatchTableViewController
+           
             controller.leagueDetailModel = self.leagueDetailModel
             controller.match = self.match
             return controller

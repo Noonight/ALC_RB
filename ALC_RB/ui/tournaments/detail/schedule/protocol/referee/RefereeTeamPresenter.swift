@@ -12,6 +12,12 @@ import AlamofireImage
 
 class RefereeTeamPresenter: MvpPresenter<RefereeTeamTableViewController> {
     
+    let dataManager = ApiRequests()
+    
+    func fetchGetPerson(person id: String, success: @escaping (GetPerson)->(), failure: @escaping (Error)->()) {
+        dataManager.get_getPerson(id: id, success: success, failure: failure)
+    }
+    
     func getReferee(referee id: String, get_referee: @escaping (SoloPerson) -> (), get_error: @escaping (Error) -> ()) {
         Alamofire
             .request(ApiRoute.getApiURL(.soloUser, id: id))

@@ -88,7 +88,7 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         do {
             viewModel.participationMatches.value = (userDefaults.getAuthorizedUser()?.person.participationMatches)!.filter({ pMatch -> Bool in
                 return pMatch.referees.contains(where: { referee -> Bool in
-                    Print.m("\(referee.person) == \(UserDefaultsHelper().getAuthorizedUser()?.person.id)")
+//                    Print.m("\(referee.person) == \(UserDefaultsHelper().getAuthorizedUser()?.person.id)")
                     return referee.person == UserDefaultsHelper().getAuthorizedUser()?.person.id
                 })
             })
@@ -137,12 +137,52 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
                     self.setState(state: .empty)
                 }
             }
+            .disposed(by: disposeBag)
         
         tableView.rx.itemSelected
             .subscribe { (indexPath) in
                 self.tableView.deselectRow(at: indexPath.element!, animated: true)
-                if (self.tableView.cellForRow(at: indexPath.element!) as? MyMatchesRefTableViewCell)?.accessoryType == .disclosureIndicator {
-                    self.show(self.refProtocol, sender: self)
+                let cell = self.tableView.cellForRow(at: indexPath.element!) as? MyMatchesRefTableViewCell
+                
+                let activityIndicator = UIActivityIndicatorView(style: .gray)
+                activityIndicator.hidesWhenStopped = true
+                
+                if cell?.accessoryType == .disclosureIndicator
+                {
+                    
+                    cell?.accessoryView = activityIndicator
+                   
+                    activityIndicator.startAnimating()
+                    
+                    guard let leagueId = cell?.cellModel?.participationMatch?.league else {
+                        Print.m("cell league is nil")
+                        return
+                    }
+                    self.viewModel.fetchLeagueInfo(
+                        id: leagueId,
+                        success: { leagueInfo in
+                            activityIndicator.stopAnimating()
+                            cell?.accessoryView = nil
+
+                            cell?.accessoryType = .detailDisclosureButton
+                            cell?.accessoryType = .disclosureIndicator
+
+                            self.refProtocol.leagueDetailModel.leagueInfo = leagueInfo
+                            guard let match = leagueInfo.league.matches?.filter({ match -> Bool in
+                                return match.id == cell?.cellModel?.participationMatch?.id
+                            }).first else {
+                                Print.m("not found match in incoming league matches")
+                                return
+                            }
+                            self.refProtocol.match = match
+                            
+                            self.show(self.refProtocol, sender: self)
+                        },
+                        failure: { error in
+                            self.showAlert(message: error.localizedDescription)
+                        }
+                    )
+                    
                 }
             }
             .disposed(by: disposeBag)

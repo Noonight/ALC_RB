@@ -12,21 +12,36 @@ import AlamofireImage
 
 class EditRefereeTeamPresenter: MvpPresenter<EditRefereeTeamTableViewController> {
     
-    func getReferee(referee id: String, get_referee: @escaping (SoloPerson) -> (), get_error: @escaping (Error) -> ()) {
-        Alamofire
-            .request(ApiRoute.getApiURL(.soloUser, id: id))
-            .validate()
-            .responseSoloPerson { (response) in
-                switch response.result {
-                case .success:
-                    if let referee = response.result.value {
-                        get_referee(referee)
-                    }
-                case .failure:
-                    get_error(response.result.error!)
-                }
-        }
+    let dataManager = ApiRequests()
+    
+//    func fetchGetPerson(person id: String) {
+//        dataManager.get_getPerson(id: id, success: { getPerson in
+//            self.getView().fetchGetPersonSuccess(getPerson: getPerson)
+//        }) { error in
+//            self.getView().fetchGetPersonFailure(error: error)
+//        }
+//    }
+    
+    func fetchGetPerson(person id: String, success: @escaping (GetPerson)->(), failure: @escaping (Error)->()) {
+        dataManager.get_getPerson(id: id, success: success, failure: failure)
     }
+    
+//    func getReferee(referee id: String, get_referee: @escaping (SoloPerson) -> (), get_error: @escaping (Error) -> ()) {
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.soloUser, id: id))
+////            .validate()
+//            .responseSoloPerson { (response) in
+//                switch response.result {
+//                case .success:
+//                    Print.m(response.result.value?.person)
+//                    if let referee = response.result.value {
+//                        get_referee(referee)
+//                    }
+//                case .failure:
+//                    get_error(response.result.error!)
+//                }
+//        }
+//    }
     
     func getRefereeImage(photo referee: String?, get_image: @escaping (UIImage) -> ()) {
         Alamofire

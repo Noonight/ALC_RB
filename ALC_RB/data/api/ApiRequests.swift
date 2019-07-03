@@ -580,6 +580,19 @@ class ApiRequests {
         }
     }
     
+    func get_getPerson(id: String, success: @escaping (GetPerson)->(), failure: @escaping (Error)->()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.soloUser, id: id))
+            .responseGetPerson { (response) in
+                switch response.result {
+                case .success(let getPerson):
+                    success(getPerson)
+                case .failure(let error):
+                    failure(error)
+                }
+        }
+    }
+    
     func get_referees(get_success: @escaping (Players) -> (), get_failure: @escaping (Error) -> ()) {
         let parameters: Parameters = [
             "type": "referee"//,

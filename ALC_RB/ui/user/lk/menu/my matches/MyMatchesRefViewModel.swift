@@ -25,14 +25,14 @@ class MyMatchesRefViewModel {
     
     func fetch()
     {
-        Print.m(participationMatches.value)
+//        Print.m(participationMatches.value)
         if participationMatches.value.count > 0 {
             refreshing.onNext(true)
             
             self.dataManager?.get_forMyMatches(participationMatches: participationMatches.value, get_success: { (cellModels) in
                 self.tableModel.onNext(cellModels)
                 self.refreshing.onNext(false)
-                Print.m(cellModels)
+//                Print.m(cellModels)
             }, get_failure: { (error) in
                 self.error.onNext(error)
             })
@@ -40,5 +40,13 @@ class MyMatchesRefViewModel {
             self.tableModel.onNext([])
 //            self.error.onNext(Error)
         }
+    }
+    
+    func fetchLeagueInfo(id: String, success: @escaping (LILeagueInfo)->(), failure: @escaping (Error)->()) {
+        dataManager?.get_tournamentLeague(id: id, get_success: { leagueInfo in
+            success(leagueInfo)
+        }, get_error: { error in
+            failure(error)
+        })
     }
 }

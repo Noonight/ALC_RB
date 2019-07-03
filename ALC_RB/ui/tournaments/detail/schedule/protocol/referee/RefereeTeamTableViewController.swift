@@ -111,86 +111,102 @@ class RefereeTeamTableViewController: UITableViewController {
         return cell
     }
     
-    func configureCell(cell: RefereeProtocolTableViewCell, model: LIReferee) {
-        switch  model.getType() {
-        case .inspector:
-            presenter.getReferee(referee: model.person, get_referee: { (referee) in
-                cell.name_label.text = referee.person.getFullName()
-                if referee.person.photo != nil {
-                    cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: referee.person.photo!))
-                    //cell.photo_image.image?.af_imageRoundedIntoCircle()
-                } else {
-                    cell.photo_image.image = UIImage(named: "ic_logo")
-                }
-            }) { (error) in
-                
-            }
-        case .first:
-            presenter.getReferee(referee: model.person, get_referee: { (referee) in
-                cell.name_label.text = referee.person.getFullName()
-                if referee.person.photo != nil {
-                    cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: referee.person.photo!))
-                    //cell.photo_image.image?.af_imageRoundedIntoCircle()
-                } else {
-                    cell.photo_image.image = UIImage(named: "ic_logo")
-                }
-            }) { (error) in
-                
-            }
-        case .second:
-            presenter.getReferee(referee: model.person, get_referee: { (referee) in
-                cell.name_label.text = referee.person.getFullName()
-                if referee.person.photo != nil {
-                    cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: referee.person.photo!))
-                    //cell.photo_image.image?.af_imageRoundedIntoCircle()
-                } else {
-                    cell.photo_image.image = UIImage(named: "ic_logo")
-                }
-            }) { (error) in
-                
-            }
-        case .third:
-            presenter.getReferee(referee: model.person, get_referee: { (referee) in
-                cell.name_label.text = referee.person.getFullName()
-                if referee.person.photo != nil {
-                    cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: referee.person.photo!))
-                    //cell.photo_image.image?.af_imageRoundedIntoCircle()
-                } else {
-                    cell.photo_image.image = UIImage(named: "ic_logo")
-                }
-            }) { (error) in
-                
-            }
-        case .chrono:
-            presenter.getReferee(referee: model.person, get_referee: { (referee) in
-                cell.name_label.text = referee.person.getFullName()
-                if referee.person.photo != nil {
-                    cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: referee.person.photo!))
-                    //cell.photo_image.image?.af_imageRoundedIntoCircle()
-                } else {
-                    cell.photo_image.image = UIImage(named: "ic_logo")
-                }
-            }) { (error) in
-                
-            }
-        default:
-            break
-        }
-        
-    }
+//    func configureCell(cell: RefereeProtocolTableViewCell, model: LIReferee) {
+//        switch  model.getType() {
+//        case .inspector:
+//            presenter.getReferee(referee: model.person, get_referee: { (referee) in
+//                cell.name_label.text = referee.person.getFullName()
+//                if referee.person.photo != nil {
+//                    cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: referee.person.photo!))
+//                    //cell.photo_image.image?.af_imageRoundedIntoCircle()
+//                } else {
+//                    cell.photo_image.image = UIImage(named: "ic_logo")
+//                }
+//            }) { (error) in
+//
+//            }
+//        case .first:
+//            presenter.getReferee(referee: model.person, get_referee: { (referee) in
+//                cell.name_label.text = referee.person.getFullName()
+//                if referee.person.photo != nil {
+//                    cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: referee.person.photo!))
+//                    //cell.photo_image.image?.af_imageRoundedIntoCircle()
+//                } else {
+//                    cell.photo_image.image = UIImage(named: "ic_logo")
+//                }
+//            }) { (error) in
+//
+//            }
+//        case .second:
+//            presenter.getReferee(referee: model.person, get_referee: { (referee) in
+//                cell.name_label.text = referee.person.getFullName()
+//                if referee.person.photo != nil {
+//                    cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: referee.person.photo!))
+//                    //cell.photo_image.image?.af_imageRoundedIntoCircle()
+//                } else {
+//                    cell.photo_image.image = UIImage(named: "ic_logo")
+//                }
+//            }) { (error) in
+//
+//            }
+//        case .third:
+//            presenter.getReferee(referee: model.person, get_referee: { (referee) in
+//                cell.name_label.text = referee.person.getFullName()
+//                if referee.person.photo != nil {
+//                    cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: referee.person.photo!))
+//                    //cell.photo_image.image?.af_imageRoundedIntoCircle()
+//                } else {
+//                    cell.photo_image.image = UIImage(named: "ic_logo")
+//                }
+//            }) { (error) in
+//
+//            }
+//        case .chrono:
+//            presenter.getReferee(referee: model.person, get_referee: { (referee) in
+//                cell.name_label.text = referee.person.getFullName()
+//                if referee.person.photo != nil {
+//                    cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: referee.person.photo!))
+//                    //cell.photo_image.image?.af_imageRoundedIntoCircle()
+//                } else {
+//                    cell.photo_image.image = UIImage(named: "ic_logo")
+//                }
+//            }) { (error) in
+//
+//            }
+//        default:
+//            break
+//        }
+//
+//    }
 
     func configureCell(cell: RefereeProtocolTableViewCell, model: TableStruct.CellStruct) {
         if model.referee_id.count > 2 {
-            presenter.getReferee(referee: model.referee_id, get_referee: { (referee) in
-                cell.name_label.text = referee.person.getFullName()
-                if referee.person.photo != nil {
-                    cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: referee.person.photo!))
+//            presenter.getReferee(referee: model.referee_id, get_referee: { (referee) in
+//                cell.name_label.text = referee.person.getFullName()
+//                if referee.person.photo != nil {
+//                    cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: referee.person.photo!))
+//                    //cell.photo_image.image?.af_imageRoundedIntoCircle()
+//                } else {
+//                    cell.photo_image.image = UIImage(named: "ic_logo")
+//                }
+//            }) { (error) in
+//
+//            }
+            presenter.fetchGetPerson(person: model.referee_id, success: { getPerson in
+                guard let person = getPerson.person else {
+                    Print.m("Error getting person")
+                    return
+                }
+                cell.name_label.text = person.getFullName()
+                //                Print.m(referee.person)
+                if person.photo != nil {
+                    cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: person.photo!))
                     //cell.photo_image.image?.af_imageRoundedIntoCircle()
                 } else {
                     cell.photo_image.image = UIImage(named: "ic_logo")
                 }
-            }) { (error) in
-                
+            }) { error in
+                Print.m(error)
             }
         } else {
             debugPrint("referee id is empty")

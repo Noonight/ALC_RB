@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ALC_RB/data/api/ApiRequests.swift"
-            timestampString = "583751361.334532"
+            timestampString = "583844651.969527"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "773"
-            endingLineNumber = "773"
+            startingLineNumber = "798"
+            endingLineNumber = "798"
             landmarkName = "get_forMyMatches(participationMatches:get_success:get_failure:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ALC_RB/data/api/ApiRequests.swift"
-            timestampString = "583751361.334985"
+            timestampString = "583844651.9696161"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "776"
-            endingLineNumber = "776"
+            startingLineNumber = "801"
+            endingLineNumber = "801"
             landmarkName = "get_forMyMatches(participationMatches:get_success:get_failure:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ALC_RB/data/api/ApiRequests.swift"
-            timestampString = "583751361.3352799"
+            timestampString = "583844651.969689"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "779"
-            endingLineNumber = "779"
+            startingLineNumber = "804"
+            endingLineNumber = "804"
             landmarkName = "get_forMyMatches(participationMatches:get_success:get_failure:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ALC_RB/data/api/ApiRequests.swift"
-            timestampString = "583751361.3355711"
+            timestampString = "583844651.969751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "783"
-            endingLineNumber = "783"
+            startingLineNumber = "808"
+            endingLineNumber = "808"
             landmarkName = "get_forMyMatches(participationMatches:get_success:get_failure:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,12 +90,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ALC_RB/data/api/ApiRequests.swift"
-            timestampString = "583751361.335856"
+            timestampString = "583844651.969806"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "793"
-            endingLineNumber = "793"
+            startingLineNumber = "818"
+            endingLineNumber = "818"
             landmarkName = "get_forMyMatches(participationMatches:get_success:get_failure:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ALC_RB/ui/user/lk/menu/my matches/edit protocol/score/EditScoreMatchTableViewController.swift"
+            timestampString = "583844651.969866"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ALC_RB/ui/user/lk/menu/my matches/edit protocol/score/EditScoreMatchTableViewController.swift"
+            timestampString = "583844651.9699301"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
