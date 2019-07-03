@@ -11,7 +11,8 @@ import UIKit
 
 protocol InvitationLKView: MvpView {
     
-    func acceptRequestSuccess(authUser: AuthUser)
+    func acceptRequestSuccess(soloPerson: SoloPerson)
+    func acceptRequestFailureMessage(message: SingleLineMessage)
     func acceptRequestFailure(error: Error)
     
     func getTournamentsSuccess(tournaments: Tournaments)
@@ -33,8 +34,12 @@ class InvitationLKPresenter: MvpPresenter<InvitationLKTableViewController> {
     let apiService = ApiRequests()
     
     func acceptRequest(token: String, acceptInfo: AcceptRequest) {
-        apiService.post_teamAcceptRequest(token: token, acceptInfo: acceptInfo, response_success: { (authUser) in
-            self.getView().acceptRequestSuccess(authUser: authUser)
+//        dump(token)
+//        dump(acceptInfo)
+        apiService.post_teamAcceptRequest(token: token, acceptInfo: acceptInfo, response_success: { soloPerson in
+            self.getView().acceptRequestSuccess(soloPerson: soloPerson)
+        }, response_message: { message in
+            self.getView().acceptRequestFailureMessage(message: message)
         }) { (error) in
             self.getView().acceptRequestFailure(error: error)
         }

@@ -95,14 +95,15 @@ class InvitationLKTableViewController: UITableViewController {
 //        }
         
 //        showHudTable(message: "Загрузка")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-//            self.tableView.reloadData()
-//            self.showLoading()
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+////            self.tableView.reloadData()
+////            self.showLoading()
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        dump(userDefault.getAuthorizedUser()?.person)
         if userDefault.getAuthorizedUser()?.person.pendingTeamInvites.count ?? 0 > 0 {
             hideEmptyView()
             if tableModel.isEmpty() {
@@ -162,7 +163,8 @@ class InvitationLKTableViewController: UITableViewController {
             
             if let mLeague = league {
                 cell.titleLabel.text = "\(mLeague.tourney). \(mLeague.name)"
-                cell.dateLabel.text = "\(mLeague.beginDate.UTCToLocal(from: .utc, to: .local)) - \(mLeague.endDate.UTCToLocal(from: .utc, to: .local))"
+//                Print.m("\(mLeague.beginDate) ### \(mLeague.endDate)")
+                cell.dateLabel.text = "\(mLeague.beginDate.UTCToLocal(from: .leagueDate, to: .local)) - \(mLeague.endDate.UTCToLocal(from: .leagueDate, to: .local))"
             }
             cell.teamName.text = team?.name
             
@@ -184,26 +186,51 @@ class InvitationLKTableViewController: UITableViewController {
     
     @objc func cancelBtnPressed(sender: UIButton) {
         Print.d(message: "\(sender.tag)  cancel")
-        let user = userDefault.getAuthorizedUser()
-        presenter.acceptRequest(
-            token: (userDefault.getAuthorizedUser()?.token)!,
-            acceptInfo: AcceptRequest(
-                idLeague: user?.person.pendingTeamInvites[sender.tag].league ?? "",
-                idTeam: user?.person.pendingTeamInvites[sender.tag].team ?? "",
-                status: .rejected)
-        )
+        showAlertOkCancel(title: "Отменить приглашение?", message: "", ok: {
+            let user = self.userDefault.getAuthorizedUser()
+            guard let league = user?.person.pendingTeamInvites[sender.tag].league else {
+                self.showAlert(message: "Лига не найдена")
+                return
+            }
+            guard let team = user?.person.pendingTeamInvites[sender.tag].team else {
+                self.showAlert(message: "Команда не найдена")
+                return
+            }
+            self.presenter.acceptRequest(
+                token: (user?.token)!,
+                acceptInfo: AcceptRequest(
+                    idLeague: league,
+                    idTeam: team,
+                    status: .rejected)
+            )
+        }) {
+            Print.m("cancel cancel")
+        }
     }
     
     @objc func okBtnPressed(sender: UIButton) {
-        Print.d(message: "\(sender.tag)  ok")
-        let user = userDefault.getAuthorizedUser()
-        presenter.acceptRequest(
-            token: (userDefault.getAuthorizedUser()?.token)!,
-            acceptInfo: AcceptRequest(
-                idLeague: user?.person.pendingTeamInvites[sender.tag].league ?? "",
-                idTeam: user?.person.pendingTeamInvites[sender.tag].team ?? "",
-                status: .accpeted)
-        )
+//        Print.d(message: "\(sender.tag)  ok")
+        showAlertOkCancel(title: "Принять приглашение?", message: "", ok: {
+            let user = self.userDefault.getAuthorizedUser()
+            guard let league = user?.person.pendingTeamInvites[sender.tag].league else {
+                self.showAlert(message: "Лига не найдена")
+                return
+            }
+            guard let team = user?.person.pendingTeamInvites[sender.tag].team else {
+                self.showAlert(message: "Команда не найдена")
+                return
+            }
+            self.presenter.acceptRequest(
+                token: (user?.token)!,
+                acceptInfo: AcceptRequest(
+                    idLeague: league,
+                    idTeam: team,
+                    status: .accpeted)
+            )
+        }) {
+            Print.m("tap cancel invite")
+        }
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -265,16 +292,28 @@ extension InvitationLKTableViewController: ActivityIndicatorProtocol {
 }
 
 extension InvitationLKTableViewController: InvitationLKView {
+    func acceptRequestFailureMessage(message: SingleLineMessage) {
+        showAlert(message: message.message)
+    }
     
-    func acceptRequestSuccess(authUser: AuthUser) {
-        Print.d(object: authUser)
-        userDefault.deleteAuthorizedUser()
-        userDefault.setAuthorizedUser(user: authUser)
-        tableView.reloadData()
+    func acceptRequestSuccess(soloPerson: SoloPerson) {
+//        Print.d(object: soloPerson)
+        defer {
+            tableView.reloadData()
+        }
+        var authorizedUser = userDefault.getAuthorizedUser()
+//        userDefault.deleteAuthorizedUser()
+        authorizedUser?.person = soloPerson.person
+        userDefault.setAuthorizedUser(user: authorizedUser!)
+        showAlert(title: "Успех", message: "", closure: {
+            self.tableView.reloadData()
+        })
+        
     }
     
     func acceptRequestFailure(error: Error) {
-        showToast(message: "Что-то пошло не так. Ошибка")
+//        showToast(message: "Что-то пошло не так. Ошибка")
+        showAlert(message: error.localizedDescription)
         Print.d(error: error)
     }
     

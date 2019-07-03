@@ -222,7 +222,7 @@ class ApiRequests {
         }
     }
     
-    func post_teamAcceptRequest(token: String, acceptInfo: AcceptRequest, response_success: @escaping (AuthUser) -> (), response_failure: @escaping (Error) -> ()) {
+    func post_teamAcceptRequest(token: String, acceptInfo: AcceptRequest, response_success: @escaping (SoloPerson) -> (), response_message: @escaping (SingleLineMessage)->(), response_failure: @escaping (Error) -> ()) {
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in
                 for (key, value) in acceptInfo.toParams() {
@@ -238,14 +238,26 @@ class ApiRequests {
                 switch result {
                 case .success(let upload, _, _):
                     
-                    upload.responseAuthUser(completionHandler: { (response) in
+//                    upload.responseJSON(completionHandler: { response in
+//                        dump(response.result.value)
+//                    })
+                    
+                    upload.responseSoloPerson(completionHandler: { response in
                         switch response.result {
                         case .success:
                             if let user = response.result.value {
                                 response_success(user)
                             }
                         case .failure(let error):
-                            response_failure(error)
+                            upload.responseSingleLineMessage(completionHandler: { response in
+                                switch response.result {
+                                case .success(let value):
+                                    response_message(value)
+                                case .failure(let error):
+                                    response_failure(error)
+                                }
+                            })
+//                            response_failure(error)
                         }
                     })
 
