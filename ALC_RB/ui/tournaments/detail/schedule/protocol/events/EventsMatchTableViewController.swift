@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventsMatchTableViewController: UITableViewController {
+class EventsMatchTableViewController: BaseStateTableViewController {
 
     // MARK: - TableStruct
     
@@ -31,6 +31,7 @@ class EventsMatchTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
+        setEmptyMessage(message: "Здесь будут отображаться события матча")
         prepareTableModel(destination: destinationModel)
     }
     
@@ -77,13 +78,18 @@ class EventsMatchTableViewController: UITableViewController {
     }
     
     func prepareTableModel(destination: [LIEvent]) {
-        let events = destination
-        let uniqueEventTypes = findUniqueHeader(destination: events)
-        for uniqEvent in uniqueEventTypes {
-            var arrEvents: [LIEvent] = events.filter { (event) -> Bool in
-                return event.eventType == uniqEvent
+        if destination.count > 0 {
+            setState(state: .normal)
+            let events = destination
+            let uniqueEventTypes = findUniqueHeader(destination: events)
+            for uniqEvent in uniqueEventTypes {
+                var arrEvents: [LIEvent] = events.filter { (event) -> Bool in
+                    return event.eventType == uniqEvent
+                }
+                tableModel.table.append(arrEvents)
             }
-            tableModel.table.append(arrEvents)
+        } else {
+            setState(state: .empty)
         }
     }
     
