@@ -155,6 +155,12 @@ struct LIReferee: Codable {
     let person: String
     let type: String
     
+    init(id: String, person: String, type: String) {
+        self.id = id
+        self.person = person
+        self.type = type
+    }
+    
     func getType() -> RefereeTeamTableViewController.TableStruct.RefereeType {
         switch type {
         case "Инспектор":
@@ -170,6 +176,10 @@ struct LIReferee: Codable {
         default:
             return .first
         }
+    }
+    
+    func convertToReferee() -> Referee {
+        return Referee(id: id, person: person, type: type)
     }
     
     enum CodingKeys: String, CodingKey {

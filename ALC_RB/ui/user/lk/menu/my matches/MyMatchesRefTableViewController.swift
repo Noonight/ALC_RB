@@ -29,12 +29,6 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "EditMatchProtocolViewControllerProtocol") as! EditMatchProtocolViewController
         
-//        viewController.leagueDetailModel.league = self.leagueDetailModel.league
-        //        dump(self.leagueDetailModel)
-//        viewController.leagueDetailModel.leagueInfo = self.leagueDetailModel.leagueInfo
-        
-        //self.add(viewController)
-        
         return viewController
     }()
     
@@ -61,22 +55,15 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         super.viewWillAppear(animated)
         
         // issue: cell not worked when we go back
-        navigationItem.title = self.title
+        self.title = "Матчи"
+        navigationController?.navigationBar.topItem?.title = self.title
         
-//        setupUser()
-//        dump(userDefaults.getAuthorizedUser())
-//        Print.m(userDefaults.getAuthorizedUser()?.person.participationMatches)
         viewModel.participationMatches.value = (userDefaults.getAuthorizedUser()?.person.participationMatches)!.filter({ pMatch -> Bool in
             return pMatch.referees.contains(where: { referee -> Bool in
-//                Print.m("\(referee.person) == \(UserDefaultsHelper().getAuthorizedUser()?.person.id)")
                 return referee.person == userDefaults.getAuthorizedUser()?.person.id
             })
         })
-//        if viewModel.firstInit.value {
-            viewModel.fetch()
-//        Print.m(viewModel.participationMatches.value)
-//            viewModel.firstInit.value = false
-//        }
+        viewModel.fetch()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -88,11 +75,9 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         do {
             viewModel.participationMatches.value = (userDefaults.getAuthorizedUser()?.person.participationMatches)!.filter({ pMatch -> Bool in
                 return pMatch.referees.contains(where: { referee -> Bool in
-//                    Print.m("\(referee.person) == \(UserDefaultsHelper().getAuthorizedUser()?.person.id)")
                     return referee.person == UserDefaultsHelper().getAuthorizedUser()?.person.id
                 })
             })
-//            viewModel.participationMatches.onNext((userDefaults.getAuthorizedUser()?.person.participationMatches)!)
         } catch {
             showAlert(title: AlertLets.alertTitle, message: AlertLets.alertMessage, actions:
                 [
@@ -184,6 +169,7 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
                     )
                     
                 }
+                // for feature, if referee is not 3-rd referee type then show protocol only for watching
             }
             .disposed(by: disposeBag)
     }

@@ -75,8 +75,8 @@ class ScheduleRefTableViewCell: UITableViewCell {
         league_label.text = cellModel.activeMatch.tour
         stadium_label.text = cellModel.activeMatch.place
         
-        Print.m(cellModel.activeMatch.teamOne.name)
-        Print.m(cellModel.activeMatch.teamTwo.name)
+//        Print.m(cellModel.activeMatch.teamOne.name)
+//        Print.m(cellModel.activeMatch.teamTwo.name)
         
         teamNameOne_label.text = cellModel.activeMatch.teamOne.name
         teamNameTwo_label.text = cellModel.activeMatch.teamTwo.name

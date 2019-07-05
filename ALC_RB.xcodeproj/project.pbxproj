@@ -195,6 +195,8 @@
 		DBA69215221E95C400BEFB26 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69214221E95C400BEFB26 /* UIColor.swift */; };
 		DBA69218221EB83500BEFB26 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69217221EB83500BEFB26 /* AuthViewController.swift */; };
 		DBA6921A221EB85900BEFB26 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA69219221EB85900BEFB26 /* RegistrationViewController.swift */; };
+		DBA77C2022CF4192000DCF02 /* ProtocolPlayersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA77C1F22CF4192000DCF02 /* ProtocolPlayersController.swift */; };
+		DBA77C2222CF4865000DCF02 /* ProtocolRefereesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA77C2122CF4865000DCF02 /* ProtocolRefereesController.swift */; };
 		DBB208E5221180850010B600 /* TeamProtocolTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208E4221180850010B600 /* TeamProtocolTableViewController.swift */; };
 		DBB208E8221182870010B600 /* TeamProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208E7221182870010B600 /* TeamProtocolTableViewCell.swift */; };
 		DBB208EA221192F90010B600 /* TeamProtocolPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208E9221192F90010B600 /* TeamProtocolPresenter.swift */; };
@@ -414,6 +416,8 @@
 		DBA69214221E95C400BEFB26 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		DBA69217221EB83500BEFB26 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		DBA69219221EB85900BEFB26 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		DBA77C1F22CF4192000DCF02 /* ProtocolPlayersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolPlayersController.swift; sourceTree = "<group>"; };
+		DBA77C2122CF4865000DCF02 /* ProtocolRefereesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolRefereesController.swift; sourceTree = "<group>"; };
 		DBB208E4221180850010B600 /* TeamProtocolTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamProtocolTableViewController.swift; sourceTree = "<group>"; };
 		DBB208E7221182870010B600 /* TeamProtocolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamProtocolTableViewCell.swift; sourceTree = "<group>"; };
 		DBB208E9221192F90010B600 /* TeamProtocolPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamProtocolPresenter.swift; sourceTree = "<group>"; };
@@ -546,6 +550,7 @@
 		187F2DE222CB19440049EA77 /* edit protocol */ = {
 			isa = PBXGroup;
 			children = (
+				DBA77C1C22CF4154000DCF02 /* protocol model controllers */,
 				187F2DE822CB19440049EA77 /* EditMatchProtocolViewController.swift */,
 				187F2DF322CB19440049EA77 /* EditMatchProtocolPresenter.swift */,
 				187F2DEE22CB19440049EA77 /* team */,
@@ -1440,6 +1445,15 @@
 			path = registration;
 			sourceTree = "<group>";
 		};
+		DBA77C1C22CF4154000DCF02 /* protocol model controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DBA77C1F22CF4192000DCF02 /* ProtocolPlayersController.swift */,
+				DBA77C2122CF4865000DCF02 /* ProtocolRefereesController.swift */,
+			);
+			path = "protocol model controllers";
+			sourceTree = "<group>";
+		};
 		DBB208E322117F8F0010B600 /* team */ = {
 			isa = PBXGroup;
 			children = (
@@ -1697,6 +1711,7 @@
 				DB52EAE82248E412004F7869 /* CommandsLKTableViewCell.swift in Sources */,
 				DBCB1EBF2223FE3F005A6976 /* ApiRequests.swift in Sources */,
 				DB17385021BA706E00017B6D /* AnnounceDateTableViewCell.swift in Sources */,
+				DBA77C2222CF4865000DCF02 /* ProtocolRefereesController.swift in Sources */,
 				DBFB83932201CFFC008A8F79 /* PlayersLeagueDetailPresenter.swift in Sources */,
 				DB59E5BC222829FC00D1F62F /* Registration.swift in Sources */,
 				DB938DCA2239410A003FBE52 /* MBProgressHud.swift in Sources */,
@@ -1846,6 +1861,7 @@
 				CE916AAC21B4E1FC0025FECF /* ApiRoute.swift in Sources */,
 				DB595C7221EF2214000282F4 /* MatchProtocolViewController.swift in Sources */,
 				1801B87F2271872300BE0F7C /* CommandAddPlayerPresenter.swift in Sources */,
+				DBA77C2022CF4192000DCF02 /* ProtocolPlayersController.swift in Sources */,
 				DB932DE722C900C800C060C2 /* RefereeEditMatchesLKPresenter.swift in Sources */,
 				18A82A5B22BB7B26006FA050 /* AlertHelper.swift in Sources */,
 				DB6D956421EDC42900E81026 /* EmptyView.swift in Sources */,

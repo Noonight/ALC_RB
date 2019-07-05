@@ -13,5 +13,6 @@ class EditTeamProtocolTableViewCell: UITableViewCell {
     @IBOutlet weak var photo_image: UIImageView!
     @IBOutlet weak var name_label: UILabel!
     @IBOutlet weak var position_label: UILabel!
+    @IBOutlet weak var switcher: UISwitch!
     
 }

@@ -50,7 +50,7 @@ class MyMatchesRefTableViewCell: UITableViewCell {
         self.cellModel = cellModel
         
         var userRef3 = cellModel.participationMatch?.referees.filter({ referee -> Bool in
-            Print.m(referee.person == UserDefaultsHelper().getAuthorizedUser()?.person.id)
+//            Print.m(referee.person == UserDefaultsHelper().getAuthorizedUser()?.person.id)
             return referee.getRefereeType() == Referee.RefereeType.referee3 && UserDefaultsHelper().getAuthorizedUser()?.person.id == referee.person
         }).first
 //        var containReferee = cellModel.participationMatch?.referees.filter({ referee -> Bool in

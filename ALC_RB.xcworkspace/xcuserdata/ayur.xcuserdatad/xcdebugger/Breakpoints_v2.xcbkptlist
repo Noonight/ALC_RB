@@ -2,4 +2,70 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ALC_RB/data/api/ApiRequests.swift"
+            timestampString = "583993976.333576"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "post_registration(userData:profileImage:response_success:response_failure:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;ALC_RB.AuthUser&gt;) -&gt; () in closure #2 (Alamofire.SessionManager.MultipartFormDataEncodingResult) -&gt; () in ALC_RB.ApiRequests.post_registration(userData: ALC_RB.Registration, profileImage: __C.UIImage, response_success: (ALC_RB.AuthUser) -&gt; (), response_failure: (Swift.Error) -&gt; ()) -&gt; ()"
+                  moduleName = "ALC_RB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayur/Documents/Programming/alc_rb/ALC_RB/data/api/ApiRequests.swift"
+                  timestampString = "583990935.2990789"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "159">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;ALC_RB.AuthUser&gt;) -&gt; () in closure #2 (Alamofire.SessionManager.MultipartFormDataEncodingResult) -&gt; () in ALC_RB.ApiRequests.post_registration(userData: ALC_RB.Registration, profileImage: __C.UIImage, response_success: (ALC_RB.AuthUser) -&gt; (), response_failure: (Swift.Error) -&gt; ()) -&gt; ()"
+                  moduleName = "ALC_RB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayur/Documents/Programming/alc_rb/ALC_RB/data/api/ApiRequests.swift"
+                  timestampString = "583990935.30309"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "212">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ALC_RB/ui/user/lk/menu/my matches/edit protocol/team/EditTeamProtocolTableViewController.swift"
+            timestampString = "584030282.116008"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "onSaveBtnPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

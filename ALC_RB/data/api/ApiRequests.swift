@@ -897,7 +897,7 @@ class ApiRequests {
             
             dispatchGroup.notify(queue: .main) {
 //                Print.m(models)
-                Print.m(models)
+//                Print.m(models)
                 get_success(models)
             }
         }

@@ -14,6 +14,12 @@ struct Referee: Codable {
     var type: String // type of ref: 1 судья, 2 судья, 3 судья, Хронометрист
     var person: String // person id
     
+    init(id: String, person: String, type: String) {
+        self.id = id
+        self.person = person
+        self.type = type
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case type = "type"
@@ -75,8 +81,8 @@ extension Referee {
         ) -> Referee {
         return Referee(
             id: id ?? self.id,
-            type: type ?? self.type,
-            person: person ?? self.person
+            person: person ?? self.person,
+            type: type ?? self.type
         )
     }
     

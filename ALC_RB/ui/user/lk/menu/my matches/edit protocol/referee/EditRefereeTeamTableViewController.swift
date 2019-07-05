@@ -63,7 +63,7 @@ class EditRefereeTeamTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         let mTitle = self.title
-        navigationController?.navigationBar.topItem?.title = " "
+//        navigationController?.navigationBar.topItem?.title = " "
         title = mTitle
         tableView.tableFooterView = UIView()
         
