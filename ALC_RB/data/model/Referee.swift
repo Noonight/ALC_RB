@@ -27,6 +27,7 @@ struct Referee: Codable {
     }
     
     enum RefereeType: String {
+        case inspector = "Инспектор"
         case referee1 = "1 судья"
         case referee2 = "2 судья"
         case referee3 = "3 судья"
@@ -36,6 +37,9 @@ struct Referee: Codable {
     }
     
     func getRefereeType() -> RefereeType {
+        if type == RefereeType.inspector.rawValue {
+            return RefereeType.inspector
+        }
         if type == RefereeType.referee1.rawValue {
             return RefereeType.referee1
         }

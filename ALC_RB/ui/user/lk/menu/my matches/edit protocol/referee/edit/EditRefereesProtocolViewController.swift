@@ -1,8 +1,8 @@
 //
-//  EditScheduleLKViewController.swift
+//  EditRefereesProtocolViewController.swift
 //  ALC_RB
 //
-//  Created by Ayur Arkhipov on 13/06/2019.
+//  Created by ayur on 05.07.2019.
 //  Copyright © 2019 test. All rights reserved.
 //
 
@@ -11,12 +11,14 @@ import RxSwift
 import RxCocoa
 import ActionSheetPicker_3_0
 
-class EditScheduleLKViewController: BaseStateViewController {
+class EditRefereesProtocolViewController: BaseStateViewController {
     private enum Texts {
         static let NO_REF = "Не назначен"
         static let REFEREES = "Рефери"
         static let NO_REF_FIO = "ФИО не указано"
         static let EDITED_SAVED = "Изменения сохранены"
+        static let SAVE_EDITED_Q = "Сохранить изменения?"
+        static let ALERT_MESSAGE_NOTHING_MORE = "Изменения будут сохранены сразу, дополнительного подтверждения в протокола не требуется"
     }
     private enum Colors {
         static let NO_REF = #colorLiteral(red: 1, green: 0.3098039216, blue: 0.2666666667, alpha: 1)
@@ -24,25 +26,39 @@ class EditScheduleLKViewController: BaseStateViewController {
     }
     
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var mainRefShowProtocol_btn: UIBarButtonItem!
-    @IBOutlet weak var save_btn: UIBarButtonItem!
+    @IBOutlet weak var scrollViewContainer: UIView!
     @IBOutlet weak var referee1_btn: UIButton!
     @IBOutlet weak var referee2_btn: UIButton!
-    @IBOutlet weak var referee3_btn: UIButton!
     @IBOutlet weak var timekeeper_btn: UIButton!
+    @IBOutlet weak var inspector_btn: UIButton!
+    @IBOutlet weak var referee3Label: UILabel!
     
-    var viewModel: EditScheduleViewModel? = EditScheduleViewModel(dataManager: ApiRequests())
+    @IBOutlet weak var save_btn: UIBarButtonItem!
+    
+    var viewModel: EditRefereesProtocolViewModel? = EditRefereesProtocolViewModel(dataManager: ApiRequests())
     private let disposeBag = DisposeBag()
     private let userDefaults = UserDefaultsHelper()
     
     var filteredRefereesWithFullName: [String]?
     
+    // MARK: - MODEL CONTROLLERS
+    
+    var refereesController: ProtocolRefereesController!
+    
+    // MARK: - LIFE CYCLE
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupBindings()
+        
         scrollView.keyboardDismissMode = .interactive
         
-        setupBindings()
+        self.viewModel?.fetchReferees {
+            self.configureFilteredReferees()
+            self.setupUI()
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,13 +66,9 @@ class EditScheduleLKViewController: BaseStateViewController {
         
         setupUI()
         
-        filteredRefereesWithFullName = viewModel?.comingReferees.value.people.filter({ person -> Bool in
-            return person.getFullName().count > 2
-        }).map({ person -> String in
-            return person.getFullName()
-        })
+//        filteredRefereesWithFullName = viewModel?.comingReferees.value.people.filter({ person -> Bool in
+        configureFilteredReferees()
         
-        mainRefShowProtocol_btn.image = mainRefShowProtocol_btn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
         save_btn.image = save_btn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
     }
     
@@ -69,42 +81,52 @@ class EditScheduleLKViewController: BaseStateViewController {
         clearUI()
     }
     
+    // MARK: - Helpers
+    
+    func configureFilteredReferees() {
+        filteredRefereesWithFullName = viewModel?.referees.value.people.filter({ person -> Bool in
+            return person.getFullName().count > 2
+        }).map({ person -> String in
+            return person.getFullName()
+        })
+    }
+    
     // MARK: - SETUP UI
     
     func setupUI() {
         clearUI()
         setupReferee()
-        setupShowProtocolBtn()
     }
     
     func clearUI() {
+        inspector_btn.setTitleAndColorWith(title: Texts.NO_REF, color: Colors.NO_REF)
         referee1_btn.setTitleAndColorWith(title: Texts.NO_REF, color: Colors.NO_REF)
         referee2_btn.setTitleAndColorWith(title: Texts.NO_REF, color: Colors.NO_REF)
-        referee3_btn.setTitleAndColorWith(title: Texts.NO_REF, color: Colors.NO_REF)
         timekeeper_btn.setTitleAndColorWith(title: Texts.NO_REF, color: Colors.NO_REF)
     }
     
-    func setupShowProtocolBtn() {
-        viewModel!.comingCellModel.value.activeMatch.played ? (mainRefShowProtocol_btn.isEnabled = false) : (mainRefShowProtocol_btn.isEnabled = true)
-    }
-    
     func setupReferee() {
-        for ref in viewModel!.comingCellModel.value.activeMatch.referees {
-            let refPerson = viewModel?.comingReferees.value.people.filter({ person -> Bool in
+//        for ref in viewModel!.comingCellModel.value.activeMatch.referees {
+        for ref in viewModel!.comingMatch.referees {
+//            let refPerson = viewModel?.comingReferees.value.people.filter({ person -> Bool in
+            let refPerson = viewModel?.referees.value.people.filter({ person -> Bool in
                 return person.id == ref.person
             }).first
-            switch ref.getRefereeType() {
+            switch ref.convertToReferee().getRefereeType() {
             case .inspector:
-                Print.m("inspector tmp")
+                self.inspector_btn.setTitle(refPerson?.getFullName(), for: .normal)
+                self.inspector_btn.setTitleColor(Colors.YES_REF, for: .normal)
             case .referee1:
                 self.referee1_btn.setTitle(refPerson?.getFullName(), for: .normal)
                 self.referee1_btn.setTitleColor(Colors.YES_REF, for: .normal)
             case .referee2:
                 self.referee2_btn.setTitle(refPerson?.getFullName(), for: .normal)
                 self.referee2_btn.setTitleColor(Colors.YES_REF, for: .normal)
+            // ### referee 3 tmp
             case .referee3:
-                self.referee3_btn.setTitle(refPerson?.getFullName(), for: .normal)
-                self.referee3_btn.setTitleColor(Colors.YES_REF, for: .normal)
+//                Print.m("referee3 \(refPerson)")
+                referee3Label.text = refPerson?.getFullName()
+//                referee3Label.textColor =
             case .timekeeper:
                 self.timekeeper_btn.setTitle(refPerson?.getFullName(), for: .normal)
                 self.timekeeper_btn.setTitleColor(Colors.YES_REF, for: .normal)
@@ -133,6 +155,10 @@ class EditScheduleLKViewController: BaseStateViewController {
         
     }
     
+    @IBAction func onInspectorBtnPressed(_ sender: UIButton) {
+        showRefereesPicker(sender: sender)
+    }
+    
     @IBAction func onReferee1BtnPressed(_ sender: UIButton) {
         showRefereesPicker(sender: sender)
     }
@@ -141,22 +167,15 @@ class EditScheduleLKViewController: BaseStateViewController {
         showRefereesPicker(sender: sender)
     }
     
-    @IBAction func onReferee3BtnPressed(_ sender: UIButton) {
+    @IBAction func onTimeKeeperBtnPressed(_ sender: UIButton) {
         showRefereesPicker(sender: sender)
-    }
-    
-    @IBAction func onTimekeeperBtnPressed(_ sender: UIButton) {
-        showRefereesPicker(sender: sender)
-    }
-    
-    @IBAction func onMainRefShowProtocolBtnPressed(_ sender: UIBarButtonItem) {
-        
     }
     
     // dictionary {person, type} of referee
     func getRefereesArray() -> [EditMatchReferee] {
         func getPersonId(_ fullName: String) -> String? {
-            return self.viewModel?.comingReferees.value.findPersonBy(fullName: fullName)?.id
+            return self.viewModel?.referees.value.findPersonBy(fullName: fullName)?.id
+//            return self.viewModel?.comingReferees.value.findPersonBy(fullName: fullName)?.id
         }
         func isCorrectTitle(btn: UIButton) -> Bool {
             return btn.title(for: .normal) != Texts.NO_REF ? true : false
@@ -164,38 +183,51 @@ class EditScheduleLKViewController: BaseStateViewController {
         
         var resultArray: [EditMatchReferee] = []
         
+        if isCorrectTitle(btn: inspector_btn) {
+            resultArray.append(EditMatchReferee(type: Referee.RefereeType.inspector.rawValue, person: getPersonId(inspector_btn.title(for: .normal)!)!))
+        }
         if isCorrectTitle(btn: referee1_btn) {
             resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(referee1_btn.title(for: .normal)!)!))
         }
         if isCorrectTitle(btn: referee2_btn) {
             resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee2.rawValue, person: getPersonId(referee2_btn.title(for: .normal)!)!))
         }
-        if isCorrectTitle(btn: referee3_btn) {
-            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee3.rawValue, person: getPersonId(referee3_btn.title(for: .normal)!)!))
-        }
+//        if isCorrectTitle(btn: referee3_btn) {
+//            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee3.rawValue, person: getPersonId(referee3_btn.title(for: .normal)!)!))
+//        }
         if isCorrectTitle(btn: timekeeper_btn) {
             resultArray.append(EditMatchReferee(type: Referee.RefereeType.timekeeper.rawValue, person: getPersonId(timekeeper_btn.title(for: .normal)!)!))
         }
+        
+        // add referee - 3 { by default }
+        resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee3.rawValue, person: (userDefaults.getAuthorizedUser()?.person.id)!))
+        
         return resultArray
     }
     
     @IBAction func onSaveBtnPressed(_ sender: UIBarButtonItem) {
-        viewModel?.editMatchReferees(
-            token: (userDefaults.getAuthorizedUser()?.token)!,
-            editMatchReferees: EditMatchReferees(
-                id: (viewModel?.comingCellModel.value.activeMatch.id)!,
-                referees: EditMatchReferees.Referees(referees: getRefereesArray())
-            ),
-            success: { soloMatch in
-                self.onResponseSuccess(soloMatch: soloMatch)
-            },
-            message_single: { message in
-                self.onResponseMessage(message: message)
-            },
-            failure: { error in
-                self.onResponseFailure(error: error)
-            }
-        )
+        showAlertOkCancel(title: Texts.SAVE_EDITED_Q, message: Texts.ALERT_MESSAGE_NOTHING_MORE, ok: {
+            self.viewModel?.editMatchReferees(
+                token: (self.userDefaults.getAuthorizedUser()?.token)!,
+                editMatchReferees: EditMatchReferees(
+                    //                id: (viewModel?.comingCellModel.value.activeMatch.id)!,
+                    id: (self.viewModel?.comingMatch.id)!,
+                    referees: EditMatchReferees.Referees(referees: self.getRefereesArray())
+                ),
+                success: { soloMatch in
+                    self.onResponseSuccess(soloMatch: soloMatch)
+                },
+                message_single: { message in
+                    self.onResponseMessage(message: message)
+                },
+                failure: { error in
+                    self.onResponseFailure(error: error)
+                }
+            )
+        }) {
+            self.setupUI()
+        }
+        
     }
     
     // MARK: - Edit Match Response
@@ -204,7 +236,10 @@ class EditScheduleLKViewController: BaseStateViewController {
             id: soloMatch.match!.id,
             match: soloMatch
         )
-//        showAlert(title: Texts.EDITED_SAVED, message: "", escaping: )
+        self.refereesController.referees = (soloMatch.match?.referees.map({ referee -> LIReferee in
+            return LIReferee(id: referee.id, person: referee.person, type: referee.type)
+        }))!
+        //        showAlert(title: Texts.EDITED_SAVED, message: "", escaping: )
         showAlert(title: Texts.EDITED_SAVED, message: "") {
             self.navigationController?.popViewController(animated: true)
         }
@@ -221,13 +256,13 @@ class EditScheduleLKViewController: BaseStateViewController {
                 editMatchReferees: self.viewModel!.cache!,
                 success: { soloMatch in
                     self.onResponseSuccess(soloMatch: soloMatch)
-                },
+            },
                 message_single: { message in
                     self.onResponseMessage(message: message)
-                },
+            },
                 failure: { error in
                     self.onResponseFailure(error: error)
-                }
+            }
             )
         })
     }
@@ -240,31 +275,23 @@ class EditScheduleLKViewController: BaseStateViewController {
         if user?.person.participationMatches.contains(where: { pMatch -> Bool in
             return pMatch.id == match.match?.id
         }) ?? false {
-            //            user?.person.participationMatches.filter({ pMatch -> Bool in
-            //                return pMatch.id == match.match?.id
-            //            }).first
             user?.person.participationMatches.removeAll(where: { pMatch -> Bool in
                 return pMatch.id == match.match?.id
             })
             if match.match?.referees.count ?? 0 > 0 {
                 user?.person.participationMatches.append(match.match!)
             }
-            //            for i in 0..<user!.person.participationMatches.count {
-            //                if user?.person.participationMatches[i].id == match.match?.id {
-            //                    user?.person.participationMatches[i] = match.match!
-            //                }
-            //            }
         } else {
             user?.person.participationMatches.append(match.match!)
         }
         userDefaults.setAuthorizedUser(user: user!)
-        //        dump(userDefaults.getAuthorizedUser()?.person)
     }
     
     func showRefereesPicker(sender: UIButton) {
         
         let acp = ActionSheetStringPicker(title: "", rows: filteredRefereesWithFullName, initialSelection: 0, doneBlock: { (picker, index, value) in
-            sender.setTitleAndColorWith(title: (self.viewModel?.comingReferees.value.findPersonBy(fullName: value as! String)?.getFullName())!, color: Colors.YES_REF)
+//            sender.setTitleAndColorWith(title: (self.viewModel?.comingReferees.value.findPersonBy(fullName: value as! String)?.getFullName())!, color: Colors.YES_REF)
+            sender.setTitleAndColorWith(title: (self.viewModel?.referees.value.findPersonBy(fullName: value as! String)?.getFullName())!, color: Colors.YES_REF)
         }, cancel: { (picker) in
             
         }, origin: sender)

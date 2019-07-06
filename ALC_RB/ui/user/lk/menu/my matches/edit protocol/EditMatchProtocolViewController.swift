@@ -39,7 +39,7 @@ class EditMatchProtocolViewController: UIViewController {
     
     var teamOnePlayersController: ProtocolPlayersController!
     var teamTwoPlayersController: ProtocolPlayersController!
-    var referesController: ProtocolRefereesController!
+    var refereesController: ProtocolRefereesController!
     
     // MARK: - Life cycle
     
@@ -76,9 +76,6 @@ class EditMatchProtocolViewController: UIViewController {
             if self.navigationController?.navigationBar.prefersLargeTitles != true {
                 self.navigationController?.navigationBar.prefersLargeTitles = true
             }
-            
-        } else {
-            // Fallback on earlier versions
         }
         
         teamOneTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
@@ -91,17 +88,12 @@ class EditMatchProtocolViewController: UIViewController {
         presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamTwo!, league: leagueDetailModel.leagueInfo.league)) { (image) in
             self.teamTwoLogo.image = image.af_imageRoundedIntoCircle()
         }
-        
-//        let navigationMatchScoreBtn = UIBarButtonItem(title: "Счет", style: .plain, target: self, action: #selector(onMatchScoreBtnPressed(sender:)))
-//        navigationItem.rightBarButtonItem = navigationMatchScoreBtn
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = false
-        } else {
-            // Fallback on earlier versions
         }
     }
     
@@ -119,7 +111,7 @@ class EditMatchProtocolViewController: UIViewController {
 //        let referees = match.referees.map { liReferee -> Referee in
 //            return liReferee.convertToReferee()
 //        }
-        referesController = ProtocolRefereesController(referees: match.referees)
+        refereesController = ProtocolRefereesController(referees: match.referees)
     }
     
     // MARK: - Button Actions
@@ -176,7 +168,9 @@ class EditMatchProtocolViewController: UIViewController {
             controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
         case is EditRefereeTeamTableViewController:
             let controller = destination as! EditRefereeTeamTableViewController
-            controller.destinationData = match.referees
+            controller.refereesController = self.refereesController
+            controller.match = self.match
+//            controller.destinationData = match.referees
         case is EditEventsMatchTableViewController:
             let controller = destination as! EditEventsMatchTableViewController
             controller.destinationModel = match.events
