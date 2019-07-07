@@ -45,6 +45,10 @@ class EditRefereeTeamTableViewController: UITableViewController {
         }
     }
     
+    @IBOutlet weak var editRefBarBtn: UIBarButtonItem!
+    
+    let userDefaults = UserDefaultsHelper()
+    
     // MARK: - Variables
     
     let cellId = "referee_protocol_cell"
@@ -74,6 +78,14 @@ class EditRefereeTeamTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         
         prepareTableModel(destinationData: refereesController.referees)
+        
+        if match.referees.contains(where: { liRef -> Bool in
+            return liRef.person == userDefaults.getAuthorizedUser()?.person.id && liRef.convertToReferee().getRefereeType() == Referee.RefereeType.referee3 && userDefaults.getAuthorizedUser()?.person.getUserType() == Person.TypeOfPerson.mainReferee
+        }) {
+            editRefBarBtn.isEnabled = true
+        } else {
+            editRefBarBtn.isEnabled = false
+        }
     }
     
     // MARK: - Prepare tableModel

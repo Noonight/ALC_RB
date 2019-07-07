@@ -6018,6 +6018,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="editRefBarBtn" destination="DOS-5E-G8M" id="WHH-1O-3eK"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sad-9f-Buo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
