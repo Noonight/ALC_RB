@@ -199,6 +199,8 @@
 		DBA77C2222CF4865000DCF02 /* ProtocolRefereesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA77C2122CF4865000DCF02 /* ProtocolRefereesController.swift */; };
 		DBA77C2522CFA8B3000DCF02 /* EditRefereesProtocolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA77C2422CFA8B3000DCF02 /* EditRefereesProtocolViewController.swift */; };
 		DBA77C2722CFA953000DCF02 /* EditRefereesProtocolViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA77C2622CFA953000DCF02 /* EditRefereesProtocolViewModel.swift */; };
+		DBA77C2A22D24A11000DCF02 /* AddEventsProtocolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA77C2922D24A11000DCF02 /* AddEventsProtocolViewController.swift */; };
+		DBA77C2C22D24A3A000DCF02 /* AddEventsProtocolPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA77C2B22D24A3A000DCF02 /* AddEventsProtocolPresenter.swift */; };
 		DBB208E5221180850010B600 /* TeamProtocolTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208E4221180850010B600 /* TeamProtocolTableViewController.swift */; };
 		DBB208E8221182870010B600 /* TeamProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208E7221182870010B600 /* TeamProtocolTableViewCell.swift */; };
 		DBB208EA221192F90010B600 /* TeamProtocolPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208E9221192F90010B600 /* TeamProtocolPresenter.swift */; };
@@ -422,6 +424,8 @@
 		DBA77C2122CF4865000DCF02 /* ProtocolRefereesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolRefereesController.swift; sourceTree = "<group>"; };
 		DBA77C2422CFA8B3000DCF02 /* EditRefereesProtocolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRefereesProtocolViewController.swift; sourceTree = "<group>"; };
 		DBA77C2622CFA953000DCF02 /* EditRefereesProtocolViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRefereesProtocolViewModel.swift; sourceTree = "<group>"; };
+		DBA77C2922D24A11000DCF02 /* AddEventsProtocolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventsProtocolViewController.swift; sourceTree = "<group>"; };
+		DBA77C2B22D24A3A000DCF02 /* AddEventsProtocolPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventsProtocolPresenter.swift; sourceTree = "<group>"; };
 		DBB208E4221180850010B600 /* TeamProtocolTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamProtocolTableViewController.swift; sourceTree = "<group>"; };
 		DBB208E7221182870010B600 /* TeamProtocolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamProtocolTableViewCell.swift; sourceTree = "<group>"; };
 		DBB208E9221192F90010B600 /* TeamProtocolPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamProtocolPresenter.swift; sourceTree = "<group>"; };
@@ -626,6 +630,7 @@
 				187F2DF522CB19440049EA77 /* EditEventsMatchTableViewController.swift */,
 				187F2DF822CB19440049EA77 /* EditEventsMatchPresenter.swift */,
 				187F2DF622CB19440049EA77 /* cell */,
+				DBA77C2822D24948000DCF02 /* add */,
 			);
 			path = events;
 			sourceTree = "<group>";
@@ -1468,6 +1473,15 @@
 			path = edit;
 			sourceTree = "<group>";
 		};
+		DBA77C2822D24948000DCF02 /* add */ = {
+			isa = PBXGroup;
+			children = (
+				DBA77C2922D24A11000DCF02 /* AddEventsProtocolViewController.swift */,
+				DBA77C2B22D24A3A000DCF02 /* AddEventsProtocolPresenter.swift */,
+			);
+			path = add;
+			sourceTree = "<group>";
+		};
 		DBB208E322117F8F0010B600 /* team */ = {
 			isa = PBXGroup;
 			children = (
@@ -1861,6 +1875,7 @@
 				CE77AC7B21B0F1BA00C0ED0D /* DateFormatterStringEx.swift in Sources */,
 				DBB208E5221180850010B600 /* TeamProtocolTableViewController.swift in Sources */,
 				18076943229E81A000A10996 /* AddPlayerToTeamResponse.swift in Sources */,
+				DBA77C2C22D24A3A000DCF02 /* AddEventsProtocolPresenter.swift in Sources */,
 				DB1CA0FD22254FD4005E1FB9 /* AuthUser.swift in Sources */,
 				DB8A68A3224E583F00D3972A /* CreateTeamInfo.swift in Sources */,
 				1824601322C5CC6F0061E877 /* Button Extensions.swift in Sources */,
@@ -1895,6 +1910,7 @@
 				DB595C7821EF7373000282F4 /* TeamLeagueTableViewCell.swift in Sources */,
 				DB17385721BA9CBB00017B6D /* UpcomingGamesPresenter.swift in Sources */,
 				DB1816DE21D0DB81005375ED /* PastLeague.swift in Sources */,
+				DBA77C2A22D24A11000DCF02 /* AddEventsProtocolViewController.swift in Sources */,
 				DB4B1A4C2240FD1300A9FB97 /* ClubEditLKPresenter.swift in Sources */,
 				CE6E380621B65E1E009C2D1F /* NewsDetailPresenter.swift in Sources */,
 				DB5FBF2722019A3B00C62291 /* MatchesTeamLeagueDetailTableViewCell.swift in Sources */,

@@ -16,6 +16,11 @@ class EditEventsMatchTableViewController: UITableViewController {
         var table: [[LIEvent]] = []
     }
     
+    // MARK: - IB
+    
+    @IBOutlet weak var addEventBarBtn: UIBarButtonItem!
+    @IBOutlet weak var helpQBarBtn: UIBarButtonItem!
+    
     // MARK: - Variables
     
     let cellId = "event_protocol_cell"
@@ -44,17 +49,13 @@ class EditEventsMatchTableViewController: UITableViewController {
     // MARK: - Setup nav button
     
     func setupNavBtn() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: " ? ", style: .plain, target: self, action: #selector(handleNavBtn))
-        
-        navigationItem.rightBarButtonItem?.setTitleTextAttributes([
-            NSAttributedString.Key.font : UIFont(name: "Helvetica-Bold", size: 26)], for: .normal)
-        navigationItem.rightBarButtonItem?.setTitleTextAttributes([
-            NSAttributedString.Key.font : UIFont(name: "Helvetica-Bold", size: 20)], for: UIControl.State.selected)
+        helpQBarBtn.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20)], for: .normal)
+        helpQBarBtn.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20)], for: .selected)
     }
     
     // MARK: - Action btn
     
-    @objc func handleNavBtn() {
+    @IBAction func onHelpBarBtnPressed(_ sender: UIBarButtonItem) {
         showMenu()
     }
 
