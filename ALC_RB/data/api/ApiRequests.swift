@@ -469,7 +469,9 @@ class ApiRequests {
             .request(ApiRoute.getApiURL(.post_edit_match_referee), method: .post, parameters: editMatchReferees.toParams(), encoding: JSONEncoding.default, headers: header)
         
             request
+            .validate()
             .responseSoloMatch(completionHandler: { response in
+//                dump(response)
                 switch response.result {
                 case .success:
                     if let soloMatch = response.result.value {

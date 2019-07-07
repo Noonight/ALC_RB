@@ -57,11 +57,7 @@ class EditRefereeTeamTableViewController: UITableViewController {
     
     // MARK: - model controllers
     
-    var refereesController: ProtocolRefereesController! {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    var refereesController: ProtocolRefereesController!
     
     // MARK: - Life cycle
     
@@ -78,13 +74,21 @@ class EditRefereeTeamTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         
         prepareTableModel(destinationData: refereesController.referees)
-        tableView.reloadData()
     }
     
     // MARK: - Prepare tableModel
     
     func prepareTableModel(destinationData: [LIReferee]) {
+        func clear() {
+            tableModel.tableModel[0].referee_id = ""
+            tableModel.tableModel[1].referee_id = ""
+            tableModel.tableModel[2].referee_id = ""
+            tableModel.tableModel[3].referee_id = ""
+            tableModel.tableModel[4].referee_id = ""
+        }
+        clear()
         for ref in destinationData {
+            Print.m(ref)
             switch ref.getType() {
             case .inspector:
                 tableModel.tableModel[0].referee_id = ref.person
@@ -98,6 +102,7 @@ class EditRefereeTeamTableViewController: UITableViewController {
                 tableModel.tableModel[4].referee_id = ref.person
             }
         }
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -140,6 +145,8 @@ class EditRefereeTeamTableViewController: UITableViewController {
                 Print.m(error)
             }
         } else {
+            cell.name_label.text = model.name
+            cell.photo_image.image = #imageLiteral(resourceName: "ic_logo")
             Print.m("referee id is empty -> \(model)")
         }
     }

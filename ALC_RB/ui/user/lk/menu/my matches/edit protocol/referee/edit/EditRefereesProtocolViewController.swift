@@ -107,7 +107,8 @@ class EditRefereesProtocolViewController: BaseStateViewController {
     
     func setupReferee() {
 //        for ref in viewModel!.comingCellModel.value.activeMatch.referees {
-        for ref in viewModel!.comingMatch.referees {
+//        for ref in viewModel!.comingMatch.referees {
+        for ref in refereesController.referees {
 //            let refPerson = viewModel?.comingReferees.value.people.filter({ person -> Bool in
             let refPerson = viewModel?.referees.value.people.filter({ person -> Bool in
                 return person.id == ref.person
@@ -250,6 +251,7 @@ class EditRefereesProtocolViewController: BaseStateViewController {
     }
     
     func onResponseFailure(error: Error) {
+        Print.m(error)
         self.showRepeatAlert(message: error.localizedDescription, repeat_closure: {
             self.viewModel?.editMatchReferees(
                 token: self.userDefaults.getAuthorizedUser()!.token,

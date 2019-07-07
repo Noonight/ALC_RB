@@ -6026,13 +6026,13 @@
         <!--События protocol-->
         <scene sceneID="g4Y-m1-pEV">
             <objects>
-                <tableViewController title="События" useStoryboardIdentifierAsRestorationIdentifier="YES" id="etU-Aw-AwJ" userLabel="События protocol" customClass="EditEventsMatchTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EditEventsMatchTableViewController" title="События" useStoryboardIdentifierAsRestorationIdentifier="YES" id="etU-Aw-AwJ" userLabel="События protocol" customClass="EditEventsMatchTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="kjP-6G-Apb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="event_protocol_cell" rowHeight="56" id="rsB-jj-Ztt" customClass="EditEventsProtocolTableViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="EditEventsProtocolTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="event_protocol_cell" rowHeight="56" id="rsB-jj-Ztt" customClass="EditEventsProtocolTableViewCell" customModule="ALC_RB" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rsB-jj-Ztt" id="iZv-Es-bok">
@@ -6073,9 +6073,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="name_label" destination="diu-HJ-CKp" id="nbZ-p6-0YC"/>
-                                    <outlet property="photo_image" destination="0DP-qV-S1b" id="ajw-dY-uZt"/>
-                                    <outlet property="type_label" destination="zJM-yU-mtU" id="EsE-Ko-pzc"/>
+                                    <outlet property="name_label" destination="diu-HJ-CKp" id="MNy-hd-SLV"/>
+                                    <outlet property="photo_image" destination="0DP-qV-S1b" id="kcv-Rv-GoD"/>
+                                    <outlet property="type_label" destination="zJM-yU-mtU" id="asd-X4-clN"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
