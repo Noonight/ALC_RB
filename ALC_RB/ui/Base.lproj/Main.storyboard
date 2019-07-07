@@ -5895,8 +5895,8 @@
                                                 <constraint firstAttribute="height" constant="40" id="tqM-J6-zif"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Алексеев" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fzf-QE-M1l">
-                                            <rect key="frame" x="64" y="8" width="191" height="20.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Алексеев" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fzf-QE-M1l">
+                                            <rect key="frame" x="64" y="8" width="76" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -5913,7 +5913,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mSV-jJ-rLB">
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mSV-jJ-rLB">
                                             <rect key="frame" x="263" y="12" width="51" height="31"/>
                                         </switch>
                                     </subviews>
@@ -5929,7 +5929,7 @@
                                         <constraint firstAttribute="trailing" secondItem="mSV-jJ-rLB" secondAttribute="trailing" constant="8" id="Y0b-4u-DjO"/>
                                         <constraint firstItem="mSV-jJ-rLB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hhn-mj-cgS" secondAttribute="trailing" constant="8" id="avT-iO-5E4"/>
                                         <constraint firstItem="mSV-jJ-rLB" firstAttribute="centerY" secondItem="OEz-O4-ZLy" secondAttribute="centerY" id="j1A-Ml-oMc"/>
-                                        <constraint firstItem="mSV-jJ-rLB" firstAttribute="leading" secondItem="Fzf-QE-M1l" secondAttribute="trailing" constant="8" id="mye-yR-RYA"/>
+                                        <constraint firstItem="mSV-jJ-rLB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Fzf-QE-M1l" secondAttribute="trailing" constant="8" id="mye-yR-RYA"/>
                                         <constraint firstItem="ead-on-xeu" firstAttribute="leading" secondItem="OEz-O4-ZLy" secondAttribute="leading" constant="8" id="niN-zK-YKs"/>
                                         <constraint firstAttribute="bottom" secondItem="hhn-mj-cgS" secondAttribute="bottom" constant="8" id="wOF-ND-MOg"/>
                                         <constraint firstAttribute="bottom" secondItem="hf5-VT-z3b" secondAttribute="bottom" constant="8" id="y1h-Qd-E0n"/>

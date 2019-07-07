@@ -100,6 +100,8 @@ class EditMatchProtocolViewController: UIViewController {
     // MARK: - PRE CONFIGURE Model Controllers
     
     func preConfigure() {
+        teamOnePlayersController = nil
+        teamTwoPlayersController = nil
         teamOnePlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamOne!))
         teamTwoPlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamTwo!))
 //        teamOnePlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamOne!).map({ liPlayer -> String in
@@ -111,6 +113,7 @@ class EditMatchProtocolViewController: UIViewController {
 //        let referees = match.referees.map { liReferee -> Referee in
 //            return liReferee.convertToReferee()
 //        }
+        refereesController = nil
         refereesController = ProtocolRefereesController(referees: match.referees)
     }
     

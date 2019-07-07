@@ -20,6 +20,9 @@ class EditTeamProtocolTableViewController: UITableViewController {
     
     var playersController: ProtocolPlayersController!
     
+    // copy of playersController need create new Object
+    var tmpPlayersController: ProtocolPlayersController = ProtocolPlayersController()
+    
     // player id or _id
     var removedPlayers: [String] = []
     
@@ -27,6 +30,10 @@ class EditTeamProtocolTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tmpPlayersController.players = playersController.players
+        self.tmpPlayersController.playersSwitch = playersController.playersSwitch
+        
         tableView.tableFooterView = UIView()
         
         initPresenter()
@@ -34,6 +41,11 @@ class EditTeamProtocolTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        dump(playersController.playersSwitch)
+        
+        self.tmpPlayersController = playersController
+        
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.largeTitleTextAttributes =
                 [
@@ -61,17 +73,23 @@ class EditTeamProtocolTableViewController: UITableViewController {
     
     @IBAction func onSaveBtnPressed(_ sender: UIBarButtonItem) {
         
-        for i in 0..<self.playersController.players.count
-        {
-            self.playersController.setPlayerValue(playerId: self.playersController.players[i].playerId, value: true)
-            for j in 0..<removedPlayers.count
-            {
-                if self.playersController.players[i].playerId == removedPlayers[j]
-                {
-                    self.playersController.setPlayerValue(playerId: playersController.players[i].playerId, value: false)
-                }
-            }
-        }
+//        Print.m(playersController.playersSwitch)
+//
+//        for i in 0..<self.playersController.players.count
+//        {
+////            self.playersController.setPlayerValue(playerId: self.playersController.players[i].playerId, value: true)
+//            for j in 0..<removedPlayers.count
+//            {
+//                if self.playersController.players[i].playerId == removedPlayers[j]
+//                {
+//                    self.playersController.setPlayerValue(playerId: playersController.players[i].playerId, value: false)
+//                }
+//            }
+//        }
+        
+//        self.playersController.playersSwitch = tmpPlayersController.playersSwitch
+        self.playersController.setSwitcherValues(playersSwitch: tmpPlayersController.playersSwitch)
+//        dump(playersController.playersSwitch)
         
         showAlert(title: "", message: "Для изменения команды нужно сохранить протокол") {
             self.navigationController?.popViewController(animated: true)
@@ -84,10 +102,12 @@ class EditTeamProtocolTableViewController: UITableViewController {
         // remove if found
         if sender.isOn
         {
-            if removedPlayers.contains(playersController.players[sender.tag].playerId)
+//            if removedPlayers.contains(playersController.players[sender.tag].playerId)
+            if removedPlayers.contains(tmpPlayersController.players[sender.tag].playerId)
             {
                 removedPlayers.removeAll { str -> Bool in
-                    return str == playersController.players[sender.tag].playerId
+//                    return str == playersController.players[sender.tag].playerId
+                    return str == tmpPlayersController.players[sender.tag].playerId
                 }
             }
         }
@@ -95,11 +115,16 @@ class EditTeamProtocolTableViewController: UITableViewController {
         // append if not found
         if !sender.isOn
         {
-            if !removedPlayers.contains(playersController.players[sender.tag].playerId)
+//            if !removedPlayers.contains(playersController.players[sender.tag].playerId)
+            if !removedPlayers.contains(tmpPlayersController.players[sender.tag].playerId)
             {
-                removedPlayers.append(playersController.players[sender.tag].playerId)
+//                removedPlayers.append(playersController.players[sender.tag].playerId)
+                removedPlayers.append(tmpPlayersController.players[sender.tag].playerId)
             }
         }
+        // modified
+        tmpPlayersController.setPlayerValue(playerId: tmpPlayersController.players[sender.tag].playerId, value: sender.isOn)
+        // ########
     }
     
     // MARK: - Table view data source
@@ -109,7 +134,8 @@ class EditTeamProtocolTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return playersController.players.count
+//        return playersController.players.count
+        return tmpPlayersController.players.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -117,7 +143,8 @@ class EditTeamProtocolTableViewController: UITableViewController {
         
         cell.switcher.tag = indexPath.row
         
-        configureCell(cell: cell, model: playersController.players[indexPath.row])
+//        configureCell(cell: cell, model: playersController.players[indexPath.row])
+        configureCell(cell: cell, model: tmpPlayersController.players[indexPath.row])
 
         return cell
     }
@@ -128,7 +155,9 @@ class EditTeamProtocolTableViewController: UITableViewController {
         
         cell.switcher.addTarget(self, action: #selector(onSwitchChange(_:)), for: UIControl.Event.valueChanged)
         
-        cell.switcher.isOn = playersController.getValueByKey(playerId: model.playerId) ?? true
+//        Print.m(playersController.getValueByKey(playerId: model.playerId))
+//        cell.switcher.isOn = playersController.getValueByKey(playerId: model.playerId) ?? true
+        cell.switcher.isOn = tmpPlayersController.getValueByKey(playerId: model.playerId) ?? true
         
         presenter.getPlayer(player: model.playerId, get_player: { (player) in
             cell.name_label.text = player.person.getFullName()
