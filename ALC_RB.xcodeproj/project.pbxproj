@@ -29,6 +29,9 @@
 		1839244A22C7CC4000A644F5 /* SoloMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1839244922C7CC4000A644F5 /* SoloMatch.swift */; };
 		184A8E4022BB6DB20027BC8E /* mmUpcomingMatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A8E3F22BB6DB20027BC8E /* mmUpcomingMatches.swift */; };
 		185E51BC22CCBBEC001F96A0 /* GetPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E51BB22CCBBEC001F96A0 /* GetPerson.swift */; };
+		18606A3122D30B8200F5D2FE /* EventTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18606A3022D30B8200F5D2FE /* EventTypeView.xib */; };
+		18606A3322D30B9200F5D2FE /* EventTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18606A3222D30B9200F5D2FE /* EventTypeView.swift */; };
+		18606A3522D3381500F5D2FE /* ProtocolEventsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18606A3422D3381500F5D2FE /* ProtocolEventsController.swift */; };
 		18717A5422BCD46600CD36C9 /* MyMatchesRefTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18717A5322BCD46600CD36C9 /* MyMatchesRefTableViewController.swift */; };
 		18717A5622BCD55100CD36C9 /* MyMatchesRefViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18717A5522BCD55100CD36C9 /* MyMatchesRefViewModel.swift */; };
 		18717A5922BCD58500CD36C9 /* MyMatchesRefTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18717A5822BCD58500CD36C9 /* MyMatchesRefTableViewCell.swift */; };
@@ -250,6 +253,9 @@
 		1839244922C7CC4000A644F5 /* SoloMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloMatch.swift; sourceTree = "<group>"; };
 		184A8E3F22BB6DB20027BC8E /* mmUpcomingMatches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mmUpcomingMatches.swift; sourceTree = "<group>"; };
 		185E51BB22CCBBEC001F96A0 /* GetPerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPerson.swift; sourceTree = "<group>"; };
+		18606A3022D30B8200F5D2FE /* EventTypeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventTypeView.xib; sourceTree = "<group>"; };
+		18606A3222D30B9200F5D2FE /* EventTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeView.swift; sourceTree = "<group>"; };
+		18606A3422D3381500F5D2FE /* ProtocolEventsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolEventsController.swift; sourceTree = "<group>"; };
 		18717A5322BCD46600CD36C9 /* MyMatchesRefTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMatchesRefTableViewController.swift; sourceTree = "<group>"; };
 		18717A5522BCD55100CD36C9 /* MyMatchesRefViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMatchesRefViewModel.swift; sourceTree = "<group>"; };
 		18717A5822BCD58500CD36C9 /* MyMatchesRefTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMatchesRefTableViewCell.swift; sourceTree = "<group>"; };
@@ -515,6 +521,15 @@
 				1823DC2522952762000A1055 /* LoadingCell.xib */,
 			);
 			path = "loading cell";
+			sourceTree = "<group>";
+		};
+		18606A2F22D30B4300F5D2FE /* custom view */ = {
+			isa = PBXGroup;
+			children = (
+				18606A3022D30B8200F5D2FE /* EventTypeView.xib */,
+				18606A3222D30B9200F5D2FE /* EventTypeView.swift */,
+			);
+			path = "custom view";
 			sourceTree = "<group>";
 		};
 		18717A5222BCD43800CD36C9 /* my matches */ = {
@@ -1460,6 +1475,7 @@
 			children = (
 				DBA77C1F22CF4192000DCF02 /* ProtocolPlayersController.swift */,
 				DBA77C2122CF4865000DCF02 /* ProtocolRefereesController.swift */,
+				18606A3422D3381500F5D2FE /* ProtocolEventsController.swift */,
 			);
 			path = "protocol model controllers";
 			sourceTree = "<group>";
@@ -1476,6 +1492,7 @@
 		DBA77C2822D24948000DCF02 /* add */ = {
 			isa = PBXGroup;
 			children = (
+				18606A2F22D30B4300F5D2FE /* custom view */,
 				DBA77C2922D24A11000DCF02 /* AddEventsProtocolViewController.swift */,
 				DBA77C2B22D24A3A000DCF02 /* AddEventsProtocolPresenter.swift */,
 			);
@@ -1642,6 +1659,7 @@
 				DB8B6C7E224BF0C0001A667D /* Colors.xcassets in Resources */,
 				CEA6EBA121A53CFE008F874D /* Main.storyboard in Resources */,
 				1823DC2722952762000A1055 /* LoadingCell.xib in Resources */,
+				18606A3122D30B8200F5D2FE /* EventTypeView.xib in Resources */,
 				DB87FE7F2243D493001EBA7C /* EmptyViewNew.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1719,6 +1737,7 @@
 				DB4B1A452240AB2C00A9FB97 /* ClubLKViewController.swift in Sources */,
 				CE158CE921AD532600CEECFE /* LeagueDetailViewController.swift in Sources */,
 				DB17385221BA897D00017B6D /* UpcomingGameTableViewCell.swift in Sources */,
+				18606A3522D3381500F5D2FE /* ProtocolEventsController.swift in Sources */,
 				DBB208F0221315110010B600 /* RefereeProtocolTableViewCell.swift in Sources */,
 				187F2E0222CB19440049EA77 /* EditTeamProtocolTableViewController.swift in Sources */,
 				DB1CA1082226BC38005E1FB9 /* RuntimeError.swift in Sources */,
@@ -1807,6 +1826,7 @@
 				DB495B7B22AFC4BF00FCC6F5 /* ActiveMatches.swift in Sources */,
 				04C024E52213DE2D00A4A571 /* EventsMatchPresenter.swift in Sources */,
 				189E1C7A22C9EC3A0086E4DA /* LabelSwitchView.swift in Sources */,
+				18606A3322D30B9200F5D2FE /* EventTypeView.swift in Sources */,
 				DB1CA1062226B8EE005E1FB9 /* UserDefaultsHelper.swift in Sources */,
 				DB11CC8A21C225610083773E /* StackView.swift in Sources */,
 				DB4A789621C10C960071BA8F /* Tournaments.swift in Sources */,

@@ -26,17 +26,20 @@ class EditEventsMatchTableViewController: UITableViewController {
     let cellId = "event_protocol_cell"
     
     var tableModel = TableStruct()
-    var destinationModel = [LIEvent]()
+//    var destinationModel = [LIEvent]()
     
     let presenter = EditEventsMatchPresenter()
     let menuLauncher = MenuLauncher()
+    
+    var eventsController: ProtocolEventsController!
     
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
-        prepareTableModel(destination: destinationModel)
+//        prepareTableModel(destination: destinationModel)
+        prepareTableModel(destination: eventsController.events)
     }
     
     override func viewWillAppear(_ animated: Bool) {

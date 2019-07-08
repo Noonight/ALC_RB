@@ -40,6 +40,7 @@ class EditMatchProtocolViewController: UIViewController {
     var teamOnePlayersController: ProtocolPlayersController!
     var teamTwoPlayersController: ProtocolPlayersController!
     var refereesController: ProtocolRefereesController!
+    var eventsController: ProtocolEventsController!
     
     // MARK: - Life cycle
     
@@ -104,17 +105,10 @@ class EditMatchProtocolViewController: UIViewController {
         teamTwoPlayersController = nil
         teamOnePlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamOne!))
         teamTwoPlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamTwo!))
-//        teamOnePlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamOne!).map({ liPlayer -> String in
-//            return liPlayer.playerId
-//        }))
-//        teamTwoPlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamTwo!).map({ liPlayer -> String in
-//            return liPlayer.playerId
-//        }))
-//        let referees = match.referees.map { liReferee -> Referee in
-//            return liReferee.convertToReferee()
-//        }
         refereesController = nil
         refereesController = ProtocolRefereesController(referees: match.referees)
+        eventsController = nil
+        eventsController = ProtocolEventsController(events: match.events)
     }
     
     // MARK: - Button Actions
@@ -176,7 +170,8 @@ class EditMatchProtocolViewController: UIViewController {
 //            controller.destinationData = match.referees
         case is EditEventsMatchTableViewController:
             let controller = destination as! EditEventsMatchTableViewController
-            controller.destinationModel = match.events
+//            controller.destinationModel = match.events
+            controller.eventsController = eventsController
         case is EditScoreMatchTableViewController:
             let controller = destination as! EditScoreMatchTableViewController
             controller.leagueDetailModel = leagueDetailModel
