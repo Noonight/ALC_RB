@@ -25,6 +25,9 @@ class AddEventsProtocolViewController: BaseStateViewController {
         static let eventFoul = "Фол"
         static let eventAutoGoal = "Автогол"
         static let eventPenalty = "Пенальти"
+        
+        static let DEFAULT_TEAM_BTN = "Обе команды"
+        static let DEFAULT_PLAYER_BTN = "Игрок"
     }
     
     @IBOutlet weak var saveBarBtn: UIBarButtonItem!
@@ -36,6 +39,7 @@ class AddEventsProtocolViewController: BaseStateViewController {
     @IBOutlet weak var eventAutoGoal: EventTypeView!
     @IBOutlet weak var eventPenalty: EventTypeView!
     
+    @IBOutlet weak var timeTextField: UITextField!
     @IBOutlet weak var teamBtn: UIButton!
     @IBOutlet weak var playerBtn: UIButton!
     
@@ -43,8 +47,11 @@ class AddEventsProtocolViewController: BaseStateViewController {
     
     // MARK: - Vars
     var model: MyMatchesRefTableViewCell.CellModel!
-    var teamOnePlayers: ProtocolPlayersController!
-    var teamTwoPlayers: ProtocolPlayersController!
+    var teamOneController: ProtocolPlayersController!
+    var teamTwoController: ProtocolPlayersController!
+    
+    var fetchedTeamOnePlayers: [GetPerson.Person]?
+    var fetchedTeamTwoPlayers: [GetPerson.Person]?
     
     // MARK: - model controllers
     var eventsController: ProtocolEventsController!
@@ -57,6 +64,10 @@ class AddEventsProtocolViewController: BaseStateViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         prepareEvents()
+
+        fetchTeamOnePersons()
+        fetchTeamTwoPersons()
+        self.setState(state: .normal)
     }
     
     // MARK: - Actions
@@ -94,6 +105,28 @@ class AddEventsProtocolViewController: BaseStateViewController {
     }
     
     // MARK: - Helpers
+    
+    func fetchTeamOnePersons() {
+        self.setState(state: .loading)
+        presenter.fetchPersons(persons: teamOneController.players.map({ liPlayer -> String in
+            return liPlayer.playerId
+        }), closure: { persons in
+            self.fetchedTeamOnePlayers = persons
+        }, failure: { error in
+            Print.m(error)
+        })
+    }
+    
+    func fetchTeamTwoPersons() {
+        self.setState(state: .loading)
+        presenter.fetchPersons(persons: teamTwoController.players.map({ liPlayer -> String in
+            return liPlayer.playerId
+        }), closure: { persons in
+            self.fetchedTeamTwoPlayers = persons
+        }, failure: { error in
+            Print.m(error)
+        })
+    }
     
     func setEvent(_ sender: EventTypeView) {
         eventGol.setState(newState: false)
@@ -153,44 +186,80 @@ class AddEventsProtocolViewController: BaseStateViewController {
         return LIEvent.EventType.non
     }
     
-    func isTeamOneChoosed() -> Bool {
-        if teamBtn.titleLabel?.text == model.team1Name {
-            return true
-        } else {
-            return false
-        }
-    }
-    
     func showTeamPicker(sender: UIButton) {
-
-        let acp = ActionSheetStringPicker(title: "", rows: [model.team1Name, model.team2Name], initialSelection: 0, doneBlock: { (picker, index, value) in
-            self.teamBtn.setTitle(value as! String, for: .normal)
+        let acp = ActionSheetStringPicker(title: "", rows: [model.team1Name!, model.team2Name!], initialSelection: 0, doneBlock: { (picker, index, value) in
+            self.teamBtn.setTitle(value as? String, for: .normal)
         }, cancel: { (picker) in
-
+            self.teamBtn.setTitle(Texts.DEFAULT_TEAM_BTN, for: .normal)
         }, origin: sender)
         
         acp?.show()
-
     }
 
     func showPlayerPicker(sender: UIButton) {
-//        let acp = ActionSheetStringPicker(title: "", rows: model.participationMatch?.playersList, initialSelection: 0, doneBlock: { (picker, index, value) in
-////            sender.setTitleAndColorWith(title: (self.viewModel?.comingReferees.value.findPersonBy(fullName: value as! String)?.getFullName())!, color: Colors.YES_REF)
-//            playerBtn.setTitle(value, for: .normal)
-//        }, cancel: { (picker) in
-//
-//        }, origin: sender)
 
-        let acp = ActionSheetStringPicker(title: "", rows: model.participationMatch?.playersList, initialSelection: 0, doneBlock: { (picker, index, value) in
-            self.playerBtn.setTitle(value as! String, for: .normal)
-        }, cancel: { (picker) in
-            
-        }, origin: sender)
-        
-//        acp?.addCustomButton(withTitle: "Снять", actionBlock: {
-//            sender.setTitleAndColorWith(title: Texts.NO_REF, color: Colors.NO_REF)
-//        })
-        acp?.show()
+        // default team, both players
+        if teamBtn.titleLabel?.text == Texts.DEFAULT_TEAM_BTN {
+            let acp = ActionSheetStringPicker(title: "", rows: getFullNamePlayers(persons: filterFullNamePlayers(persons: connectTeamOneAndTeamTwoPlayers())), initialSelection: 0, doneBlock: { (picker, index, value) in
+                self.playerBtn.setTitle(value as? String, for: .normal)
+            }, cancel: { (picker) in
+                self.playerBtn.setTitle(Texts.DEFAULT_PLAYER_BTN, for: .normal)
+            }, origin: sender)
+            acp?.show()
+        } else if teamBtn.titleLabel?.text == model.team1Name {
+            let acp = ActionSheetStringPicker(title: "", rows: getFullNamePlayers(persons: filterFullNamePlayers(persons: fetchedTeamOnePlayers!)), initialSelection: 0, doneBlock: { (picker, index, value) in
+                self.playerBtn.setTitle(value as? String, for: .normal)
+            }, cancel: { (picker) in
+                self.playerBtn.setTitle(Texts.DEFAULT_PLAYER_BTN, for: .normal)
+            }, origin: sender)
+            acp?.show()
+        } else if teamBtn.titleLabel?.text == model.team2Name {
+            let acp = ActionSheetStringPicker(title: "", rows: getFullNamePlayers(persons: filterFullNamePlayers(persons: fetchedTeamTwoPlayers!)), initialSelection: 0, doneBlock: { (picker, index, value) in
+                self.playerBtn.setTitle(value as? String, for: .normal)
+            }, cancel: { (picker) in
+                self.playerBtn.setTitle(Texts.DEFAULT_PLAYER_BTN, for: .normal)
+            }, origin: sender)
+            acp?.show()
+        }
+    }
+    
+    func isCorrectPlayer() -> Bool {
+        if playerBtn.titleLabel?.text != Texts.DEFAULT_PLAYER_BTN {
+            if findPlayerId(playerFullName: (playerBtn.titleLabel?.text)!) != nil {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func findPlayerId(playerFullName: String) -> String? {
+        return connectTeamOneAndTeamTwoPlayers().filter({ getPerson -> Bool in
+            return getPerson.getFullName() == playerFullName
+        }).first?.id
+    }
+    
+    func getFullNamePlayers(persons: [GetPerson.Person]) -> [String] {
+        return persons.map({ getPerson -> String in
+            return getPerson.getFullName()
+        })
+    }
+    
+    func filterFullNamePlayers(persons: [GetPerson.Person]) -> [GetPerson.Person] {
+        return persons.filter({ getPerson -> Bool in
+            return getPerson.getFullName().count > 2
+        })
+    }
+    
+    func connectTeamOneAndTeamTwoPlayers() -> [GetPerson.Person] {
+        return [fetchedTeamOnePlayers, fetchedTeamTwoPlayers].flatMap({ element -> [GetPerson.Person] in
+            return element!
+        })
+    }
+    
+    func reset() {
+        timeTextField.text = ""
+        teamBtn.setTitle(Texts.DEFAULT_TEAM_BTN, for: .normal)
+        playerBtn.setTitle(Texts.DEFAULT_PLAYER_BTN, for: .normal)
     }
     
     // MARK: - Prepare

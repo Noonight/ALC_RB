@@ -174,6 +174,8 @@ class EditMatchProtocolViewController: UIViewController {
 //            controller.destinationModel = match.events
             controller.eventsController = eventsController
             controller.model = self.model
+            controller.teamOneController = self.teamOnePlayersController
+            controller.teamTwoController = self.teamTwoPlayersController
         case is EditScoreMatchTableViewController:
             let controller = destination as! EditScoreMatchTableViewController
             controller.leagueDetailModel = leagueDetailModel

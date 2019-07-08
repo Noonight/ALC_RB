@@ -37,6 +37,8 @@ class EditEventsMatchTableViewController: UITableViewController {
     let menuLauncher = MenuLauncher()
     
     var eventsController: ProtocolEventsController!
+    var teamOneController: ProtocolPlayersController!
+    var teamTwoController: ProtocolPlayersController!
     
     // MARK: - Life cycle
     
@@ -147,6 +149,8 @@ class EditEventsMatchTableViewController: UITableViewController {
         {
             destination.eventsController = self.eventsController
             destination.model = self.model
+            destination.teamOneController = self.teamOneController
+            destination.teamTwoController = self.teamTwoController
         }
     }
 }
