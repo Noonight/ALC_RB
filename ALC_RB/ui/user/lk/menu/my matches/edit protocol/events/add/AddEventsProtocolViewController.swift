@@ -41,6 +41,14 @@ class AddEventsProtocolViewController: BaseStateViewController {
     
     let presenter = AddEventsProtocolPresenter()
     
+    // MARK: - Vars
+    var model: MyMatchesRefTableViewCell.CellModel!
+    var teamOnePlayers: ProtocolPlayersController!
+    var teamTwoPlayers: ProtocolPlayersController!
+    
+    // MARK: - model controllers
+    var eventsController: ProtocolEventsController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
@@ -53,11 +61,11 @@ class AddEventsProtocolViewController: BaseStateViewController {
     
     // MARK: - Actions
     @IBAction func onCommandBtnPressed(_ sender: UIButton) {
-        
+        showTeamPicker(sender: sender)
     }
     
     @IBAction func onPlayerBtnPressed(_ sender: UIButton) {
-        
+        showPlayerPicker(sender: sender)
     }
     
     @IBAction func onSaveBtnPressed(_ sender: UIBarButtonItem) {
@@ -145,33 +153,45 @@ class AddEventsProtocolViewController: BaseStateViewController {
         return LIEvent.EventType.non
     }
     
-//    func showTeamPicker(sender: UIButton) {
-//
-//        let acp = ActionSheetStringPicker(title: "", rows: filteredRefereesWithFullName, initialSelection: 0, doneBlock: { (picker, index, value) in
-//            sender.setTitleAndColorWith(title: (self.viewModel?.comingReferees.value.findPersonBy(fullName: value as! String)?.getFullName())!, color: Colors.YES_REF)
+    func isTeamOneChoosed() -> Bool {
+        if teamBtn.titleLabel?.text == model.team1Name {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func showTeamPicker(sender: UIButton) {
+
+        let acp = ActionSheetStringPicker(title: "", rows: [model.team1Name, model.team2Name], initialSelection: 0, doneBlock: { (picker, index, value) in
+            self.teamBtn.setTitle(value as! String, for: .normal)
+        }, cancel: { (picker) in
+
+        }, origin: sender)
+        
+        acp?.show()
+
+    }
+
+    func showPlayerPicker(sender: UIButton) {
+//        let acp = ActionSheetStringPicker(title: "", rows: model.participationMatch?.playersList, initialSelection: 0, doneBlock: { (picker, index, value) in
+////            sender.setTitleAndColorWith(title: (self.viewModel?.comingReferees.value.findPersonBy(fullName: value as! String)?.getFullName())!, color: Colors.YES_REF)
+//            playerBtn.setTitle(value, for: .normal)
 //        }, cancel: { (picker) in
 //
 //        }, origin: sender)
-//
+
+        let acp = ActionSheetStringPicker(title: "", rows: model.participationMatch?.playersList, initialSelection: 0, doneBlock: { (picker, index, value) in
+            self.playerBtn.setTitle(value as! String, for: .normal)
+        }, cancel: { (picker) in
+            
+        }, origin: sender)
+        
 //        acp?.addCustomButton(withTitle: "Снять", actionBlock: {
 //            sender.setTitleAndColorWith(title: Texts.NO_REF, color: Colors.NO_REF)
 //        })
-//        acp?.show()
-//
-//    }
-//
-//    func showPlayerPicker(sender: UIButton) {
-//        let acp = ActionSheetStringPicker(title: "", rows: filteredRefereesWithFullName, initialSelection: 0, doneBlock: { (picker, index, value) in
-//            sender.setTitleAndColorWith(title: (self.viewModel?.comingReferees.value.findPersonBy(fullName: value as! String)?.getFullName())!, color: Colors.YES_REF)
-//        }, cancel: { (picker) in
-//
-//        }, origin: sender)
-//
-//        acp?.addCustomButton(withTitle: "Снять", actionBlock: {
-//            sender.setTitleAndColorWith(title: Texts.NO_REF, color: Colors.NO_REF)
-//        })
-//        acp?.show()
-//    }
+        acp?.show()
+    }
     
     // MARK: - Prepare
     func prepareEvents() {

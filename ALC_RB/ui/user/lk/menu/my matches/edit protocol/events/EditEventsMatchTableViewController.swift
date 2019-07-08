@@ -9,7 +9,10 @@
 import UIKit
 
 class EditEventsMatchTableViewController: UITableViewController {
-
+    enum SegueIdentifiers {
+        static let add = "segue_add_event"
+    }
+    
     // MARK: - TableStruct
     
     struct TableStruct {
@@ -27,6 +30,8 @@ class EditEventsMatchTableViewController: UITableViewController {
     
     var tableModel = TableStruct()
 //    var destinationModel = [LIEvent]()
+    
+    var model: MyMatchesRefTableViewCell.CellModel!
     
     let presenter = EditEventsMatchPresenter()
     let menuLauncher = MenuLauncher()
@@ -133,6 +138,16 @@ class EditEventsMatchTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    // MARK: - NAVIGATION
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIdentifiers.add,
+            let destination = segue.destination as? AddEventsProtocolViewController
+        {
+            destination.eventsController = self.eventsController
+            destination.model = self.model
+        }
     }
 }
 

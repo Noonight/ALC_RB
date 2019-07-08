@@ -13,4 +13,8 @@ class ProtocolEventsController {
     init(events: [LIEvent]) {
         self.events = events
     }
+    
+    func add(_ event: LIEvent) {
+        events.append(event)
+    }
 }

@@ -6097,7 +6097,7 @@
                             </barButtonItem>
                             <barButtonItem systemItem="add" id="PM0-Jq-W9m">
                                 <connections>
-                                    <segue destination="27Y-yi-uug" kind="show" id="Zde-0g-vHC"/>
+                                    <segue destination="27Y-yi-uug" kind="show" identifier="segue_add_event" id="Zde-0g-vHC"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -6175,7 +6175,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="FTJ-jj-azH" firstAttribute="centerY" secondItem="SrF-2T-7Wj" secondAttribute="centerY" id="3eH-ad-rap"/>
                                             <constraint firstItem="TmI-Zy-sbW" firstAttribute="leading" secondItem="eum-Vs-7d7" secondAttribute="trailing" constant="16" id="4B5-2D-iu2"/>
