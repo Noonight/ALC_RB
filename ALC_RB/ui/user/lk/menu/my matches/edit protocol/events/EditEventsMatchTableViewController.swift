@@ -45,14 +45,14 @@ class EditEventsMatchTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
-//        prepareTableModel(destination: destinationModel)
-        prepareTableModel(destination: eventsController.events)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         tableView.tableFooterView = UIView()
         
+        prepareTableModel(destination: eventsController.events)
+
         setupNavBtn()
     }
     
@@ -96,6 +96,7 @@ class EditEventsMatchTableViewController: UITableViewController {
             }
             tableModel.table.append(arrEvents)
         }
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source

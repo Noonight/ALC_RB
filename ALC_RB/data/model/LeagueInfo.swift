@@ -108,7 +108,7 @@ struct LIMatch: Codable {
 }
 
 struct LIEvent: Codable {
-    let id: String
+    let id: String // m.b. id of match
     let eventType: String
     let player: String
     let time: String
@@ -140,6 +140,29 @@ struct LIEvent: Codable {
         case autoGoal = "А"
         case penalty = "П"
         case non = "-"
+    }
+    
+    enum SystemEventType: String {
+        case goal, yellowCard, redCard, foul, autoGoal, penalty, non
+    }
+    
+    func getSystemeventType() -> SystemEventType {
+        switch eventType {
+        case "goal":
+            return .goal
+        case "yellowCard":
+            return .yellowCard
+        case "redCard":
+            return .redCard
+        case "foul":
+            return .foul
+        case "autoGoal":
+            return .autoGoal
+        case "penalty":
+            return .penalty
+        default:
+            return .non
+        }
     }
     
     enum CodingKeys: String, CodingKey {

@@ -80,12 +80,17 @@ class AddEventsProtocolViewController: BaseStateViewController {
     }
     
     @IBAction func onSaveBtnPressed(_ sender: UIBarButtonItem) {
-//        showAlert(message: getEventType().rawValue)
-        Print.m(getEventType().rawValue)
-        Print.m(timeTextField.text)
-//        Print.m(<#T##m: Any##Any#>)
-        if isCorrectPlayer() {
-            Print.m(findPlayerId(playerFullName: (playerBtn.titleLabel?.text)!))
+        if fieldsIsEmpty() {
+            showAlert(title: "Выберите тип события, тайм, игрока", message: "")
+        } else {
+            eventsController.add(LIEvent(id: model.participationMatch!.id, eventType: getSystemEventType().rawValue, player: getPlayerId()!, time: getTime()!))
+//            Print.m("### --- ###")
+//            Print.m(UserDefaultsHelper().getAuthorizedUser()?.token)
+//            Print.m("### --- ###")
+//            Print.m(eventsController.events.last)
+            showAlert(title: "Событие добавлено", message: "Для сохранения, сохраните протокол") {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
     
@@ -111,6 +116,33 @@ class AddEventsProtocolViewController: BaseStateViewController {
     }
     
     // MARK: - Helpers
+    
+    func getTime() -> String? {
+        if let time = timeTextField.text {
+            return "\(time) тайм"
+        }
+        return nil
+    }
+    
+    func getPlayerId() -> String? {
+        if isCorrectPlayer() {
+            return findPlayerId(playerFullName: playerBtn.titleLabel!.text!)
+        }
+        return nil
+    }
+    
+    func fieldsIsEmpty() -> Bool {
+        if getSystemEventType() == .non {
+            return true
+        }
+        if timeTextField.text?.isEmpty ?? true {
+            return true
+        }
+        if !isCorrectPlayer() {
+            return true
+        }
+        return false
+    }
     
     func fetchTeamOnePersons() {
         self.setState(state: .loading)
@@ -167,29 +199,54 @@ class AddEventsProtocolViewController: BaseStateViewController {
         }
     }
     
-    func getEventType() -> LIEvent.EventType {
+//    func getEventType() -> LIEvent.EventType {
+//        func eventState(view: EventTypeView) -> Bool {
+//            return view.getState()
+//        }
+//        if eventState(view: eventGol) {
+//            return LIEvent.EventType.goal
+//        }
+//        if eventState(view: eventYellowCard) {
+//            return LIEvent.EventType.yellowCard
+//        }
+//        if eventState(view: eventRedCard) {
+//            return LIEvent.EventType.redCard
+//        }
+//        if eventState(view: eventFol) {
+//            return LIEvent.EventType.foul
+//        }
+//        if eventState(view: eventAutoGoal) {
+//            return LIEvent.EventType.autoGoal
+//        }
+//        if eventState(view: eventPenalty) {
+//            return LIEvent.EventType.penalty
+//        }
+//        return LIEvent.EventType.non
+//    }
+    
+    func getSystemEventType() -> LIEvent.SystemEventType {
         func eventState(view: EventTypeView) -> Bool {
             return view.getState()
         }
         if eventState(view: eventGol) {
-            return LIEvent.EventType.goal
+            return LIEvent.SystemEventType.goal
         }
         if eventState(view: eventYellowCard) {
-            return LIEvent.EventType.yellowCard
+            return LIEvent.SystemEventType.yellowCard
         }
         if eventState(view: eventRedCard) {
-            return LIEvent.EventType.redCard
+            return LIEvent.SystemEventType.redCard
         }
         if eventState(view: eventFol) {
-            return LIEvent.EventType.foul
+            return LIEvent.SystemEventType.foul
         }
         if eventState(view: eventAutoGoal) {
-            return LIEvent.EventType.autoGoal
+            return LIEvent.SystemEventType.autoGoal
         }
         if eventState(view: eventPenalty) {
-            return LIEvent.EventType.penalty
+            return LIEvent.SystemEventType.penalty
         }
-        return LIEvent.EventType.non
+        return LIEvent.SystemEventType.non
     }
     
     func showTeamPicker(sender: UIButton) {
