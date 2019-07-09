@@ -50,6 +50,9 @@ class CommandEditLKViewController: BaseStateViewController {
         commandInvitePlayers.delegate = commandInvPlayersTableViewHelper
         
         commandInvPlayersTableViewHelper.setDeleteBtnProtocol(deleteBtnDelegate: self)
+        
+        commandInvitePlayers.tableFooterView = UIView()
+        commandPlayers.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,15 +142,18 @@ extension CommandEditLKViewController: CommandEditLKView {
     
     func onEditCommandSuccess(editTeamResponse: EditTeamResponse) {
         presenter.getPersons()
-        showToast(message: "Editing successful")
+//        showToast(message: "Editing successful")
+        showAlert(title: "Изменения успешно сохранены", message: "")
     }
     
     func onEditCommandFailure(error: Error) {
-        Print.m(error)
+//        Print.m(error)
+        showAlert(message: error.localizedDescription)
     }
     
     func onEditCommandSingleLineMessageSuccess(singleLineMessage: SingleLineMessage) {
-        showToast(message: singleLineMessage.message)
+//        showToast(message: singleLineMessage.message)
+        showAlert(title: "", message: singleLineMessage.message)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -192,7 +198,7 @@ extension CommandEditLKViewController: OnCommandInvitePlayerDeleteBtnPressedProt
 
 extension CommandEditLKViewController: OnCommandPlayerEditNumberCompleteProtocol {
     func onEditNumberComplete(model: CommandPlayersTableViewCell.CellModel) {
-        for i in 0...mutablePlayers.count - 1 {
+        for i in 0...mutablePlayers.count {
             if model.player?.id == mutablePlayers[i].id {
                 mutablePlayers[i].number = model.player!.number
                 break

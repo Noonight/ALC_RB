@@ -112,29 +112,12 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         
         Print.m("We are in CommandLKTableViewController")
         
-//        createNewCommandBtn.isEnabled = false
+        dump(userDefaults.getAuthorizedUser()?.person)
+        
         presenter.getTournaments()
-        
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = createNewCommandBtn
-//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
-//            self.updateUI()
-//        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-//        let person = userDefaults.getAuthorizedUser()?.person
-        
-        
         updateUI()
-//        if person?.participation.count ?? 0 > 0 {
-//
-//            //            Print.m("count of participation > 0 ->> \(person?.participation)")
-//            //            setState(state: .loading)
-//            updateUI()
-//        } else {
-//            setState(state: .empty)
-//        }
+
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = createNewCommandBtn
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -150,6 +133,9 @@ class CommandsLKTableViewController: BaseStateTableViewController {
     
     func updateUI() {
         Print.m("Update ui start")
+        defer {
+            tableView.reloadData()
+        }
         if userDefaults.getAuthorizedUser()?.person.participation.count ?? 0 > 0 {
             
             //            Print.m("count of participation > 0 ->> \(person?.participation)")

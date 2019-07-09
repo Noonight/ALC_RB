@@ -292,7 +292,7 @@ class ApiRequests {
         
 //        dump(editTeam.toParams())
         
-        _ = Alamofire
+        Alamofire
             .request(ApiRoute.getApiURL(.post_edit_team), method: .post, parameters: editTeam.toParams(), encoding: JSONEncoding.default, headers: header)
 //            .responseJSON { (response) in
 //                debugPrint(response)
@@ -306,21 +306,62 @@ class ApiRequests {
                         response_success(editTeamResponse)
                     }
                 case .failure(let error):
-                    response_failure(error)
+                    Alamofire
+                        .request(ApiRoute.getApiURL(.post_edit_team), method: .post, parameters: editTeam.toParams(), encoding: JSONEncoding.default, headers: header)
+                        .responseSingleLineMessage(completionHandler: { response in
+                            switch response.result {
+                            case .success(let value):
+                                response_single_line_message(value)
+                            case .failure(let error):
+                                response_failure(error)
+                            }
+                        })
+//                    requestMessage(success: { message in
+//                        response_single_line_message(message)
+//                    }, failure: { error in
+//                        response_failure(error)
+//                    })
+////                    response_failure(error)
                 }
             }
-            .responseSingleLineMessage { (response) in
-                switch response.result {
-                case .success:
-                    if let singleLineMessage = response.result.value {
-                        response_single_line_message(singleLineMessage)
-                    }
-                case .failure(let error):
-                    response_failure(error)
-                }
-            }
-//        debugPrint(request)
         
+//        Alamofire
+//            .upload(multipartFormData: { (multipartFormData) in
+//                for (key, value) in editTeam.toParams() {
+//                    let strValue = value as! String
+//                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
+//                }
+//            },
+//                    usingThreshold: UInt64(),
+//                    to: ApiRoute.getApiURL(.post_edit_team),
+//                    method: .post,
+//                    headers: ["auth" : token])
+//            { (result) in
+//                switch result {
+//                case .success(let upload, _, _):
+//
+//                    upload.responseEditTeamResponse(completionHandler: { response in
+//                        switch response.result {
+//                        case .success:
+//                            if let editTeamResponse = response.result.value {
+//                                response_success(editTeamResponse)
+//                            }
+//                        case .failure(let error):
+//                            upload.responseSingleLineMessage(completionHandler: { response in
+//                                switch response.result {
+//                                case .success(let value):
+//                                    response_single_line_message(value)
+//                                case .failure(let error):
+//                                    response_failure(error)
+//                                }
+//                            })
+//                        }
+//                    })
+//
+//                case .failure(let error):
+//                    response_failure(error)
+//                }
+//        }
     }
     
     func post_createTeam(token: String, teamInfo: CreateTeamInfo, response_success: @escaping (SoloTeam) -> (), response_failure: @escaping (Error) -> (), response_failure_message: @escaping (SingleLineMessage) -> ()) {
@@ -542,6 +583,23 @@ class ApiRequests {
     }
     
     // MARK: - GET requests
+    
+    func get_refreshAuthUser(token: String, success: @escaping (AuthUser) -> (), failure: @escaping (Error) -> ()) {
+        let header: HTTPHeaders = [
+            "Content-Type" : "application/json",
+            "auth" : "\(token)"
+        ]
+        Alamofire
+            .request(ApiRoute.getApiURL(.refreshUser), method: .get, encoding: JSONEncoding.default, headers: header)
+            .responseAuthUser { response in
+                switch response.result {
+                case .success(let value):
+                    success(value)
+                case .failure(let error):
+                    failure(error)
+                }
+        }
+    }
     
     func get_activeMatches(limit: Int = 30, offset: Int = 0, played: String = "false", get_success: @escaping (ActiveMatches) -> (), get_failure: @escaping (Error) -> ()) {
         let parameters: Parameters = [

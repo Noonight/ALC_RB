@@ -226,6 +226,7 @@ extension CommandCreateLKViewController : CommandCreateLKView {
         
         var tmpUser = userDefaults.getAuthorizedUser()
         tmpUser?.person.participation.append(Participation(league: presenter.createTeamCache!._id, id: "", team: team.team.id))
+//        tmpUser?.person.participation.append(Participation(league: presenter.createTeamCache?._id, id: team.team.id, team: <#T##String#>))
         userDefaults.setAuthorizedUser(user: tmpUser!)
 //        dismiss(animated: true) {
 //            Print.m("Dismiss complete")

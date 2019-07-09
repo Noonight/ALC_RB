@@ -124,7 +124,8 @@ class UserLKViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        authUser = userDefaultsHelper.getAuthorizedUser()
+//        authUser = userDefaultsHelper.getAuthorizedUser()
+        self.presenter.refreshUser(token: userDefaultsHelper.getAuthorizedUser()!.token)
         
 //        dump(authUser)
         
@@ -318,6 +319,15 @@ class UserLKViewController: UIViewController {
 }
 // MARK: - Presenter
 extension UserLKViewController: UserLKView {
+    func onRefreshUserSuccessful(authUser: AuthUser) {
+        userDefaultsHelper.setAuthorizedUser(user: authUser)
+        self.authUser = userDefaultsHelper.getAuthorizedUser()
+    }
+    
+    func onRefreshUserFailure(authUser: Error) {
+        showAlert(message: authUser.localizedDescription)
+    }
+    
 //    func fetchRefereesSuccess(referees: Players) {
 ////        self.referees = referees
 //    }

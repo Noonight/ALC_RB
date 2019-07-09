@@ -16,6 +16,9 @@ protocol UserLKView: MvpView {
     
 //    func fetchRefereesSuccess(referees: Players)
 //    func fetchRefereesFailure(error: Error)
+    
+    func onRefreshUserSuccessful(authUser: AuthUser)
+    func onRefreshUserFailure(authUser: Error)
 }
 
 class UserLKPresenter: MvpPresenter<UserLKViewController> {
@@ -27,6 +30,14 @@ class UserLKPresenter: MvpPresenter<UserLKViewController> {
             self.getView().getProfileImageSuccessful(image: image)
         }) { (error) in
             self.getView().getProfileImageFailure(error: error)
+        }
+    }
+    
+    func refreshUser(token: String) {
+        apiService.get_refreshAuthUser(token: token, success: { authUser in
+            self.getView().onRefreshUserSuccessful(authUser: authUser)
+        }) { error in
+            self.getView().onRefreshUserFailure(authUser: error)
         }
     }
     

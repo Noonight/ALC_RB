@@ -305,7 +305,7 @@ extension InvitationLKTableViewController: InvitationLKView {
 //        userDefault.deleteAuthorizedUser()
         authorizedUser?.person = soloPerson.person
         userDefault.setAuthorizedUser(user: authorizedUser!)
-        showAlert(title: "Успех", message: "", closure: {
+        showAlert(title: "Действие успешно", message: "", closure: {
             self.tableView.reloadData()
         })
         
