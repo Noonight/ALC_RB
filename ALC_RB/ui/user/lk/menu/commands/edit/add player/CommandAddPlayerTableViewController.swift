@@ -28,6 +28,9 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     var team = Team()
     var leagueId: String!
     
+    // MARK: - model controllers
+    var teamController: TeamCommandsController!
+    
     let searchController = UISearchController(searchResultsController: nil)
     var currentTimeOfSearch = CACurrentMediaTime()
     
@@ -44,7 +47,7 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
         super.viewDidLoad()
         initPresenter()
         
-        presenter.fetchPersons(offset: 0)
+//        presenter.fetchPersons(offset: 0)
         
         configureSearchController()
         

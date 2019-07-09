@@ -20,4 +20,9 @@ class TeamCommandsController {
             }
         }
     }
+    func getTeamById(id: String) -> Team? {
+        return teams.filter({ team -> Bool in
+            return team.id == id
+        }).first
+    }
 }

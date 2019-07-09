@@ -173,6 +173,7 @@ extension CommandEditLKViewController: CommandEditLKView {
             )
             destination.team = self.team
             destination.leagueId = self.participation?.league
+            destination.teamController = self.teamController
         }
     }
 }
