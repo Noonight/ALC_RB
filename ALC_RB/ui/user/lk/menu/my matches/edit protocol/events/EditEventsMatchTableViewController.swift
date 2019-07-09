@@ -54,8 +54,6 @@ class EditEventsMatchTableViewController: UITableViewController {
         super.viewWillAppear(true)
         tableView.tableFooterView = UIView()
         
-        Print.m(findUniqueEvent(destination: eventsController.events))
-        
         prepareTableModel(destination: eventsController.events)
 
         setupNavBtn()
@@ -118,13 +116,6 @@ class EditEventsMatchTableViewController: UITableViewController {
             tableView.reloadData()
         }
         let events = destination
-//        let uniqueEventTypes = findUniqueEvent(destination: events)
-//        for uniqEvent in uniqueEventTypes {
-//            var arrEvents: [LIEvent] = events.filter { (event) -> Bool in
-//                return event.eventType == uniqEvent
-//            }
-//            tableModel.table.append(arrEvents)
-//        }
         let uniqueTime = findUniqueTime(events: events)
         for time in uniqueTime {
             tableModel.table.append(findTimeEvents(at: time))
@@ -142,7 +133,11 @@ class EditEventsMatchTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return tableModel.table[section][0].time
+        if tableModel.table[section].count > 0 {
+            return tableModel.table[section][0].time
+        } else {
+            return "***"
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -174,6 +169,14 @@ class EditEventsMatchTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            eventsController.removeFirst(tableModel.table[indexPath.section][indexPath.row])
+            tableModel.table[indexPath.section].remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
     
     // MARK: - NAVIGATION

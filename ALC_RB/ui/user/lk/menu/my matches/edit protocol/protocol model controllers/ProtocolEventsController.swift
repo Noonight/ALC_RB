@@ -17,4 +17,15 @@ class ProtocolEventsController {
     func add(_ event: LIEvent) {
         events.append(event)
     }
+    
+    func removeFirst(_ event: LIEvent) {
+        let index = events.index(of: event)!
+        events.remove(at: index)
+    }
+}
+
+extension LIEvent: Equatable {
+    static func ==(lhs: LIEvent, rhs: LIEvent) -> Bool {
+        return lhs.id == rhs.id && lhs.eventType == rhs.eventType && lhs.player == rhs.player && lhs.time == rhs.time
+    }
 }
