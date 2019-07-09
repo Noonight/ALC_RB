@@ -10,7 +10,14 @@ import Foundation
 import Alamofire
 import AlamofireImage
 
+protocol EditMatchProtocolView : MvpView {
+    func requestEditProtocolSuccess(match: SoloMatch)
+    func requestEditProtocolFailure(error: Error)
+}
+
 class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> {
+    
+    let dataManager = ApiRequests()
     
     func getClubs(id: String, getting: @escaping (Clubs) -> ()) {
         Alamofire
@@ -38,6 +45,14 @@ class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> 
                         getting(img)
                     }
                 })
+        }
+    }
+    
+    func requestEditProtocol(token: String, editProtocol: EditProtocol) {
+        dataManager.post_changeProtocol(token: token, newProtocol: editProtocol, success: { soloMatch in
+            self.getView().requestEditProtocolSuccess(match: soloMatch)
+        }) { error in
+            self.getView().requestEditProtocolFailure(error: error)
         }
     }
 }

@@ -25,6 +25,12 @@ struct ParticipationMatch: Codable {
     var v: Int
     var leagueID: String
     
+    func covertToLIMatch() -> LIMatch {
+        return LIMatch(date: date, stage: stage, played: played, tour: tour, playersList: playersList, place: place, winner: winner, score: score, fouls: fouls, autoGoals: autoGoals, id: id, league: league, teamOne: teamOne, teamTwo: teamTwo, events: events, referees: referees.map({ referee -> LIReferee in
+            return LIReferee(id: referee.id, person: referee.person, type: referee.type)
+        }), createdAt: createdAt, updatedAt: updatedAt, v: v)
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""

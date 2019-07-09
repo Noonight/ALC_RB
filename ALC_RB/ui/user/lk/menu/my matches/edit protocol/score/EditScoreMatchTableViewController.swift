@@ -48,7 +48,7 @@ class EditScoreMatchTableViewController: UITableViewController {
         
         //match.events.append(LIEvent(id: "apsifjsd0890", eventType: "yellowCard", player: "5be94d0206af116344942a58", time: "2 тайм"))
         
-        prepareTableStruct(leagueModel: leagueDetailModel, match: match)
+//        prepareTableStruct(leagueModel: leagueDetailModel, match: match)
         
 //        tableStruct.events[1][0] = LIEvent(id: "eflgjko9u5ng0345jg904wjf0", eventType: "yellowCard", player: "5be94d0206af116344942a58", time: "2 тайм")
 //        tableStruct.events[1].append(LIEvent(id: "eflgjko9u5ng0345jg904wjf0", eventType: "yellowCard", player: "5be94d0206af116344942a58", time: "2 тайм"))
@@ -63,6 +63,8 @@ class EditScoreMatchTableViewController: UITableViewController {
         footer_view.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 98)
         
         configureFooter(league: leagueDetailModel.leagueInfo.league, match: match)
+        
+        prepareTableStruct(leagueModel: leagueDetailModel, match: match)
     }
 
     // MARK: - Configure footer
@@ -101,7 +103,7 @@ class EditScoreMatchTableViewController: UITableViewController {
         var allEventTypes: [String] = []
         for event in destination {
             if !allEventTypes.contains(event.time) {
-                if event.getEventType() == LIEvent.EventType.goal {
+                if event.getEventType() == LIEvent.EventType.goal || event.getEventType() == LIEvent.EventType.autoGoal {
                     allEventTypes.append(event.time)
                 }
             }
@@ -110,11 +112,12 @@ class EditScoreMatchTableViewController: UITableViewController {
     }
     
     func prepareTableStruct(leagueModel: LeagueDetailModel, match: LIMatch) {
+        tableStruct.events = []
         let events = match.events
         let uniqueEventTypes = findUniqueHeader(destination: events)
         for uniqEvent in uniqueEventTypes {
-            var arrEvents: [LIEvent] = events.filter { (event) -> Bool in
-                return event.time == uniqEvent
+            let arrEvents: [LIEvent] = events.filter { (event) -> Bool in
+                return event.time == uniqEvent && (event.getSystemeventType() == LIEvent.SystemEventType.goal || event.getSystemeventType() == LIEvent.SystemEventType.autoGoal)
             }
             tableStruct.events.append(arrEvents)
         }
@@ -191,24 +194,28 @@ class EditScoreMatchTableViewController: UITableViewController {
             return team.id == teamTwo
         }
         
-        var result = teamOne
+        var result = ""
+        
+//        if teamOnePlayers?.players?.contains(where: { liPlayer -> Bool in
+//            return liPlayer.playerId =
+//        })
         
         if (teamOnePlayers?.contains(where: { (team) -> Bool in
             return team.players!.contains(where: { (player) -> Bool in
-                return player.id == playerId
+                return player.playerId == playerId
             })
         }) ?? false) {
-            result = teamOne
+            result = teamOne!
         }
         if (teamTwoPlayers?.contains(where: { (team) -> Bool in
             return team.players!.contains(where: { (player) -> Bool in
-                return player.id == playerId
+                return player.playerId == playerId
             })
         }) ?? false) {
-            result = teamTwo
+            result = teamTwo!
         }
         
-        return result!
+        return result
     }
     
     // MARK: - Table view delegate

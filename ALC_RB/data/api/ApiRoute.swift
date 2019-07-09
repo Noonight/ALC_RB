@@ -53,6 +53,7 @@ enum Routes: String {
     case getusers = "getusers"
     case soloUser = "getuser"
     case activeMatches = "matches/active"
+    case refreshUser = "refresh" // get user in header token of authorized user
     
     case post_auth = "signin"
     case post_reg = "signup"
@@ -64,4 +65,5 @@ enum Routes: String {
     case post_add_player_team = "team/addplayer"
     case post_create_club = "clubs/add"
     case post_edit_match_referee = "matches/setreferees"
+    case post_edit_protcol = "matches/changeProtocol"
 }

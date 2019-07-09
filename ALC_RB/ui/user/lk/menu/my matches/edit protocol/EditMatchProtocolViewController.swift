@@ -36,6 +36,8 @@ class EditMatchProtocolViewController: UIViewController {
     
     let presenter = EditMatchProtocolPresenter()
     
+    let userDefaults = UserDefaultsHelper()
+    
     // MARK: - Model Controllers
     
     var teamOnePlayersController: ProtocolPlayersController!
@@ -80,6 +82,8 @@ class EditMatchProtocolViewController: UIViewController {
             }
         }
         
+        setMatchByUserDefaults()
+        
         teamOneTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
         
         teamTwoTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .two)
@@ -97,6 +101,14 @@ class EditMatchProtocolViewController: UIViewController {
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = false
         }
+    }
+    
+    func setMatchByUserDefaults() {
+        let tmpSelfMatch = self.match
+        let match = userDefaults.getAuthorizedUser()?.person.participationMatches.filter({ pMatch -> Bool in
+            return pMatch.id == tmpSelfMatch.id
+        }).first
+        self.match = (match?.covertToLIMatch())!
     }
     
     // MARK: - PRE CONFIGURE Model Controllers
@@ -128,6 +140,27 @@ class EditMatchProtocolViewController: UIViewController {
     }
     
     @IBAction func saveBtnPressed(_ sender: UIBarButtonItem) {
+        func connectPlayersOfTeamOneAndTwo() -> [LIPlayer] {
+            return [teamOnePlayersController.players, teamTwoPlayersController.players].flatMap({ liPlayer -> [LIPlayer] in
+                return liPlayer
+            })
+        }
+        showAlertOkCancel(title: "Сохранить протокол?", message: "", ok: {
+            let request = EditProtocol(
+                id: self.match.id,
+                events: EditProtocol.Events(events: self.eventsController.events),
+                playersList: connectPlayersOfTeamOneAndTwo().map({ liPlayer -> String in
+                    return liPlayer.playerId
+                })
+            )
+//            dump(request)
+            self.presenter.requestEditProtocol(
+                token: (self.userDefaults.getAuthorizedUser()?.token)!,
+                editProtocol: request
+            )
+        }) {
+            Print.m("Отмена сохранения протокола")
+        }
         
     }
     
@@ -179,6 +212,7 @@ class EditMatchProtocolViewController: UIViewController {
         case is EditScoreMatchTableViewController:
             let controller = destination as! EditScoreMatchTableViewController
             controller.leagueDetailModel = leagueDetailModel
+            setMatchByUserDefaults()
             controller.match = match
         default:
             break
@@ -212,7 +246,22 @@ class EditMatchProtocolViewController: UIViewController {
     }
 }
 
-extension EditMatchProtocolViewController: MvpView {
+extension EditMatchProtocolViewController: EditMatchProtocolView {
+    func requestEditProtocolSuccess(match: SoloMatch) {
+        var user = userDefaults.getAuthorizedUser()
+        user?.person.participationMatches.removeAll(where: { pMatch -> Bool in
+            return pMatch.id == match.match?.id
+        })
+        user?.person.participationMatches.append(match.match!)
+        self.userDefaults.setAuthorizedUser(user: user!)
+        setMatchByUserDefaults()
+        showAlert(title: "Протокол сохранен", message: "")
+    }
+    
+    func requestEditProtocolFailure(error: Error) {
+        showAlert(message: error.localizedDescription)
+    }
+    
     func initPresenter() {
         presenter.attachView(view: self)
     }

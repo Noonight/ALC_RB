@@ -113,6 +113,15 @@ struct LIEvent: Codable {
     let player: String
     let time: String
     
+    func toDictionary() -> [String: Any] {
+        return [
+            CodingKeys.id.rawValue : id,
+            CodingKeys.eventType.rawValue : eventType,
+            CodingKeys.player.rawValue : player,
+            CodingKeys.time.rawValue : time
+        ]
+    }
+    
     func getEventType() -> EventType {
         switch eventType {
         case "goal":
