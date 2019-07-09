@@ -80,7 +80,13 @@ class AddEventsProtocolViewController: BaseStateViewController {
     }
     
     @IBAction func onSaveBtnPressed(_ sender: UIBarButtonItem) {
-        showAlert(message: getEventType().rawValue)
+//        showAlert(message: getEventType().rawValue)
+        Print.m(getEventType().rawValue)
+        Print.m(timeTextField.text)
+//        Print.m(<#T##m: Any##Any#>)
+        if isCorrectPlayer() {
+            Print.m(findPlayerId(playerFullName: (playerBtn.titleLabel?.text)!))
+        }
     }
     
     @objc func eventTap(_ sender: UITapGestureRecognizer) {
