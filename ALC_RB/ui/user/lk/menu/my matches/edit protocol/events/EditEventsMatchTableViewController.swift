@@ -17,6 +17,9 @@ class EditEventsMatchTableViewController: UITableViewController {
     
     struct TableStruct {
         var table: [[LIEvent]] = []
+        mutating func reset() {
+            table = []
+        }
     }
     
     // MARK: - IB
@@ -51,6 +54,8 @@ class EditEventsMatchTableViewController: UITableViewController {
         super.viewWillAppear(true)
         tableView.tableFooterView = UIView()
         
+        Print.m(findUniqueEvent(destination: eventsController.events))
+        
         prepareTableModel(destination: eventsController.events)
 
         setupNavBtn()
@@ -77,7 +82,17 @@ class EditEventsMatchTableViewController: UITableViewController {
     
     // MARK: - Prepare tableModel
     
-    func findUniqueHeader(destination: [LIEvent]) -> [String] {
+    func findUniqueTime(events: [LIEvent]) -> [String] {
+        var allEventTimes: [String] = []
+        for event in events {
+            if !allEventTimes.contains(event.time) {
+                allEventTimes.append(event.time)
+            }
+        }
+        return allEventTimes
+    }
+    
+    func findUniqueEvent(destination: [LIEvent]) -> [String] {
         var allEventTypes: [String] = []
         for event in destination {
             if !allEventTypes.contains(event.eventType) {
@@ -87,16 +102,33 @@ class EditEventsMatchTableViewController: UITableViewController {
         return allEventTypes
     }
     
-    func prepareTableModel(destination: [LIEvent]) {
-        let events = destination
-        let uniqueEventTypes = findUniqueHeader(destination: events)
-        for uniqEvent in uniqueEventTypes {
-            var arrEvents: [LIEvent] = events.filter { (event) -> Bool in
-                return event.eventType == uniqEvent
+    func findTimeEvents(at time: String) -> [LIEvent] {
+        var timeEvents: [LIEvent] = []
+        for event in eventsController.events {
+            if event.time == time {
+                timeEvents.append(event)
             }
-            tableModel.table.append(arrEvents)
         }
-        tableView.reloadData()
+        return timeEvents
+    }
+    
+    func prepareTableModel(destination: [LIEvent]) {
+        tableModel.reset()
+        defer {
+            tableView.reloadData()
+        }
+        let events = destination
+//        let uniqueEventTypes = findUniqueEvent(destination: events)
+//        for uniqEvent in uniqueEventTypes {
+//            var arrEvents: [LIEvent] = events.filter { (event) -> Bool in
+//                return event.eventType == uniqEvent
+//            }
+//            tableModel.table.append(arrEvents)
+//        }
+        let uniqueTime = findUniqueTime(events: events)
+        for time in uniqueTime {
+            tableModel.table.append(findTimeEvents(at: time))
+        }
     }
     
     // MARK: - Table view data source
@@ -128,6 +160,7 @@ class EditEventsMatchTableViewController: UITableViewController {
             if person.person.photo != nil {
                 self.presenter.getPlayerImage(player_photo: person.person.photo ?? " ", get_image: { (image) in
                     cell.photo_image.image = image
+                    cell.photo_image.cropAndRound()
                 })
             } else {
                 cell.photo_image.image = UIImage(named: "ic_logo")
