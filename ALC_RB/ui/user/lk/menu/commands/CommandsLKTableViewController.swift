@@ -76,13 +76,52 @@ class CommandsLKTableViewController: BaseStateTableViewController {
     
     let presenter = CommandsLKPresenter()
     
-    var tableModel = TableModel() {
-        didSet {
-            Print.m("tableModel ->> person own commands \(tableModel.personOwnCommands)")
-            Print.m("tableModel ->> person inside commands \(tableModel.personInsideCommands)")
-            updateUI()
+    // MARK: - model controllers
+    var teamController: TeamCommandsController!
+    var participationController: ParticipationCommandsController!
+    
+    func prepareModelController(tournaments: Tournaments) {
+        
+        defer {
+            self.updateUI()
         }
+        
+        participationController = ParticipationCommandsController(participation: (userDefaults.getAuthorizedUser()?.person.participation)!)
+        
+        let ownerParticipations = getPersonOwnCommands(participation: participationController.participation, tournaments: tournaments)
+        
+        func getOwnerTeam(participation: Participation, tournaments: Tournaments) -> Team? {
+            var returnedTeam: Team?
+            for league in tournaments.leagues {
+                if participation.league == league.id {
+                    for team in league.teams {
+                        if team.creator == userDefaults.getAuthorizedUser()?.person.id {
+                            returnedTeam = team
+                        }
+                    }
+                }
+            }
+            return returnedTeam
+        }
+        
+        func getOwnerTeams() -> [Team] {
+            var teams: [Team] = []
+            for participation in ownerParticipations {
+                let team = getOwnerTeam(participation: participation, tournaments: tournaments)
+                if team != nil {
+                    teams.append(team!)
+                }
+            }
+            return teams
+        }
+        
+        
+        teamController = TeamCommandsController(teams: getOwnerTeams())
+        
     }
+    
+    // MARK: - Life cycle
+    var tableModel = TableModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,10 +151,11 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         
         Print.m("We are in CommandLKTableViewController")
         
-        dump(userDefaults.getAuthorizedUser()?.person)
+//        dump(userDefaults.getAuthorizedUser()?.person)
         
+        setState(state: .loading)
         presenter.getTournaments()
-        updateUI()
+//        updateUI()
 
         navigationController?.navigationBar.topItem?.rightBarButtonItem = createNewCommandBtn
     }
@@ -136,8 +176,9 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         defer {
             tableView.reloadData()
         }
-        if userDefaults.getAuthorizedUser()?.person.participation.count ?? 0 > 0 {
-            
+//        if userDefaults.getAuthorizedUser()?.person.participation.count ?? 0 > 0 {
+        if participationController.participation.count > 0 {
+        
             //            Print.m("count of participation > 0 ->> \(person?.participation)")
             //            setState(state: .loading)
             if !tableModel.isEmpty() || !tableModel.commandsIsEmpty() {
@@ -151,7 +192,8 @@ class CommandsLKTableViewController: BaseStateTableViewController {
                 Print.m(tableModel.personOwnCommands)
                 Print.m(tableModel.personInsideCommands)
                 
-            } else if userDefaults.getAuthorizedUser()?.person.participation.count ?? 0 > tmpParticipationCount {
+//            } else if userDefaults.getAuthorizedUser()?.person.participation.count ?? 0 > tmpParticipationCount {
+            } else if participationController.participation.count > tmpParticipationCount {
                 if tableModel.tournaments.leagues.count > 0 {
                     Print.m("we are here")
                     let group = DispatchGroup()
@@ -164,7 +206,8 @@ class CommandsLKTableViewController: BaseStateTableViewController {
                     
                     group.notify(queue: .main) {
 //                        self.preparingByTournaments = 1
-                        self.tmpParticipationCount = self.userDefaults.getAuthorizedUser()?.person.participation.count ?? 0
+//                        self.tmpParticipationCount = self.userDefaults.getAuthorizedUser()?.person.participation.count ?? 0
+                        self.tmpParticipationCount = self.participationController.participation.count
 
                         self.updateUI()
                     }
@@ -186,7 +229,8 @@ class CommandsLKTableViewController: BaseStateTableViewController {
                     
                     group.notify(queue: .main) {
                         self.preparingByTournaments = 1
-                        self.tmpParticipationCount = self.userDefaults.getAuthorizedUser()?.person.participation.count ?? 0
+//                        self.tmpParticipationCount = self.userDefaults.getAuthorizedUser()?.person.participation.count ?? 0
+                        self.tmpParticipationCount = self.participationController.participation.count
 
                         self.updateUI()
                     }
@@ -203,9 +247,11 @@ class CommandsLKTableViewController: BaseStateTableViewController {
     
     func preparePersonCommands () {
         
-        tableModel.personOwnCommands = getPersonOwnCommands(participation: (userDefaults.getAuthorizedUser()?.person.participation)!, tournaments: tableModel.tournaments)
+//        tableModel.personOwnCommands = getPersonOwnCommands(participation: (userDefaults.getAuthorizedUser()?.person.participation)!, tournaments: tableModel.tournaments)
+        tableModel.personOwnCommands = getPersonOwnCommands(participation: participationController.participation, tournaments: tableModel.tournaments)
         
-        tableModel.personInsideCommands = getPersonCommands(participation: (userDefaults.getAuthorizedUser()?.person.participation)!, tournaments: tableModel.tournaments)
+//        tableModel.personInsideCommands = getPersonCommands(participation: (userDefaults.getAuthorizedUser()?.person.participation)!, tournaments: tableModel.tournaments)
+        tableModel.personInsideCommands = getPersonCommands(participation: participationController.participation, tournaments: tableModel.tournaments)
         
     }
     
@@ -381,7 +427,10 @@ class CommandsLKTableViewController: BaseStateTableViewController {
                 .teams.filter({ (team) -> Bool in
                     return team.id == tableModel.personOwnCommands[cellIndex].team
                 }).first!)!
+//            destination.team = teamController.teams
             destination.participation = tableModel.personOwnCommands[cellIndex]
+            destination.teamController = self.teamController
+            destination.participationController = self.participationController
         }
         
     }
@@ -391,18 +440,14 @@ extension CommandsLKTableViewController : CommandsLKView {
     func getTournamentsSuccess(tournaments: Tournaments) {
         tableModel.tournaments = Tournaments()
         tableModel.tournaments = tournaments
+        prepareModelController(tournaments: tournaments)
     }
     
     func getTournamentsFailure(error: Error) {
         Print.m(error)
-    }
-    
-    func getLeagueInfoSuccess(leagueInfo: LILeagueInfo) {
-        
-    }
-    
-    func getLeagueInfoFailure(error: Error) {
-        
+        showRepeatAlert(message: error.localizedDescription) {
+            self.presenter.getTournaments()
+        }
     }
     
     func initPresenter() {

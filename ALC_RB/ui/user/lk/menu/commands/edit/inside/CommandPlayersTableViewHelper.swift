@@ -62,6 +62,7 @@ class CommandPlayersTableViewHelper: NSObject, UITableViewDelegate, UITableViewD
         cell.playerNumberTextField.tag = tag
         
         try cell.setPlayerNumberTextDidEnd(didEndProtocol: self.editNumberCompleteProtocol!)
+//        try cell.set
         
 //        cell.playerCommandNumLabel.text = String(tag + 1)
         

@@ -11,9 +11,6 @@ import UIKit
 
 protocol CommandsLKView : MvpView {
     
-    func getLeagueInfoSuccess(leagueInfo: LILeagueInfo)
-    func getLeagueInfoFailure(error: Error)
-    
     func getTournamentsSuccess(tournaments: Tournaments)
     func getTournamentsFailure(error: Error)
     

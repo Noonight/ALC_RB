@@ -30,6 +30,10 @@ class CommandEditLKViewController: BaseStateViewController {
 
     let userDefaultHelper = UserDefaultsHelper()
     
+    // MARK: - model controllers
+    var teamController: TeamCommandsController!
+    var participationController: ParticipationCommandsController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
@@ -90,6 +94,7 @@ extension CommandEditLKViewController: CommandEditLKView {
 //        self.mutablePlayers = play
         
         let teamPlayers = team.players
+        dump(teamPlayers)
         var array : [CommandPlayersTableViewCell.CellModel] = []
         
         var arrayInv: [CommandInvitePlayersTableViewCell.CellModel] = []
@@ -97,16 +102,16 @@ extension CommandEditLKViewController: CommandEditLKView {
         for player in teamPlayers {
             for person in players.people {
                 if player.playerID == person.id {
-                    let randNum = Int.random(in: 0...5)
+//                    let randNum = Int.random(in: 0...5)
     
                     // TEST
-                    if player.getInviteStatus() == .pending || randNum > 2 {
-                        arrayInv.append(CommandInvitePlayersTableViewCell.CellModel(
-                            player: player,
-                            person: person,
-                            playerImagePath: person.photo ?? "")
-                        )
-                    }
+//                    if player.getInviteStatus() == .pending || randNum > 2 {
+//                        arrayInv.append(CommandInvitePlayersTableViewCell.CellModel(
+//                            player: player,
+//                            person: person,
+//                            playerImagePath: person.photo ?? "")
+//                        )
+//                    }
                     
                     if player.getInviteStatus() == .accepted || player.getInviteStatus() == .approved {
                         array.append(CommandPlayersTableViewCell.CellModel(
@@ -114,7 +119,7 @@ extension CommandEditLKViewController: CommandEditLKView {
                             playerImagePath: person.photo ?? "",
                             person: person)
                         )
-                    } else if player.getInviteStatus() == .pending || randNum > 2 {
+                    } else if player.getInviteStatus() == .pending /*|| randNum > 2 */{
                     arrayInv.append(CommandInvitePlayersTableViewCell.CellModel(
                         player: player,
                         person: person,
@@ -134,6 +139,7 @@ extension CommandEditLKViewController: CommandEditLKView {
     
     func onGetPersonsFailure(error: Error) {
         Print.m(error)
+        showAlert(message: error.localizedDescription)
     }
     
     func initPresenter() {
@@ -141,18 +147,19 @@ extension CommandEditLKViewController: CommandEditLKView {
     }
     
     func onEditCommandSuccess(editTeamResponse: EditTeamResponse) {
+        self.team.players = editTeamResponse.players
+//        self.players = editTeamResponse.players
+        self.teamController.setPlayersByTeamId(id: self.team.id, players: editTeamResponse.players)
         presenter.getPersons()
-//        showToast(message: "Editing successful")
         showAlert(title: "Изменения успешно сохранены", message: "")
     }
     
     func onEditCommandFailure(error: Error) {
-//        Print.m(error)
+        Print.m(error)
         showAlert(message: error.localizedDescription)
     }
     
     func onEditCommandSingleLineMessageSuccess(singleLineMessage: SingleLineMessage) {
-//        showToast(message: singleLineMessage.message)
         showAlert(title: "", message: singleLineMessage.message)
     }
     

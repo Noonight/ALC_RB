@@ -211,6 +211,9 @@
 		DBB208ED221306170010B600 /* RefereeTeamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208EC221306170010B600 /* RefereeTeamTableViewController.swift */; };
 		DBB208F0221315110010B600 /* RefereeProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208EF221315110010B600 /* RefereeProtocolTableViewCell.swift */; };
 		DBB208F2221316D90010B600 /* RefereeTeamPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208F1221316D90010B600 /* RefereeTeamPresenter.swift */; };
+		DBBEE1BB22D5413700CFB17E /* TeamCommandsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBEE1BA22D5413700CFB17E /* TeamCommandsController.swift */; };
+		DBBEE1BD22D5416800CFB17E /* ParticipationCommandsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBEE1BC22D5416800CFB17E /* ParticipationCommandsController.swift */; };
+		DBBEE1C022D54A1B00CFB17E /* TextFieldNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBEE1BF22D54A1B00CFB17E /* TextFieldNavigation.swift */; };
 		DBC347612216F34B001D9B7D /* StringEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC347602216F34B001D9B7D /* StringEx.swift */; };
 		DBC5C5F6221FDA8500B0A1B6 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5C5F5221FDA8500B0A1B6 /* ImagePicker.swift */; };
 		DBC5C5FA2220128100B0A1B6 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC5C5F92220128100B0A1B6 /* UITextField.swift */; };
@@ -440,6 +443,9 @@
 		DBB208EC221306170010B600 /* RefereeTeamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTeamTableViewController.swift; sourceTree = "<group>"; };
 		DBB208EF221315110010B600 /* RefereeProtocolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeProtocolTableViewCell.swift; sourceTree = "<group>"; };
 		DBB208F1221316D90010B600 /* RefereeTeamPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeTeamPresenter.swift; sourceTree = "<group>"; };
+		DBBEE1BA22D5413700CFB17E /* TeamCommandsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCommandsController.swift; sourceTree = "<group>"; };
+		DBBEE1BC22D5416800CFB17E /* ParticipationCommandsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipationCommandsController.swift; sourceTree = "<group>"; };
+		DBBEE1BF22D54A1B00CFB17E /* TextFieldNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldNavigation.swift; sourceTree = "<group>"; };
 		DBC347602216F34B001D9B7D /* StringEx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEx.swift; sourceTree = "<group>"; };
 		DBC5C5F5221FDA8500B0A1B6 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		DBC5C5F92220128100B0A1B6 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
@@ -936,6 +942,7 @@
 		CEA6EBB421A53F15008F874D /* base */ = {
 			isa = PBXGroup;
 			children = (
+				DBBEE1BE22D54A0900CFB17E /* keyboard */,
 				DB7F7CA422BF0B4D00000C40 /* image view */,
 				1823DC21229526F6000A1055 /* loading cell */,
 				DB99BB6F224CD5F600EE30D7 /* ad */,
@@ -1274,6 +1281,7 @@
 		DB5BDB972247CB990014C003 /* commands */ = {
 			isa = PBXGroup;
 			children = (
+				DBBEE1B922D5412400CFB17E /* model controllers */,
 				DB5BDB982247CD0E0014C003 /* CommandsLKTableViewController.swift */,
 				DB5BDB9A2247CD230014C003 /* CommandsLKPresenter.swift */,
 				DB52EAE62248E3F8004F7869 /* cell */,
@@ -1538,6 +1546,23 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
+		DBBEE1B922D5412400CFB17E /* model controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DBBEE1BA22D5413700CFB17E /* TeamCommandsController.swift */,
+				DBBEE1BC22D5416800CFB17E /* ParticipationCommandsController.swift */,
+			);
+			path = "model controllers";
+			sourceTree = "<group>";
+		};
+		DBBEE1BE22D54A0900CFB17E /* keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				DBBEE1BF22D54A1B00CFB17E /* TextFieldNavigation.swift */,
+			);
+			path = keyboard;
+			sourceTree = "<group>";
+		};
 		DBC3476222170985001D9B7D /* snackbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1678,10 +1703,11 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -1695,6 +1721,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -1703,7 +1730,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C11ED1E2DE4486EC022A9E5B /* [CP] Check Pods Manifest.lock */ = {
@@ -1808,6 +1835,7 @@
 				DB59433821F219FE00945601 /* PlayersTeamLeagueDetailViewController.swift in Sources */,
 				DB99BB71224CD60C00EE30D7 /* Advertising.swift in Sources */,
 				DB932DEA22C9022800C060C2 /* RefereeEditMatchesLKTableViewCell.swift in Sources */,
+				DBBEE1BB22D5413700CFB17E /* TeamCommandsController.swift in Sources */,
 				1839244822C7500D00A644F5 /* EditMatchReferees.swift in Sources */,
 				184A8E4022BB6DB20027BC8E /* mmUpcomingMatches.swift in Sources */,
 				DB641F8A222BB283004AC6CB /* UserLKPresenter.swift in Sources */,
@@ -1887,6 +1915,7 @@
 				187F2E0522CB19440049EA77 /* EditMatchProtocolPresenter.swift in Sources */,
 				DBA6921A221EB85900BEFB26 /* RegistrationViewController.swift in Sources */,
 				DBE0E7AA223C063200CC0EE2 /* OngoingLeagueTableViewCell.swift in Sources */,
+				DBBEE1BD22D5416800CFB17E /* ParticipationCommandsController.swift in Sources */,
 				DB52EAE52248E2E6004F7869 /* CommandCreateLKPresenter.swift in Sources */,
 				DB59433421F212BE00945601 /* SegmentHelper.swift in Sources */,
 				187F2DFD22CB19440049EA77 /* EditRefereeTeamPresenter.swift in Sources */,
@@ -1923,6 +1952,7 @@
 				CE47323E21A5513500199D79 /* HomeViewController.swift in Sources */,
 				DB4B1A4E224114D100A9FB97 /* EditClubInfo.swift in Sources */,
 				187BFB2E22A570F200E19A3B /* RefereeLKTableViewCell.swift in Sources */,
+				DBBEE1C022D54A1B00CFB17E /* TextFieldNavigation.swift in Sources */,
 				DB2A35E021CA28A100E9E2C5 /* PlayerTableViewCell.swift in Sources */,
 				18717A5922BCD58500CD36C9 /* MyMatchesRefTableViewCell.swift in Sources */,
 				DB2DEBBC222CE84B003FE599 /* EditedProfilePerson.swift in Sources */,
