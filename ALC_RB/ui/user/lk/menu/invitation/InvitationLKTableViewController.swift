@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import ESPullToRefresh
 
 class InvitationLKTableViewController: UITableViewController {
 
@@ -15,7 +16,6 @@ class InvitationLKTableViewController: UITableViewController {
     
     struct TableModel {
         var tournaments: Tournaments?
-//        var liLeagueInfo: LILeagueInfo?
         var clubs: Clubs?
         var players: Players?
         
@@ -38,7 +38,6 @@ class InvitationLKTableViewController: UITableViewController {
     
     var tableModel = TableModel() {
         didSet {
-//            Print.d(object: tableModel.isEmpty())
             if !tableModel.isEmpty() {
                 self.hideLoading()
                 self.tableView.reloadData()
@@ -54,7 +53,6 @@ class InvitationLKTableViewController: UITableViewController {
     
     let presenter = InvitationLKPresenter()
     
-//    var backgroundActivityView: UIView?
     let activityIndicator = UIActivityIndicatorView(style: .gray)
     var viewBack: UIView = UIView()
     
@@ -64,46 +62,23 @@ class InvitationLKTableViewController: UITableViewController {
         super.viewDidLoad()
         initPresenter()
         
-//        var user = userDefault.getAuthorizedUser()
-//        user?.person.pendingTeamInvites = [
-//            PendingTeamInvite("12swdf234te5g34t3", "5be94d1a06af116344942a92", "5be94d1a06af116344942b2a"),
-//            PendingTeamInvite("12swdf234te5g34asdt3", "5be94d1a06af116344942a92", "5be94d1a06af116344942a93"),
-//            PendingTeamInvite("12swdf234te5123g34t3", "5be94d1a06af116344942a92", "5be94d1a06af116344942aad")
-//        ]
-//        userDefault.setAuthorizedUser(user: user!)
-//        var user = userDefault.getAuthorizedUser()
-//        user?.person.pendingTeamInvites = []
-//        userDefault.setAuthorizedUser(user: user!)
-        
         activityIndicator.hidesWhenStopped = true
         
         tableView.tableFooterView = UIView()
+        
+        tableView.es.addPullToRefresh {
+            self.fetch()
+        }
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-//        if userDefault.getAuthorizedUser()?.person.pendingTeamInvites.count ?? 0 > 0 {
-//            hideEmptyView()
-//            if tableModel.isEmpty() {
-//                showLoading()
-//            } else {
-//                hideLoading()
-//            }
-//        } else {
-//            showEmptyView()
-//        }
-        
-//        showHudTable(message: "Загрузка")
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-////            self.tableView.reloadData()
-////            self.showLoading()
-//        }
+        fetch()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-//        dump(userDefault.getAuthorizedUser()?.person)
         if userDefault.getAuthorizedUser()?.person.pendingTeamInvites.count ?? 0 > 0 {
             hideEmptyView()
             if tableModel.isEmpty() {
@@ -116,10 +91,16 @@ class InvitationLKTableViewController: UITableViewController {
         }
     }
     
-    func checkPendingTeamInviteList() {
-        
+    func fetch() {
+        presenter.refreshUser(token: userDefault.getAuthorizedUser()!.token)
     }
     
+    func fetchSupportModels() {
+        presenter.getTournaments()
+        presenter.getClubs()
+        presenter.getPlayers()
+    }
+        
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -129,10 +110,6 @@ class InvitationLKTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userDefault.getAuthorizedUser()?.person.pendingTeamInvites.count ?? 0
     }
-    
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 224
-//    }
 
     // MARK: - Table view delegate
     
@@ -163,7 +140,6 @@ class InvitationLKTableViewController: UITableViewController {
             
             if let mLeague = league {
                 cell.titleLabel.text = "\(mLeague.tourney). \(mLeague.name)"
-//                Print.m("\(mLeague.beginDate) ### \(mLeague.endDate)")
                 cell.dateLabel.text = "\(mLeague.beginDate.UTCToLocal(from: .leagueDate, to: .local)) - \(mLeague.endDate.UTCToLocal(from: .leagueDate, to: .local))"
             }
             cell.teamName.text = team?.name
@@ -209,7 +185,6 @@ class InvitationLKTableViewController: UITableViewController {
     }
     
     @objc func okBtnPressed(sender: UIButton) {
-//        Print.d(message: "\(sender.tag)  ok")
         showAlertOkCancel(title: "Принять приглашение?", message: "", ok: {
             let user = self.userDefault.getAuthorizedUser()
             guard let league = user?.person.pendingTeamInvites[sender.tag].league else {
@@ -243,12 +218,6 @@ extension InvitationLKTableViewController: EmptyProtocol {
         viewBack.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height)
         viewBack.backgroundColor = .white
         viewBack.addSubview(empty_view)
-        
-//        let constraintX = NSLayoutConstraint(item: viewBack, attribute: .centerX, relatedBy: .equal, toItem: empty_view, attribute: .centerX, multiplier: 1.0, constant: 0)
-//        let constraintY = NSLayoutConstraint(item: viewBack, attribute: .centerY, relatedBy: .equal, toItem: empty_view, attribute: .centerY, multiplier: 1.0, constant: 0)
-//        viewBack.addConstraints([
-//            constraintX,
-//            constraintY])
 
         empty_view.setCenterFromParent()
         
@@ -261,15 +230,12 @@ extension InvitationLKTableViewController: EmptyProtocol {
     func hideEmptyView() {
         tableView.isScrollEnabled = true
         tableView.separatorStyle = .singleLine
-        //        tableView.separatorStyle = .singleLine
-        //        tableView.backgroundView = nil
         viewBack.removeFromSuperview()
     }
 }
 
 extension InvitationLKTableViewController: ActivityIndicatorProtocol {
     func showLoading() {
-//        activityIndicator.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         activityIndicator.frame = tableView.frame
         activityIndicator.backgroundColor = .white
         
@@ -277,7 +243,6 @@ extension InvitationLKTableViewController: ActivityIndicatorProtocol {
         view.addSubview(activityIndicator)
         view.bringSubviewToFront(activityIndicator)
         
-//        tableView.separatorStyle = .none
         activityIndicator.startAnimating()
     }
     
@@ -285,24 +250,32 @@ extension InvitationLKTableViewController: ActivityIndicatorProtocol {
         activityIndicator.stopAnimating()
         tableView.isScrollEnabled = true
 
-//        tableView.separatorStyle = .singleLine
-//        tableView.backgroundView = nil
         activityIndicator.removeFromSuperview()
     }
 }
 
 extension InvitationLKTableViewController: InvitationLKView {
+    func onRefreshUserSuccess(authUser: AuthUser) {
+        userDefault.setAuthorizedUser(user: authUser)
+        fetchSupportModels()
+        self.tableView.es.stopPullToRefresh()
+    }
+    
+    func onRefreshUserFailure(error: Error) {
+        Print.m(error)
+        self.tableView.es.stopPullToRefresh()
+//        showAlertR
+    }
+    
     func acceptRequestFailureMessage(message: SingleLineMessage) {
         showAlert(message: message.message)
     }
     
     func acceptRequestSuccess(soloPerson: SoloPerson) {
-//        Print.d(object: soloPerson)
         defer {
             tableView.reloadData()
         }
         var authorizedUser = userDefault.getAuthorizedUser()
-//        userDefault.deleteAuthorizedUser()
         authorizedUser?.person = soloPerson.person
         userDefault.setAuthorizedUser(user: authorizedUser!)
         showAlert(title: "Действие успешно", message: "", closure: {
@@ -312,7 +285,6 @@ extension InvitationLKTableViewController: InvitationLKView {
     }
     
     func acceptRequestFailure(error: Error) {
-//        showToast(message: "Что-то пошло не так. Ошибка")
         showAlert(message: error.localizedDescription)
         Print.d(error: error)
     }
@@ -326,7 +298,6 @@ extension InvitationLKTableViewController: InvitationLKView {
     }
     
     func getTournamentLeagueSuccess(liLeagueInfo: LILeagueInfo) {
-//        tableModel.liLeagueInfo = liLeagueInfo
     }
     
     func getTournamentLeagueFailure(error: Error) {
@@ -351,11 +322,6 @@ extension InvitationLKTableViewController: InvitationLKView {
     
     func initPresenter() {
         presenter.attachView(view: self)
-        presenter.getTournaments()
-//        presenter.getTournamentLeague(id: userDefault.getAuthorizedUser()?.person.pendingTeamInvites)
-        presenter.getClubs()
-        presenter.getPlayers()
-//        presenter.getPlayersWithQuery(query: <#T##String#>)
     }
     
 }

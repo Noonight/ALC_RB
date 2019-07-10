@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B80AC021169BDECFF29554FC0D5997E2"
-               BuildableName = "Pods_ALC_RB.framework"
-               BlueprintName = "Pods-ALC_RB"
+               BlueprintIdentifier = "51BC770AE6BB91FAC2BAC07706C0FF79"
+               BuildableName = "ESPullToRefresh.bundle"
+               BlueprintName = "ESPullToRefresh-ESPullToRefresh"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B80AC021169BDECFF29554FC0D5997E2"
-            BuildableName = "Pods_ALC_RB.framework"
-            BlueprintName = "Pods-ALC_RB"
+            BlueprintIdentifier = "51BC770AE6BB91FAC2BAC07706C0FF79"
+            BuildableName = "ESPullToRefresh.bundle"
+            BlueprintName = "ESPullToRefresh-ESPullToRefresh"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

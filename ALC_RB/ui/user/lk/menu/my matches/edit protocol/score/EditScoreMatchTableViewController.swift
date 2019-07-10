@@ -93,8 +93,12 @@ class EditScoreMatchTableViewController: UITableViewController {
     }
     
     func parseScoreString(score: String) -> String {
-        var scores = score.components(separatedBy: ":")
-        return "\(scores[0]) : \(scores[1])"
+//        var scores: [Int] = [0, 0]
+        if score.count > 2 {
+            var scores = score.components(separatedBy: ":")
+            return "\(scores[0]) : \(scores[1])"
+        }
+        return "0 : 0"
     }
     
     // MARK: - Prepare Table struct

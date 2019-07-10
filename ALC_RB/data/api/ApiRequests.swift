@@ -637,6 +637,20 @@ class ApiRequests {
         ]
         Alamofire
             .request(ApiRoute.getApiURL(.refreshUser), method: .get, encoding: JSONEncoding.default, headers: header)
+//            .responseJSON(completionHandler: { response in
+//                if let error = response.result.error {
+//                    Print.m(error)
+//                    return
+//                }
+//                dump(response.result.value)
+//                do {
+//                    let decoder = JSONDecoder()
+//                    let decode = try decoder.decode(AuthUser.self, from: response.data!)
+//                    Print.m(decode)
+//                } catch {
+//                    Print.m("error")
+//                }
+//            })
             .responseAuthUser { response in
                 switch response.result {
                 case .success(let value):

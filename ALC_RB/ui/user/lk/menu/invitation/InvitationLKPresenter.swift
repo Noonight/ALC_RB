@@ -27,6 +27,8 @@ protocol InvitationLKView: MvpView {
     func getClubsSuccess(clubs: Clubs)
     func getClubsFailure(error: Error)
     
+    func onRefreshUserSuccess(authUser: AuthUser)
+    func onRefreshUserFailure(error: Error)
 }
 
 class InvitationLKPresenter: MvpPresenter<InvitationLKTableViewController> {
@@ -58,6 +60,14 @@ class InvitationLKPresenter: MvpPresenter<InvitationLKTableViewController> {
             self.getView().getTournamentLeagueSuccess(liLeagueInfo: liLeagueInfo)
         }) { (error) in
             self.getView().getTournamentsFailure(error: error)
+        }
+    }
+    
+    func refreshUser(token: String) {
+        apiService.get_refreshAuthUser(token: token, success: { authUser in
+            self.getView().onRefreshUserSuccess(authUser: authUser)
+        }) { error in
+            self.getView().onRefreshUserFailure(error: error)
         }
     }
     
