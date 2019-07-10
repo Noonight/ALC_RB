@@ -157,8 +157,7 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
             playerId: personId)
         dump(userDefaultsHelper.getAuthorizedUser()?.token)
         dump(addPlayer)
-        presenter.addPlayerToTeamForLeague(token: userDefaultsHelper.getAuthorizedUser()!.token, addPlayerToTeam: addPlayer
-        )
+        presenter.addPlayerToTeamForLeague(token: userDefaultsHelper.getAuthorizedUser()!.token, addPlayerToTeam: addPlayer)
         currentAddId = sender.tag
     }
     

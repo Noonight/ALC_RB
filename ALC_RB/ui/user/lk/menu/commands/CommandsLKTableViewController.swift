@@ -132,6 +132,10 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         super.viewDidLoad()
         initPresenter()
         
+        self.tableView.es.addPullToRefresh {
+            self.presenter.refreshUser(token: self.userDefaults.getAuthorizedUser()!.token)
+        }
+        
         tableView.backgroundView = UIView()
         tableView.tableFooterView = UIView()
         
@@ -454,11 +458,13 @@ extension CommandsLKTableViewController : CommandsLKView {
     func getRefreshUserSuccessful(authUser: AuthUser) {
         userDefaults.setAuthorizedUser(user: authUser)
         self.presenter.getTournaments()
+        self.tableView.es.stopPullToRefresh()
 //        self.authUser = userDefaults.getAuthorizedUser()
     }
     
     func getRefreshUserFailure(error: Error) {
         showAlert(message: error.localizedDescription)
+        self.tableView.es.stopPullToRefresh()
     }
     
     func getTournamentsSuccess(tournaments: Tournaments) {

@@ -20,16 +20,18 @@ class RefereesViewModel {
         self.dataManager = dataManager
     }
     
-    func fetch() {
+    func fetch(closure: @escaping ()->()) {
         refreshing.onNext(true)
         
         dataManager.get_referees(get_success: { (referees) in
 //            Print.m(referees)
             self.refreshing.onNext(false)
             self.referees.onNext(referees)
+            closure()
         }) { (error) in
             Print.m(error)
             self.error.onNext(error)
+            closure()
         }
     }
 }

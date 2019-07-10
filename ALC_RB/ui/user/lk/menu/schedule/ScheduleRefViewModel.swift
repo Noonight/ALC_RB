@@ -33,7 +33,7 @@ class ScheduleRefViewModel {
         self.dataManager = dataManager
     }
     
-    func fetch() {
+    func fetch(closure: @escaping () -> ()) {
         refreshing.onNext(true)
         
         dataManager.getActiveMatchesForView(get_success: { (activeMatches, referees, clubs) in
@@ -44,9 +44,11 @@ class ScheduleRefViewModel {
                 referees: referees,
                 clubs: clubs)
             )
+            closure()
             
         }) { (error) in
             self.error.onNext(error)
+            closure()
         }
     }
 }

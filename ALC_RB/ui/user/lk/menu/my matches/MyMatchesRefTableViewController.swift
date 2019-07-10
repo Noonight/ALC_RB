@@ -39,6 +39,10 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.es.addPullToRefresh {
+            self.fetch()
+        }
+        
         tableView.dataSource = nil
         tableView.delegate = nil
         
@@ -58,12 +62,18 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         self.title = "Матчи"
         navigationController?.navigationBar.topItem?.title = self.title
         
+        fetch()
+    }
+    
+    func fetch() {
         viewModel.participationMatches.value = (userDefaults.getAuthorizedUser()?.person.participationMatches)!.filter({ pMatch -> Bool in
             return pMatch.referees.contains(where: { referee -> Bool in
                 return referee.person == userDefaults.getAuthorizedUser()?.person.id
             })
         })
-        viewModel.fetch()
+        viewModel.fetch() {
+            self.tableView.es.stopPullToRefresh()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -95,6 +105,7 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         
         viewModel.refreshing
             .subscribe { (refreshing) in
+                self.tableView.es.stopPullToRefresh()
                 refreshing.element! ? (self.setState(state: .loading)) : (self.setState(state: .normal))
             }
             .disposed(by: disposeBag)

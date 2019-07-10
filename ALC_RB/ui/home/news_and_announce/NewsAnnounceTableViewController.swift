@@ -62,6 +62,11 @@ class NewsAnnounceTableViewController: UITableViewController, MvpView {
         
         tableView.tableFooterView = UIView()
         
+        self.tableView.es.addPullToRefresh {
+            self.fetch()
+        }
+        
+        fetch()
         //tableView.backgroundView = noNewsView
         //navigationController?.navigationItem.title = "title"
         //print(navigationController?.navigationItem.title)
@@ -69,7 +74,9 @@ class NewsAnnounceTableViewController: UITableViewController, MvpView {
     
     func initPresenter() {
         presenter.attachView(view: self)
-        
+    }
+    
+    func fetch() {
         presenter.getFewNews()
         presenter.getFewAnnounces()
     }
@@ -100,6 +107,7 @@ class NewsAnnounceTableViewController: UITableViewController, MvpView {
         tableData.announces = announces
         //try! print(tableData.announces.jsonString())
         self.tableView.reloadData()
+        self.tableView.es.stopPullToRefresh()
     }
     
     // MARK: - Table view data source

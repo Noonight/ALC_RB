@@ -26,6 +26,7 @@ class AnnounceAllTableViewController: UITableViewController {
         self.title = mTitle
         
         tableView.tableFooterView = UIView()
+        
     }
     
     func updateUI() {

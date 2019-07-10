@@ -269,6 +269,7 @@ extension InvitationLKTableViewController: InvitationLKView {
     
     func acceptRequestFailureMessage(message: SingleLineMessage) {
         showAlert(message: message.message)
+        self.tableView.es.stopPullToRefresh()
     }
     
     func acceptRequestSuccess(soloPerson: SoloPerson) {

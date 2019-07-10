@@ -82,16 +82,16 @@ struct MmMatch: Codable {
     let stage: Bool?
     let played: Bool?
     let tour: String?
-    let playersList: [JSONAny]?
+    let playersList: [String]?
     let place: String?
-    let winner: JSONNull?
+    let winner: String?
     let score: String?
-    let fouls: JSONNull?
-    let autoGoals: JSONNull?
+    let fouls: String?
+    let autoGoals: String?
     let teamOne: MmTeam?
     let teamTwo: MmTeam?
     let league: String?
-    let events: [JSONAny]?
+    let events: [LIEvent]?
     let referees: [MmReferee]?
     let createdAt: String?
     let updatedAt: String?
@@ -146,16 +146,16 @@ extension MmMatch {
         stage: Bool?? = nil,
         played: Bool?? = nil,
         tour: String?? = nil,
-        playersList: [JSONAny]?? = nil,
+        playersList: [String]?? = nil,
         place: String?? = nil,
-        winner: JSONNull?? = nil,
+        winner: String?? = nil,
         score: String?? = nil,
-        fouls: JSONNull?? = nil,
-        autoGoals: JSONNull?? = nil,
+        fouls: String?? = nil,
+        autoGoals: String?? = nil,
         teamOne: MmTeam?? = nil,
         teamTwo: MmTeam?? = nil,
         league: String?? = nil,
-        events: [JSONAny]?? = nil,
+        events: [LIEvent]?? = nil,
         referees: [MmReferee]?? = nil,
         createdAt: String?? = nil,
         updatedAt: String?? = nil,

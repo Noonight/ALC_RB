@@ -23,7 +23,7 @@ class MyMatchesRefViewModel {
         self.dataManager = dataManager
     }
     
-    func fetch()
+    func fetch(closure: @escaping () -> ())
     {
 //        Print.m(participationMatches.value)
         if participationMatches.value.count > 0 {
@@ -32,12 +32,14 @@ class MyMatchesRefViewModel {
             self.dataManager?.get_forMyMatches(participationMatches: participationMatches.value, get_success: { (cellModels) in
                 self.tableModel.onNext(cellModels)
                 self.refreshing.onNext(false)
+                closure()
 //                Print.m(cellModels)
             }, get_failure: { (error) in
                 self.error.onNext(error)
             })
         } else {
             self.tableModel.onNext([])
+            closure()
 //            self.error.onNext(Error)
         }
     }

@@ -39,16 +39,26 @@ class RefereesLKTableViewController: BaseStateTableViewController {
         viewModel = RefereesViewModel(dataManager: ApiRequests())
         
         setupBindings()
+        
+        self.tableView.es.addPullToRefresh {
+            self.fetch()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        viewModel.fetch()
+        fetch()
+    }
+    func fetch() {
+        viewModel.fetch() {
+            self.tableView.es.stopPullToRefresh()
+        }
     }
     
     func setupBindings() {
         viewModel.refreshing
             .subscribe { (event) in
+                self.tableView.es.stopPullToRefresh()
                 event.element! ? self.setState(state: .loading) : self.setState(state: .normal)
             }.disposed(by: disposeBag)
         
