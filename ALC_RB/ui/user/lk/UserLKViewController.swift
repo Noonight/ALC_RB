@@ -325,6 +325,7 @@ extension UserLKViewController: UserLKView {
     }
     
     func onRefreshUserFailure(authUser: Error) {
+        Print.m(authUser)
         showAlert(message: authUser.localizedDescription)
     }
     

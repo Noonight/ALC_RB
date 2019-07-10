@@ -105,7 +105,7 @@ class EditMatchProtocolViewController: UIViewController {
     
     func setMatchByUserDefaults() {
         let tmpSelfMatch = self.match
-        let match = userDefaults.getAuthorizedUser()?.person.participationMatches.filter({ pMatch -> Bool in
+        let match = userDefaults.getAuthorizedUser()?.person.participationMatches!.filter({ pMatch -> Bool in
             return pMatch.id == tmpSelfMatch.id
         }).first
         self.match = (match?.covertToLIMatch())!
@@ -249,10 +249,10 @@ class EditMatchProtocolViewController: UIViewController {
 extension EditMatchProtocolViewController: EditMatchProtocolView {
     func requestEditProtocolSuccess(match: SoloMatch) {
         var user = userDefaults.getAuthorizedUser()
-        user?.person.participationMatches.removeAll(where: { pMatch -> Bool in
+        user?.person.participationMatches!.removeAll(where: { pMatch -> Bool in
             return pMatch.id == match.match?.id
         })
-        user?.person.participationMatches.append(match.match!)
+        user?.person.participationMatches!.append(match.match!)
         self.userDefaults.setAuthorizedUser(user: user!)
         setMatchByUserDefaults()
         showAlert(title: "Протокол сохранен", message: "")

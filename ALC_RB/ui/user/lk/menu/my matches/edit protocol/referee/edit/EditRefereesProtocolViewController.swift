@@ -274,17 +274,17 @@ class EditRefereesProtocolViewController: BaseStateViewController {
         var user = userDefaults.getAuthorizedUser()
         //        dump(user?.person)
         
-        if user?.person.participationMatches.contains(where: { pMatch -> Bool in
+        if user?.person.participationMatches!.contains(where: { pMatch -> Bool in
             return pMatch.id == match.match?.id
         }) ?? false {
-            user?.person.participationMatches.removeAll(where: { pMatch -> Bool in
+            user?.person.participationMatches!.removeAll(where: { pMatch -> Bool in
                 return pMatch.id == match.match?.id
             })
             if match.match?.referees.count ?? 0 > 0 {
-                user?.person.participationMatches.append(match.match!)
+                user?.person.participationMatches!.append(match.match!)
             }
         } else {
-            user?.person.participationMatches.append(match.match!)
+            user?.person.participationMatches!.append(match.match!)
         }
         userDefaults.setAuthorizedUser(user: user!)
     }

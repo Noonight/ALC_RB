@@ -118,7 +118,8 @@ extension RegistrationViewController: RegistrationView {
     }
     
     func registrationError(error: Error) {
-        showToast(message: "Не удалось создать пользователя")
+//        showToast(message: "Не удалось создать пользователя")
+        showAlert(message: error.localizedDescription)
         Print.d(object: error)
     }
     

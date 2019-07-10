@@ -185,17 +185,17 @@ extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
         var user = userDefaults.getAuthorizedUser()
 //        dump(user?.person)
         
-        if user?.person.participationMatches.contains(where: { pMatch -> Bool in
+        if user?.person.participationMatches!.contains(where: { pMatch -> Bool in
             return pMatch.id == match.match?.id
         }) ?? false {
 //            user?.person.participationMatches.filter({ pMatch -> Bool in
 //                return pMatch.id == match.match?.id
 //            }).first
-            user?.person.participationMatches.removeAll(where: { pMatch -> Bool in
+            user?.person.participationMatches!.removeAll(where: { pMatch -> Bool in
                 return pMatch.id == match.match?.id
             })
             if match.match?.referees.count ?? 0 > 0 {
-                user?.person.participationMatches.append(match.match!)
+                user?.person.participationMatches!.append(match.match!)
             }
 //            for i in 0..<user!.person.participationMatches.count {
 //                if user?.person.participationMatches[i].id == match.match?.id {
@@ -203,7 +203,7 @@ extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
 //                }
 //            }
         } else {
-            user?.person.participationMatches.append(match.match!)
+            user?.person.participationMatches!.append(match.match!)
         }
         userDefaults.setAuthorizedUser(user: user!)
 //        dump(userDefaults.getAuthorizedUser()?.person)

@@ -113,7 +113,8 @@ extension AuthViewController: AuthView {
     }
     
     func authorizationError(error: Error) {
-        showToast(message: "Неверные данные", seconds: 3.0)
+        showAlert(message: error.localizedDescription)
+//        showToast(message: "Неверные данные", seconds: 3.0)
     }
 }
 

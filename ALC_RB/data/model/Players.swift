@@ -36,7 +36,7 @@ struct Person: Codable {
     var birthdate: String
     var photo: String?
     var desc: String
-    var participationMatches: [ParticipationMatch]
+    var participationMatches: [ParticipationMatch]?
     var pastLeagues: [PastLeague]
     var id: String
     var login: String
