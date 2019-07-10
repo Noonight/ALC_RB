@@ -25,4 +25,11 @@ class TeamCommandsController {
             return team.id == id
         }).first
     }
+    func addPlayerById(id: String, player: Player) {
+        for i in 0..<teams.count {
+            if teams[i].id == id {
+                teams[i].players.append(player)
+            }
+        }
+    }
 }

@@ -272,6 +272,10 @@ struct LIPlayer: Codable {
     let id: String
     let playerId: String
     
+    func convertToPlayer() -> Player {
+        return Player().with(inviteStatus: inviteStatus, number: number, activeYellowCards: activeYellowCards, yellowCards: yellowCards, redCards: redCards, activeDisquals: activeDisquals, disquals: disquals, matches: matches, goals: goals, id: id, playerID: playerId)
+    }
+    
     enum CodingKeys: String, CodingKey {
         case inviteStatus = "inviteStatus"
         case number = "number"

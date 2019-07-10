@@ -37,11 +37,7 @@ class CommandEditLKViewController: BaseStateViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
-        
-        mutablePlayers = team.players
-        
-        presenter.getPersons()
-        
+    
         saveBtn.image = saveBtn.image?.af_imageScaled(to: CGSize(width: 24, height: 24))
         
         commandPlayers.dataSource = commandPlayersTableViewHelper
@@ -61,6 +57,11 @@ class CommandEditLKViewController: BaseStateViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        team.players = (teamController.getTeamById(id: team.id)?.players)!
+        mutablePlayers = team.players
+        
+        presenter.getPersons()
         
         Print.m("We are in CommandEditLKViewController")
         

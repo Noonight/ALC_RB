@@ -12,8 +12,8 @@ protocol CommandAddPlayerView: MvpView {
     func onFetchPersonsSuccess(players: Players)
     func onFetchPersonsFailure(error: Error)
     
-    func onRequestAddPlayerToTeamSuccess(singleLineMessage: SingleLineMessage)
-    func onRequestAddPlayerToTeamFailure(singleLineMessage: SingleLineMessage)
+    func onRequestAddPlayerToTeamSuccess(liLeagueInfo: LILeagueInfo)
+    func onRequestAddPlayerToTeamMessage(singleLineMessage: SingleLineMessage)
     func onRequestAddPlayerToTeamError(error: Error)
     
     func onFetchQueryPersonsSuccess(players: Players)
@@ -32,12 +32,12 @@ class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewControlle
     }
     
     func addPlayerToTeamForLeague(token: String, addPlayerToTeam: AddPlayerToTeam) {
-        apiService.post_addPlayerToTeam(token: token, addPlayerToTeam: addPlayerToTeam, response_success: { (singleLineMessage) in
-            self.getView().onRequestAddPlayerToTeamSuccess(singleLineMessage: singleLineMessage)
-        }, response_failure: { (error) in
+        apiService.post_addPlayerToTeam(token: token, addPlayerToTeam: addPlayerToTeam, response_success: { liLeagueInfo in
+            self.getView().onRequestAddPlayerToTeamSuccess(liLeagueInfo: liLeagueInfo)
+        }, response_failure: { error in
             self.getView().onRequestAddPlayerToTeamError(error: error)
-        }) { (singleLineMessage) in
-            self.getView().onRequestAddPlayerToTeamFailure(singleLineMessage: singleLineMessage)
+        }) { message in
+            self.getView().onRequestAddPlayerToTeamMessage(singleLineMessage: message)
         }
     }
     

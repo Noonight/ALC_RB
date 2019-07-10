@@ -42,6 +42,10 @@ class CommandInvitePlayersTableViewHelper: NSObject, UITableViewDataSource, UITa
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 88
+    }
+    
     func configureCell(cell: CommandInvitePlayersTableViewCell, model: CommandInvitePlayersTableViewCell.CellModel, tag: Int) {
         cell.cellModel = model
 //        cell.playerDeleteBtn.tag = tag

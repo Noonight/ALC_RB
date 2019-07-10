@@ -409,7 +409,7 @@ class ApiRequests {
         }
     }
     
-    func post_addPlayerToTeam(token: String, addPlayerToTeam: AddPlayerToTeam, response_success: @escaping (SingleLineMessage) -> (), response_failure: @escaping (Error) -> (), response_single_line_message: @escaping (SingleLineMessage) -> ()) {
+    func post_addPlayerToTeam(token: String, addPlayerToTeam: AddPlayerToTeam, response_success: @escaping (LILeagueInfo) -> (), response_failure: @escaping (Error) -> (), response_single_line_message: @escaping (SingleLineMessage) -> ()) {
         
         
         let header: HTTPHeaders = [
@@ -418,31 +418,77 @@ class ApiRequests {
         ]
         
         Alamofire
-            .request(ApiRoute.getApiURL(.post_add_player_team), method: .post, parameters: addPlayerToTeam.toParams(), encoding: JSONEncoding.default, headers: header)
-            .responseSingleLineMessage(completionHandler: { (response) in
-                switch response.result {
-                case .success:
-//                    Print.m(response.result.error)
-                    let statusCode = response.response?.statusCode ?? 0
-                    switch statusCode {
-                    case 200...299:
-                        if let singleLineMessage = response.result.value {
-                            response_success(singleLineMessage)
-                        }
-                    default:
-                        if let singleLineMessage = response.result.value {
-                            response_single_line_message(singleLineMessage)
-                        }
-                    }
-                case.failure(let error):
-                    if let singleLineMessage = response.result.value {
-                        response_single_line_message(singleLineMessage)
-                    } else {
-                        response_failure(error)
-                    }
+            .upload(multipartFormData: { (multipartFormData) in
+                for (key, value) in addPlayerToTeam.toParams() {
+                    let strValue = value as! String
+                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
                 }
-            })
+            },
+                    usingThreshold: UInt64(),
+                    to: ApiRoute.getApiURL(.post_add_player_team),
+                    method: .post,
+                    headers: ["auth" : token])
+            { (result) in
+                switch result {
+                case .success(let upload, _, _):
+
+                    upload.responseLILeagueInfo(completionHandler: { response in
+                        switch response.result {
+                        case .success(let value):
+                            response_success(value)
+                        case .failure(let error):
+                            upload.responseSingleLineMessage(completionHandler: { response in
+                                switch response.result {
+                                case .success(let value):
+                                    response_single_line_message(value)
+                                case .failure(let error):
+                                    response_failure(error)
+                                }
+                            })
+                        }
+                    })
+                case .failure(let error):
+                    response_failure(error)
+                }
+        }
     }
+    
+//    func post_addPlayerToTeam(token: String, addPlayerToTeam: AddPlayerToTeam, response_success: @escaping (SingleLineMessage) -> (), response_failure: @escaping (Error) -> ()) {
+//
+//        let header: HTTPHeaders = [
+//            "Content-Type" : "application/json",
+//            "auth" : "\(token)"
+//        ]
+//
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.post_add_player_team), method: .post, parameters: addPlayerToTeam.toParams(), encoding: JSONEncoding.default, headers: header)
+//            .responseJSON(completionHandler: { response in
+//                if response.error != nil {
+//                    response_failure(response.error!)
+//                    return
+//                }
+//                Print.m(response.result.value)
+//                do {
+//                    let decoder = JSONDecoder()
+//                    let value = try decoder.decode(SingleLineMessage.self, from: response.data!)
+//                    response_success(value)
+//                } catch {
+//                    Print.m("Все плохо, ты не знал?")
+//                }
+//
+//
+//            })
+//            .responseSingleLineMessage(completionHandler: { (response) in
+////                dump(response)
+//                Print.m(response.result.value)
+//                switch response.result {
+//                case .success(let value):
+//                    response_success(value)
+//                case.failure(let error):
+//                    response_failure(error)
+//                }
+//            })
+//    }
     
     func post_matchSetReferee(token: String, editMatchReferees: EditMatchReferees, response_success: @escaping (SoloMatch) -> (), response_message: @escaping (SingleLineMessage) -> (), response_failure: @escaping (Error) -> ()) {
         

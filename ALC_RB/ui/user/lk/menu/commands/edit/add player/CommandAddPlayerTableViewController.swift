@@ -13,6 +13,9 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
         static let list = "cell_command_add_player"
         static let loading = "cell_command_add_player_loading"
     }
+    private enum Texts {
+        static let playerInTeam = "Игрок уже получил приглашение в эту команду"
+    }
     
     struct TableModel {
         var players = Players()
@@ -109,6 +112,8 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
         let player: Person
         if isFiltering() {
             player = filteredPlayers.people[indexPath.row]
+            let teamPlayers = teamController.getTeamById(id: self.team.id)?.players
+            cell.usedPlayers = teamPlayers!
             cell.configure(with: player)
             
             cell.cell_add_player_btn.tag = indexPath.row
@@ -146,10 +151,13 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
             personId = tableModel.players.people[sender.tag].id
             Print.m("tag of button is \(sender.tag). item on this tag is \(tableModel.players.people[sender.tag])")
         }
-        presenter.addPlayerToTeamForLeague(token: userDefaultsHelper.getAuthorizedUser()!.token, addPlayerToTeam: AddPlayerToTeam(
+        let addPlayer = AddPlayerToTeam(
             _id: leagueId,
             teamId: team.id,
             playerId: personId)
+        dump(userDefaultsHelper.getAuthorizedUser()?.token)
+        dump(addPlayer)
+        presenter.addPlayerToTeamForLeague(token: userDefaultsHelper.getAuthorizedUser()!.token, addPlayerToTeam: addPlayer
         )
         currentAddId = sender.tag
     }
@@ -267,6 +275,22 @@ private extension CommandAddPlayerTableViewController {
 }
 
 extension CommandAddPlayerTableViewController : CommandAddPlayerView {
+    func onRequestAddPlayerToTeamSuccess(liLeagueInfo: LILeagueInfo) {
+        //        teamController.addPlayerById(id: team.id, player: tableModel.players.people[currentId])
+        if let team = liLeagueInfo.league.teams?.filter({ liTeam -> Bool in
+            return liTeam.id == team.id
+        }).first {
+            var convertedPlayers: [Player] = []
+            for i in 0..<team.players!.count {
+                convertedPlayers.append(team.players![i].convertToPlayer())
+            }
+            teamController.setPlayersByTeamId(id: team.id!, players: convertedPlayers)
+//            teamController.addPlayerById(id: team.id, player: <#T##Player#>)
+        }
+        
+        deleteLastChosenRow()
+    }
+    
     func onFetchQueryPersonsSuccess(players: Players) {
         // asd
         Print.m(players)
@@ -279,18 +303,15 @@ extension CommandAddPlayerTableViewController : CommandAddPlayerView {
         setState(state: BaseState.error(message: error.localizedDescription))
     }
     
-    func onRequestAddPlayerToTeamSuccess(singleLineMessage: SingleLineMessage) {
-        deleteLastChosenRow()
-//        showToast(message: "add player to team good")
-    }
-    
-    func onRequestAddPlayerToTeamFailure(singleLineMessage: SingleLineMessage) {
+    func onRequestAddPlayerToTeamMessage(singleLineMessage: SingleLineMessage) {
         // somwthing
-        showToast(message: "Ошибка: \(singleLineMessage.message)")
+        Print.m(singleLineMessage.message)
+        showAlert(title: singleLineMessage.message, message: "")
     }
     
     func onRequestAddPlayerToTeamError(error: Error) {
-        showToast(message: "Неизвестная ошибка.")
+//        showToast(message: "Неизвестная ошибка.")
+        showAlert(message: error.localizedDescription)
         Print.m(error)
         // something
     }

@@ -18,9 +18,10 @@ class CommandAddPlayerTableViewCell: UITableViewCell {
     @IBOutlet weak var cell_loadMore_btn: UIButton!
     @IBOutlet weak var cell_add_player_btn: UIButton!
     
+    var usedPlayers: [Player] = []
+    
     override func prepareForReuse() {
         super.prepareForReuse()
-        
     }
     
     override func awakeFromNib() {
@@ -32,22 +33,28 @@ class CommandAddPlayerTableViewCell: UITableViewCell {
     
     func configure(with person: Person?) {
         if let person = person {
-            player_image.alpha = 1
-            player_name.alpha = 1
-            player_date_of_birth.alpha = 1
-            cell_loadMore_btn.isEnabled = false
-            cell_loadMore_btn.alpha = 0
-            cell_add_player_btn.alpha = 1
-            cell_add_player_btn.isEnabled = true
-//            cell_loading_indicator.stopAnimating()
-            if person.photo != nil {
-                player_image.af_setImage(withURL: ApiRoute.getImageURL(image: (person.photo)!))
-                player_image.image = player_image.image?.af_imageRoundedIntoCircle()
+            if usedPlayers.contains(where: { player -> Bool in
+                return player.playerID == person.id
+            }) {
+                isHidden = true
             } else {
-                player_image.image = #imageLiteral(resourceName: "ic_logo")
+                player_image.alpha = 1
+                player_name.alpha = 1
+                player_date_of_birth.alpha = 1
+                cell_loadMore_btn.isEnabled = false
+                cell_loadMore_btn.alpha = 0
+                cell_add_player_btn.alpha = 1
+                cell_add_player_btn.isEnabled = true
+                //            cell_loading_indicator.stopAnimating()
+                if person.photo != nil {
+                    player_image.af_setImage(withURL: ApiRoute.getImageURL(image: (person.photo)!))
+                    player_image.image = player_image.image?.af_imageRoundedIntoCircle()
+                } else {
+                    player_image.image = #imageLiteral(resourceName: "ic_logo")
+                }
+                player_name.text = person.getFullName()
+                player_date_of_birth.text = person.birthdate.UTCToLocal(from: .utc, to: .local)
             }
-            player_name.text = person.getFullName()
-            player_date_of_birth.text = person.birthdate.UTCToLocal(from: .utc, to: .local)
         } else {
             cell_add_player_btn.alpha = 0
             cell_add_player_btn.isEnabled = false
