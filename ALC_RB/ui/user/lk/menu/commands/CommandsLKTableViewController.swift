@@ -72,6 +72,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
     
     let cellId = "commands_lk_cell"
     let segueId = "segue_edit_team"
+    let segueAdd = "segue_add_team"
     let userDefaults = UserDefaultsHelper()
     
     let presenter = CommandsLKPresenter()
@@ -88,8 +89,11 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         
         participationController = ParticipationCommandsController(participation: (userDefaults.getAuthorizedUser()?.person.participation)!)
         
-        let ownerParticipations = getPersonOwnCommands(participation: participationController.participation, tournaments: tournaments)
+//        dump(userDefaults.getAuthorizedUser()?.person)
+//        dump(participationController)
         
+        let ownerParticipations = getPersonOwnCommands(participation: participationController.participation, tournaments: tournaments)
+//        dump(ownerParticipations)
         func getOwnerTeam(participation: Participation, tournaments: Tournaments) -> Team? {
             var returnedTeam: Team?
             for league in tournaments.leagues {
@@ -108,6 +112,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
             var teams: [Team] = []
             for participation in ownerParticipations {
                 let team = getOwnerTeam(participation: participation, tournaments: tournaments)
+//                dump(team)
                 if team != nil {
                     teams.append(team!)
                 }
@@ -148,13 +153,14 @@ class CommandsLKTableViewController: BaseStateTableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.presenter.refreshUser(token: userDefaults.getAuthorizedUser()!.token)
         
         Print.m("We are in CommandLKTableViewController")
         
 //        dump(userDefaults.getAuthorizedUser()?.person)
         
         setState(state: .loading)
-        presenter.getTournaments()
+//        presenter.getTournaments()
 //        updateUI()
 
         navigationController?.navigationBar.topItem?.rightBarButtonItem = createNewCommandBtn
@@ -181,6 +187,9 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         
             //            Print.m("count of participation > 0 ->> \(person?.participation)")
             //            setState(state: .loading)
+            if tableModel.personOwnCommands.count + tableModel.personInsideCommands.count != participationController.participation.count {
+                preparePersonCommands()
+            }
             if !tableModel.isEmpty() || !tableModel.commandsIsEmpty() {
                 Print.m("table model not empty ->> \(!tableModel.isEmpty())")
                 Print.m("table model commands not empty ->> \(!tableModel.commandsIsEmpty())")
@@ -420,15 +429,20 @@ class CommandsLKTableViewController: BaseStateTableViewController {
             let destination = segue.destination as? CommandEditLKViewController,
             let cellIndex = tableView.indexPathForSelectedRow?.row
         {
-//            destination.team = tableModel.personOwnCommands[cellIndex]
             destination.team = (tableModel.tournaments.leagues.filter { (league) -> Bool in
                 return league.id == tableModel.personOwnCommands[cellIndex].league
                 }.first?
                 .teams.filter({ (team) -> Bool in
                     return team.id == tableModel.personOwnCommands[cellIndex].team
                 }).first!)!
-//            destination.team = teamController.teams
             destination.participation = tableModel.personOwnCommands[cellIndex]
+            destination.teamController = self.teamController
+            destination.participationController = self.participationController
+        }
+        
+        if segue.identifier == segueAdd,
+            let destination = segue.destination as? CommandCreateLKViewController
+        {
             destination.teamController = self.teamController
             destination.participationController = self.participationController
         }
@@ -437,6 +451,16 @@ class CommandsLKTableViewController: BaseStateTableViewController {
 }
 
 extension CommandsLKTableViewController : CommandsLKView {
+    func getRefreshUserSuccessful(authUser: AuthUser) {
+        userDefaults.setAuthorizedUser(user: authUser)
+        self.presenter.getTournaments()
+//        self.authUser = userDefaults.getAuthorizedUser()
+    }
+    
+    func getRefreshUserFailure(error: Error) {
+        showAlert(message: error.localizedDescription)
+    }
+    
     func getTournamentsSuccess(tournaments: Tournaments) {
         tableModel.tournaments = Tournaments()
         tableModel.tournaments = tournaments

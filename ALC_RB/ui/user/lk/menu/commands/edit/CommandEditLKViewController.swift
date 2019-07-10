@@ -180,11 +180,17 @@ extension CommandEditLKViewController: CommandEditLKView {
 }
 
 extension CommandEditLKViewController: OnCommandPlayerDeleteBtnPressedProtocol {
+    
     func onDeleteBtnPressed(index: IndexPath, model: CommandPlayersTableViewCell.CellModel) {
         Print.m("player table \(index.row)")
         for i in 0...mutablePlayers.count {
             if model.player?.id == mutablePlayers[i].id {
-                mutablePlayers.remove(at: i)
+                if mutablePlayers.count == 1 {
+                    showAlert(message: "Нельзя удалять последнего игрока.")
+//                    showAlertOkCancel(title: "Предупреждение", message: "Если удалить последнего игрока ", ok: <#T##() -> ()#>, cancel: <#T##() -> ()#>)
+                } else {
+                    mutablePlayers.remove(at: i)
+                }
                 break
             }
         }

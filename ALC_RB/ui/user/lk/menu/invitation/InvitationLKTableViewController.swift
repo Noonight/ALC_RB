@@ -103,7 +103,7 @@ class InvitationLKTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        dump(userDefault.getAuthorizedUser()?.person)
+//        dump(userDefault.getAuthorizedUser()?.person)
         if userDefault.getAuthorizedUser()?.person.pendingTeamInvites.count ?? 0 > 0 {
             hideEmptyView()
             if tableModel.isEmpty() {

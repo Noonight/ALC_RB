@@ -51,6 +51,10 @@ class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegat
     
     var tmpTournamentTitle: String?
     
+    // MARK: - model controllers
+    var teamController: TeamCommandsController!
+    var participationController: ParticipationCommandsController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
@@ -219,18 +223,26 @@ extension CommandCreateLKViewController : CommandCreateLKView {
     func onCreateTeamSuccess(team: SoloTeam) {
 //        showToast(message: "\(teamCreatedMessage)\(team.team.name)", seconds: 5)
         if let tournamentTitle = self.tmpTournamentTitle {
-            showAlert(title: "Успех", message: "Команда '\(team.team.name)' заявлена на турнир '\(tournamentTitle)'")
+//            showAlert(title: "Успех", message: "Команда '\(team.team.name)' заявлена на турнир '\(tournamentTitle)'")
+            showAlert(title: "Успех", message: "Команда '\(team.team.name)' заявлена на турнир '\(tournamentTitle)'") {
+                self.navigationController?.popViewController(animated: true)
+            }
         } else {
-            showAlert(title: "Успех", message: "Команда '\(team.team.name)' создана")
+//            showAlert(title: "Успех", message: "Команда '\(team.team.name)' создана")
+            showAlert(title: "Успех", message: "Команда '\(team.team.name)' создана") {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
         
-        var tmpUser = userDefaults.getAuthorizedUser()
-        tmpUser?.person.participation.append(Participation(league: presenter.createTeamCache!._id, id: "", team: team.team.id))
-//        tmpUser?.person.participation.append(Participation(league: presenter.createTeamCache?._id, id: team.team.id, team: <#T##String#>))
-        userDefaults.setAuthorizedUser(user: tmpUser!)
+//        var tmpUser = userDefaults.getAuthorizedUser()
+//        tmpUser?.person.participation.append(Participation(league: presenter.createTeamCache!._id, id: "", team: team.team.id))
+////        tmpUser?.person.participation.append(Participation(league: presenter.createTeamCache?._id, id: team.team.id, team: <#T##String#>))
+//        userDefaults.setAuthorizedUser(user: tmpUser!)
 //        dismiss(animated: true) {
 //            Print.m("Dismiss complete")
 //        }
+//        teamController.teams.append(team.team)
+//        participationController.participation.append(Participation(league: presenter.createTeamCache!._id, id: "", team: team.team.id))
     }
     
     func onCreateTeamFailure(error: Error) {

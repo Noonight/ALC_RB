@@ -14,6 +14,9 @@ protocol CommandsLKView : MvpView {
     func getTournamentsSuccess(tournaments: Tournaments)
     func getTournamentsFailure(error: Error)
     
+    func getRefreshUserSuccessful(authUser: AuthUser)
+    func getRefreshUserFailure(error: Error)
+    
 }
 
 class CommandsLKPresenter : MvpPresenter<CommandsLKTableViewController> {
@@ -25,6 +28,14 @@ class CommandsLKPresenter : MvpPresenter<CommandsLKTableViewController> {
             self.getView().getTournamentsSuccess(tournaments: tournaments)
         }) { (error) in
             self.getView().getTournamentsFailure(error: error)
+        }
+    }
+    
+    func refreshUser(token: String) {
+        apiService.get_refreshAuthUser(token: token, success: { authUser in
+            self.getView().getRefreshUserSuccessful(authUser: authUser)
+        }) { error in
+            self.getView().getRefreshUserFailure(error: error)
         }
     }
     

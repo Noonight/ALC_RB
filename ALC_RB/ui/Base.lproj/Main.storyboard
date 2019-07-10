@@ -3143,7 +3143,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="40G-0W-Xec">
                             <connections>
                                 <action selector="onAddCommandBtnPressed:" destination="efu-UH-kJW" id="mAy-w6-iAE"/>
-                                <segue destination="V6h-1D-JjW" kind="show" id="Ecg-ew-vWe"/>
+                                <segue destination="V6h-1D-JjW" kind="show" identifier="segue_add_team" id="Ecg-ew-vWe"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

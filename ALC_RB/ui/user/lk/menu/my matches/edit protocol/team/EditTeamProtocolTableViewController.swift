@@ -42,7 +42,7 @@ class EditTeamProtocolTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        dump(playersController.playersSwitch)
+//        dump(playersController.playersSwitch)
         
         self.tmpPlayersController = playersController
         
