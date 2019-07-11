@@ -104,6 +104,10 @@ class RegistrationViewController: UIViewController {
 // MARK: - Presenter init
 
 extension RegistrationViewController: RegistrationView {
+    func registrationMessage(message: SingleLineMessage) {
+        showAlert(title: message.message, message: "")
+    }
+    
     func initPresenter() {
         presenter.attachView(view: self)
     }
@@ -118,7 +122,6 @@ extension RegistrationViewController: RegistrationView {
     }
     
     func registrationError(error: Error) {
-//        showToast(message: "Не удалось создать пользователя")
         showAlert(message: error.localizedDescription)
         Print.d(object: error)
     }

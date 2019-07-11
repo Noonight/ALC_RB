@@ -9,33 +9,41 @@
 import Foundation
 import Alamofire
 
+protocol NewsAnnounceView: MvpView {
+    func onFetchNewsSuccess(news: News)
+    func onFetchNewsFailure(error: Error)
+    
+    func onFetchAnnouncesSuccess(announces: Announce)
+    func onFetchAnnouncesFailure(error: Error)
+}
+
 class NewsAnnouncePresenter: MvpPresenter<NewsAnnounceTableViewController> {
     
-    func getFewNews() {        
+    func getFewNews(closure: @escaping () -> ()) {
         Alamofire
             .request(ApiRoute.getApiURL(.news))
             .responseNews { response in
-            if let news = response.result.value {
-                self.getView().onGetNewsDataSuccess(news: news)
-                //try! print(news.jsonString()!)
-            }
+                switch response.result {
+                case .success(let value):
+                    self.getView().onFetchNewsSuccess(news: value)
+                    closure()
+                case .failure(let error):
+                    self.getView().onFetchNewsFailure(error: error)
+                }
         }
-        //Alamofire.req
-        
     }
     
-    func getFewAnnounces() {
+    func getFewAnnounces(closure: @escaping () -> ()) {
         Alamofire
             .request(ApiRoute.getApiURL(.announce))
             .responseAnnounce{ response in
-                if let announce = response.result.value {
-                    self.getView().onGetAnnounceDataSuccess(announces: announce)
-                    //try! print(announce.jsonString()!)
+                switch response.result {
+                case .success(let value):
+                    self.getView().onFetchAnnouncesSuccess(announces: value)
+                    closure()
+                case .failure(let error):
+                    self.getView().onFetchAnnouncesFailure(error: error)
                 }
-        //print("presenter: getFewAnnounces")
-        //return announ
         }
-    
     }
-
 }

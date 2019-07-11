@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsAnnounceTableViewController: UITableViewController, MvpView {
+class NewsAnnounceTableViewController: UITableViewController {
 
     @IBOutlet var noNewsView: UIView!
     @IBOutlet var noAnnounceView: UIView!
@@ -49,6 +49,7 @@ class NewsAnnounceTableViewController: UITableViewController, MvpView {
     let cellAnnounce = "cell_announce_dynamic"
     
     private let presenter = NewsAnnouncePresenter()
+    let refreshControll = UIRefreshControl()
     
     var tableData = NewsTableData()
     
@@ -59,26 +60,49 @@ class NewsAnnounceTableViewController: UITableViewController, MvpView {
         super.viewDidLoad()
         
         initPresenter()
-        
-        tableView.tableFooterView = UIView()
-        
-        self.tableView.es.addPullToRefresh {
-            self.fetch()
-        }
-        
         fetch()
-        //tableView.backgroundView = noNewsView
-        //navigationController?.navigationItem.title = "title"
-        //print(navigationController?.navigationItem.title)
+        tableView.tableFooterView = UIView()
+        tableView.refreshControl = self.refreshControll
+        
+        self.refreshControll.addTarget(self, action: #selector(fetch), for: .valueChanged)
     }
     
-    func initPresenter() {
-        presenter.attachView(view: self)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController!.view.transform = CGAffineTransform(scaleX: 0.9, y: 0.9);
     }
     
-    func fetch() {
-        presenter.getFewNews()
-        presenter.getFewAnnounces()
+    @objc func fetch() {
+        if !tableView.isDragging
+        {
+            let group = DispatchGroup()
+            group.enter()
+            presenter.getFewNews() {
+                group.leave()
+            }
+            group.enter()
+            presenter.getFewAnnounces() {
+                group.leave()
+            }
+            group.notify(queue: .main) {
+                self.endRefreshing()
+            }
+        }
+    }
+    
+    // MARK: - Helpers
+    func endRefreshing() {
+        if self.refreshControll.isRefreshing == true {
+            self.refreshControll.endRefreshing()
+        }
+    }
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+    {
+        if refreshControl?.isRefreshing == true
+        {
+            fetch()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -91,23 +115,7 @@ class NewsAnnounceTableViewController: UITableViewController, MvpView {
                 date: (tableData.news.news[cellIndex].updatedAt).UTCToLocal(from: .utc, to: .local),
                 content: tableData.news.news[cellIndex].content,
                 imagePath: tableData.news.news[cellIndex].img)
-//            destination.cTitle = tableData.news.news[cellIndex].caption
-//            destination.cDate = tableData.news.news[cellIndex].updatedAt
-//            destination.cImagePath = tableData.news.news[cellIndex].img
-//            destination.cText = tableData.news.news[cellIndex].content
         }
-    }
-    
-    func onGetNewsDataSuccess(news: News) {
-        tableData.news = news
-        self.tableView.reloadData()
-    }
-    
-    func onGetAnnounceDataSuccess(announces: Announce) {
-        tableData.announces = announces
-        //try! print(tableData.announces.jsonString())
-        self.tableView.reloadData()
-        self.tableView.es.stopPullToRefresh()
     }
     
     // MARK: - Table view data source
@@ -129,8 +137,6 @@ class NewsAnnounceTableViewController: UITableViewController, MvpView {
         
         let cellAnnounce = tableView.dequeueReusableCell(withIdentifier: self.cellAnnounce) as? AnnouncesTableViewCell
         
-        //print("section: \(indexPath.section), row: \(indexPath.row)")
-        
         if (indexPath.section == 0) {
             cellNews?.content?.text = tableData.news.news[indexPath.row].caption
             cellNews?.date?.text = (tableData.news.news[indexPath.row].updatedAt).UTCToLocal(from: .utc, to: .local)
@@ -148,17 +154,9 @@ class NewsAnnounceTableViewController: UITableViewController, MvpView {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        //navigationController?.pushViewController(NewsDetailViewController(), animated: true)
-        //self.navigationController?.pushViewController(NewsDetailViewController(), animated: true)
     }
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let btn = UIButton(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
-//        btn.backgroundColor = UIColor.white
-//
-//        btn.addTarget(self, action: #selector(onBtnPressed), for: .touchUpInside)
-//        btn.setTitle(tableData.footer[section], for: .normal)
-//        btn.setTitleColor(.black, for: .normal)
 
         if (section == 0) {
             let footerBtn = FooterBtn.instanceBtn(id: .news, title: tableData.footer[section], viewContainer: tableView)
@@ -170,8 +168,6 @@ class NewsAnnounceTableViewController: UITableViewController, MvpView {
             footerBtn.addTarget(self, action: #selector(onFooterBtnPressed), for: .touchUpInside)
             return footerBtn
         }
-        
-        //let footerBtn = FooterBtn.instanceBtn(id: .news, title: <#T##String#>, viewContainer: <#T##UIView#>)
         
         return UIView()
     }
@@ -198,6 +194,30 @@ class NewsAnnounceTableViewController: UITableViewController, MvpView {
     }
 }
 
+extension NewsAnnounceTableViewController: NewsAnnounceView {
+    func onFetchNewsSuccess(news: News) {
+        tableData.news = news
+        self.tableView.reloadData()
+    }
+    
+    func onFetchNewsFailure(error: Error) {
+        Print.m(error)
+    }
+    
+    func onFetchAnnouncesSuccess(announces: Announce) {
+        tableData.announces = announces
+        self.tableView.reloadData()
+    }
+    
+    func onFetchAnnouncesFailure(error: Error) {
+        Print.m(error)
+    }
+    
+    func initPresenter() {
+        presenter.attachView(view: self)
+    }
+}
+
 class FooterBtn: UIButton {
     
     enum BtnType: Int {
@@ -214,21 +234,11 @@ class FooterBtn: UIButton {
     }
     
     var btnType: BtnType?
-    //var btn: UIButton?
     var viewContainer: UIView?
     
     init(id: BtnType, title: String, viewContainer: UIView/*, actionTouchUpInside: @escaping () -> ()*/) {
         self.btnType = id
         self.viewContainer = viewContainer
-//        btn = UIButton(frame: CGRect(x: DefaultParams.x,
-//                                     y: DefaultParams.y,
-//                                     width: Int(viewContainer.frame.width),
-//                                     height: DefaultParams.height))
-//        btn?.backgroundColor = DefaultParams.backgroundColor
-//        btn?.setTitle(title, for: .normal)
-//        btn?.setTitleColor(DefaultParams.titleColor, for: .normal)
-//        self.actionTouchUpInside = actionTouchUpInside
-//        btn?.addTarget(self, action: #selector(actionTouchUpInside), for: .touchUpInside)
         super.init(frame: CGRect(x: DefaultParams.x,
                                  y: DefaultParams.y,
                                  width: Int(viewContainer.frame.width),
@@ -245,10 +255,6 @@ class FooterBtn: UIButton {
     func getInstance() -> FooterBtn {
         return self
     }
-    
-//    func addTouchUpInside(() -> ()) {
-//        
-//    }
     
     static func instanceBtn(id: BtnType, title: String, viewContainer: UIView/*, actionTouchUpInside: () -> ()*/) -> FooterBtn {
         return FooterBtn(id: id, title: title, viewContainer: viewContainer).getInstance()

@@ -36,7 +36,7 @@ class ApiRequests {
         }
     }
     
-    func post_registration(userData: Registration, profileImage: UIImage, response_success: @escaping (AuthUser) -> (), response_failure: @escaping (Error) -> ()) {
+    func post_registration(userData: Registration, profileImage: UIImage, response_success: @escaping (AuthUser) -> (), response_failure: @escaping (Error) -> (), response_message: @escaping (SingleLineMessage) -> ()) {
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in
                 multipartFormData.append(profileImage.jpegData(compressionQuality: 1.0)!, withName: "photo", fileName: "jpg", mimeType: "image/jpg")
@@ -51,8 +51,6 @@ class ApiRequests {
             { (result) in
                 switch result {
                 case .success(let upload, _, _):
-                    //                    upload.uploadProgress(closure: { (progress) in
-                    //                    })
                     
                     upload.responseAuthUser(completionHandler: { (response) in
                         switch response.result {
@@ -61,7 +59,15 @@ class ApiRequests {
                                 response_success(newUser)
                             }
                         case .failure(let error):
-                            response_failure(error)
+//                            response_failure(error)
+                            upload.responseSingleLineMessage(completionHandler: { response in
+                                switch response.result {
+                                case .success(let value):
+                                    response_message(value)
+                                case .failure(let error):
+                                    response_failure(error)
+                                }
+                            })
                         }
                     })
                     
