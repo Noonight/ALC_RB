@@ -10,6 +10,7 @@ import UIKit
 
 class AnnounceAllTableViewController: UITableViewController {
 
+    // MARK: - Var & Let
     let cellId = "cell_announce_date"
     
     var tableData: Announce? {
@@ -20,19 +21,53 @@ class AnnounceAllTableViewController: UITableViewController {
     
     let mTitle = "Объявления"
     
+    let presenter = AnnouncesAllPresenter()
+    let refreshControll = UIRefreshControl()
+    
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.initPresenter()
         self.title = mTitle
         
         tableView.tableFooterView = UIView()
-        
+        prepareRefreshControl()
     }
     
     func updateUI() {
         tableView.reloadData()
     }
+    
+    // MARK: - Prepare
+    func prepareRefreshControl() {
+        tableView.refreshControl = self.refreshControll
+        
+        self.refreshControll.addTarget(self, action: #selector(fetch), for: .valueChanged)
+    }
 
+    // MARK: - UIRefreshControll
+    @objc func fetch() {
+        if !tableView.isDragging
+        {
+            presenter.fetchAnnounces() {
+                self.endRefreshing()
+            }
+        }
+    }
+    
+    func endRefreshing() {
+        if self.refreshControll.isRefreshing == true {
+            self.refreshControll.endRefreshing()
+        }
+    }
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+    {
+        if refreshControl?.isRefreshing == true
+        {
+            fetch()
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -56,4 +91,21 @@ class AnnounceAllTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+}
+
+extension AnnounceAllTableViewController : AnnouncesAllView {
+    func fetchAnnouncesSuccess(announces: Announce) {
+        self.tableData = announces
+    }
+    
+    func fetchAnnouncesFailure(error: Error) {
+        Print.m(error)
+        showRepeatAlert(message: error.localizedDescription) {
+            self.presenter.fetchAnnounces() { }
+        }
+    }
+    
+    func initPresenter() {
+        self.presenter.attachView(view: self)
+    }
 }

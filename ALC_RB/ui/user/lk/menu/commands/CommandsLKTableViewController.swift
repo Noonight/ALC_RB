@@ -89,11 +89,8 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         
         participationController = ParticipationCommandsController(participation: (userDefaults.getAuthorizedUser()?.person.participation)!)
         
-//        dump(userDefaults.getAuthorizedUser()?.person)
-//        dump(participationController)
-        
         let ownerParticipations = getPersonOwnCommands(participation: participationController.participation, tournaments: tournaments)
-//        dump(ownerParticipations)
+        
         func getOwnerTeam(participation: Participation, tournaments: Tournaments) -> Team? {
             var returnedTeam: Team?
             for league in tournaments.leagues {
@@ -112,7 +109,6 @@ class CommandsLKTableViewController: BaseStateTableViewController {
             var teams: [Team] = []
             for participation in ownerParticipations {
                 let team = getOwnerTeam(participation: participation, tournaments: tournaments)
-//                dump(team)
                 if team != nil {
                     teams.append(team!)
                 }
@@ -120,9 +116,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
             return teams
         }
         
-        
         teamController = TeamCommandsController(teams: getOwnerTeams())
-        
     }
     
     // MARK: - Life cycle
@@ -140,19 +134,6 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         tableView.tableFooterView = UIView()
         
         setEmptyMessage(message: "Вы пока не участвуете ни в одной команде")
-        
-//        var user = userDefaults.getAuthorizedUser()
-//
-//        user?.person.participation = [
-//            Participation(league: "5be94d1a06af116344942a92", id: "23r42gerwgwscw2r", team: "5be94d1a06af116344942a93"),
-//            Participation(league: "5be94d1a06af116344942a92", id: "wdfv34t34bt34", team: "5be94d1a06af116344942aff"),
-//            Participation(league: "5be94d1a06af116344942a92", id: "sdf3v4t34tb34", team: "5be94d1a06af116344942ad0"),
-//            Participation(league: "5be94d1a06af116344942a92", id: "sdfv34tn3y4esd", team: "5be94d1a06af116344942aad")
-//        ]
-//
-//        userDefaults.setAuthorizedUser(user: user!)
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -161,11 +142,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         
         Print.m("We are in CommandLKTableViewController")
         
-//        dump(userDefaults.getAuthorizedUser()?.person)
-        
         setState(state: .loading)
-//        presenter.getTournaments()
-//        updateUI()
 
         navigationController?.navigationBar.topItem?.rightBarButtonItem = createNewCommandBtn
     }
@@ -186,11 +163,8 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         defer {
             tableView.reloadData()
         }
-//        if userDefaults.getAuthorizedUser()?.person.participation.count ?? 0 > 0 {
         if participationController.participation.count > 0 {
         
-            //            Print.m("count of participation > 0 ->> \(person?.participation)")
-            //            setState(state: .loading)
             if tableModel.personOwnCommands.count + tableModel.personInsideCommands.count != participationController.participation.count {
                 preparePersonCommands()
             }
@@ -428,6 +402,17 @@ class CommandsLKTableViewController: BaseStateTableViewController {
 
     // MARK: - Navigation
 
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == segueId {
+            return true
+        } else if identifier == segueAdd && userDefaults.getAuthorizedUser()?.person.club != nil {
+            return true
+        } else {
+            showAlert(message: "Необходимо создать клуб.")
+            return false
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueId,
             let destination = segue.destination as? CommandEditLKViewController,
@@ -459,15 +444,18 @@ extension CommandsLKTableViewController : CommandsLKView {
         userDefaults.setAuthorizedUser(user: authUser)
         self.presenter.getTournaments()
         self.tableView.es.stopPullToRefresh()
-//        self.authUser = userDefaults.getAuthorizedUser()
+//        self.authUser = userDefaults.getAuthorizedUser()
+        Print.m(authUser)
     }
     
     func getRefreshUserFailure(error: Error) {
         showAlert(message: error.localizedDescription)
         self.tableView.es.stopPullToRefresh()
+        Print.m(error)
     }
     
     func getTournamentsSuccess(tournaments: Tournaments) {
+        Print.m("get tournament success")
         tableModel.tournaments = Tournaments()
         tableModel.tournaments = tournaments
         prepareModelController(tournaments: tournaments)

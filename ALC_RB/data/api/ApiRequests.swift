@@ -1061,4 +1061,30 @@ class ApiRequests {
         
     }
     
+    func get_news(success: @escaping (News) -> (), failure: @escaping (Error) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.news))
+            .responseNews { response in
+                switch response.result {
+                case .success(let value):
+                    success(value)
+                case .failure(let error):
+                    failure(error)
+                }
+        }
+    }
+    
+    func get_announces(success: @escaping (Announce) -> (), failure: @escaping (Error) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.announce))
+            .responseAnnounce { response in
+                switch response.result {
+                case .success(let value):
+                    success(value)
+                case .failure(let error):
+                    failure(error)
+                }
+        }
+    }
+    
 }

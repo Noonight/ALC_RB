@@ -10,6 +10,7 @@ import UIKit
 
 class NewsAllTableViewController: UITableViewController {
 
+    // MARK: - Var & Let
     let cellId = "cell_news_dynamic"
     
     var tableData: News? {
@@ -23,20 +24,47 @@ class NewsAllTableViewController: UITableViewController {
     
     let mTitle = "Новости"
     
+    let presenter = NewsAllPresenter()
+    let refreshControll = UIRefreshControl()
+    
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //navigationController?.navigationItem.title = mTitle
-        
-        //print(parent!.navigationController?.navigationBar)
-        
+        self.initPresenter()
         self.title = mTitle
         
         tableView.tableFooterView = UIView()
+        
+        tableView.refreshControl = self.refreshControll
+        
+        self.refreshControll.addTarget(self, action: #selector(fetch), for: .valueChanged)
     }
 
     func updateUI() {
         tableView.reloadData()
+    }
+    // MARK: - UIRefreshController
+    @objc func fetch() {
+        if !tableView.isDragging
+        {
+            presenter.fetchNews() {
+                self.endRefreshing()
+            }
+        }
+    }
+    
+    func endRefreshing() {
+        if self.refreshControll.isRefreshing == true {
+            self.refreshControll.endRefreshing()
+        }
+    }
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+    {
+        if refreshControl?.isRefreshing == true
+        {
+            fetch()
+        }
     }
     
     // MARK: - Table view data source
@@ -74,5 +102,21 @@ class NewsAllTableViewController: UITableViewController {
                 imagePath: tableData!.news[cellIndex].img)
         }
     }
+}
 
+extension NewsAllTableViewController: NewsAllView {
+    func fetchNewsSuccessful(news: News) {
+        self.tableData = news
+    }
+    
+    func fetchNewsFailure(error: Error) {
+        Print.m(error)
+        showRepeatAlert(message: error.localizedDescription) {
+            self.presenter.fetchNews() { }
+        }
+    }
+    
+    func initPresenter() {
+        presenter.attachView(view: self)
+    }
 }
