@@ -17,8 +17,10 @@ target 'ALC_RB' do
   pod 'ActionSheetPicker-3.0'
   pod 'IQKeyboardManagerSwift'
   pod 'ESPullToRefresh'
-  pod 'StatusAlert', '~> 1.1.1'
+  pod 'StatusAlert'#, '~> 1.1.1'
   pod 'AMScrollingNavbar'
   pod 'Kingfisher', '~> 5.0'
   #pod 'SDWebImage', '~> 5.0'
+  #pod "CollieGallery"
+  pod 'Lightbox'
 end

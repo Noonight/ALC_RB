@@ -8,13 +8,18 @@
 
 import UIKit
 import AlamofireImage
+import Lightbox
 
 class NewsDetailViewController: UIViewController, MvpView {
 
-    @IBOutlet weak var mTitle: UILabel?
-    @IBOutlet weak var mDate: UILabel?
-    @IBOutlet weak var mImage: UIImageView?
-    @IBOutlet weak var mText: UITextView?
+    @IBOutlet weak var mTitle: UILabel!
+    @IBOutlet weak var mDate: UILabel!
+    @IBOutlet weak var mImage: UIImageView!
+    @IBOutlet weak var mText: UITextView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var containerView: UIView!
+    
+    @IBOutlet weak var imageHeight: NSLayoutConstraint!
     
     struct NewsDetailContent {
         var cTitle: String? = String()
@@ -36,73 +41,44 @@ class NewsDetailViewController: UIViewController, MvpView {
         }
     }
     
-//    var cTitle: String? = String()
-//    var cDate: String? = String()
-//    var cText: String? = String()
-//    var cImagePath: String? = String()
-    
     private let presenter = NewsDetailPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //print()
-        
         initPresenter()
         
-        //mImage?.frame.minX = 0
-        //mImage?.frame.midY = 0
-        //mImage?.image
+        mImage.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleBottomMargin.rawValue | UIView.AutoresizingMask.flexibleHeight.rawValue | UIView.AutoresizingMask.flexibleRightMargin.rawValue | UIView.AutoresizingMask.flexibleLeftMargin.rawValue | UIView.AutoresizingMask.flexibleTopMargin.rawValue | UIView.AutoresizingMask.flexibleWidth.rawValue)
+        mImage!.contentMode = UIView.ContentMode.scaleAspectFit
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        refreshUI()
+    }
+    
     func refreshUI() {
         mTitle?.text = content?.cTitle
         mDate?.text = content?.cDate
         mText?.text = content?.cText
         presenter.getImage(imageName: (content?.cImagePath)!)
-        
-        //prepareImage()
-        mImage?.af_setImage(withURL: ApiRoute.getImageURL(image: (content?.cImagePath)!))
-    }
-    
-    func prepareImage() {
-        let width = view.frame.width
-        print("width is \(width)")
-        
-        var oldImage: UIImage?
-        presenter.getImage(imageName: (content?.cImagePath)!) { image in
-            oldImage = image
-            let oldWidth = oldImage?.cgImage?.width
-            let oldHeight = oldImage?.cgImage?.height
-            let newHeight = (Int(oldHeight!) / Int(oldWidth!)) * Int(width)
-            print("height is \(newHeight)")
-            //self.mImage?.image = oldImage?.af_imageAspectScaled(toFill: CGSize(width: Int(width), height: newHeight))
-            //self.mImage?.image = oldImage?.af_imageScaled(to: CGSize(width: Int(width), height: newHeight))
-            self.mImage?.image = oldImage?.cgImage?.scaleImageToSize(img: oldImage!, size: CGSize(width: Int(width), height: newHeight))
-        }
-        //mImage?.image?.af_inflate()
-        //mImage?.image?.af_imageAspectScaled(toFit: CGSize(width: view.frame.width, height: view.frame.height))
     }
     
     func initPresenter() {
         presenter.attachView(view: self)
-        
-        //presenter.getImage(imageName: cImagePath!)
     }
-
     
     func onGetImageSuccess(_ image: UIImage) {
-        //mImage?.image = image
-        
-        //mImage.st
+        mImage?.image = image
+        imageHeight.constant = image.size.height
+        containerView.layoutIfNeeded()
+        mImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap)))
+        mImage.isUserInteractionEnabled = true
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        refreshUI()
-//        mTitle?.text = cTitle
-//        mDate?.text = cDate
-//        //mImage.image = cImage
-//        mText?.text = cText
-
+    @objc func imageTap() {
+        let images = [LightboxImage(image: mImage.image!)]
+        let controller = LightboxController(images: images)
+        controller.dynamicBackground = true
+        present(controller, animated: true, completion: nil)
     }
 }
