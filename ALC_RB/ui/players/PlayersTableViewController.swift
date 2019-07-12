@@ -103,7 +103,6 @@ extension PlayersTableViewController {
         if (isFiltering()) {
             return filteredPlayers.people.count
         }
-        debugPrint(players.people.count)
         return players.people.count
     }
     
@@ -116,23 +115,8 @@ extension PlayersTableViewController {
         } else {
             player = players.people[indexPath.row]
         }
-        //let player = players.people[indexPath.row]
         
         configureCell(cell, player)
-        
-//        cell.mName.text = players.people[indexPath.row].surname + " " + players.people[indexPath.row].name + " " + players.people[indexPath.row].lastname
-//
-//        if (player.birthdate != "" || player.birthdate != nil || player.birthdate != " ") {
-//            cell.mBirthDate.text = players.people[indexPath.row].birthdate.UTCToLocal(from: .utc, to: .local)
-//        }
-//
-//        if (player.photo != nil || player.photo != "" || player.photo != " ") {
-//            presenter.getImage(imageName: players.people[indexPath.row].photo ?? "") { image in
-//                cell.mImage.image = image.af_imageRoundedIntoCircle()
-//            }
-//        }
-        
-        //debugPrint("section: \(indexPath.section), row: \(indexPath.row)")
         
         return cell
     }
@@ -153,10 +137,11 @@ extension PlayersTableViewController {
         }
         
         if (player.photo?.count ?? "".count > 3) {
-//            cell.mImage.cacheImage(urlString: ApiRoute.getImageURL(image: player.photo ?? "").absoluteString)
-//            cell.mImage.cropAndRound()
+            cell.mImage.image = #imageLiteral(resourceName: "ic_logo")
             presenter.getImage(imageName: player.photo ?? "") { image in
-                cell.mImage.image = image.af_imageRoundedIntoCircle()
+                DispatchQueue.main.async {
+                    cell.mImage.image = image.af_imageRoundedIntoCircle()
+                }
             }
         } else {
             cell.mImage.image = UIImage(named: "ic_logo")

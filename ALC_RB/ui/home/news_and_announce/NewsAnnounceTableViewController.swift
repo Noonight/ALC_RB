@@ -176,11 +176,11 @@ class NewsAnnounceTableViewController: UITableViewController {
     @objc func onFooterBtnPressed(_ sender: FooterBtn) {
         if (sender.btnType == .news) {
             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            
+
             let viewController = storyboard.instantiateViewController(withIdentifier: "NewsAllTableViewController") as! NewsAllTableViewController
-            
+
             viewController.tableData = tableData.news
-            
+
             navigationController?.pushViewController(viewController, animated: true)
         } else if (sender.btnType == .announces) {
             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)

@@ -6,110 +6,187 @@
 //  Copyright © 2018 test. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import StatefulViewController
+import SystemConfiguration
 
-class NewsAllTableViewController: UITableViewController {
-
-    // MARK: - Var & Let
-    let cellId = "cell_news_dynamic"
-    
-    var tableData: News? {
-        didSet {
-            updateUI()
-        }
+class NewsAllTableViewController: UITableViewController, StatefulViewController {
+    // MARK: - Static variables
+    enum CellIdentifiers {
+        static let CELL = "cell_news_dynamic"
+    }
+    enum SegueIdentifiers {
+        static let DETAIL = "NewsDetailIdentifier"
+    }
+    enum Text {
+        static let TITLE = "Новости"
     }
     
-    let newsDetailIdentifier = "NewsDetail"
-    let newsDetailSegueIdentifier = "NewsDetailIdentifier"
-    
-    let mTitle = "Новости"
-    
+    // MARK: - Var & Let
+    private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.raywenderlich.com")
+    var tableData: News = News()
     let presenter = NewsAllPresenter()
-    let refreshControll = UIRefreshControl()
     
-    // MARK: - Life cycle
+    // MARK: - Controller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initPresenter()
-        self.title = mTitle
-        
-        tableView.tableFooterView = UIView()
-        
-        tableView.refreshControl = self.refreshControll
-        
-        self.refreshControll.addTarget(self, action: #selector(fetch), for: .valueChanged)
+        self.prepareView()
+        self.prepareTableView()
+        self.prepareTableViewRefreshController()
+        self.prepareStateful()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setupInitialViewState() {
+            Print.m("setup initial view state complete")
+        } // stateful
+//        refreshData()
     }
 
-    func updateUI() {
+    func refreshUI() {
         tableView.reloadData()
     }
+    
+    // MARK: - Prepare
+    func prepareStateful() {
+        self.loadingView = LoadingView(frame: view.frame)
+        self.emptyView = EmptyView(frame: view.frame)
+        let failureView = ErrorView(frame: view.frame)
+        failureView.tapGestureRecognizer.addTarget(self, action: #selector(refreshData))
+        self.errorView = failureView
+    }
+    func prepareView() {
+        self.title = Text.TITLE
+    }
+    func prepareTableView() {
+        tableView.tableFooterView = UIView()
+    }
+    func prepareTableViewRefreshController() {
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+    }
+    // MARK: - Reachable
+    private func checkReachable(){
+        var flags = SCNetworkReachabilityFlags()
+        SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+        
+        if (isNetworkReachable(with: flags))
+        {
+            print (flags)
+            if flags.contains(.isWWAN) {
+                self.showAlert(title: "via mobile", message: "Reachable")
+                return
+            }
+            
+            self.showAlert(title:"via wifi",message:"Reachable")
+        }
+        else if (!isNetworkReachable(with: flags)) {
+            self.showAlert(title:"Sorry no connection",message: "unreachable")
+            print (flags)
+            return
+        }
+    }
+    private func isNetworkReachable(with flags: SCNetworkReachabilityFlags) -> Bool {
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
+        let canConnectWithoutUserInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
+        return isReachable && (!needsConnection || canConnectWithoutUserInteraction)
+    }
+    @objc func reachabilityChanged(note: Notification) {
+        
+        let reachability = note.object as! Reachability
+        
+        switch reachability.connection {
+        case .wifi:
+            print("Reachable via WiFi")
+        case .cellular:
+            print("Reachable via Cellular")
+        case .none:
+            print("Network not reachable")
+        }
+    }
+    
     // MARK: - UIRefreshController
-    @objc func fetch() {
+    @objc func refreshData() {
+        if lastState == .Loading { return }
+//        checkReachable()
+        startLoading()
         if !tableView.isDragging
         {
-            presenter.fetchNews() {
-                self.endRefreshing()
-            }
+            presenter.fetchNews { }
         }
     }
-    
     func endRefreshing() {
-        if self.refreshControll.isRefreshing == true {
-            self.refreshControll.endRefreshing()
-        }
+        self.tableView.reloadData()
+        self.endLoading(error: nil, completion: nil)
+        
+        self.refreshControl?.endRefreshing()
     }
-    
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
     {
         if refreshControl?.isRefreshing == true
         {
-            fetch()
+            refreshData()
         }
     }
     
-    // MARK: - Table view data source
-    
+    // MARK: - UITableViewDataSource
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (tableData?.news.count)!
+        return tableData.news.count
     }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? NewsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.CELL, for: indexPath) as? NewsTableViewCell
 
-        cell?.content?.text = tableData?.news[indexPath.row].caption
-        cell?.date?.text = tableData?.news[indexPath.row].updatedAt.UTCToLocal(from: .utc, to: .local)
+        cell?.content?.text = tableData.news[indexPath.row].caption
+        cell?.date?.text = tableData.news[indexPath.row].updatedAt.UTCToLocal(from: .utc, to: .local)
         
         return cell!
     }
-
+    
+    // MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if  segue.identifier == newsDetailSegueIdentifier,
+        if  segue.identifier == SegueIdentifiers.DETAIL,
             let destination = segue.destination as? NewsDetailViewController,
             let cellIndex = tableView.indexPathForSelectedRow?.row
         {
             destination.content = NewsDetailViewController.NewsDetailContent(
-                title: tableData!.news[cellIndex].caption,
-                date: (tableData!.news[cellIndex].updatedAt).UTCToLocal(from: .utc, to: .local),
-                content: tableData!.news[cellIndex].content,
-                imagePath: tableData!.news[cellIndex].img)
+                title: tableData.news[cellIndex].caption,
+                date: (tableData.news[cellIndex].updatedAt).UTCToLocal(from: .utc, to: .local),
+                content: tableData.news[cellIndex].content,
+                imagePath: tableData.news[cellIndex].img)
         }
     }
+    
+    // MARL: - Stateful
+    func hasContent() -> Bool {
+        return self.tableData.count > 0
+    }
+    func handleErrorWhenContentAvailable(_ error: Error) {
+        let alertController = UIAlertController(title: "Ошибка", message: error.localizedDescription, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
-
+// MARK: - Extensions
+// MARK: - Presenter
 extension NewsAllTableViewController: NewsAllView {
     func fetchNewsSuccessful(news: News) {
         self.tableData = news
+        self.endRefreshing()
     }
     
     func fetchNewsFailure(error: Error) {
+        endRefreshing()
         Print.m(error)
         showRepeatAlert(message: error.localizedDescription) {
             self.presenter.fetchNews() { }

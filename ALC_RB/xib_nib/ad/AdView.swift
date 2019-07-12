@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class AdView: UIView {
 
     @IBOutlet var containerView: UIView!
