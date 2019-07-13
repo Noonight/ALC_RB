@@ -16,10 +16,9 @@ protocol NewsAllView: MvpView {
 class NewsAllPresenter: MvpPresenter<NewsAllTableViewController> {
     let dataManager = ApiRequests()
     
-    func fetchNews(closure: @escaping () -> ()) {
+    func fetch() {
         dataManager.get_news(success: { news in
             self.getView().fetchNewsSuccessful(news: news)
-            closure()
         }) { error in
             self.getView().fetchNewsFailure(error: error)
         }

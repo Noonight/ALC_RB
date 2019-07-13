@@ -16,10 +16,9 @@ protocol AnnouncesAllView : MvpView {
 class AnnouncesAllPresenter: MvpPresenter<AnnounceAllTableViewController> {
     let dataManager = ApiRequests()
     
-    func fetchAnnounces(closure: @escaping () -> ()) {
+    func fetch() {
         dataManager.get_announces(success: { announces in
             self.getView().fetchAnnouncesSuccess(announces: announces)
-            closure()
         }) { error in
             self.getView().fetchAnnouncesFailure(error: error)
         }

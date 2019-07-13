@@ -42,7 +42,8 @@ class BaseStateViewController : UIViewController {
     let emptyView = EmptyViewNew()
     var backgroundView: UIView?
     
-    var state = BaseState.normal
+    var lastState = BaseState.loading
+    var state = BaseState.loading
     
     var emptyMessage: String = "Здесь будет контент. Возможно забыли настроить сообщение!"
     
@@ -60,17 +61,20 @@ extension BaseStateViewController : BaseStateActions {
                 hideLoading()
                 hideEmptyView()
                 self.state = .normal
+                self.lastState = .normal
             case .loading:
-                showLoading()
-                hideEmptyView()
+                hideEmptyView() // background view first clear
+                showLoading() // after add new background view
                 self.state = .loading
+                self.lastState = .loading
             case .error(let message):
-                showToast(message: message)
+                showAlert(message: message)
                 self.state = .error(message: message)
             case .empty:
-                showEmptyView()
                 hideLoading()
+                showEmptyView()
                 self.state = .empty
+                self.lastState = .empty
             }
         }
         
@@ -82,12 +86,9 @@ extension BaseStateViewController : EmptyProtocol {
         backgroundView = UIView()
         
         backgroundView?.frame = view.frame
-        
-        //        emptyView.backgroundColor = .clear
-        //        emptyView.containerView.backgroundColor = .clear
         backgroundView?.backgroundColor = .white
-        backgroundView?.addSubview(emptyView)
         
+        backgroundView?.addSubview(emptyView)
         view.addSubview(backgroundView!)
         
         backgroundView?.translatesAutoresizingMaskIntoConstraints = true
@@ -101,18 +102,33 @@ extension BaseStateViewController : EmptyProtocol {
     
     func hideEmptyView() {
         if let backgroundView = backgroundView {
-            backgroundView.removeFromSuperview()
+//            backgroundView.removeFromSuperview()
+            UIView.animate(withDuration: 0.2) {
+                backgroundView.removeFromSuperview()
+            }
         }
     }
 }
 
 extension BaseStateViewController : ActivityIndicatorProtocol {
     func showLoading() {
+        backgroundView = UIView()
+        
+        backgroundView?.frame = view.frame
+        backgroundView?.backgroundColor = .white
+        
+        backgroundView?.addSubview(activityIndicator)
+        view.addSubview(backgroundView!)
+        
+        backgroundView?.translatesAutoresizingMaskIntoConstraints = true
+        
         activityIndicator.frame = view.frame
         activityIndicator.backgroundColor = .white
         
-        view.addSubview(activityIndicator)
-        view.bringSubviewToFront(activityIndicator)
+//        view.addSubview(activityIndicator)
+//        view.bringSubviewToFront(activityIndicator)
+        
+        activityIndicator.setCenterFromParent()
         
         activityIndicator.startAnimating()
     }
@@ -120,6 +136,11 @@ extension BaseStateViewController : ActivityIndicatorProtocol {
     func hideLoading() {
         activityIndicator.stopAnimating()
         
-        activityIndicator.removeFromSuperview()
+        if let backgroundView = backgroundView {
+            UIView.animate(withDuration: 0.2) {
+                backgroundView.removeFromSuperview()
+            }
+        }
+//        activityIndicator.removeFromSuperview()
     }
 }

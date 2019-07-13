@@ -5307,10 +5307,10 @@
             </objects>
             <point key="canvasLocation" x="-227" y="-3635"/>
         </scene>
-        <!--Scrolling Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="pVS-EB-d56">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JoN-yP-8jZ" customClass="ScrollingNavigationController" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JoN-yP-8jZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="ic_home" id="doP-UK-cdq">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>

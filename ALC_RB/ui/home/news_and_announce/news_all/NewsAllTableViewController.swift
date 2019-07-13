@@ -6,11 +6,10 @@
 //  Copyright © 2018 test. All rights reserved.
 //
 
-import Foundation
-import StatefulViewController
+import UIKit
 import SystemConfiguration
 
-class NewsAllTableViewController: UITableViewController, StatefulViewController {
+class NewsAllTableViewController: BaseStateTableViewController {
     // MARK: - Static variables
     enum CellIdentifiers {
         static let CELL = "cell_news_dynamic"
@@ -33,38 +32,29 @@ class NewsAllTableViewController: UITableViewController, StatefulViewController 
         self.initPresenter()
         self.prepareView()
         self.prepareTableView()
-        self.prepareTableViewRefreshController()
-        self.prepareStateful()
+//        self.prepareTableViewRefreshController()
+        self.fetch = self.presenter.fetch
+        self.prepareEmptyView()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setupInitialViewState() {
-            Print.m("setup initial view state complete")
-        } // stateful
-//        refreshData()
-    }
-
-    func refreshUI() {
-        tableView.reloadData()
+//        self.setupInitialViewState()
     }
     
     // MARK: - Prepare
-    func prepareStateful() {
-        self.loadingView = LoadingView(frame: view.frame)
-        self.emptyView = EmptyView(frame: view.frame)
-        let failureView = ErrorView(frame: view.frame)
-        failureView.tapGestureRecognizer.addTarget(self, action: #selector(refreshData))
-        self.errorView = failureView
-    }
     func prepareView() {
         self.title = Text.TITLE
     }
     func prepareTableView() {
         tableView.tableFooterView = UIView()
     }
-    func prepareTableViewRefreshController() {
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+//    func prepareTableViewRefreshController() {
+//        self.refreshControl = UIRefreshControl()
+//        self.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+//    }
+    func prepareEmptyView() {
+        self.setEmptyMessage(message: "Здесь будут новости")
     }
     // MARK: - Reachable
     private func checkReachable(){
@@ -109,26 +99,38 @@ class NewsAllTableViewController: UITableViewController, StatefulViewController 
     }
     
     // MARK: - UIRefreshController
-    @objc func refreshData() {
-        if lastState == .Loading { return }
-//        checkReachable()
-        startLoading()
-        if !tableView.isDragging
-        {
-            presenter.fetchNews { }
-        }
-    }
-    func endRefreshing() {
-        self.tableView.reloadData()
-        self.endLoading(error: nil, completion: nil)
-        
-        self.refreshControl?.endRefreshing()
-    }
-    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
-    {
-        if refreshControl?.isRefreshing == true
-        {
-            refreshData()
+//    @objc func refreshData() {
+////        if lastState == .Loading { return }
+////        checkReachable()
+////        startLoading()
+//        if !tableView.isDragging
+//        {
+//            presenter.fetchNews { }
+//        }
+//    }
+//    func endRefreshing() {
+//        self.tableView.reloadData()
+////        self.endLoading(error: nil, completion: nil)
+//
+//        self.refreshControl?.endRefreshing()
+//        if tableData.count == 0 {
+//            self.setState(state: .empty)
+//        } else {
+//            self.setState(state: .normal)
+//        }
+//    }
+//    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+//    {
+//        if refreshControl?.isRefreshing == true
+//        {
+//            refreshData()
+//        }
+//    }
+    override func hasContent() -> Bool {
+        if tableData.count != 0 {
+            return true
+        } else {
+            return false
         }
     }
     
@@ -166,16 +168,6 @@ class NewsAllTableViewController: UITableViewController, StatefulViewController 
                 imagePath: tableData.news[cellIndex].img)
         }
     }
-    
-    // MARL: - Stateful
-    func hasContent() -> Bool {
-        return self.tableData.count > 0
-    }
-    func handleErrorWhenContentAvailable(_ error: Error) {
-        let alertController = UIAlertController(title: "Ошибка", message: error.localizedDescription, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alertController, animated: true, completion: nil)
-    }
 }
 // MARK: - Extensions
 // MARK: - Presenter
@@ -188,8 +180,8 @@ extension NewsAllTableViewController: NewsAllView {
     func fetchNewsFailure(error: Error) {
         endRefreshing()
         Print.m(error)
-        showRepeatAlert(message: error.localizedDescription) {
-            self.presenter.fetchNews() { }
+        showFailFetchRepeatAlert(message: error.localizedDescription) {
+            self.presenter.fetch()
         }
     }
     

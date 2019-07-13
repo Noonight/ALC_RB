@@ -8,8 +8,17 @@
 
 import UIKit
 
-class NewsAnnounceTableViewController: UITableViewController {
-
+class NewsAnnounceTableViewController: BaseStateTableViewController {
+    enum CellIdentifiers {
+        static let NEWS = "cell_news_dynamic"
+        static let ANNOUNCE = "cell_announce_dynamic"
+    }
+    enum SegueIdentifiers {
+        static let NEWS_DETAIL = "NewsDetailIdentifier"
+        static let ANNOUNCE_DETAIL = ""
+    }
+    
+    // MARK: - Oulets
     @IBOutlet var noNewsView: UIView!
     @IBOutlet var noAnnounceView: UIView!
     
@@ -45,68 +54,71 @@ class NewsAnnounceTableViewController: UITableViewController {
         }
     }
     
-    let cellNews = "cell_news_dynamic"
-    let cellAnnounce = "cell_announce_dynamic"
-    
+    // MARK: - Var & Let
     private let presenter = NewsAnnouncePresenter()
-    let refreshControll = UIRefreshControl()
+    private var tableData = NewsTableData()
     
-    var tableData = NewsTableData()
-    
-    let newsDetailIdentifier = "NewsDetail"
-    let newsDetailSegueIdentifier = "NewsDetailIdentifier"
-    
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        initPresenter()
-        fetch()
-        tableView.tableFooterView = UIView()
-        tableView.refreshControl = self.refreshControll
-        
-        self.refreshControll.addTarget(self, action: #selector(fetch), for: .valueChanged)
+        self.initPresenter()
+        self.setupTableView()
+//        self.setupRefreshControl()
+        self.setupBaseState()
+        self.fetch = self.presenter.fetch
+        self.refreshData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController!.view.transform = CGAffineTransform(scaleX: 0.9, y: 0.9);
+        
     }
     
-    @objc func fetch() {
-        if !tableView.isDragging
-        {
-            let group = DispatchGroup()
-            group.enter()
-            presenter.getFewNews() {
-                group.leave()
-            }
-            group.enter()
-            presenter.getFewAnnounces() {
-                group.leave()
-            }
-            group.notify(queue: .main) {
-                self.endRefreshing()
-            }
-        }
+    // MARK: - Setup
+    func setupTableView() {
+        tableView.tableFooterView = UIView()
+    }
+//    func setupRefreshControl() {
+//        self.refreshControl = UIRefreshControl()
+//        self.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+//    }
+    func setupBaseState() {
+        self.setEmptyMessage(message: "Здесь будут отображаться новости и объявления")
     }
     
-    // MARK: - Helpers
-    func endRefreshing() {
-        if self.refreshControll.isRefreshing == true {
-            self.refreshControll.endRefreshing()
-        }
+    // MARK: - Refresh control
+//    @objc override func refreshData() {
+//        if self.state == .loading { return }
+//        if self.refreshControl?.isRefreshing == false {
+//            self.setState(state: .loading)
+//        }
+//        if tableView.isDragging == false
+//        {
+//            presenter.fetch()
+//        }
+//    }
+    
+//    func endRefreshing() {
+//        self.tableView.reloadData()
+//        self.setState(state: .normal)
+//
+//        self.refreshControl?.endRefreshing()
+//    }
+    
+//    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+//    {
+//        if refreshControl?.isRefreshing == true
+//        {
+//            refreshData()
+//        }
+//    }
+    override func hasContent() -> Bool {
+        return (tableData.news.count != 0 || tableData.announces.count != 0) ? true : false
     }
     
-    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
-    {
-        if refreshControl?.isRefreshing == true
-        {
-            fetch()
-        }
-    }
-    
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if  segue.identifier == newsDetailSegueIdentifier,
+        if  segue.identifier == SegueIdentifiers.NEWS_DETAIL,
             let destination = segue.destination as? NewsDetailViewController,
             let cellIndex = tableView.indexPathForSelectedRow?.row
         {
@@ -117,25 +129,58 @@ class NewsAnnounceTableViewController: UITableViewController {
                 imagePath: tableData.news.news[cellIndex].img)
         }
     }
+}
+// MARK: - Extensions
+
+// MARK: - Presenter
+extension NewsAnnounceTableViewController: NewsAnnounceView {
+    func fetchSuccessful() {
+        endRefreshing()
+    }
     
-    // MARK: - Table view data source
+    func onFetchNewsSuccess(news: News) {
+        tableData.news = news
+    }
+    
+    func onFetchNewsFailure(error: Error) {
+        endRefreshing()
+        Print.m(error)
+    }
+    
+    func onFetchAnnouncesSuccess(announces: Announce) {
+        tableData.announces = announces
+    }
+    
+    func onFetchAnnouncesFailure(error: Error) {
+        endRefreshing()
+        Print.m(error)
+    }
+    
+    func initPresenter() {
+        presenter.attachView(view: self)
+    }
+}
+
+// MARK: - Table view data source
+extension NewsAnnounceTableViewController {
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return tableData.countSections
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableData.getCountItemOfSection(section)
     }
-
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return tableData.header[section]
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cellNews = tableView.dequeueReusableCell(withIdentifier: self.cellNews) as? NewsTableViewCell
         
-        let cellAnnounce = tableView.dequeueReusableCell(withIdentifier: self.cellAnnounce) as? AnnouncesTableViewCell
+        let cellNews = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.NEWS) as? NewsTableViewCell
+        
+        let cellAnnounce = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.ANNOUNCE) as? AnnouncesTableViewCell
         
         if (indexPath.section == 0) {
             cellNews?.content?.text = tableData.news.news[indexPath.row].caption
@@ -157,7 +202,7 @@ class NewsAnnounceTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-
+        
         if (section == 0) {
             let footerBtn = FooterBtn.instanceBtn(id: .news, title: tableData.footer[section], viewContainer: tableView)
             footerBtn.addTarget(self, action: #selector(onFooterBtnPressed), for: .touchUpInside)
@@ -176,11 +221,11 @@ class NewsAnnounceTableViewController: UITableViewController {
     @objc func onFooterBtnPressed(_ sender: FooterBtn) {
         if (sender.btnType == .news) {
             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-
+            
             let viewController = storyboard.instantiateViewController(withIdentifier: "NewsAllTableViewController") as! NewsAllTableViewController
-
+            
             viewController.tableData = tableData.news
-
+            
             navigationController?.pushViewController(viewController, animated: true)
         } else if (sender.btnType == .announces) {
             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -191,30 +236,6 @@ class NewsAnnounceTableViewController: UITableViewController {
             
             navigationController?.pushViewController(viewController, animated: true)
         }
-    }
-}
-
-extension NewsAnnounceTableViewController: NewsAnnounceView {
-    func onFetchNewsSuccess(news: News) {
-        tableData.news = news
-        self.tableView.reloadData()
-    }
-    
-    func onFetchNewsFailure(error: Error) {
-        Print.m(error)
-    }
-    
-    func onFetchAnnouncesSuccess(announces: Announce) {
-        tableData.announces = announces
-        self.tableView.reloadData()
-    }
-    
-    func onFetchAnnouncesFailure(error: Error) {
-        Print.m(error)
-    }
-    
-    func initPresenter() {
-        presenter.attachView(view: self)
     }
 }
 

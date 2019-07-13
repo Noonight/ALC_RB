@@ -8,16 +8,20 @@
 
 import UIKit
 
-class AnnounceAllTableViewController: UITableViewController {
+class AnnounceAllTableViewController: BaseStateTableViewController {
 
     // MARK: - Var & Let
     let cellId = "cell_announce_date"
     
-    var tableData: Announce? {
+    var tableData: Announce? /*{
         didSet {
-            updateUI()
+            if tableData?.count == 0 {
+                self.setState(state: .empty)
+            } else {
+                updateUI()
+            }
         }
-    }
+    }*/
     
     let mTitle = "Объявления"
     
@@ -30,8 +34,11 @@ class AnnounceAllTableViewController: UITableViewController {
         self.initPresenter()
         self.title = mTitle
         
+        self.fetch = self.presenter.fetch
+        
         tableView.tableFooterView = UIView()
-        prepareRefreshControl()
+//        prepareRefreshControl()
+        self.setEmptyMessage(message: "Здесь будут объявления")
     }
     
     func updateUI() {
@@ -39,35 +46,43 @@ class AnnounceAllTableViewController: UITableViewController {
     }
     
     // MARK: - Prepare
-    func prepareRefreshControl() {
-        tableView.refreshControl = self.refreshControll
-        
-        self.refreshControll.addTarget(self, action: #selector(fetch), for: .valueChanged)
-    }
-
-    // MARK: - UIRefreshControll
-    @objc func fetch() {
-        if !tableView.isDragging
-        {
-            presenter.fetchAnnounces() {
-                self.endRefreshing()
-            }
+//    func prepareRefreshControl() {
+//        tableView.refreshControl = self.refreshControll
+//
+//        self.refreshControll.addTarget(self, action: #selector(fetch), for: .valueChanged)
+//    }
+//
+//    // MARK: - UIRefreshControll
+//    @objc func fetch() {
+//        if !tableView.isDragging
+//        {
+//            presenter.fetchAnnounces() {
+//                self.endRefreshing()
+//            }
+//        }
+//    }
+//
+//    func endRefreshing() {
+//        self.setState(state: .normal)
+//        if self.refreshControll.isRefreshing == true {
+//            self.refreshControll.endRefreshing()
+//        }
+//    }
+    override func hasContent() -> Bool {
+        if tableData?.count != 0 {
+            return true
+        } else {
+            return false
         }
     }
     
-    func endRefreshing() {
-        if self.refreshControll.isRefreshing == true {
-            self.refreshControll.endRefreshing()
-        }
-    }
-    
-    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
-    {
-        if refreshControl?.isRefreshing == true
-        {
-            fetch()
-        }
-    }
+//    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+//    {
+//        if refreshControl?.isRefreshing == true
+//        {
+//            fetch()
+//        }
+//    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -96,12 +111,14 @@ class AnnounceAllTableViewController: UITableViewController {
 extension AnnounceAllTableViewController : AnnouncesAllView {
     func fetchAnnouncesSuccess(announces: Announce) {
         self.tableData = announces
+        endRefreshing()
     }
     
     func fetchAnnouncesFailure(error: Error) {
         Print.m(error)
-        showRepeatAlert(message: error.localizedDescription) {
-            self.presenter.fetchAnnounces() { }
+        endRefreshing()
+        showFailFetchRepeatAlert(message: error.localizedDescription) {
+            self.presenter.fetch()
         }
     }
     

@@ -15,6 +15,8 @@ protocol NewsAnnounceView: MvpView {
     
     func onFetchAnnouncesSuccess(announces: Announce)
     func onFetchAnnouncesFailure(error: Error)
+    
+    func fetchSuccessful()
 }
 
 class NewsAnnouncePresenter: MvpPresenter<NewsAnnounceTableViewController> {
@@ -44,6 +46,21 @@ class NewsAnnouncePresenter: MvpPresenter<NewsAnnounceTableViewController> {
                 case .failure(let error):
                     self.getView().onFetchAnnouncesFailure(error: error)
                 }
+        }
+    }
+    
+    func fetch() {
+        let group = DispatchGroup()
+        group.enter()
+        self.getFewNews {
+            group.leave()
+        }
+        group.enter()
+        self.getFewAnnounces {
+            group.leave()
+        }
+        group.notify(queue: .main) {
+            self.getView().fetchSuccessful()
         }
     }
 }

@@ -69,4 +69,15 @@ extension UIViewController {
         }))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func showFailFetchRepeatAlert(title: String = "Не удалось загрузить данные", message: String, repeat_fetch: @escaping () -> ()) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (alertAction) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Повторить", style: .destructive, handler: { (action) in
+            repeat_fetch()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
