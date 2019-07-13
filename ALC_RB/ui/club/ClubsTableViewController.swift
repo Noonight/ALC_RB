@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ClubsTableViewController: UITableViewController, MvpView {
+class ClubsTableViewController: BaseStateTableViewController {
 
     let cellId = "cell_club"
     
@@ -22,19 +22,15 @@ class ClubsTableViewController: UITableViewController, MvpView {
         super.viewDidLoad()
         
         initPresenter()
-        
+        self.fetch = self.presenter.getClubs
         initView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        presenter.getClubs()
+        
+        self.refreshData()
     }
 
     func initView() {
         tableView.tableFooterView = UIView()
-        
-        //showLoading()
+        setEmptyMessage(message: "Здесь будут отображаться клубы")
     }
     
     func updateUI() {
@@ -43,50 +39,34 @@ class ClubsTableViewController: UITableViewController, MvpView {
 }
 
 extension ClubsTableViewController {
+    override func hasContent() -> Bool {
+        if clubs.clubs.count != 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+// MARK: Presenter
+extension ClubsTableViewController: ClubsTableView {
+    func onGetClubsFailure(_ error: Error) {
+        endRefreshing()
+        Print.m(error)
+        showFailFetchRepeatAlert(message: error.localizedDescription) {
+            self.refreshData()
+        }
+    }
+    
+    func onGetClubsSuccess(_ clubs: Clubs) {
+        self.clubs = clubs
+        endRefreshing()
+    }
     
     func initPresenter() {
         presenter.attachView(view: self)
     }
 }
-
-extension ClubsTableViewController: ClubsTableView {
-//    func showLoading() {
-//        //UIActivityIndicatorView.startAnimating(self)
-//    }
-//
-//    func hideLoading() {
-//
-//    }
-    
-    func onGetClubsSuccess(_ clubs: Clubs) {
-        self.clubs = clubs
-        //try! print(clubs.jsonString())
-        updateUI()
-    }
-    
-    func onGetImageSuccess(_ img: UIImage) {
-        //
-    }
-}
-
-//extension ClubsTableViewController: ActivityIndicator {
-//
-//    var indicator: UIActivityIndicatorView {
-//        let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
-//        indicator.center = tableView.center
-//        indicator.hidesWhenStopped = true
-//        view.addSubview(indicator)
-//        return indicator
-//    }
-//
-//    func showLoading() {
-//        indicator.startAnimating()
-//    }
-//
-//    func hideLoading() {
-//        indicator.stopAnimating()
-//    }
-//}
 
 extension ClubsTableViewController {
     

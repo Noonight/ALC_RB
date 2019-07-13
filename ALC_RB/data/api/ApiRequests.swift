@@ -1087,4 +1087,17 @@ class ApiRequests {
         }
     }
     
+    func getClubs(success: @escaping (Clubs) -> (), failure: @escaping (Error) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.clubs))
+            .responseClubs { response in
+                switch response.result {
+                case .success(let value):
+                    success(value)
+                case .failure(let error):
+                    failure(error)
+                }
+        }
+    }
+    
 }
