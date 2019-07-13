@@ -27,99 +27,42 @@ class TournamentsTableViewController: BaseStateTableViewController {
     
     let cellId = "cell_tournament"
     
-    var firstLoad = true
-    
-//    let activityIndicator = UIActivityIndicatorView(style: .gray)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
         
-        //        tournaments.leagues = [
-        //            League(status: "Завершено", matches: [
-        //                   "match one",
-        //                   "match two"
-        //                ], id: "some id", tourney: "Турнир", name: "Имя", beginDate: "10.10.2010", endDate: "10.12.2012", maxTeams: 32, teams: [], transferBegin: "some date transfer", transferEnd: "some date transfer", playersMin: 16, playersMax: 64, playersCapacity: 92, yellowCardsToDisqual: 3, ageAllowedMin: 6, ageAllowedMax: 3)
-        //        ]
-        
         initPresenter()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if firstLoad {
-            presenter.getTournaments(refreshing: firstLoad)
-        } else {
-            presenter.getTournaments(refreshing: firstLoad)
-        }
-//        presenter.getTournaments()
-        
+        self.fetch = self.presenter.getTournaments
+        refreshData()
+        setEmptyMessage(message: "Здесь будут отображаться турниры")
     }
     
     private func initView() {
-        
         tableView.tableFooterView = UIView()
-//        prepareActivityIndicator()
-    }
-    
-//    func prepareActivityIndicator() {
-//        activityIndicator.hidesWhenStopped = true
-//    }
-    
-    func updateUI() {
-        tableView.reloadData()
     }
 }
 
 extension TournamentsTableViewController: TournamentsView {
     
-//    func showLoading() {
-//        tableView.backgroundView = activityIndicator
-//        tableView.separatorStyle = .none
-//        activityIndicator.startAnimating()
-//    }
-//
-//    func hideLoading() {
-//        activityIndicator.stopAnimating()
-//        tableView.separatorStyle = .singleLine
-//        tableView.backgroundView = nil
-//    }
-    
     func initPresenter() {
         presenter.attachView(view: self)
-        
     }
     
     func onGetTournamentSuccess(tournament: Tournaments) {
         self.tournaments = tournament
-        if firstLoad {
-            firstLoad = !firstLoad
-        }
-        updateUI()
+        endRefreshing()
     }
     
     func onGetTournamentFailure(error: Error) {
-//        showAlert(title: Variables.errorAlertTitle, message: error.localizedDescription, actions:
-//            [
-//                UIAlertAction(title: Variables.errorAlertOk, style: .default, handler: nil),
-//                UIAlertAction(title: Variables.errorAlertRefresh, style: .default, handler: { (action) in
-//                    self.presenter.getTournaments()
-//                })
-//            ]
-//        )
-        showRefreshAlert(message: error.localizedDescription) {
-            self.firstLoad = true
-            self.presenter.getTournaments(refreshing: self.firstLoad)
+        endRefreshing()
+        showFailFetchRepeatAlert(message: error.localizedDescription) {
+            self.refreshData()
         }
-        Print.m(error.localizedDescription)
+        Print.m(error)
     }
 }
 
 extension TournamentsTableViewController {
-    
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 100
-//    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -174,3 +117,12 @@ extension TournamentsTableViewController {
     }
 }
 
+extension TournamentsTableViewController {
+    override func hasContent() -> Bool {
+        if tournaments.count != 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+}

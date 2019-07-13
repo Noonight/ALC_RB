@@ -191,7 +191,7 @@ extension BaseStateTableViewController : ActivityIndicatorProtocol {
         activityIndicator.stopAnimating()
         
         if let backgroundView = backgroundView {
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 0.1) {
                 backgroundView.removeFromSuperview()
             }
         }

@@ -118,7 +118,8 @@ extension AnnounceAllTableViewController : AnnouncesAllView {
         Print.m(error)
         endRefreshing()
         showFailFetchRepeatAlert(message: error.localizedDescription) {
-            self.presenter.fetch()
+//            self.presenter.fetch()
+            self.refreshData()
         }
     }
     

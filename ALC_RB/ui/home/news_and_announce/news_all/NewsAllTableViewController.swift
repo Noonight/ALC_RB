@@ -181,7 +181,8 @@ extension NewsAllTableViewController: NewsAllView {
         endRefreshing()
         Print.m(error)
         showFailFetchRepeatAlert(message: error.localizedDescription) {
-            self.presenter.fetch()
+//            self.presenter.fetch()
+            self.refreshData()
         }
     }
     

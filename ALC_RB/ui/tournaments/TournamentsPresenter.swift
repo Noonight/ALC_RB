@@ -16,13 +16,8 @@ protocol TournamentsView: MvpView, ActivityIndicatorProtocol {
 
 class TournamentsPresenter: MvpPresenter<TournamentsTableViewController> {
     
-    func getTournaments(refreshing: Bool) {
+    func getTournaments() {
         
-        if refreshing {
-            self.getView().showLoading()
-        }
-        
-        debugPrint("Indicator show loading start")
         Alamofire
             .request(ApiRoute.getApiURL(.tournaments))
             .responseTournaments { response in
@@ -30,17 +25,11 @@ class TournamentsPresenter: MvpPresenter<TournamentsTableViewController> {
                 case .success:
                     if let tournaments = response.result.value {
                         self.getView().onGetTournamentSuccess(tournament: tournaments)
-                        if refreshing {
-                            self.getView().hideLoading()
-                        }
                     }
                 case .failure(let error):
                     Print.m(error)
                     self.getView().onGetTournamentFailure(error: error)
                 }
-                
         }
-        
     }
-    
 }
