@@ -16,20 +16,13 @@ protocol TournamentsView: MvpView, ActivityIndicatorProtocol {
 
 class TournamentsPresenter: MvpPresenter<TournamentsTableViewController> {
     
+    let dataManager = ApiRequests()
+    
     func getTournaments() {
-        
-        Alamofire
-            .request(ApiRoute.getApiURL(.tournaments))
-            .responseTournaments { response in
-                switch response.result {
-                case .success:
-                    if let tournaments = response.result.value {
-                        self.getView().onGetTournamentSuccess(tournament: tournaments)
-                    }
-                case .failure(let error):
-                    Print.m(error)
-                    self.getView().onGetTournamentFailure(error: error)
-                }
+        dataManager.get_tournamets(get_success: { tournaments in
+            self.getView().onGetTournamentSuccess(tournament: tournaments)
+        }) { error in
+            self.getView().onGetTournamentFailure(error: error)
         }
     }
 }

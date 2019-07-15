@@ -10,7 +10,8 @@
 #endif
 #endif
 
+#import "UIScrollView+InfiniteScroll.h"
 
-FOUNDATION_EXPORT double StatefulViewControllerVersionNumber;
-FOUNDATION_EXPORT const unsigned char StatefulViewControllerVersionString[];
+FOUNDATION_EXPORT double UIScrollView_InfiniteScrollVersionNumber;
+FOUNDATION_EXPORT const unsigned char UIScrollView_InfiniteScrollVersionString[];
 

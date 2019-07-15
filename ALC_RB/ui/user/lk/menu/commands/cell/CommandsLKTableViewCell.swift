@@ -17,4 +17,5 @@ class CommandsLKTableViewCell: UITableViewCell {
     @IBOutlet weak var tournamentTransfer_label: UILabel!
     @IBOutlet weak var countOfPlayers_label: UILabel!
     
+    
 }

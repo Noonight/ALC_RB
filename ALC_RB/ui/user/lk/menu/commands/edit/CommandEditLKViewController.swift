@@ -79,6 +79,7 @@ class CommandEditLKViewController: BaseStateViewController {
     
     @IBAction func onNavBarSaveBtnPressed(_ sender: UIBarButtonItem) {
         Print.m("save btn")
+        Print.m(participation?.league)
         presenter.editCommand(
             token: (userDefaultHelper.getAuthorizedUser()?.token)!,
             editTeam: EditTeam(
@@ -95,7 +96,7 @@ extension CommandEditLKViewController: CommandEditLKView {
 //        self.mutablePlayers = play
         
         let teamPlayers = team.players
-        dump(teamPlayers)
+//        dump(teamPlayers)
         var array : [CommandPlayersTableViewCell.CellModel] = []
         
         var arrayInv: [CommandInvitePlayersTableViewCell.CellModel] = []
@@ -103,16 +104,6 @@ extension CommandEditLKViewController: CommandEditLKView {
         for player in teamPlayers {
             for person in players.people {
                 if player.playerID == person.id {
-//                    let randNum = Int.random(in: 0...5)
-    
-                    // TEST
-//                    if player.getInviteStatus() == .pending || randNum > 2 {
-//                        arrayInv.append(CommandInvitePlayersTableViewCell.CellModel(
-//                            player: player,
-//                            person: person,
-//                            playerImagePath: person.photo ?? "")
-//                        )
-//                    }
                     
                     if player.getInviteStatus() == .accepted || player.getInviteStatus() == .approved {
                         array.append(CommandPlayersTableViewCell.CellModel(

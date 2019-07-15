@@ -43,6 +43,7 @@ class BaseStateTableViewController: UITableViewController {
         inMemorySectionHeaderHeight = tableView.sectionHeaderHeight
         inMemorySectionFooterHeight = tableView.sectionFooterHeight
         self.setupPullToRefresh()
+//        tableView.tableFooterView = UIView()
     }
 
     func setEmptyMessage(message new: String) {

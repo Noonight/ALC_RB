@@ -23,5 +23,6 @@ target 'ALC_RB' do
   #pod 'SDWebImage', '~> 5.0'
   #pod "CollieGallery"
   pod 'Lightbox' # full screen images
-  pod "StatefulViewController", "~> 3.0"
+  #pod "StatefulViewController", "~> 3.0"
+  pod 'UIScrollView-InfiniteScroll', '~> 1.1.0'
 end

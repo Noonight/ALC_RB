@@ -707,9 +707,13 @@ class ApiRequests {
         }
     }
     
-    func get_tournamets(get_success: @escaping (Tournaments) -> (), get_failure: @escaping (Error) -> ()) {
+    func get_tournamets(limit: Int = 300, offset: Int = 0, get_success: @escaping (Tournaments) -> (), get_failure: @escaping (Error) -> ()) {
+        let parameters: Parameters = [
+            "limit": limit, // default values
+            "offset": offset
+        ]
         Alamofire
-            .request(ApiRoute.getApiURL(.tournaments))
+            .request(ApiRoute.getApiURL(.tournaments), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
             .responseTournaments { response in
                 switch response.result {
                 case .success:

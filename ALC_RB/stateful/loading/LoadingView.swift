@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import StatefulViewController
+//import StatefulViewController
 
-class LoadingView: BasicPlaceholderView, StatefulPlaceholderView {
+class LoadingView: BasicPlaceholderView/*, StatefulPlaceholderView */{
     
     let label = UILabel()
     
