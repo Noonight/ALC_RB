@@ -50,21 +50,6 @@ class PlayersTableViewController: UITableViewController {
             // Fallback on earlier versions
         }
         definesPresentationContext = true
-        
-        configureSearchAction()
-    }
-    
-    func configureSearchAction() {
-//        searchController.rx.
-//        let editText = UITextField(frame: CGRect(x: 0, y: 0, width: 150, height: view.frame.height))
-//        view.addSubview(editText)
-//
-//        editText.rx.text.orEmpty
-//            .debounce(1, scheduler: MainScheduler.instance)
-//            .
-//            .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
-//            .subscribeOn(MainScheduler.instance)
-        
     }
 }
 

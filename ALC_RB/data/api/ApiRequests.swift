@@ -454,6 +454,7 @@ class ApiRequests {
                         }
                     })
                 case .failure(let error):
+                    Print.m(error)
                     response_failure(error)
                 }
         }

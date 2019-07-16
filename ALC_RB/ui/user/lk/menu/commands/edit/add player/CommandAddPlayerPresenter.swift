@@ -18,6 +18,9 @@ protocol CommandAddPlayerView: MvpView {
     
     func onFetchQueryPersonsSuccess(players: Players)
     func onFetchQueryPersonsFailure(error: Error)
+    
+    func onFetchSuccessful(player: Players)
+    func onFetchFailure(error: Error)
 }
 
 class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewController> {
@@ -46,6 +49,22 @@ class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewControlle
             self.getView().onFetchQueryPersonsSuccess(players: players)
         }) { (error) in
             self.getView().onFetchQueryPersonsFailure(error: error)
+        }
+    }
+    
+    func fetch(limit: Int = 20, offset: Int = 0) {
+        apiService.get_players(limit: limit, offset: offset, get_success: { players in
+            self.getView().onFetchPersonsSuccess(players: players)
+        }) { error in
+            self.getView().onFetchFailure(error: error)
+        }
+    }
+    // only first 20
+    func fetch() {
+        apiService.get_players(limit: 20, offset: 0, get_success: { players in
+            self.getView().onFetchSuccessful(player: players)
+        }) { error in
+            self.getView().onFetchFailure(error: error)
         }
     }
 }

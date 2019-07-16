@@ -27,52 +27,48 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
         }
     }
     
+    // MARK: Var & Let
     let userDefaultsHelper = UserDefaultsHelper()
     var team = Team()
     var leagueId: String!
     
-    // MARK: - model controllers
-    var teamController: TeamCommandsController!
-    
     let searchController = UISearchController(searchResultsController: nil)
-    var currentTimeOfSearch = CACurrentMediaTime()
     
-    var tableModel = TableModel() {
-        didSet {
-            updateUI()
-        }
-    }
+    var tableModel = TableModel()
     var filteredPlayers = Players()
     
     let presenter = CommandAddPlayerPresenter()
     
+    var currentAddId: Int?
+    
+    // MARK: - model controllers
+    var teamController: TeamCommandsController!
+    
+    // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        initPresenter()
         
-//        presenter.fetchPersons(offset: 0)
+        self.preparePresenter()
+        self.prepareTableView()
+        self.prepareSearchController()
+        self.prepareRefreshControl()
         
-        configureSearchController()
-        
-        tableView.tableFooterView = UIView()
-//        let loadingCellNib = UINib.init(nibName: LoadingCell.NibParams.nibName, bundle: nil)
-//        self.tableView.register(loadingCellNib, forCellReuseIdentifier: CellIdentifiers.loading)
-
+        self.refreshData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if tableModel.players.people.count < 2 {
-            setState(state: .loading)
-            searchController.searchBar.text = ""
-            searchController.isActive = false
-            presenter.fetchPersons(offset: currentCount())
-        }
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        if tableModel.players.people.count < 2 {
+//            setState(state: .loading)
+//            searchController.searchBar.text = ""
+//            searchController.isActive = false
+//            presenter.fetchPersons(offset: currentCount())
+//        }
+//
+//    }
 
-    // MARK: - Helpers
-
-    func configureSearchController() {
+    // MARK: Prepare
+    func prepareSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Поиск игроков"
@@ -84,64 +80,17 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
         }
         definesPresentationContext = true
     }
-    
-    func updateUI() {
-//        DispatchQueue.main.async {
-            self.tableView.reloadData()
-//        }
-//        tableView.reloadData()
+    func prepareTableView() {
+        tableView.tableFooterView = UIView()
+    }
+    func preparePresenter() {
+        initPresenter()
+    }
+    func prepareRefreshControl() {
+        self.fetch = self.presenter.fetch
     }
     
-    // MARK: - Table view data source
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering() {
-            return filteredPlayers.count
-        }
-        return tableModel.players.people.count + 1
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-//        if isLoadingCell(for: indexPath) {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.loading, for: indexPath) as! LoadingCell
-//            return cell
-//        }
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.list, for: indexPath) as! CommandAddPlayerTableViewCell
-        
-        let player: Person
-        if isFiltering() {
-            player = filteredPlayers.people[indexPath.row]
-            let teamPlayers = teamController.getTeamById(id: self.team.id)?.players
-            cell.usedPlayers = teamPlayers!
-            cell.configure(with: player)
-            
-            cell.cell_add_player_btn.tag = indexPath.row
-            cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
-        } else {
-            if isLoadingCell(for: indexPath) {
-                cell.configure(with: .none)
-                //            cell.backAction = self
-                //            cell.cell_loadMore_btn.addTarget(self, action: #selector(onLoadMoreBtnPressed(sender:)), for: .touchUpInside)
-                cell.cell_loadMore_btn.addTarget(self, action: #selector(onLoadMoreBtnPressed), for: .touchUpInside)
-                
-            } else {
-                player = tableModel.players.people[indexPath.row]
-                
-                cell.configure(with: player)
-                cell.cell_add_player_btn.tag = indexPath.row
-                cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
-                cell.tag = indexPath.row
-            }
-        }
-//        cell.configure(with: tableModel.players.people[indexPath.row])
-        
-        return cell
-    }
-    
-    // it is for add player to team
-    var currentAddId: Int?
-    
+    // MARK: Actions
     @objc func onAddPlayerBtnPressed(sender: UIButton) {
         var personId: String!
         if isFiltering() {
@@ -174,52 +123,21 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
             sender.setTitle("Конец", for: .normal)
         }
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        Print.m("cell did select")
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 66
-    }
 }
 
-//extension CommandAddPlayerTableViewController : CommandAddPlayerViewModelDelegate {
-//    func onFetchPersonsCompleted(with newIndexPathsToReload: [IndexPath]?) {
-//        guard let newIndexPathsToReload = newIndexPathsToReload else {
-////            indicatorView.stopAnimating()
-//            setState(state: .normal)
-////            tableView.isHidden = false
-////            tableView.reloadData()
-//            return
-//        }
-//        // 2
-//        let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
-//        tableView.reloadRows(at: indexPathsToReload, with: .automatic)
-//    }
-//
-//    func onFetchPersonsFailed(with error: Error) {
-////        indicatorView.stopAnimating()
-//        setState(state: .error(message: "Warning: \(error)"))
-////        let title = "Warning".localizedString
-////        let action = UIAlertAction(title: "OK".localizedString, style: .default)
-////        displayAlert(with: title , message: reason, actions: [action])
-//    }
-//
-//
-//}
+// MARK: Extensions
 
-//extension CommandAddPlayerTableViewController : UITableViewDataSourcePrefetching {
-//    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-//        Print.m("index path is loading \(indexPaths)")
-//        if indexPaths.contains(where: isLoadingCell) {
-//            Print.m("Index path containts is loading cell")
-//            viewLoaded.fetchPersons(offset: viewModel.offset)
-//        }
-//    }
-//}
-
+// MARK: Refresh controller
+extension CommandAddPlayerTableViewController {
+    override func hasContent() -> Bool {
+        if tableModel.players.people.count != 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+// MARK: Search controller
 extension CommandAddPlayerTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForQuery(searchController.searchBar.text!)
@@ -235,7 +153,8 @@ extension CommandAddPlayerTableViewController: UISearchResultsUpdating {
                 Print.m("Query is \(query)")
                 presenter.findPersons(query: query)
             }
-        updateUI()
+//        updateUI()
+        self.tableView.reloadData()
 //        }
     }
     
@@ -243,15 +162,9 @@ extension CommandAddPlayerTableViewController: UISearchResultsUpdating {
         let isFilter = searchController.isActive && !searchBarIsEmpty()
         return isFilter
     }
-    
-    
-    func saveCurrentTime() {
-        currentTimeOfSearch = CACurrentMediaTime()
-        
-        
-    }
 }
 
+// MARK: Helper delete
 private extension CommandAddPlayerTableViewController {
     func isLoadingCell (for indexPath: IndexPath) -> Bool {
         return indexPath.row == tableModel.players.people.count
@@ -272,8 +185,18 @@ private extension CommandAddPlayerTableViewController {
         tableView.endUpdates()
     }
 }
-
+// MARK: Presenter
 extension CommandAddPlayerTableViewController : CommandAddPlayerView {
+    func onFetchSuccessful(player: Players) {
+        self.tableModel.players = player
+        self.endRefreshing()
+    }
+    
+    func onFetchFailure(error: Error) {
+        Print.m(error)
+        self.endRefreshing()
+    }
+    
     func onRequestAddPlayerToTeamSuccess(liLeagueInfo: LILeagueInfo) {
         //        teamController.addPlayerById(id: team.id, player: tableModel.players.people[currentId])
         if let team = liLeagueInfo.league.teams?.filter({ liTeam -> Bool in
@@ -334,10 +257,56 @@ extension CommandAddPlayerTableViewController : CommandAddPlayerView {
     func initPresenter() {
         presenter.attachView(view: self)
     }
+}
+
+// MARK: Table view
+extension CommandAddPlayerTableViewController {
+    // MARK: - Table view data source
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering() {
+            Print.m("is filtering - \(self.isFiltering()) && \(filteredPlayers.count)")
+            return filteredPlayers.count
+        }
+        return tableModel.players.people.count + 1
+    }
     
-//    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
-//        let indexPathsForVisibleRows = tableView.indexPathsForVisibleRows ?? []
-//        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
-//        return Array(indexPathsIntersection)
-//    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.list, for: indexPath) as! CommandAddPlayerTableViewCell
+        
+        let player: Person
+        if isFiltering() {
+            player = filteredPlayers.people[indexPath.row]
+            let teamPlayers = teamController.getTeamById(id: self.team.id)?.players
+            cell.usedPlayers = teamPlayers!
+            cell.configure(with: player)
+            
+            cell.cell_add_player_btn.tag = indexPath.row
+            cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
+        } else {
+            if isLoadingCell(for: indexPath) {
+                cell.configure(with: .none)
+                cell.cell_loadMore_btn.addTarget(self, action: #selector(onLoadMoreBtnPressed), for: .touchUpInside)
+                
+            } else {
+                player = tableModel.players.people[indexPath.row]
+                
+                cell.configure(with: player)
+                cell.cell_add_player_btn.tag = indexPath.row
+                cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
+                cell.tag = indexPath.row
+            }
+        }
+        
+        return cell
+    }
+    // MARK: Delegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        Print.m("cell did select")
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 66
+    }
 }

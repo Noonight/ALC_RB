@@ -99,6 +99,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         super.viewWillAppear(true)
         navigationController?.navigationBar.topItem?.rightBarButtonItem = createNewCommandBtn
 //        self.updateTableModel()
+        self.prepareCreateCommandBtn()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -190,6 +191,13 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         
         tableModel.ownerTeams = teamOwnerController.teams
         tableModel.playerTeams = teamPlayerController.teams
+    }
+    func prepareCreateCommandBtn() {
+        if userDefaults.getAuthorizedUser()?.person.club?.count == 0 {
+            createNewCommandBtn.isEnabled = false
+        } else {
+            createNewCommandBtn.isEnabled = true
+        }
     }
     
     // MARK: Update
