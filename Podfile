@@ -24,5 +24,6 @@ target 'ALC_RB' do
   #pod "CollieGallery"
   pod 'Lightbox' # full screen images
   #pod "StatefulViewController", "~> 3.0"
+  pod 'SwiftDate', '~> 5.0'
   pod 'UIScrollView-InfiniteScroll', '~> 1.1.0'
 end

@@ -15,11 +15,33 @@ protocol PlayersTableView: MvpView {
     
     func onRequestQueryPersonsSuccess(players: Players)
     func onRequestQueryPersonsFailure(error: Error)
+    
+    func onFetchSuccess(players: Players)
+    func onFetchFailure(error: Error)
+    
+    func onFetchScrollSuccess(players: Players)
+    func onFetchScrollFailure(error: Error)
 }
 
 class PlayersPresenter: MvpPresenter<PlayersTableViewController> {
     
     let apiService = ApiRequests()
+    
+    func fetch() {
+        apiService.get_players(limit: 20, offset: 0, get_success: { players in
+            self.getView().onFetchSuccess(players: players)
+        }) { error in
+            self.getView().onFetchFailure(error: error)
+        }
+    }
+    
+    func fetchInfScroll(limit: Int = 20, offset: Int = 0) {
+        apiService.get_players(limit: limit, offset: offset, get_success: { players in
+            self.getView().onFetchScrollSuccess(players: players)
+        }) { error in
+            self.getView().onFetchScrollFailure(error: error)
+        }
+    }
     
     func getPlayers() {
         let parameters: Parameters = [

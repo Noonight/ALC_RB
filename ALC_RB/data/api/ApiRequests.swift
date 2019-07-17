@@ -802,7 +802,8 @@ class ApiRequests {
     func get_playersWithQuery(query: String, get_success: @escaping (Players) -> (), get_failure: @escaping (Error) -> ()) {
         let parameters: Parameters = [
             "type": "player",
-            "search": query
+            "search": query,
+            "limit": 999
         ]
         
         Alamofire

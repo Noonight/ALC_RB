@@ -31,7 +31,7 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     let userDefaultsHelper = UserDefaultsHelper()
     var team = Team()
     var leagueId: String!
-    
+    var leagueController: LeagueController!
     let searchController = UISearchController(searchResultsController: nil)
     
     var tableModel = TableModel()
@@ -54,21 +54,10 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
         self.prepareTableView()
         self.prepareSearchController()
         self.prepareRefreshController()
-        self.prepareInfinityScrollController()
+        self.prepareInfiniteScrollController()
         
         self.refreshData()
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        if tableModel.players.people.count < 2 {
-//            setState(state: .loading)
-//            searchController.searchBar.text = ""
-//            searchController.isActive = false
-//            presenter.fetchPersons(offset: currentCount())
-//        }
-//
-//    }
 
     // MARK: Prepare
     func prepareSearchController() {
@@ -92,7 +81,7 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     func prepareRefreshController() {
         self.fetch = self.presenter.fetch
     }
-    func prepareInfinityScrollController() {
+    func prepareInfiniteScrollController() {
         self.tableView.infiniteScrollIndicatorMargin = 40
         self.tableView.infiniteScrollTriggerOffset = 500
         self.tableView.addInfiniteScroll { tableView in
@@ -118,7 +107,25 @@ extension CommandAddPlayerTableViewController {
 // MARK: Search controller
 extension CommandAddPlayerTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        filterContentForQuery(searchController.searchBar.text!)
+        if searchController.isActive {
+            self.tableView.removeInfiniteScroll()
+            self.refreshControl = nil
+            if searchController.searchBar.text?.count ?? 0 > 2 {
+                filterContentForQuery(searchController.searchBar.text!)
+            } else {
+                filteredPlayers.people = []
+                tableView.reloadData()
+            }
+            Print.m("search controller is active")
+        } else {
+            Print.m("search controller is not active")
+           self.tableView.reloadData()
+            // configure deleted interacive features
+            self.setupPullToRefresh()
+            //            self.prepareRefreshController()
+            self.prepareInfiniteScrollController()
+            
+        }
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -127,10 +134,10 @@ extension CommandAddPlayerTableViewController: UISearchResultsUpdating {
     
     func filterContentForQuery(_ query: String, scope: String = "All") {
 //        if (CACurrentMediaTime() - currentTimeOfSearch) > 5 {
-            if query.count > 1 {
-                Print.m("Query is \(query)")
+//            if query.count > 1 {
+//                Print.m("Query is \(query)")
                 presenter.findPersons(query: query)
-            }
+//            }
 //        updateUI()
 //        self.tableView.reloadData()
 //        }
@@ -147,6 +154,7 @@ extension CommandAddPlayerTableViewController {
     @objc func onAddPlayerBtnPressed(sender: UIButton) {
         var personId: String!
         if isFiltering() {
+            Print.m("person id on \(sender.tag) is \(filteredPlayers.people[sender.tag].id)")
             personId = filteredPlayers.people[sender.tag].id
             Print.m("tag of button is \(sender.tag). item on this tag is \(filteredPlayers.people[sender.tag])")
         } else {
@@ -192,12 +200,19 @@ private extension CommandAddPlayerTableViewController {
         return tableModel.players.people.count
     }
     
-    func deleteLastChosenRow() {
-        tableView.beginUpdates()
-        tableModel.players.people.remove(at: currentAddId!)
-        tableView.deleteRows(at: [IndexPath(row: currentAddId!, section: 0)], with: .automatic)
-        tableView.endUpdates()
-    }
+//    func setStateRow(player: Player) {
+//        tableView.beginUpdates()
+//        if isFiltering() {
+////            filteredPlayers.people.remove(at: currentAddId!)
+//            (self.tableView.cellForRow(at: IndexPath(row: currentAddId!, section: 0)) as! CommandAddPlayerTableViewCell).setStatus(status: .invited("В вашей команде"))
+//        } else {
+//            (self.tableView.cellForRow(at: IndexPath(row: currentAddId!, section: 0)) as! CommandAddPlayerTableViewCell).setStatus(status: .invited("В вашей команде"))
+////            tableModel.players.people.remove(at: currentAddId!)
+//        }
+//
+//        self.leagueController.addPlayerToTeamById(id: team.id, player: player)
+//        tableView.endUpdates()
+//    }
 }
 
 // MARK: Presenter
@@ -237,7 +252,7 @@ extension CommandAddPlayerTableViewController : CommandAddPlayerView {
     func onFetchSuccessful(player: Players) {
         self.tableModel.players = player
         // if pull to refresh used pages also update
-        self.prepareInfinityScrollController()
+        self.prepareInfiniteScrollController()
         self.paginationHelper = PaginationHelper(totalCount: player.count, currentCount: self.tableModel.players.people.count) // MARK: INIT PAGER
         self.endRefreshing()
     }
@@ -260,12 +275,16 @@ extension CommandAddPlayerTableViewController : CommandAddPlayerView {
 //            teamController.addPlayerById(id: team.id, player: <#T##Player#>)
         }
         
-        deleteLastChosenRow()
+        // set status to invite send
+        
+//        setStateRow()
+        self.leagueController.league = liLeagueInfo.league.convertToLeague()
+        self.tableView.reloadRows(at: [IndexPath(row: currentAddId!, section: 0)], with: UITableView.RowAnimation.automatic)
     }
     
     func onFetchQueryPersonsSuccess(players: Players) {
         // asd
-        Print.m(players)
+//        Print.m(players)
         filteredPlayers = players
         tableView.reloadData()
 //        updateUI()
@@ -315,8 +334,8 @@ extension CommandAddPlayerTableViewController {
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering() {
-            Print.m("is filtering - \(self.isFiltering()) && \(filteredPlayers.count)")
-            return filteredPlayers.count
+            Print.m("is filtering - \(self.isFiltering()) && \(filteredPlayers.people.count)")
+            return filteredPlayers.people.count
         }
         return tableModel.players.people.count// + 1
     }
@@ -325,12 +344,32 @@ extension CommandAddPlayerTableViewController {
     
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.list, for: indexPath) as! CommandAddPlayerTableViewCell
         
+        func setupStatus(player: Person) {
+            if leagueController.league.teams.contains(where: { team -> Bool in
+                return team.id == self.team.id && team.players.contains(where: { inPlayer -> Bool in
+                    return player.id == inPlayer.playerID
+                })
+            }) {
+                cell.configure(with: player, status: .invited("В вашей команде"))
+            }
+            let team = leagueController.league.teams.filter { team -> Bool in
+                return team.id != self.team.id && team.players.contains(where: { inPlayer -> Bool in
+                    return player.id == inPlayer.playerID
+                })
+                }.first
+            if team != nil {
+                cell.configure(with: player, status: .invited("Играет в \(String(describing: team?.name))"))
+            }
+        }
+        
         let player: Person
         if isFiltering() {
             player = filteredPlayers.people[indexPath.row]
-            let teamPlayers = teamController.getTeamById(id: self.team.id)?.players
-            cell.usedPlayers = teamPlayers!
-            cell.configure(with: player)
+//            let teamPlayers = teamController.getTeamById(id: self.team.id)?.players
+//            cell.usedPlayers = teamPlayers!
+            cell.configure(with: player, status: .notUsed)
+            
+            setupStatus(player: player)
             
             cell.cell_add_player_btn.tag = indexPath.row
             cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
@@ -340,12 +379,15 @@ extension CommandAddPlayerTableViewController {
 //                cell.cell_loadMore_btn.addTarget(self, action: #selector(onLoadMoreBtnPressed), for: .touchUpInside)
 //
 //            } else {
-                player = tableModel.players.people[indexPath.row]
-                
-                cell.configure(with: player)
-                cell.cell_add_player_btn.tag = indexPath.row
-                cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
-                cell.tag = indexPath.row
+            player = tableModel.players.people[indexPath.row]
+            
+            cell.configure(with: player, status: .notUsed)
+            
+            setupStatus(player: player)
+            
+            cell.cell_add_player_btn.tag = indexPath.row
+            cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
+            cell.tag = indexPath.row
 //            }
         }
         

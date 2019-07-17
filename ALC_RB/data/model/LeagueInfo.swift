@@ -40,6 +40,20 @@ struct LILeague: Codable {
     let ageAllowedMin: Int?
     let ageAllowedMax: Int?
     
+    func convertToLeague() -> League {
+        func getMatchArray() -> [String] {
+            return (self.matches?.map({ liMatch -> String in
+                return liMatch.id
+            }))!
+        }
+        func getTeamArray() -> [Team] {
+            return (self.teams?.map({ team -> Team in
+                return team.convertToTeam()
+            }))!
+        }
+        return League().with(status: status, matches: getMatchArray(), id: id, tourney: tourney, name: name, beginDate: beginDate, endDate: endDate, transferBegin: transferBegin, transferEnd: transferEnd, playersMin: playersMin, playersMax: playersMax, playersCapacity: playersCapacity, yellowCardsToDisqual: yellowCardsToDisqual, ageAllowedMin: ageAllowedMin, ageAllowedMax: ageAllowedMax, maxTeams: maxTeams, teams: getTeamArray())
+    }
+    
     enum CodingKeys: String, CodingKey {
         case status = "status"
         case matches = "matches"
@@ -238,6 +252,15 @@ struct LITeam: Codable {
     let name: String?
     let creator: String?
     let club: String?
+    
+    func convertToTeam() -> Team {
+        func getPlayersArray() -> [Player] {
+            return (players?.map({ player -> Player in
+                return player.convertToPlayer()
+            }))!
+        }
+        return Team().with(status: status, place: place, playoffPlace: playoffPlace, madeToPlayoff: madeToPlayoff, group: group, goals: goals, goalsReceived: goalsReceived, wins: wins, losses: losses, draws: draws, groupScore: groupScore, id: id, name: name, creator: creator, players: getPlayersArray(), club: club)
+    }
     
     enum CodingKeys: String, CodingKey {
         case status = "status"

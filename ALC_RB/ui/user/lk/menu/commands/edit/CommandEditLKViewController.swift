@@ -25,7 +25,8 @@ class CommandEditLKViewController: BaseStateViewController {
     
     var team = Team()
     var players = Players()
-    
+//    var league = League()
+    var leagueController: LeagueController!
     var mutablePlayers: [Player] = []
 
     let userDefaultHelper = UserDefaultsHelper()
@@ -166,6 +167,8 @@ extension CommandEditLKViewController: CommandEditLKView {
             destination.team = self.team
             destination.leagueId = self.participation?.league
             destination.teamController = self.teamController
+//            destination.league = self.league
+            destination.leagueController = self.leagueController
         }
     }
 }

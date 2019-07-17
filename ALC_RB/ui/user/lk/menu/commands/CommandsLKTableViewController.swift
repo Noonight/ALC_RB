@@ -34,6 +34,14 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         
         init () { }
         
+        func getLeagueOfTeam(inTeam: Team) -> League? {
+            return tournaments.leagues.filter({ league -> Bool in
+                return (league.teams.filter({ team -> Bool in
+                    return team.id == inTeam.id
+                }).first != nil)
+            }).first
+        }
+        
         func countOfSections () -> Int {
             if ownerTeams.count > 0 && playerTeams.count > 0 {
                 return 2
@@ -335,6 +343,7 @@ extension CommandsLKTableViewController {
             destination.participation = participationController.getByTeamId(tableModel.ownerTeams[indexPath.row].id)
             destination.teamController = self.teamOwnerController
             destination.participationController = self.participationController
+            destination.leagueController = LeagueController(league: self.tableModel.getLeagueOfTeam(inTeam: tableModel.ownerTeams[indexPath.row])!)
         }
         
         if segue.identifier == SegueIdentifiers.ADD,

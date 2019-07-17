@@ -185,16 +185,16 @@ extension BaseStateTableViewController : ActivityIndicatorProtocol {
         
         view.bringSubviewToFront(backgroundView!)
         
-        activityIndicator.startAnimating()
+        activityIndicator.startAnimating()  
     }
     
     func hideLoading() {
         activityIndicator.stopAnimating()
         
         if let backgroundView = backgroundView {
-            UIView.animate(withDuration: 0.1) {
+//            UIView.animate(withDuration: 0.1) {
                 backgroundView.removeFromSuperview()
-            }
+//            }
         }
         tableView.isScrollEnabled = true
         

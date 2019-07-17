@@ -159,6 +159,7 @@
 		DB59E5BE2228EB5C00D1F62F /* ImageUploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59E5BD2228EB5C00D1F62F /* ImageUploadHelper.swift */; };
 		DB59E5C022292B5900D1F62F /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59E5BF22292B5900D1F62F /* EditProfile.swift */; };
 		DB5A00CF2237F1AF00B93EF5 /* AcceptRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5A00CE2237F1AF00B93EF5 /* AcceptRequest.swift */; };
+		DB5A6DF422DFA617001D4119 /* LeagueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5A6DF322DFA617001D4119 /* LeagueController.swift */; };
 		DB5AAC0622369FDB0097963E /* InvitationLKTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AAC0522369FDB0097963E /* InvitationLKTableViewController.swift */; };
 		DB5AAC082236A1380097963E /* InvitationLKPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AAC072236A1380097963E /* InvitationLKPresenter.swift */; };
 		DB5AAC0B2236A1AE0097963E /* InvitationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AAC0A2236A1AE0097963E /* InvitationTableViewCell.swift */; };
@@ -397,6 +398,7 @@
 		DB59E5BD2228EB5C00D1F62F /* ImageUploadHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadHelper.swift; sourceTree = "<group>"; };
 		DB59E5BF22292B5900D1F62F /* EditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
 		DB5A00CE2237F1AF00B93EF5 /* AcceptRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRequest.swift; sourceTree = "<group>"; };
+		DB5A6DF322DFA617001D4119 /* LeagueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueController.swift; sourceTree = "<group>"; };
 		DB5AAC0522369FDB0097963E /* InvitationLKTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationLKTableViewController.swift; sourceTree = "<group>"; };
 		DB5AAC072236A1380097963E /* InvitationLKPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationLKPresenter.swift; sourceTree = "<group>"; };
 		DB5AAC0A2236A1AE0097963E /* InvitationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationTableViewCell.swift; sourceTree = "<group>"; };
@@ -1323,6 +1325,14 @@
 			path = post;
 			sourceTree = "<group>";
 		};
+		DB5A6DF522DFA75A001D4119 /* model controller */ = {
+			isa = PBXGroup;
+			children = (
+				DB5A6DF322DFA617001D4119 /* LeagueController.swift */,
+			);
+			path = "model controller";
+			sourceTree = "<group>";
+		};
 		DB5AAC0422369F6F0097963E /* invitation */ = {
 			isa = PBXGroup;
 			children = (
@@ -1454,6 +1464,7 @@
 		DB98FACB225470CF002933D0 /* edit */ = {
 			isa = PBXGroup;
 			children = (
+				DB5A6DF522DFA75A001D4119 /* model controller */,
 				DB98FACC2254717B002933D0 /* CommandEditLKViewController.swift */,
 				DB98FACE2254AF35002933D0 /* CommandEditLKPresenter.swift */,
 				DB98FAD02254B03C002933D0 /* inside */,
@@ -1781,7 +1792,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AMScrollingNavbar/AMScrollingNavbar.framework",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
@@ -1796,6 +1807,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/StatusAlert/StatusAlert.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/UIScrollView-InfiniteScroll/UIScrollView_InfiniteScroll.framework",
 			);
@@ -1817,12 +1829,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StatusAlert.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIScrollView_InfiniteScroll.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C11ED1E2DE4486EC022A9E5B /* [CP] Check Pods Manifest.lock */ = {
@@ -1954,6 +1967,7 @@
 				DB59E5B9222802F000D1F62F /* EditProfilePresenter.swift in Sources */,
 				187F2DFB22CB19440049EA77 /* EditRefereeTeamTableViewController.swift in Sources */,
 				DB495B7B22AFC4BF00FCC6F5 /* ActiveMatches.swift in Sources */,
+				DB5A6DF422DFA617001D4119 /* LeagueController.swift in Sources */,
 				04C024E52213DE2D00A4A571 /* EventsMatchPresenter.swift in Sources */,
 				189E1C7A22C9EC3A0086E4DA /* LabelSwitchView.swift in Sources */,
 				18606A3322D30B9200F5D2FE /* EventTypeView.swift in Sources */,

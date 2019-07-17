@@ -10,35 +10,55 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class PlayersTableViewController: UITableViewController {
-
-    let presenter = PlayersPresenter()
-
-    let disposeBag = DisposeBag()
+class PlayersTableViewController: BaseStateTableViewController {
+    private enum CellIdentifiers {
+        static let PLAYER = "cell_players"
+    }
+    private enum SegueIdentifiers {
+        static let PLAYER = "segue_player"
+    }
     
+    // MARK: Var & Let
+    
+    let presenter = PlayersPresenter()
+    let disposeBag = DisposeBag()
     let searchController = UISearchController(searchResultsController: nil)
+    var paginationHelper: PaginationHelper!
     
     var players = Players()
-    
     var filteredPlayers = Players()
     
-    let cellId = "cell_players"
-    let segueId = "segue_player"
+    // MARK: Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initPresenter()
+        self.configurePresenter()
+        self.configureSearchController()
+        self.configureTableView()
+        self.configureRefreshController()
+        self.configureInfiniteScrollController()
         
-        configureSearchController()
-        
-        tableView.tableFooterView = UIView()
-    }
-
-    func updateUI() {
-        tableView.reloadData()
+        self.refreshData()
     }
     
+    // MARK: Configure
+    func configureRefreshController() {
+        self.fetch = self.presenter.fetch
+    }
+    func configureInfiniteScrollController() {
+        self.tableView.infiniteScrollIndicatorMargin = 40
+        self.tableView.infiniteScrollTriggerOffset = 500
+        self.tableView.addInfiniteScroll { tableView in
+            self.presenter.fetchInfScroll(offset: self.paginationHelper.getCurrentCount())
+        }
+    }
+    func configurePresenter() {
+        self.initPresenter()
+    }
+    func configureTableView() {
+        self.tableView.tableFooterView = UIView()
+    }
     func configureSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -53,10 +73,68 @@ class PlayersTableViewController: UITableViewController {
     }
 }
 
+// MARK: Extensions
+
+// MARK: Refresh controller
+
+extension PlayersTableViewController {
+    override func hasContent() -> Bool {
+        if self.players.people.count == 0 {
+            return false
+        } else {
+            return true
+        }
+    }
+}
+
+// MARK: Presenter
+
 extension PlayersTableViewController: PlayersTableView {
+    func onFetchSuccess(players: Players) {
+        self.players = players
+        // if pull to refresh used pages also update
+        self.configureInfiniteScrollController()
+        self.paginationHelper = PaginationHelper(totalCount: players.count, currentCount: self.players.people.count) // MARK: INIT PAGER
+        self.endRefreshing()
+    }
+    
+    func onFetchFailure(error: Error) {
+        Print.m(error)
+        self.endRefreshing()
+    }
+    
+    func onFetchScrollSuccess(players: Players) {
+        Print.m("new players count is \(self.players.people.count + players.people.count)")
+        // create new index paths
+        let playersCount = self.players.people.count // current count of players
+        let responsePlayersCount = players.people.count + playersCount // current count of response players
+        let (start, end) = (playersCount, responsePlayersCount)
+        let indexPaths = (start..<end).map { return IndexPath(row: $0, section: 0) }
+        
+        // update data source
+        self.players.people.append(contentsOf: players.people)
+        self.paginationHelper.setCurrentCount(newCount: self.players.people.count)
+        self.paginationHelper.setTotalCount(newCount: players.count)
+        
+        // update table view
+        self.tableView.beginUpdates()
+        self.tableView.insertRows(at: indexPaths, with: .automatic)
+        self.tableView.endUpdates()
+        
+        self.tableView.finishInfiniteScroll()
+        
+        if self.paginationHelper.getCurrentCount() == self.paginationHelper.getTotalCount() {
+            self.tableView.removeInfiniteScroll()
+        }
+    }
+    
+    func onFetchScrollFailure(error: Error) {
+        self.tableView.finishInfiniteScroll()
+        showAlert(message: error.localizedDescription)
+    }
+    
     func onRequestQueryPersonsSuccess(players: Players) {
         filteredPlayers = players
-        updateUI()
     }
     
     func onRequestQueryPersonsFailure(error: Error) {
@@ -75,10 +153,11 @@ extension PlayersTableViewController: PlayersTableView {
     
     func onGetPlayersSuccess(_ players: Players) {
         self.players = players
-        updateUI()
     }
 }
-// tableview datasource
+
+// MARK: Table view
+
 extension PlayersTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -92,7 +171,7 @@ extension PlayersTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! PlayerTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.PLAYER, for: indexPath) as! PlayerTableViewCell
         
         let player: Person
         if (isFiltering()) {
@@ -116,7 +195,8 @@ extension PlayersTableViewController {
         }
         
         if (player.birthdate.count > 3) {
-            cell.mBirthDate.text = player.birthdate.UTCToLocal(from: .utc, to: .local)
+            cell.mBirthDate.text = player.birthdate.UTCToLocal(from: .GMT, to: .local)
+//            cell.mBirthDate.text = player.birthdate
         } else {
             cell.mBirthDate.text = ""
         }
@@ -133,14 +213,14 @@ extension PlayersTableViewController {
         }
     }
 }
-//tableview delegate
+// MARK: Table view DELEGATE
 extension PlayersTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         debugPrint("\(indexPath.row)")
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-// search controller
+// MARK: Search controller
 extension PlayersTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterContentForQuery(searchController.searchBar.text!)
@@ -151,13 +231,12 @@ extension PlayersTableViewController: UISearchResultsUpdating {
     }
     
     func filterContentForQuery(_ query: String, scope: String = "All") {
+        if searchBarIsEmpty() {
+            self.filteredPlayers = Players()
+        }
         if query.count >= 2 {
             presenter.searchPlayers(query: query)
         }
-//        filteredPlayers.people = players.people.filter({ (person: Person) -> Bool in
-//            return person.getFullName().lowercased().contains(query.lowercased())
-//        })
-        updateUI()
     }
     
     func isFiltering() -> Bool {
@@ -165,11 +244,11 @@ extension PlayersTableViewController: UISearchResultsUpdating {
     }
     
 }
-//segue
+// MARK: Navigation
 extension PlayersTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == segueId,
+        if segue.identifier == SegueIdentifiers.PLAYER,
             let destination = segue.destination as? PlayerViewController,
             let indexPath = tableView.indexPathForSelectedRow,
             let cellIndex = tableView.indexPathForSelectedRow?.row,

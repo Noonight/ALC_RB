@@ -36,7 +36,7 @@ struct League: Codable {
     var playersMin: Int?
     var playersMax: Int?
     var playersCapacity: Int
-    var yellowCardsToDisqual: Int64?
+    var yellowCardsToDisqual: Int?
     var ageAllowedMin: Int
     var ageAllowedMax: Int
     var maxTeams: Int
@@ -82,7 +82,7 @@ struct League: Codable {
         self.playersMin = try container.decodeIfPresent(Int.self, forKey: .playersMin) ?? 0
         self.playersMax = try container.decodeIfPresent(Int.self, forKey: .playersMax) ?? 0
         self.playersCapacity = try container.decodeIfPresent(Int.self, forKey: .playersCapacity) ?? 0
-        self.yellowCardsToDisqual = try container.decodeIfPresent(Int64.self, forKey: .yellowCardsToDisqual) ?? 0
+        self.yellowCardsToDisqual = try container.decodeIfPresent(Int.self, forKey: .yellowCardsToDisqual) ?? 0
         self.ageAllowedMin = try container.decodeIfPresent(Int.self, forKey: .ageAllowedMin) ?? 0
         self.ageAllowedMax = try container.decodeIfPresent(Int.self, forKey: .ageAllowedMax) ?? 0
         self.maxTeams = try container.decodeIfPresent(Int.self, forKey: .maxTeams) ?? 0
@@ -269,7 +269,7 @@ extension League {
         playersMin: Int? = nil,
         playersMax: Int? = nil,
         playersCapacity: Int? = nil,
-        yellowCardsToDisqual: Int64?? = nil,
+        yellowCardsToDisqual: Int?? = nil,
         ageAllowedMin: Int? = nil,
         ageAllowedMax: Int? = nil,
         maxTeams: Int? = nil,
