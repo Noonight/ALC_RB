@@ -41,6 +41,8 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     
     var currentAddId: Int?
     
+    var paginationHelper: PaginationHelper! // need init after first fetch data and on every pull to refresh action
+    
     // MARK: - model controllers
     var teamController: TeamCommandsController!
     
@@ -51,7 +53,8 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
         self.preparePresenter()
         self.prepareTableView()
         self.prepareSearchController()
-        self.prepareRefreshControl()
+        self.prepareRefreshController()
+        self.prepareInfinityScrollController()
         
         self.refreshData()
     }
@@ -86,11 +89,61 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     func preparePresenter() {
         initPresenter()
     }
-    func prepareRefreshControl() {
+    func prepareRefreshController() {
         self.fetch = self.presenter.fetch
     }
+    func prepareInfinityScrollController() {
+        self.tableView.infiniteScrollIndicatorMargin = 40
+        self.tableView.infiniteScrollTriggerOffset = 500
+        self.tableView.addInfiniteScroll { tableView in
+            Print.m("infinite scroll trigered")
+            self.presenter.fetchInfScroll(offset: self.paginationHelper.getCurrentCount())
+        }
+    }
+}
+
+// MARK: Extensions
+
+// MARK: Refresh controller
+extension CommandAddPlayerTableViewController {
+    override func hasContent() -> Bool {
+        if tableModel.players.people.count != 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+// MARK: Search controller
+extension CommandAddPlayerTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForQuery(searchController.searchBar.text!)
+    }
     
-    // MARK: Actions
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForQuery(_ query: String, scope: String = "All") {
+//        if (CACurrentMediaTime() - currentTimeOfSearch) > 5 {
+            if query.count > 1 {
+                Print.m("Query is \(query)")
+                presenter.findPersons(query: query)
+            }
+//        updateUI()
+//        self.tableView.reloadData()
+//        }
+    }
+    
+    func isFiltering() -> Bool {
+        let isFilter = searchController.isActive && !searchBarIsEmpty()
+        return isFilter
+    }
+}
+
+// MARK: Actions
+extension CommandAddPlayerTableViewController {
     @objc func onAddPlayerBtnPressed(sender: UIButton) {
         var personId: String!
         if isFiltering() {
@@ -111,7 +164,7 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     }
     
     @objc func onLoadMoreBtnPressed(sender: UIButton) {
-//        onBtnLoadMorePressed(button: sender)
+        //        onBtnLoadMorePressed(button: sender)
         Print.m("good job -> currentCount is \(currentCount()) // totalCount is \(totalCount())")
         
         if currentCount() < totalCount() {
@@ -122,45 +175,6 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
         if currentCount() == totalCount() {
             sender.setTitle("Конец", for: .normal)
         }
-    }
-}
-
-// MARK: Extensions
-
-// MARK: Refresh controller
-extension CommandAddPlayerTableViewController {
-    override func hasContent() -> Bool {
-        if tableModel.players.people.count != 0 {
-            return true
-        } else {
-            return false
-        }
-    }
-}
-// MARK: Search controller
-extension CommandAddPlayerTableViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        filterContentForQuery(searchController.searchBar.text!)
-    }
-    
-    func searchBarIsEmpty() -> Bool {
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
-    
-    func filterContentForQuery(_ query: String, scope: String = "All") {
-//        if (CACurrentMediaTime() - currentTimeOfSearch) > 5 {
-            if query.count > 1 {
-                Print.m("Query is \(query)")
-                presenter.findPersons(query: query)
-            }
-//        updateUI()
-        self.tableView.reloadData()
-//        }
-    }
-    
-    func isFiltering() -> Bool {
-        let isFilter = searchController.isActive && !searchBarIsEmpty()
-        return isFilter
     }
 }
 
@@ -185,10 +199,46 @@ private extension CommandAddPlayerTableViewController {
         tableView.endUpdates()
     }
 }
+
 // MARK: Presenter
 extension CommandAddPlayerTableViewController : CommandAddPlayerView {
+    func onFetchScrollSuccessful(players: Players) {
+        Print.m("new players count is \(self.tableModel.players.people.count + players.people.count)")
+        // create new index paths
+        let playersCount = self.tableModel.players.people.count // current count of players
+        let responsePlayersCount = players.people.count + playersCount // current count of response players
+        let (start, end) = (playersCount, responsePlayersCount)
+        let indexPaths = (start..<end).map { return IndexPath(row: $0, section: 0) }
+        
+        // update data source
+        self.tableModel.players.people.append(contentsOf: players.people)
+//        self.numPages = response.nbPages
+//        self.currentPage += 1
+        self.paginationHelper.setCurrentCount(newCount: self.tableModel.players.people.count)
+        self.paginationHelper.setTotalCount(newCount: players.count)
+        
+        // update table view
+        self.tableView.beginUpdates()
+        self.tableView.insertRows(at: indexPaths, with: .automatic)
+        self.tableView.endUpdates()
+        
+        self.tableView.finishInfiniteScroll()
+        
+        if self.paginationHelper.getCurrentCount() == self.paginationHelper.getTotalCount() {
+            self.tableView.removeInfiniteScroll()
+        }
+    }
+    
+    func onFetchScrollFailure(error: Error) {
+        self.tableView.finishInfiniteScroll()
+        showAlert(message: error.localizedDescription)
+    }
+    
     func onFetchSuccessful(player: Players) {
         self.tableModel.players = player
+        // if pull to refresh used pages also update
+        self.prepareInfinityScrollController()
+        self.paginationHelper = PaginationHelper(totalCount: player.count, currentCount: self.tableModel.players.people.count) // MARK: INIT PAGER
         self.endRefreshing()
     }
     
@@ -217,6 +267,7 @@ extension CommandAddPlayerTableViewController : CommandAddPlayerView {
         // asd
         Print.m(players)
         filteredPlayers = players
+        tableView.reloadData()
 //        updateUI()
     }
     
@@ -267,7 +318,7 @@ extension CommandAddPlayerTableViewController {
             Print.m("is filtering - \(self.isFiltering()) && \(filteredPlayers.count)")
             return filteredPlayers.count
         }
-        return tableModel.players.people.count + 1
+        return tableModel.players.people.count// + 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -284,18 +335,18 @@ extension CommandAddPlayerTableViewController {
             cell.cell_add_player_btn.tag = indexPath.row
             cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
         } else {
-            if isLoadingCell(for: indexPath) {
-                cell.configure(with: .none)
-                cell.cell_loadMore_btn.addTarget(self, action: #selector(onLoadMoreBtnPressed), for: .touchUpInside)
-                
-            } else {
+//            if isLoadingCell(for: indexPath) {
+//                cell.configure(with: .none)
+//                cell.cell_loadMore_btn.addTarget(self, action: #selector(onLoadMoreBtnPressed), for: .touchUpInside)
+//
+//            } else {
                 player = tableModel.players.people[indexPath.row]
                 
                 cell.configure(with: player)
                 cell.cell_add_player_btn.tag = indexPath.row
                 cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
                 cell.tag = indexPath.row
-            }
+//            }
         }
         
         return cell

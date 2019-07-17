@@ -27,7 +27,7 @@ struct ApiRoute {
     static func getImageURL(image: String, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) -> URL {
         #if DEBUG
         let className = (fileName as NSString).lastPathComponent
-        print("<\(className)> ->> \(functionName) [#\(lineNumber)]| \(baseRoute)\(image)\n")
+//        print("<\(className)> ->> \(functionName) [#\(lineNumber)]| \(baseRoute)\(image)\n")
         #endif
         return URL(string: "\(baseRoute)\(image)")!
     }

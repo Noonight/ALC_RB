@@ -169,6 +169,8 @@
 		DB641F8A222BB283004AC6CB /* UserLKPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB641F89222BB283004AC6CB /* UserLKPresenter.swift */; };
 		DB641F8C222C0921004AC6CB /* UserLifeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB641F8B222C0921004AC6CB /* UserLifeHelper.swift */; };
 		DB673F5121D7A39B006205A8 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB673F5021D7A39B006205A8 /* Image.swift */; };
+		DB673FDE22DDF44600581E6D /* Pages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB673FDD22DDF44600581E6D /* Pages.swift */; };
+		DB673FE322DEFCA400581E6D /* PaginationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB673FE222DEFCA400581E6D /* PaginationHelper.swift */; };
 		DB6AA17E21C294A4007D4693 /* ClubsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA17D21C294A4007D4693 /* ClubsTableViewController.swift */; };
 		DB6AA18121C295C3007D4693 /* ClubsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA18021C295C3007D4693 /* ClubsPresenter.swift */; };
 		DB6AA18321C296DE007D4693 /* ClubTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA18221C296DE007D4693 /* ClubTableViewCell.swift */; };
@@ -406,6 +408,9 @@
 		DB641F89222BB283004AC6CB /* UserLKPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLKPresenter.swift; sourceTree = "<group>"; };
 		DB641F8B222C0921004AC6CB /* UserLifeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLifeHelper.swift; sourceTree = "<group>"; };
 		DB673F5021D7A39B006205A8 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		DB673FDD22DDF44600581E6D /* Pages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pages.swift; sourceTree = "<group>"; };
+		DB673FE022DE230000581E6D /* InfiniteScrollViewSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InfiniteScrollViewSwift-Bridging-Header.h"; sourceTree = "<group>"; };
+		DB673FE222DEFCA400581E6D /* PaginationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationHelper.swift; sourceTree = "<group>"; };
 		DB6AA17D21C294A4007D4693 /* ClubsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubsTableViewController.swift; sourceTree = "<group>"; };
 		DB6AA18021C295C3007D4693 /* ClubsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubsPresenter.swift; sourceTree = "<group>"; };
 		DB6AA18221C296DE007D4693 /* ClubTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubTableViewCell.swift; sourceTree = "<group>"; };
@@ -783,7 +788,9 @@
 		CE61551421AF9782008C4463 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				DB673FE122DEFC8C00581E6D /* pagination */,
 				DB1CA1052226B8EE005E1FB9 /* UserDefaultsHelper.swift */,
+				DB673FDC22DDF41F00581E6D /* pages */,
 				CE77AC7C21B0FBB300C0ED0D /* api */,
 				CE61551521AF9786008C4463 /* model */,
 			);
@@ -955,6 +962,7 @@
 		CEA6EBB421A53F15008F874D /* base */ = {
 			isa = PBXGroup;
 			children = (
+				DB673FDF22DE22EC00581E6D /* infinity scroll */,
 				DB7F7CA422BF0B4D00000C40 /* image view */,
 				1823DC21229526F6000A1055 /* loading cell */,
 				DB99BB6F224CD5F600EE30D7 /* ad */,
@@ -1344,6 +1352,30 @@
 				DB98FACB225470CF002933D0 /* edit */,
 			);
 			path = commands;
+			sourceTree = "<group>";
+		};
+		DB673FDC22DDF41F00581E6D /* pages */ = {
+			isa = PBXGroup;
+			children = (
+				DB673FDD22DDF44600581E6D /* Pages.swift */,
+			);
+			path = pages;
+			sourceTree = "<group>";
+		};
+		DB673FDF22DE22EC00581E6D /* infinity scroll */ = {
+			isa = PBXGroup;
+			children = (
+				DB673FE022DE230000581E6D /* InfiniteScrollViewSwift-Bridging-Header.h */,
+			);
+			path = "infinity scroll";
+			sourceTree = "<group>";
+		};
+		DB673FE122DEFC8C00581E6D /* pagination */ = {
+			isa = PBXGroup;
+			children = (
+				DB673FE222DEFCA400581E6D /* PaginationHelper.swift */,
+			);
+			path = pagination;
 			sourceTree = "<group>";
 		};
 		DB6AA17C21C29485007D4693 /* club */ = {
@@ -1844,11 +1876,13 @@
 				DBC5C5F6221FDA8500B0A1B6 /* ImagePicker.swift in Sources */,
 				DB2A35D621CA203B00E9E2C5 /* PlayersTableViewController.swift in Sources */,
 				DB57C5D221F0BFD500BEA097 /* TeamLeagueDetailViewController.swift in Sources */,
+				DB673FDE22DDF44600581E6D /* Pages.swift in Sources */,
 				DB99BB6E224CB48300EE30D7 /* AdView.swift in Sources */,
 				18076941229E7D4900A10996 /* AddPlayerToTeam.swift in Sources */,
 				DBA69210221E74A000BEFB26 /* DrawerMenuTableViewCell.swift in Sources */,
 				DB52EAE82248E412004F7869 /* CommandsLKTableViewCell.swift in Sources */,
 				DBCB1EBF2223FE3F005A6976 /* ApiRequests.swift in Sources */,
+				DB673FE322DEFCA400581E6D /* PaginationHelper.swift in Sources */,
 				DB17385021BA706E00017B6D /* AnnounceDateTableViewCell.swift in Sources */,
 				DBA77C2222CF4865000DCF02 /* ProtocolRefereesController.swift in Sources */,
 				DBFB83932201CFFC008A8F79 /* PlayersLeagueDetailPresenter.swift in Sources */,
@@ -2199,6 +2233,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.baikalweb.alf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ALC_RB/base/infinity scroll/InfiniteScrollViewSwift-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2218,6 +2253,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.baikalweb.alf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ALC_RB/base/infinity scroll/InfiniteScrollViewSwift-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

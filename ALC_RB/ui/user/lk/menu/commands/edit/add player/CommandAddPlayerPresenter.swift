@@ -21,6 +21,9 @@ protocol CommandAddPlayerView: MvpView {
     
     func onFetchSuccessful(player: Players)
     func onFetchFailure(error: Error)
+    
+    func onFetchScrollSuccessful(players: Players)
+    func onFetchScrollFailure(error: Error)
 }
 
 class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewController> {
@@ -52,11 +55,13 @@ class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewControlle
         }
     }
     
-    func fetch(limit: Int = 20, offset: Int = 0) {
+    func fetchInfScroll(limit: Int = 20, offset: Int = 0) {
         apiService.get_players(limit: limit, offset: offset, get_success: { players in
-            self.getView().onFetchPersonsSuccess(players: players)
+//            self.getView().onFetchPersonsSuccess(players: players)
+            self.getView().onFetchScrollSuccessful(players: players)
         }) { error in
-            self.getView().onFetchFailure(error: error)
+//            self.getView().onFetchFailure(error: error)
+            self.getView().onFetchScrollFailure(error: error)
         }
     }
     // only first 20
