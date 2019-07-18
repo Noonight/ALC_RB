@@ -20,4 +20,12 @@ class LeagueController {
             }
         }
     }
+    func editTeamPlayersById(teamId: String, players: [Player]) {
+        for i in 0...self.league.teams.count - 1 {
+            Print.m("index i = \(i) || count of players = \(self.league.teams.count) \n team id is \(self.league.teams[i].id) == param team id is \(teamId)")
+            if self.league.teams[i].id == teamId {
+                self.league.teams[i].players = players
+            }
+        }
+    }
 }

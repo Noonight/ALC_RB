@@ -27,6 +27,9 @@ class MatchProtocolViewController: UIViewController {
     @IBOutlet weak var refereesBtn: UIButton!
     @IBOutlet weak var eventsBtn: UIButton!
     
+    @IBOutlet var teamOneTap: UITapGestureRecognizer!
+    @IBOutlet var teamTwoTap: UITapGestureRecognizer!
+    
     var leagueDetailModel = LeagueDetailModel()
     var match = LIMatch()
     
@@ -58,10 +61,17 @@ class MatchProtocolViewController: UIViewController {
         
         let navigationMatchScoreBtn = UIBarButtonItem(title: "Счет", style: .plain, target: self, action: #selector(onMatchScoreBtnPressed(sender:)))
         navigationItem.rightBarButtonItem = navigationMatchScoreBtn
+        
     }
     
     // MARK: - Button Actions
     
+    @IBAction func onTeamOneTap(_ sender: UITapGestureRecognizer) {
+        
+    }
+    @IBAction func onTeamTwoTap(_ sender: UITapGestureRecognizer) {
+        
+    }
     @objc func onMatchScoreBtnPressed(sender: UIBarButtonItem) {
         let score: ScoreMatchTableViewController = {
             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)

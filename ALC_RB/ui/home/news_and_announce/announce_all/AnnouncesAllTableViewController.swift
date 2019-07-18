@@ -97,7 +97,7 @@ class AnnounceAllTableViewController: BaseStateTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? AnnounceDateTableViewCell
 
         cell?.content.text = tableData?.announces[indexPath.row].content
-        cell?.date.text = tableData?.announces[indexPath.row].date.UTCToLocal(from: .utc, to: .local)
+        cell?.date.text = tableData?.announces[indexPath.row].date.convertDate(from: .utc, to: .local)
         
         return cell!
     }

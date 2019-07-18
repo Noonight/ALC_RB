@@ -62,10 +62,11 @@ class PlayerViewController: UIViewController {
         
         pastLeaguesTable.reloadData()
         mPhoto.image = content?.photo
-        mName.text = content?.person.name
-        Print.d(message: "\(content?.person.birthdate)")
+//        mName.text = content?.person.name
+        mName.text = content?.person.getFullName()
+//        Print.d(message: "\(content?.person.birthdate)")
         if content?.person.birthdate.count ?? 0 > 3 {
-            mBirthDate.text = content?.person.birthdate.UTCToLocal(from: .utc, to: .local)
+            mBirthDate.text = content?.person.birthdate.convertDate(from: .utc, to: .local)
         } else {
             mBirthDate.text = ""
         }

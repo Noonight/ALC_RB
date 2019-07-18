@@ -40,8 +40,8 @@ class RefereeEditMatchesLKTableViewCell: UITableViewCell {
 //        Print.m(comingTargetPerson)
         reset()
         
-        dateLabel.text = cellModel.activeMatch.date.UTCToLocal(from: .utcTime, to: .local)
-        timeLabel.text = cellModel.activeMatch.date.UTCToLocal(from: .utcTime, to: .localTime)
+        dateLabel.text = cellModel.activeMatch.date.convertDate(from: .utcTime, to: .local)
+        timeLabel.text = cellModel.activeMatch.date.convertDate(from: .utcTime, to: .localTime)
         leagueLabel.text = cellModel.activeMatch.tour
         placeLabel.text = cellModel.activeMatch.place
         

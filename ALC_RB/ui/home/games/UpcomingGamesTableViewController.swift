@@ -123,10 +123,10 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
 //        let model = tableData.matches![indexPath.row]
         if let model = tableData.matches?[indexPath.row] {
             if let date =  model.date {
-                cell.mDate.text = date.UTCToLocal(from: .utc, to: .local)
+                cell.mDate.text = date.convertDate(from: .utc, to: .local)
 
             }
-            cell.mTime.text = model.date!.UTCToLocal(from: .utc, to: .localTime)
+            cell.mTime.text = model.date!.convertDate(from: .utc, to: .localTime)
             cell.mTour.text = model.tour
             cell.mPlace.text = model.place
             cell.mTitleTeam1.text = model.teamOne?.name

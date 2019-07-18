@@ -143,6 +143,7 @@ extension CommandEditLKViewController: CommandEditLKView {
         self.team.players = editTeamResponse.players
 //        self.players = editTeamResponse.players
         self.teamController.setPlayersByTeamId(id: self.team.id, players: editTeamResponse.players)
+        self.leagueController.editTeamPlayersById(teamId: self.team.id, players: editTeamResponse.players)
         presenter.getPersons()
         showAlert(title: "Изменения успешно сохранены", message: "")
     }
@@ -179,12 +180,17 @@ extension CommandEditLKViewController: OnCommandPlayerDeleteBtnPressedProtocol {
         Print.m("player table \(index.row)")
         for i in 0...mutablePlayers.count {
             if model.player?.id == mutablePlayers[i].id {
-                if mutablePlayers.count == 1 {
-                    showAlert(message: "Нельзя удалять последнего игрока.")
-//                    showAlertOkCancel(title: "Предупреждение", message: "Если удалить последнего игрока ", ok: <#T##() -> ()#>, cancel: <#T##() -> ()#>)
+                if mutablePlayers[i].id == userDefaultHelper.getAuthorizedUser()?.person.id { // i can't delete teams' trainer
+                    showAlert(message: "Вы пытаетесь удалить тренера.")
                 } else {
                     mutablePlayers.remove(at: i)
                 }
+//                if mutablePlayers.count == 1 {
+//
+////                    showAlertOkCancel(title: "Предупреждение", message: "Если удалить последнего игрока ", ok: <#T##() -> ()#>, cancel: <#T##() -> ()#>)
+//                } else {
+//                    mutablePlayers.remove(at: i)
+//                }
                 break
             }
         }

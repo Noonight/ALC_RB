@@ -111,6 +111,16 @@ struct Person: Codable {
         return "Не указано"
     }
     
+    // Surname, First Name, First Patronymic
+    func getSurnameNP() -> String {
+        let emptyChar = Character(" ")
+        let surnameNP = "\(surname) \(name.first ?? emptyChar) \(lastname.first ?? emptyChar)"
+        if (surnameNP.count > 4) {
+            return surnameNP
+        }
+        return "Не указано"
+    }
+    
     func getUserType() -> TypeOfPerson {
         if type == TypeOfPerson.player.rawValue {
             return TypeOfPerson.player

@@ -21,34 +21,48 @@ enum DateFormats: String {
 
 extension String {
     
-    func UTCToLocal(from: DateFormats, to: DateFormats) -> String {
+    func convertDate(from: DateFormats, to: DateFormats) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = from.rawValue
-        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-
-        let dt = dateFormatter.date(from: self)
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        
+        var dt = dateFormatter.date(from: self)
+        
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = to.rawValue
-
+        
+        
+        if dt == nil {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = from.rawValue
+            dateFormatter.locale = Locale(identifier: "en_US")
+            
+            dt = dateFormatter.date(from: self)
+            
+            dateFormatter.timeZone = TimeZone.current
+            dateFormatter.dateFormat = to.rawValue
+        }
+        
         return dateFormatter.string(from: dt ?? Date())
     }
 
-    func localToUTC(from: String, to: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = from
-        dateFormatter.calendar = NSCalendar.current
-        dateFormatter.timeZone = TimeZone.current
-
-        let dt = dateFormatter.date(from: self)
-        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        dateFormatter.dateFormat = to
-
-        return dateFormatter.string(from: dt ?? Date())
-    }
+//    func localToUTC(from: String, to: String) -> String {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = from
+//        dateFormatter.calendar = NSCalendar.current
+//        dateFormatter.timeZone = TimeZone.current
+//
+//        let dt = dateFormatter.date(from: self)
+//        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//        dateFormatter.dateFormat = to
+//
+//        return dateFormatter.string(from: dt ?? Date())
+//    }
     
     func getDateOfType(type: DateFormats) -> Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = type.rawValue
+        dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
         
         guard let date = dateFormatter.date(from: self) else {
@@ -62,9 +76,9 @@ extension String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = type.rawValue
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        
+
         let dt = dateFormatter.date(from: self)
-        
+
         return dt
     }
 }
@@ -73,6 +87,7 @@ extension Date {
     func getStringOfType(type: DateFormats) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = type.rawValue
+        dateFormatter.locale = Locale(identifier: "en_US")
         
         guard let date: String = dateFormatter.string(from: self) else {
             Print.d(message: "DEBUG: date format exception Date -> String")

@@ -135,14 +135,17 @@ extension PlayersTableViewController: PlayersTableView {
     
     func onRequestQueryPersonsSuccess(players: Players) {
         filteredPlayers = players
+        tableView.reloadData()
     }
     
     func onRequestQueryPersonsFailure(error: Error) {
         // some
-        let alert = UIAlertController(title: "\(error.localizedDescription)", message: nil, preferredStyle: .alert)
-        present(alert, animated: true) {
-//            alert.dismiss(animated: true, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
-        }
+//        let alert = UIAlertController(title: "\(error.localizedDescription)", message: nil, preferredStyle: .alert)
+//        present(alert, animated: true) {
+////            alert.dismiss(animated: true, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+//        }
+        Print.m(error)
+        showAlert(message: error.localizedDescription)
     }
     
     func initPresenter() {
@@ -186,16 +189,17 @@ extension PlayersTableViewController {
     }
     
     func configureCell(_ cell: PlayerTableViewCell, _ player: Person) {
-        let fullName = player.surname + " " + player.name
-        
-        if (fullName.count > 3) {
-            cell.mName.text = fullName
-        } else {
-            cell.mName.text = "Не указано"
-        }
+//        let fullName = player.surname + " " + player.name
+//
+//        if (fullName.count > 3) {
+//            cell.mName.text = fullName
+//        } else {
+//            cell.mName.text = "Не указано"
+//        }
+        cell.mName.text = player.getSurnameNP()
         
         if (player.birthdate.count > 3) {
-            cell.mBirthDate.text = player.birthdate.UTCToLocal(from: .GMT, to: .local)
+            cell.mBirthDate.text = player.birthdate.convertDate(from: .GMT, to: .local)
 //            cell.mBirthDate.text = player.birthdate
         } else {
             cell.mBirthDate.text = ""
@@ -223,7 +227,25 @@ extension PlayersTableViewController {
 // MARK: Search controller
 extension PlayersTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        filterContentForQuery(searchController.searchBar.text!)
+        if searchController.isActive {
+            self.tableView.removeInfiniteScroll()
+            self.refreshControl = nil
+            if searchController.searchBar.text?.count ?? 0 > 2 {
+                filterContentForQuery(searchController.searchBar.text!)
+            } else {
+                filteredPlayers.people = []
+                tableView.reloadData()
+            }
+            Print.m("search controller is active")
+        } else {
+            Print.m("search controller is not active")
+            self.tableView.reloadData()
+            // configure deleted interacive features
+            self.setupPullToRefresh()
+            //            self.prepareRefreshController()
+            self.configureInfiniteScrollController()
+            
+        }
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -231,12 +253,13 @@ extension PlayersTableViewController: UISearchResultsUpdating {
     }
     
     func filterContentForQuery(_ query: String, scope: String = "All") {
-        if searchBarIsEmpty() {
-            self.filteredPlayers = Players()
-        }
-        if query.count >= 2 {
-            presenter.searchPlayers(query: query)
-        }
+//        if searchBarIsEmpty() {
+//            self.filteredPlayers = Players()
+//        }
+        self.presenter.searchPlayers(query: query)
+//        if query.count >= 2 {
+//            presenter.searchPlayers(query: query)
+//        }
     }
     
     func isFiltering() -> Bool {

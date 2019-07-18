@@ -78,8 +78,8 @@ class MyMatchesRefTableViewCell: UITableViewCell {
         
         
         
-        dateLabel.text = cellModel.participationMatch?.date.UTCToLocal(from: .utcTime, to: .local)
-        timeLabel.text = cellModel.participationMatch?.date.UTCToLocal(from: .utcTime, to: .localTime)
+        dateLabel.text = cellModel.participationMatch?.date.convertDate(from: .utcTime, to: .local)
+        timeLabel.text = cellModel.participationMatch?.date.convertDate(from: .utcTime, to: .localTime)
         tourLabel.text = cellModel.participationMatch?.tour
         placeLabel.text = cellModel.participationMatch?.place
         

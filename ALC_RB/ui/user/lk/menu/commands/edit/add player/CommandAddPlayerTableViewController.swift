@@ -354,11 +354,11 @@ extension CommandAddPlayerTableViewController {
             }
             let team = leagueController.league.teams.filter { team -> Bool in
                 return team.id != self.team.id && team.players.contains(where: { inPlayer -> Bool in
-                    return player.id == inPlayer.playerID
+                    return player.id == inPlayer.playerID && (inPlayer.inviteStatus == InviteStatus.approved.rawValue || inPlayer.inviteStatus == InviteStatus.accepted.rawValue || inPlayer.inviteStatus == InviteStatus.rejected.rawValue)
                 })
                 }.first
             if team != nil {
-                cell.configure(with: player, status: .invited("Играет в \(String(describing: team?.name))"))
+                cell.configure(with: player, status: .invited("Играет в \(team!.name)"))
             }
         }
         

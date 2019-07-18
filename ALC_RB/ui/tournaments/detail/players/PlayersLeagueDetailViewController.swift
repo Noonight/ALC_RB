@@ -248,7 +248,8 @@ extension PlayersLeagueDetailViewController: UITableViewDataSource {
     
     func configureCell(cell: PlayersLeagueTableViewCell, leagueDetailModel: LeagueDetailModel, player: LIPlayer) {
         presenter.getUser(user: player.playerId) { (person) in
-            cell.name_label.text = person.person.getFullName()
+//            cell.name_label.text = person.person.getFullName()
+            cell.name_label.text = person.person.getSurnameNP()
             
             self.presenter.getClubImageByClubId(user: self.getClubByUserId(user: player.playerId)) { (img) in
                 cell.photo_img.image = img.af_imageRoundedIntoCircle()

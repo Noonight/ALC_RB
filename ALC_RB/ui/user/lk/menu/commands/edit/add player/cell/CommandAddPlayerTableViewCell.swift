@@ -8,6 +8,7 @@
 
 import UIKit
 import AlamofireImage
+//import SwiftDate
 
 class CommandAddPlayerTableViewCell: UITableViewCell {
     
@@ -50,15 +51,17 @@ class CommandAddPlayerTableViewCell: UITableViewCell {
             } else {
                 player_image.image = #imageLiteral(resourceName: "ic_logo")
             }
-            player_name.text = person.getFullName()
-            if person.birthdate.count != 0 {
-                player_date_of_birth.text = person.birthdate.UTCToLocal(from: .GMT, to: .local)
-            } else {
+//            player_name.text = person.getFullName()
+            player_name.text = person.getSurnameNP()
+//            if person.birthdate.count != 0 {
+//                player_date_of_birth.text = person.birthdate.UTCToLocal(from: .GMT, to: .local)
+                self.setupPlayerDateOfBirth(player: person)
+//            } else {
                 player_date_of_birth.text = ""
-            }
+//            }
             
 //            player_date_of_birth.text = person.birthdate.to
-            self.setStatus(status: status)
+            self.setStatus(player: person, status: status)
             
         } else {
             cell_add_player_btn.alpha = 0
@@ -69,7 +72,7 @@ class CommandAddPlayerTableViewCell: UITableViewCell {
         }
     }
     
-    func setStatus(status: Status) {
+    func setStatus(player: Person, status: Status) {
         switch status {
         case .invited(let string):
             if string == "В вашей команде" {
@@ -78,9 +81,18 @@ class CommandAddPlayerTableViewCell: UITableViewCell {
                 self.player_status.textColor = UIColor.blue
             }
             self.player_status.text = string
+            self.player_date_of_birth.text = ""
         case .notUsed:
+            self.setupPlayerDateOfBirth(player: player)
             self.player_status.text = ""
         }
     }
     
+    func setupPlayerDateOfBirth(player: Person) {
+        if player.birthdate.count > 3 {
+            self.player_date_of_birth.text = player.birthdate.convertDate(from: .GMT, to: .local)
+        } else {
+            self.player_date_of_birth.text = ""
+        }
+    }
 }

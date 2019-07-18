@@ -84,7 +84,8 @@ extension PlayersTeamLeagueDetailViewController: UITableViewDataSource {
     
     func configureCell(cell: PlayersTeamLeagueDetailTableViewCell, model: LIPlayer) {
         presenter.getPlayer(player: model.playerId) { (person) in
-            cell.name.text = person.person.surname
+//            cell.name.text = person.person.surname
+            cell.name.text = person.person.getSurnameNP()
             cell.games.text = String(model.matches)
             cell.goals.text = String(model.goals)
             cell.yellow_cards.text = String(model.yellowCards)

@@ -54,7 +54,8 @@ class TeamProtocolTableViewController: UITableViewController {
     
     func configureCell(cell: TeamProtocolTableViewCell, model: LIPlayer) {
         presenter.getPlayer(player: model.playerId, get_player: { (player) in
-            cell.name_label.text = player.person.getFullName()
+//            cell.name_label.text = player.person.getFullName()
+            cell.name_label.text = player.person.getSurnameNP()
             if player.person.photo != nil {
                 cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: player.person.photo!))
                 //cell.photo_image.image?.af_imageRoundedIntoCircle()

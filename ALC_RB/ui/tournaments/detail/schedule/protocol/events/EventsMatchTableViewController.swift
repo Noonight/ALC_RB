@@ -33,6 +33,7 @@ class EventsMatchTableViewController: BaseStateTableViewController {
         initPresenter()
         setEmptyMessage(message: "Здесь будут отображаться события матча")
         prepareTableModel(destination: destinationModel)
+        self.refreshControl = nil
     }
     
     override func viewWillAppear(_ animated: Bool) {

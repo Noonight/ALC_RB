@@ -145,7 +145,7 @@ class NewsAllTableViewController: BaseStateTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.CELL, for: indexPath) as? NewsTableViewCell
 
         cell?.content?.text = tableData.news[indexPath.row].caption
-        cell?.date?.text = tableData.news[indexPath.row].updatedAt.UTCToLocal(from: .utc, to: .local)
+        cell?.date?.text = tableData.news[indexPath.row].updatedAt.convertDate(from: .utc, to: .local)
         
         return cell!
     }
@@ -163,7 +163,7 @@ class NewsAllTableViewController: BaseStateTableViewController {
         {
             destination.content = NewsDetailViewController.NewsDetailContent(
                 title: tableData.news[cellIndex].caption,
-                date: (tableData.news[cellIndex].updatedAt).UTCToLocal(from: .utc, to: .local),
+                date: (tableData.news[cellIndex].updatedAt).convertDate(from: .utc, to: .local),
                 content: tableData.news[cellIndex].content,
                 imagePath: tableData.news[cellIndex].img)
         }

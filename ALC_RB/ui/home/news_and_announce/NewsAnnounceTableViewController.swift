@@ -124,7 +124,7 @@ class NewsAnnounceTableViewController: BaseStateTableViewController {
         {
             destination.content = NewsDetailViewController.NewsDetailContent(
                 title: tableData.news.news[cellIndex].caption,
-                date: (tableData.news.news[cellIndex].updatedAt).UTCToLocal(from: .utc, to: .local),
+                date: (tableData.news.news[cellIndex].updatedAt).convertDate(from: .utc, to: .local),
                 content: tableData.news.news[cellIndex].content,
                 imagePath: tableData.news.news[cellIndex].img)
         }
@@ -184,7 +184,7 @@ extension NewsAnnounceTableViewController {
         
         if (indexPath.section == 0) {
             cellNews?.content?.text = tableData.news.news[indexPath.row].caption
-            cellNews?.date?.text = (tableData.news.news[indexPath.row].updatedAt).UTCToLocal(from: .utc, to: .local)
+            cellNews?.date?.text = (tableData.news.news[indexPath.row].updatedAt).convertDate(from: .utc, to: .local)
             
             return cellNews!
         }

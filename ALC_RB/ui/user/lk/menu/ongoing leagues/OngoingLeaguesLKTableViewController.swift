@@ -136,7 +136,7 @@ class OngoingLeaguesLKTableViewController: BaseStateTableViewController {
 //                Print.m("\(league.beginDate) ->> \(league.endDate)")
                 
                 cell.userTournamentTitle_label.text = "\(league.name). \(league.tourney)"
-                cell.userTournamentDate_label.text = "\(league.beginDate.UTCToLocal(from: .leagueDate, to: .local)) - \(league.endDate.UTCToLocal(from: .leagueDate, to: .local))"
+                cell.userTournamentDate_label.text = "\(league.beginDate.convertDate(from: .leagueDate, to: .local)) - \(league.endDate.convertDate(from: .leagueDate, to: .local))"
             }
             
             if let team = team {
