@@ -821,8 +821,12 @@ class ApiRequests {
     }
     
     func get_clubs(get_success: @escaping (Clubs) -> (), get_failure: @escaping (Error) -> ()) {
+        let parameters: Parameters = [
+            "limit": 999
+        ]
         Alamofire
-            .request(ApiRoute.getApiURL(.clubs))
+            .request(ApiRoute.getApiURL(.clubs), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+//            .request(ApiRoute.getApiURL(.clubs))
             .responseClubs { response in
                 switch response.result {
                 case .success:

@@ -11,18 +11,21 @@ import UIKit
 class OngoingLeaguesLKTableViewController: BaseStateTableViewController {
 
     struct TableModel {
-        var tournaments: Tournaments?
-        var clubs: Clubs?
+        var tournaments: Tournaments!
+        var clubs: Clubs!
         
         init(tournaments: Tournaments, clubs: Clubs) {
             self.tournaments = tournaments
             self.clubs = clubs
         }
         
-        init () { }
+        init () {
+            self.tournaments = Tournaments()
+            self.clubs = Clubs()
+        }
         
         func isEmpty() -> Bool {
-            return tournaments == nil || clubs == nil
+            return tournaments.leagues.count != 0 && clubs.clubs.count != 0
         }
     }
     
@@ -35,36 +38,30 @@ class OngoingLeaguesLKTableViewController: BaseStateTableViewController {
     
     let presenter = OngoingLeaguesLKPresenter()
     
-    var tableModel = TableModel() {
-        didSet {
-            if !tableModel.isEmpty() {
-                self.hideLoading()
-                self.tableView.reloadData()
-            }
-        }
-    }
+    var tableModel = TableModel()// {
+//        didSet {
+//            if !tableModel.isEmpty() {
+//                self.hideLoading()
+//                self.tableView.reloadData()
+//            }
+//        }
+//    }
     
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initPresenter()
-        setEmptyMessage(message: emptyMsg)
+        self.preparePresenter()
+        self.prepareTableView()
+        self.prepareEmptyState()
+        self.prepareRefreshController()
         
-        tableView.tableFooterView = UIView()
-        
-//        var userSet = userDefaults.getAuthorizedUser()
-//        userSet?.person.participation = [
-//            Participation(league: "5be94d1a06af116344942a92", id: "23rsdfgdwef", team: "5be94d1a06af116344942aad"),
-//            Participation(league: "5be94d1a06af116344942a92", id: "123fsdfewf23", team: "5be94d1a06af116344942ae7"),
-//            Participation(league: "5be94d1a06af116344942a92", id: "asd23f4g34fs", team: "5be94d1a06af116344942a93"),
-//        ]
-//        userDefaults.setAuthorizedUser(user: userSet!)
-        
-        
-//        let user = userDefaults.getAuthorizedUser()?.person
-//
-//        if user?.participation.count ?? 0 > 0 {
+        self.refreshData()
+    }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(true)
+//        if userDefaults.getAuthorizedUser()?.person.participation.count ?? 0 > 0 {
 //            hideEmptyView()
 //            if tableModel.isEmpty() {
 //                showLoading()
@@ -74,39 +71,78 @@ class OngoingLeaguesLKTableViewController: BaseStateTableViewController {
 //        } else {
 //            showEmptyView()
 //        }
-        
+//    }
+}
+
+// MARK: Extensions
+
+// MARK: Prepare
+
+extension OngoingLeaguesLKTableViewController {
+    func prepareTableView() {
+        self.tableView.tableFooterView = UIView()
+    }
+    func prepareEmptyState() {
+        self.setEmptyMessage(message: emptyMsg)
+    }
+    func preparePresenter() {
+        self.initPresenter()
+    }
+    func prepareRefreshController() {
+        self.fetch = self.presenter.fetch
+    }
+}
+
+// MARK: Refresh controller
+
+extension OngoingLeaguesLKTableViewController {
+    override func hasContent() -> Bool {
+        Print.m(userDefaults.getAuthorizedUser()?.person.participation)
+        return /*!self.tableModel.isEmpty() && */ userDefaults.getAuthorizedUser()?.person.participation.count != 0
+    }
+}
+
+// MARK: Presenter
+
+extension OngoingLeaguesLKTableViewController: OngoingLeaguesLKView {
+    func onFetchSuccess() {
+        self.endRefreshing()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        presenter.getTournaments()
-        presenter.getClubs()
+    
+    func getClubsSuccess(clubs: Clubs) {
+        tableModel.clubs = clubs
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        if userDefaults.getAuthorizedUser()?.person.participation.count ?? 0 > 0 {
-            hideEmptyView()
-            if tableModel.isEmpty() {
-                showLoading()
-            } else {
-                hideLoading()
-            }
-        } else {
-            showEmptyView()
-        }
+    func getClubsFailure(error: Error) {
+        Print.d(error: error)
     }
+    
+    func getTournamentsSuccess(tournaments: Tournaments) {
+        tableModel.tournaments = tournaments
+    }
+    
+    func getTournamentsFailure(error: Error) {
+        Print.d(error: error)
+    }
+    
+    func initPresenter() {
+        presenter.attachView(view: self)
+    }
+}
 
-    // MARK: - Table view data source
+// MARK: - Table view data source
 
+extension OngoingLeaguesLKTableViewController {
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userDefaults.getAuthorizedUser()?.person.participation.count ?? 0
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! OngoingLeagueTableViewCell
         let model = userDefaults.getAuthorizedUser()?.person.participation[indexPath.row]
@@ -129,11 +165,7 @@ class OngoingLeaguesLKTableViewController: BaseStateTableViewController {
                 return club.id == team?.club
             }).first
             
-            
-            
             if let league = league {
-                
-//                Print.m("\(league.beginDate) ->> \(league.endDate)")
                 
                 cell.userTournamentTitle_label.text = "\(league.name). \(league.tourney)"
                 cell.userTournamentDate_label.text = "\(league.beginDate.convertDate(from: .leagueDate, to: .local)) - \(league.endDate.convertDate(from: .leagueDate, to: .local))"
@@ -157,29 +189,5 @@ class OngoingLeaguesLKTableViewController: BaseStateTableViewController {
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-}
-
-extension OngoingLeaguesLKTableViewController: OngoingLeaguesLKView {
-    
-    func getClubsSuccess(clubs: Clubs) {
-        tableModel.clubs = clubs
-    }
-    
-    func getClubsFailure(error: Error) {
-        Print.d(error: error)
-    }
-    
-    func getTournamentsSuccess(tournaments: Tournaments) {
-        tableModel.tournaments = tournaments
-    }
-    
-    func getTournamentsFailure(error: Error) {
-        Print.d(error: error)
-    }
-    
-    func initPresenter() {
-        presenter.attachView(view: self)
     }
 }
