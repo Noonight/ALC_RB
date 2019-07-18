@@ -11,7 +11,7 @@ import UIKit
 protocol AuthView: MvpView {
     
     func authorizationComplete(authUser: AuthUser)
-    
+    func authorizationMessage(message: SingleLineMessage)
     func authorizationError(error: Error)
     
     func replaceUserLKVC(authUser: AuthUser)
@@ -22,10 +22,12 @@ class AuthPresenter: MvpPresenter<AuthViewController> {
     let apiService = ApiRequests()
     
     func signIn(userData: SignIn) {
-        apiService.post_authorization(userData: userData, get_auth_user: { (authUser) in
+        apiService.post_authorization(userData: userData, get_auth_user: { authUser in
             self.getView().authorizationComplete(authUser: authUser)
-        }) { (error) in
+        }, get_error: { error in
             self.getView().authorizationError(error: error)
+        }) { message in
+            self.getView().authorizationMessage(message: message)
         }
     }
     

@@ -39,6 +39,8 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.refreshControl = nil
+        
         self.tableView.es.addPullToRefresh {
             self.fetch()
         }
@@ -53,6 +55,8 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         setEmptyMessage(message: "Здвесь будут отображаться ваши матчи")
         
         bindViews()
+        
+        fetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,8 +65,6 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         // issue: cell not worked when we go back
         self.title = "Матчи"
         navigationController?.navigationBar.topItem?.title = self.title
-        
-        fetch()
     }
     
     func fetch() {
@@ -74,11 +76,6 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         viewModel.fetch() {
             self.tableView.es.stopPullToRefresh()
         }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        viewWillDisappear(animated)
-//        viewModel.firstInit.value = true
     }
     
     func setupUser() {

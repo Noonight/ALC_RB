@@ -15,22 +15,45 @@ class ApiRequests {
     
     // MARK: - POST requests
     
-    func post_authorization(userData: SignIn, get_auth_user: @escaping (AuthUser) -> (), get_error: @escaping (Error) -> ()) {
+    func post_authorization(userData: SignIn, get_auth_user: @escaping (AuthUser) -> (), get_error: @escaping (Error) -> (), get_message: @escaping (SingleLineMessage) -> ()) {
         let params: [String: Any] = [
             SignIn.Fields.login.rawValue: userData.login,
             SignIn.Fields.password.rawValue: userData.password
         ]
         Alamofire
-            .request(ApiRoute.getApiURL(.post_auth), method: HTTPMethod.post, parameters: params, encoding: JSONEncoding.default, headers: [:])
-            .validate()
-            .responseAuthUser { (response) in
-                switch response.result {
-                case .success:
-                    if let authUser = response.result.value {
-                        get_auth_user(authUser)
+            .upload(multipartFormData: { (multipartFormData) in
+                for (key, value) in params {
+                    let strValue = value as! String
+                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
+                }
+            },
+                    usingThreshold: UInt64(),
+                    to: ApiRoute.getApiURL(.post_auth),
+                    method: .post)
+            { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    
+                    upload.responseAuthUser { (response) in
+                        switch response.result {
+                        case .success:
+                            if let authUser = response.result.value {
+                                get_auth_user(authUser)
+                            }
+                        case .failure(let error):
+                            upload.responseSingleLineMessage(completionHandler: { response in
+                                switch response.result {
+                                case .success(let value):
+                                    get_message(value)
+                                case .failure(let error):
+                                    get_error(error)
+                                }
+                            })
+                            
+                        }
                     }
+                    
                 case .failure(let error):
-                    print(error)
                     get_error(error)
                 }
         }

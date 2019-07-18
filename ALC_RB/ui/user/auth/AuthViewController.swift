@@ -81,18 +81,18 @@ class AuthViewController: UIViewController {
     }
 }
 
+// MARK: Presenter
+
 extension AuthViewController: AuthView {
+    func authorizationMessage(message: SingleLineMessage) {
+        showAlert(title: message.message, message: "")
+    }
+    
     func initPresenter() {
         presenter.attachView(view: self)
     }
     
     func authorizationComplete(authUser: AuthUser) {
-//
-//        do {
-//            try UserDefaults().set(object: authUser, forKey: "authUser")
-//        } catch {
-//            print("error with set data about user from UserDefaults")
-//        }
         
         userDefaultHelper.deleteAuthorizedUser()
         userDefaultHelper.setAuthorizedUser(user: authUser)
@@ -113,6 +113,7 @@ extension AuthViewController: AuthView {
     }
     
     func authorizationError(error: Error) {
+        Print.m(error)
         showAlert(message: error.localizedDescription)
 //        showToast(message: "Неверные данные", seconds: 3.0)
     }

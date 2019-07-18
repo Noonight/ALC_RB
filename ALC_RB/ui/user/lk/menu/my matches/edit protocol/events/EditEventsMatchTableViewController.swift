@@ -150,7 +150,8 @@ class EditEventsMatchTableViewController: UITableViewController {
     
     func configureCell(cell: EditEventsProtocolTableViewCell, model: LIEvent) {
         presenter.getPlayer(player: model.player, get_player: { (person) in
-            cell.name_label.text = person.person.getFullName()
+//            cell.name_label.text = person.person.getFullName()
+            cell.name_label.text = person.person.getSurnameNP()
             cell.type_label.text = model.getEventType().rawValue
             if person.person.photo != nil {
                 self.presenter.getPlayerImage(player_photo: person.person.photo ?? " ", get_image: { (image) in
