@@ -28,7 +28,7 @@ class RefereesLKTableViewController: BaseStateTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.refreshControl = nil
         tableView.delegate = nil
         tableView.dataSource = nil
         

@@ -36,7 +36,7 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.refreshControl = nil
         self.tableView.es.addPullToRefresh {
             self.fetch()
             
