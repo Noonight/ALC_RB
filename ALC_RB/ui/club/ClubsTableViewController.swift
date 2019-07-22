@@ -7,37 +7,54 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ClubsTableViewController: BaseStateTableViewController {
-
-    let cellId = "cell_club"
+    enum CellIdentifiers {
+        static let CLUB = "cell_club"
+    }
+    enum SegueIdentifiers {
+        static let DETAIL = "TeamDetailSegue"
+    }
     
-    let segueId = "TeamDetailSegue"
+    // MARK: Var & Let
     
     let presenter = ClubsPresenter()
-    
     var clubs = Clubs()
+//    let imageCache = NSCache<NSString, UIImage>()
+    
+    // MARK: Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initPresenter()
-        self.fetch = self.presenter.getClubs
-        initView()
+        self.configurePresenter()
+        self.configureEmptyView()
+        self.configureTableView()
+        self.configureRefreshController()
         
         self.refreshData()
     }
+}
+// MARK: Extensions
 
-    func initView() {
-        tableView.tableFooterView = UIView()
-        setEmptyMessage(message: "Здесь будут отображаться клубы")
+// MARK: Configure
+extension ClubsTableViewController {
+    func configurePresenter() {
+        self.initPresenter()
     }
-    
-    func updateUI() {
-        tableView.reloadData()
+    func configureRefreshController() {
+        self.fetch = self.presenter.getClubs
+    }
+    func configureEmptyView() {
+        self.setEmptyMessage(message: "Здесь будут отображаться клубы")
+    }
+    func configureTableView() {
+        self.tableView.tableFooterView = UIView()
     }
 }
 
+// MARK: Refresh controller
 extension ClubsTableViewController {
     override func hasContent() -> Bool {
         if clubs.clubs.count != 0 {
@@ -68,6 +85,8 @@ extension ClubsTableViewController: ClubsTableView {
     }
 }
 
+// MARK: Table view
+// MARK: Data source
 extension ClubsTableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -79,45 +98,84 @@ extension ClubsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ClubTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.CLUB, for: indexPath) as! ClubTableViewCell
 
-        cell.configure(with: clubs.clubs[indexPath.row])
+        let model = clubs.clubs[indexPath.row]
         
-//        cell.mTitle?.text = clubs.clubs[indexPath.row].name
-//        //print(clubs.clubs[indexPath.row].name)
-////        cell.imageView?.image
-//        cell.imageView?.image = #imageLiteral(resourceName: "ic_con")
-//        cell.imageView?.af_setImage(withURL: ApiRoute.getImageURL(image: clubs.clubs[indexPath.row].logo), placeholderImage: #imageLiteral(resourceName: "ic_con"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true, completion: { (response) in
-//            cell.imageView?.image = response.result.value?.af_imageRoundedIntoCircle()
-//        })
-//        presenter.getImage(imageName: clubs.clubs[indexPath.row].logo) { (image) in
-//            cell.mImage?.image = image.af_imageRoundedIntoCircle()
-//        }
+        cell.mTitle.text = model.name
+//        cell.mImage.image = #imageLiteral(resourceName: "ic_con")
+//        cell.mImage.image = nil
+//        cell.mImage.layer.cornerRadius = cell.mImage.frame.size.width / 2
+//        cell.mImage.clipsToBounds = true
+        if model.logo != nil || model.logo?.count != 0 {
+//            cell.mImage.image.downsampledImage
+            let url = ApiRoute.getImageURL(image: model.logo!)
+            let processor = DownsamplingImageProcessor(size: cell.mImage.frame.size)
+                .append(another: CroppingImageProcessorCustom(size: cell.mImage.frame.size))
+                .append(another: RoundCornerImageProcessor(cornerRadius: cell.mImage.getHalfWidthHeight()))
+            
+            cell.mImage.kf.indicatorType = .activity
+            cell.mImage.kf.setImage(
+                with: url,
+                placeholder: UIImage(named: "ic_bal"),
+                options: [
+                    .processor(processor),
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(1)),
+                    .cacheOriginalImage
+                ])
+            {
+                result in
+                switch result {
+                case .success(let value):
+                    print("Task done for: \(value.source.url?.absoluteString ?? "") size of image is \(value.image.size)")
+                    cell.mImage.cropAndRound()
+
+                case .failure(let error):
+                    print("Job failed: \(error.localizedDescription)")
+                }
+            }
+        }
         
         return cell
     }
     
 }
 
+// MARK: Delegate
 extension ClubsTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
+// MARK: Navigation
 extension ClubsTableViewController {
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if  segue.identifier == segueId,
+        if  segue.identifier == SegueIdentifiers.DETAIL,
             let destination = segue.destination as? ClubDetailViewController,
             let cellIndex = tableView.indexPathForSelectedRow?.row
         {
-            destination.content = ClubDetailContent(
-                image: (tableView.cellForRow(at: tableView.indexPathForSelectedRow!) as! ClubTableViewCell).mImage.image!,
-                title: clubs.clubs[cellIndex].name ?? "",
-                owner: clubs.clubs[cellIndex].owner?.surname ?? "",
-                text: clubs.clubs[cellIndex].info ?? "")
+            let cacheImage = ImageCache.default
+            var cachedOriginalSizeImage: UIImage?
+            if let imageUrl = clubs.clubs[cellIndex].logo {
+                cacheImage.retrieveImage(forKey: ApiRoute.getAbsoluteImageRoute(imageUrl)) { result in
+                    switch result {
+                    case .success(let value):
+                        
+                        // If the `cacheType is `.none`, `image` will be `nil`.
+                        cachedOriginalSizeImage = value.image
+                    case .failure(let error):
+                        print(error)
+                    }
+                    destination.content = ClubDetailContent(
+                        image: cachedOriginalSizeImage,
+                        title: self.clubs.clubs[cellIndex].name ?? "",
+                        owner: self.clubs.clubs[cellIndex].owner?.surname ?? "",
+                        text: self.clubs.clubs[cellIndex].info ?? "")
+                }
+            }
+            
         }
     }
-    
 }

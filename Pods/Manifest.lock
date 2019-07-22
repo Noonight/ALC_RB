@@ -9,7 +9,7 @@ PODS:
   - Imaginary (4.2.0):
     - Cache (~> 5.0)
   - IQKeyboardManagerSwift (6.2.0)
-  - Kingfisher (5.2.0)
+  - Kingfisher (5.7.0)
   - Lightbox (2.3.0):
     - Imaginary (~> 4.0)
   - RxAtomic (4.4.0)
@@ -17,8 +17,6 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
-  - StatusAlert (1.1.0)
-  - SwiftDate (5.1.0)
   - SwiftyJSON (4.2.0)
   - UIScrollView-InfiniteScroll (1.1.0)
 
@@ -29,17 +27,15 @@ DEPENDENCIES:
   - AMScrollingNavbar
   - ESPullToRefresh
   - IQKeyboardManagerSwift
-  - Kingfisher (~> 5.0)
+  - Kingfisher (~> 5.7)
   - Lightbox
   - RxCocoa
   - RxSwift
-  - StatusAlert
-  - SwiftDate (~> 5.0)
   - SwiftyJSON (~> 4.0)
   - UIScrollView-InfiniteScroll (~> 1.1.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - ActionSheetPicker-3.0
     - Alamofire
     - AlamofireImage
@@ -53,8 +49,6 @@ SPEC REPOS:
     - RxAtomic
     - RxCocoa
     - RxSwift
-    - StatusAlert
-    - SwiftDate
     - SwiftyJSON
     - UIScrollView-InfiniteScroll
 
@@ -67,16 +61,14 @@ SPEC CHECKSUMS:
   ESPullToRefresh: 119e2710b82b75536aab2bbe4883ba119fca35c8
   Imaginary: dae33d06dbc2ada22f98afef5eb45cc061311a2c
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
-  Kingfisher: 07067cfacf371117330dceb4b4b8f5c4b691ab42
+  Kingfisher: c7d211b54f1f30d8060aadab177d52b4349c825b
   Lightbox: d317750e4132bfb871a5307cfe0a2c7d6a583c65
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
-  StatusAlert: 4d6dadebf5f7abd5648fa774ef3062f2f95cc4aa
-  SwiftDate: 6329e58969a2de31cea7f1ee1143b247693196e7
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
 
-PODFILE CHECKSUM: 115f9a986e7c5c541e25a72c8316656a4456f688
+PODFILE CHECKSUM: f8a362479977c0cd2b7ffd8b0bdaf6fda92f5f14
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.1

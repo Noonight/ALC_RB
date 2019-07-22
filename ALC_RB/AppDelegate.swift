@@ -8,6 +8,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import Kingfisher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,10 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        IQKeyboardManager.shared.enable = true
+        self.setupIQKeyboardManager()
+        self.setupKingfisher()
         return true
     } // for xcode 10+
     
+    func setupKingfisher() {
+//        ImageCache.default.memoryStorage.config.expiration = .seconds(30)
+//        ImageCache.default.memoryStorage.config
+    }
+    
+    func setupIQKeyboardManager() {
+        IQKeyboardManager.shared.enable = true
+    }
     
 //    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 //        // Override point for customization after application launch.

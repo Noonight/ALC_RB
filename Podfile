@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '10.0'
 
 target 'ALC_RB' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -17,13 +17,13 @@ target 'ALC_RB' do
   pod 'ActionSheetPicker-3.0'
   pod 'IQKeyboardManagerSwift'
   pod 'ESPullToRefresh'
-  pod 'StatusAlert'#, '~> 1.1.1' # like toast alert
+  #pod 'StatusAlert'#, '~> 1.1.1' # like toast alert
   pod 'AMScrollingNavbar'
-  pod 'Kingfisher', '~> 5.0' # loading image
+  pod 'Kingfisher', '~> 5.7' # loading image
   #pod 'SDWebImage', '~> 5.0'
   #pod "CollieGallery"
   pod 'Lightbox' # full screen images
   #pod "StatefulViewController", "~> 3.0"
-  pod 'SwiftDate', '~> 5.0'
+  #pod 'SwiftDate', '~> 5.0'
   pod 'UIScrollView-InfiniteScroll', '~> 1.1.0'
 end

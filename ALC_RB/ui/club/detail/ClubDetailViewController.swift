@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lightbox
 
 struct ClubDetailContent {
     var cImage = UIImage(named: "ic_con")
@@ -14,8 +15,10 @@ struct ClubDetailContent {
     var cOwner = String()
     var cText = String()
     
-    init(image: UIImage, title: String, owner: String, text: String) {
-        self.cImage = image
+    init(image: UIImage?, title: String, owner: String, text: String) {
+        if let mImage = image {
+            self.cImage = mImage
+        }
         self.cTitle = title
         self.cOwner = owner
         self.cText = text
@@ -24,7 +27,7 @@ struct ClubDetailContent {
 
 class ClubDetailViewController: UIViewController {
 
-    @IBOutlet weak var mImage: UIImageView?
+    @IBOutlet weak var mImage: UIImageView!
     @IBOutlet weak var mTitle: UILabel?
     @IBOutlet weak var mOwner: UILabel?
     @IBOutlet weak var mText: UITextView?
@@ -41,8 +44,8 @@ class ClubDetailViewController: UIViewController {
         super.viewDidLoad()
         
         initPresenter()
-        
-        debugPrint(navigationController?.navigationBar ?? "no")
+        initLightBox()
+//        debugPrint(navigationController?.navigationBar ?? "no")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,12 +53,29 @@ class ClubDetailViewController: UIViewController {
         updateUI()
     }
     
+    func initLightBox() {
+        self.mImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap)))
+        self.mImage.isUserInteractionEnabled = true
+    }
+    
+    @objc func imageTap() {
+        let images = [LightboxImage(image: self.mImage.image!)]
+        let controller = LightboxController(images: images)
+        controller.dynamicBackground = true
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
     func updateUI() {
-        mImage?.image = content?.cImage
-        mImage?.cropAndRound()
-        mTitle?.text = content?.cTitle
-        mOwner?.text = content?.cOwner
-        mText?.text = content?.cText
+        DispatchQueue.main.async {
+//            self.mImage.layer.cornerRadius = self.mImage.frame.size.width / 2
+//            self.mImage.clipsToBounds = true
+            self.mImage.image = self.content?.cImage
+            self.mImage?.cropAndRound()
+            self.mTitle?.text = self.content?.cTitle
+            self.mOwner?.text = self.content?.cOwner
+            self.mText?.text = self.content?.cText
+        }
     }
 }
 

@@ -31,6 +31,10 @@ struct ApiRoute {
         #endif
         return URL(string: "\(baseRoute)\(image)")!
     }
+    
+    static func getAbsoluteImageRoute(_ image: String) -> String {
+        return URL(string: "\(baseRoute)\(image)")!.absoluteString
+    }
 
     
     static func getApiURL(_ mod: Routes, id: String, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) -> URL {
