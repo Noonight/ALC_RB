@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lightbox
 
 class PlayerViewController: UIViewController {
     
@@ -22,9 +23,13 @@ class PlayerViewController: UIViewController {
         var person: Person
         var photo: UIImage
         
-        init(person: Person, photo: UIImage) {
+        init(person: Person, photo: UIImage?) {
             self.person = person
-            self.photo = photo
+            if let image = photo {
+                self.photo = image
+            } else {
+                self.photo = #imageLiteral(resourceName: "ic_logo")
+            }
         }
     }
     
@@ -41,6 +46,8 @@ class PlayerViewController: UIViewController {
         prepareTableView()
         reloadUI()
         pastLeaguesTable.tableFooterView = UIView()
+        
+        initLightBox()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,6 +85,21 @@ class PlayerViewController: UIViewController {
     }
     
     var backgroundView: UIView = UIView()
+}
+// MARK: LightBox
+extension PlayerViewController {
+    func initLightBox() {
+        self.mPhoto.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap)))
+        self.mPhoto.isUserInteractionEnabled = true
+    }
+    
+    @objc func imageTap() {
+        let images = [LightboxImage(image: self.mPhoto.image!)]
+        let controller = LightboxController(images: images)
+        controller.dynamicBackground = false
+        
+        present(controller, animated: true, completion: nil)
+    }
 }
 
 extension PlayerViewController: EmptyProtocol {
@@ -125,7 +147,10 @@ extension PlayerViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //debugPrint(content?.person.pastLeagues)
-        return (content!.person.pastLeagues.count)
+        if let pastLeaguesCount = content?.person.pastLeagues.count {
+            return pastLeaguesCount
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

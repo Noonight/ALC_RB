@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 class PlayersTableViewController: BaseStateTableViewController {
     private enum CellIdentifiers {
@@ -205,13 +206,22 @@ extension PlayersTableViewController {
             cell.mBirthDate.text = ""
         }
         
-        if (player.photo?.count ?? "".count > 3) {
-            cell.mImage.image = #imageLiteral(resourceName: "ic_logo")
-            presenter.getImage(imageName: player.photo ?? "") { image in
-                DispatchQueue.main.async {
-                    cell.mImage.image = image.af_imageRoundedIntoCircle()
-                }
-            }
+        if player.photo?.count ?? 0 != 0 {
+            let url = ApiRoute.getImageURL(image: player.photo!)
+            let processor = DownsamplingImageProcessor(size: cell.mImage.frame.size)
+                .append(another: CroppingImageProcessorCustom(size: cell.mImage.frame.size))
+                .append(another: RoundCornerImageProcessor(cornerRadius: cell.mImage.getHalfWidthHeight()))
+            
+            cell.mImage.kf.indicatorType = .activity
+            cell.mImage.kf.setImage(
+                with: url,
+                placeholder: UIImage(named: "ic_logo"),
+                options: [
+                    .processor(processor),
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(1)),
+                    .cacheOriginalImage
+                ])
         } else {
             cell.mImage.image = UIImage(named: "ic_logo")
         }
@@ -283,9 +293,28 @@ extension PlayersTableViewController {
             } else {
                 person = players.people[cellIndex]
             }
-            destination.content = PlayerViewController.PlayerDetailContent(
-                person: person, photo: cell.mImage.image!
-            )
+            
+            let cacheImage = ImageCache.default
+            var cachedOriginalSizeImage: UIImage?
+            if let imageUrl = players.people[cellIndex].photo {
+                cacheImage.retrieveImage(forKey: ApiRoute.getAbsoluteImageRoute(imageUrl)) { result in
+                    switch result {
+                    case .success(let value):
+                        
+                        // If the `cacheType is `.none`, `image` will be `nil`.
+                        cachedOriginalSizeImage = value.image
+                    case .failure(let error):
+                        print(error)
+                    }
+                    destination.content = PlayerViewController.PlayerDetailContent(
+                        person: person, photo: cachedOriginalSizeImage
+                    )
+                }
+            }
+            
+//            destination.content = PlayerViewController.PlayerDetailContent(
+//                person: person, photo: cell.mImage.image!
+//            )
         }
     }
 }

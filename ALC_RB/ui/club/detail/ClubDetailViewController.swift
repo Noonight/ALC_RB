@@ -61,7 +61,7 @@ class ClubDetailViewController: UIViewController {
     @objc func imageTap() {
         let images = [LightboxImage(image: self.mImage.image!)]
         let controller = LightboxController(images: images)
-        controller.dynamicBackground = true
+        controller.dynamicBackground = false
         
         present(controller, animated: true, completion: nil)
     }

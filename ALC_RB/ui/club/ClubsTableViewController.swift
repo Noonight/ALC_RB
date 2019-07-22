@@ -129,7 +129,6 @@ extension ClubsTableViewController {
                 switch result {
                 case .success(let value):
                     print("Task done for: \(value.source.url?.absoluteString ?? "") size of image is \(value.image.size)")
-                    cell.mImage.cropAndRound()
 
                 case .failure(let error):
                     print("Job failed: \(error.localizedDescription)")
