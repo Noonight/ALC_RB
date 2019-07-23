@@ -18,22 +18,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.setupIQKeyboardManager()
-        self.setupKingfisher()
+        
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.makeKeyAndVisible()
+//        self.window?.backgroundColor = .white
+//
+//        let rootViewController = MainTabBarViewController()
+//        self.window?.rootViewController = rootViewController
+        
         return true
     } // for xcode 10+
-    
-    func setupKingfisher() {
-//        ImageCache.default.memoryStorage.config.expiration = .seconds(30)
-//        ImageCache.default.memoryStorage.config
-    }
     
     func setupIQKeyboardManager() {
         IQKeyboardManager.shared.enable = true
     }
-    
-//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-//        // Override point for customization after application launch.
-//        return true
-//    }
 }
 

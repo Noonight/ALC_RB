@@ -14,7 +14,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="TournamentsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7Kj-7O-f2M" userLabel="Tournaments TVC" customClass="TournamentsTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hqs-i8-t4z">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -116,11 +116,11 @@
                         <viewControllerLayoutGuide type="bottom" id="W9f-Bl-mck"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6oU-yY-KDG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ibw-k8-RhG">
-                                <rect key="frame" x="0.0" y="180.5" width="320" height="387.5"/>
+                                <rect key="frame" x="0.0" y="180.5" width="320" height="338.5"/>
                             </containerView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="h3F-Lq-Gbp">
                                 <rect key="frame" x="0.0" y="64" width="320" height="116.5"/>
@@ -1577,13 +1577,13 @@
         <!--Home VC-->
         <scene sceneID="cve-Bg-B7G">
             <objects>
-                <viewController id="qfh-ra-8NT" userLabel="Home VC" customClass="HomeViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qfh-ra-8NT" userLabel="Home VC" customClass="HomeViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XhT-gS-21o"/>
                         <viewControllerLayoutGuide type="bottom" id="VTE-9d-6hx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="pme-s7-nUK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMa-0m-4H4">
@@ -1625,12 +1625,12 @@
         <scene sceneID="VFP-fV-QdH">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="67f-Sq-Qh7" userLabel="Main Tab Bar Controller" sceneMemberID="viewController">
-                    <tabBar key="tabBar" autoresizesSubviews="NO" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="o00-2z-J5o">
+                    <tabBar key="tabBar" autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" itemPositioning="centered" id="o00-2z-J5o">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <edgeInsets key="layoutMargins" top="16" left="8" bottom="12" right="8"/>
-                        <color key="selectedImageTintColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <edgeInsets key="layoutMargins" top="40" left="8" bottom="40" right="8"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="JoN-yP-8jZ" kind="relationship" relationship="viewControllers" id="m1J-LH-5JX"/>
@@ -1647,9 +1647,9 @@
         <!--Teams TVC-->
         <scene sceneID="she-bp-fGw">
             <objects>
-                <tableViewController storyboardIdentifier="ClubsTableViewController" id="Ml2-cj-Vre" userLabel="Teams TVC" customClass="ClubsTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ClubsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ml2-cj-Vre" userLabel="Teams TVC" customClass="ClubsTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="K3v-ah-tia">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1711,7 +1711,7 @@
                         <viewControllerLayoutGuide type="bottom" id="GUp-UW-eoi"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ago-da-fUr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_con" translatesAutoresizingMaskIntoConstraints="NO" id="d0t-L9-AHo">
@@ -2024,8 +2024,9 @@
         <scene sceneID="as7-z4-Kf0">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7hd-qi-iyc" userLabel="Teams NC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="ic_club" id="xpz-ja-5Hq">
-                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab_club" id="xpz-ja-5Hq">
+                        <inset key="imageInsets" minX="0.0" minY="5.5" maxX="0.0" maxY="-5.5"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5BH-Yu-Odg">
@@ -2044,9 +2045,9 @@
         <!--Players TVC-->
         <scene sceneID="lKk-Mi-9SF">
             <objects>
-                <tableViewController id="mfc-bU-mcH" userLabel="Players TVC" customClass="PlayersTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PlayersTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mfc-bU-mcH" userLabel="Players TVC" customClass="PlayersTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="NGn-d9-zZv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -2119,7 +2120,7 @@
                         <viewControllerLayoutGuide type="bottom" id="N2L-JF-OZt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="GCs-7E-aoD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gR0-z6-sKs">
@@ -2256,8 +2257,8 @@
         <scene sceneID="Vhx-Hg-Uce">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sPa-qT-CdH" userLabel="Players NC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="ic_players" id="aG6-h3-6PK">
-                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab_players" id="aG6-h3-6PK">
+                        <inset key="imageInsets" minX="0.0" minY="5.5" maxX="0.0" maxY="-5.5"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NCh-XS-9eq">
@@ -2282,7 +2283,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ige-bV-qeE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="X3V-Uv-jgw">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xnH-ZP-hhw">
@@ -2441,7 +2442,7 @@
                         <viewControllerLayoutGuide type="bottom" id="z5v-Uk-bh2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EDO-rh-n1O">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCH-JD-Ole">
@@ -4808,8 +4809,8 @@
         <scene sceneID="Pml-zE-jre">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="427-kr-52D" userLabel="Tournaments NC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="ic_cup" id="5a4-aj-G08">
-                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab_cup" id="5a4-aj-G08">
+                        <inset key="imageInsets" minX="0.0" minY="5.5" maxX="0.0" maxY="-5.5"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="s8s-e8-JKs">
@@ -5324,8 +5325,8 @@
         <scene sceneID="pVS-EB-d56">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JoN-yP-8jZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="ic_home" id="doP-UK-cdq">
-                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab_home" id="doP-UK-cdq">
+                        <inset key="imageInsets" minX="0.0" minY="5.5" maxX="0.0" maxY="-5.5"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Veh-6h-cEH">
@@ -5366,8 +5367,8 @@
         <scene sceneID="8Hv-e3-As7">
             <objects>
                 <navigationController storyboardIdentifier="AuthNC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NU4-Op-Ygr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="ic_user" id="UVK-ho-yJP">
-                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab_user" id="UVK-ho-yJP">
+                        <inset key="imageInsets" minX="0.0" minY="5.5" maxX="0.0" maxY="-5.5"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RaP-mj-2iM">
@@ -6661,17 +6662,13 @@
         <image name="ic_add_photo" width="48" height="48"/>
         <image name="ic_arrow_right" width="48" height="48"/>
         <image name="ic_back_v4" width="296.33334350585938" height="426.66665649414062"/>
-        <image name="ic_club" width="48" height="48"/>
         <image name="ic_con" width="48" height="48"/>
-        <image name="ic_cup" width="48" height="48"/>
         <image name="ic_document" width="50" height="50"/>
         <image name="ic_empty" width="128" height="128"/>
-        <image name="ic_home" width="48" height="48"/>
         <image name="ic_inv" width="36" height="36"/>
         <image name="ic_key2" width="48" height="48"/>
         <image name="ic_logo" width="196" height="140"/>
         <image name="ic_menu4" width="36" height="36"/>
-        <image name="ic_players" width="48" height="48"/>
         <image name="ic_settings" width="36" height="36"/>
         <image name="ic_tick" width="36" height="36"/>
         <image name="ic_user" width="48" height="48"/>
@@ -6861,6 +6858,11 @@ AbQBwQHWAdsB3wHhAeMB5QHuAfMB+QIBAgMCBQIHAgkCDgIWE4IThBOJE5cTmxOiE6cTtBO3E8QTyRPR
 E9QT2RPhE+QT9hP5E/4AAAAAAAACAQAAAAAAAABXAAAAAAAAAAAAAAAAAAAUAA
 </mutableData>
         </image>
+        <image name="tab_club" width="25" height="25"/>
+        <image name="tab_cup" width="25" height="25"/>
+        <image name="tab_home" width="25" height="25"/>
+        <image name="tab_players" width="25" height="25"/>
+        <image name="tab_user" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lH4-98-i6H"/>

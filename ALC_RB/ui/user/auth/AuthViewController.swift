@@ -108,7 +108,8 @@ extension AuthViewController: AuthView {
         childViewController.authUser = authUser
         
         let countOfViewControllers = tabBarController?.viewControllers?.count
-        //        _ = tabBarController?.selectedViewController
+        viewController.tabBarItem = tabBarController?.viewControllers![countOfViewControllers! - 1].tabBarItem
+
         tabBarController?.viewControllers![countOfViewControllers! - 1] = viewController
     }
     
