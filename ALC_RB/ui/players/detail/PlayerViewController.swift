@@ -31,11 +31,17 @@ class PlayerViewController: UIViewController {
                 self.photo = #imageLiteral(resourceName: "ic_logo")
             }
         }
+        
+        init() {
+            self.person = Person()
+            self.photo = #imageLiteral(resourceName: "ic_logo")
+        }
     }
     
-    var content: PlayerDetailContent? {
+    var content = PlayerDetailContent() {
         didSet {
-            //reloadUI()
+//            reloadUI()
+//            self.mPhoto.image = self.content.photo.af_imageRoundedIntoCircle()
         }
     }
     
@@ -61,19 +67,19 @@ class PlayerViewController: UIViewController {
     }
     func reloadUI() {
         
-        if content?.person.pastLeagues.count == 0 {
+        if content.person.pastLeagues.count == 0 {
             showEmptyView()
         } else {
             hideEmptyView()
         }
         
         pastLeaguesTable.reloadData()
-        mPhoto.image = content?.photo
+        mPhoto.image = content.photo.af_imageRoundedIntoCircle()
 //        mName.text = content?.person.name
-        mName.text = content?.person.getFullName()
+        mName.text = content.person.getFullName()
 //        Print.d(message: "\(content?.person.birthdate)")
-        if content?.person.birthdate.count ?? 0 > 3 {
-            mBirthDate.text = content?.person.birthdate.convertDate(from: .utc, to: .local)
+        if content.person.birthdate.count > 3 {
+            mBirthDate.text = content.person.birthdate.convertDate(from: .utc, to: .local)
         } else {
             mBirthDate.text = ""
         }
@@ -94,7 +100,7 @@ extension PlayerViewController {
     }
     
     @objc func imageTap() {
-        let images = [LightboxImage(image: self.mPhoto.image!)]
+        let images = [LightboxImage(image: self.content.photo)]
         let controller = LightboxController(images: images)
         controller.dynamicBackground = false
         
@@ -146,17 +152,13 @@ extension PlayerViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //debugPrint(content?.person.pastLeagues)
-        if let pastLeaguesCount = content?.person.pastLeagues.count {
-            return pastLeaguesCount
-        }
-        return 0
+        return self.content.person.pastLeagues.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! PlayerPastLeaguesTableViewCell
         
-        configureCell(cell: cell, model: (content!.person.pastLeagues[indexPath.row]))
+        configureCell(cell: cell, model: (content.person.pastLeagues[indexPath.row]))
         
         return cell
     }

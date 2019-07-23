@@ -284,8 +284,7 @@ extension PlayersTableViewController {
         if segue.identifier == SegueIdentifiers.PLAYER,
             let destination = segue.destination as? PlayerViewController,
             let indexPath = tableView.indexPathForSelectedRow,
-            let cellIndex = tableView.indexPathForSelectedRow?.row,
-            let cell = tableView.cellForRow(at: indexPath) as? PlayerTableViewCell
+            let cellIndex = tableView.indexPathForSelectedRow?.row
         {
             let person: Person
             if isFiltering() {
@@ -295,21 +294,25 @@ extension PlayersTableViewController {
             }
             
             let cacheImage = ImageCache.default
-            var cachedOriginalSizeImage: UIImage?
+//            var cachedOriginalSizeImage: UIImage?
+
             if let imageUrl = players.people[cellIndex].photo {
+//                cell.showLoading()
                 cacheImage.retrieveImage(forKey: ApiRoute.getAbsoluteImageRoute(imageUrl)) { result in
                     switch result {
                     case .success(let value):
-                        
-                        // If the `cacheType is `.none`, `image` will be `nil`.
-                        cachedOriginalSizeImage = value.image
+                        if let image = value.image {
+                            destination.content = PlayerViewController.PlayerDetailContent(person: person, photo: value.image!)
+                        } else {
+                            destination.content = PlayerViewController.PlayerDetailContent(person: person, photo: nil)
+                        }
                     case .failure(let error):
                         print(error)
+                        destination.content = PlayerViewController.PlayerDetailContent(person: person, photo: nil)
                     }
-                    destination.content = PlayerViewController.PlayerDetailContent(
-                        person: person, photo: cachedOriginalSizeImage
-                    )
                 }
+            } else {
+                destination.content = PlayerViewController.PlayerDetailContent(person: person, photo: nil)
             }
             
 //            destination.content = PlayerViewController.PlayerDetailContent(

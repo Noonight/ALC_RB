@@ -53,7 +53,7 @@ extension MainTabBarViewController {
 }
 
 extension UIViewController {
-    static func storyboardInstance() -> UIViewController {
+    fileprivate static func storyboardInstance() -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         return storyboard.instantiateViewController(withIdentifier: String(describing: self))
     }

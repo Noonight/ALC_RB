@@ -9,7 +9,10 @@
 import UIKit
 
 class RegistrationViewController: UIViewController {
-
+    enum Texts {
+        static let FILL_ALL_FIELDS = "Заполните все поля"
+    }
+    
     // MARK: - Variables
     
     @IBOutlet weak var photoImageView: UIImageView!
@@ -23,6 +26,14 @@ class RegistrationViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    // MARK: Var & Let
+    
+    var choosedImage: UIImage? {
+        didSet {
+            self.photoImageView.image = self.choosedImage?.af_imageRoundedIntoCircle()
+        }
+    }
+    
     var imagePicker: ImagePicker?
     
     let presenter = RegistrationPresenter()
@@ -31,34 +42,49 @@ class RegistrationViewController: UIViewController {
     
     let userDefaultsHelper = UserDefaultsHelper()
     
-    // MARK: - Life cycle
+    // MARK: LIFE CYCLE
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initPresenter()
+        self.setupPresenter()
+        self.setupScrollKeyboard()
+        self.setupTextFields()
+        self.setupImagePicker()
         
-        imagePicker = ImagePicker(presentationController: self, delegate: self)
-        
-        familyTextField.delegate = self
-        nameTextField.delegate = self
-        patronymicTextField.delegate = self
-        loginTextField.delegate = self
-        passwordTF.delegate = self
-        
-        scrollView.keyboardDismissMode = .onDrag
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        navigationController?.isNavigationBarHidden = false
-        barCompleteButton.image =  barCompleteButton.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
         
+        self.setupNavController()
+        self.setupScrollKeyboard()
+    }
+    
+    // MARK: SETUP
+    
+    func setupTextFields() {
+        self.familyTextField.delegate = self
+        self.nameTextField.delegate = self
+        self.patronymicTextField.delegate = self
+        self.loginTextField.delegate = self
+        self.passwordTF.delegate = self
+    }
+    func setupImagePicker() {
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+        
+    }
+    func setupPresenter() {
+        self.initPresenter()
+    }
+    func setupScrollKeyboard() {
+        scrollView.keyboardDismissMode = .onDrag
         self.view.addGestureRecognizer(UIGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+    func setupNavController() {
+        self.navigationController?.isNavigationBarHidden = false
+        self.barCompleteButton.image =  barCompleteButton.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
     }
     
     // MARK: - Actions
@@ -73,21 +99,14 @@ class RegistrationViewController: UIViewController {
                 lastName: patronymicTextField.getTextOrEmptyString(),
                 login: loginTextField.text!,
                 password: passwordTF.text!,
-                birthdate: dateOfBirth), profileImage: photoImageView.image ?? UIImage())
+                birthdate: dateOfBirth), profileImage: self.choosedImage)
         } else {
-            showToast(message: "Заполните все поля")
+            showAlert(message: Texts.FILL_ALL_FIELDS)
         }
     }
     
     @IBAction func imageTap(_ sender: UITapGestureRecognizer) {
         imagePicker!.present(from: self.view)
-    }
-    
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
     
     // MARK: - Helpers
@@ -101,7 +120,7 @@ class RegistrationViewController: UIViewController {
 
 }
 
-// MARK: - Presenter init
+// MARK: - PRESENTER
 
 extension RegistrationViewController: RegistrationView {
     func registrationMessage(message: SingleLineMessage) {
@@ -134,57 +153,25 @@ extension RegistrationViewController: RegistrationView {
         childViewController.authUser = authUser
         
         let countOfViewControllers = tabBarController?.viewControllers?.count
-        //        _ = tabBarController?.selectedViewController
+        viewController.tabBarItem = tabBarController?.viewControllers![countOfViewControllers! - 1].tabBarItem
+        
         tabBarController?.viewControllers![countOfViewControllers! - 1] = viewController
     }
 }
 
-// MARK: - Image picker delegate
+// MARK: IMAGE PICKER
 
 extension RegistrationViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
-        photoImageView.image = image?.af_imageRoundedIntoCircle()
+//        photoImageView.image = image?.af_imageRoundedIntoCircle()
+        self.choosedImage = image
     }
 }
 
-// MARK: - Text field delegate
+// MARK: TEXT FIELDS
 
 extension RegistrationViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        switch textField {
-//        case familyTextField:
-//            if !familyTextField.isEmpty() {
-//                nameTextField.becomeFirstResponder()
-//                break
-//            }
-//            showToast(message: "Family field is empty", seconds: 1.0)
-//        case nameTextField:
-//            if !nameTextField.isEmpty() {
-//                patronymicTextField.becomeFirstResponder()
-//                break
-//            }
-//            showToast(message: "First name field is empty", seconds: 1.0)
-//        case patronymicTextField:
-//            if !patronymicTextField.isEmpty() {
-//                loginTextField.becomeFirstResponder()
-//                break
-//            }
-//            showToast(message: "Patronymic field is empty", seconds: 1.0)
-//        case loginTextField:
-//            if !loginTextField.isEmpty() {
-//                passwordTF.becomeFirstResponder()
-//                break
-//            }
-//            showToast(message: "Login field is empty", seconds: 1.0)
-//        case passwordTF:
-//            if !passwordTF.isEmpty() {
-//                passwordTF.resignFirstResponder()
-//                break
-//            }
-//            showToast(message: "Password field is empty", seconds: 1.0)
-//        default:
-//            textField.endEditing(true)
-//        }
         textField.endEditing(true)
         return true
     }

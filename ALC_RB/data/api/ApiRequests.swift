@@ -59,10 +59,12 @@ class ApiRequests {
         }
     }
     
-    func post_registration(userData: Registration, profileImage: UIImage, response_success: @escaping (AuthUser) -> (), response_failure: @escaping (Error) -> (), response_message: @escaping (SingleLineMessage) -> ()) {
+    func post_registration(userData: Registration, profileImage: UIImage?, response_success: @escaping (AuthUser) -> (), response_failure: @escaping (Error) -> (), response_message: @escaping (SingleLineMessage) -> ()) {
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in
-                multipartFormData.append(profileImage.jpegData(compressionQuality: 1.0)!, withName: "photo", fileName: "jpg", mimeType: "image/jpg")
+                if let image = profileImage {
+                    multipartFormData.append(image.jpegData(compressionQuality: 1.0)!, withName: "photo", fileName: "jpg", mimeType: "image/jpg")
+                }
                 for (key, value) in userData.toParams() {
                     let strValue = value as! String
                     multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)

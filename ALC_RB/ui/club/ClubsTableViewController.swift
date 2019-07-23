@@ -156,23 +156,47 @@ extension ClubsTableViewController {
             let cellIndex = tableView.indexPathForSelectedRow?.row
         {
             let cacheImage = ImageCache.default
-            var cachedOriginalSizeImage: UIImage?
-            if let imageUrl = clubs.clubs[cellIndex].logo {
-                cacheImage.retrieveImage(forKey: ApiRoute.getAbsoluteImageRoute(imageUrl)) { result in
-                    switch result {
+            
+            if let imageUrl = clubs.clubs[cellIndex].logo
+            {
+                cacheImage.retrieveImage(forKey: ApiRoute.getAbsoluteImageRoute(imageUrl))
+                { result in
+                    switch result
+                    {
                     case .success(let value):
-                        
-                        // If the `cacheType is `.none`, `image` will be `nil`.
-                        cachedOriginalSizeImage = value.image
+                        if let image = value.image
+                        {
+                            destination.content = ClubDetailContent(
+                                image: image,
+                                title: self.clubs.clubs[cellIndex].name ?? "",
+                                owner: self.clubs.clubs[cellIndex].owner?.surname ?? "",
+                                text: self.clubs.clubs[cellIndex].info ?? "")
+                        }
+                        else
+                        {
+                            destination.content = ClubDetailContent(
+                                image: nil,
+                                title: self.clubs.clubs[cellIndex].name ?? "",
+                                owner: self.clubs.clubs[cellIndex].owner?.surname ?? "",
+                                text: self.clubs.clubs[cellIndex].info ?? "")
+                        }
                     case .failure(let error):
                         print(error)
+                        destination.content = ClubDetailContent(
+                            image: nil,
+                            title: self.clubs.clubs[cellIndex].name ?? "",
+                            owner: self.clubs.clubs[cellIndex].owner?.surname ?? "",
+                            text: self.clubs.clubs[cellIndex].info ?? "")
                     }
-                    destination.content = ClubDetailContent(
-                        image: cachedOriginalSizeImage,
-                        title: self.clubs.clubs[cellIndex].name ?? "",
-                        owner: self.clubs.clubs[cellIndex].owner?.surname ?? "",
-                        text: self.clubs.clubs[cellIndex].info ?? "")
                 }
+            }
+            else
+            {
+                destination.content = ClubDetailContent(
+                    image: nil,
+                    title: self.clubs.clubs[cellIndex].name ?? "",
+                    owner: self.clubs.clubs[cellIndex].owner?.surname ?? "",
+                    text: self.clubs.clubs[cellIndex].info ?? "")
             }
             
         }

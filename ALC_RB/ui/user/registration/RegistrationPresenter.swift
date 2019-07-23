@@ -22,7 +22,7 @@ class RegistrationPresenter: MvpPresenter<RegistrationViewController> {
     
     let apiService = ApiRequests()
     
-    func registration(userData: Registration, profileImage: UIImage) {
+    func registration(userData: Registration, profileImage: UIImage?) {
         apiService.post_registration(userData: userData, profileImage: profileImage, response_success: { (authUser) in
             self.getView().registrationComplete(authUser: authUser)
         }, response_failure: { (error) in
