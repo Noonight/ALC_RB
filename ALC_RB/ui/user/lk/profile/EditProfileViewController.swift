@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 class EditProfileViewController: UIViewController {
 
@@ -24,6 +25,7 @@ class EditProfileViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    // MARK: Var & Let
     let presenter = EditProfilePresenter()
     
     var imagePicker: ImagePicker?
@@ -34,13 +36,11 @@ class EditProfileViewController: UIViewController {
     
     var profileInfoChanged = false
     
-    // MARK: - Trash Variables
-    var trashImageView: UIImage?
-    var trashFamily: String?
-    var trashName: String?
-    var trashPatronymic: String?
-    var trashLogin: String?
-    var trashDatePicker: String?
+    var choosedImage: UIImage? {
+        didSet {
+            self.imageView.image = self.choosedImage?.af_imageRoundedIntoCircle()
+        }
+    }
     
     // MARK: - Life cycle
     
@@ -56,11 +56,9 @@ class EditProfileViewController: UIViewController {
         self.patronymicTF.delegate = self
         self.loginTF.delegate = self
         
-        prepareRxFields()
-        
         scrollView.keyboardDismissMode = .onDrag
         
-        firstInit()
+//        firstInit()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -68,7 +66,7 @@ class EditProfileViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
         barSaveBtn.image = barSaveBtn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
         
-        
+        self.firstInit()
     }
     
     // MARK: - First init
@@ -82,27 +80,27 @@ class EditProfileViewController: UIViewController {
         datePicker.date = (authUser?.person.birthdate.getDateOfType(type: .GMT))!
 
         presenter.photoProfile(imagePath: authUser?.person.photo ?? "")
-    }
-    
-    func prepareRxFields() {
-//        datePicker.rx
-//            .controlEvent(UIControlEvents.editingDidEnd)
-//            .asObservable()
-//            .subscribe(onNext: <#T##((()) -> Void)?##((()) -> Void)?##(()) -> Void#>, onError: <#T##((Error) -> Void)?##((Error) -> Void)?##(Error) -> Void#>, onCompleted: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, onDisposed: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
-//        nameTF.rx
-//            .controlEvent(UIControlEvents.editingDidEnd)
-//            .asObservable()
-//            .subscribe { (onNext) in
-//                self.profileInfoChanged = true
-//            }
+//        if let image = authUser?.person.photo {
+//            let url = ApiRoute.getImageURL(image: image)
+//            let processor = CroppingImageProcessorCustom(size: self.imageView.frame.size)
+//                .append(another: RoundCornerImageProcessor(cornerRadius: self.imageView.getHalfWidthHeight()))
 //
+//            self.imageView.kf.indicatorType = .activity
+//            self.imageView.kf.setImage(
+//                with: url,
+//                placeholder: UIImage(named: "ic_logo"),
+//                options: [
+//                    .processor(processor),
+//                    .scaleFactor(UIScreen.main.scale),
+//                    .transition(.fade(1)),
+//                    .cacheOriginalImage
+//                ])
+//        }
     }
     
     // MARK: - Actions
     
     @IBAction func onSaveBtnPressed(_ sender: UIBarButtonItem) {
-        
-        checkFieldsIsChanged()
         
         let dateOfBirth = datePicker.date.getStringOfType(type: .GMT)
         presenter.editProfile(token: (authUser?.token)!, profileInfo: EditProfile(
@@ -111,19 +109,12 @@ class EditProfileViewController: UIViewController {
             lastname: patronymicTF.text!,
             login: loginTF.text!,
             _id: (authUser?.person.id)!,
-            birthdate: dateOfBirth), profileImage: imageView.image!)
-        if profileInfoChanged {
-            
-        }
+            birthdate: dateOfBirth), profileImage: choosedImage)
         
     }
     
     @IBAction func onImagePressed(_ sender: UITapGestureRecognizer) {
         imagePicker?.present(from: self.view)
-    }
-    
-    func checkFieldsIsChanged() {
-        
     }
 }
 
@@ -138,7 +129,7 @@ extension EditProfileViewController: EditProfileView {
     }
     
     func getProfilePhotoSuccessful(image: UIImage) {
-        self.imageView.image = image.af_imageRoundedIntoCircle()
+        self.choosedImage = image.af_imageRoundedIntoCircle()
     }
     
     func getProfilePhotoFailure(error: Error) {
@@ -172,40 +163,13 @@ extension EditProfileViewController: EditProfileView {
 
 extension EditProfileViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
-        self.imageView.image = image?.af_imageRoundedIntoCircle()
+        self.choosedImage = image
+//        self.imageView.image = image?.af_imageRoundedIntoCircle()
     }
 }
 
 extension EditProfileViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        switch textField {
-//        case familyTF:
-//            if !familyTF.isEmpty() {
-//                familyTF.resignFirstResponder()
-//                break
-//            }
-//            showToast(message: "Family field is empty", seconds: 1.0)
-//        case nameTF:
-//            if !nameTF.isEmpty() {
-//                nameTF.resignFirstResponder()
-//                break
-//            }
-//            showToast(message: "First name field is empty", seconds: 1.0)
-//        case patronymicTF:
-//            if !patronymicTF.isEmpty() {
-//                patronymicTF.resignFirstResponder()
-//                break
-//            }
-//            showToast(message: "Patronymic field is empty", seconds: 1.0)
-//        case loginTF:
-//            if !loginTF.isEmpty() {
-//                loginTF.resignFirstResponder()
-//                break
-//            }
-//            showToast(message: "Login field is empty", seconds: 1.0)
-//        default:
-//            textField.endEditing(true)
-//        }
         textField.endEditing(true)
         return true
     }

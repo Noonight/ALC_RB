@@ -27,6 +27,12 @@ class ClubEditLKViewController: BaseStateViewController, UITextFieldDelegate {
     
     let userDefaults = UserDefaultsHelper()
     
+    var choosedImage: UIImage? {
+        didSet {
+            self.clubImage.image = self.choosedImage?.af_imageRoundedIntoCircle()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
@@ -77,16 +83,8 @@ class ClubEditLKViewController: BaseStateViewController, UITextFieldDelegate {
             clubDescription_textView.text = club.info
             presenter.getClubLogo(byPath: club.logo ?? "")
         } else {
-            //            showToast(message: "Что-то пошло не так. Ошибка!")
             showAlert(message: "Что - то пошло не так")
         }
-        //        if club != nil {
-        //            clubTitle_label.text = club?.name
-        //            clubDescription_textView.text = club?.info
-        //            presenter.getClubLogo(byPath: club?.logo ?? "")
-        //        } else {
-        //            showToast(message: "Что-то пошло не так. Ошибка!")
-        //        }
     }
     
     // MARK: - Actions
@@ -99,7 +97,7 @@ class ClubEditLKViewController: BaseStateViewController, UITextFieldDelegate {
                 name: clubTitle_label.text!,
                 _id: (userDefaults.getAuthorizedUser()?.person.club!)!,
                 info: clubDescription_textView.text!),
-            image: clubImage.image!)
+            image: self.choosedImage)
     }
     
     @IBAction func onImageAreaPressed(_ sender: UITapGestureRecognizer) {
@@ -161,6 +159,7 @@ extension ClubEditLKViewController : ClubEditLKView {
 
 extension ClubEditLKViewController : ImagePickerDelegate {
     func didSelect(image: UIImage?) {
-        clubImage.image = image?.af_imageRoundedIntoCircle()
+        self.choosedImage = image
+//        clubImage.image = image?.af_imageRoundedIntoCircle()
     }
 }

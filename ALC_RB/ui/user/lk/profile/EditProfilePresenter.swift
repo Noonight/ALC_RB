@@ -25,7 +25,7 @@ class EditProfilePresenter: MvpPresenter<EditProfileViewController> {
     
     let apiService = ApiRequests()
     
-    func editProfile(token: String, profileInfo: EditProfile, profileImage: UIImage) {
+    func editProfile(token: String, profileInfo: EditProfile, profileImage: UIImage?) {
         apiService.post_edit_profile(token: token, profileInfo: profileInfo, profileImage: profileImage, response_success: { (editedProfile) in
             self.getView().changeProfileSuccessful(editedProfile: editedProfile)
         }) { (error) in

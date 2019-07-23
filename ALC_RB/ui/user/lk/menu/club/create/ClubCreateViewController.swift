@@ -25,6 +25,11 @@ class ClubCreateViewController: BaseStateViewController
     
     // image holder, hidden
     private var tmpImage: UIImage?
+    private var choosedImage: UIImage? {
+        didSet {
+            self.logoImage.image = self.choosedImage?.af_imageRoundedIntoCircle()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +63,7 @@ class ClubCreateViewController: BaseStateViewController
                 info: descriptionText.text ?? "",
                 owner: userDefaults.getAuthorizedUser()?.person.id ?? ""
             ),
-            image: tmpImage
+            image: choosedImage
         )
     }
 }
@@ -73,8 +78,10 @@ extension ClubCreateViewController: ClubCreateProtocol {
         var user = userDefaults.getAuthorizedUser()
         user?.person.club = soloClub.club.id
         userDefaults.setAuthorizedUser(user: user!)
-        showToast(message: Variables.successfulMessage)
-        navigationController?.popViewController(animated: true)
+//        showToast(message: Variables.successfulMessage)
+        self.showAlert(title: Variables.successfulMessage, message: "")
+//        navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
         dismiss(animated: true) {
             Print.m("View controller no anymore")
         }
@@ -90,7 +97,7 @@ extension ClubCreateViewController: ClubCreateProtocol {
             self.presenter.create(
                 token: (self.userDefaults.getAuthorizedUser()?.token)!,
                 createClub: (self.presenter.createClubCache!.createClub)!,
-                image: self.tmpImage)
+                image: self.choosedImage)
         }
     }
     
@@ -132,9 +139,10 @@ extension ClubCreateViewController : ImagePickerDelegate
 {
     func didSelect(image: UIImage?) {
         if let image = image {
-            self.logoImage.image = image
-            self.logoImage.cropAndRound()
-            self.tmpImage = image
+//            self.logoImage.image = image
+//            self.logoImage.cropAndRound()
+//            self.tmpImage = image
+            self.choosedImage = image
         }
     }
 }

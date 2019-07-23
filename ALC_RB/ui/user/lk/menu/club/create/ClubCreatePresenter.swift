@@ -36,7 +36,7 @@ class ClubCreatePresenter: MvpPresenter<ClubCreateViewController> {
     }
     
     func create(token: String, createClub: CreateClub, image: UIImage?) {
-        if createClub.fieldsIsEmpty() || image == nil {
+        if createClub.fieldsIsEmpty() {
             self.getView().fieldsIsEmpty()
         } else {
             self.createClubCache = CreateClubCache(createClub: createClub, image: image)

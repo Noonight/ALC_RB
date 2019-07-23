@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ClubLKViewController: BaseStateViewController {
 
@@ -116,6 +117,22 @@ extension ClubLKViewController: ClubLKView {
             updateNavBar()
             
             presenter.getImage(imagePath: club.logo ?? "")
+//            if let image = club.logo {
+//                let url = ApiRoute.getImageURL(image: image)
+//                let processor = CroppingImageProcessorCustom(size: self.commandLogo_image.frame.size)
+//                    .append(another: RoundCornerImageProcessor(cornerRadius: self.commandLogo_image.getHalfWidthHeight()))
+//
+//                self.commandLogo_image.kf.indicatorType = .activity
+//                self.commandLogo_image.kf.setImage(
+//                    with: url,
+//                    placeholder: UIImage(named: "ic_con"),
+//                    options: [
+//                        .processor(processor),
+//                        .scaleFactor(UIScreen.main.scale),
+//                        .transition(.fade(1)),
+//                        .cacheOriginalImage
+//                    ])
+//            }
             commandTitle_label.text = club.name
             commandDescription_label.text = club.info
             

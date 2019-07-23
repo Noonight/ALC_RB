@@ -4403,7 +4403,6 @@
                                                 <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="88" id="0Ob-yx-fHI"/>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="88" id="rlN-SC-yLG"/>
                                                     <constraint firstAttribute="height" constant="88" id="scb-Tu-DyJ"/>
                                                 </constraints>
                                             </imageView>
@@ -4428,6 +4427,7 @@
                                                 <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="240" id="jYn-gT-h7u"/>
+                                                    <constraint firstAttribute="height" constant="128" id="oLF-j1-7aN"/>
                                                 </constraints>
                                                 <connections>
                                                     <outletCollection property="gestureRecognizers" destination="Aym-pp-3ol" appends="YES" id="95J-p5-eLE"/>
@@ -4438,7 +4438,6 @@
                                         <constraints>
                                             <constraint firstItem="lrO-zA-YJ8" firstAttribute="leading" secondItem="alb-g8-ydo" secondAttribute="leading" constant="16" id="2nN-AZ-IPZ"/>
                                             <constraint firstItem="o4i-ZX-WEK" firstAttribute="top" secondItem="alb-g8-ydo" secondAttribute="top" constant="16" id="84f-wP-gnE"/>
-                                            <constraint firstAttribute="bottom" secondItem="a6p-BQ-FXg" secondAttribute="bottom" constant="432" id="Efe-Pa-xjl"/>
                                             <constraint firstItem="o4i-ZX-WEK" firstAttribute="centerX" secondItem="alb-g8-ydo" secondAttribute="centerX" id="Hk7-qn-h89"/>
                                             <constraint firstItem="a6p-BQ-FXg" firstAttribute="centerX" secondItem="alb-g8-ydo" secondAttribute="centerX" id="Qxm-SI-Adr"/>
                                             <constraint firstAttribute="trailing" secondItem="lrO-zA-YJ8" secondAttribute="trailing" constant="16" id="eq4-A5-3Uu"/>

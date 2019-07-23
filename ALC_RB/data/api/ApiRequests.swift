@@ -102,10 +102,13 @@ class ApiRequests {
         }
     }
     
-    func post_edit_profile(token: String, profileInfo: EditProfile, profileImage: UIImage, response_success: @escaping (SoloPerson) -> (), response_failure: @escaping (Error) -> () ) {
+    func post_edit_profile(token: String, profileInfo: EditProfile, profileImage: UIImage?, response_success: @escaping (SoloPerson) -> (), response_failure: @escaping (Error) -> () ) {
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in
-                multipartFormData.append(profileImage.jpegData(compressionQuality: 1.0)!, withName: "photo", fileName: "jpg", mimeType: "image/jpg")
+                if let image = profileImage {
+                    multipartFormData.append(image.jpegData(compressionQuality: 1.0)!, withName: "photo", fileName: "jpg", mimeType: "image/jpg")
+                }
+                
                 for (key, value) in profileInfo.toParams() {
                     let strValue = value as! String
                     multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
@@ -138,14 +141,16 @@ class ApiRequests {
             }
     }
     
-    func post_editClubInfo(token: String, clubInfo: EditClubInfo, clubImage: UIImage, response_success: @escaping (SoloClub) -> (), response_failure: @escaping (Error) -> ()) {
+    func post_editClubInfo(token: String, clubInfo: EditClubInfo, clubImage: UIImage?, response_success: @escaping (SoloClub) -> (), response_failure: @escaping (Error) -> ()) {
         
 //        Print.m("token - >> \(token)")
 //        Print.m("club - >> \(clubInfo)")
         
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in
-                multipartFormData.append(clubImage.jpegData(compressionQuality: 1.0)!, withName: "logo", fileName: "jpg", mimeType: "image/jpg")
+                if let image = clubImage {
+                    multipartFormData.append(image.jpegData(compressionQuality: 1.0)!, withName: "logo", fileName: "jpg", mimeType: "image/jpg")
+                }
                 for (key, value) in clubInfo.toParams() {
                     let strValue = value as! String
                     multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
@@ -210,8 +215,8 @@ class ApiRequests {
     func post_createClub(token: String, createClub: CreateClub, image: UIImage?, response_success: @escaping (SoloClub) -> (), response_message: @escaping (SingleLineMessage) -> (), response_failure: @escaping (Error) -> ()) {
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in
-                if let image = image {
-                    multipartFormData.append(image.jpegData(compressionQuality: 1.0)!, withName: "logo", fileName: "jpg", mimeType: "image/jpg")
+                if let mImage = image {
+                    multipartFormData.append(mImage.jpegData(compressionQuality: 1.0)!, withName: "logo", fileName: "jpg", mimeType: "image/jpg")
                 }
                 for (key, value) in createClub.toParams() {
                     let strValue = value as! String

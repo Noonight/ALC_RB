@@ -25,9 +25,9 @@ class ClubEditLKPresenter : MvpPresenter<ClubEditLKViewController> {
     
     struct EditClubInfoCache {
         var editClubInfo: EditClubInfo
-        var image: UIImage
+        var image: UIImage?
         
-        init(clubInfo: EditClubInfo, image: UIImage) {
+        init(clubInfo: EditClubInfo, image: UIImage?) {
             self.editClubInfo = clubInfo
             self.image = image
         }
@@ -35,7 +35,7 @@ class ClubEditLKPresenter : MvpPresenter<ClubEditLKViewController> {
     
     var editClubInfoCache: EditClubInfoCache?
     
-    func editClubInfo(token: String, clubInfo: EditClubInfo, image: UIImage) {
+    func editClubInfo(token: String, clubInfo: EditClubInfo, image: UIImage?) {
         editClubInfoCache = EditClubInfoCache(clubInfo: clubInfo, image: image)
         apiService.post_editClubInfo(token: token, clubInfo: clubInfo, clubImage: image, response_success: { (soloClub) in
             self.getView().editClubInfoSuccess(soloClub: soloClub)

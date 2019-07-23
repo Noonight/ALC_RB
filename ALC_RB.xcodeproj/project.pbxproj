@@ -23,7 +23,6 @@
 		180F236722B25F1700ADE8FD /* EditScheduleLKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */; };
 		180F236922B262AD00ADE8FD /* EditScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */; };
 		1814452722E6BFCF00C9D45E /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1814452622E6BFCF00C9D45E /* MainTabBarViewController.swift */; };
-		1814452922E6D73300C9D45E /* UITableViewCell Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1814452822E6D73300C9D45E /* UITableViewCell Ext.swift */; };
 		1821150B22E59F22000F86D5 /* CGSize Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1821150A22E59F22000F86D5 /* CGSize Ext.swift */; };
 		1823DC2622952762000A1055 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1823DC2422952762000A1055 /* LoadingCell.swift */; };
 		1823DC2722952762000A1055 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1823DC2522952762000A1055 /* LoadingCell.xib */; };
@@ -263,7 +262,6 @@
 		180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleLKViewController.swift; sourceTree = "<group>"; };
 		180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewModel.swift; sourceTree = "<group>"; };
 		1814452622E6BFCF00C9D45E /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
-		1814452822E6D73300C9D45E /* UITableViewCell Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell Ext.swift"; sourceTree = "<group>"; };
 		1821150A22E59F22000F86D5 /* CGSize Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize Ext.swift"; sourceTree = "<group>"; };
 		1823DC2422952762000A1055 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		1823DC2522952762000A1055 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
@@ -906,7 +904,6 @@
 				1824601222C5CC6F0061E877 /* Button Extensions.swift */,
 				DB0E0CBC22D6ABB5005342FE /* View.swift */,
 				1821150A22E59F22000F86D5 /* CGSize Ext.swift */,
-				1814452822E6D73300C9D45E /* UITableViewCell Ext.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -1999,7 +1996,6 @@
 				187F2E0622CB19440049EA77 /* EditEventsMatchTableViewController.swift in Sources */,
 				DB98FACF2254AF35002933D0 /* CommandEditLKPresenter.swift in Sources */,
 				DB52EAE32248E2C7004F7869 /* CommandCreateLKViewController.swift in Sources */,
-				1814452922E6D73300C9D45E /* UITableViewCell Ext.swift in Sources */,
 				DB17385B21BAACB900017B6D /* Clubs.swift in Sources */,
 				DBA119F8225735830006904D /* CommandInvitePlayersTableViewCell.swift in Sources */,
 				DB48BE7A22002FC4008B007D /* SoloPerson.swift in Sources */,

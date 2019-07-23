@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class UserLKViewController: UIViewController {
 
@@ -135,11 +136,27 @@ class UserLKViewController: UIViewController {
 //        showFirstItem()
 
         self.userHeaderMenuLabel.text = authUser?.person.getFullName()
-        if authUser?.person.photo != nil {
-            self.presenter.getProfileImage(imagePath: (authUser?.person.photo!)!)
-        } else {
-//            self.userHeaderMenuImage.image = UIImage(named: "ic_user")
-            self.userHeaderMenuImage.image = UIImage(named: "ic_logo")?.af_imageRoundedIntoCircle()
+//        if authUser?.person.photo != nil {
+//            self.presenter.getProfileImage(imagePath: (authUser?.person.photo!)!)
+//        } else {
+////            self.userHeaderMenuImage.image = UIImage(named: "ic_user")
+//            self.userHeaderMenuImage.image = UIImage(named: "ic_logo")?.af_imageRoundedIntoCircle()
+//        }
+        if let image = authUser?.person.photo {
+            let url = ApiRoute.getImageURL(image: image)
+            let processor = CroppingImageProcessorCustom(size: self.userHeaderMenuImage.frame.size)
+                .append(another: RoundCornerImageProcessor(cornerRadius: self.userHeaderMenuImage.getHalfWidthHeight()))
+            
+            self.userHeaderMenuImage.kf.indicatorType = .activity
+            self.userHeaderMenuImage.kf.setImage(
+                with: url,
+                placeholder: UIImage(named: "ic_logo"),
+                options: [
+                    .processor(processor),
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(1))//,
+//                    .cacheOriginalImage
+                ])
         }
         
     }
