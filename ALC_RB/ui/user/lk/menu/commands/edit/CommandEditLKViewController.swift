@@ -9,12 +9,15 @@
 import UIKit
 
 class CommandEditLKViewController: BaseStateViewController {
-
+    enum SegueIdentifiers {
+        static let ADD_PLAYER = "segue_add_player_to_team"
+    }
+    
     @IBOutlet weak var saveBtn: UIBarButtonItem!
     @IBOutlet weak var commandPlayers: UITableView!
     @IBOutlet weak var commandInvitePlayers: UITableView!
     
-    let segueAddPlayers = "segue_add_player_to_team"
+    // MARK: Var & Let
     
     let presenter = CommandEditLKPresenter()
     
@@ -25,7 +28,6 @@ class CommandEditLKViewController: BaseStateViewController {
     
     var team = Team()
     var players = Players()
-//    var league = League()
     var leagueController: LeagueController!
     var mutablePlayers: [Player] = []
 
@@ -35,12 +37,25 @@ class CommandEditLKViewController: BaseStateViewController {
     var teamController: TeamCommandsController!
     var participationController: ParticipationCommandsController!
     
+    // MARK: Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        initPresenter()
-    
-//        saveBtn.image = saveBtn.image?.af_imageScaled(to: CGSize(width: 24, height: 24))
         
+        self.setupPresenter()
+        self.setupTableViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        team.players = (teamController.getTeamById(id: team.id)?.players)!
+        mutablePlayers = team.players
+        
+        presenter.getPersons()
+    }
+    
+    func setupTableViews() {
         commandPlayers.dataSource = commandPlayersTableViewHelper
         commandPlayers.delegate = commandPlayersTableViewHelper
         
@@ -56,31 +71,20 @@ class CommandEditLKViewController: BaseStateViewController {
         commandPlayers.tableFooterView = UIView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        team.players = (teamController.getTeamById(id: team.id)?.players)!
-        mutablePlayers = team.players
-        
-        presenter.getPersons()
-        
-        Print.m("We are in CommandEditLKViewController")
-        
-//        Print.m("team is \(team)")
-//        Print.m("participation is \(participation)")
+    func setupPresenter() {
+        self.initPresenter()
     }
+}
 
-    // MARK: - Toolbar Actions
+// MARK: Extensions
+
+// MARK: Actions
+
+extension CommandEditLKViewController {
     
-    @IBAction func onAddPlayerBtnPressed(_ sender: UIButton) {
-        Print.m("add btn")
-    }
-    
-    // MARK: - Helpers functions
+    @IBAction func onAddPlayerBtnPressed(_ sender: UIButton) { }
     
     @IBAction func onNavBarSaveBtnPressed(_ sender: UIBarButtonItem) {
-        Print.m("save btn")
-        Print.m(participation?.league)
         presenter.editCommand(
             token: (userDefaultHelper.getAuthorizedUser()?.token)!,
             editTeam: EditTeam(
@@ -91,13 +95,12 @@ class CommandEditLKViewController: BaseStateViewController {
     }
 }
 
+// MARK: Presenter
+
 extension CommandEditLKViewController: CommandEditLKView {
     func onGetPersonsComplete(players: Players) {
         
-//        self.mutablePlayers = play
-        
         let teamPlayers = team.players
-//        dump(teamPlayers)
         var array : [CommandPlayersTableViewCell.CellModel] = []
         
         var arrayInv: [CommandInvitePlayersTableViewCell.CellModel] = []
@@ -135,13 +138,8 @@ extension CommandEditLKViewController: CommandEditLKView {
         showAlert(message: error.localizedDescription)
     }
     
-    func initPresenter() {
-        presenter.attachView(view: self)
-    }
-    
     func onEditCommandSuccess(editTeamResponse: EditTeamResponse) {
         self.team.players = editTeamResponse.players
-//        self.players = editTeamResponse.players
         self.teamController.setPlayersByTeamId(id: self.team.id, players: editTeamResponse.players)
         self.leagueController.editTeamPlayersById(teamId: self.team.id, players: editTeamResponse.players)
         presenter.getPersons()
@@ -157,30 +155,32 @@ extension CommandEditLKViewController: CommandEditLKView {
         showAlert(title: "", message: singleLineMessage.message)
     }
     
+    func initPresenter() {
+        presenter.attachView(view: self)
+    }
+}
+
+// MARK: Navigation
+
+extension CommandEditLKViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueAddPlayers,
+        if segue.identifier == SegueIdentifiers.ADD_PLAYER,
             let destination = segue.destination as? CommandAddPlayerTableViewController
         {
-            destination.tableModel = CommandAddPlayerTableViewController.TableModel(
-//                team: self.team
-//                players: self.mutablePlayers
-            )
+            destination.tableModel = CommandAddPlayerTableViewController.TableModel()
             destination.team = self.team
             destination.leagueId = self.participation?.league
             destination.teamController = self.teamController
-//            destination.league = self.league
             destination.leagueController = self.leagueController
         }
     }
 }
 
+// MARK: Delegates ( Edit / Delete )
+
 extension CommandEditLKViewController: OnCommandPlayerDeleteBtnPressedProtocol {
     
-    
     func onDeleteBtnPressed(index: IndexPath, model: CommandPlayersTableViewCell.CellModel, success: @escaping () -> ()) {
-        Print.m("player table \(index.row)")
-        
-        
         for i in 0...mutablePlayers.count {
             if model.player?.id == mutablePlayers[i].id {
                 
@@ -212,8 +212,6 @@ extension CommandEditLKViewController: OnCommandPlayerDeleteBtnPressedProtocol {
 extension CommandEditLKViewController: OnCommandInvitePlayerDeleteBtnPressedProtocol {
     
     func onDeleteInvBtnPressed(index: IndexPath, model: CommandInvitePlayersTableViewCell.CellModel, success: @escaping () -> ()) {
-        Print.m("player invite table \(index.row)")
-//        dump(mutablePlayers)
         for i in 0...mutablePlayers.count/* - 1*/ {
             if model.player?.id == mutablePlayers[i].id {
                 if let personName = model.person?.getFullName() {
@@ -237,7 +235,6 @@ extension CommandEditLKViewController: OnCommandInvitePlayerDeleteBtnPressedProt
         }
     }
 }
-
 
 extension CommandEditLKViewController: OnCommandPlayerEditNumberCompleteProtocol {
     func onEditNumberComplete(model: CommandPlayersTableViewCell.CellModel) {

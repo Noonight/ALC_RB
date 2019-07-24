@@ -27,3 +27,12 @@ target 'ALC_RB' do
   #pod 'SwiftDate', '~> 5.0'
   pod 'UIScrollView-InfiniteScroll', '~> 1.1.0'
 end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      #config.build_settings['ENABLE_BITCODE'] = 'NO'
+      config.build_settings['SWIFT_VERSION'] = '4.2' # <--- // 2nd add this
+    end
+  end
+end

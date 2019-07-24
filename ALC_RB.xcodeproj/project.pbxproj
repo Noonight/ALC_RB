@@ -68,6 +68,7 @@
 		18EB8B9F226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EB8B9E226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift */; };
 		18EB8BA2227056100087BD99 /* CommandAddPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EB8BA1227056100087BD99 /* CommandAddPlayerTableViewCell.swift */; };
 		18FE29BF22AE1C420094C4D8 /* MenuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FE29BE22AE1C420094C4D8 /* MenuHelper.swift */; };
+		9BCE331CF018A19CBE318D29 /* Pods_ALC_RB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8CAFADB419EC76B3B2A2418 /* Pods_ALC_RB.framework */; };
 		CE0AF81721C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0AF81621C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift */; };
 		CE0AF81A21C7A1C200F8F6A2 /* ClubDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0AF81921C7A1C200F8F6A2 /* ClubDetailViewController.swift */; };
 		CE0AF81D21C7A27900F8F6A2 /* ClubDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0AF81C21C7A27900F8F6A2 /* ClubDetailPresenter.swift */; };
@@ -241,7 +242,6 @@
 		DBFB838E2201CAB4008A8F79 /* MatchesTeamLeagueDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB838D2201CAB4008A8F79 /* MatchesTeamLeagueDetailPresenter.swift */; };
 		DBFB83912201CEAE008A8F79 /* PlayersLeagueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB83902201CEAE008A8F79 /* PlayersLeagueDetailViewController.swift */; };
 		DBFB83932201CFFC008A8F79 /* PlayersLeagueDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB83922201CFFC008A8F79 /* PlayersLeagueDetailPresenter.swift */; };
-		E36266006B773BB7B08340D9 /* Pods_ALC_RB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F181E6D1A012D323B0FC0ECB /* Pods_ALC_RB.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -307,7 +307,9 @@
 		18EB8B9E226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerTableViewController.swift; sourceTree = "<group>"; };
 		18EB8BA1227056100087BD99 /* CommandAddPlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		18FE29BE22AE1C420094C4D8 /* MenuHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHelper.swift; sourceTree = "<group>"; };
-		86FFA841A8CBD98081CB4DE1 /* Pods-ALC_RB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ALC_RB.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.debug.xcconfig"; sourceTree = "<group>"; };
+		264713EC4646AA805C58CFF2 /* Pods-ALC_RB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ALC_RB.release.xcconfig"; path = "Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.release.xcconfig"; sourceTree = "<group>"; };
+		94E91859B21FCA46298FEF92 /* Pods-ALC_RB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ALC_RB.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.debug.xcconfig"; sourceTree = "<group>"; };
+		C8CAFADB419EC76B3B2A2418 /* Pods_ALC_RB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ALC_RB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE0AF81621C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorProtocol.swift; sourceTree = "<group>"; };
 		CE0AF81921C7A1C200F8F6A2 /* ClubDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubDetailViewController.swift; sourceTree = "<group>"; };
 		CE0AF81C21C7A27900F8F6A2 /* ClubDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubDetailPresenter.swift; sourceTree = "<group>"; };
@@ -485,8 +487,6 @@
 		DBFB838D2201CAB4008A8F79 /* MatchesTeamLeagueDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesTeamLeagueDetailPresenter.swift; sourceTree = "<group>"; };
 		DBFB83902201CEAE008A8F79 /* PlayersLeagueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersLeagueDetailViewController.swift; sourceTree = "<group>"; };
 		DBFB83922201CFFC008A8F79 /* PlayersLeagueDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersLeagueDetailPresenter.swift; sourceTree = "<group>"; };
-		E936F5C8B72023C5136763E0 /* Pods-ALC_RB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ALC_RB.release.xcconfig"; path = "Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.release.xcconfig"; sourceTree = "<group>"; };
-		F181E6D1A012D323B0FC0ECB /* Pods_ALC_RB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ALC_RB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -494,7 +494,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E36266006B773BB7B08340D9 /* Pods_ALC_RB.framework in Frameworks */,
+				9BCE331CF018A19CBE318D29 /* Pods_ALC_RB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -742,19 +742,19 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
-		68046093AB397FA5AFC347E0 /* Pods */ = {
+		55F666B0C8F344025D76B0B9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				86FFA841A8CBD98081CB4DE1 /* Pods-ALC_RB.debug.xcconfig */,
-				E936F5C8B72023C5136763E0 /* Pods-ALC_RB.release.xcconfig */,
+				94E91859B21FCA46298FEF92 /* Pods-ALC_RB.debug.xcconfig */,
+				264713EC4646AA805C58CFF2 /* Pods-ALC_RB.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		6A46DC8C031C5924E8590960 /* Frameworks */ = {
+		ADCA614F707F28767C12BD19 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F181E6D1A012D323B0FC0ECB /* Pods_ALC_RB.framework */,
+				C8CAFADB419EC76B3B2A2418 /* Pods_ALC_RB.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -931,8 +931,8 @@
 			children = (
 				CEA6EB9A21A53CFE008F874D /* ALC_RB */,
 				CEA6EB9921A53CFE008F874D /* Products */,
-				68046093AB397FA5AFC347E0 /* Pods */,
-				6A46DC8C031C5924E8590960 /* Frameworks */,
+				55F666B0C8F344025D76B0B9 /* Pods */,
+				ADCA614F707F28767C12BD19 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1730,11 +1730,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEA6EBAA21A53CFE008F874D /* Build configuration list for PBXNativeTarget "ALC_RB" */;
 			buildPhases = (
-				C11ED1E2DE4486EC022A9E5B /* [CP] Check Pods Manifest.lock */,
+				51D949AE18D1EDAED4381B3B /* [CP] Check Pods Manifest.lock */,
 				CEA6EB9421A53CFE008F874D /* Sources */,
 				CEA6EB9521A53CFE008F874D /* Frameworks */,
 				CEA6EB9621A53CFE008F874D /* Resources */,
-				2841BEA3900B3DAF68E30B05 /* [CP] Embed Pods Frameworks */,
+				09A598BD9F7E905D8D4F4246 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1801,7 +1801,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2841BEA3900B3DAF68E30B05 /* [CP] Embed Pods Frameworks */ = {
+		09A598BD9F7E905D8D4F4246 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1809,7 +1809,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AMScrollingNavbar/AMScrollingNavbar.framework",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
@@ -1848,10 +1848,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C11ED1E2DE4486EC022A9E5B /* [CP] Check Pods Manifest.lock */ = {
+		51D949AE18D1EDAED4381B3B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2251,7 +2251,7 @@
 		};
 		CEA6EBAB21A53CFE008F874D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 86FFA841A8CBD98081CB4DE1 /* Pods-ALC_RB.debug.xcconfig */;
+			baseConfigurationReference = 94E91859B21FCA46298FEF92 /* Pods-ALC_RB.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2271,7 +2271,7 @@
 		};
 		CEA6EBAC21A53CFE008F874D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E936F5C8B72023C5136763E0 /* Pods-ALC_RB.release.xcconfig */;
+			baseConfigurationReference = 264713EC4646AA805C58CFF2 /* Pods-ALC_RB.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
