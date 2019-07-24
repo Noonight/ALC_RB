@@ -9,6 +9,7 @@
 import UIKit
 import AlamofireImage
 //import SwiftDate
+import Kingfisher
 
 class CommandAddPlayerTableViewCell: UITableViewCell {
     
@@ -45,22 +46,30 @@ class CommandAddPlayerTableViewCell: UITableViewCell {
             player_date_of_birth.alpha = 1
             cell_add_player_btn.alpha = 1
             cell_add_player_btn.isEnabled = true
-            if person.photo != nil {
-                player_image.af_setImage(withURL: ApiRoute.getImageURL(image: (person.photo)!))
-                player_image.image = player_image.image?.af_imageRoundedIntoCircle()
-            } else {
-                player_image.image = #imageLiteral(resourceName: "ic_logo")
-            }
-//            player_name.text = person.getFullName()
-            player_name.text = person.getSurnameNP()
-//            if person.birthdate.count != 0 {
-//                player_date_of_birth.text = person.birthdate.UTCToLocal(from: .GMT, to: .local)
-                self.setupPlayerDateOfBirth(player: person)
-//            } else {
-                player_date_of_birth.text = ""
-//            }
             
-//            player_date_of_birth.text = person.birthdate.to
+            if let image = person.photo {
+                
+                let url = ApiRoute.getImageURL(image: image)
+                let processor = CroppingImageProcessorCustom(size: self.player_image.frame.size)
+                    .append(another: RoundCornerImageProcessor(cornerRadius: self.player_image.getHalfWidthHeight()))
+                
+                self.player_image.kf.indicatorType = .activity
+                self.player_image.kf.setImage(
+                    with: url,
+                    placeholder: UIImage(named: "ic_logo"),
+                    options: [
+                        .processor(processor),
+                        .scaleFactor(UIScreen.main.scale),
+                        .transition(.fade(1)),
+                        .cacheOriginalImage
+                    ])
+            } else {
+                self.player_image.image = UIImage(named: "ic_logo")
+            }
+            player_name.text = person.getSurnameNP()
+            
+            self.setupPlayerDateOfBirth(player: person)
+            
             self.setStatus(player: person, status: status)
             
         } else {

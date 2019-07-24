@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol OnCommandPlayerDeleteBtnPressedProtocol {
-    func onDeleteBtnPressed(index: IndexPath, model: CommandPlayersTableViewCell.CellModel)
+    func onDeleteBtnPressed(index: IndexPath, model: CommandPlayersTableViewCell.CellModel, success: @escaping() -> ()) // delete is ok or not
 }
 
 protocol OnCommandPlayerEditNumberCompleteProtocol {
@@ -76,14 +76,15 @@ class CommandPlayersTableViewHelper: NSObject, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
-            deleteBtnProtocol?.onDeleteBtnPressed(index: indexPath, model: tableData[indexPath.row])
-            if tableData.count == 1 {
-                Print.m("table data = 1")
-            } else {
-                tableData.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+            deleteBtnProtocol?.onDeleteBtnPressed(index: indexPath, model: tableData[indexPath.row]) {
+                
+                if self.tableData.count == 1 {
+                    Print.m("table data = 1")
+                } else {
+                    self.tableData.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
             }
-            
         }
     }
 }

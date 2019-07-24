@@ -108,6 +108,10 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         navigationController?.navigationBar.topItem?.rightBarButtonItem = createNewCommandBtn
 //        self.updateTableModel()
         self.prepareCreateCommandBtn()
+        
+        self.prepareModelController {
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

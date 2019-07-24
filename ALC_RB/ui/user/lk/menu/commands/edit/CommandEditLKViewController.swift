@@ -39,7 +39,7 @@ class CommandEditLKViewController: BaseStateViewController {
         super.viewDidLoad()
         initPresenter()
     
-        saveBtn.image = saveBtn.image?.af_imageScaled(to: CGSize(width: 24, height: 24))
+//        saveBtn.image = saveBtn.image?.af_imageScaled(to: CGSize(width: 24, height: 24))
         
         commandPlayers.dataSource = commandPlayersTableViewHelper
         commandPlayers.delegate = commandPlayersTableViewHelper
@@ -176,21 +176,33 @@ extension CommandEditLKViewController: CommandEditLKView {
 
 extension CommandEditLKViewController: OnCommandPlayerDeleteBtnPressedProtocol {
     
-    func onDeleteBtnPressed(index: IndexPath, model: CommandPlayersTableViewCell.CellModel) {
+    
+    func onDeleteBtnPressed(index: IndexPath, model: CommandPlayersTableViewCell.CellModel, success: @escaping () -> ()) {
         Print.m("player table \(index.row)")
+        
+        
         for i in 0...mutablePlayers.count {
             if model.player?.id == mutablePlayers[i].id {
-                if mutablePlayers[i].id == userDefaultHelper.getAuthorizedUser()?.person.id { // i can't delete teams' trainer
-                    showAlert(message: "Вы пытаетесь удалить тренера.")
+                
+                if mutablePlayers[i].playerID == userDefaultHelper.getAuthorizedUser()?.person.id { // i can't delete teams' trainer
+                    showAlert(message: "Вы пытаетесь исключить тренера.")
                 } else {
-                    mutablePlayers.remove(at: i)
+                    if let personName = model.person?.getFullName() {
+                        showAlertOkCancel(title: "Внимание", message: "Исключить игрока \(personName)?", ok: {
+                            self.mutablePlayers.remove(at: i)
+                            success()
+                        }) {
+                            Print.m("Отмена удаления игрока")
+                        }
+                    } else {
+                        showAlertOkCancel(title: "Внимание", message: "Исключить игрока?", ok: {
+                            self.mutablePlayers.remove(at: i)
+                            success()
+                        }) {
+                            Print.m("Отмена удаления игрока")
+                        }
+                    }
                 }
-//                if mutablePlayers.count == 1 {
-//
-////                    showAlertOkCancel(title: "Предупреждение", message: "Если удалить последнего игрока ", ok: <#T##() -> ()#>, cancel: <#T##() -> ()#>)
-//                } else {
-//                    mutablePlayers.remove(at: i)
-//                }
                 break
             }
         }
@@ -198,12 +210,28 @@ extension CommandEditLKViewController: OnCommandPlayerDeleteBtnPressedProtocol {
 }
 
 extension CommandEditLKViewController: OnCommandInvitePlayerDeleteBtnPressedProtocol {
-    func onDeleteInvBtnPressed(index: IndexPath, model: CommandInvitePlayersTableViewCell.CellModel) {
+    
+    func onDeleteInvBtnPressed(index: IndexPath, model: CommandInvitePlayersTableViewCell.CellModel, success: @escaping () -> ()) {
         Print.m("player invite table \(index.row)")
 //        dump(mutablePlayers)
         for i in 0...mutablePlayers.count/* - 1*/ {
             if model.player?.id == mutablePlayers[i].id {
-                mutablePlayers.remove(at: i)
+                if let personName = model.person?.getFullName() {
+                    showAlertOkCancel(title: "Внимание", message: "Отозвать приглашение для игрока \(personName)?", ok: {
+                        self.mutablePlayers.remove(at: i)
+                        success()
+                    }) {
+                        Print.m("cancel delete")
+                    }
+                } else {
+                    showAlertOkCancel(title: "Внимание", message: "Отозвать приглашение для игрока?", ok: {
+                        self.mutablePlayers.remove(at: i)
+                        success()
+                    }) {
+                        Print.m("cencel delete")
+                    }
+                }
+                
                 break
             }
         }

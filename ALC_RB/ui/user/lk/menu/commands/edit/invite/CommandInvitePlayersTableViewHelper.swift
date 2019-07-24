@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol OnCommandInvitePlayerDeleteBtnPressedProtocol {
-    func onDeleteInvBtnPressed(index: IndexPath, model: CommandInvitePlayersTableViewCell.CellModel)
+    func onDeleteInvBtnPressed(index: IndexPath, model: CommandInvitePlayersTableViewCell.CellModel, success: @escaping () -> ())
 }
 
 class CommandInvitePlayersTableViewHelper: NSObject, UITableViewDataSource, UITableViewDelegate {
@@ -65,10 +65,10 @@ class CommandInvitePlayersTableViewHelper: NSObject, UITableViewDataSource, UITa
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
-            deleteBtnProtocol?.onDeleteInvBtnPressed(index: indexPath, model: tableData[indexPath.row])
-            
-            tableData.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            deleteBtnProtocol?.onDeleteInvBtnPressed(index: indexPath, model: tableData[indexPath.row]) {
+                self.tableData.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
         }
     }
 }

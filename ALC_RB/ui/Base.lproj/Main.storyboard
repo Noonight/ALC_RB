@@ -3448,7 +3448,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Редактировать команду" id="hlY-ds-qcK">
-                        <barButtonItem key="rightBarButtonItem" image="ic_tick" id="y0i-95-IIO">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="y0i-95-IIO">
                             <connections>
                                 <action selector="onNavBarSaveBtnPressed:" destination="Fie-qf-cde" id="9Ay-Yw-9vY"/>
                             </connections>
