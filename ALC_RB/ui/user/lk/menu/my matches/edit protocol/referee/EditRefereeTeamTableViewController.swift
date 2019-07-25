@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class EditRefereeTeamTableViewController: UITableViewController {
     enum SegueIdentifiers {
@@ -147,12 +148,27 @@ class EditRefereeTeamTableViewController: UITableViewController {
                     return
                 }
                 cell.name_label.text = person.getFullName()
-                if person.photo != nil {
-                    cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: person.photo!))
-                    cell.photo_image.image?.af_imageRoundedIntoCircle()
+                
+                if let imageUrl = person.photo {
+                    let url = ApiRoute.getImageURL(image: imageUrl)
+                    let processor = DownsamplingImageProcessor(size: cell.photo_image.frame.size)
+                        .append(another: CroppingImageProcessorCustom(size: cell.photo_image.frame.size))
+                        .append(another: RoundCornerImageProcessor(cornerRadius: cell.photo_image.getHalfWidthHeight()))
+                    
+                    cell.photo_image.kf.indicatorType = .activity
+                    cell.photo_image.kf.setImage(
+                        with: url,
+                        placeholder: UIImage(named: "ic_logo"),
+                        options: [
+                            .processor(processor),
+                            .scaleFactor(UIScreen.main.scale),
+                            .transition(.fade(1)),
+                            .cacheOriginalImage
+                        ])
                 } else {
-                    cell.photo_image.image = UIImage(named: "ic_logo")
+                    cell.photo_image.image = #imageLiteral(resourceName: "ic_logo")
                 }
+                
             }) { error in
                 Print.m(error)
             }

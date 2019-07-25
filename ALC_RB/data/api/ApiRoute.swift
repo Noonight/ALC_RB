@@ -10,7 +10,7 @@ import Foundation
 
 struct ApiRoute {
     
-    static let baseRoute = "http://footballapi.ibb.su/"
+    static let baseRoute = "https://footballapi.ibb.su/"
     
     static func getApiURL(_ mod: Routes, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) -> URL {
         #if DEBUG

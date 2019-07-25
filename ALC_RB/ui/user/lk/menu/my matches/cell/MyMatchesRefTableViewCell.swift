@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import AlamofireImage
+//import AlamofireImage
+import Kingfisher
 
 class MyMatchesRefTableViewCell: UITableViewCell {
 
@@ -46,24 +47,11 @@ class MyMatchesRefTableViewCell: UITableViewCell {
     var cellModel: CellModel?
     
     func configure(with cellModel: CellModel) {
-//        reset()
         self.cellModel = cellModel
         
         var userRef3 = cellModel.participationMatch?.referees.filter({ referee -> Bool in
-//            Print.m(referee.person == UserDefaultsHelper().getAuthorizedUser()?.person.id)
             return referee.getRefereeType() == Referee.RefereeType.referee3 && UserDefaultsHelper().getAuthorizedUser()?.person.id == referee.person
         }).first
-//        var containReferee = cellModel.participationMatch?.referees.filter({ referee -> Bool in
-//            Print.m(referee.getRefereeType() == Referee.RefereeType.referee3)
-//            return referee.getRefereeType() == Referee.RefereeType.referee3
-//        })/*.contains(where: { (referee) -> Bool in
-//            if let personId = UserDefaultsHelper().getAuthorizedUser()?.person.id {
-//                Print.m("\(referee.id) = \(personId)")
-//
-//                return referee.id == personId
-//            }
-//            return false
-//        })*/
         
         if userRef3 != nil {
             accessoryType = .disclosureIndicator
@@ -71,34 +59,55 @@ class MyMatchesRefTableViewCell: UITableViewCell {
             accessoryType = .none
         }
         
-//        if containReferee!.count > 0 {
-//            Print.m(containReferee!.count > 0)
-//            accessoryType = .disclosureIndicator
-//        }
-        
-        
-        
         dateLabel.text = cellModel.participationMatch?.date.convertDate(from: .utcTime, to: .local)
         timeLabel.text = cellModel.participationMatch?.date.convertDate(from: .utcTime, to: .localTime)
         tourLabel.text = cellModel.participationMatch?.tour
         placeLabel.text = cellModel.participationMatch?.place
         
         team1NameLabel.text = cellModel.team1Name
-        team1Image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.club1?.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.3), runImageTransitionIfCached: true) { response in
-            self.team1Image.image = response.result.value?.af_imageRoundedIntoCircle()
-        }
-//        team1Image.loadImageWith(url: ApiRoute.getImageURL(image: cellModel.club1?.logo ?? ""))
         
-//        team1Image.cacheImage(urlString: ApiRoute.getImageURL(image: cellModel.club1?.logo ?? "").absoluteString)
+        
+        if let urlOne = cellModel.club1?.logo {
+            let url = ApiRoute.getImageURL(image: urlOne)
+            let processor = DownsamplingImageProcessor(size: self.team1Image.frame.size)
+                .append(another: CroppingImageProcessorCustom(size: self.team1Image.frame.size))
+                .append(another: RoundCornerImageProcessor(cornerRadius: self.team1Image.getHalfWidthHeight()))
+            
+            self.team1Image.kf.indicatorType = .activity
+            self.team1Image.kf.setImage(
+                with: url,
+                placeholder: UIImage(named: "ic_logo"),
+                options: [
+                    .processor(processor),
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(1)),
+                    .cacheOriginalImage
+                ])
+        } else {
+            self.team1Image.image = #imageLiteral(resourceName: "ic_logo")
+        }
         
         team2NameLabel.text = cellModel.team2Name
-        team2Image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.club2?.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.3), runImageTransitionIfCached: true) { response in
-            self.team2Image.image = response.result.value?.af_imageRoundedIntoCircle()
+        
+        if let urlTwo = cellModel.club2?.logo {
+            let url = ApiRoute.getImageURL(image: urlTwo)
+            let processor = DownsamplingImageProcessor(size: self.team2Image.frame.size)
+                .append(another: CroppingImageProcessorCustom(size: self.team2Image.frame.size))
+                .append(another: RoundCornerImageProcessor(cornerRadius: self.team2Image.getHalfWidthHeight()))
+            
+            self.team2Image.kf.indicatorType = .activity
+            self.team2Image.kf.setImage(
+                with: url,
+                placeholder: UIImage(named: "ic_logo"),
+                options: [
+                    .processor(processor),
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(1)),
+                    .cacheOriginalImage
+                ])
+        } else {
+            self.team2Image.image = #imageLiteral(resourceName: "ic_logo")
         }
-        
-//        team2Image.loadImageWith(url: ApiRoute.getImageURL(image: cellModel.club2?.logo ?? ""))
-        
-//        team2Image.cacheImage(urlString: ApiRoute.getImageURL(image: cellModel.club2?.logo ?? "").absoluteString)
         
         if cellModel.participationMatch?.score.count ?? 0 > 1 {
             scoreLabel.text = cellModel.participationMatch?.score
@@ -113,11 +122,11 @@ class MyMatchesRefTableViewCell: UITableViewCell {
         tourLabel.text = ""
         placeLabel.text = ""
         
-//        team1Image.image = nil
         team1Image.image = #imageLiteral(resourceName: "ic_logo")
         team1NameLabel.text = ""
+        
         scoreLabel.text = " - "
-//        team2Image.image = nil
+
         team2Image.image = #imageLiteral(resourceName: "ic_logo")
         team2NameLabel.text = ""
     }

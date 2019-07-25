@@ -38,6 +38,8 @@ class RefereeEditMatchesLKTableViewController: BaseStateTableViewController {
         initPresenter()
         tableView.tableFooterView = UIView()
         setEmptyMessage(message: "Здесь будут отображаться активные или доступные матчи для выбранного судьи")
+        
+        self.refreshControl = nil
     }
 
     override func viewWillAppear(_ animated: Bool) {
