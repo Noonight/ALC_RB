@@ -665,6 +665,27 @@ class ApiRequests {
 //        }
     }
     
+    func post_acceptProtocol(token: String, id: String, success: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
+        let header: HTTPHeaders = [
+            "Content-Type" : "application/json",
+            "auth" : "\(token)"
+        ]
+        let parameter: Parameters = [
+            "_id" : id
+        ]
+        
+        Alamofire
+            .request(ApiRoute.getApiURL(.post_edit_protcol), method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: header)
+            .responseSingleLineMessage(completionHandler: { response in
+                switch response.result {
+                case .success(let value):
+                    success(value)
+                case .failure(let error):
+                    failure(error)
+                }
+            })
+    }
+    
     // MARK: - GET requests
     
     func get_refreshAuthUser(token: String, success: @escaping (AuthUser) -> (), failure: @escaping (Error) -> ()) {

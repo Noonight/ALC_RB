@@ -48,4 +48,17 @@ class UserDefaultsHelper {
         userDefaults.removeObject(forKey: userKey)
     }
     
+    func setParticipationMatchPlayedBy(id: String) -> Bool {
+        guard var user = self.getAuthorizedUser() else { return false }
+        
+        for i in 0...user.person.participationMatches!.count {
+            if user.person.participationMatches![i].id == id {
+                user.person.participationMatches![i].played = true
+                self.setAuthorizedUser(user: user)
+                return true
+            }
+        }
+        return false
+    }
+    
 }

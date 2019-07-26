@@ -9,13 +9,15 @@
 import UIKit
 
 class EditMatchProtocolViewController: UIViewController {
-
-    // MARK: - Variables
+    enum SegueIdentifiers {
+        static let DO_MATCH = "segue_do_match_referee"
+        static let TEAM_ONE = "team_one_protocol_segue"
+        static let TEAM_TWO = "team_two_protocol_segue"
+        static let REFEREES = "referee_protocol_segue"
+        static let EVENTS   = "events_protocol_segue"
+    }
     
-    let segueOneId = "team_one_protocol_segue"
-    let segueTwoId = "team_two_protocol_segue"
-    let segueReferee = "referee_protocol_segue"
-    let segueEvents = "events_protocol_segue"
+    // MARK: Outlets
     
     @IBOutlet weak var teamOneLogo: UIImageView!
     @IBOutlet weak var teamOneTitle: UILabel!
@@ -29,6 +31,8 @@ class EditMatchProtocolViewController: UIViewController {
     
     @IBOutlet weak var scoreBarBtn: UIBarButtonItem!
     @IBOutlet weak var saveBarBtn: UIBarButtonItem!
+    
+    // MARK: Var & Let
     
     var leagueDetailModel = LeagueDetailModel()
     var match = LIMatch()
@@ -50,38 +54,32 @@ class EditMatchProtocolViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.largeTitleTextAttributes =
-                [
-                    NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 24)
-            ]
-            if self.navigationController?.navigationBar.prefersLargeTitles != true {
-                self.navigationController?.navigationBar.prefersLargeTitles = true
-            }
-        } else {
-            // Fallback on earlier versions
-        }
+        self.setupPresenter()
+        self.setupNavController()
         
-        initPresenter()
-        
-        preConfigure()
+        self.preConfigureModelControllers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        navigationController?.navigationBar.topItem?.title = " "
-        title = "Редактировать протокол"
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.largeTitleTextAttributes =
-                [
-                    NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 24)
-                ]
-            if self.navigationController?.navigationBar.prefersLargeTitles != true {
-                self.navigationController?.navigationBar.prefersLargeTitles = true
-            }
-        }
+        self.setupNavController()
+        self.setupView()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
+        self.unSetupNavigationcontroller()
+    }
+    
+    // MARK: Setup
+    
+    func setupPresenter() {
+        self.initPresenter()
+    }
+    
+    func setupView() {
         setMatchByUserDefaults()
         
         teamOneTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
@@ -95,25 +93,27 @@ class EditMatchProtocolViewController: UIViewController {
             self.teamTwoLogo.image = image.af_imageRoundedIntoCircle()
         }
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    
+    func setupNavController() {
+        navigationController?.navigationBar.topItem?.title = " "
+        title = "Редактировать протокол"
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 24)]
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        }
+    }
+    
+    // MARK: Un-setup
+    
+    func unSetupNavigationcontroller() {
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.prefersLargeTitles = false
         }
     }
     
-    func setMatchByUserDefaults() {
-        let tmpSelfMatch = self.match
-        let match = userDefaults.getAuthorizedUser()?.person.participationMatches!.filter({ pMatch -> Bool in
-            return pMatch.id == tmpSelfMatch.id
-        }).first
-        self.match = (match?.covertToLIMatch())!
-    }
-    
     // MARK: - PRE CONFIGURE Model Controllers
     
-    func preConfigure() {
+    func preConfigureModelControllers() {
         teamOnePlayersController = nil
         teamTwoPlayersController = nil
         teamOnePlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamOne!))
@@ -123,9 +123,31 @@ class EditMatchProtocolViewController: UIViewController {
         eventsController = nil
         eventsController = ProtocolEventsController(events: match.events)
     }
+}
+
+// MARK: Extensions
+
+// MARK: Helpers
+
+extension EditMatchProtocolViewController {
+    func getPlayersTeam(team id: String) -> [LIPlayer] {
+        return (leagueDetailModel.leagueInfo.league.teams?.filter({ (team) -> Bool in
+            return team.id == id
+        }).first?.players)!
+    }
     
-    // MARK: - Button Actions
-    
+    func setMatchByUserDefaults() {
+        let tmpSelfMatch = self.match
+        let match = userDefaults.getAuthorizedUser()?.person.participationMatches!.filter({ pMatch -> Bool in
+            return pMatch.id == tmpSelfMatch.id
+        }).first
+        self.match = (match?.covertToLIMatch())!
+    }
+}
+
+// MARK: Actions
+
+extension EditMatchProtocolViewController {
     @IBAction func scoreBtnPressed(_ sender: UIBarButtonItem) {
         let score: EditScoreMatchTableViewController = {
             let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -153,7 +175,6 @@ class EditMatchProtocolViewController: UIViewController {
                     return liPlayer.playerId
                 })
             )
-//            dump(request)
             self.presenter.requestEditProtocol(
                 token: (self.userDefaults.getAuthorizedUser()?.token)!,
                 editProtocol: request
@@ -164,23 +185,33 @@ class EditMatchProtocolViewController: UIViewController {
         
     }
     
+    @IBAction func acceptProtocolPressed(_ sender: UIBarButtonItem) {
+        showAlertOkCancel(title: "Подтвердить протокол?", message: "После подтверждения протокола матч нельзя будет редактировать", ok: {
+            self.presenter.requestAcceptProtocol(token: (self.userDefaults.getAuthorizedUser()?.token)!, protocolId: self.match.id)
+        }) {
+            Print.m("Cancel: accept protocol")
+        }
+    }
+    
     @IBAction func teamOneBtnPressed(_ sender: UIButton) { }
     @IBAction func teamTwoBtnPressed(_ sender: UIButton) { }
     @IBAction func refereeBtnPressed(_ sender: UIButton) { }
     @IBAction func eventsBtnPressed(_ sender: UIButton) { }
-    
-    // MARK: - Navigation
-    
+}
+
+// MARK: Navigation
+
+extension EditMatchProtocolViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case segueOneId:
+        case SegueIdentifiers.TEAM_ONE:
             //let destination = segue.destination as?  TeamProtocolTableViewController
             prepareSegueDataModel(destination: segue.destination, team: .one)
-        case segueTwoId:
+        case SegueIdentifiers.TEAM_TWO:
             prepareSegueDataModel(destination: segue.destination, team: .two)
-        case segueReferee:
+        case SegueIdentifiers.REFEREES:
             prepareSegueDataModel(destination: segue.destination)
-        case segueEvents:
+        case SegueIdentifiers.EVENTS:
             prepareSegueDataModel(destination: segue.destination)
             break
         default:
@@ -188,23 +219,18 @@ class EditMatchProtocolViewController: UIViewController {
         }
     }
     
-    // MARK: - PREPARE
-    
     func prepareSegueDataModel(destination: UIViewController) {
         switch destination {
         case is EditTeamProtocolTableViewController:
             let controller = destination as! EditTeamProtocolTableViewController
-//            controller.players = getPlayersTeam(team: match.teamOne!)
             controller.playersController = teamOnePlayersController
             controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
         case is EditRefereeTeamTableViewController:
             let controller = destination as! EditRefereeTeamTableViewController
             controller.refereesController = self.refereesController
             controller.match = self.match
-//            controller.destinationData = match.referees
         case is EditEventsMatchTableViewController:
             let controller = destination as! EditEventsMatchTableViewController
-//            controller.destinationModel = match.events
             controller.eventsController = eventsController
             controller.model = self.model
             controller.teamOneController = self.teamOnePlayersController
@@ -226,11 +252,9 @@ class EditMatchProtocolViewController: UIViewController {
             
             switch team{
             case .one:
-//                controller.players = getPlayersTeam(team: match.teamOne!)
                 controller.playersController = teamOnePlayersController
                 controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
             case .two:
-//                controller.players = getPlayersTeam(team: match.teamTwo!)
                 controller.playersController = teamTwoPlayersController
                 controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .two)
             }
@@ -238,15 +262,21 @@ class EditMatchProtocolViewController: UIViewController {
             break
         }
     }
-    
-    func getPlayersTeam(team id: String) -> [LIPlayer] {
-        return (leagueDetailModel.leagueInfo.league.teams?.filter({ (team) -> Bool in
-            return team.id == id
-        }).first?.players)!
-    }
 }
 
+// MARK: Presenter
+
 extension EditMatchProtocolViewController: EditMatchProtocolView {
+    func requestAcceptProtocolSuccess(message: SingleLineMessage) {
+//        self.match.played = true
+        showAlert(title: message.message, message: "")
+//        self.userDefaults.setParticipationMatchPlayedBy(id: self.match.id)
+    }
+    
+    func requestAcceptProtocolFailure(error: Error) {
+        showAlert(message: error.localizedDescription)
+    }
+    
     func requestEditProtocolSuccess(match: SoloMatch) {
         var user = userDefaults.getAuthorizedUser()
         user?.person.participationMatches!.removeAll(where: { pMatch -> Bool in

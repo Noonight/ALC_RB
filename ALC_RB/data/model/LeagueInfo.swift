@@ -78,7 +78,7 @@ struct LILeague: Codable {
 struct LIMatch: Codable {
     let date: String?
     let stage: Bool
-    let played: Bool
+    var played: Bool
     let tour: String
     let playersList: [String]
     let place: String?

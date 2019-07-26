@@ -13,6 +13,9 @@ import AlamofireImage
 protocol EditMatchProtocolView : MvpView {
     func requestEditProtocolSuccess(match: SoloMatch)
     func requestEditProtocolFailure(error: Error)
+    
+    func requestAcceptProtocolSuccess(message: SingleLineMessage)
+    func requestAcceptProtocolFailure(error: Error)
 }
 
 class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> {
@@ -53,6 +56,14 @@ class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> 
             self.getView().requestEditProtocolSuccess(match: soloMatch)
         }) { error in
             self.getView().requestEditProtocolFailure(error: error)
+        }
+    }
+    
+    func requestAcceptProtocol(token: String, protocolId: String) {
+        dataManager.post_acceptProtocol(token: token, id: protocolId, success: { message in
+            self.getView().requestAcceptProtocolSuccess(message: message)
+        }) { error in
+            self.getView().requestAcceptProtocolFailure(error: error)
         }
     }
 }
