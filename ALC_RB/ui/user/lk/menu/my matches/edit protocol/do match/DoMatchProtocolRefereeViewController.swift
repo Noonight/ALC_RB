@@ -35,6 +35,18 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         static let REFEREES = "segue_edit_referees_do_protocol"
     }
     
+    // MARK: OUTLETS
+    
+    @IBOutlet weak var titleTeamOne_label: UILabel!
+    @IBOutlet weak var score_label: UILabel!
+    @IBOutlet weak var titleTeamTwo_label: UILabel!
+    
+    @IBOutlet weak var scoreAtTimeTeamOne_label: UILabel!
+    @IBOutlet weak var scoreAtTimeTeamTwo_label: UILabel!
+    
+    @IBOutlet weak var playersOne_table: UITableView!
+    @IBOutlet weak var playersTwo_table: UITableView!
+    
     // MARK: Var & Let
     
     let userDefaults = UserDefaultsHelper()
@@ -50,6 +62,12 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         self.setupPresenter()
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.setupTitle()
+    }
 }
 
 // MARK: EXTENSIONS
@@ -57,6 +75,19 @@ class DoMatchProtocolRefereeViewController: UIViewController {
 // MARK: SETUP
 
 extension DoMatchProtocolRefereeViewController {
+    
+    func setupTitle() {
+        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)]
+    }
+    
+    func setupView() {
+        self.titleTeamOne_label.text = viewModel.match.teamOne
+        self.titleTeamTwo_label.text = viewModel.match.teamTwo
+        // setup score // mb calculate before
+        
+    }
+    
     func setupPresenter() {
         self.initPresenter()
     }

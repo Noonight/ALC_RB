@@ -3903,6 +3903,12 @@
         <!--дополнительное время-->
         <scene sceneID="hLE-jB-kmc">
             <objects>
+                <tapGestureRecognizer id="h54-cb-rjC">
+                    <connections>
+                        <segue destination="Wqd-gf-gJI" kind="show" identifier="segue_edit_referees_do_protocol" id="j6x-Mv-JVi"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yKo-5K-SqZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="2UG-mV-sx9" customClass="DoMatchProtocolRefereeViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NWD-1W-gDp"/>
@@ -4097,7 +4103,7 @@
                                                             <constraint firstAttribute="width" constant="160" id="g95-jI-csn"/>
                                                         </constraints>
                                                         <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="50" id="VfX-Os-tDU" customClass="RefereeProtocolPlayerTeamOneTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_protocol_team_one" rowHeight="50" id="VfX-Os-tDU" customClass="RefereeProtocolPlayerTeamOneTableViewCell" customModule="ALC_RB" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="28" width="160" height="50"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VfX-Os-tDU" id="fNQ-vb-LbE">
@@ -4149,7 +4155,7 @@
                                                         <rect key="frame" x="161" y="0.0" width="159" height="223.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="50" id="iUf-LF-Dar" customClass="RefereeProtocolPlayerTeamTwoTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_protocol_team_two" rowHeight="50" id="iUf-LF-Dar" customClass="RefereeProtocolPlayerTeamTwoTableViewCell" customModule="ALC_RB" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="28" width="159" height="50"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iUf-LF-Dar" id="Yh2-AW-js0">
@@ -4418,13 +4424,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="дополнительное время" id="mgY-3O-3Gc"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yKo-5K-SqZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="h54-cb-rjC">
                     <connections>
-                        <segue destination="Wqd-gf-gJI" kind="show" identifier="segue_edit_referees_do_protocol" id="j6x-Mv-JVi"/>
+                        <outlet property="playersOne_table" destination="eQv-G9-HmJ" id="5hV-CH-i40"/>
+                        <outlet property="playersTwo_table" destination="nH9-dG-YV9" id="REr-FN-CoF"/>
+                        <outlet property="scoreAtTimeTeamOne_label" destination="EqQ-i9-9yB" id="92e-sA-Qfo"/>
+                        <outlet property="scoreAtTimeTeamTwo_label" destination="vMM-O7-aEh" id="lz5-3V-TRK"/>
+                        <outlet property="score_label" destination="Mmb-JB-qZc" id="BMB-xy-KuS"/>
+                        <outlet property="titleTeamOne_label" destination="3U9-Jk-Blc" id="aei-q9-mn9"/>
+                        <outlet property="titleTeamTwo_label" destination="id7-3a-OAN" id="zlr-Nb-Lam"/>
                     </connections>
-                </tapGestureRecognizer>
+                </viewController>
             </objects>
             <point key="canvasLocation" x="8178.75" y="-540.84507042253517"/>
         </scene>
