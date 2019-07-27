@@ -163,7 +163,8 @@ extension EditMatchProtocolViewController {
     
     @IBAction func saveBtnPressed(_ sender: UIBarButtonItem) {
         func connectPlayersOfTeamOneAndTwo() -> [LIPlayer] {
-            return [teamOnePlayersController.players, teamTwoPlayersController.players].flatMap({ liPlayer -> [LIPlayer] in
+//            return [teamOnePlayersController.players, teamTwoPlayersController.players].flatMap({ liPlayer -> [LIPlayer] in
+            return [teamOnePlayersController.getPlayingPlayers(), teamTwoPlayersController.getPlayingPlayers()].flatMap({ liPlayer -> [LIPlayer] in
                 return liPlayer
             })
         }
@@ -213,7 +214,15 @@ extension EditMatchProtocolViewController {
             prepareSegueDataModel(destination: segue.destination)
         case SegueIdentifiers.EVENTS:
             prepareSegueDataModel(destination: segue.destination)
-            break
+        case SegueIdentifiers.DO_MATCH:
+            let controller = segue.destination as! DoMatchProtocolRefereeViewController
+            controller.viewModel = ProtocolRefereeViewModel(
+                match: self.match,
+                teamOneModel: self.teamOnePlayersController,
+                teamTwoModle: self.teamTwoPlayersController,
+                refereesModel: self.refereesController,
+                eventsModel: self.eventsController
+            )
         default:
             break
         }

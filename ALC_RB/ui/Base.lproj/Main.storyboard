@@ -3903,7 +3903,7 @@
         <!--дополнительное время-->
         <scene sceneID="hLE-jB-kmc">
             <objects>
-                <viewController id="2UG-mV-sx9" sceneMemberID="viewController">
+                <viewController id="2UG-mV-sx9" customClass="DoMatchProtocolRefereeViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NWD-1W-gDp"/>
                         <viewControllerLayoutGuide type="bottom" id="uTn-fu-loL"/>
@@ -4097,13 +4097,19 @@
                                                             <constraint firstAttribute="width" constant="160" id="g95-jI-csn"/>
                                                         </constraints>
                                                         <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="50" id="VfX-Os-tDU">
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="50" id="VfX-Os-tDU" customClass="RefereeProtocolPlayerTeamOneTableViewCell" customModule="ALC_RB" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="28" width="160" height="50"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VfX-Os-tDU" id="fNQ-vb-LbE">
                                                                     <rect key="frame" x="0.0" y="0.0" width="160" height="49.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBN-T0-y5F">
+                                                                            <rect key="frame" x="131.5" y="0.0" width="28.5" height="49.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                                            <color key="textColor" red="0.0" green="0.0" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Чимитсараев" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1v-Bm-1qU">
                                                                             <rect key="frame" x="4" y="0.0" width="152" height="18"/>
                                                                             <constraints>
@@ -4113,13 +4119,7 @@
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBN-T0-y5F">
-                                                                            <rect key="frame" x="131.5" y="0.0" width="28.5" height="49.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                                                            <color key="textColor" red="0.0" green="0.0" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zJ-UF-Pxp">
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zJ-UF-Pxp" customClass="PlayerEventView" customModule="ALC_RB" customModuleProvider="target">
                                                                             <rect key="frame" x="4" y="22" width="123.5" height="27.5"/>
                                                                             <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </view>
@@ -4137,6 +4137,11 @@
                                                                         <constraint firstItem="z1v-Bm-1qU" firstAttribute="leading" secondItem="fNQ-vb-LbE" secondAttribute="leading" constant="4" id="zSX-65-Pkd"/>
                                                                     </constraints>
                                                                 </tableViewCellContentView>
+                                                                <connections>
+                                                                    <outlet property="playerEvents_view" destination="5zJ-UF-Pxp" id="CQg-kj-0ME"/>
+                                                                    <outlet property="playerName_label" destination="z1v-Bm-1qU" id="jCF-lB-L2P"/>
+                                                                    <outlet property="playerNumber_label" destination="uBN-T0-y5F" id="cLl-dl-nNW"/>
+                                                                </connections>
                                                             </tableViewCell>
                                                         </prototypes>
                                                     </tableView>
@@ -4144,13 +4149,19 @@
                                                         <rect key="frame" x="161" y="0.0" width="159" height="223.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="50" id="iUf-LF-Dar">
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="50" id="iUf-LF-Dar" customClass="RefereeProtocolPlayerTeamTwoTableViewCell" customModule="ALC_RB" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="28" width="159" height="50"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iUf-LF-Dar" id="Yh2-AW-js0">
                                                                     <rect key="frame" x="0.0" y="0.0" width="159" height="49.5"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhG-K3-swp">
+                                                                            <rect key="frame" x="130.5" y="0.0" width="28.5" height="49.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                                            <color key="textColor" red="0.86274509803921573" green="0.050980392156862744" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Чимитсараев" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="New-pu-dAg">
                                                                             <rect key="frame" x="4" y="0.0" width="151" height="18"/>
                                                                             <constraints>
@@ -4160,13 +4171,7 @@
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhG-K3-swp">
-                                                                            <rect key="frame" x="130.5" y="0.0" width="28.5" height="49.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                                                            <color key="textColor" red="0.86274509803921573" green="0.050980392156862744" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kR1-G1-QRR">
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kR1-G1-QRR" customClass="PlayerEventView" customModule="ALC_RB" customModuleProvider="target">
                                                                             <rect key="frame" x="4" y="22" width="122.5" height="27.5"/>
                                                                             <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         </view>
@@ -4184,6 +4189,11 @@
                                                                         <constraint firstItem="New-pu-dAg" firstAttribute="leading" secondItem="Yh2-AW-js0" secondAttribute="leading" constant="4" id="sL8-X9-Wc0"/>
                                                                     </constraints>
                                                                 </tableViewCellContentView>
+                                                                <connections>
+                                                                    <outlet property="playerEvents_view" destination="kR1-G1-QRR" id="v8A-yj-chH"/>
+                                                                    <outlet property="playerName_label" destination="New-pu-dAg" id="doM-hB-C3Z"/>
+                                                                    <outlet property="playerNumber_label" destination="lhG-K3-swp" id="LeA-aw-cy5"/>
+                                                                </connections>
                                                             </tableViewCell>
                                                         </prototypes>
                                                     </tableView>
@@ -4224,6 +4234,9 @@
                                                                         <real key="value" value="0.0"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="onFirstTimeBtnPressed:" destination="2UG-mV-sx9" eventType="touchUpInside" id="pIs-Fr-Uau"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZa-Yj-Qyx" customClass="DesignableButton" customModule="ALC_RB" customModuleProvider="target">
                                                                 <rect key="frame" x="68.5" y="0.0" width="59" height="30"/>
@@ -4242,6 +4255,9 @@
                                                                         <real key="value" value="0.0"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="onSecondTimeBtnPressed:" destination="2UG-mV-sx9" eventType="touchUpInside" id="rXV-YO-k0y"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebJ-Fx-1Nh" customClass="DesignableButton" customModule="ALC_RB" customModuleProvider="target">
                                                                 <rect key="frame" x="139.5" y="0.0" width="85" height="30"/>
@@ -4260,6 +4276,9 @@
                                                                         <real key="value" value="0.0"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="onMoreTimeBtnPressed:" destination="2UG-mV-sx9" eventType="touchUpInside" id="tm1-2M-GUq"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcV-i0-045" customClass="DesignableButton" customModule="ALC_RB" customModuleProvider="target">
                                                                 <rect key="frame" x="236" y="0.0" width="76" height="30"/>
@@ -4278,6 +4297,9 @@
                                                                         <real key="value" value="0.0"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="onPenaltyTimeBtnPressed:" destination="2UG-mV-sx9" eventType="touchUpInside" id="GPu-bx-Fgg"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -4343,6 +4365,9 @@
                                                                 <real key="value" value="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="onAcceptProtocolBtnPressed:" destination="2UG-mV-sx9" eventType="touchUpInside" id="0uh-C9-VRa"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

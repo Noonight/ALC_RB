@@ -28,6 +28,18 @@ extension UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func showAlertOkCancelCustom(title: String, message: String, ok: @escaping ()->(), cancel: @escaping ()->(), customAction: UIAlertAction) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { alert in
+            cancel()
+        }))
+        alert.addAction(UIAlertAction(title: "ОК", style: .destructive, handler: { alert in
+            ok()
+        }))
+        alert.addAction(customAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func showAlert(title: String, message: String, actions: [UIAlertAction]) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         for action in actions {

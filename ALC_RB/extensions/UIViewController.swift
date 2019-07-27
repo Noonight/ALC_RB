@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 extension UIViewController {
     
@@ -35,5 +36,20 @@ extension UIViewController {
             alert.dismiss(animated: true)
         }
     }
-
+    
+    func showLoadingViewHUD(with message: String? = Constants.Texts.LOADING) -> MBProgressHUD {
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        hud.backgroundView.style = MBProgressHUDBackgroundStyle.solidColor
+        hud.backgroundView.color = UIColor(white: 0, alpha: 0.5)
+        
+        hud.mode = MBProgressHUDMode.indeterminate
+        hud.label.text = message
+        
+        return hud
+    }
+    
+    func hideLoadingHUD() {
+        MBProgressHUD.hide(for: self.view, animated: true)
+    }
 }

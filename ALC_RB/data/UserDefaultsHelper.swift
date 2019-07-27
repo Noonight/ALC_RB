@@ -61,4 +61,8 @@ class UserDefaultsHelper {
         return false
     }
     
+    func getToken() -> String {
+        return (self.getAuthorizedUser()?.token)!
+    }
+    
 }

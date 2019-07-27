@@ -98,4 +98,18 @@ class ProtocolPlayersController {
     func setSwitcherValues(playersSwitch: [PlayersSwitch]) {
         self.playersSwitch = playersSwitch
     }
+    
+    func getPlayingPlayers() -> [LIPlayer] {
+        var resultArray: [LIPlayer] = []
+        for item in players
+        {
+            if self.playersSwitch.contains(where: { switcher -> Bool in
+                return switcher.key == item.playerId && switcher.value
+            }) {
+                resultArray.append(item)
+            }
+        }
+        
+        return resultArray
+    }
 }
