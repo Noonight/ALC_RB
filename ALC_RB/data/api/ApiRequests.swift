@@ -1161,4 +1161,18 @@ class ApiRequests {
         }
     }
     
+    func get_soloPerson(playerId: String, success: @escaping (SoloPerson) -> (), failure: @escaping (Error) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.soloUser, id: playerId))
+            .validate()
+            .responseSoloPerson { (response) in
+                switch response.result {
+                case .success(let value):
+                    success(value)
+                case .failure(let error):
+                    failure(error)
+                }
+        }
+    }
+    
 }

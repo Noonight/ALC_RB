@@ -142,6 +142,9 @@
 		DB4B1A4A2240FD0900A9FB97 /* ClubEditLKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4B1A492240FD0900A9FB97 /* ClubEditLKViewController.swift */; };
 		DB4B1A4C2240FD1300A9FB97 /* ClubEditLKPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4B1A4B2240FD1300A9FB97 /* ClubEditLKPresenter.swift */; };
 		DB4B1A4E224114D100A9FB97 /* EditClubInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4B1A4D224114D100A9FB97 /* EditClubInfo.swift */; };
+		DB4C45DC22EDDE0600B28148 /* AutoGoalFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4C45DB22EDDE0600B28148 /* AutoGoalFooterView.swift */; };
+		DB4C45DE22EDDE1B00B28148 /* AutoGoalFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB4C45DD22EDDE1B00B28148 /* AutoGoalFooterView.xib */; };
+		DB4C45E022EDFD4900B28148 /* UITableView Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4C45DF22EDFD4900B28148 /* UITableView Extensions.swift */; };
 		DB51CD9222150E3700A8D08E /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51CD9122150E3700A8D08E /* BaseCell.swift */; };
 		DB51CD9522155D8B00A8D08E /* ScoreMatchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51CD9422155D8B00A8D08E /* ScoreMatchTableViewController.swift */; };
 		DB51CD982215619E00A8D08E /* ScoreMatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51CD972215619D00A8D08E /* ScoreMatchTableViewCell.swift */; };
@@ -392,6 +395,9 @@
 		DB4B1A492240FD0900A9FB97 /* ClubEditLKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubEditLKViewController.swift; sourceTree = "<group>"; };
 		DB4B1A4B2240FD1300A9FB97 /* ClubEditLKPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubEditLKPresenter.swift; sourceTree = "<group>"; };
 		DB4B1A4D224114D100A9FB97 /* EditClubInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditClubInfo.swift; sourceTree = "<group>"; };
+		DB4C45DB22EDDE0600B28148 /* AutoGoalFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoGoalFooterView.swift; sourceTree = "<group>"; };
+		DB4C45DD22EDDE1B00B28148 /* AutoGoalFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoGoalFooterView.xib; sourceTree = "<group>"; };
+		DB4C45DF22EDFD4900B28148 /* UITableView Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView Extensions.swift"; sourceTree = "<group>"; };
 		DB51CD9122150E3700A8D08E /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		DB51CD9422155D8B00A8D08E /* ScoreMatchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreMatchTableViewController.swift; sourceTree = "<group>"; };
 		DB51CD972215619D00A8D08E /* ScoreMatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreMatchTableViewCell.swift; sourceTree = "<group>"; };
@@ -811,8 +817,8 @@
 		CE61551421AF9782008C4463 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				DB673FE122DEFC8C00581E6D /* pagination */,
 				DB1CA1052226B8EE005E1FB9 /* UserDefaultsHelper.swift */,
+				DB673FE122DEFC8C00581E6D /* pagination */,
 				DB673FDC22DDF41F00581E6D /* pages */,
 				CE77AC7C21B0FBB300C0ED0D /* api */,
 				CE61551521AF9786008C4463 /* model */,
@@ -914,6 +920,7 @@
 				1821150A22E59F22000F86D5 /* CGSize Ext.swift */,
 				DB966A5C22EC589B00064233 /* MBProgressHud Extensions.swift */,
 				18A82A5A22BB7B26006FA050 /* View Controller Alerts.swift */,
+				DB4C45DF22EDFD4900B28148 /* UITableView Extensions.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -1176,6 +1183,15 @@
 				DB4B1A4B2240FD1300A9FB97 /* ClubEditLKPresenter.swift */,
 			);
 			path = edit;
+			sourceTree = "<group>";
+		};
+		DB4C45DA22EDDDD100B28148 /* footer */ = {
+			isa = PBXGroup;
+			children = (
+				DB4C45DB22EDDE0600B28148 /* AutoGoalFooterView.swift */,
+				DB4C45DD22EDDE1B00B28148 /* AutoGoalFooterView.xib */,
+			);
+			path = footer;
 			sourceTree = "<group>";
 		};
 		DB51CD9022150E0C00A8D08E /* base */ = {
@@ -1479,6 +1495,7 @@
 			children = (
 				DB966A6422EC811600064233 /* ProtocolTeamOnePlayers.swift */,
 				DB9FA4AD22ECA35A00BA5A52 /* ProtocolTeamTwoPlayers.swift */,
+				DB4C45DA22EDDDD100B28148 /* footer */,
 				DB966A6622EC81C600064233 /* cell */,
 			);
 			path = "table view";
@@ -1828,6 +1845,7 @@
 				CEA6EBA321A53CFE008F874D /* Assets.xcassets in Resources */,
 				189E1C7822C9EC280086E4DA /* LabelSwitchView.xib in Resources */,
 				DB99BB6C224CB46700EE30D7 /* AdView.xib in Resources */,
+				DB4C45DE22EDDE1B00B28148 /* AutoGoalFooterView.xib in Resources */,
 				DB8B6C7E224BF0C0001A667D /* Colors.xcassets in Resources */,
 				CEA6EBA121A53CFE008F874D /* Main.storyboard in Resources */,
 				1823DC2722952762000A1055 /* LoadingCell.xib in Resources */,
@@ -1921,6 +1939,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB4C45E022EDFD4900B28148 /* UITableView Extensions.swift in Sources */,
 				187F2DFC22CB19440049EA77 /* EditRefereeProtocolTableViewCell.swift in Sources */,
 				DB5BDB992247CD0E0014C003 /* CommandsLKTableViewController.swift in Sources */,
 				DB4B1A452240AB2C00A9FB97 /* ClubLKViewController.swift in Sources */,
@@ -2004,6 +2023,7 @@
 				DB932DEA22C9022800C060C2 /* RefereeEditMatchesLKTableViewCell.swift in Sources */,
 				DBBEE1BB22D5413700CFB17E /* TeamCommandsController.swift in Sources */,
 				1839244822C7500D00A644F5 /* EditMatchReferees.swift in Sources */,
+				DB4C45DC22EDDE0600B28148 /* AutoGoalFooterView.swift in Sources */,
 				184A8E4022BB6DB20027BC8E /* mmUpcomingMatches.swift in Sources */,
 				DB641F8A222BB283004AC6CB /* UserLKPresenter.swift in Sources */,
 				DB2E1F7522EAFB7B00CDA5CD /* DoMatchProtocolRefereePresenter.swift in Sources */,

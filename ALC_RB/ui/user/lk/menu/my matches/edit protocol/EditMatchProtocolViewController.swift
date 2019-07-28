@@ -218,8 +218,9 @@ extension EditMatchProtocolViewController {
             let controller = segue.destination as! DoMatchProtocolRefereeViewController
             controller.viewModel = ProtocolRefereeViewModel(
                 match: self.match,
+                leagueDetailModel: self.leagueDetailModel,
                 teamOneModel: self.teamOnePlayersController,
-                teamTwoModle: self.teamTwoPlayersController,
+                teamTwoModel: self.teamTwoPlayersController,
                 refereesModel: self.refereesController,
                 eventsModel: self.eventsController
             )

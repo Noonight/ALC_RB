@@ -11,6 +11,7 @@ import UIKit
 class ProtocolTeamTwoPlayers : NSObject {
     enum Cell {
         static let CELL = "cell_protocol_team_two"
+        static let HEIGHT = CGFloat(integerLiteral: 50)
     }
     
     var cellActions: CellActions?
@@ -20,13 +21,16 @@ class ProtocolTeamTwoPlayers : NSObject {
         self.dataSource = dataSource
         self.cellActions = cellActions
     }
+    
+    override init() { }
 }
 
 extension ProtocolTeamTwoPlayers : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         // row selected do somethig  # important place
-        self.cellActions?.onCellSelected(model: self.dataSource[indexPath.row]) // call back here <---
+        guard let cellActions = self.cellActions else { return }
+        cellActions.onCellSelected(model: self.dataSource[indexPath.row]) // call back here <---
     }
 }
 
@@ -41,5 +45,9 @@ extension ProtocolTeamTwoPlayers : UITableViewDataSource {
         cell.configure(cellModel: dataSource[indexPath.row])
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Cell.HEIGHT
     }
 }

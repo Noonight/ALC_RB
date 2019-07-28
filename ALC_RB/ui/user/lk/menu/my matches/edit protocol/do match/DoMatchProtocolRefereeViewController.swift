@@ -53,6 +53,11 @@ class DoMatchProtocolRefereeViewController: UIViewController {
     let presenter = DoMatchProtocolRefereePresenter()
     
     var viewModel: ProtocolRefereeViewModel!
+    var playersTeamOne: ProtocolTeamOnePlayers = ProtocolTeamOnePlayers()
+    var playersTeamTwo: ProtocolTeamTwoPlayers = ProtocolTeamTwoPlayers()
+    
+    var playersTeamOneAutoGoalsFooter: AutoGoalFooterView = AutoGoalFooterView()
+    var playersTeamTwoAutoGoalsFooter: AutoGoalFooterView = AutoGoalFooterView()
     
     // MARK: LIFE CYCLE
     
@@ -60,13 +65,9 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         super.viewDidLoad()
         
         self.setupPresenter()
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.setupTitle()
+        self.setupTableDataSources()
+        self.setupView()
+        self.setupTableViews()
     }
 }
 
@@ -76,16 +77,43 @@ class DoMatchProtocolRefereeViewController: UIViewController {
 
 extension DoMatchProtocolRefereeViewController {
     
-    func setupTitle() {
-        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)]
+    func setupTableDataSources() {
+        let teamOneHud = self.playersOne_table.showLoadingViewHUD()
+        self.viewModel.prepareTableViewCells(team: .one)
+        { dataSource in
+            self.playersTeamOne.dataSource = dataSource
+            
+            teamOneHud.hide(animated: true)
+            self.playersOne_table.reloadData()
+        }
+        
+        let teamTwoHud = self.playersTwo_table.showLoadingViewHUD()
+        self.viewModel.prepareTableViewCells(team: .two)
+        { dataSource in
+            self.playersTeamTwo.dataSource = dataSource
+            
+            teamTwoHud.hide(animated: true)
+            self.playersTwo_table.reloadData()
+        }
     }
     
     func setupView() {
-        self.titleTeamOne_label.text = viewModel.match.teamOne
-        self.titleTeamTwo_label.text = viewModel.match.teamTwo
+        self.titleTeamOne_label.text = ClubTeamHelper.getTeamTitle(league: viewModel.leagueDetailModel.leagueInfo.league, match: viewModel.match, team: .one)
+        self.titleTeamTwo_label.text = ClubTeamHelper.getTeamTitle(league: viewModel.leagueDetailModel.leagueInfo.league, match: viewModel.match, team: .two)
         // setup score // mb calculate before
+        self.score_label.text = self.viewModel.match.score
+    }
+    
+    func setupTableViews() {
+        self.playersOne_table.dataSource    = self.playersTeamOne
+        self.playersOne_table.delegate      = self.playersTeamOne
         
+//        self.playersOne_table.tableFooterView = self.playersTeamOneAutoGoalsFooter
+        
+        self.playersTwo_table.dataSource    = self.playersTeamTwo
+        self.playersTwo_table.delegate      = self.playersTeamTwo
+        
+//        self.playersTwo_table.tableFooterView = self.playersTeamTwoAutoGoalsFooter
     }
     
     func setupPresenter() {
@@ -99,7 +127,7 @@ extension DoMatchProtocolRefereeViewController {
     
     @IBAction func onAcceptProtocolBtnPressed(_ sender: UIButton) {
         
-        let acceptProtocol = UIAlertAction(title: Texts.ACCEPT_PROTOCOL, style: .cancel)
+        let acceptProtocol = UIAlertAction(title: Texts.ACCEPT_PROTOCOL, style: .default)
         { alerter in
             
             let hud = self.showLoadingViewHUD()
@@ -131,7 +159,7 @@ extension DoMatchProtocolRefereeViewController {
             })
         }
         
-        let saveProtocol = UIAlertAction(title: Texts.SAVE_PROTOCOL, style: .cancel)
+        let saveProtocol = UIAlertAction(title: Texts.SAVE_PROTOCOL, style: .default)
         { alerter in
             
             let hud = self.showLoadingViewHUD()
@@ -152,7 +180,7 @@ extension DoMatchProtocolRefereeViewController {
             })
         }
         
-        let cancel = UIAlertAction(title: Constants.Texts.CANCEL, style: UIAlertAction.Style.default)
+        let cancel = UIAlertAction(title: Constants.Texts.CANCEL, style: .cancel)
         { alerter in
             // nothing
             Print.m("cancel pressed")

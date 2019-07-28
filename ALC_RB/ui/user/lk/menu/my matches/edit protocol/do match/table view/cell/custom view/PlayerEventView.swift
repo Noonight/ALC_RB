@@ -32,32 +32,42 @@ class PlayerEventView: UIView {
         self.resetUI()
         
         if viewModel?.goals != 0 {
-            self.goalsView.isHidden = false
+            self.goalsView.alpha = 1.0
+//            self.goalsView.isHidden = false
             self.goalsLabel.text = String(viewModel!.goals)
         }
         if viewModel?.successfulPenaltyGoals != 0 {
-            self.successfulPenaltyGoalsView.isHidden = false
+            self.successfulPenaltyGoalsView.alpha = 1.0
+//            self.successfulPenaltyGoalsView.isHidden = false
             self.successfulPenaltyGoalsLabel.text = String(viewModel!.successfulPenaltyGoals)
         }
         if viewModel?.failurePenaltyGoals != 0 {
-            self.failurePenaltyGoalsView.isHidden = false
+            self.failurePenaltyGoalsView.alpha = 1.0
+//            self.failurePenaltyGoalsView.isHidden = false
             self.failurePenaltyGoalsLabel.text = String(viewModel!.failurePenaltyGoals)
         }
         if viewModel?.yellowCards != 0 {
-            self.yellowCardView.isHidden = false
+            self.yellowCardView.alpha = 1.0
+//            self.yellowCardView.isHidden = false
             self.yellowCardsLabel.text = String(viewModel!.yellowCards)
         }
         if viewModel?.redCard == true {
-            self.redCardView.isHidden = false
+            self.redCardView.alpha = 1.0
+//            self.redCardView.isHidden = false
         }
     }
     
     func resetUI() {
-        self.goalsView.isHidden = true
-        self.successfulPenaltyGoalsView.isHidden = true
-        self.failurePenaltyGoalsView.isHidden = true
-        self.yellowCardView.isHidden = true
-        self.redCardView.isHidden = true
+//        self.goalsView.isHidden = true
+//        self.successfulPenaltyGoalsView.isHidden = true
+//        self.failurePenaltyGoalsView.isHidden = true
+//        self.yellowCardView.isHidden = true
+//        self.redCardView.isHidden = true
+        self.goalsView.alpha = 0.0
+        self.successfulPenaltyGoalsView.alpha = 0.0
+        self.failurePenaltyGoalsView.alpha = 0.0
+        self.yellowCardView.alpha = 0.0
+        self.redCardView.alpha = 0.0
     }
     
     override init(frame: CGRect) {

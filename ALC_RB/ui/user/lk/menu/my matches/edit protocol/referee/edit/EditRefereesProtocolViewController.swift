@@ -18,7 +18,7 @@ class EditRefereesProtocolViewController: BaseStateViewController {
         static let NO_REF_FIO = "ФИО не указано"
         static let EDITED_SAVED = "Изменения сохранены"
         static let SAVE_EDITED_Q = "Сохранить изменения?"
-        static let ALERT_MESSAGE_NOTHING_MORE = "Изменения будут сохранены сразу, дополнительного подтверждения в протокола не требуется"
+        static let ALERT_MESSAGE_NOTHING_MORE = "Изменения будут сохранены сразу, дополнительного подтверждения протокола не требуется"
     }
     private enum Colors {
         static let NO_REF = #colorLiteral(red: 1, green: 0.3098039216, blue: 0.2666666667, alpha: 1)

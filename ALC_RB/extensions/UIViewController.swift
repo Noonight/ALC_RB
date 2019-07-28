@@ -41,7 +41,7 @@ extension UIViewController {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         
         hud.backgroundView.style = MBProgressHUDBackgroundStyle.solidColor
-        hud.backgroundView.color = UIColor(white: 0, alpha: 0.5)
+        hud.backgroundView.color = UIColor(white: 0, alpha: 0.1)
         
         hud.mode = MBProgressHUDMode.indeterminate
         hud.label.text = message
