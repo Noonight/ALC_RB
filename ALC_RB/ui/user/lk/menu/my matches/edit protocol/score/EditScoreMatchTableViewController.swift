@@ -9,7 +9,10 @@
 import UIKit
 
 class EditScoreMatchTableViewController: UITableViewController {
-
+    enum CellIdentifiers {
+        static let CELL = "score_match_cell"
+    }
+    
     // MARK: - Table struct
     
     struct TableStruct {
@@ -25,12 +28,11 @@ class EditScoreMatchTableViewController: UITableViewController {
     @IBOutlet weak var footer_team_two_label: UILabel!
     @IBOutlet weak var footer_team_two_image: UIImageView!
     
-    
-    let cellId = "score_match_cell"
     let presenter = EditScoreMatchPresenter()
+    var viewModel: RefereeScoreModel!
     
-    var leagueDetailModel = LeagueDetailModel()
-    var match = LIMatch()
+//    var leagueDetailModel = LeagueDetailModel()
+//    var match = LIMatch()
     
     var tableStruct: TableStruct = TableStruct()
     
@@ -45,15 +47,6 @@ class EditScoreMatchTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
-        
-        //match.events.append(LIEvent(id: "apsifjsd0890", eventType: "yellowCard", player: "5be94d0206af116344942a58", time: "2 тайм"))
-        
-//        prepareTableStruct(leagueModel: leagueDetailModel, match: match)
-        
-//        tableStruct.events[1][0] = LIEvent(id: "eflgjko9u5ng0345jg904wjf0", eventType: "yellowCard", player: "5be94d0206af116344942a58", time: "2 тайм")
-//        tableStruct.events[1].append(LIEvent(id: "eflgjko9u5ng0345jg904wjf0", eventType: "yellowCard", player: "5be94d0206af116344942a58", time: "2 тайм"))
-//        tableStruct.events.append([LIEvent(id: "eflgjko9u5ng0345jg904wjf0", eventType: "yellowCard", player: "5be94d0206af116344942a58", time: "2 тайм")])
-//        tableStruct.events[0].append(LIEvent(id: "203jirjg0sd8jfipsdj08", eventType: "", player: <#T##String#>, time: <#T##String#>))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,63 +55,34 @@ class EditScoreMatchTableViewController: UITableViewController {
         tableView.tableFooterView = footer_view
         footer_view.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 98)
         
-        configureFooter(league: leagueDetailModel.leagueInfo.league, match: match)
+        configureFooter(league: self.viewModel.leagueDetailModel.leagueInfo.league,
+                        match: self.viewModel.match)
         
-        prepareTableStruct(leagueModel: leagueDetailModel, match: match)
+        prepareTableStruct(leagueModel: self.viewModel.leagueDetailModel,
+                           match: self.viewModel.match)
     }
 
     // MARK: - Configure footer
     
     func configureFooter(league: LILeague, match: LIMatch) {
-        let titleTeamOne = ClubTeamHelper.getTeamTitle(league: league, match: match, team: .one)
-        footer_team_one_label.text = titleTeamOne
-        //scheduleCell.mTitleTeam1 = titleTeamOne
+//        let titleTeamOne = ClubTeamHelper.getTeamTitle(league: league, match: match, team: .one)
+//        footer_team_one_label.text = titleTeamOne
         
-        let titleTeamTwo = ClubTeamHelper.getTeamTitle(league: league, match: match, team: .two)
-        footer_team_two_label.text = titleTeamTwo
-        //scheduleCell.mTitleTeam2 = titleTeamTwo
+        footer_team_one_label.text = self.viewModel.prepareTeamTitle(team: .one)
         
-//        footer_score_label.text = match.score ?? "-"
-        footer_score_label.text = parseScoreString(score: match.score ?? "0:0")
-//        footer_score_label.text = getScore(teamOne: teamOneCount, teamTwo: teamTwoCount)
+//        let titleTeamTwo = ClubTeamHelper.getTeamTitle(league: league, match: match, team: .two)
+//        footer_team_two_label.text = titleTeamTwo
         
-//        if let urlOne = person.person.photo {
-//            let url = ApiRoute.getImageURL(image: url)
-//            let processor = DownsamplingImageProcessor(size: cell.photo_image.frame.size)
-//                .append(another: CroppingImageProcessorCustom(size: cell.photo_image.frame.size))
-//                .append(another: RoundCornerImageProcessor(cornerRadius: cell.photo_image.getHalfWidthHeight()))
-//
-//            cell.photo_image.kf.indicatorType = .activity
-//            cell.photo_image.kf.setImage(
-//                with: url,
-//                placeholder: UIImage(named: "ic_logo"),
-//                options: [
-//                    .processor(processor),
-//                    .scaleFactor(UIScreen.main.scale),
-//                    .transition(.fade(1)),
-//                    .cacheOriginalImage
-//                ])
-//        } else {
-//            cell.photo_image.image = #imageLiteral(resourceName: "ic_logo")
-//        }
+        footer_team_two_label.text = self.viewModel.prepareTeamTitle(team: .two)
+        
+        footer_score_label.text = self.viewModel.prepareResultScore()
         
         presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamOne!, league: league)) { (image) in
             self.footer_team_one_image.image = image.af_imageRoundedIntoCircle()
-            //self.scheduleCell.mImageTeam1 = image
         }
         presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamTwo!, league: league)) { (image) in
             self.footer_team_two_image.image = image.af_imageRoundedIntoCircle()
-            //self.scheduleCell.mImageTeam2 = image
         }
-    }
-    
-    func parseScoreString(score: String) -> String {
-//        var scores: [Int] = [0, 0]
-        if score.count > 2 {
-            var scores = score.components(separatedBy: ":")
-            return "\(scores[0]) : \(scores[1])"
-        }
-        return "0 : 0"
     }
     
     // MARK: - Prepare Table struct
@@ -141,7 +105,11 @@ class EditScoreMatchTableViewController: UITableViewController {
         let uniqueEventTypes = findUniqueHeader(destination: events)
         for uniqEvent in uniqueEventTypes {
             let arrEvents: [LIEvent] = events.filter { (event) -> Bool in
-                return event.time == uniqEvent && (event.getSystemeventType() == LIEvent.SystemEventType.goal || event.getSystemeventType() == LIEvent.SystemEventType.autoGoal)
+                return event.time == uniqEvent && (
+                        event.getSystemEventType() == LIEvent.SystemEventType.goal //||
+//                        event.getSystemEventType() == LIEvent.SystemEventType.autoGoal //||
+//                        event.getSystemEventType() == LIEvent.SystemEventType.penalty
+                )
             }
             tableStruct.events.append(arrEvents)
         }
@@ -162,9 +130,13 @@ class EditScoreMatchTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! EditScoreMatchTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.CELL, for: indexPath) as! EditScoreMatchTableViewCell
 
-        configureCell(cell: cell, league: leagueDetailModel.leagueInfo.league, match: match, event: tableStruct.events[indexPath.section][indexPath.row])
+        configureCell(
+            cell: cell,
+            league: self.viewModel.leagueDetailModel.leagueInfo.league,
+            match: self.viewModel.match,
+            event: tableStruct.events[indexPath.section][indexPath.row])
 
         return cell
     }

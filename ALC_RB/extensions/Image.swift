@@ -10,7 +10,6 @@ import UIKit
 
 extension CGImage {
     
-    
     func scaleImageToSize(img: UIImage, size: CGSize) -> UIImage {
         UIGraphicsBeginImageContext(size)
         

@@ -63,6 +63,7 @@ class MenuLauncher: NSObject {
     }
     
     @objc func hideMenu() {
+        Print.m("hide view")
         UIView.animate(withDuration: 0.5) {
             self.blackView.alpha = 0
             

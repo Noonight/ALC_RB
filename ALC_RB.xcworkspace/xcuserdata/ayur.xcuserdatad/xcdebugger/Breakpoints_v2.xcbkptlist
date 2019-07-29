@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/model/ProtocolRefereeViewModel.swift"
-            timestampString = "586078237.052143"
+            timestampString = "586112699.006119"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "prepareTableViewCells(team:completed:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/model/ProtocolRefereeViewModel.swift"
-            timestampString = "586078237.052439"
+            timestampString = "586112699.006214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "prepareTableViewCells(team:completed:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -126,6 +126,7 @@
 		DB2E1F7322EAFAE800CDA5CD /* DoMatchProtocolRefereeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E1F7222EAFAE800CDA5CD /* DoMatchProtocolRefereeViewController.swift */; };
 		DB2E1F7522EAFB7B00CDA5CD /* DoMatchProtocolRefereePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E1F7422EAFB7B00CDA5CD /* DoMatchProtocolRefereePresenter.swift */; };
 		DB2E1F7822EC11E800CDA5CD /* ProtocolRefereeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E1F7722EC11E800CDA5CD /* ProtocolRefereeViewModel.swift */; };
+		DB45709822EF4EC000455BFB /* RefereeScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB45709722EF4EC000455BFB /* RefereeScoreModel.swift */; };
 		DB48BE7622002B42008B007D /* SoloClub.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB48BE7522002B42008B007D /* SoloClub.swift */; };
 		DB48BE7822002BD1008B007D /* PlayersTeamLeagueDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB48BE7722002BD1008B007D /* PlayersTeamLeagueDetailPresenter.swift */; };
 		DB48BE7A22002FC4008B007D /* SoloPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB48BE7922002FC4008B007D /* SoloPerson.swift */; };
@@ -384,6 +385,7 @@
 		DB2E1F7222EAFAE800CDA5CD /* DoMatchProtocolRefereeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoMatchProtocolRefereeViewController.swift; sourceTree = "<group>"; };
 		DB2E1F7422EAFB7B00CDA5CD /* DoMatchProtocolRefereePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoMatchProtocolRefereePresenter.swift; sourceTree = "<group>"; };
 		DB2E1F7722EC11E800CDA5CD /* ProtocolRefereeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolRefereeViewModel.swift; sourceTree = "<group>"; };
+		DB45709722EF4EC000455BFB /* RefereeScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeScoreModel.swift; sourceTree = "<group>"; };
 		DB48BE7522002B42008B007D /* SoloClub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloClub.swift; sourceTree = "<group>"; };
 		DB48BE7722002BD1008B007D /* PlayersTeamLeagueDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTeamLeagueDetailPresenter.swift; sourceTree = "<group>"; };
 		DB48BE7922002FC4008B007D /* SoloPerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloPerson.swift; sourceTree = "<group>"; };
@@ -670,6 +672,7 @@
 			children = (
 				187F2DEA22CB19440049EA77 /* EditScoreMatchTableViewController.swift */,
 				187F2DED22CB19440049EA77 /* EditScoreMatchPresenter.swift */,
+				DB45709622EF4EB200455BFB /* model */,
 				187F2DEB22CB19440049EA77 /* cell */,
 			);
 			path = score;
@@ -1146,6 +1149,14 @@
 			isa = PBXGroup;
 			children = (
 				DB2E1F7722EC11E800CDA5CD /* ProtocolRefereeViewModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		DB45709622EF4EB200455BFB /* model */ = {
+			isa = PBXGroup;
+			children = (
+				DB45709722EF4EC000455BFB /* RefereeScoreModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2016,6 +2027,7 @@
 				DB17385021BA706E00017B6D /* AnnounceDateTableViewCell.swift in Sources */,
 				1814452722E6BFCF00C9D45E /* MainTabBarViewController.swift in Sources */,
 				DBA77C2222CF4865000DCF02 /* ProtocolRefereesController.swift in Sources */,
+				DB45709822EF4EC000455BFB /* RefereeScoreModel.swift in Sources */,
 				DBFB83932201CFFC008A8F79 /* PlayersLeagueDetailPresenter.swift in Sources */,
 				DB9FA4A122EC986200BA5A52 /* RefereeProtocolPlayerTableViewCell.swift in Sources */,
 				DBA77C2522CFA8B3000DCF02 /* EditRefereesProtocolViewController.swift in Sources */,

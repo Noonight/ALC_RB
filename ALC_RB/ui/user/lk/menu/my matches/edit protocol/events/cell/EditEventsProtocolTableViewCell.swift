@@ -12,6 +12,6 @@ class EditEventsProtocolTableViewCell: UITableViewCell {
 
     @IBOutlet weak var photo_image: UIImageView!
     @IBOutlet weak var name_label: UILabel!
-    @IBOutlet weak var type_label: UILabel!
+    @IBOutlet weak var event_type_image: UIImageView!
     
 }

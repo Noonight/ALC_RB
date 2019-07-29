@@ -26,7 +26,11 @@ class ProtocolRefereeViewModel {
     var teamOnePlayersController: ProtocolPlayersController!
     var teamTwoPlayersController: ProtocolPlayersController!
     var refereesController: ProtocolRefereesController!
-    var eventsController: ProtocolEventsController!
+    var eventsController: ProtocolEventsController! {
+        didSet {
+            Print.m(eventsController.events)
+        }
+    }
     
     let dataManager = ApiRequests()
     
@@ -47,7 +51,10 @@ class ProtocolRefereeViewModel {
 //    }
     
     func appendEvent(event: LIEvent) {
+        Print.m(event)
+        Print.m(eventsController.events)
         self.eventsController.add(event)
+        Print.m(eventsController.events)
     }
     
     // MARK: PREPARE FOR DISPLAY OR PREPARE DATA FOR SERVER REQUEST
@@ -107,7 +114,7 @@ class ProtocolRefereeViewModel {
         }
         
         group.notify(queue: .main) {
-            completed(returnedArray)
+            completed(returnedArray.sorted { $0.person!.getSurnameNP() > $1.person!.getSurnameNP() }) // add sort for every time
         }
     }
     

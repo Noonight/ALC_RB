@@ -86,6 +86,8 @@ extension DoMatchProtocolRefereeViewController {
         self.eventMaker = EventMaker(callBack:
         { liEvent in
             self.viewModel.appendEvent(event: liEvent)
+//            dump(self.viewModel.eventsController)
+            self.setupTableDataSources()
         })
     }
     

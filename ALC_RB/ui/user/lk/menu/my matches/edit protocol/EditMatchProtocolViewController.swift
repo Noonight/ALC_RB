@@ -154,8 +154,16 @@ extension EditMatchProtocolViewController {
             
             let controller = storyboard.instantiateViewController(withIdentifier: "EditScoreMatchTableViewController") as! EditScoreMatchTableViewController
             
-            controller.leagueDetailModel = self.leagueDetailModel
-            controller.match = self.match
+            controller.viewModel = RefereeScoreModel(
+                match: self.match,
+                leagueDetailModel: self.leagueDetailModel,
+                teamOnePlayers: self.teamOnePlayersController,
+                teamTwoPlayers: self.teamTwoPlayersController,
+                events: self.eventsController
+            )
+            
+//            controller.leagueDetailModel = self.leagueDetailModel
+//            controller.match = self.match
             return controller
         }()
         navigationController?.show(score, sender: self)
@@ -247,9 +255,16 @@ extension EditMatchProtocolViewController {
             controller.teamTwoController = self.teamTwoPlayersController
         case is EditScoreMatchTableViewController:
             let controller = destination as! EditScoreMatchTableViewController
-            controller.leagueDetailModel = leagueDetailModel
+            controller.viewModel = RefereeScoreModel(
+                match: self.match,
+                leagueDetailModel: self.leagueDetailModel,
+                teamOnePlayers: self.teamOnePlayersController,
+                teamTwoPlayers: self.teamTwoPlayersController,
+                events: self.eventsController
+            )
+//            controller.leagueDetailModel = leagueDetailModel
             setMatchByUserDefaults()
-            controller.match = match
+//            controller.match = match
         default:
             break
         }

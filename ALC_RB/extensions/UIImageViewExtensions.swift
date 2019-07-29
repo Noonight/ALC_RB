@@ -75,6 +75,105 @@ extension UIImageView {
 
 extension UIImage {
     
+    func addText(textToDraw: NSString, atCorner: Int, textColor: UIColor?, textFont: UIFont?) -> UIImage {
+        
+        // Setup the font specific variables
+        var _textColor: UIColor
+        if textColor == nil {
+            _textColor = UIColor.white
+        } else {
+            _textColor = textColor!
+        }
+        
+        var _textFont: UIFont
+        if textFont == nil {
+            _textFont = UIFont.systemFont(ofSize: 50)
+        } else {
+            _textFont = textFont!
+        }
+        
+        // Setup the image context using the passed image
+        UIGraphicsBeginImageContext(size)
+        
+        // Put the image into a rectangle as large as the original image
+        draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        
+        let titleParagraphStyle = NSMutableParagraphStyle()
+        
+        // Setup the font attributes that will be later used to dictate how the text should be drawn
+        let textFontAttributes = [
+            NSAttributedString.Key.font.rawValue: _textFont,
+            NSAttributedString.Key.foregroundColor: _textColor,
+            NSAttributedString.Key.paragraphStyle: titleParagraphStyle
+            ] as! [NSAttributedString.Key : Any]
+        
+        // get the bounding-box for the string
+        var stringSize = textToDraw.size(withAttributes: textFontAttributes)
+        
+        // draw in rect functions like whole numbers
+        stringSize.width = ceil(stringSize.width)
+        stringSize.height = ceil(stringSize.height)
+        
+        var rect = CGRect(origin: CGPoint.zero, size: self.size)
+        
+        switch atCorner {
+            
+        case 1:
+            // top-right
+            titleParagraphStyle.alignment = .right
+            
+        case 2:
+            // bottom-right
+            rect.origin.y = self.size.height - stringSize.height
+            titleParagraphStyle.alignment = .right
+            
+        case 3:
+            // bottom-left
+            rect.origin.y = self.size.height - stringSize.height
+            
+        default:
+            // top-left
+            // don't need to change anything here
+            break
+            
+        }
+        
+        // Draw the text into an image
+        textToDraw.draw(in: rect, withAttributes: textFontAttributes)
+        
+        // Create a new image out of the images we have created
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        // End the context now that we have the image we need
+        UIGraphicsEndImageContext()
+        
+        //Pass the image back up to the caller
+        return newImage!
+    }
+    
+//    func appendText(drawText text: String, atPoint point: CGPoint) -> UIImage {
+//        let textColor = UIColor.white
+//        let textFont = UIFont.systemFont(ofSize: 17)
+////        let textFont = UIFont(name: "Helvetica Bold", size: 12)!
+//
+//        let scale = UIScreen.main.scale
+//        UIGraphicsBeginImageContextWithOptions(self.size, false, scale)
+//
+//        let textFontAttributes = [
+//            NSAttributedString.Key.font: textFont,
+//            NSAttributedString.Key.foregroundColor: textColor,
+//            ] as [NSAttributedString.Key : Any]
+//        self.draw(in: CGRect(origin: CGPoint.zero, size: self.size))
+//
+//        let rect = CGRect(origin: point, size: self.size)
+//        text.draw(in: rect, withAttributes: textFontAttributes)
+//
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//
+//        return newImage!
+//    }
+    
 //    func cropAndRound() {
 //        self.image = self.cropAndCenteringImage(image: self.image!, width: Double(self.frame.width), height: Double(self.frame.height))
 //        self.setRounded()

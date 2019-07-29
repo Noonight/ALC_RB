@@ -14,19 +14,14 @@ class EventMaker: NSObject {
     
     let eventView = AddEventView(frame: SIZE)
     var onHideTriggered: ((LIEvent) -> ())
-    var backgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = BACKGROUND_COLOR
-        view.alpha = 0 // hidden
-        
-        return view
-    }()
+    var backgroundView = UIView()
     var curMatchId: String!
     var curPlayerId: String!
     var curTime: String!
     
     init(callBack: @escaping (LIEvent) -> ()) {
         self.onHideTriggered = callBack
+//        self.eventView.callBacks = self
     }
     
     // MARK: WORK WORK VIEW CONTROLLER
@@ -36,25 +31,31 @@ class EventMaker: NSObject {
         self.curPlayerId = playerId
         self.curTime = time
         
+        self.eventView.callBacks = self
+        self.eventView.playerId = self.curPlayerId
+        
         if let window = UIApplication.shared.keyWindow {
-            window.addSubview(backgroundView)
-            window.addSubview(eventView)
-            
-            backgroundView.addGestureRecognizer(UIGestureRecognizer(
+            backgroundView.backgroundColor = EventMaker.BACKGROUND_COLOR
+            backgroundView.alpha = 0
+            backgroundView.addGestureRecognizer(UITapGestureRecognizer(
                 target: self,
                 action: #selector(hideBackgroundView))
             )
             
+            window.addSubview(backgroundView)
+            window.addSubview(eventView)
+            
             eventView.setCenterFromParent()
-            eventView.setCenterFromParentTrue()
+            
+            Print.m(backgroundView.frame)
             
             backgroundView.frame = window.frame
-            backgroundView.alpha = 0
+            
+            Print.m(backgroundView.frame)
             
             eventView.alpha = 0
-            eventView.isHidden = false
             
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.backgroundView.alpha = 1
                 
                 self.eventView.alpha = 1
@@ -62,7 +63,8 @@ class EventMaker: NSObject {
         }
     }
     
-    public func hide(eventType: LIEvent.EventType) -> LIEvent {
+    public func hide(eventType: LIEvent.SystemEventType) -> LIEvent {
+        self.hideBackgroundView()
         return LIEvent().with(
             id: self.curMatchId,
             eventType: eventType.rawValue,
@@ -74,22 +76,18 @@ class EventMaker: NSObject {
     // MARK: HELPERS
     
     @objc func hideBackgroundView() {
-        UIView.animate(withDuration: 0.5)
+        UIView.animate(withDuration: 0.2)
         {
-
             self.backgroundView.alpha = 0
             self.eventView.alpha = 0
-//            if let window = UIApplication.shared.keyWindow {
-//                self.eventView.alpha = 0
-//            }
         }
-        self.eventView.isHidden = true
     }
     
 }
 
 extension EventMaker: EventCallBack {
     func onGoalPressed(playerId: String) {
+        Print.m("call back here ")
         onHideTriggered(hide(eventType: .goal))
     }
     

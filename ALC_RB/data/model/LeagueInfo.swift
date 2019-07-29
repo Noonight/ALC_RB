@@ -169,7 +169,7 @@ struct LIEvent: Codable {
         case goal, yellowCard, redCard, foul, autoGoal, penalty, non
     }
     
-    func getSystemeventType() -> SystemEventType {
+    func getSystemEventType() -> SystemEventType {
         switch eventType {
         case "goal":
             return .goal
@@ -185,6 +185,26 @@ struct LIEvent: Codable {
             return .penalty
         default:
             return .non
+        }
+    }
+    
+    func getSystemEventImage() -> UIImage? {
+        switch getSystemEventType() {
+        case .goal:
+            return UIImage(named: "ic_green_footbal")
+        case .foul:
+            return UIImage(named: "ic_faul")
+        case .penalty:
+            let image = UIImage(named: "ic_green_footbal")
+            return image?.addText(textToDraw: NSString(string: "П"), atCorner: 2, textColor: .black, textFont: UIFont.systemFont(ofSize: 25))
+        case .yellowCard:
+            return UIImage(named: "ic_yellowCard")
+        case .redCard:
+            return UIImage(named: "ic_redCard")
+        case .autoGoal:
+            return UIImage(named: "ic_goal")
+        case .non:
+            return UIImage(named: "ic_settings")
         }
     }
     

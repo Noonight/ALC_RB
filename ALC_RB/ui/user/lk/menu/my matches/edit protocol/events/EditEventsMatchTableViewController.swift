@@ -153,7 +153,8 @@ class EditEventsMatchTableViewController: UITableViewController {
         presenter.getPlayer(player: model.player, get_player: { (person) in
 //            cell.name_label.text = person.person.getFullName()
             cell.name_label.text = person.person.getSurnameNP()
-            cell.type_label.text = model.getEventType().rawValue
+//            cell.type_label.text = model.getEventType().rawValue
+            cell.event_type_image.image = model.getSystemEventImage()
             
             if let url = person.person.photo {
                 let url = ApiRoute.getImageURL(image: url)
