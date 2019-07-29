@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddEventView" customModule="ALC_RB" customModuleProvider="target">
+            <connections>
+                <outlet property="container_view" destination="iN0-l3-epB" id="j7I-Mz-IMa"/>
+                <outlet property="failure_penalty_image" destination="SXb-1Q-dju" id="hO8-8B-bKr"/>
+                <outlet property="failure_penalty_tap" destination="bjl-6E-Plu" id="l8i-DQ-hub"/>
+                <outlet property="goal_image" destination="ElT-pZ-yqO" id="c5i-mB-jnZ"/>
+                <outlet property="goal_tap" destination="WVU-25-H7J" id="74f-I5-R81"/>
+                <outlet property="red_card_image" destination="vqH-dK-eDP" id="MpI-QN-syV"/>
+                <outlet property="red_card_tap" destination="9qh-xW-7SF" id="nnS-OE-rNh"/>
+                <outlet property="success_penalty_image" destination="eUL-Xn-2us" id="19M-XW-V6x"/>
+                <outlet property="success_penalty_tap" destination="rp1-9X-IOg" id="yW1-nf-rnQ"/>
+                <outlet property="yellow_card_image" destination="e1y-AY-lw3" id="iqW-E0-B1G"/>
+                <outlet property="yellow_card_tap" destination="Hvt-Wv-FsB" id="pVN-xG-i7g"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="278" height="70"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K9C-3k-hgg" customClass="DesignableView" customModule="ALC_RB" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="278" height="70"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_green_footbal" translatesAutoresizingMaskIntoConstraints="NO" id="ElT-pZ-yqO">
+                            <rect key="frame" x="8" y="8" width="54" height="54"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="54" id="BeM-NU-ViX"/>
+                                <constraint firstAttribute="height" constant="54" id="Wta-iF-1EU"/>
+                            </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="WVU-25-H7J" appends="YES" id="KTz-Zb-wev"/>
+                            </connections>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_green_footbal" translatesAutoresizingMaskIntoConstraints="NO" id="eUL-Xn-2us">
+                            <rect key="frame" x="70" y="18" width="44" height="44"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="0Wl-V1-mfH"/>
+                                <constraint firstAttribute="width" constant="44" id="qwL-eZ-N7C"/>
+                            </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="rp1-9X-IOg" appends="YES" id="lyW-rV-HgW"/>
+                            </connections>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_gray_footbal" translatesAutoresizingMaskIntoConstraints="NO" id="SXb-1Q-dju">
+                            <rect key="frame" x="122" y="18" width="44" height="44"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="QPY-8S-GHG"/>
+                                <constraint firstAttribute="width" constant="44" id="pXa-IK-t56"/>
+                            </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="bjl-6E-Plu" appends="YES" id="9Ma-q2-XgB"/>
+                            </connections>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_yellowCard" translatesAutoresizingMaskIntoConstraints="NO" id="e1y-AY-lw3">
+                            <rect key="frame" x="174" y="18" width="44" height="44"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="Vxe-Nv-ly9"/>
+                                <constraint firstAttribute="width" constant="44" id="eA4-QH-KUQ"/>
+                            </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="Hvt-Wv-FsB" appends="YES" id="2xy-xF-DO3"/>
+                            </connections>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_redCard" translatesAutoresizingMaskIntoConstraints="NO" id="vqH-dK-eDP">
+                            <rect key="frame" x="226" y="18" width="44" height="44"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="9ZI-kf-I0R"/>
+                                <constraint firstAttribute="width" constant="44" id="I0M-Qp-HZD"/>
+                            </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="9qh-xW-7SF" appends="YES" id="fxz-Ma-Ldn"/>
+                            </connections>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="П" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAM-0b-XRo">
+                            <rect key="frame" x="98" y="44" width="16" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="k4j-cb-a82"/>
+                                <constraint firstAttribute="width" constant="16" id="pqs-Ye-655"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="П" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pLO-DF-bI8">
+                            <rect key="frame" x="150" y="44" width="16" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="97T-5g-tbD"/>
+                                <constraint firstAttribute="width" constant="16" id="H3P-Tn-duK"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="of8-ix-tkD"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="e1y-AY-lw3" firstAttribute="leading" secondItem="pLO-DF-bI8" secondAttribute="trailing" constant="8" id="1Ao-GC-k9N"/>
+                        <constraint firstAttribute="bottom" secondItem="eUL-Xn-2us" secondAttribute="bottom" constant="8" id="2kL-Wz-AiN"/>
+                        <constraint firstItem="eUL-Xn-2us" firstAttribute="leading" secondItem="ElT-pZ-yqO" secondAttribute="trailing" constant="8" id="40j-rW-HtO"/>
+                        <constraint firstItem="ElT-pZ-yqO" firstAttribute="leading" secondItem="K9C-3k-hgg" secondAttribute="leading" constant="8" id="6Lb-JE-2UJ"/>
+                        <constraint firstAttribute="bottom" secondItem="SXb-1Q-dju" secondAttribute="bottom" constant="8" id="9ii-ES-dmE"/>
+                        <constraint firstItem="ElT-pZ-yqO" firstAttribute="top" secondItem="K9C-3k-hgg" secondAttribute="top" constant="8" id="Bd3-ZO-OzB"/>
+                        <constraint firstAttribute="bottom" secondItem="vqH-dK-eDP" secondAttribute="bottom" constant="8" id="E63-iI-xBo"/>
+                        <constraint firstItem="SXb-1Q-dju" firstAttribute="leading" secondItem="wAM-0b-XRo" secondAttribute="trailing" constant="8" id="El6-GH-Ptv"/>
+                        <constraint firstItem="vqH-dK-eDP" firstAttribute="leading" secondItem="e1y-AY-lw3" secondAttribute="trailing" constant="8" id="Gek-Qp-wqV"/>
+                        <constraint firstAttribute="bottom" secondItem="ElT-pZ-yqO" secondAttribute="bottom" constant="8" id="Gq6-yJ-kJt"/>
+                        <constraint firstItem="eUL-Xn-2us" firstAttribute="top" secondItem="K9C-3k-hgg" secondAttribute="top" constant="18" id="NIz-2f-Lil"/>
+                        <constraint firstItem="e1y-AY-lw3" firstAttribute="leading" secondItem="SXb-1Q-dju" secondAttribute="trailing" constant="8" id="S4Y-tZ-D89"/>
+                        <constraint firstItem="SXb-1Q-dju" firstAttribute="leading" secondItem="eUL-Xn-2us" secondAttribute="trailing" constant="8" id="a6m-EW-3Gb"/>
+                        <constraint firstAttribute="trailing" secondItem="vqH-dK-eDP" secondAttribute="trailing" constant="8" id="ap6-E7-Qcc"/>
+                        <constraint firstAttribute="bottom" secondItem="e1y-AY-lw3" secondAttribute="bottom" constant="8" id="e3k-Ep-qti"/>
+                        <constraint firstItem="e1y-AY-lw3" firstAttribute="top" secondItem="K9C-3k-hgg" secondAttribute="top" constant="18" id="hxi-e4-TCp"/>
+                        <constraint firstItem="vqH-dK-eDP" firstAttribute="top" secondItem="K9C-3k-hgg" secondAttribute="top" constant="18" id="tJ8-MY-nKI"/>
+                        <constraint firstItem="SXb-1Q-dju" firstAttribute="top" secondItem="K9C-3k-hgg" secondAttribute="top" constant="18" id="wf3-zO-04A"/>
+                        <constraint firstAttribute="bottom" secondItem="pLO-DF-bI8" secondAttribute="bottom" constant="8" id="wrc-YR-hb2"/>
+                        <constraint firstAttribute="bottom" secondItem="wAM-0b-XRo" secondAttribute="bottom" constant="8" id="zLh-hb-hhP"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="K9C-3k-hgg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ezw-NW-BnO"/>
+                <constraint firstItem="K9C-3k-hgg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Ri5-xK-vbd"/>
+                <constraint firstAttribute="bottom" secondItem="K9C-3k-hgg" secondAttribute="bottom" id="feF-lB-QGo"/>
+                <constraint firstAttribute="trailing" secondItem="K9C-3k-hgg" secondAttribute="trailing" id="vHk-9I-lTV"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="17.600000000000001" y="-223.08845577211397"/>
+        </view>
+        <tapGestureRecognizer id="WVU-25-H7J"/>
+        <tapGestureRecognizer id="rp1-9X-IOg"/>
+        <tapGestureRecognizer id="bjl-6E-Plu"/>
+        <tapGestureRecognizer id="Hvt-Wv-FsB"/>
+        <tapGestureRecognizer id="9qh-xW-7SF"/>
+    </objects>
+    <resources>
+        <image name="ic_gray_footbal" width="50" height="50"/>
+        <image name="ic_green_footbal" width="50" height="50"/>
+        <image name="ic_redCard" width="50" height="75"/>
+        <image name="ic_yellowCard" width="50" height="75"/>
+    </resources>
+</document>

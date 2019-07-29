@@ -11,6 +11,15 @@ import Lightbox
 
 extension UIImageView {
     
+    func animateTap()
+    {
+        alpha = 0.75
+        UIView.animate(withDuration: 0.5)
+        {
+            self.alpha = 1.0
+        }
+    }
+    
     func cropAndRound() {
         self.image = self.cropAndCenteringImage(image: self.image!, width: Double(self.frame.width), height: Double(self.frame.height))
         self.setRounded()

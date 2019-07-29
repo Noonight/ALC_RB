@@ -40,6 +40,16 @@ class ProtocolRefereeViewModel {
         self.eventsController = eventsModel
     }
     
+    // MARK: WORK WITH VARIABLES
+    
+//    func appendNewEvent(eventType: LIEvent.EventType, playerId: String, time: ) {
+//        eventsController.add(event)
+//    }
+    
+    func appendEvent(event: LIEvent) {
+        self.eventsController.add(event)
+    }
+    
     // MARK: PREPARE FOR DISPLAY OR PREPARE DATA FOR SERVER REQUEST
     
     func prepareMatchId() -> String {

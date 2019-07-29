@@ -82,6 +82,26 @@ class EditScoreMatchTableViewController: UITableViewController {
         footer_score_label.text = parseScoreString(score: match.score ?? "0:0")
 //        footer_score_label.text = getScore(teamOne: teamOneCount, teamTwo: teamTwoCount)
         
+//        if let urlOne = person.person.photo {
+//            let url = ApiRoute.getImageURL(image: url)
+//            let processor = DownsamplingImageProcessor(size: cell.photo_image.frame.size)
+//                .append(another: CroppingImageProcessorCustom(size: cell.photo_image.frame.size))
+//                .append(another: RoundCornerImageProcessor(cornerRadius: cell.photo_image.getHalfWidthHeight()))
+//
+//            cell.photo_image.kf.indicatorType = .activity
+//            cell.photo_image.kf.setImage(
+//                with: url,
+//                placeholder: UIImage(named: "ic_logo"),
+//                options: [
+//                    .processor(processor),
+//                    .scaleFactor(UIScreen.main.scale),
+//                    .transition(.fade(1)),
+//                    .cacheOriginalImage
+//                ])
+//        } else {
+//            cell.photo_image.image = #imageLiteral(resourceName: "ic_logo")
+//        }
+        
         presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamOne!, league: league)) { (image) in
             self.footer_team_one_image.image = image.af_imageRoundedIntoCircle()
             //self.scheduleCell.mImageTeam1 = image

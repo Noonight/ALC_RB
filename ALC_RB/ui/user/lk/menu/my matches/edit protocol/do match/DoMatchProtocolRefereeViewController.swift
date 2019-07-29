@@ -59,6 +59,9 @@ class DoMatchProtocolRefereeViewController: UIViewController {
     var playersTeamOneAutoGoalsFooter: AutoGoalFooterView = AutoGoalFooterView()
     var playersTeamTwoAutoGoalsFooter: AutoGoalFooterView = AutoGoalFooterView()
     
+//    var eventMaker: AddEventView = AddEventView()
+    var eventMaker: EventMaker?
+    
     // MARK: LIFE CYCLE
     
     override func viewDidLoad() {
@@ -66,8 +69,10 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         
         self.setupPresenter()
         self.setupTableDataSources()
+        self.setupEventMaker()
         self.setupView()
         self.setupTableViews()
+        self.setupTableViewsActions()
     }
 }
 
@@ -76,6 +81,18 @@ class DoMatchProtocolRefereeViewController: UIViewController {
 // MARK: SETUP
 
 extension DoMatchProtocolRefereeViewController {
+    
+    func setupEventMaker() {
+        self.eventMaker = EventMaker(callBack:
+        { liEvent in
+            self.viewModel.appendEvent(event: liEvent)
+        })
+    }
+    
+    func setupTableViewsActions() {
+        self.playersTeamOne.cellActions = self
+        self.playersTeamTwo.cellActions = self
+    }
     
     func setupTableDataSources() {
         let teamOneHud = self.playersOne_table.showLoadingViewHUD()
@@ -208,6 +225,20 @@ extension DoMatchProtocolRefereeViewController {
     @IBAction func onPenaltyTimeBtnPressed(_ sender: UIButton) {
         self.viewModel.currentTime = .penalty
         self.title = self.viewModel.currentTime.rawValue
+    }
+}
+
+// MARK: TABLE ACITONS
+
+extension DoMatchProtocolRefereeViewController: CellActions {
+    func onCellSelected(model: CellModel)
+    {
+        let curModel = model as! RefereeProtocolPlayerTeamCellModel
+        self.eventMaker!.showWith(
+            matchId: self.viewModel.match.id,
+            playerId: (curModel.player?.playerID)!,
+            time: self.viewModel.currentTime.rawValue
+        )
     }
 }
 

@@ -145,6 +145,9 @@
 		DB4C45DC22EDDE0600B28148 /* AutoGoalFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4C45DB22EDDE0600B28148 /* AutoGoalFooterView.swift */; };
 		DB4C45DE22EDDE1B00B28148 /* AutoGoalFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB4C45DD22EDDE1B00B28148 /* AutoGoalFooterView.xib */; };
 		DB4C45E022EDFD4900B28148 /* UITableView Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4C45DF22EDFD4900B28148 /* UITableView Extensions.swift */; };
+		DB4FCAF322EEBA2B00A89BE7 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4FCAF222EEBA2B00A89BE7 /* AddEventView.swift */; };
+		DB4FCAF522EEBA3500A89BE7 /* AddEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB4FCAF422EEBA3500A89BE7 /* AddEventView.xib */; };
+		DB4FCAF822EECC5B00A89BE7 /* EventMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4FCAF722EECC5B00A89BE7 /* EventMaker.swift */; };
 		DB51CD9222150E3700A8D08E /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51CD9122150E3700A8D08E /* BaseCell.swift */; };
 		DB51CD9522155D8B00A8D08E /* ScoreMatchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51CD9422155D8B00A8D08E /* ScoreMatchTableViewController.swift */; };
 		DB51CD982215619E00A8D08E /* ScoreMatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB51CD972215619D00A8D08E /* ScoreMatchTableViewCell.swift */; };
@@ -400,6 +403,9 @@
 		DB4C45DB22EDDE0600B28148 /* AutoGoalFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoGoalFooterView.swift; sourceTree = "<group>"; };
 		DB4C45DD22EDDE1B00B28148 /* AutoGoalFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoGoalFooterView.xib; sourceTree = "<group>"; };
 		DB4C45DF22EDFD4900B28148 /* UITableView Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView Extensions.swift"; sourceTree = "<group>"; };
+		DB4FCAF222EEBA2B00A89BE7 /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
+		DB4FCAF422EEBA3500A89BE7 /* AddEventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEventView.xib; sourceTree = "<group>"; };
+		DB4FCAF722EECC5B00A89BE7 /* EventMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMaker.swift; sourceTree = "<group>"; };
 		DB51CD9122150E3700A8D08E /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		DB51CD9422155D8B00A8D08E /* ScoreMatchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreMatchTableViewController.swift; sourceTree = "<group>"; };
 		DB51CD972215619D00A8D08E /* ScoreMatchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreMatchTableViewCell.swift; sourceTree = "<group>"; };
@@ -1127,6 +1133,7 @@
 		DB2E1F7122EAFACE00CDA5CD /* do match */ = {
 			isa = PBXGroup;
 			children = (
+				DB4FCAF122EEBA0A00A89BE7 /* add event view */,
 				DB966A6322EC80F500064233 /* table view */,
 				DB2E1F7622EC11C700CDA5CD /* model */,
 				DB2E1F7222EAFAE800CDA5CD /* DoMatchProtocolRefereeViewController.swift */,
@@ -1197,6 +1204,24 @@
 				DB4C45DD22EDDE1B00B28148 /* AutoGoalFooterView.xib */,
 			);
 			path = footer;
+			sourceTree = "<group>";
+		};
+		DB4FCAF122EEBA0A00A89BE7 /* add event view */ = {
+			isa = PBXGroup;
+			children = (
+				DB4FCAF622EECC3700A89BE7 /* view */,
+				DB4FCAF722EECC5B00A89BE7 /* EventMaker.swift */,
+			);
+			path = "add event view";
+			sourceTree = "<group>";
+		};
+		DB4FCAF622EECC3700A89BE7 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				DB4FCAF222EEBA2B00A89BE7 /* AddEventView.swift */,
+				DB4FCAF422EEBA3500A89BE7 /* AddEventView.xib */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		DB51CD9022150E0C00A8D08E /* base */ = {
@@ -1866,6 +1891,7 @@
 				18606A3122D30B8200F5D2FE /* EventTypeView.xib in Resources */,
 				DB966A7022EC832100064233 /* PlayerEventView.xib in Resources */,
 				DB87FE7F2243D493001EBA7C /* EmptyViewNew.xib in Resources */,
+				DB4FCAF522EEBA3500A89BE7 /* AddEventView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1978,9 +2004,11 @@
 				DB966A5D22EC589B00064233 /* MBProgressHud Extensions.swift in Sources */,
 				DB57C5D221F0BFD500BEA097 /* TeamLeagueDetailViewController.swift in Sources */,
 				DB673FDE22DDF44600581E6D /* Pages.swift in Sources */,
+				DB4FCAF322EEBA2B00A89BE7 /* AddEventView.swift in Sources */,
 				DB99BB6E224CB48300EE30D7 /* AdView.swift in Sources */,
 				DB9FA4AA22EC9DCC00BA5A52 /* RefereeProtocolPlayerTeamCellModel.swift in Sources */,
 				18076941229E7D4900A10996 /* AddPlayerToTeam.swift in Sources */,
+				DB4FCAF822EECC5B00A89BE7 /* EventMaker.swift in Sources */,
 				DBA69210221E74A000BEFB26 /* DrawerMenuTableViewCell.swift in Sources */,
 				DB52EAE82248E412004F7869 /* CommandsLKTableViewCell.swift in Sources */,
 				DBCB1EBF2223FE3F005A6976 /* ApiRequests.swift in Sources */,

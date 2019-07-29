@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class EditEventsMatchTableViewController: UITableViewController {
     enum SegueIdentifiers {
@@ -153,14 +154,35 @@ class EditEventsMatchTableViewController: UITableViewController {
 //            cell.name_label.text = person.person.getFullName()
             cell.name_label.text = person.person.getSurnameNP()
             cell.type_label.text = model.getEventType().rawValue
-            if person.person.photo != nil {
-                self.presenter.getPlayerImage(player_photo: person.person.photo ?? " ", get_image: { (image) in
-                    cell.photo_image.image = image
-                    cell.photo_image.cropAndRound()
-                })
+            
+            if let url = person.person.photo {
+                let url = ApiRoute.getImageURL(image: url)
+                let processor = DownsamplingImageProcessor(size: cell.photo_image.frame.size)
+                    .append(another: CroppingImageProcessorCustom(size: cell.photo_image.frame.size))
+                    .append(another: RoundCornerImageProcessor(cornerRadius: cell.photo_image.getHalfWidthHeight()))
+                
+                cell.photo_image.kf.indicatorType = .activity
+                cell.photo_image.kf.setImage(
+                    with: url,
+                    placeholder: UIImage(named: "ic_logo"),
+                    options: [
+                        .processor(processor),
+                        .scaleFactor(UIScreen.main.scale),
+                        .transition(.fade(1)),
+                        .cacheOriginalImage
+                    ])
             } else {
-                cell.photo_image.image = UIImage(named: "ic_logo")
+                cell.photo_image.image = #imageLiteral(resourceName: "ic_logo")
             }
+            
+//            if person.person.photo != nil {
+//                self.presenter.getPlayerImage(player_photo: person.person.photo ?? " ", get_image: { (image) in
+//                    cell.photo_image.image = image
+//                    cell.photo_image.cropAndRound()
+//                })
+//            } else {
+//                cell.photo_image.image = UIImage(named: "ic_logo")
+//            }
         }) { (error) in
             
         }
