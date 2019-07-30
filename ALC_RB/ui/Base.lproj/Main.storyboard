@@ -4093,18 +4093,15 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SNU-bh-uGn" userLabel="players">
                                                 <rect key="frame" x="0.0" y="73.5" width="320" height="248.5"/>
                                                 <subviews>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eQv-G9-HmJ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="160" height="248.5"/>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eQv-G9-HmJ" customClass="IntrinsicTableView" customModule="ALC_RB" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="159.5" height="248.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="160" id="g95-jI-csn"/>
-                                                        </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_protocol_team_one" rowHeight="50" id="VfX-Os-tDU" customClass="RefereeProtocolPlayerTeamOneTableViewCell" customModule="ALC_RB" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="160" height="50"/>
+                                                                <rect key="frame" x="0.0" y="28" width="159.5" height="50"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VfX-Os-tDU" id="fNQ-vb-LbE">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="50"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="159.5" height="50"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBN-T0-y5F">
@@ -4154,15 +4151,15 @@
                                                             </tableViewCell>
                                                         </prototypes>
                                                     </tableView>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nH9-dG-YV9">
-                                                        <rect key="frame" x="161" y="0.0" width="159" height="248.5"/>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nH9-dG-YV9" customClass="IntrinsicTableView" customModule="ALC_RB" customModuleProvider="target">
+                                                        <rect key="frame" x="160.5" y="0.0" width="159.5" height="248.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_protocol_team_two" rowHeight="50" id="iUf-LF-Dar" customClass="RefereeProtocolPlayerTeamTwoTableViewCell" customModule="ALC_RB" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="159" height="50"/>
+                                                                <rect key="frame" x="0.0" y="28" width="159.5" height="50"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iUf-LF-Dar" id="Yh2-AW-js0">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="159" height="50"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="159.5" height="50"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lhG-K3-swp">
@@ -4219,6 +4216,7 @@
                                                     <constraint firstAttribute="height" secondItem="eQv-G9-HmJ" secondAttribute="height" id="46W-ah-S9b"/>
                                                     <constraint firstItem="nH9-dG-YV9" firstAttribute="leading" secondItem="eQv-G9-HmJ" secondAttribute="trailing" constant="1" id="VKr-pS-0rY"/>
                                                     <constraint firstItem="eQv-G9-HmJ" firstAttribute="top" secondItem="SNU-bh-uGn" secondAttribute="top" id="XGd-kD-SRk"/>
+                                                    <constraint firstItem="eQv-G9-HmJ" firstAttribute="width" secondItem="nH9-dG-YV9" secondAttribute="width" id="cE5-om-Xou"/>
                                                     <constraint firstAttribute="trailing" secondItem="nH9-dG-YV9" secondAttribute="trailing" id="coX-Nd-K5F"/>
                                                     <constraint firstAttribute="height" secondItem="nH9-dG-YV9" secondAttribute="height" id="izg-KI-jdQ"/>
                                                     <constraint firstItem="eQv-G9-HmJ" firstAttribute="leading" secondItem="SNU-bh-uGn" secondAttribute="leading" id="jtW-7X-syS"/>
@@ -4441,7 +4439,6 @@
                         <outlet property="scoreAtTimeTeamOne_label" destination="EqQ-i9-9yB" id="92e-sA-Qfo"/>
                         <outlet property="scoreAtTimeTeamTwo_label" destination="vMM-O7-aEh" id="lz5-3V-TRK"/>
                         <outlet property="score_label" destination="Mmb-JB-qZc" id="BMB-xy-KuS"/>
-                        <outlet property="teamOne_width" destination="g95-jI-csn" id="Ps6-L3-qRB"/>
                         <outlet property="titleTeamOne_label" destination="3U9-Jk-Blc" id="aei-q9-mn9"/>
                         <outlet property="titleTeamTwo_label" destination="id7-3a-OAN" id="zlr-Nb-Lam"/>
                     </connections>

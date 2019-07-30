@@ -101,6 +101,19 @@ class ProtocolRefereeViewModel {
     
     // MARK: PREPARE FOR DISPLAY OR PREPARE DATA FOR SERVER REQUEST
     
+    func prepareAutogoalsCount(for team: ClubTeamHelper.TeamEnum) -> Int {
+        var countOfAutoGoals = 0
+        if team == .one
+        {
+            
+        }
+        if team == .two
+        {
+            
+        }
+        return countOfAutoGoals
+    }
+    
     func prepareCurrentTime() -> String {
         return self.currentTime.rawValue
     }

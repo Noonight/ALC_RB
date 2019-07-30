@@ -27,6 +27,7 @@
 		1823DC2622952762000A1055 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1823DC2422952762000A1055 /* LoadingCell.swift */; };
 		1823DC2722952762000A1055 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1823DC2522952762000A1055 /* LoadingCell.xib */; };
 		1824601322C5CC6F0061E877 /* Button Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824601222C5CC6F0061E877 /* Button Extensions.swift */; };
+		1826378C22F085BF0014C30A /* IntrinsicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1826378B22F085BF0014C30A /* IntrinsicTableView.swift */; };
 		1839244822C7500D00A644F5 /* EditMatchReferees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1839244722C7500D00A644F5 /* EditMatchReferees.swift */; };
 		1839244A22C7CC4000A644F5 /* SoloMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1839244922C7CC4000A644F5 /* SoloMatch.swift */; };
 		184A8E4022BB6DB20027BC8E /* mmUpcomingMatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A8E3F22BB6DB20027BC8E /* mmUpcomingMatches.swift */; };
@@ -283,6 +284,7 @@
 		1823DC2422952762000A1055 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		1823DC2522952762000A1055 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		1824601222C5CC6F0061E877 /* Button Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button Extensions.swift"; sourceTree = "<group>"; };
+		1826378B22F085BF0014C30A /* IntrinsicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicTableView.swift; sourceTree = "<group>"; };
 		1839244722C7500D00A644F5 /* EditMatchReferees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMatchReferees.swift; sourceTree = "<group>"; };
 		1839244922C7CC4000A644F5 /* SoloMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloMatch.swift; sourceTree = "<group>"; };
 		184A8E3F22BB6DB20027BC8E /* mmUpcomingMatches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mmUpcomingMatches.swift; sourceTree = "<group>"; };
@@ -586,6 +588,14 @@
 				1823DC2522952762000A1055 /* LoadingCell.xib */,
 			);
 			path = "loading cell";
+			sourceTree = "<group>";
+		};
+		1826378A22F085A50014C30A /* base views */ = {
+			isa = PBXGroup;
+			children = (
+				1826378B22F085BF0014C30A /* IntrinsicTableView.swift */,
+			);
+			path = "base views";
 			sourceTree = "<group>";
 		};
 		18606A2F22D30B4300F5D2FE /* custom view */ = {
@@ -1011,6 +1021,7 @@
 		CEA6EBB421A53F15008F874D /* base */ = {
 			isa = PBXGroup;
 			children = (
+				1826378A22F085A50014C30A /* base views */,
 				DBC6155222EE2D920078FAE3 /* animation */,
 				CEA6EBB721A53F85008F874D /* mvp */,
 				DB673FDF22DE22EC00581E6D /* infinity scroll */,
@@ -2001,6 +2012,7 @@
 				DB17385221BA897D00017B6D /* UpcomingGameTableViewCell.swift in Sources */,
 				18606A3522D3381500F5D2FE /* ProtocolEventsController.swift in Sources */,
 				DBB208F0221315110010B600 /* RefereeProtocolTableViewCell.swift in Sources */,
+				1826378C22F085BF0014C30A /* IntrinsicTableView.swift in Sources */,
 				187F2E0222CB19440049EA77 /* EditTeamProtocolTableViewController.swift in Sources */,
 				DB9FA4AC22ECA1A000BA5A52 /* CellActions.swift in Sources */,
 				DB1CA1082226BC38005E1FB9 /* RuntimeError.swift in Sources */,

@@ -89,7 +89,7 @@ class DoMatchProtocolRefereeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.setupTableViewWidth()
+//        self.setupTableViewWidth()
     }
 }
 
@@ -99,13 +99,17 @@ class DoMatchProtocolRefereeViewController: UIViewController {
 
 extension DoMatchProtocolRefereeViewController {
     
+    func setupFooter() {
+        self.tabl
+    }
+    
     func setupFoulsCounter() {
         self.foulsTeamOneCount_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapTeamOneFouls)))
         self.foulsTeamTwoCount_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapTeamTwoFouls)))
     }
     
     func setupTableViewWidth() {
-        self.teamOne_width.constant = UIScreen.main.bounds.width / 2
+        self.teamOne_width.constant = self.view.frame.width / 2
     }
     
     func setupEventMaker() {
