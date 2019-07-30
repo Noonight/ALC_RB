@@ -57,7 +57,7 @@ class EditMatchProtocolViewController: UIViewController {
         super.viewDidLoad()
         
         self.setupPresenter()
-        self.setupNavController()
+//        self.setupNavController()
         
         
     }
@@ -68,7 +68,7 @@ class EditMatchProtocolViewController: UIViewController {
         self.setupNavController()
         self.setupView()
         
-        self.preConfigureModelControllers()
+//        self.preConfigureModelControllers()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

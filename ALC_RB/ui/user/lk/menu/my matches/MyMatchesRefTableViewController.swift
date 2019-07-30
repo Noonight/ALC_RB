@@ -171,6 +171,8 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
                             
                             self.refProtocol.model = cell?.cellModel
                             
+                            self.refProtocol.preConfigureModelControllers()
+                            
                             self.show(self.refProtocol, sender: self)
                         },
                         failure: { error in
