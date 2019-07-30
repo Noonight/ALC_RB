@@ -20,7 +20,23 @@ class PlayersTeamLeagueDetailViewController: UIViewController {
     let cellId = "player_team_cell"
     
     //var leagueDetailModel: LeagueDetailModel = LeagueDetailModel()
-    var team = LITeam()
+    var _team: LITeam = LITeam()
+    var team: LITeam {
+        get {
+            return self._team
+        }
+        set (newValue) {
+            var newVal = newValue
+            let filteredPlayers = newVal.players?.filter({ liPLayer -> Bool in
+                return liPLayer.getInviteStatus() == .accepted || liPLayer.getInviteStatus() == .approved
+            })
+            if let teamPlayers = filteredPlayers {
+                newVal.players = teamPlayers
+            }
+            _team = newVal
+        }
+    }
+    var fetchedPersons: [Person] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +80,10 @@ extension PlayersTeamLeagueDetailViewController: UITableViewDataSource {
         return view
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 74
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -83,15 +103,31 @@ extension PlayersTeamLeagueDetailViewController: UITableViewDataSource {
     }
     
     func configureCell(cell: PlayersTeamLeagueDetailTableViewCell, model: LIPlayer) {
-        presenter.getPlayer(player: model.playerId) { (person) in
-//            cell.name.text = person.person.surname
-            cell.name.text = person.person.getSurnameNP()
+        
+        func setupCell(person: Person) {
+            cell.name.text = person.getSurnameNP()
             cell.games.text = String(model.matches)
             cell.goals.text = String(model.goals)
             cell.yellow_cards.text = String(model.yellowCards)
             cell.disqualifications.text = String(model.disquals)
         }
+        
+        if let fetchedPerson = fetchedPersons.filter({ person -> Bool in
+            return person.id == model.playerId
+        }).first {
+            setupCell(person: fetchedPerson)
+        } else {
+            let hud = cell.showLoadingViewHUD()
+            presenter.getPlayer(player: model.playerId)
+            { (person) in
+                self.fetchedPersons.append(person.person)
+                setupCell(person: person.person)
+                hud.hide(animated: true)
+//                hud.hideAfter(seconds: 10)
+            }
+        }
     }
+    
 }
 
 extension PlayersTeamLeagueDetailViewController: UITableViewDelegate {

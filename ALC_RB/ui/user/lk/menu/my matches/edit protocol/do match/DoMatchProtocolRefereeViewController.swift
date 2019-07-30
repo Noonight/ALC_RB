@@ -30,6 +30,10 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         
         static let PROGRESS_PROTOCOL_SAVING = "Сохраняем протокол..."
         static let PROGRESS_PROTOCOL_SAVED  = "Протокол сохранен"
+        
+        static let FAILURE_ADD_EVENT    = "Добавить событие не удалось, вы можете сохранить ивент позже"
+        static let DELETE               = "Удалить"
+        static let LEAVE                = "Оставить"
     }
     enum Segues {
         static let REFEREES = "segue_edit_referees_do_protocol"
@@ -41,12 +45,16 @@ class DoMatchProtocolRefereeViewController: UIViewController {
     @IBOutlet weak var score_label: UILabel!
     @IBOutlet weak var titleTeamTwo_label: UILabel!
     
+    @IBOutlet weak var foulsTeamOneCount_view: UIView!
+    @IBOutlet weak var foulsTeamTwoCount_view: UIView!
+    
     @IBOutlet weak var scoreAtTimeTeamOne_label: UILabel!
     @IBOutlet weak var scoreAtTimeTeamTwo_label: UILabel!
     
     @IBOutlet weak var playersOne_table: UITableView!
     @IBOutlet weak var playersTwo_table: UITableView!
     
+    @IBOutlet weak var teamOne_width: NSLayoutConstraint!
     // MARK: Var & Let
     
     let userDefaults = UserDefaultsHelper()
@@ -70,9 +78,12 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         self.setupPresenter()
         self.setupTableDataSources()
         self.setupEventMaker()
-        self.setupView()
+        self.setupStaticView()
+        self.setupDynamicView()
         self.setupTableViews()
         self.setupTableViewsActions()
+        self.setupTableViewWidth()
+        self.setupFoulsConunter()
     }
 }
 
@@ -82,12 +93,19 @@ class DoMatchProtocolRefereeViewController: UIViewController {
 
 extension DoMatchProtocolRefereeViewController {
     
+    func setupFoulsConunter() {
+        self.foulsTeamOneCount_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapTeamOneFouls)))
+        self.foulsTeamTwoCount_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapTeamTwoFouls)))
+    }
+    
+    func setupTableViewWidth() {
+        self.teamOne_width.constant = UIScreen.main.bounds.width / 2
+    }
+    
     func setupEventMaker() {
         self.eventMaker = EventMaker(callBack:
         { liEvent in
-            self.viewModel.appendEvent(event: liEvent)
-//            dump(self.viewModel.eventsController)
-            self.setupTableDataSources()
+            self.eventMakerCompleteWork(event: liEvent)
         })
     }
     
@@ -116,11 +134,15 @@ extension DoMatchProtocolRefereeViewController {
         }
     }
     
-    func setupView() {
-        self.titleTeamOne_label.text = ClubTeamHelper.getTeamTitle(league: viewModel.leagueDetailModel.leagueInfo.league, match: viewModel.match, team: .one)
-        self.titleTeamTwo_label.text = ClubTeamHelper.getTeamTitle(league: viewModel.leagueDetailModel.leagueInfo.league, match: viewModel.match, team: .two)
+    func setupDynamicView() {
+        
         // setup score // mb calculate before
         self.score_label.text = self.viewModel.match.score
+    }
+    
+    func setupStaticView() {
+        self.titleTeamOne_label.text = ClubTeamHelper.getTeamTitle(league: viewModel.leagueDetailModel.leagueInfo.league, match: viewModel.match, team: .one)
+        self.titleTeamTwo_label.text = ClubTeamHelper.getTeamTitle(league: viewModel.leagueDetailModel.leagueInfo.league, match: viewModel.match, team: .two)
     }
     
     func setupTableViews() {
@@ -143,6 +165,54 @@ extension DoMatchProtocolRefereeViewController {
 // MARK: ACTIONS
 
 extension DoMatchProtocolRefereeViewController {
+    
+    @objc func tapTeamOneFouls() {
+        self.viewModel.upFoulsCount(for: .one)
+        self.scoreAtTimeTeamOne_label.text = String(self.viewModel.prepareFoulsCount(for: .one))
+    }
+    
+    @objc func tapTeamTwoFouls() {
+        self.viewModel.upFoulsCount(for: .two)
+        self.scoreAtTimeTeamTwo_label.text = String(self.viewModel.prepareFoulsCount(for: .two))
+    }
+    
+    func eventMakerCompleteWork(event: LIEvent) { // TODO : need work with data base or smth
+        self.viewModel.appendEvent(event: event)
+        
+        let hud = self.showLoadingViewHUD()
+        
+        self.presenter.saveProtocol(
+            token: self.userDefaults.getToken(),
+            editedProtocol: self.viewModel.prepareEditProtocol(),
+        ok: { match in
+                self.viewModel.updateMatch(match: match.match!.covertToLIMatch())
+                hud.showSuccessAfterAndHideAfter()
+                
+                self.setupTableDataSources()
+                self.setupDynamicView()
+        },
+        failure: { error in
+                hud.hide(animated: true)
+                
+                let delete = UIAlertAction(title: Texts.DELETE, style: .default)
+                { alerter in
+                    self.viewModel.deleteLastAddedEvent()
+                    
+                    self.setupTableDataSources()
+                    self.setupDynamicView()
+                }
+                
+                let leave = UIAlertAction(title: Texts.LEAVE, style: .cancel)
+                { alerter in
+                    Print.m("NOTHING")
+                    
+                    self.setupTableDataSources()
+                    self.setupDynamicView()
+                }
+                
+                self.showAlert(title: Constants.Texts.FAILURE, message: error.localizedDescription, actions: [delete, leave])
+        })
+    }
     
     @IBAction func onAcceptProtocolBtnPressed(_ sender: UIButton) {
         
@@ -210,23 +280,29 @@ extension DoMatchProtocolRefereeViewController {
     }
     
     @IBAction func onFirstTimeBtnPressed(_ sender: UIButton) {
-        self.viewModel.currentTime = .firstTime
-        self.title = self.viewModel.currentTime.rawValue
+        self.viewModel.updateTime(time: .firstTime)
+//        self.viewModel.currentTime = .firstTime
+        self.title = self.viewModel.prepareCurrentTime()
+        self.updateUIFouls()
     }
     
     @IBAction func onSecondTimeBtnPressed(_ sender: UIButton) {
-        self.viewModel.currentTime = .secondTime
-        self.title = self.viewModel.currentTime.rawValue
+//        self.viewModel.currentTime = .secondTime
+        self.viewModel.updateTime(time: .secondTime)
+        self.title = self.viewModel.prepareCurrentTime()
+        self.updateUIFouls()
     }
     
     @IBAction func onMoreTimeBtnPressed(_ sender: UIButton) {
-        self.viewModel.currentTime = .moreTime
-        self.title = self.viewModel.currentTime.rawValue
+        self.viewModel.updateTime(time: .moreTime)
+        self.title = self.viewModel.prepareCurrentTime()
+        self.updateUIFouls()
     }
     
     @IBAction func onPenaltyTimeBtnPressed(_ sender: UIButton) {
-        self.viewModel.currentTime = .penalty
-        self.title = self.viewModel.currentTime.rawValue
+        self.viewModel.updateTime(time: .penalty)
+        self.title = self.viewModel.prepareCurrentTime()
+        self.updateUIFouls()
     }
 }
 
@@ -241,6 +317,15 @@ extension DoMatchProtocolRefereeViewController: CellActions {
             playerId: (curModel.player?.playerID)!,
             time: self.viewModel.currentTime.rawValue
         )
+    }
+}
+
+// MARK: HELPERS
+
+extension DoMatchProtocolRefereeViewController {
+    func updateUIFouls() {
+        self.scoreAtTimeTeamOne_label.text = String(self.viewModel.prepareFoulsCount(for: .one))
+        self.scoreAtTimeTeamTwo_label.text = String(self.viewModel.prepareFoulsCount(for: .two))
     }
 }
 

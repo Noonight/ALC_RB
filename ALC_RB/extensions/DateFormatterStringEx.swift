@@ -28,7 +28,7 @@ extension String {
         
         var dt = dateFormatter.date(from: self)
         
-        dateFormatter.timeZone = TimeZone.current
+//        dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = to.rawValue
         
         
@@ -39,7 +39,7 @@ extension String {
             
             dt = dateFormatter.date(from: self)
             
-            dateFormatter.timeZone = TimeZone.current
+//            dateFormatter.timeZone = TimeZone.current
             dateFormatter.dateFormat = to.rawValue
         }
         

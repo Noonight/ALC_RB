@@ -89,6 +89,7 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
     
     func onGetUpcomingMatchesSuccesful(data: MmUpcomingMatches) {
         tableData = data
+        dump(data)
         //try! print(tableData.jsonString())
         updateUI()
     }
@@ -123,10 +124,10 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
 //        let model = tableData.matches![indexPath.row]
         if let model = tableData.matches?[indexPath.row] {
             if let date =  model.date {
-                cell.mDate.text = date.convertDate(from: .utc, to: .local)
+                cell.mDate.text = date.convertDate(from: .utcTime, to: .local)
 
             }
-            cell.mTime.text = model.date!.convertDate(from: .utc, to: .localTime)
+            cell.mTime.text = model.date!.convertDate(from: .utcTime, to: .localTime)
             cell.mTour.text = model.tour
             cell.mPlace.text = model.place
             cell.mTitleTeam1.text = model.teamOne?.name

@@ -150,6 +150,8 @@ struct LIEvent: Codable {
             return .autoGoal
         case "penalty":
             return .penalty
+        case "penaltyFailure":
+            return .penaltyFailure
         default:
             return EventType.non
         }
@@ -162,11 +164,12 @@ struct LIEvent: Codable {
         case foul = "Ф"
         case autoGoal = "А"
         case penalty = "П"
+        case penaltyFailure = "ПН"
         case non = "-"
     }
     
     enum SystemEventType: String {
-        case goal, yellowCard, redCard, foul, autoGoal, penalty, non
+        case goal, yellowCard, redCard, foul, autoGoal, penalty, penaltyFailure, non
     }
     
     func getSystemEventType() -> SystemEventType {
@@ -183,6 +186,8 @@ struct LIEvent: Codable {
             return .autoGoal
         case "penalty":
             return .penalty
+        case "penaltyFailure":
+            return .penaltyFailure
         default:
             return .non
         }
@@ -196,6 +201,9 @@ struct LIEvent: Codable {
             return UIImage(named: "ic_faul")
         case .penalty:
             let image = UIImage(named: "ic_green_footbal")
+            return image?.addText(textToDraw: NSString(string: "П"), atCorner: 2, textColor: .black, textFont: UIFont.systemFont(ofSize: 25))
+        case .penaltyFailure:
+            let image = UIImage(named: "ic_gray_footbal")
             return image?.addText(textToDraw: NSString(string: "П"), atCorner: 2, textColor: .black, textFont: UIFont.systemFont(ofSize: 25))
         case .yellowCard:
             return UIImage(named: "ic_yellowCard")
@@ -267,7 +275,7 @@ struct LITeam: Codable {
     let losses: Int?
     let draws: Int?
     let groupScore: Int?
-    let players: [LIPlayer]?
+    var players: [LIPlayer]?
     let id: String?
     let name: String?
     let creator: String?
@@ -314,6 +322,22 @@ struct LIPlayer: Codable {
     let goals: Int
     let id: String
     let playerId: String
+    
+    func getInviteStatus() -> InviteStatus {
+        if inviteStatus.contains(InviteStatus.accepted.rawValue) {
+            return InviteStatus.accepted
+        }
+        if inviteStatus.contains(InviteStatus.approved.rawValue) {
+            return InviteStatus.approved
+        }
+        if inviteStatus.contains(InviteStatus.rejected.rawValue) {
+            return InviteStatus.rejected
+        }
+        if inviteStatus.contains(InviteStatus.pending.rawValue) {
+            return InviteStatus.pending
+        }
+        return .noData
+    }
     
     func convertToPlayer() -> Player {
         return Player().with(inviteStatus: inviteStatus, number: number, activeYellowCards: activeYellowCards, yellowCards: yellowCards, redCards: redCards, activeDisquals: activeDisquals, disquals: disquals, matches: matches, goals: goals, id: id, playerID: playerId)

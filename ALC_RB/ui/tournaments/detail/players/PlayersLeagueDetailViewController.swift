@@ -34,6 +34,7 @@ class PlayersLeagueDetailViewController: UIViewController {
             updateUI()
         }
     }
+    var fetchedPersons: [Person] = []
     
     let presenter = PlayersLeagueDetailPresenter()
     
@@ -47,7 +48,13 @@ class PlayersLeagueDetailViewController: UIViewController {
         initPresenter()
         
         for i in leagueDetailModel.leagueInfo.league.teams! {
-            playersArray += i.players!
+            let filteredPlayers = i.players?.filter({ liPlayer -> Bool in
+                return liPlayer.getInviteStatus() == .accepted || liPlayer.getInviteStatus() == .approved
+            })
+            if let filterPlayerArray = filteredPlayers {
+                playersArray += filterPlayerArray
+            }
+            
             //print("\(i.players)")
         }
         
@@ -230,6 +237,10 @@ extension PlayersLeagueDetailViewController: UITableViewDataSource {
         return view
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 37
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -247,9 +258,9 @@ extension PlayersLeagueDetailViewController: UITableViewDataSource {
     }
     
     func configureCell(cell: PlayersLeagueTableViewCell, leagueDetailModel: LeagueDetailModel, player: LIPlayer) {
-        presenter.getUser(user: player.playerId) { (person) in
-//            cell.name_label.text = person.person.getFullName()
-            cell.name_label.text = person.person.getSurnameNP()
+        func setupCell(person: Person)
+        {
+            cell.name_label.text = person.getSurnameNP()
             
             self.presenter.getClubImageByClubId(user: self.getClubByUserId(user: player.playerId)) { (img) in
                 cell.photo_img.image = img.af_imageRoundedIntoCircle()
@@ -260,6 +271,19 @@ extension PlayersLeagueDetailViewController: UITableViewDataSource {
             cell.yellow_cards_label.text = String(player.activeYellowCards)
             cell.red_cards_label.text = String(player.redCards)
         }
+        if let person = fetchedPersons.filter({ person -> Bool in
+            return person.id == player.playerId
+        }).first {
+            setupCell(person: person)
+        } else {
+            let hud = cell.showLoadingViewHUD()
+            presenter.getUser(user: player.playerId) { (person) in
+                self.fetchedPersons.append(person.person)
+                setupCell(person: person.person)
+                hud.hide(animated: true)
+            }
+        }
+        
     }
     
     func getClubByUserId(user id: String) -> String {

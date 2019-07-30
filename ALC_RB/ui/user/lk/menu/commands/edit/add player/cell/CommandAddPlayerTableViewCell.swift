@@ -14,7 +14,8 @@ import Kingfisher
 class CommandAddPlayerTableViewCell: UITableViewCell {
     
     enum Status {
-        case invited(String)
+        case invitedIn(String)
+        case plyedIn(String)
         case notUsed
     }
     
@@ -83,12 +84,14 @@ class CommandAddPlayerTableViewCell: UITableViewCell {
     
     func setStatus(player: Person, status: Status) {
         switch status {
-        case .invited(let string):
-            if string == "В вашей команде" {
-                self.player_status.textColor = UIColor.green
-            } else {
-                self.player_status.textColor = UIColor.blue
-            }
+        case .invitedIn(let string):
+            self.player_status.textColor = UIColor.green
+            
+            self.player_status.text = string
+            self.player_date_of_birth.text = ""
+            
+        case .plyedIn(let string):
+            self.player_status.textColor = UIColor.blue
             self.player_status.text = string
             self.player_date_of_birth.text = ""
         case .notUsed:

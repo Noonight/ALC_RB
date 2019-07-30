@@ -55,6 +55,7 @@
 		187F2E0622CB19440049EA77 /* EditEventsMatchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F2DF522CB19440049EA77 /* EditEventsMatchTableViewController.swift */; };
 		187F2E0722CB19440049EA77 /* EditEventsProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F2DF722CB19440049EA77 /* EditEventsProtocolTableViewCell.swift */; };
 		187F2E0822CB19440049EA77 /* EditEventsMatchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F2DF822CB19440049EA77 /* EditEventsMatchPresenter.swift */; };
+		1886264522F00E5200DC75E3 /* UITableViewCell+MBProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1886264422F00E5200DC75E3 /* UITableViewCell+MBProgressHUD.swift */; };
 		18870B3122C0DD0000126A87 /* ClubCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18870B3022C0DD0000126A87 /* ClubCreateViewController.swift */; };
 		18870B3322C0DD1300126A87 /* ClubCreatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18870B3222C0DD1300126A87 /* ClubCreatePresenter.swift */; };
 		188F097B227BFF8700B827AC /* CommandAddPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */; };
@@ -310,6 +311,7 @@
 		187F2DF522CB19440049EA77 /* EditEventsMatchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditEventsMatchTableViewController.swift; sourceTree = "<group>"; };
 		187F2DF722CB19440049EA77 /* EditEventsProtocolTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditEventsProtocolTableViewCell.swift; sourceTree = "<group>"; };
 		187F2DF822CB19440049EA77 /* EditEventsMatchPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditEventsMatchPresenter.swift; sourceTree = "<group>"; };
+		1886264422F00E5200DC75E3 /* UITableViewCell+MBProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+MBProgressHUD.swift"; sourceTree = "<group>"; };
 		18870B3022C0DD0000126A87 /* ClubCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubCreateViewController.swift; sourceTree = "<group>"; };
 		18870B3222C0DD1300126A87 /* ClubCreatePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubCreatePresenter.swift; sourceTree = "<group>"; };
 		188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerViewModel.swift; sourceTree = "<group>"; };
@@ -934,6 +936,7 @@
 				DB966A5C22EC589B00064233 /* MBProgressHud Extensions.swift */,
 				18A82A5A22BB7B26006FA050 /* View Controller Alerts.swift */,
 				DB4C45DF22EDFD4900B28148 /* UITableView Extensions.swift */,
+				1886264422F00E5200DC75E3 /* UITableViewCell+MBProgressHUD.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -1917,7 +1920,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AMScrollingNavbar/AMScrollingNavbar.framework",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
@@ -1958,7 +1961,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		51D949AE18D1EDAED4381B3B /* [CP] Check Pods Manifest.lock */ = {
@@ -2028,6 +2031,7 @@
 				1814452722E6BFCF00C9D45E /* MainTabBarViewController.swift in Sources */,
 				DBA77C2222CF4865000DCF02 /* ProtocolRefereesController.swift in Sources */,
 				DB45709822EF4EC000455BFB /* RefereeScoreModel.swift in Sources */,
+				1886264522F00E5200DC75E3 /* UITableViewCell+MBProgressHUD.swift in Sources */,
 				DBFB83932201CFFC008A8F79 /* PlayersLeagueDetailPresenter.swift in Sources */,
 				DB9FA4A122EC986200BA5A52 /* RefereeProtocolPlayerTableViewCell.swift in Sources */,
 				DBA77C2522CFA8B3000DCF02 /* EditRefereesProtocolViewController.swift in Sources */,

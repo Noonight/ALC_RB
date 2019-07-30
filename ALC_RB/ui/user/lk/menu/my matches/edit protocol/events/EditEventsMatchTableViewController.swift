@@ -34,6 +34,7 @@ class EditEventsMatchTableViewController: UITableViewController {
     
     var tableModel = TableStruct()
 //    var destinationModel = [LIEvent]()
+    var fetchedPersons: [Person] = []
     
     var model: MyMatchesRefTableViewCell.CellModel!
     
@@ -150,13 +151,12 @@ class EditEventsMatchTableViewController: UITableViewController {
     }
     
     func configureCell(cell: EditEventsProtocolTableViewCell, model: LIEvent) {
-        presenter.getPlayer(player: model.player, get_player: { (person) in
-//            cell.name_label.text = person.person.getFullName()
-            cell.name_label.text = person.person.getSurnameNP()
-//            cell.type_label.text = model.getEventType().rawValue
+        
+        func setupCell(person: Person) {
+            cell.name_label.text = person.getSurnameNP()
             cell.event_type_image.image = model.getSystemEventImage()
             
-            if let url = person.person.photo {
+            if let url = person.photo {
                 let url = ApiRoute.getImageURL(image: url)
                 let processor = DownsamplingImageProcessor(size: cell.photo_image.frame.size)
                     .append(another: CroppingImageProcessorCustom(size: cell.photo_image.frame.size))
@@ -175,18 +175,24 @@ class EditEventsMatchTableViewController: UITableViewController {
             } else {
                 cell.photo_image.image = #imageLiteral(resourceName: "ic_logo")
             }
-            
-//            if person.person.photo != nil {
-//                self.presenter.getPlayerImage(player_photo: person.person.photo ?? " ", get_image: { (image) in
-//                    cell.photo_image.image = image
-//                    cell.photo_image.cropAndRound()
-//                })
-//            } else {
-//                cell.photo_image.image = UIImage(named: "ic_logo")
-//            }
-        }) { (error) in
-            
         }
+        
+        if let person = fetchedPersons.filter({ person -> Bool in
+            return person.id == model.player
+        }).first {
+            setupCell(person: person)
+        } else {
+            let hud = cell.showLoadingViewHUD()
+            presenter.getPlayer(player: model.player, get_player:
+            { (person) in
+                self.fetchedPersons.append(person.person)
+                setupCell(person: person.person)
+                hud.hide(animated: true)
+            }) { (error) in
+                hud.setToFailureWith(detailMessage: error.localizedDescription)
+            }
+        }
+        
     }
 
     // MARK: - Table view delegate

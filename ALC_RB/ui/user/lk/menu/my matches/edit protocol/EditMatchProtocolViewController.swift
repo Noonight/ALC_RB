@@ -57,7 +57,7 @@ class EditMatchProtocolViewController: UIViewController {
         self.setupPresenter()
         self.setupNavController()
         
-        self.preConfigureModelControllers()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +65,8 @@ class EditMatchProtocolViewController: UIViewController {
         
         self.setupNavController()
         self.setupView()
+        
+        self.preConfigureModelControllers()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,7 +82,7 @@ class EditMatchProtocolViewController: UIViewController {
     }
     
     func setupView() {
-        setMatchByUserDefaults()
+//        setMatchByUserDefaults()
         
         teamOneTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
         
@@ -136,13 +138,13 @@ extension EditMatchProtocolViewController {
         }).first?.players)!
     }
     
-    func setMatchByUserDefaults() {
-        let tmpSelfMatch = self.match
-        let match = userDefaults.getAuthorizedUser()?.person.participationMatches!.filter({ pMatch -> Bool in
-            return pMatch.id == tmpSelfMatch.id
-        }).first
-        self.match = (match?.covertToLIMatch())!
-    }
+//    func setMatchByUserDefaults() {
+//        let tmpSelfMatch = self.match
+//        let match = userDefaults.getAuthorizedUser()?.person.participationMatches!.filter({ pMatch -> Bool in
+//            return pMatch.id == tmpSelfMatch.id
+//        }).first
+//        self.match = (match?.covertToLIMatch())!
+//    }
 }
 
 // MARK: Actions
@@ -263,7 +265,7 @@ extension EditMatchProtocolViewController {
                 events: self.eventsController
             )
 //            controller.leagueDetailModel = leagueDetailModel
-            setMatchByUserDefaults()
+//            setMatchByUserDefaults()
 //            controller.match = match
         default:
             break
@@ -309,7 +311,7 @@ extension EditMatchProtocolViewController: EditMatchProtocolView {
         })
         user?.person.participationMatches!.append(match.match!)
         self.userDefaults.setAuthorizedUser(user: user!)
-        setMatchByUserDefaults()
+//        setMatchByUserDefaults()
         showAlert(title: "Протокол сохранен", message: "")
     }
     

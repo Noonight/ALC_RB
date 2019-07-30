@@ -28,4 +28,23 @@ class LeagueController {
             }
         }
     }
+    
+    func getPlayerById(_ id: String) -> Player? {
+        let team = league.teams.filter { team -> Bool in
+            return team.players.contains(where: { player -> Bool in
+                return player.playerID == id
+            })
+        }.first
+        return team?.players.filter({ player -> Bool in
+            return player.playerID == id
+        }).first
+    }
+    
+    func getTeamByPlayerId(_ id: String) -> Team? {
+        return league.teams.filter({ team -> Bool in
+            return team.players.contains(where: { player -> Bool in
+                return player.playerID == id
+            })
+        }).first
+    }
 }

@@ -32,6 +32,9 @@ class ProtocolRefereeViewModel {
         }
     }
     
+    var teamOneFoulsCount = 0 // TODO need update later
+    var teamTwoFoulsCount = 0
+    
     let dataManager = ApiRequests()
     
     init(match: LIMatch, leagueDetailModel: LeagueDetailModel, teamOneModel: ProtocolPlayersController, teamTwoModel: ProtocolPlayersController,
@@ -44,20 +47,63 @@ class ProtocolRefereeViewModel {
         self.eventsController = eventsModel
     }
     
+    // MARK: UPDATE DATA
+    
+    func upFoulsCount(for team: ClubTeamHelper.TeamEnum) {
+        if team == .one
+        {
+            self.teamOneFoulsCount += 1
+        }
+        if team == .two
+        {
+            self.teamTwoFoulsCount += 1
+        }
+    }
+    
+    func clearFouls() {
+        self.teamOneFoulsCount = 0
+        self.teamTwoFoulsCount = 0
+    }
+    
+    func updateTime(time: CurrentTime) {
+        if self.currentTime != time
+        {
+            self.currentTime = time
+            if self.currentTime == .firstTime
+            {
+                self.clearFouls()
+            }
+            if self.currentTime == .secondTime
+            {
+                self.clearFouls()
+            }
+            if self.currentTime == .penalty
+            {
+                self.clearFouls()
+            }
+        }
+    }
+    
+    func deleteLastAddedEvent() {
+        self.eventsController.removeLastAdded()
+    }
+    
+    func updateMatch(match: LIMatch) {
+        self.match = match
+        self.eventsController.updateEvents(events: match.events)
+    }
+    
     // MARK: WORK WITH VARIABLES
     
-//    func appendNewEvent(eventType: LIEvent.EventType, playerId: String, time: ) {
-//        eventsController.add(event)
-//    }
-    
     func appendEvent(event: LIEvent) {
-        Print.m(event)
-        Print.m(eventsController.events)
         self.eventsController.add(event)
-        Print.m(eventsController.events)
     }
     
     // MARK: PREPARE FOR DISPLAY OR PREPARE DATA FOR SERVER REQUEST
+    
+    func prepareCurrentTime() -> String {
+        return self.currentTime.rawValue
+    }
     
     func prepareMatchId() -> String {
         return self.match.id
@@ -69,6 +115,18 @@ class ProtocolRefereeViewModel {
             events: EditProtocol.Events(events: eventsController.events),
             playersList: self.getPlayersId()
         )
+    }
+    
+    func prepareFoulsCount(for team: ClubTeamHelper.TeamEnum) -> Int {
+        if team == .one
+        {
+            return self.teamOneFoulsCount
+        }
+        if team == .two
+        {
+            return self.teamTwoFoulsCount
+        }
+        return 0
     }
     
     func prepareTableViewCells(team: ClubTeamHelper.TeamEnum, completed: @escaping ([RefereeProtocolPlayerTeamCellModel]) -> ()) {
@@ -155,6 +213,10 @@ class ProtocolRefereeViewModel {
                 if event.getEventType() == .penalty
                 {
                     returnedModel.successfulPenaltyGoals = returnedModel.successfulPenaltyGoals + 1
+                }
+                if event.getEventType() == .penaltyFailure
+                {
+                    returnedModel.failurePenaltyGoals = returnedModel.failurePenaltyGoals + 1
                 }
                 // MARK: TODO => failurePenalty
                 if event.getEventType() == .yellowCard

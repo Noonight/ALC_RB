@@ -34,7 +34,6 @@ class AddEventView: UIView {
     
     var callBacks: EventCallBack? {
         didSet {
-            Print.m("setup work")
             setupCallBacks()
         }
     }
@@ -43,7 +42,6 @@ class AddEventView: UIView {
     
     func setupCallBacks() {
         if self.callBacks != nil {
-            Print.m("call back is not nil")
 //            goal_image.addGestureRecognizer(UITapGestureRecognizer(target: goal_image, action: #selector(onGoal)))
 //            goal_tap.addTarget(self, action: #selector(onGoal))
             success_penalty_tap.addTarget(self, action: #selector(onSuccessPenalty))
@@ -61,7 +59,6 @@ class AddEventView: UIView {
     }
     
     @objc func onGoal() {
-        Print.m("goal tap work")
         goal_image.animateTap()
         callBacks?.onGoalPressed(playerId: self.playerId)
     }

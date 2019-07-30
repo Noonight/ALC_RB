@@ -15,6 +15,8 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     }
     private enum Texts {
         static let playerInTeam = "Игрок уже получил приглашение в эту команду"
+        static let PLAYER_IN_ANOTHER_TEAM = "В составе "
+        static let PLAYER_INVITED_TO = "Приглашен в команду "
     }
     
     struct TableModel {
@@ -199,20 +201,6 @@ private extension CommandAddPlayerTableViewController {
     func currentCount() -> Int {
         return tableModel.players.people.count
     }
-    
-//    func setStateRow(player: Player) {
-//        tableView.beginUpdates()
-//        if isFiltering() {
-////            filteredPlayers.people.remove(at: currentAddId!)
-//            (self.tableView.cellForRow(at: IndexPath(row: currentAddId!, section: 0)) as! CommandAddPlayerTableViewCell).setStatus(status: .invited("В вашей команде"))
-//        } else {
-//            (self.tableView.cellForRow(at: IndexPath(row: currentAddId!, section: 0)) as! CommandAddPlayerTableViewCell).setStatus(status: .invited("В вашей команде"))
-////            tableModel.players.people.remove(at: currentAddId!)
-//        }
-//
-//        self.leagueController.addPlayerToTeamById(id: team.id, player: player)
-//        tableView.endUpdates()
-//    }
 }
 
 // MARK: Presenter
@@ -344,56 +332,66 @@ extension CommandAddPlayerTableViewController {
     
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.list, for: indexPath) as! CommandAddPlayerTableViewCell
         
-        func setupStatus(player: Person) {
+        func setupStatus(person: Person) {
             if leagueController.league.teams.contains(where: { team -> Bool in
                 return team.id == self.team.id && team.players.contains(where: { inPlayer -> Bool in
-                    return player.id == inPlayer.playerID
+                    return person.id == inPlayer.playerID
                 })
             }) {
-                cell.configure(with: player, status: .invited("В вашей команде"))
+                cell.configure(with: person, status: .invitedIn("В вашей команде"))
             }
             let team = leagueController.league.teams.filter { team -> Bool in
                 return team.id != self.team.id && team.players.contains(where: { inPlayer -> Bool in
-                    return player.id == inPlayer.playerID && (inPlayer.inviteStatus == InviteStatus.approved.rawValue || inPlayer.inviteStatus == InviteStatus.accepted.rawValue || inPlayer.inviteStatus == InviteStatus.rejected.rawValue)
+                    return person.id == inPlayer.playerID && (inPlayer.inviteStatus == InviteStatus.approved.rawValue || inPlayer.inviteStatus == InviteStatus.accepted.rawValue || inPlayer.inviteStatus == InviteStatus.rejected.rawValue)
                 })
                 }.first
             if team != nil {
-                cell.configure(with: player, status: .invited("Играет в \(team!.name)"))
+                cell.configure(with: person, status: .invitedIn("\(Texts.PLAYER_IN_ANOTHER_TEAM)\(team!.name)"))
+            }
+            
+            if let player = leagueController.getPlayerById(person.id) {
+                
+                if player.getInviteStatus() == .accepted || player.getInviteStatus() == .approved // Подтвержден или одобрен
+                {
+                    cell.configure(with: person, status: .plyedIn("\(Texts.PLAYER_IN_ANOTHER_TEAM)\(leagueController.getTeamByPlayerId(person.id)?.name ?? "другой команды")"))
+                }
+                
+                if player.getInviteStatus() == .pending // Ожидание
+                {
+                    cell.configure(with: person, status: .invitedIn("\(Texts.PLAYER_INVITED_TO)\(leagueController.getTeamByPlayerId(person.id)?.name ?? "N")"))
+                }
+                
+            } else { // user not found in league
+                cell.configure(with: person, status: .notUsed)
             }
         }
         
         let player: Person
         if isFiltering() {
             player = filteredPlayers.people[indexPath.row]
-//            let teamPlayers = teamController.getTeamById(id: self.team.id)?.players
-//            cell.usedPlayers = teamPlayers!
             cell.configure(with: player, status: .notUsed)
             
-            setupStatus(player: player)
+            setupStatus(person: player)
             
             cell.cell_add_player_btn.tag = indexPath.row
             cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
         } else {
-//            if isLoadingCell(for: indexPath) {
-//                cell.configure(with: .none)
-//                cell.cell_loadMore_btn.addTarget(self, action: #selector(onLoadMoreBtnPressed), for: .touchUpInside)
-//
-//            } else {
             player = tableModel.players.people[indexPath.row]
             
             cell.configure(with: player, status: .notUsed)
             
-            setupStatus(player: player)
+            setupStatus(person: player)
             
             cell.cell_add_player_btn.tag = indexPath.row
             cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
             cell.tag = indexPath.row
-//            }
         }
         
         return cell
     }
+    
     // MARK: Delegate
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         Print.m("cell did select")

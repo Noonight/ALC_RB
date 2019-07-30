@@ -96,6 +96,7 @@ extension EventMaker: EventCallBack {
     }
     
     func onFailurePenaltyPressed(playerId: String) {
+        self.onHideTriggered(hide(eventType: .penaltyFailure))
         Print.m("No event for failure penalty") // NO EVENT FOR FAILURE PENALTY
     }
     
