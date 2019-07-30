@@ -156,14 +156,6 @@ class ProtocolRefereeViewModel {
         return 0
     }
     
-//    func fakePreapreTableViewCells(team: ClubTeamHelper.TeamEnum, completed: @escaping ([RefereeProtocolPlayerTeamCellModel]) -> ()) {
-//        var array: [RefereeProtocolPlayerTeamCellModel] = []
-//        for _ in 0...10 {
-//            array.append(RefereeProtocolPlayerTeamCellModel(player: Player(), person: Person(), eventsModel: RefereeProtocolPlayerEventsModel(goals: 1, successfulPenaltyGoals: 1, failurePenaltyGoals: 1, yellowCards: 1, redCard: false)))
-//        }
-//        completed(array)
-//    }
-    
     func prepareTableViewCells(team: ClubTeamHelper.TeamEnum, completed: @escaping ([RefereeProtocolPlayerTeamCellModel]) -> ()) {
         var returnedArray: [RefereeProtocolPlayerTeamCellModel] = []
         
@@ -253,7 +245,6 @@ class ProtocolRefereeViewModel {
                 {
                     returnedModel.failurePenaltyGoals = returnedModel.failurePenaltyGoals + 1
                 }
-                // MARK: TODO => failurePenalty
                 if event.getEventType() == .yellowCard
                 {
                     returnedModel.yellowCards = returnedModel.yellowCards + 1

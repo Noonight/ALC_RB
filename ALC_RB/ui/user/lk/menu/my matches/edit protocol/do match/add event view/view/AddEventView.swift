@@ -59,8 +59,6 @@ class AddEventView: UIView {
     
     func setupCallBacks() {
         if self.callBacks != nil {
-//            goal_image.addGestureRecognizer(UITapGestureRecognizer(target: goal_image, action: #selector(onGoal)))
-//            goal_tap.addTarget(self, action: #selector(onGoal))
             success_penalty_tap.addTarget(self, action: #selector(onSuccessPenalty))
             failure_penalty_tap.addTarget(self, action: #selector(onFailurePenalty))
             yellow_card_tap.addTarget(self, action: #selector(onYellowCard))
