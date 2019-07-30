@@ -73,6 +73,12 @@ extension UIImageView {
     }
 }
 
+extension CGSize {
+    func getHalfWidthHeight() -> CGFloat {
+        return min(width, height) / 2
+    }
+}
+
 extension UIImage {
     
     func addText(textToDraw: NSString, atCorner: Int, textColor: UIColor?, textFont: UIFont?) -> UIImage {

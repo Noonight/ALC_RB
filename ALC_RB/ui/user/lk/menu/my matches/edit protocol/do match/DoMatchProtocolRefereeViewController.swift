@@ -82,15 +82,18 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         self.setupDynamicView()
         self.setupTableViews()
         self.setupTableViewsActions()
-//        self.setupTableViewWidth()
         self.setupFoulsCounter()
+        self.setupAutogoalsFooter()
+        
+//        self.setupFakeData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-//        self.setupTableViewWidth()
-    }
+//    func setupFakeData() {
+//        self.viewModel.fakePreapreTableViewCells(team: .one) { dataSource in
+//            self.playersTeamOne.dataSource = dataSource
+//            self.playersOne_table.reloadData()
+//        }
+//    }
 }
 
 // MARK: EXTENSIONS
@@ -99,17 +102,52 @@ class DoMatchProtocolRefereeViewController: UIViewController {
 
 extension DoMatchProtocolRefereeViewController {
     
-    func setupFooter() {
-        self.tabl
+    func setupAutogoalsFooter() {
+//        let countOfTeamOneAutoGoals = self.viewModel.prepareAutogoalsCount(for: .one)
+//        if countOfTeamOneAutoGoals != 0
+//        {
+        self.playersTeamOneAutoGoalsFooter = AutoGoalFooterView(frame: CGRect(x: 0, y: 0, width: self.playersOne_table.frame.width, height: 40))
+        self.playersOne_table.tableFooterView = self.playersTeamOneAutoGoalsFooter
+//            self.playersTeamOneAutoGoalsFooter.countOfGoals = countOfTeamOneAutoGoals
+//        }
+//        else
+//        {
+//            self.playersOne_table.tableFooterView = nil
+//        }
+//        let countOfTeamTwoAutoGoals = self.viewModel.prepareAutogoalsCount(for: .two)
+//        if countOfTeamTwoAutoGoals != 0
+//        {
+        self.playersTeamTwoAutoGoalsFooter = AutoGoalFooterView(frame: CGRect(x: 0, y: 0, width: self.playersTwo_table.frame.width, height: 40))
+        self.playersTwo_table.tableFooterView = self.playersTeamTwoAutoGoalsFooter
+//            self.playersTeamTwoAutoGoalsFooter.countOfGoals = countOfTeamTwoAutoGoals
+//        }
+//        else
+//        {
+//            self.playersTwo_table.tableFooterView = nil
+//        }
+        
+        // edited ---------------------
+        
+        self.playersTeamOneAutoGoalsFooter.countOfGoals = self.viewModel.prepareAutogoalsCount(for: .one)
+        self.playersTeamTwoAutoGoalsFooter.countOfGoals = self.viewModel.prepareAutogoalsCount(for: .two)
+        
+//        self.playersOne_table.tableFooterView?.isUserInteractionEnabled = true
+//        self.playersTwo_table.tableFooterView?.isUserInteractionEnabled = true
+        
+//        self.playersOne_table.tableFooterView!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapTeamOneAutoGoals)))
+//        self.playersTwo_table.tableFooterView!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapTeamTwoAutoGoals)))
+        
+        self.playersTeamOneAutoGoalsFooter.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapTeamOneAutoGoals)))
+        self.playersTeamTwoAutoGoalsFooter.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapTeamTwoAutoGoals)))
+        
+//        self.playersOne_table.tableFooterView?.addConstraint(NSLayoutConstraint(item: self.playersOne_table.tableFooterView!, attribute: NSLayoutConstraint.Attribute.height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 50))
+//        self.playersTwo_table.tableFooterView?.addConstraint(NSLayoutConstraint(item: self.playersTwo_table.tableFooterView!, attribute: .height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: 50))
+
     }
     
     func setupFoulsCounter() {
         self.foulsTeamOneCount_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapTeamOneFouls)))
         self.foulsTeamTwoCount_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapTeamTwoFouls)))
-    }
-    
-    func setupTableViewWidth() {
-        self.teamOne_width.constant = self.view.frame.width / 2
     }
     
     func setupEventMaker() {
@@ -159,12 +197,8 @@ extension DoMatchProtocolRefereeViewController {
         self.playersOne_table.dataSource    = self.playersTeamOne
         self.playersOne_table.delegate      = self.playersTeamOne
         
-//        self.playersOne_table.tableFooterView = self.playersTeamOneAutoGoalsFooter
-        
         self.playersTwo_table.dataSource    = self.playersTeamTwo
         self.playersTwo_table.delegate      = self.playersTeamTwo
-        
-//        self.playersTwo_table.tableFooterView = self.playersTeamTwoAutoGoalsFooter
     }
     
     func setupPresenter() {
@@ -176,14 +210,25 @@ extension DoMatchProtocolRefereeViewController {
 
 extension DoMatchProtocolRefereeViewController {
     
+    @objc func tapTeamOneAutoGoals() {
+        Print.m("tap")
+        self.viewModel.upAutoGoalsCount(for: .one)
+        self.updateUIAutoGoals()
+    }
+    
+    @objc func tapTeamTwoAutoGoals() {
+        self.viewModel.upAutoGoalsCount(for: .two)
+        self.updateUIAutoGoals()
+    }
+    
     @objc func tapTeamOneFouls() {
         self.viewModel.upFoulsCount(for: .one)
-        self.scoreAtTimeTeamOne_label.text = String(self.viewModel.prepareFoulsCount(for: .one))
+        self.updateUIFouls()
     }
     
     @objc func tapTeamTwoFouls() {
         self.viewModel.upFoulsCount(for: .two)
-        self.scoreAtTimeTeamTwo_label.text = String(self.viewModel.prepareFoulsCount(for: .two))
+        self.updateUIFouls()
     }
     
     func eventMakerCompleteWork(event: LIEvent) { // TODO : need work with data base or smth
@@ -333,9 +378,15 @@ extension DoMatchProtocolRefereeViewController: CellActions {
 // MARK: HELPERS
 
 extension DoMatchProtocolRefereeViewController {
+    
     func updateUIFouls() {
         self.scoreAtTimeTeamOne_label.text = String(self.viewModel.prepareFoulsCount(for: .one))
         self.scoreAtTimeTeamTwo_label.text = String(self.viewModel.prepareFoulsCount(for: .two))
+    }
+    
+    func updateUIAutoGoals() {
+        self.playersTeamOneAutoGoalsFooter.countOfGoals = self.viewModel.prepareAutogoalsCount(for: .one)
+        self.playersTeamTwoAutoGoalsFooter.countOfGoals = self.viewModel.prepareAutogoalsCount(for: .two)
     }
 }
 

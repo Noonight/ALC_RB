@@ -311,17 +311,31 @@ struct LITeam: Codable {
 }
 
 struct LIPlayer: Codable {
-    let inviteStatus: String
-    let number: String
-    let activeYellowCards: Int
-    let yellowCards: Int
-    let redCards: Int
-    let activeDisquals: Int
-    let disquals: Int
-    let matches: Int
-    let goals: Int
-    let id: String
-    let playerId: String
+    var inviteStatus: String
+    var number: String
+    var activeYellowCards: Int
+    var yellowCards: Int
+    var redCards: Int
+    var activeDisquals: Int
+    var disquals: Int
+    var matches: Int
+    var goals: Int
+    var id: String
+    var playerId: String
+    
+    init() {
+        self.inviteStatus = InviteStatus.accepted.rawValue
+        self.number = "00"
+        self.activeYellowCards = 0
+        self.yellowCards = 0
+        self.redCards = 0
+        self.activeDisquals = 0
+        self.disquals = 0
+        self.matches = 0
+        self.goals = 0
+        self.id = ""
+        self.playerId = ""
+    }
     
     func getInviteStatus() -> InviteStatus {
         if inviteStatus.contains(InviteStatus.accepted.rawValue) {
@@ -772,19 +786,21 @@ extension LIPlayer {
         id: String? = nil,
         playerId: String? = nil
         ) -> LIPlayer {
-        return LIPlayer(
-            inviteStatus: inviteStatus ?? self.inviteStatus,
-            number: number ?? self.number,
-            activeYellowCards: activeYellowCards ?? self.activeYellowCards,
-            yellowCards: yellowCards ?? self.yellowCards,
-            redCards: redCards ?? self.redCards,
-            activeDisquals: activeDisquals ?? self.activeDisquals,
-            disquals: disquals ?? self.disquals,
-            matches: matches ?? self.matches,
-            goals: goals ?? self.goals,
-            id: id ?? self.id,
-            playerId: playerId ?? self.playerId
-        )
+        
+        var player = LIPlayer()
+        player.inviteStatus = inviteStatus ?? self.inviteStatus
+        player.number = number ?? self.number
+        player.activeYellowCards = activeYellowCards ?? self.activeYellowCards
+        player.yellowCards = yellowCards ?? self.yellowCards
+        player.redCards = redCards ?? self.redCards
+        player.activeDisquals = activeDisquals ?? self.activeDisquals
+        player.disquals = disquals ?? self.disquals
+        player.matches = matches ?? self.matches
+        player.goals = goals ?? self.goals
+        player.id = id ?? self.id
+        player.playerId = playerId ?? self.playerId
+        
+        return player
     }
     
     func jsonData() throws -> Data {

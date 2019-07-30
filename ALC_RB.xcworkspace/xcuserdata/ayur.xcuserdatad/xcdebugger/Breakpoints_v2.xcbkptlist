@@ -58,28 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/model/ProtocolRefereeViewModel.swift"
-            timestampString = "586112699.006119"
+            timestampString = "586204275.210716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "prepareTableViewCells(team:completed:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/model/ProtocolRefereeViewModel.swift"
-            timestampString = "586112699.006214"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "prepareTableViewCells(team:completed:)"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "appendEvent(event:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

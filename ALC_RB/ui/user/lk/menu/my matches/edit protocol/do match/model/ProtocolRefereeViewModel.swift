@@ -35,6 +35,9 @@ class ProtocolRefereeViewModel {
     var teamOneFoulsCount = 0 // TODO need update later
     var teamTwoFoulsCount = 0
     
+    var teamOneAutoGoalsCount = 0 // TODO need smth
+    var teamTwoAutoGoalsCount = 0
+    
     let dataManager = ApiRequests()
     
     init(match: LIMatch, leagueDetailModel: LeagueDetailModel, teamOneModel: ProtocolPlayersController, teamTwoModel: ProtocolPlayersController,
@@ -57,6 +60,17 @@ class ProtocolRefereeViewModel {
         if team == .two
         {
             self.teamTwoFoulsCount += 1
+        }
+    }
+    
+    func upAutoGoalsCount(for team: ClubTeamHelper.TeamEnum) {
+        if team == .one
+        {
+            self.teamOneAutoGoalsCount += 1
+        }
+        if team == .two
+        {
+            self.teamTwoAutoGoalsCount += 1
         }
     }
     
@@ -102,14 +116,14 @@ class ProtocolRefereeViewModel {
     // MARK: PREPARE FOR DISPLAY OR PREPARE DATA FOR SERVER REQUEST
     
     func prepareAutogoalsCount(for team: ClubTeamHelper.TeamEnum) -> Int {
-        var countOfAutoGoals = 0
+        let countOfAutoGoals = 0
         if team == .one
         {
-            
+            return self.teamOneAutoGoalsCount
         }
         if team == .two
         {
-            
+            return self.teamTwoAutoGoalsCount
         }
         return countOfAutoGoals
     }
@@ -141,6 +155,14 @@ class ProtocolRefereeViewModel {
         }
         return 0
     }
+    
+//    func fakePreapreTableViewCells(team: ClubTeamHelper.TeamEnum, completed: @escaping ([RefereeProtocolPlayerTeamCellModel]) -> ()) {
+//        var array: [RefereeProtocolPlayerTeamCellModel] = []
+//        for _ in 0...10 {
+//            array.append(RefereeProtocolPlayerTeamCellModel(player: Player(), person: Person(), eventsModel: RefereeProtocolPlayerEventsModel(goals: 1, successfulPenaltyGoals: 1, failurePenaltyGoals: 1, yellowCards: 1, redCard: false)))
+//        }
+//        completed(array)
+//    }
     
     func prepareTableViewCells(team: ClubTeamHelper.TeamEnum, completed: @escaping ([RefereeProtocolPlayerTeamCellModel]) -> ()) {
         var returnedArray: [RefereeProtocolPlayerTeamCellModel] = []

@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import AlamofireImage
+import Kingfisher
 
 class PlayersLeagueDetailPresenter: MvpPresenter<PlayersLeagueDetailViewController> {
     
@@ -61,16 +62,48 @@ class PlayersLeagueDetailPresenter: MvpPresenter<PlayersLeagueDetailViewControll
             .validate()
             .responseSoloClub { (response) in
                 switch response.result {
-                case .success:
-                    if let club = response.result.value {
-                        Alamofire
-                            .request(ApiRoute.getImageURL(image: club.club.addLogo ?? ""))
-                            .responseImage(completionHandler: { (reseponseImage) in
-                                if let img = reseponseImage.result.value {
-                                    get_club_image(img)
-                                }
-                            })
+                case .success(let value):
+                    
+                    if let urlPhoto = value.club.logo {
+                        let url = ApiRoute.getImageURL(image: urlPhoto)
+                        let downloader = KingfisherManager.shared
+                        let cellImageSize = CGSize(width: 22, height: 22)
+                        let processor = DownsamplingImageProcessor(size: cellImageSize)
+                            .append(another: CroppingImageProcessorCustom(size: cellImageSize))
+                            .append(another: RoundCornerImageProcessor(cornerRadius: cellImageSize.getHalfWidthHeight()))
+                        downloader.downloader.downloadImage(
+                            with: url,
+                            options: [
+                                .processor(processor),
+                                .scaleFactor(UIScreen.main.scale),
+                                .transition(.fade(1)),
+                                .cacheOriginalImage
+                        ]) {
+                            result in
+                            switch result {
+                            case .success(let value):
+                                
+                                get_club_image(value.image)
+                                
+                            case .failure(let error):
+                                get_club_image(#imageLiteral(resourceName: "ic_logo"))
+                            }
+                        }
                     }
+                    else
+                    {
+                        get_club_image(#imageLiteral(resourceName: "ic_logo"))
+                    }
+                    
+//                    if let club = response.result.value {
+//                        Alamofire
+//                            .request(ApiRoute.getImageURL(image: club.club.addLogo ?? ""))
+//                            .responseImage(completionHandler: { (reseponseImage) in
+//                                if let img = reseponseImage.result.value {
+//                                    get_club_image(img)
+//                                }
+//                            })
+//                    }
                 case .failure:
                     debugPrint("get club failure \(String(describing: response.request?.url))")
         }

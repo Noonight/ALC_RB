@@ -38,6 +38,10 @@ class ProtocolPlayersController {
         self.playersSwitch = playersSwitch
     }
     
+    func add(_ player: LIPlayer) {
+        self.players.append(player)
+    }
+    
     func setPlayerValue(playerId: String, value: Bool) {
 //        self.playersSwitch.updateValue(value, forKey: playerId)
 //        var switcher = self.playersSwitch.filter { playersSwitch -> Bool in
