@@ -72,10 +72,12 @@ class AddEventView: UIView {
     // MARK: ACTIONS
     
     @objc func onMinusState() {
+        self.minus_state_image.animateTap()
         self.stateMinusActive = !self.stateMinusActive
     }
     
     @objc func onRotateView() {
+        self.rotate_view_image.animateTap()
         self.rotated = !self.rotated
     }
     
