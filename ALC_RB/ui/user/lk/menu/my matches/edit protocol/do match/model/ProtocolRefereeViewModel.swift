@@ -102,6 +102,10 @@ class ProtocolRefereeViewModel {
         self.eventsController.removeLastAdded()
     }
     
+    func restoreLastDeletedEvent() {
+        self.eventsController.restoreLastDeleted()
+    }
+    
     func updateMatch(match: LIMatch) {
         self.match = match
         self.eventsController.updateEvents(events: match.events)
@@ -111,6 +115,10 @@ class ProtocolRefereeViewModel {
     
     func appendEvent(event: LIEvent) {
         self.eventsController.add(event)
+    }
+    
+    func removeEvent(event: EventMaker.DeleteEvent) -> Bool {
+        return self.eventsController.removeFirstWith(event: event)
     }
     
     // MARK: PREPARE FOR DISPLAY OR PREPARE DATA FOR SERVER REQUEST

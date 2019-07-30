@@ -37,6 +37,20 @@ extension UIViewController {
         }
     }
     
+    func showToastHUD(message: String) -> MBProgressHUD {
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        hud.backgroundView.style = MBProgressHUDBackgroundStyle.solidColor
+        hud.backgroundView.color = UIColor(white: 0, alpha: 0.1)
+        
+        hud.mode = MBProgressHUDMode.text
+        hud.label.text = message
+        
+        hud.offset = CGPoint(x: 0.0, y: MBProgressMaxOffset)
+        
+        return hud
+    }
+    
     func showLoadingViewHUD(with message: String? = Constants.Texts.LOADING) -> MBProgressHUD {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         

@@ -13,15 +13,16 @@ class EventMaker: NSObject {
     static let BACKGROUND_COLOR = UIColor(white: 0, alpha: 0.1)
     
     let eventView = AddEventView(frame: SIZE)
-    var onHideTriggered: ((LIEvent) -> ())
+    var onHideAddTriggered: ((LIEvent) -> ())
+    var onHideDeleteTriggered: ((DeleteEvent) -> ())
     var backgroundView = UIView()
     var curMatchId: String!
     var curPlayerId: String!
     var curTime: String!
     
-    init(callBack: @escaping (LIEvent) -> ()) {
-        self.onHideTriggered = callBack
-//        self.eventView.callBacks = self
+    init(addEventBack: @escaping (LIEvent) -> (), deleteEventBack: @escaping (DeleteEvent) -> ()) {
+        self.onHideAddTriggered = addEventBack
+        self.onHideDeleteTriggered = deleteEventBack
     }
     
     // MARK: WORK WORK VIEW CONTROLLER
@@ -63,7 +64,7 @@ class EventMaker: NSObject {
         }
     }
     
-    public func hide(eventType: LIEvent.SystemEventType) -> LIEvent {
+    public func hideAdd(eventType: LIEvent.SystemEventType) -> LIEvent {
         self.hideBackgroundView()
         return LIEvent().with(
             id: self.curMatchId,
@@ -71,6 +72,25 @@ class EventMaker: NSObject {
             player: self.curPlayerId,
             time: self.curTime
         )
+    }
+    
+    public func hideDelete(eventType: LIEvent.SystemEventType) -> DeleteEvent {
+        self.hideBackgroundView()
+        return DeleteEvent(
+            playerId: self.curPlayerId,
+            eventType: eventType
+        )
+    }
+    
+    func hide(eventType: LIEvent.SystemEventType) {
+        if self.eventView.stateMinusActive == true
+        {
+            onHideDeleteTriggered(hideDelete(eventType: eventType))
+        }
+        else
+        {
+            onHideAddTriggered(hideAdd(eventType: eventType))
+        }
     }
     
     // MARK: HELPERS
@@ -87,26 +107,33 @@ class EventMaker: NSObject {
 
 extension EventMaker: EventCallBack {
     func onGoalPressed(playerId: String) {
-        Print.m("call back here ")
-        onHideTriggered(hide(eventType: .goal))
+        hide(eventType: .goal)
     }
     
     func onSuccessPenaltyPressed(playerId: String) {
-        self.onHideTriggered(hide(eventType: .penalty))
+        hide(eventType: .penalty)
     }
     
     func onFailurePenaltyPressed(playerId: String) {
-        self.onHideTriggered(hide(eventType: .penaltyFailure))
-        Print.m("No event for failure penalty") // NO EVENT FOR FAILURE PENALTY
+        hide(eventType: .penaltyFailure)
     }
     
     func onYellowCardPressed(playerId: String) {
-        self.onHideTriggered(hide(eventType: .yellowCard))
+        hide(eventType: .yellowCard)
     }
     
     func onRedCardPressed(playerId: String) {
-        self.onHideTriggered(hide(eventType: .redCard))
+        hide(eventType: .redCard)
     }
+}
+
+// MARK: DELETE EVENT STRUCT
+
+extension EventMaker {
     
-    
+    struct DeleteEvent {
+        var playerId: String
+        var eventType: LIEvent.SystemEventType
+    }
+
 }

@@ -29,6 +29,8 @@ class EditMatchProtocolViewController: UIViewController {
     @IBOutlet weak var refereesBtn: UIButton!
     @IBOutlet weak var eventsBtn: UIButton!
     
+    @IBOutlet weak var height_constraint: NSLayoutConstraint!
+    
     @IBOutlet weak var scoreBarBtn: UIBarButtonItem!
     @IBOutlet weak var saveBarBtn: UIBarButtonItem!
     
