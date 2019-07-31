@@ -191,7 +191,8 @@ extension TeamsLeagueTableViewController {
         
         cell.selectionStyle = .none
         
-        configureCell(cell, model)
+//        configureCell(cell, model)
+        cell.configure(team: leagueDetailModel.leagueInfo.league.teams![indexPath.row])
         
         return cell
     }
