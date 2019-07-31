@@ -11,9 +11,12 @@ import AlamofireImage
 import RxSwift
 
 class ScheduleTableViewController: UITableViewController {
-
-    let cellId = "cell_schedule"
-    let segueId = "segue_schedule_protocol"
+    enum CellIdentifiers {
+        static let CELL = "cell_schedule"
+    }
+    enum SegueIdentifiers {
+        static let DETAIL = "segue_schedule_protocol"
+    }
     
     let presenter = ScheduleLeaguePresenter()
     
@@ -27,14 +30,14 @@ class ScheduleTableViewController: UITableViewController {
             if newValue.leagueInfo.league.matches?.count != 0
             {
                 var newVal = newValue
-                let hud = self.tableView.showLoadingViewHUD()
+                let hud = self.tableView.showLoadingViewHUD(with: "Сортируем по дате...")
                 if let curMatches = newVal.leagueInfo.league.matches {
                     
-                    let sortedMatches = SortMatchesByDateHelper.sort(type: .lowToHigh, matches: curMatches)
+                    let sortedMatches = SortMatchesByDateHelper.sort(type: .lowToHigh, matches: curMatches) // sorting matches by date
                     newVal.leagueInfo.league.matches = sortedMatches
                 }
                 _leagueDetailModel = newVal
-                hud.showSuccessAfterAndHideAfter()
+                hud.showSuccessAfterAndHideAfter(withMessage: "Готово")
                 self.updateUI()
             }
             else
@@ -81,6 +84,10 @@ class ScheduleTableViewController: UITableViewController {
         checkEmptyView()
     }
 }
+
+// MARK: Extensions
+
+// MARK: LeagueMainProtocol
 
 extension ScheduleTableViewController: LeagueMainProtocol {
     func updateData(leagueDetailModel: LeagueDetailModel) {
@@ -146,9 +153,11 @@ extension ScheduleTableViewController: EmptyProtocol {
     }
 }
 
+// MARK: NAVIGATION
+
 extension ScheduleTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueId,
+        if segue.identifier == SegueIdentifiers.DETAIL,
             let destination = segue.destination as? MatchProtocolViewController,
             let cellIndex = tableView.indexPathForSelectedRow?.row
         {
@@ -158,26 +167,21 @@ extension ScheduleTableViewController {
     }
 }
 
+// MARK: TABLE VIEW: DATASOURCE
+
 extension ScheduleTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return leagueDetailModel.leagueInfo.league.matches.count
         return (leagueDetailModel.leagueInfo.league.matches?.count)!
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ScheduleTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.CELL, for: indexPath) as! ScheduleTableViewCell
         
         let model = leagueDetailModel.leagueInfo.league
-//        let match = SortMatchesByDateHelper.sort(type: .lowToHigh, matches: leagueDetailModel.leagueInfo.league.matches!)[indexPath.row]
-//        let match = (leagueDetailModel.leagueInfo.league.matches?.sorted(by: { (lMatch, rMatch) -> Bool in // SORT FROM LOW TO HIGH
-//            guard let leftDate = lMatch.date?.toDate(type: .utcTime) else { return false }
-//            guard let rightDate = rMatch.date?.toDate(type: .utcTime) else { return false }
-//            return leftDate < rightDate
-//        })[indexPath.row])!
         let match = (leagueDetailModel.leagueInfo.league.matches?[indexPath.row])!
         
         configureCell(cell, model, match)
@@ -187,48 +191,42 @@ extension ScheduleTableViewController {
     
     func configureCell(_ cell: ScheduleTableViewCell, _ model: LILeague, _ match: LIMatch) {
         
-        if match.played {
+        if match.played == true {
             cell.accessoryType = .disclosureIndicator
+            cell.setColorState(played: true)
         } else {
             cell.accessoryType = .none
+            cell.setColorState(played: false)
         }
         
         if match.date?.count ?? 0 > 2
         {
-            Print.m("time from server === \(match.date!) =>>> formated date is \(match.date?.toDate()?.date)")
             cell.mDate.text = match.date?.toDate()?.toFormat(DateFormats.local.rawValue)
-//            cell.mDate.text = match.date?.convertDate(from: .utcTime, to: .local)
-//            cell.mTime.text = match.date?.convertDate(from: .utcTime, to: .localTime)
             cell.mTime.text = match.date?.toDate()?.toFormat(DateFormats.localTime.rawValue)
         }
         else
         {
-//            Print.m("empty date")
             cell.mDate.text = ""
             cell.mTime.text = ""
         }
-//        cell.mTour.text = match.tour
-//        cell.mPlace.text = match.place
+        cell.mTour.text = match.tour
+        cell.mPlace.text = match.place
         
         let titleTeamOne = getTeamTitle(league: model, match: match, team: .one)
         cell.mTitleTeam1.text = titleTeamOne
-        //scheduleCell.mTitleTeam1 = titleTeamOne
         
         let titleTeamTwo = getTeamTitle(league: model, match: match, team: .two)
         cell.mTitleTeam2.text = titleTeamTwo
-        //scheduleCell.mTitleTeam2 = titleTeamTwo
         
         cell.mScore.text = match.score ?? "-"
         
-        
-        
-        presenter.getClubImage(id: getClubIdByTeamId(match.teamOne ?? "", league: model)) { (image) in
+        presenter.getClubImage(id: getClubIdByTeamId(match.teamOne ?? "", league: model))
+        { (image) in
             cell.mImageTeam1.image = image.af_imageRoundedIntoCircle()
-            //self.scheduleCell.mImageTeam1 = image
         }
-        presenter.getClubImage(id: getClubIdByTeamId(match.teamTwo ?? "", league: model)) { (image) in
+        presenter.getClubImage(id: getClubIdByTeamId(match.teamTwo ?? "", league: model))
+        { (image) in
             cell.mImageTeam2.image = image.af_imageRoundedIntoCircle()
-            //self.scheduleCell.mImageTeam2 = image
         }
     }
     
@@ -260,7 +258,6 @@ extension ScheduleTableViewController {
 extension ScheduleTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        //scheduleCell = ScheduleCellModel(mTitleTeam1: (tableView.cellForRow(at: indexPath) as! ScheduleTableViewCell).mTitleTeam1.text ?? "", mImageTeam1: (tableView.cellForRow(at: indexPath) as! ScheduleTableViewCell).mImageTeam1.image!, mTitleTeam2: (tableView.cellForRow(at: indexPath) as! ScheduleTableViewCell).mTitleTeam2.text ?? "", mImageTeam2: (tableView.cellForRow(at: indexPath) as! ScheduleTableViewCell).mImageTeam2.image!)
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {

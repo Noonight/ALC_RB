@@ -9,7 +9,9 @@
 import UIKit
 
 class ScheduleTableViewCell: UITableViewCell {
-
+    static let PLAYED_COLOR = UIColor(red: 54, green: 178, blue: 39)
+    static let NOT_PLAYED_COLOR = UIColor(red: 0, green: 97, blue: 225)
+    
     @IBOutlet weak var mDate: UILabel!
     @IBOutlet weak var mTime: UILabel!
     @IBOutlet weak var mTour: UILabel!
@@ -29,6 +31,21 @@ class ScheduleTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setColorState(played: Bool) {
+        if played == true
+        {
+            self.mTitleTeam1.textColor = ScheduleTableViewCell.PLAYED_COLOR
+            self.mTitleTeam2.textColor = ScheduleTableViewCell.PLAYED_COLOR
+            self.mScore.textColor = ScheduleTableViewCell.PLAYED_COLOR
+        }
+        else
+        {
+            self.mTitleTeam1.textColor = ScheduleTableViewCell.NOT_PLAYED_COLOR
+            self.mTitleTeam2.textColor = ScheduleTableViewCell.NOT_PLAYED_COLOR
+            self.mScore.textColor = ScheduleTableViewCell.NOT_PLAYED_COLOR
+        }
     }
 
 }
