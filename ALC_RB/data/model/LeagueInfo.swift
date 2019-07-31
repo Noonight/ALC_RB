@@ -14,7 +14,7 @@ import Foundation
 import Alamofire
 
 struct LILeagueInfo: Codable {
-    let league: LILeague
+    var league: LILeague
     
     enum CodingKeys: String, CodingKey {
         case league = "league"
@@ -23,7 +23,7 @@ struct LILeagueInfo: Codable {
 
 struct LILeague: Codable {
     let status: String?
-    let matches: [LIMatch]?
+    var matches: [LIMatch]?
     let id: String?
     let tourney: String?
     let name: String?

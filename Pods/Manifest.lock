@@ -18,6 +18,7 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
+  - SwiftDate (5.1.0)
   - SwiftyJSON (4.2.0)
   - UIScrollView-InfiniteScroll (1.1.0)
 
@@ -33,11 +34,12 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1.1.0)
   - RxCocoa
   - RxSwift
+  - SwiftDate (~> 5.0)
   - SwiftyJSON (~> 4.0)
   - UIScrollView-InfiniteScroll (~> 1.1.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - ActionSheetPicker-3.0
     - Alamofire
     - AlamofireImage
@@ -52,6 +54,7 @@ SPEC REPOS:
     - RxAtomic
     - RxCocoa
     - RxSwift
+    - SwiftDate
     - SwiftyJSON
     - UIScrollView-InfiniteScroll
 
@@ -70,9 +73,10 @@ SPEC CHECKSUMS:
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
+  SwiftDate: 6329e58969a2de31cea7f1ee1143b247693196e7
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
 
-PODFILE CHECKSUM: b8c5b019443f037f19a70a3f372e3ff11bba43ab
+PODFILE CHECKSUM: cb8e8d49f4149976b07dc7523f5a3e292374e360
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.5.3

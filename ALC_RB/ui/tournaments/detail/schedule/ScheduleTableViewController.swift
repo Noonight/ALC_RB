@@ -17,9 +17,30 @@ class ScheduleTableViewController: UITableViewController {
     
     let presenter = ScheduleLeaguePresenter()
     
-    var leagueDetailModel = LeagueDetailModel() {
-        didSet {
-            updateUI()
+    var _leagueDetailModel = LeagueDetailModel()
+    var leagueDetailModel: LeagueDetailModel
+    {
+        get {
+            return _leagueDetailModel
+        }
+        set {
+            if newValue.leagueInfo.league.matches?.count != 0
+            {
+                var newVal = newValue
+                let hud = self.tableView.showLoadingViewHUD()
+                if let curMatches = newVal.leagueInfo.league.matches {
+                    
+                    let sortedMatches = SortMatchesByDateHelper.sort(type: .lowToHigh, matches: curMatches)
+                    newVal.leagueInfo.league.matches = sortedMatches
+                }
+                _leagueDetailModel = newVal
+                hud.showSuccessAfterAndHideAfter()
+                self.updateUI()
+            }
+            else
+            {
+                self.updateUI()
+            }
         }
     }
     
@@ -37,26 +58,16 @@ class ScheduleTableViewController: UITableViewController {
         initPresenter()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-    }
-    
     func leagueInfoMatchesIsEmpty() -> Bool {
-        //debugPrint(leagueDetailModel.leagueInfo.league.matches)
-//        Print.m(leagueDetailModel.leagueInfo.league.matches.isEmpty ? " League matches is empty --- " : " League matches not empty +++ ")
-//        dump(leagueDetailModel.league.matches)
-        Print.m("count of matches is \(leagueDetailModel.league.matches!.count)")
 
         if leagueDetailModel.league.matches!.count > 0 {
             return false
         } else {
             return true
         }
-        //return leagueDetailModel.leagueInfo.league.matches.isEmpty
     }
     
     func checkEmptyView() {
-        //hideLoading()
         if leagueInfoMatchesIsEmpty() {
             showEmptyView()
         } else {
@@ -67,7 +78,6 @@ class ScheduleTableViewController: UITableViewController {
     }
     
     func updateUI() {
-        //debugPrint(#function)
         checkEmptyView()
     }
 }
@@ -75,7 +85,6 @@ class ScheduleTableViewController: UITableViewController {
 extension ScheduleTableViewController: LeagueMainProtocol {
     func updateData(leagueDetailModel: LeagueDetailModel) {
         self.leagueDetailModel = leagueDetailModel
-        print(#function)
         updateUI()
     }
 }
@@ -108,7 +117,6 @@ extension ScheduleTableViewController: ActivityIndicatorProtocol {
 extension ScheduleTableViewController: EmptyProtocol {
     func hideEmptyView() {
         tableView.separatorStyle = .singleLine
-//        tableView.backgroundView = nil
         backgroundView.removeFromSuperview()
     }
     
@@ -116,7 +124,6 @@ extension ScheduleTableViewController: EmptyProtocol {
         
         let newEmptyView = EmptyViewNew()
         
-        //        backgroundView = UIView()
         backgroundView.frame = tableView.frame
         
         backgroundView.backgroundColor = .white
@@ -134,10 +141,6 @@ extension ScheduleTableViewController: EmptyProtocol {
         backgroundView.setCenterFromParent()
         
         tableView.bringSubviewToFront(backgroundView)
-        
-//        tableView.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
-//        tableView.backgroundView?.addSubview(empty_view)
-//        empty_view.setCenterFromParent()
 
         tableView.separatorStyle = .none
     }
@@ -151,7 +154,6 @@ extension ScheduleTableViewController {
         {
             destination.leagueDetailModel = self.leagueDetailModel
             destination.match = self.leagueDetailModel.leagueInfo.league.matches![cellIndex]
-            //destination.scheduleCell = self.scheduleCell
         }
     }
 }
@@ -170,7 +172,12 @@ extension ScheduleTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ScheduleTableViewCell
         
         let model = leagueDetailModel.leagueInfo.league
-//        Print.m(model)
+//        let match = SortMatchesByDateHelper.sort(type: .lowToHigh, matches: leagueDetailModel.leagueInfo.league.matches!)[indexPath.row]
+//        let match = (leagueDetailModel.leagueInfo.league.matches?.sorted(by: { (lMatch, rMatch) -> Bool in // SORT FROM LOW TO HIGH
+//            guard let leftDate = lMatch.date?.toDate(type: .utcTime) else { return false }
+//            guard let rightDate = rMatch.date?.toDate(type: .utcTime) else { return false }
+//            return leftDate < rightDate
+//        })[indexPath.row])!
         let match = (leagueDetailModel.leagueInfo.league.matches?[indexPath.row])!
         
         configureCell(cell, model, match)
@@ -186,10 +193,22 @@ extension ScheduleTableViewController {
             cell.accessoryType = .none
         }
         
-        cell.mDate.text = match.date?.convertDate(from: .utc, to: .local)
-        cell.mTime.text = match.date?.convertDate(from: .utcTime, to: .localTime)
-        cell.mTour.text = match.tour
-        cell.mPlace.text = match.place
+        if match.date?.count ?? 0 > 2
+        {
+            Print.m("time from server === \(match.date!) =>>> formated date is \(match.date?.toDate()?.date)")
+            cell.mDate.text = match.date?.toDate()?.toFormat(DateFormats.local.rawValue)
+//            cell.mDate.text = match.date?.convertDate(from: .utcTime, to: .local)
+//            cell.mTime.text = match.date?.convertDate(from: .utcTime, to: .localTime)
+            cell.mTime.text = match.date?.toDate()?.toFormat(DateFormats.localTime.rawValue)
+        }
+        else
+        {
+//            Print.m("empty date")
+            cell.mDate.text = ""
+            cell.mTime.text = ""
+        }
+//        cell.mTour.text = match.tour
+//        cell.mPlace.text = match.place
         
         let titleTeamOne = getTeamTitle(league: model, match: match, team: .one)
         cell.mTitleTeam1.text = titleTeamOne

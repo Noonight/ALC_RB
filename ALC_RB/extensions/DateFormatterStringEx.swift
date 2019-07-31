@@ -18,6 +18,33 @@ enum DateFormats: String {
     
     case leagueDate = "yyyy-MM-dd"
 }
+//internal static let builtInAutoFormat: [String] =  [
+//    DateFormats.iso8601,
+//    "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'",
+//    "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'",
+//    "yyyy-MM-dd'T'HH:mm:ss.SSSZ",
+//    "yyyy-MM-dd'T'HH:mm", // modificated utc
+//    "yyyy-MM-dd HH:mm:ss",
+//    "yyyy-MM-dd HH:mm",
+//    "yyyy-MM-dd",
+//    "h:mm:ss A",
+//    "h:mm A",
+//    "MM/dd/yyyy",
+//    "MMMM d, yyyy",
+//    "MMMM d, yyyy LT",
+//    "dddd, MMMM D, yyyy LT",
+//    "yyyyyy-MM-dd",
+//    "yyyy-MM-dd",
+//    "GGGG-[W]WW-E",
+//    "GGGG-[W]WW",
+//    "yyyy-ddd",
+//    "HH:mm:ss.SSSS",
+//    "HH:mm:ss",
+//    "HH:mm",
+//    "HH",
+//    "EEE MMM dd HH:mm:ss zzz yyyy", // modificated GMT
+//    "dd MMMM yyyy" // modificated
+//]
 
 extension String {
     
@@ -42,6 +69,18 @@ extension String {
 //            dateFormatter.timeZone = TimeZone.current
             dateFormatter.dateFormat = to.rawValue
         }
+//        if dt == nil
+//        {
+//            Print.m("dt is nil")
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = DateFormats.utc.rawValue
+//            dateFormatter.locale = Locale(identifier: "en_US")
+//
+//            dt = dateFormatter.date(from: self)
+//
+//            //            dateFormatter.timeZone = TimeZone.current
+//            dateFormatter.dateFormat = to.rawValue
+//        }
         
         return dateFormatter.string(from: dt ?? Date())
     }
@@ -63,7 +102,7 @@ extension String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = type.rawValue
         dateFormatter.locale = Locale(identifier: "en_US")
-        dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
+//        dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
         
         guard let date = dateFormatter.date(from: self) else {
             Print.d(message: "DEBUG: date format exception String -> Date")
@@ -72,10 +111,10 @@ extension String {
         return date
     }
     
-    func toDate(type: DateFormats) -> Date? {
+    func toDateCustom(type: DateFormats) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = type.rawValue
-        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+//        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
 
         let dt = dateFormatter.date(from: self)
 
