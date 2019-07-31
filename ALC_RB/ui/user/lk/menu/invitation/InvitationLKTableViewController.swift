@@ -139,7 +139,9 @@ class InvitationLKTableViewController: UITableViewController {
             }).first
             
             if let mLeague = league {
-                cell.titleLabel.text = "\(mLeague.tourney). \(mLeague.name)"
+                guard let tourney = mLeague.tourney else { return }
+                guard let name = mLeague.name else { return }
+                cell.titleLabel.text = "\(tourney). \(name)"
                 cell.dateLabel.text = "\(mLeague.beginDate!.convertDate(from: .leagueDate, to: .local)) - \(mLeague.endDate!.convertDate(from: .leagueDate, to: .local))"
             }
             cell.teamName.text = team?.name
