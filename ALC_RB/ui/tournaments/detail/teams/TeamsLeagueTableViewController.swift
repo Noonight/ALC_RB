@@ -114,7 +114,7 @@ extension TeamsLeagueTableViewController {
     }
     
     func leagueTeamsIsEmpty() -> Bool {
-        return leagueDetailModel.league.teams.isEmpty
+        return leagueDetailModel.league.teams!.isEmpty
     }
 }
 
@@ -182,12 +182,12 @@ extension TeamsLeagueTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return leagueDetailModel.league.teams.count
+        return leagueDetailModel.league.teams!.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TeamLeagueTableViewCell
-        let model = leagueDetailModel.league.teams[indexPath.row]
+        let model = leagueDetailModel.league.teams![indexPath.row]
         
         cell.selectionStyle = .none
         

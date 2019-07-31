@@ -185,6 +185,8 @@
 		DB6AA18121C295C3007D4693 /* ClubsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA18021C295C3007D4693 /* ClubsPresenter.swift */; };
 		DB6AA18321C296DE007D4693 /* ClubTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA18221C296DE007D4693 /* ClubTableViewCell.swift */; };
 		DB78E13F21D529DC001C885D /* EmptyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78E13E21D529DC001C885D /* EmptyProtocol.swift */; };
+		DB85B36322F14C820030D8A3 /* AutoGoalsFoulsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB85B36222F14C820030D8A3 /* AutoGoalsFoulsHelper.swift */; };
+		DB85B36522F15D5B0030D8A3 /* SoloLeague.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB85B36422F15D5B0030D8A3 /* SoloLeague.swift */; };
 		DB87FE7C2243B522001EBA7C /* BaseStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87FE7B2243B522001EBA7C /* BaseStateViewController.swift */; };
 		DB87FE7F2243D493001EBA7C /* EmptyViewNew.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB87FE7E2243D493001EBA7C /* EmptyViewNew.xib */; };
 		DB87FE812243D9E2001EBA7C /* EmptyViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87FE802243D9E2001EBA7C /* EmptyViewNew.swift */; };
@@ -448,6 +450,8 @@
 		DB6AA18021C295C3007D4693 /* ClubsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubsPresenter.swift; sourceTree = "<group>"; };
 		DB6AA18221C296DE007D4693 /* ClubTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubTableViewCell.swift; sourceTree = "<group>"; };
 		DB78E13E21D529DC001C885D /* EmptyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyProtocol.swift; sourceTree = "<group>"; };
+		DB85B36222F14C820030D8A3 /* AutoGoalsFoulsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoGoalsFoulsHelper.swift; sourceTree = "<group>"; };
+		DB85B36422F15D5B0030D8A3 /* SoloLeague.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloLeague.swift; sourceTree = "<group>"; };
 		DB87FE7B2243B522001EBA7C /* BaseStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStateViewController.swift; sourceTree = "<group>"; };
 		DB87FE7E2243D493001EBA7C /* EmptyViewNew.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyViewNew.xib; sourceTree = "<group>"; };
 		DB87FE802243D9E2001EBA7C /* EmptyViewNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewNew.swift; sourceTree = "<group>"; };
@@ -878,6 +882,7 @@
 				18D89EA322BCA021007FF537 /* ParticipationMatch.swift */,
 				1839244922C7CC4000A644F5 /* SoloMatch.swift */,
 				185E51BB22CCBBEC001F96A0 /* GetPerson.swift */,
+				DB85B36422F15D5B0030D8A3 /* SoloLeague.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1719,6 +1724,7 @@
 				DBA77C1F22CF4192000DCF02 /* ProtocolPlayersController.swift */,
 				DBA77C2122CF4865000DCF02 /* ProtocolRefereesController.swift */,
 				18606A3422D3381500F5D2FE /* ProtocolEventsController.swift */,
+				DB85B36222F14C820030D8A3 /* AutoGoalsFoulsHelper.swift */,
 			);
 			path = "protocol model controllers";
 			sourceTree = "<group>";
@@ -2113,6 +2119,7 @@
 				CE0AF81721C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift in Sources */,
 				DB98FACA225462AB002933D0 /* ErrorMessage.swift in Sources */,
 				DBFB83912201CEAE008A8F79 /* PlayersLeagueDetailViewController.swift in Sources */,
+				DB85B36322F14C820030D8A3 /* AutoGoalsFoulsHelper.swift in Sources */,
 				DB59E5B9222802F000D1F62F /* EditProfilePresenter.swift in Sources */,
 				187F2DFB22CB19440049EA77 /* EditRefereeTeamTableViewController.swift in Sources */,
 				DB495B7B22AFC4BF00FCC6F5 /* ActiveMatches.swift in Sources */,
@@ -2198,6 +2205,7 @@
 				DB8A68A3224E583F00D3972A /* CreateTeamInfo.swift in Sources */,
 				1824601322C5CC6F0061E877 /* Button Extensions.swift in Sources */,
 				04DF5492220D6861001323A6 /* MatchProtocolPresenter.swift in Sources */,
+				DB85B36522F15D5B0030D8A3 /* SoloLeague.swift in Sources */,
 				187F2E0422CB19440049EA77 /* EditTeamProtocolTableViewCell.swift in Sources */,
 				CE61551721AF9797008C4463 /* News.swift in Sources */,
 				DB1816E121D10161005375ED /* PlayerViewController.swift in Sources */,

@@ -82,11 +82,11 @@ extension TournamentsTableViewController {
     }
     
     func configureCell(_ cell: TournamentTableViewCell, _ model: League) {
-        cell.title?.text = model.tourney + ". " + model.name
-        cell.date?.text = "\(model.beginDate.convertDate(from: .leagueDate, to: .local)) - \(model.endDate.convertDate(from: .leagueDate, to: .local))"
+        cell.title?.text = model.tourney! + ". " + model.name!
+        cell.date?.text = "\(model.beginDate!.convertDate(from: .leagueDate, to: .local)) - \(model.endDate!.convertDate(from: .leagueDate, to: .local))"
         //cell.date?.text = "10.03.2018 - 10.04.2018"
         //cell.commandNum?.text = "Количество команд: \(tournaments.leagues[indexPath.row].maxTeams)"
-        cell.commandNum?.text = String(model.maxTeams)
+        cell.commandNum?.text = String(model.maxTeams!)
         cell.img?.image = #imageLiteral(resourceName: "ic_con")
         if (model.status == tournamentFinished) {
             cell.img?.image = UIImage(named: "ic_fin")

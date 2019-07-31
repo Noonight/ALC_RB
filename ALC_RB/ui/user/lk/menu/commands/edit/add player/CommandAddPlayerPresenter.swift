@@ -12,7 +12,7 @@ protocol CommandAddPlayerView: MvpView {
     func onFetchPersonsSuccess(players: Players)
     func onFetchPersonsFailure(error: Error)
     
-    func onRequestAddPlayerToTeamSuccess(liLeagueInfo: LILeagueInfo)
+    func onRequestAddPlayerToTeamSuccess(soloLeague: SoloLeague)
     func onRequestAddPlayerToTeamMessage(singleLineMessage: SingleLineMessage)
     func onRequestAddPlayerToTeamError(error: Error)
     
@@ -38,8 +38,8 @@ class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewControlle
     }
     
     func addPlayerToTeamForLeague(token: String, addPlayerToTeam: AddPlayerToTeam) {
-        apiService.post_addPlayerToTeam(token: token, addPlayerToTeam: addPlayerToTeam, response_success: { liLeagueInfo in
-            self.getView().onRequestAddPlayerToTeamSuccess(liLeagueInfo: liLeagueInfo)
+        apiService.post_addPlayerToTeam(token: token, addPlayerToTeam: addPlayerToTeam, response_success: { soloLeague in
+            self.getView().onRequestAddPlayerToTeamSuccess(soloLeague: soloLeague)
         }, response_failure: { error in
             self.getView().onRequestAddPlayerToTeamError(error: error)
         }) { message in

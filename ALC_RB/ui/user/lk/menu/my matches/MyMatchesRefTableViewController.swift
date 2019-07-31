@@ -56,7 +56,7 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         
         bindViews()
         
-        fetch()
+//        fetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,6 +65,8 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         // issue: cell not worked when we go back
         self.title = "Матчи"
         navigationController?.navigationBar.topItem?.title = self.title
+        
+        self.fetch()
     }
     
     func fetch() {

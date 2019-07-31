@@ -52,7 +52,7 @@ class TournamentPickerHelper : NSObject, UIPickerViewDelegate, UIPickerViewDataS
 //        label.text = rows[row]
         if let rows = rows {
             //            return rows[row].name
-            if rows[row].tourney.contains(".") {
+            if rows[row].tourney!.contains(".") {
                 label.text = "\(rows[row].tourney) \(rows[row].name)"
             } else {
                 label.text = "\(rows[row].tourney). \(rows[row].name)"
@@ -69,7 +69,7 @@ class TournamentPickerHelper : NSObject, UIPickerViewDelegate, UIPickerViewDataS
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if let rows = rows {
 //            return rows[row].name
-            if rows[row].tourney.contains(".") {
+            if rows[row].tourney!.contains(".") {
                 return "\(rows[row].tourney) \(rows[row].name)"
             } else {
                 return "\(rows[row].tourney). \(rows[row].name)"

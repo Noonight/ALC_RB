@@ -45,9 +45,9 @@ class ScheduleTableViewController: UITableViewController {
         //debugPrint(leagueDetailModel.leagueInfo.league.matches)
 //        Print.m(leagueDetailModel.leagueInfo.league.matches.isEmpty ? " League matches is empty --- " : " League matches not empty +++ ")
 //        dump(leagueDetailModel.league.matches)
-        Print.m("count of matches is \(leagueDetailModel.league.matches.count)")
+        Print.m("count of matches is \(leagueDetailModel.league.matches!.count)")
 
-        if leagueDetailModel.league.matches.count > 0 {
+        if leagueDetailModel.league.matches!.count > 0 {
             return false
         } else {
             return true

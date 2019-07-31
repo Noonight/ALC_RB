@@ -445,7 +445,7 @@ class ApiRequests {
         }
     }
     
-    func post_addPlayerToTeam(token: String, addPlayerToTeam: AddPlayerToTeam, response_success: @escaping (LILeagueInfo) -> (), response_failure: @escaping (Error) -> (), response_single_line_message: @escaping (SingleLineMessage) -> ()) {
+    func post_addPlayerToTeam(token: String, addPlayerToTeam: AddPlayerToTeam, response_success: @escaping (SoloLeague) -> (), response_failure: @escaping (Error) -> (), response_single_line_message: @escaping (SingleLineMessage) -> ()) {
         
         
         let header: HTTPHeaders = [
@@ -468,7 +468,11 @@ class ApiRequests {
                 switch result {
                 case .success(let upload, _, _):
 
-                    upload.responseLILeagueInfo(completionHandler: { response in
+//                    upload.responseJSON(completionHandler: { response in
+//                        dump(response.result)
+//                    })
+                    
+                    upload.responseSoloLeague(completionHandler: { response in
                         switch response.result {
                         case .success(let value):
                             response_success(value)
@@ -483,6 +487,22 @@ class ApiRequests {
                             })
                         }
                     })
+                    
+//                    upload.responseLILeagueInfo(completionHandler: { response in
+//                        switch response.result {
+//                        case .success(let value):
+//                            response_success(value)
+//                        case .failure(let error):
+//                            upload.responseSingleLineMessage(completionHandler: { response in
+//                                switch response.result {
+//                                case .success(let value):
+//                                    response_single_line_message(value)
+//                                case .failure(let error):
+//                                    response_failure(error)
+//                                }
+//                            })
+//                        }
+//                    })
                 case .failure(let error):
                     Print.m(error)
                     response_failure(error)

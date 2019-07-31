@@ -158,7 +158,7 @@ extension OngoingLeaguesLKTableViewController {
             let league = tableModel.tournaments?.leagues.filter({ (league) -> Bool in
                 return league.id == model.league
             }).first
-            let team = league?.teams.filter({ (team) -> Bool in
+            let team = league?.teams!.filter({ (team) -> Bool in
                 return team.id == model.team
             }).first
             let club = tableModel.clubs?.clubs.filter({ (club) -> Bool in
@@ -168,7 +168,7 @@ extension OngoingLeaguesLKTableViewController {
             if let league = league {
                 
                 cell.userTournamentTitle_label.text = "\(league.name). \(league.tourney)"
-                cell.userTournamentDate_label.text = "\(league.beginDate.convertDate(from: .leagueDate, to: .local)) - \(league.endDate.convertDate(from: .leagueDate, to: .local))"
+                cell.userTournamentDate_label.text = "\(league.beginDate!.convertDate(from: .leagueDate, to: .local)) - \(league.endDate!.convertDate(from: .leagueDate, to: .local))"
             }
             
             if let team = team {

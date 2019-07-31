@@ -128,7 +128,7 @@ class InvitationLKTableViewController: UITableViewController {
             let league = tableModel.tournaments?.leagues.filter({ (league) -> Bool in
                 return league.id == model.league
             }).first
-            let team = league?.teams.filter({ (team) -> Bool in
+            let team = league?.teams!.filter({ (team) -> Bool in
                 return team.id == model.team
             }).first
             let teamCreator = tableModel.players?.people.filter({ (person) -> Bool in
@@ -140,7 +140,7 @@ class InvitationLKTableViewController: UITableViewController {
             
             if let mLeague = league {
                 cell.titleLabel.text = "\(mLeague.tourney). \(mLeague.name)"
-                cell.dateLabel.text = "\(mLeague.beginDate.convertDate(from: .leagueDate, to: .local)) - \(mLeague.endDate.convertDate(from: .leagueDate, to: .local))"
+                cell.dateLabel.text = "\(mLeague.beginDate!.convertDate(from: .leagueDate, to: .local)) - \(mLeague.endDate!.convertDate(from: .leagueDate, to: .local))"
             }
             cell.teamName.text = team?.name
             

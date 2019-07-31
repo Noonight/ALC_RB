@@ -116,4 +116,10 @@ class ProtocolPlayersController {
         
         return resultArray
     }
+    
+    func getPlayerByIdOfPlayingPlayers(_ id: String) -> LIPlayer? {
+        return self.getPlayingPlayers().filter({ player -> Bool in
+            return player.playerId == id
+        }).first
+    }
 }

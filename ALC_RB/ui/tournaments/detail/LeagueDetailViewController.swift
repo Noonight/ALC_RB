@@ -86,7 +86,7 @@ class LeagueDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         initView()
-        presenter.getTournamentInfo(id: leagueDetailModel.league.id)
+        presenter.getTournamentInfo(id: leagueDetailModel.league.id!)
     }
     
     func initView() {
@@ -156,7 +156,7 @@ extension LeagueDetailViewController: LeagueDetailView {
 //            ]
 //        )
         showRefreshAlert(message: error.localizedDescription) {
-            self.presenter.getTournamentInfo(id: self.leagueDetailModel.league.id)
+            self.presenter.getTournamentInfo(id: self.leagueDetailModel.league.id!)
         }
     }
     

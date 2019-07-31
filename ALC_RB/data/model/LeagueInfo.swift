@@ -200,11 +200,13 @@ struct LIEvent: Codable {
         case .foul:
             return UIImage(named: "ic_faul")
         case .penalty:
-            let image = UIImage(named: "ic_green_footbal")
-            return image?.addText(textToDraw: NSString(string: "П"), atCorner: 2, textColor: .black, textFont: UIFont.systemFont(ofSize: 25))
+//            let image = UIImage(named: "ic_green_footbal")
+//            return image?.addText(textToDraw: NSString(string: "П"), atCorner: 2, textColor: .black, textFont: UIFont.systemFont(ofSize: 25))
+            return UIImage(named: "ic_green_footbal_with_P")
         case .penaltyFailure:
-            let image = UIImage(named: "ic_gray_footbal")
-            return image?.addText(textToDraw: NSString(string: "П"), atCorner: 2, textColor: .black, textFont: UIFont.systemFont(ofSize: 25))
+//            let image = UIImage(named: "ic_gray_footbal")
+//            return image?.addText(textToDraw: NSString(string: "П"), atCorner: 2, textColor: .black, textFont: UIFont.systemFont(ofSize: 25))
+            return UIImage(named: "ic_gray_footbal_with_P")
         case .yellowCard:
             return UIImage(named: "ic_yellowCard")
         case .redCard:

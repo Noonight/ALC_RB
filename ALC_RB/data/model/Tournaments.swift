@@ -24,28 +24,28 @@ struct Tournaments: Codable {
 }
 
 struct League: Codable {
-    var status: String
-    var matches: [String]
-    var id: String
-    var tourney: String
-    var name: String
-    var beginDate: String
-    var endDate: String
-    var transferBegin: String
-    var transferEnd: String
+    var status: String?
+    var matches: [String]?
+    var id: String?
+    var tourney: String?
+    var name: String?
+    var beginDate: String?
+    var endDate: String?
+    var transferBegin: String?
+    var transferEnd: String?
     var playersMin: Int?
     var playersMax: Int?
-    var playersCapacity: Int
+    var playersCapacity: Int?
     var yellowCardsToDisqual: Int?
-    var ageAllowedMin: Int
-    var ageAllowedMax: Int
-    var maxTeams: Int
-    var teams: [Team]
+    var ageAllowedMin: Int?
+    var ageAllowedMax: Int?
+    var maxTeams: Int?
+    var teams: [Team]?
     
     func betweenBeginEndDate() -> Bool {
-        let firstDate = beginDate.toDate(type: .leagueDate)!
-        let lastDate = endDate.toDate(type: .leagueDate)!
-        return Date().isBetween(firstDate, and: lastDate)
+        let firstDate = beginDate?.toDate(type: .leagueDate)!
+        let lastDate = endDate?.toDate(type: .leagueDate)!
+        return Date().isBetween(firstDate!, and: lastDate!)
     }
     
     func getStatus() -> Statuses {

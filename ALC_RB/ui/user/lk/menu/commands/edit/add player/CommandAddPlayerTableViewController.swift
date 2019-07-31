@@ -167,8 +167,8 @@ extension CommandAddPlayerTableViewController {
             _id: leagueId,
             teamId: team.id,
             playerId: personId)
-        dump(userDefaultsHelper.getAuthorizedUser()?.token)
-        dump(addPlayer)
+//        dump(userDefaultsHelper.getAuthorizedUser()?.token)
+//        dump(addPlayer)
         presenter.addPlayerToTeamForLeague(token: userDefaultsHelper.getAuthorizedUser()!.token, addPlayerToTeam: addPlayer)
         currentAddId = sender.tag
     }
@@ -250,23 +250,24 @@ extension CommandAddPlayerTableViewController : CommandAddPlayerView {
         self.endRefreshing()
     }
     
-    func onRequestAddPlayerToTeamSuccess(liLeagueInfo: LILeagueInfo) {
+    func onRequestAddPlayerToTeamSuccess(soloLeague: SoloLeague) {
         //        teamController.addPlayerById(id: team.id, player: tableModel.players.people[currentId])
-        if let team = liLeagueInfo.league.teams?.filter({ liTeam -> Bool in
+        if let team = soloLeague.league.teams!.filter({ liTeam -> Bool in
             return liTeam.id == team.id
         }).first {
             var convertedPlayers: [Player] = []
-            for i in 0..<team.players!.count {
-                convertedPlayers.append(team.players![i].convertToPlayer())
+            for i in 0..<team.players.count {
+                convertedPlayers.append(team.players[i]/*.convertToPlayer()*/)
             }
-            teamController.setPlayersByTeamId(id: team.id!, players: convertedPlayers)
+            teamController.setPlayersByTeamId(id: team.id, players: convertedPlayers)
 //            teamController.addPlayerById(id: team.id, player: <#T##Player#>)
         }
         
         // set status to invite send
         
 //        setStateRow()
-        self.leagueController.league = liLeagueInfo.league.convertToLeague()
+//        self.leagueController.league = liLeagueInfo.league.convertToLeague()
+        self.leagueController.league = soloLeague.league
         self.tableView.reloadRows(at: [IndexPath(row: currentAddId!, section: 0)], with: UITableView.RowAnimation.automatic)
     }
     
@@ -333,14 +334,14 @@ extension CommandAddPlayerTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.list, for: indexPath) as! CommandAddPlayerTableViewCell
         
         func setupStatus(person: Person) {
-            if leagueController.league.teams.contains(where: { team -> Bool in
+            if leagueController.league.teams!.contains(where: { team -> Bool in
                 return team.id == self.team.id && team.players.contains(where: { inPlayer -> Bool in
                     return person.id == inPlayer.playerID
                 })
             }) {
                 cell.configure(with: person, status: .invitedIn("В вашей команде"))
             }
-            let team = leagueController.league.teams.filter { team -> Bool in
+            let team = leagueController.league.teams!.filter { team -> Bool in
                 return team.id != self.team.id && team.players.contains(where: { inPlayer -> Bool in
                     return person.id == inPlayer.playerID && (inPlayer.inviteStatus == InviteStatus.approved.rawValue || inPlayer.inviteStatus == InviteStatus.accepted.rawValue || inPlayer.inviteStatus == InviteStatus.rejected.rawValue)
                 })

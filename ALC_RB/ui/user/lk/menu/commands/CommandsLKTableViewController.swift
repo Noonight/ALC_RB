@@ -36,7 +36,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         
         func getLeagueOfTeam(inTeam: Team) -> League? {
             return tournaments.leagues.filter({ league -> Bool in
-                return (league.teams.filter({ team -> Bool in
+                return (league.teams!.filter({ team -> Bool in
                     return team.id == inTeam.id
                 }).first != nil)
             }).first
@@ -146,7 +146,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
             var returnedTeam: Team?
             for league in tournaments.leagues {
                 if participation.league == league.id {
-                    for team in league.teams {
+                    for team in league.teams! {
                         if team.id == participation.team {
                             if team.creator == userDefaults.getAuthorizedUser()?.person.id {
                                 returnedTeam = team
@@ -175,7 +175,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
             var returnedTeam: Team?
             for league in tournaments.leagues {
                 if participation.league == league.id {
-                    for team in league.teams {
+                    for team in league.teams! {
                         if team.id == participation.team {
                             if team.creator != userDefaults.getAuthorizedUser()?.person.id {
                                 returnedTeam = team
@@ -232,7 +232,7 @@ extension CommandsLKTableViewController {
         for par in participation {
             for league in tournaments.leagues {
                 if league.id == par.league {
-                    for team in league.teams {
+                    for team in league.teams! {
                         if team.id == par.team {
                             if team.creator == userDefaults.getAuthorizedUser()?.person.id {
                                 arr.append(par)
@@ -253,7 +253,7 @@ extension CommandsLKTableViewController {
         for par in participation {
             for league in tournaments.leagues {
                 if league.id == par.league {
-                    for team in league.teams {
+                    for team in league.teams! {
                         if team.id == par.team {
                             if team.creator != userDefaults.getAuthorizedUser()?.person.id {
                                 arr.append(par)
@@ -398,20 +398,22 @@ extension CommandsLKTableViewController {
     
     func configureCell (cell: CommandsLKTableViewCell, model: Team) {
         let tournament = tableModel.tournaments.leagues.filter({ (league) -> Bool in
-            return league.teams.contains(where: { team -> Bool in
+            return league.teams!.contains(where: { team -> Bool in
                 return team.id == model.id
             })
         }).first
         if let tournament = tournament {
-            if tournament.tourney.contains(".") {
-                cell.tournamentTitle_label.text = "\(tournament.tourney) \(tournament.name)"
+            guard let tourney = tournament.tourney else { return }
+            guard let name = tournament.name else { return }
+            if tourney.contains(".") {
+                cell.tournamentTitle_label.text = "\(tourney) \(name)"
             } else {
-                cell.tournamentTitle_label.text = "\(tournament.tourney). \(tournament.name)"
+                cell.tournamentTitle_label.text = "\(tourney). \(name)"
             }
             
-            cell.tournamentDate_label.text = "\(tournament.beginDate.convertDate(from: .leagueDate, to: .local)) - \(tournament.endDate.convertDate(from: .leagueDate, to: .local))"
+            cell.tournamentDate_label.text = "\(tournament.beginDate!.convertDate(from: .leagueDate, to: .local)) - \(tournament.endDate!.convertDate(from: .leagueDate, to: .local))"
             
-            cell.tournamentTransfer_label.text = "\(tournament.transferBegin.convertDate(from: .leagueDate, to: .local)) - \(tournament.transferEnd.convertDate(from: .leagueDate, to: .local))"
+            cell.tournamentTransfer_label.text = "\(tournament.transferBegin!.convertDate(from: .leagueDate, to: .local)) - \(tournament.transferEnd!.convertDate(from: .leagueDate, to: .local))"
             
             if tournament.betweenBeginEndDate() {
                 cell.tournamentTitle_label.textColor = .red

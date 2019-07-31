@@ -18,12 +18,16 @@ class EditEventsMatchTableViewController: UITableViewController {
     
     struct TableStruct {
         var table: [[LIEvent]] = []
+        
+        var teamOneFouls: [LIEvent] = []
+        var teamTwoFouls: [LIEvent] = []
+        
+        var teamOneAutoGoals: [LIEvent] = []
+        var teamTwoAutoGoals: [LIEvent] = []
         mutating func reset() {
             table = []
         }
     }
-    
-    // MARK: - IB
     
     @IBOutlet weak var addEventBarBtn: UIBarButtonItem!
     @IBOutlet weak var helpQBarBtn: UIBarButtonItem!
