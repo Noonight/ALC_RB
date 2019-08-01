@@ -19,7 +19,9 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         
         static let Q_ACCEPT_MATCH = "Завершить матч?"
 //        static let D_ACCEPT_MATCH = "Завершая матч вы подтверждаете протокол, изменения большне не будут доступны. Нажмите 'Сохранить протокол' если хотите внести изменения позже"
-        static let D_ACCEPT_MATCH = "Завершая матч вы сохраняете протокол, изменения будут доступны пока главный судья не подтвердит протокол"
+//        static let D_ACCEPT_MATCH = "Завершая матч вы сохраняете протокол, изменения будут доступны пока главный судья не подтвердит протокол"
+        static let D_ACCEPT_MATCH_NOT_MAIN_REF = "Завершая матч вы сохраняете протокол, изменения будут доступны пока главный судья не подтвердит протокол. Для публикации главный судья должен подтвердить протокол"
+        static let D_ACCEPT_MATCH_MAIN_REF = "Завершая матч вы сохраняете протокол, изменения будут доступны пока главный судья не подтвердит протокол. Т.к. вы являетесь главным судьеи вы можете сразу подтвердить протокол нажав на 'Подтвердить протокол', изменения больше не будут доступны, протокол будет опубликован."
 
         
         static let PROGRESS_1_PROTOCOL_SAVING       = "[1/2] Сохраняем протокол..."
@@ -37,9 +39,13 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         static let DELETE               = "Удалить"
         static let LEAVE                = "Оставить"
         
-        static let PROGRESS_DELETE_EVENT    = "Удаляем событие..."
-        static let RESTORE                  = "Восстановить"
-        static let EVENT_NOT_FOUND          = "Событие не найдено."
+        static let PROGRESS_DELETE_EVENT            = "Удаляем событие..."
+        static let PROGRESS_DELETE_EVENT_COMPLETE   = "Событие удалено"
+        static let RESTORE                          = "Восстановить"
+        static let EVENT_NOT_FOUND                  = "Событие не найдено."
+        
+        static let PROGRESS_ADD_EVENT           = "Добавляем событие..."
+        static let PROGRESS_ADD_EVENT_COMPLETE  = "Событие добавлено"
     }
     enum Segues {
         static let REFEREES = "segue_edit_referees_do_protocol"
@@ -205,14 +211,14 @@ extension DoMatchProtocolRefereeViewController {
     func eventMakerCompleteWork_ADD(event: LIEvent) { // TODO : need work with data base or smth
         self.viewModel.appendEvent(event: event)
         
-        let hud = self.showLoadingViewHUD()
+        let hud = self.showLoadingViewHUD(with: Texts.PROGRESS_ADD_EVENT)
         
         self.presenter.saveProtocol(
             token: self.userDefaults.getToken(),
             editedProtocol: self.viewModel.prepareEditProtocol(),
         ok: { match in
                 self.viewModel.updateMatch(match: match.match!.convertToLIMatch())
-                hud.showSuccessAfterAndHideAfter()
+                hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_ADD_EVENT_COMPLETE)
                 
                 self.setupTableDataSources()
                 self.setupDynamicView()
@@ -250,7 +256,7 @@ extension DoMatchProtocolRefereeViewController {
                 editedProtocol: self.viewModel.prepareEditProtocol(),
                 ok: { match in
                     self.viewModel.updateMatch(match: match.match!.convertToLIMatch())
-                    hud.showSuccessAfterAndHideAfter()
+                    hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_DELETE_EVENT_COMPLETE)
                     
                     self.setupTableDataSources()
                     self.setupDynamicView()
@@ -286,19 +292,47 @@ extension DoMatchProtocolRefereeViewController {
     
     @IBAction func onAcceptProtocolBtnPressed(_ sender: UIButton) {
         
-//        let acceptProtocol = UIAlertAction(title: Texts.ACCEPT_PROTOCOL, style: .default)
-//        { alerter in
-//
-//            let hud = self.showLoadingViewHUD()
-//            hud.setDetailMessage(with: Texts.PROGRESS_1_PROTOCOL_SAVING)
-//
-//            self.presenter.saveProtocol(
-//                token: self.userDefaults.getToken(),
-//                editedProtocol: self.viewModel.prepareEditProtocol(),
-//            ok: { match in // protocol saved
-//
-//                hud.setDetailMessage(with: Texts.PROGRESS_2_PROTOCOL_ACCEPTING)
-//
+        let acceptProtocol = UIAlertAction(title: Texts.ACCEPT_PROTOCOL, style: .default)
+        { alerter in
+
+            let hud = self.showLoadingViewHUD()
+            hud.setDetailMessage(with: Texts.PROGRESS_1_PROTOCOL_SAVING)
+
+            self.presenter.saveProtocol(
+                token: self.userDefaults.getToken(),
+                editedProtocol: self.viewModel.prepareEditProtocol(),
+            ok: { match in // protocol saved
+
+                hud.setDetailMessage(with: Texts.PROGRESS_2_PROTOCOL_ACCEPTING)
+
+//                Print.m("token \(self.userDefaults.getToken()) ,, matchId \(self.viewModel.prepareMatchId())")
+                
+                self.presenter.acceptProtocol(
+                    token: self.userDefaults.getToken(),
+                    matchId: self.viewModel.prepareMatchId(),
+                ok: { match in
+                    hud.setDetailMessage(with: Texts.PROGRESS_2_PROTOCOL_ACCEPTED)
+                    // do some staff for saving status of accepted match
+                    guard let newMatch = match.match else {
+                        hud.showSuccessAfterAndHideAfter()
+                        return
+                    }
+                    
+                    self.userDefaults.setMatch(match: newMatch)
+                    hud.showSuccessAfterAndHideAfter()
+                },
+                response_message: { message in
+                    hud.hide(animated: true)
+                    
+                    self.showAlert(title: message.message, message: "")
+                },
+                failure: { error in
+                    hud.hide(animated: true)
+                    
+                    self.showAlert(message: error.localizedDescription)
+                    Print.m(error)
+                })
+                
 //                self.presenter.acceptProtocol(
 //                    token: self.userDefaults.getToken(),
 //                    matchId: self.viewModel.prepareMatchId(),
@@ -310,13 +344,13 @@ extension DoMatchProtocolRefereeViewController {
 //                }, failure: { error in // protocol not accepted
 //
 //                })
-//
-//            }, failure: { error in // protocol not saved
-//                Print.m(error)
-//                hud.setToFailureWith(detailMessage: error.localizedDescription)
-//                hud.hideAfter()
-//            })
-//        }
+
+            }, failure: { error in // protocol not saved
+                Print.m(error)
+                hud.setToFailureWith(detailMessage: error.localizedDescription)
+                hud.hideAfter()
+            })
+        }
         
         let saveProtocol = UIAlertAction(title: Texts.SAVE_PROTOCOL, style: .default)
         { alerter in
@@ -345,8 +379,14 @@ extension DoMatchProtocolRefereeViewController {
             Print.m("cancel pressed")
         }
         
-        showAlert(title: Texts.Q_ACCEPT_MATCH, message: Texts.D_ACCEPT_MATCH, actions: [/*acceptProtocol, */saveProtocol, cancel])
-        
+        if userDefaults.getAuthorizedUser()?.person.getUserType() == Person.TypeOfPerson.mainReferee // main ref here
+        {
+            showAlert(title: Texts.Q_ACCEPT_MATCH, message: Texts.D_ACCEPT_MATCH_MAIN_REF, actions: [acceptProtocol, saveProtocol, cancel])
+        }
+        else
+        {
+            showAlert(title: Texts.Q_ACCEPT_MATCH, message: Texts.D_ACCEPT_MATCH_NOT_MAIN_REF, actions: [saveProtocol, cancel])
+        }
     }
     
     @IBAction func onFirstTimeBtnPressed(_ sender: UIButton) {

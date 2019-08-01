@@ -65,4 +65,25 @@ class UserDefaultsHelper {
         return (self.getAuthorizedUser()?.token)!
     }
     
+    func setMatch(match: ParticipationMatch) -> Bool {
+        var user = getAuthorizedUser()
+        if user?.person.participationMatches?.contains(where: { parMatch -> Bool in
+            return parMatch.id == match.id
+        }) ?? false
+        {
+            user?.person.participationMatches?.removeAll(where: { parMatch -> Bool in
+                return parMatch.id == match.id
+            })
+            user?.person.participationMatches?.append(match)
+            
+            setAuthorizedUser(user: user!)
+            
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
+    
 }

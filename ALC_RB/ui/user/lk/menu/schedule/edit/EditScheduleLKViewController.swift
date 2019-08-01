@@ -22,6 +22,9 @@ class EditScheduleLKViewController: BaseStateViewController {
         static let NO_REF = #colorLiteral(red: 1, green: 0.3098039216, blue: 0.2666666667, alpha: 1)
         static let YES_REF = #colorLiteral(red: 0.07843137255, green: 0.5568627451, blue: 1, alpha: 1)
     }
+    enum SegueIdentifiers {
+        static let SHOW_PROTOCOL = "segue_show_protocol_for_main_ref"
+    }
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var mainRefShowProtocol_btn: UIBarButtonItem!
@@ -36,6 +39,14 @@ class EditScheduleLKViewController: BaseStateViewController {
     private let userDefaults = UserDefaultsHelper()
     
     var filteredRefereesWithFullName: [String]?
+    
+    private lazy var refProtocol: EditMatchProtocolViewController = {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        var viewController = storyboard.instantiateViewController(withIdentifier: "EditMatchProtocolViewControllerProtocol") as! EditMatchProtocolViewController
+        
+        return viewController
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +68,7 @@ class EditScheduleLKViewController: BaseStateViewController {
         })
         
         mainRefShowProtocol_btn.image = mainRefShowProtocol_btn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
-        save_btn.image = save_btn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
+//        save_btn.image = save_btn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
     }
     
     deinit {
@@ -85,7 +96,15 @@ class EditScheduleLKViewController: BaseStateViewController {
     }
     
     func setupShowProtocolBtn() {
-        viewModel!.comingCellModel.value.activeMatch.played ? (mainRefShowProtocol_btn.isEnabled = false) : (mainRefShowProtocol_btn.isEnabled = true)
+//        viewModel!.comingCellModel.value.activeMatch.played ? (mainRefShowProtocol_btn.isEnabled = false) : (mainRefShowProtocol_btn.isEnabled = true)
+        if viewModel?.comingCellModel.value.activeMatch.played == true
+        {
+            mainRefShowProtocol_btn.isEnabled = false
+        }
+        else
+        {
+            mainRefShowProtocol_btn.isEnabled = true
+        }
     }
     
     func setupReferee() {
@@ -150,7 +169,54 @@ class EditScheduleLKViewController: BaseStateViewController {
     }
     
     @IBAction func onMainRefShowProtocolBtnPressed(_ sender: UIBarButtonItem) {
+        let activityIndicator = UIActivityIndicatorView(style: .gray)
+        activityIndicator.hidesWhenStopped = true
         
+//        if cell?.accessoryType == .disclosureIndicator
+//        {
+        let defaultView = sender.customView
+        sender.customView = activityIndicator
+//        cell?.accessoryView = activityIndicator
+        
+        activityIndicator.startAnimating()
+        
+////        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+////            sender.customView = defaultView
+////        }
+
+//        Print.m(viewModel?.comingCellModel.value.activeMatch.id)
+        guard let leagueId = viewModel?.comingCellModel.value.activeMatch.leagueID else {
+            Print.m("cell league is nil")
+            return
+        }
+        self.viewModel?.fetchLeagueInfo(
+            id: leagueId,
+            success: { leagueInfo in
+
+                sender.customView = defaultView
+
+                self.refProtocol.leagueDetailModel.leagueInfo = leagueInfo
+                guard let match = leagueInfo.league.matches?.filter({ match -> Bool in
+                    return match.id == self.viewModel?.comingCellModel.value.activeMatch.id
+                }).first else {
+                    Print.m("not found match in incoming league matches")
+                    return
+                }
+                self.refProtocol.match = match
+
+                self.refProtocol.model = self.viewModel?.comingCellModel.value.convertToMyMatchesRefTableViewCellCellModle()
+
+                self.refProtocol.preConfigureModelControllers()
+
+                self.show(self.refProtocol, sender: self)
+        },
+            failure: { error in
+                self.showAlert(message: error.localizedDescription)
+                Print.m(error)
+        }
+        )
+        
+//        }
     }
     
     // dictionary {person, type} of referee
@@ -276,3 +342,20 @@ class EditScheduleLKViewController: BaseStateViewController {
         
     }
 }
+
+// MARK: NAVIGATION
+
+//extension EditScheduleLKViewController {
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == SegueIdentifiers.SHOW_PROTOCOL,
+//            let destination = segue.destination as? EditMatchProtocolViewController//,
+////            let cellIndex = tableView.indexPathForSelectedRow
+//        {
+//            //            destination.leagueDetailModel =
+////            let cell = (tableView.cellForRow(at: cellIndex) as? MyMatchesRefTableViewCell)?.cellModel!.participationMatch!.leagueID
+//            //            destination.leagueDetailModel = self.leagueDetailModel
+//            //            destination.match = self.leagueDetailModel.leagueInfo.league.matches![cellIndex]
+//            //destination.scheduleCell = self.scheduleCell
+//        }
+//    }
+//}

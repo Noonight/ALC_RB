@@ -685,25 +685,64 @@ class ApiRequests {
 //        }
     }
     
-    func post_acceptProtocol(token: String, id: String, success: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
-        let header: HTTPHeaders = [
-            "Content-Type" : "application/json",
-            "auth" : "\(token)"
-        ]
-        let parameter: Parameters = [
-            "_id" : id
-        ]
+    func post_acceptProtocol(token: String, id: String, success: @escaping (SoloMatch) -> (), message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
+//        let header: HTTPHeaders = [
+//            "Content-Type" : "application/json",
+//            "auth" : "\(token)"
+//        ]
+//        let parameter: Parameters = [
+//            "_id" : id
+//        ]
+        
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.post_accept_protocol), method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: header)
+//            .responseSingleLineMessage(completionHandler: { response in
+//                switch response.result {
+//                case .success(let value):
+//                    success(value)
+//                case .failure(let error):
+//                    failure(error)
+//                }
+//            })
         
         Alamofire
-            .request(ApiRoute.getApiURL(.post_edit_protcol), method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: header)
-            .responseSingleLineMessage(completionHandler: { response in
-                switch response.result {
-                case .success(let value):
-                    success(value)
+            .upload(multipartFormData: { (multipartFormData) in
+                
+                multipartFormData.append(id.data(using: String.Encoding.utf8)!, withName: "_id")
+                
+            },
+                    usingThreshold: UInt64(),
+                    to: ApiRoute.getApiURL(.post_accept_protocol),
+                    method: .post,
+                    headers: ["auth" : token])
+            { (result) in
+                switch result {
+                case .success(let upload, _, _):
+                    
+                    upload.responseJSON(completionHandler: { response in
+                        dump(response.result)
+                    })
+                    
+                    upload.responseSoloMatch(completionHandler: { response in
+                        switch response.result {
+                        case .success(let value):
+                            success(value)
+                        case .failure(let error):
+                            upload.responseSingleLineMessage(completionHandler: { response in
+                                switch response.result {
+                                case .success(let value):
+                                    message(value)
+                                case .failure(let error):
+                                    failure(error)
+                                }
+                            })
+                        }
+                    })
+                    
                 case .failure(let error):
                     failure(error)
                 }
-            })
+        }
     }
     
     // MARK: - GET requests

@@ -59,11 +59,18 @@ class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> 
         }
     }
     
-    func requestAcceptProtocol(token: String, protocolId: String) {
-        dataManager.post_acceptProtocol(token: token, id: protocolId, success: { message in
-            self.getView().requestAcceptProtocolSuccess(message: message)
+    func requestAcceptProtocol(token: String, matchId: String) {
+//        dataManager.post_acceptProtocol(token: token, id: matchId, success: { message in
+//            self.getView().requestAcceptProtocolSuccess(message: message)
+//        }) { error in
+//            self.getView().requestAcceptProtocolFailure(error: error)
+//        }
+        dataManager.post_acceptProtocol(token: token, id: matchId, success: { match in
+            
+        }, message: { message in
+            
         }) { error in
-            self.getView().requestAcceptProtocolFailure(error: error)
+            
         }
     }
 }

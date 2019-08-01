@@ -153,6 +153,7 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
                         Print.m("cell league is nil")
                         return
                     }
+//                    guard let leagueId = cell?.cellModel?.participationMatch
                     self.viewModel.fetchLeagueInfo(
                         id: leagueId,
                         success: { leagueInfo in

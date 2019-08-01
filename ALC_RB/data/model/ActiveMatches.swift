@@ -86,7 +86,10 @@ struct ActiveMatch: Codable {
     var tour: String?
     var playersList: [String]
     var place: String
-//    var winner: String? // delete
+    
+    var winner: String? // delete
+    var fouls: String?
+    
     var autoGoals: String?
     
     var score: String
@@ -97,9 +100,14 @@ struct ActiveMatch: Codable {
     var penalty: String?
     var createdAt: String
     var updatedAt: String
+    var leagueID: String
     var v: Int
     
-    init(id: String, date: String, stage: Bool, played: Bool, tour: String, playersList: [String], place: String, autoGoals: String, score: String, league: String, teamOne: Team, teamTwo: Team, events: [LIEvent], referees: [Referee], penalty: String, createdAt: String, updatedAt: String, v: Int) {
+    func convertToParticipationMatch() -> ParticipationMatch {
+        return ParticipationMatch().with(id: id, date: date, stage: stage, played: played, tour: tour, playersList: playersList, place: place, winner: winner, score: score, fouls: fouls, autoGoals: autoGoals, league: league, teamOne: teamOne.id, teamTwo: teamTwo.id, events: events, referees: referees, createdAt: createdAt, updatedAt: updatedAt, v: v, leagueID: leagueID)
+    }
+    
+    init(id: String, date: String, stage: Bool, played: Bool, tour: String, playersList: [String], place: String, autoGoals: String, score: String, league: String, teamOne: Team, teamTwo: Team, events: [LIEvent], referees: [Referee], penalty: String, createdAt: String, updatedAt: String, v: Int, leagueID: String, winner: String, fouls: String) {
         self.id = id
         self.date = date
         self.stage = stage
@@ -117,6 +125,11 @@ struct ActiveMatch: Codable {
         self.penalty = penalty
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+        
+        self.leagueID = leagueID
+        self.winner = winner
+        self.fouls = fouls
+        
         self.v = v
     }
     
@@ -129,7 +142,10 @@ struct ActiveMatch: Codable {
         self.tour = try container.decodeIfPresent(String.self, forKey: .tour) ?? ""
         self.playersList = try container.decodeIfPresent([String].self, forKey: .playersList) ?? []
         self.place = try container.decodeIfPresent(String.self, forKey: .place) ?? ""
-//        self.winner = try container.decodeIfPresent(String.self, forKey: .winner) ?? ""
+        
+        self.winner = try container.decodeIfPresent(String.self, forKey: .winner) ?? ""
+        self.winner = try container.decodeIfPresent(String.self, forKey: .fouls) ?? ""
+        
         self.autoGoals = try container.decodeIfPresent(String.self, forKey: .autoGoals) ?? ""
         self.score = try container.decodeIfPresent(String.self, forKey: .score) ?? ""
         self.league = try container.decodeIfPresent(String.self, forKey: .league) ?? ""
@@ -141,12 +157,15 @@ struct ActiveMatch: Codable {
         self.updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
         self.v = try container.decodeIfPresent(Int.self, forKey: .v) ?? -1
         
+        self.leagueID = try container.decodeIfPresent(String.self, forKey: .leagueID) ?? ""
+        
         self.penalty = try container.decodeIfPresent(String.self, forKey: .penalty)
     }
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case date, stage, played, tour, playersList, place/*, winner*/, score/*, fouls*/, autoGoals, league, teamOne, teamTwo, events, referees, createdAt, updatedAt
+        case date, stage, played, tour, playersList, place, winner, score, fouls, autoGoals, league, teamOne, teamTwo, events, referees, createdAt, updatedAt
+        case leagueID
         case v = "__v"
         //        case leagueID = "leagueId"
         case penalty
@@ -163,9 +182,9 @@ extension ActiveMatch {
         tour = ""
         playersList = []
         place = ""
-//        winner = nil
+        winner = ""
         score = ""
-        //        fouls = nil
+                fouls = ""
         autoGoals = nil
         league = ""
         teamOne = Team()
@@ -177,7 +196,7 @@ extension ActiveMatch {
         createdAt = ""
         updatedAt = ""
         v = -1
-        //        leagueID = ""
+                leagueID = ""
     }
     
     init(data: Data) throws {
@@ -203,9 +222,13 @@ extension ActiveMatch {
         tour: String? = nil,
         playersList: [String]? = nil,
         place: String? = nil,
-//        winner: String? = nil,
+        
+        winner: String? = nil,
+        fouls: String? = nil,
+        leagueID: String? = nil,
+        
         score: String? = "",
-        fouls: JSONNull?? = nil,
+//        fouls: JSONNull?? = nil,
         autoGoals: String? = nil,
         league: String? = nil,
         teamOne: Team? = nil,
@@ -236,6 +259,11 @@ extension ActiveMatch {
         match.createdAt = createdAt ?? self.createdAt
         match.updatedAt = updatedAt ?? self.updatedAt
         match.v = v ?? self.v
+        
+        match.leagueID = leagueID ?? self.leagueID
+        match.winner = winner ?? self.winner
+        match.fouls = fouls ?? self.fouls
+        
         return match
     }
     

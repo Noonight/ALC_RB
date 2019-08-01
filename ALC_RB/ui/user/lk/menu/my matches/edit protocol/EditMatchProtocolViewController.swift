@@ -198,13 +198,13 @@ extension EditMatchProtocolViewController {
         
     }
     
-    @IBAction func acceptProtocolPressed(_ sender: UIBarButtonItem) {
-        showAlertOkCancel(title: "Подтвердить протокол?", message: "После подтверждения протокола матч нельзя будет редактировать", ok: {
-            self.presenter.requestAcceptProtocol(token: (self.userDefaults.getAuthorizedUser()?.token)!, protocolId: self.match.id)
-        }) {
-            Print.m("Cancel: accept protocol")
-        }
-    }
+//    @IBAction func acceptProtocolPressed(_ sender: UIBarButtonItem) {
+//        showAlertOkCancel(title: "Подтвердить протокол?", message: "После подтверждения протокола матч нельзя будет редактировать", ok: {
+//            self.presenter.requestAcceptProtocol(token: (self.userDefaults.getAuthorizedUser()?.token)!, matchId: self.match.id)
+//        }) {
+//            Print.m("Cancel: accept protocol")
+//        }
+//    }
     
     @IBAction func teamOneBtnPressed(_ sender: UIButton) { }
     @IBAction func teamTwoBtnPressed(_ sender: UIButton) { }

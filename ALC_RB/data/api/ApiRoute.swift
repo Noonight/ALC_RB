@@ -70,4 +70,5 @@ enum Routes: String {
     case post_create_club = "clubs/add"
     case post_edit_match_referee = "matches/setreferees"
     case post_edit_protcol = "matches/changeProtocol"
+    case post_accept_protocol = "matches/acceptProtocol"
 }

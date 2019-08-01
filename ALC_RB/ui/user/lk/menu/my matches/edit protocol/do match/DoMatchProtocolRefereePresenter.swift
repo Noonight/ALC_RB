@@ -38,17 +38,24 @@ class DoMatchProtocolRefereePresenter: MvpPresenter<DoMatchProtocolRefereeViewCo
         }
     }
     
-    func acceptProtocol(token: String, matchId: String) {
-        dataManager.post_acceptProtocol(token: token, id: matchId, success: { message in
-            self.getView().onAcceptProtocolSuccess(message: message)
-        }) { error in
-            self.getView().onAcceptProtocolFailure(error: error)
-        }
-    }
+//    func acceptProtocol(token: String, matchId: String) {
+//        dataManager.post_acceptProtocol(token: token, id: matchId, success: { message in
+//            self.getView().onAcceptProtocolSuccess(message: message)
+//        }) { error in
+//            self.getView().onAcceptProtocolFailure(error: error)
+//        }
+//    }
     
-    func acceptProtocol(token: String, matchId: String, ok: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
-        dataManager.post_acceptProtocol(token: token, id: matchId, success: { message in
-            ok(message)
+    func acceptProtocol(token: String, matchId: String, ok: @escaping (SoloMatch) -> (), response_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
+//        dataManager.post_acceptProtocol(token: token, id: matchId, success: { message in
+//            ok(message)
+//        }) { error in
+//            failure(error)
+//        }
+        dataManager.post_acceptProtocol(token: token, id: matchId, success: { match in
+            ok(match)
+        }, message: { message in
+            response_message(message)
         }) { error in
             failure(error)
         }

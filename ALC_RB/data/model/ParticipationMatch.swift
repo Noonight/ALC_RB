@@ -26,7 +26,7 @@ struct ParticipationMatch: Codable {
     var leagueID: String
     
     func convertToLIMatch() -> LIMatch {
-        return LIMatch(date: date, stage: stage, played: played, tour: tour, playersList: playersList, place: place, winner: winner, score: score, fouls: fouls, autoGoals: autoGoals, id: id, league: league, teamOne: teamOne, teamTwo: teamTwo, events: events, referees: referees.map({ referee -> LIReferee in
+        return LIMatch(date: date, stage: stage, played: played, tour: tour, playersList: playersList, place: place, winner: winner, score: score, fouls: fouls, autoGoals: autoGoals, id: id, league: leagueID, teamOne: teamOne, teamTwo: teamTwo, events: events, referees: referees.map({ referee -> LIReferee in
             return LIReferee(id: referee.id, person: referee.person, type: referee.type)
         }), createdAt: createdAt, updatedAt: updatedAt, v: v)
     }

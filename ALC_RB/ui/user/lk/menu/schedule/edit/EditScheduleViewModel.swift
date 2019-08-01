@@ -60,6 +60,15 @@ class EditScheduleViewModel {
         }
     }
     
+    func fetchLeagueInfo(id: String, success: @escaping (LILeagueInfo)->(), failure: @escaping (Error)->()) {
+        dataManager.get_tournamentLeague(id: id, get_success: { leagueInfo in
+            success(leagueInfo)
+        }, get_error: { error in
+            failure(error)
+//            Print.m(error)
+        })
+    }
+    
     func editMatchReferees(token: String, editMatchReferees: EditMatchReferees, success: @escaping (SoloMatch)->(), message_single: @escaping (SingleLineMessage)->(), failure: @escaping (Error)->()) {
         self.cache = editMatchReferees
         dataManager.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees, response_success: { soloMatch in
@@ -70,5 +79,13 @@ class EditScheduleViewModel {
                 failure(error)
             }
     }
+    
+//    func acceptMatch(token: String, protocolID: String, success: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
+//        dataManager.post_acceptProtocol(token: token, id: protocolID, success: { message in
+//            success(message)
+//        }) { error in
+//            failure(error)
+//        }
+//    }
     
 }

@@ -63,6 +63,10 @@ class ScheduleRefTableViewCell: UITableViewCell {
             self.referee3 = referee3
             self.timekeeper = timekeeper
         }
+        
+        func convertToMyMatchesRefTableViewCellCellModle() -> MyMatchesRefTableViewCell.CellModel {
+            return MyMatchesRefTableViewCell.CellModel(participationMatch: activeMatch.convertToParticipationMatch(), club1: clubTeamOne, club2: clubTeamTwo, team1Name: clubTeamOne.name!, team2Name: clubTeamTwo.name!)
+        }
     }
     
     var cellModel: CellModel?
