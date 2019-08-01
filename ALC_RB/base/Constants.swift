@@ -16,4 +16,7 @@ struct Constants {
         static let FAILURE      = "Ошибка!"
         static let CANCEL       = "Отмена"
     }
+    struct Images {
+        static let INFO         = UIImage(named: )
+    }
 }

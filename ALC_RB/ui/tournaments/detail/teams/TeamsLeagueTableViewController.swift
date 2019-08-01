@@ -9,12 +9,22 @@
 import UIKit
 
 class TeamsLeagueTableViewController: UITableViewController {
-
+    enum Texts {
+        static let HERE_WILL_SHOW_TEAMS = "Здесь будут отображаться команды"
+    }
+    enum SegueIdentifiers {
+        static let DETAIL = "segue_team_league_detail"
+    }
+    
+    // MARK: OUTLETS
+    
     @IBOutlet var emptyView: UIView!
     @IBOutlet weak var tableHeaderView: UIView!
     
-    let cellId = "cell_league_team"
-    let segueId = "segue_team_league_detail"
+    // MARK: VAR & LET
+    
+//    let infoBarButtonItem = UIBarButtonItem(barButtonSystemItem: ., target: <#T##Any?#>, action: <#T##Selector?#>)
+    var teamsTable: TeamsLeagueTableView = TeamsLeagueTableView()
     var leagueDetailModel = LeagueDetailModel() {
         didSet {
             updateUI()
@@ -30,18 +40,15 @@ class TeamsLeagueTableViewController: UITableViewController {
     
     var backgroundView = UIView()
     
+    // MARK: LIFE CYCLE
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.tableFooterView = UIView()
-        title = " "
         
-        menuLauncher.menuSettings = [
-            Menu(name: "№ - место в турнире"),
-            Menu(name: "И - количество проведенных матчей"),
-            Menu(name: "РМ - разница забитых и пропущенных мячей"),
-            Menu(name: "О - количество очков")
-        ]
-        setupNavBtn()
+        self.setupTitle()
+        self.setupQMenu()
+        self.setupTableViews()
+        self.setupTableDataSource()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,56 +56,80 @@ class TeamsLeagueTableViewController: UITableViewController {
         setupNavBtn()
     }
     
-    // MARK: - Setup nav button
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.unSetupNavBarRightItem()
+    }
+}
+
+// MARK: EXTENSIONS
+
+// MARK: SETUP
+
+extension TeamsLeagueTableViewController {
+    
+    func setupQMenu() {
+        menuLauncher.menuSettings = [
+            Menu(name: "№ - место в турнире"),
+            Menu(name: "И - количество проведенных матчей"),
+            Menu(name: "РМ - разница забитых и пропущенных мячей"),
+            Menu(name: "О - количество очков")
+        ]
+    }
+    
+    func setupTitle() {
+        self.title = " "
+    }
+    
+    func setupTableViews() {
+        self.tableView.delegate     = teamsTable
+        self.tableView.dataSource   = teamsTable
+        
+        self.tableView.tableFooterView = UIView()
+    }
+    
+    func setupTableDataSource() {
+        self.teamsTable.dataSource = self.leagueDetailModel.leagueInfo.league.teams!
+        self.tableView.reloadData()
+    }
     
     func setupNavBtn() {
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: " ? ", style: .plain, target: self, action: #selector(handleNavBtn))
-//        navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: " ? ", style: .plain, target: self, action: #selector(handleNavBtn))
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: " ? ", style: .plain, target: self, action: #selector(handleNavBtn))
         
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([
             NSAttributedString.Key.font : UIFont(name: "Helvetica-Bold", size: 26)], for: .normal)
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([
             NSAttributedString.Key.font : UIFont(name: "Helvetica-Bold", size: 20)], for: UIControl.State.selected)
     }
+}
+
+// MARK: UN SETUP
+
+extension TeamsLeagueTableViewController {
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
+    func unSetupNavBarRightItem() {
         navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
     }
-    
-    // MARK: - Action btn
+}
+
+// MARK: ACTIONS
+
+extension TeamsLeagueTableViewController {
     
     @objc func handleNavBtn() {
         showMenu()
     }
     
-    // MARK: - Setup menu
+}
+
+// MARK: HELPERS
+
+extension TeamsLeagueTableViewController {
     
     func showMenu() {
         menuLauncher.showMenu()
     }
-}
-
-extension TeamsLeagueTableViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if  segue.identifier == segueId,
-            let destination = segue.destination as? TeamLeagueDetailViewController,
-            let cellIndex = tableView.indexPathForSelectedRow?.row
-        {
-            //destination.league = tournaments.leagues[cellIndex]
-            let team = leagueDetailModel.leagueInfo.league.teams![cellIndex]
-            destination.teamModel = team
-            let matches = leagueDetailModel.leagueInfo.league.matches?.filter { (match) -> Bool in
-                return match.teamOne == team.id || match.teamTwo == team.id
-            }
-            destination.teamMatches = matches!
-            destination.league = leagueDetailModel.leagueInfo.league
-        }
-    }
-}
-
-extension TeamsLeagueTableViewController {
+    
     func updateUI() {
         checkEmptyView()
     }
@@ -118,6 +149,8 @@ extension TeamsLeagueTableViewController {
     }
 }
 
+// MARK: LEAGUE MAIN PROTOCOL
+
 extension TeamsLeagueTableViewController: LeagueMainProtocol {
     func updateData(leagueDetailModel: LeagueDetailModel) {
         self.leagueDetailModel = leagueDetailModel
@@ -125,12 +158,13 @@ extension TeamsLeagueTableViewController: LeagueMainProtocol {
     }
 }
 
+// MARK: EMPTY VIEW PROTOCOL
+
 extension TeamsLeagueTableViewController: EmptyProtocol {
     func showEmptyView() {
         
         let newEmptyView = EmptyViewNew()
         
-        //        backgroundView = UIView()
         backgroundView.frame = tableView.frame
         
         backgroundView.backgroundColor = .white
@@ -138,7 +172,7 @@ extension TeamsLeagueTableViewController: EmptyProtocol {
         
         tableView.addSubview(backgroundView)
         
-        newEmptyView.setText(text: "Здесь будут отображаться команды")
+        newEmptyView.setText(text: Texts.HERE_WILL_SHOW_TEAMS)
         
         backgroundView.translatesAutoresizingMaskIntoConstraints = true
         
@@ -149,70 +183,32 @@ extension TeamsLeagueTableViewController: EmptyProtocol {
         
         tableView.bringSubviewToFront(backgroundView)
         
-        //if tableView.is
-//        tableView.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
-//        tableView.backgroundView?.addSubview(emptyView)
-//        emptyView.setCenterFromParent()
         tableView.separatorStyle = .none
         tableHeaderView.isHidden = true
-        //tableHeaderView.backgroundColor = UIColor.lightGray
-        //emptyView.center.y = emptyView.center.y - tableHeaderView.frame.height
     }
     
     func hideEmptyView() {
         tableView.separatorStyle = .singleLine
-//        tableView.backgroundView = nil
         backgroundView.removeFromSuperview()
         tableHeaderView.isHidden = false
     }
 }
 
-extension TeamsLeagueTableViewController {
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 37))
-        tableHeaderView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 37)
-        view.addSubview(tableHeaderView)
-        
-        return view
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return leagueDetailModel.league.teams!.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! TeamLeagueTableViewCell
-        let model = leagueDetailModel.league.teams![indexPath.row]
-        
-        cell.selectionStyle = .none
-        
-//        configureCell(cell, model)
-        cell.configure(team: leagueDetailModel.leagueInfo.league.teams![indexPath.row])
-        
-        return cell
-    }
-    
-    func configureCell(_ cell: TeamLeagueTableViewCell, _ model: Team) {
-        //cell.position_label.text = model.playoffPlace ?? "-"
-        //cell.team_btn.titleLabel?.text = model.name
-        cell.team_btn.setTitle(model.name, for: .normal)
-        cell.games_label.text = String(model.wins + model.losses)
-        cell.rm_label.text = String(model.goals - model.goalsReceived)
-        cell.score_label.text = String(model.groupScore)
-    }
-}
+// MARK: NAVIGATION
 
 extension TeamsLeagueTableViewController {
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  segue.identifier == SegueIdentifiers.DETAIL,
+            let destination = segue.destination as? TeamLeagueDetailViewController,
+            let cellIndex = tableView.indexPathForSelectedRow?.row
+        {
+            let team = leagueDetailModel.leagueInfo.league.teams![cellIndex]
+            destination.teamModel = team
+            let matches = leagueDetailModel.leagueInfo.league.matches?.filter { (match) -> Bool in
+                return match.teamOne == team.id || match.teamTwo == team.id
+            }
+            destination.teamMatches = matches!
+            destination.league = leagueDetailModel.leagueInfo.league
+        }
     }
-    
-//    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-//        return nil
-//    }
 }
