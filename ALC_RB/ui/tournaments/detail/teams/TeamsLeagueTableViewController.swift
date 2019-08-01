@@ -23,7 +23,6 @@ class TeamsLeagueTableViewController: UITableViewController {
     
     // MARK: VAR & LET
     
-//    let infoBarButtonItem = UIBarButtonItem(barButtonSystemItem: ., target: <#T##Any?#>, action: <#T##Selector?#>)
     var teamsTable: TeamsLeagueTableView = TeamsLeagueTableView()
     var leagueDetailModel = LeagueDetailModel() {
         didSet {
@@ -72,6 +71,7 @@ extension TeamsLeagueTableViewController {
         menuLauncher.menuSettings = [
             Menu(name: "№ - место в турнире"),
             Menu(name: "И - количество проведенных матчей"),
+            Menu(name: "В - победы"),
             Menu(name: "РМ - разница забитых и пропущенных мячей"),
             Menu(name: "О - количество очков")
         ]
@@ -94,12 +94,8 @@ extension TeamsLeagueTableViewController {
     }
     
     func setupNavBtn() {
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: " ? ", style: .plain, target: self, action: #selector(handleNavBtn))
-        
-        navigationItem.rightBarButtonItem?.setTitleTextAttributes([
-            NSAttributedString.Key.font : UIFont(name: "Helvetica-Bold", size: 26)], for: .normal)
-        navigationItem.rightBarButtonItem?.setTitleTextAttributes([
-            NSAttributedString.Key.font : UIFont(name: "Helvetica-Bold", size: 20)], for: UIControl.State.selected)
+        let btn = barButtonItem(type: .info, action: #selector(onNavBarInfoPressed))
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = btn
     }
 }
 
@@ -116,7 +112,7 @@ extension TeamsLeagueTableViewController {
 
 extension TeamsLeagueTableViewController {
     
-    @objc func handleNavBtn() {
+    @objc func onNavBarInfoPressed() {
         showMenu()
     }
     
@@ -184,13 +180,14 @@ extension TeamsLeagueTableViewController: EmptyProtocol {
         tableView.bringSubviewToFront(backgroundView)
         
         tableView.separatorStyle = .none
-        tableHeaderView.isHidden = true
+        
+        teamsTable.isHidden = true
     }
     
     func hideEmptyView() {
         tableView.separatorStyle = .singleLine
         backgroundView.removeFromSuperview()
-        tableHeaderView.isHidden = false
+        teamsTable.isHidden = false
     }
 }
 

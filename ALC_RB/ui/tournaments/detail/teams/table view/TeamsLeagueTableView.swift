@@ -14,10 +14,27 @@ class TeamsLeagueTableView : NSObject {
     }
     
     var tableHeaderView = TournamentTeamHeaderView()
-    
-    var dataSource: [LITeam] = []
+    var isHidden = false {
+        didSet {
+            self.tableHeaderView.isHidden = self.isHidden
+        }
+    }
+    var _dataSource: [LITeam] = []
+    var dataSource: [LITeam] {
+        get {
+            return self._dataSource
+        }
+        set {
+            var newVal = newValue
+            newVal = newVal.sorted { lTeam, rTeam -> Bool in
+                return lTeam.groupScore ?? 0 > rTeam.groupScore ?? 0
+            }
+            self._dataSource = newVal
+        }
+    }
     
     init(dataSource: [LITeam]) {
+        super.init()
         self.dataSource = dataSource
     }
     

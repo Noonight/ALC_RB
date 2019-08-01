@@ -48,6 +48,7 @@ class MenuLauncher: NSObject {
             window.addSubview(collectionView)
             
             let height: CGFloat = 220
+            
             let y = window.frame.height - height
             collectionView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
             
@@ -59,6 +60,7 @@ class MenuLauncher: NSObject {
                 
                 self.collectionView.frame = CGRect(x: 0, y: y, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
             }, completion: nil)
+            Print.m(self.collectionView.contentSize)
         }
     }
     

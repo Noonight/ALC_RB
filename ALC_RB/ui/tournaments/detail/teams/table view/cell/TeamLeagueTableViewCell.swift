@@ -49,11 +49,13 @@ class TeamLeagueTableViewCell: UITableViewCell {
         self.position_label.text = String(place)
         if 1 ... 3 ~= place
         {
+//            Print.m(place)
             setPosition(position: .firstThree)
             return
         }
         if 4 ... 6 ~= place
         {
+//            Print.m(place)
             setPosition(position: .secondThree)
             return
         }

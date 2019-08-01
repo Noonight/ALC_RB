@@ -16,7 +16,11 @@ struct Constants {
         static let FAILURE      = "Ошибка!"
         static let CANCEL       = "Отмена"
     }
-    struct Images {
-        static let INFO         = UIImage(named: )
+//    struct Images {
+//        static let Q_INFO       = UIImage(named: "ic_info")
+//        static let PROTOCOL     = UIImage(named: "ic_document")
+//    }
+    struct Sizes {
+        static let NAV_BAR_ICON_SIZE = CGSize(width: 22, height: 22)
     }
 }
