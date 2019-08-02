@@ -10,6 +10,7 @@ import UIKit
 
 protocol RefereeEditMatchesView: MvpView {
     func onFetchModelSuccess(dataModel: [RefereeEditMatchesLKTableViewCell.CellModel])
+    func onFetchModelMessage(message: SingleLineMessage)
     func onFetchModelFailure(error: Error)
     
     func onResponseEditMatchSuccess(soloMatch: SoloMatch)
@@ -59,6 +60,8 @@ class RefereeEditMatchesLKPresenter: MvpPresenter<RefereeEditMatchesLKTableViewC
 //            }
             self.getView().onFetchModelSuccess(dataModel: cellModels)
             
+        }, get_message: { message in
+            self.getView().onFetchModelMessage(message: message)
         }) { (error) in
             self.getView().onFetchModelFailure(error: error)
         }

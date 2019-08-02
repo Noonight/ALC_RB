@@ -87,7 +87,7 @@ extension TeamsLeagueTableViewController {
     }
     
     func setupTableDataSource() {
-        self.teamsTable.dataSource = self.leagueDetailModel.leagueInfo.league.teams!
+        self.teamsTable.initDataSource(teams: self.leagueDetailModel.leagueInfo.league.teams!)
         self.tableView.reloadData()
     }
     

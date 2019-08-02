@@ -221,6 +221,10 @@ extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
         }
     }
     
+    func onFetchModelMessage(message: SingleLineMessage) {
+        self.showAlert(message: message.message)
+    }
+    
     func onFetchModelFailure(error: Error) {
         Print.m(error)
         showRepeatAlert(message: error.localizedDescription) {

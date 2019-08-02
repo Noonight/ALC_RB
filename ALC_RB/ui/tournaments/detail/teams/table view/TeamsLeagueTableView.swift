@@ -18,29 +18,34 @@ class TeamsLeagueTableView : NSObject {
     }
     
     let tableHeaderViewCellNib = UINib(nibName: "TournamentTeamHeaderCellTableViewCell", bundle: nil)
-    var _dataSource: [LITeam] = []
-    var dataSource: [LITeam] {
+    var _dataSource: [FilterTeamsByGroupHelper.GroupedLITeam] = []
+    var dataSource: [FilterTeamsByGroupHelper.GroupedLITeam] {
         get {
             return self._dataSource
         }
         set {
             var newVal = newValue
-            newVal = newVal.sorted { lTeam, rTeam -> Bool in
-                return lTeam.groupScore ?? 0 > rTeam.groupScore ?? 0
-            }
             self._dataSource = newVal
         }
     }
     
     init(dataSource: [LITeam]) {
         super.init()
-        self.dataSource = dataSource
+        self.initDataSource(teams: dataSource)
     }
     
     override init() { }
 }
 
 // MARK: EXTENSIONS
+
+// MARK: INIT
+
+extension TeamsLeagueTableView {
+    func initDataSource(teams: [LITeam]) {
+        self.dataSource = FilterTeamsByGroupHelper.filter(teams: teams)
+    }
+}
 
 // MARK: DELEGATE
 
@@ -54,9 +59,16 @@ extension TeamsLeagueTableView : UITableViewDelegate {
 
 extension TeamsLeagueTableView : UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.dataSource[section].name
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.dataSource.count
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSource.count + HeaderCell.COUNT
+        return self.dataSource[section].teams.count + HeaderCell.COUNT
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,11 +80,10 @@ extension TeamsLeagueTableView : UITableViewDataSource {
         else
         {
             cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.TEAM, for: indexPath) as! TeamLeagueTableViewCell
-            let model = dataSource[indexPath.row - HeaderCell.COUNT]
+            let model = dataSource[indexPath.section].teams[indexPath.row - HeaderCell.COUNT]
             
             (cell as! TeamLeagueTableViewCell).configure(team: model)
         }
-        
         
         cell.selectionStyle = .none
         

@@ -79,6 +79,13 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
             }
             .disposed(by: disposeBag)
         
+        viewModel.message
+            .observeOn(MainScheduler.instance)
+            .subscribe { message in
+                self.showAlert(message: message.element!.message)
+            }
+            .disposed(by: disposeBag)
+        
         viewModel.dataModel
             .subscribe { (dataModel) in
                 self.tmpReferee = dataModel.element?.referees

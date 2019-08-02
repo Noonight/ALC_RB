@@ -778,26 +778,30 @@ class ApiRequests {
         }
     }
     
-    func get_activeMatches(limit: Int = 30, offset: Int = 0, played: String = "false", get_success: @escaping (ActiveMatches) -> (), get_failure: @escaping (Error) -> ()) {
+    func get_activeMatches(limit: Int = 30, offset: Int = 0, played: String = "false", get_success: @escaping (ActiveMatches) -> (), get_message: @escaping (SingleLineMessage) -> (), get_failure: @escaping (Error) -> ()) {
         let parameters: Parameters = [
             "limit": limit,
             "offset": offset,
             "played": played
         ]
         
-        Alamofire
+        let instance =
+            Alamofire
             .request(ApiRoute.getApiURL(.activeMatches), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
-            .responseActiveMatches { (response) in
-//                dump(response)
-//                dump(response.result)
+            
+        instance.responseActiveMatches { (response) in
                 switch response.result {
-                case .success:
-                    if let activeMatches = response.result.value {
-//                        dump(activeMatches)
-                        get_success(activeMatches)
-                    }
+                case .success(let value):
+                    get_success(value)
                 case .failure(let error):
-                    get_failure(error)
+                    instance.responseSingleLineMessage(completionHandler: { response in
+                        switch response.result {
+                        case .success(let value):
+                            get_message(value)
+                        case .failure(let error):
+                            get_failure(error)
+                        }
+                    })
                 }
         }
     }
@@ -965,7 +969,7 @@ class ApiRequests {
         }
     }
     
-    func getActiveMatchesForView(get_success: @escaping (ActiveMatches, Players, [SoloClub]) -> (), get_failure: @escaping (Error) -> ()) {
+    func getActiveMatchesForView(get_success: @escaping (ActiveMatches, Players, [SoloClub]) -> (), get_message: @escaping (SingleLineMessage) -> (), get_failure: @escaping (Error) -> ()) {
         
         var fActiveMatches = ActiveMatches()
         var fReferees = Players()
@@ -975,29 +979,6 @@ class ApiRequests {
         
         group.enter()
         get_activeMatches(get_success: { (activeMatches) in
-            
-//            var tmpActiveMatch1 = ActiveMatch()
-//
-//            var tmpTeam1 = Team()
-//            tmpTeam1.club = "5be94cd706af1163449429eb"
-//            tmpActiveMatch1.teamOne = tmpTeam1
-//            var tmpTeam2 = Team()
-//            tmpTeam2.club = "5c12554c8962d414ff27f8d1"
-//            tmpActiveMatch1.teamTwo = tmpTeam2
-//
-//            var tmpRef1 = Referee().with(id: "Some id", type: Referee.RefereeType.referee1.rawValue, person: "5bf26cc5bd6d4060caa005ba")
-//            var tmpTimekeeper = Referee().with(id: "Some id too", type: Referee.RefereeType.timekeeper.rawValue, person: "5bf26cd0bd6d4060caa005bb")
-//
-//            tmpActiveMatch1.referees.append(tmpRef1)
-//            tmpActiveMatch1.referees.append(tmpTimekeeper)
-//
-////            var tmpActiveMatch2 = ActiveMatch()
-//
-//
-//            let tmpActiveMatches = ActiveMatches(matches: [tmpActiveMatch1], count: 1)
-////            fActiveMatches = activeMatches
-//
-//            fActiveMatches = tmpActiveMatches
             
             fActiveMatches = activeMatches
             
@@ -1039,6 +1020,8 @@ class ApiRequests {
             
             group.leave()
             
+        }, get_message: { message in
+            get_message(message)
         }) { (error) in
             get_failure(error)
         }

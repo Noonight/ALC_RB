@@ -86,7 +86,9 @@ protocol PullToRefresh {
     func endRefreshing() // use when fetch data is complete
     func hasContent() -> Bool // need to override
 }
-// MARK: - PULL TO REFRESH
+
+// MARK: PULL TO REFRESH
+
 extension BaseStateTableViewController : PullToRefresh {
 
     func setupPullToRefresh() {
@@ -129,6 +131,8 @@ extension BaseStateTableViewController : PullToRefresh {
     }
 }
 
+// MARK: EMPTY PROTOCOL
+
 extension BaseStateTableViewController : EmptyProtocol {
     
     func showEmptyView() {
@@ -161,6 +165,8 @@ extension BaseStateTableViewController : EmptyProtocol {
     }
 }
 
+// MARK: LOADING PROTOCOL
+
 extension BaseStateTableViewController : ActivityIndicatorProtocol {
     func showLoading() {
         
@@ -192,50 +198,10 @@ extension BaseStateTableViewController : ActivityIndicatorProtocol {
         activityIndicator.stopAnimating()
         
         if let backgroundView = backgroundView {
-//            UIView.animate(withDuration: 0.1) {
-                backgroundView.removeFromSuperview()
-//            }
+            backgroundView.removeFromSuperview()
         }
         tableView.isScrollEnabled = true
         
-//        activityIndicator.removeFromSuperview()
     }
-    
-    
-}
-
-extension BaseStateTableViewController {
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        if headerFooterOfSectionsIsHidden == true {
-//            return 0
-//        } else {
-//            Print.m(tableView.sectionHeaderHeight)
-//            if tableView.sectionHeaderHeight != 0 {
-//                inMemoryFooterSize = tableView.sectionHeaderHeight
-//            }
-//            return inMemoryHeaderSize
-//        }
-//    }
-//    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        if headerFooterOfSectionsIsHidden == true {
-//            return 0
-//        } else {
-//            if tableView.sectionFooterHeight != 0 {
-//                inMemoryFooterSize = tableView.sectionFooterHeight
-//            }
-//            tableView.header
-//            return inMemoryFooterSize
-//        }
-//    }
-    
-//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
-//    {
-//                let animation = AnimationFactory.makeSlideIn(duration: 0.5, delayFactor: 0.05)
-//        let animation = AnimationFactory.makeFade(duration: 0.5, delayFactor: 0.05)
-//                let animation = AnimationFactory.makeMoveUpWithBounce(rowHeight: cell.frame.height, duration: 0.5, delayFactor: 0.05)
-        //        let animation = AnimationFactory.makeMoveUpWithFade(rowHeight: cell.frame.height, duration: 2, delayFactor: 0.05)
-//        let animator = Animator(animation: animation)
-//        animator.animate(cell: cell, at: indexPath, in: tableView)
-//    }
     
 }

@@ -17,6 +17,7 @@ class TeamProtocolTableViewController: UITableViewController {
     let presenter = TeamProtocolPresenter()
     
     var players = [LIPlayer]()
+    var fetchedPersons: [Person] = []
     
     // MARK: - Lyfe cycle
     
@@ -53,18 +54,33 @@ class TeamProtocolTableViewController: UITableViewController {
     // MARK: - Configure cell
     
     func configureCell(cell: TeamProtocolTableViewCell, model: LIPlayer) {
-        presenter.getPlayer(player: model.playerId, get_player: { (player) in
-//            cell.name_label.text = player.person.getFullName()
-            cell.name_label.text = player.person.getSurnameNP()
-            if player.person.photo != nil {
-                cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: player.person.photo!))
+        func setupCell(person: Person) {
+            cell.name_label.text = person.getSurnameNP()
+            if person.photo != nil {
+                cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: person.photo!))
                 //cell.photo_image.image?.af_imageRoundedIntoCircle()
             } else {
                 cell.photo_image.image = UIImage(named: "ic_logo")
             }
-        }) { (error) in
-            debugPrint("get person info error")
         }
+        
+        if let curPerson = fetchedPersons.filter({ person -> Bool in
+            return person.id == model.id
+        }).first {
+            setupCell(person: curPerson)
+        }
+        else
+        {
+            presenter.getPlayer(player: model.playerId, get_player: { (player) in
+                //            cell.name_label.text = player.person.getFullName()
+                self.fetchedPersons.append(player.person)
+                setupCell(person: player.person)
+                
+            }) { (error) in
+                debugPrint("get person info error")
+            }
+        }
+        
         cell.position_label.text = model.number
     }
 

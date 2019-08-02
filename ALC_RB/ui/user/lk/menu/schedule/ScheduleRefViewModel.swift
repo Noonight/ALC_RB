@@ -24,6 +24,7 @@ class ScheduleRefViewModel {
     
     var error: PublishSubject<Error?> = PublishSubject()
     var refreshing: PublishSubject<Bool> = PublishSubject()
+    var message: PublishSubject<SingleLineMessage> = PublishSubject()
 
     var dataModel: PublishSubject<DataModel> = PublishSubject()
     
@@ -46,7 +47,11 @@ class ScheduleRefViewModel {
             )
             closure()
             
+        }, get_message: { message in
+            self.message.onNext(message)
+            closure()
         }) { (error) in
+            Print.m(error)
             self.error.onNext(error)
             closure()
         }
