@@ -24,6 +24,13 @@ class TeamLeagueTableViewCell: UITableViewCell {
     @IBOutlet weak var rm_label: UILabel!
     @IBOutlet weak var score_label: UILabel!
     @IBOutlet weak var wins_label: UILabel!
+    @IBOutlet weak var red_card_image: UIImageView!
+    
+    var isContainsPlayersWithActiveDisquals = false {
+        didSet {
+            self.red_card_image.isHidden = !self.isContainsPlayersWithActiveDisquals
+        }
+    }
     
     func configure(team: LITeam?) {
         if let curTeam = team {
@@ -32,6 +39,8 @@ class TeamLeagueTableViewCell: UITableViewCell {
             rm_label.text = String(curTeam.goals! - curTeam.goalsReceived!)
             score_label.text = String(curTeam.groupScore!)
             wins_label.text = String(curTeam.wins!)
+            
+            self.isContainsPlayersWithActiveDisquals = team?.isContainsPlayersWithActiveDisquals() ?? false
             
             guard let curPlace = curTeam.place else { return }
             preparePosition(place: curPlace)

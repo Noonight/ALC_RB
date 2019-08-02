@@ -19,6 +19,8 @@
 		1801B87F2271872300BE0F7C /* CommandAddPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1801B87E2271872300BE0F7C /* CommandAddPlayerPresenter.swift */; };
 		18076941229E7D4900A10996 /* AddPlayerToTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18076940229E7D4900A10996 /* AddPlayerToTeam.swift */; };
 		18076943229E81A000A10996 /* AddPlayerToTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18076942229E81A000A10996 /* AddPlayerToTeamResponse.swift */; };
+		1807709322F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1807709122F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.swift */; };
+		1807709422F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1807709222F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.xib */; };
 		180C084D22C1F74A00ADC90D /* CreateClub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180C084C22C1F74A00ADC90D /* CreateClub.swift */; };
 		180F236722B25F1700ADE8FD /* EditScheduleLKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */; };
 		180F236922B262AD00ADE8FD /* EditScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */; };
@@ -283,6 +285,8 @@
 		18063EDC2282C49B0072FACD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		18076940229E7D4900A10996 /* AddPlayerToTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerToTeam.swift; sourceTree = "<group>"; };
 		18076942229E81A000A10996 /* AddPlayerToTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerToTeamResponse.swift; sourceTree = "<group>"; };
+		1807709122F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentTeamHeaderCellTableViewCell.swift; sourceTree = "<group>"; };
+		1807709222F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TournamentTeamHeaderCellTableViewCell.xib; sourceTree = "<group>"; };
 		180C084C22C1F74A00ADC90D /* CreateClub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClub.swift; sourceTree = "<group>"; };
 		180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleLKViewController.swift; sourceTree = "<group>"; };
 		180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewModel.swift; sourceTree = "<group>"; };
@@ -586,6 +590,15 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
+		1807709022F3EEB100D71EA9 /* as cell */ = {
+			isa = PBXGroup;
+			children = (
+				1807709122F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.swift */,
+				1807709222F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.xib */,
+			);
+			path = "as cell";
+			sourceTree = "<group>";
+		};
 		180F236522B25EA000ADE8FD /* edit */ = {
 			isa = PBXGroup;
 			children = (
@@ -807,6 +820,7 @@
 		18EFFABC22F3173200B17947 /* header */ = {
 			isa = PBXGroup;
 			children = (
+				1807709022F3EEB100D71EA9 /* as cell */,
 				18EFFABD22F3175800B17947 /* TournamentTeamHeaderView.xib */,
 				18EFFABF22F3189800B17947 /* TournamentTeamHeaderView.swift */,
 			);
@@ -1945,6 +1959,7 @@
 				CEA6EBA621A53CFE008F874D /* LaunchScreen.storyboard in Resources */,
 				CEA6EBA321A53CFE008F874D /* Assets.xcassets in Resources */,
 				189E1C7822C9EC280086E4DA /* LabelSwitchView.xib in Resources */,
+				1807709422F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.xib in Resources */,
 				DB99BB6C224CB46700EE30D7 /* AdView.xib in Resources */,
 				DB4C45DE22EDDE1B00B28148 /* AutoGoalFooterView.xib in Resources */,
 				CEA6EBA121A53CFE008F874D /* Main.storyboard in Resources */,
@@ -2163,6 +2178,7 @@
 				DB1CA1062226B8EE005E1FB9 /* UserDefaultsHelper.swift in Sources */,
 				DB11CC8A21C225610083773E /* StackView.swift in Sources */,
 				DB4A789621C10C960071BA8F /* Tournaments.swift in Sources */,
+				1807709322F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.swift in Sources */,
 				DB8A68A1224E568900D3972A /* ClubPickerHelper.swift in Sources */,
 				049B9AD021F704EC00CDD104 /* ScheduleLeaguePresenter.swift in Sources */,
 				18EB8B9F226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift in Sources */,

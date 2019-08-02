@@ -283,6 +283,29 @@ struct LITeam: Codable {
     let creator: String?
     let club: String?
     
+    func isContainsPlayersWithActiveDisquals() -> Bool {
+        guard let curPlayers = players else { return false }
+        for player in curPlayers {
+            if player.activeDisquals != 0
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func countOfPlayersWithActiveDisquals() -> Int {
+        guard let curPlayers = players else { return 0 }
+        var counter = 0
+        for player in curPlayers {
+            if player.activeDisquals != 0
+            {
+                counter += 1
+            }
+        }
+        return counter
+    }
+    
     func convertToTeam() -> Team {
         func getPlayersArray() -> [Player] {
             return (players?.map({ player -> Player in

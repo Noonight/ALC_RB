@@ -19,7 +19,6 @@ class TeamsLeagueTableViewController: UITableViewController {
     // MARK: OUTLETS
     
     @IBOutlet var emptyView: UIView!
-    @IBOutlet weak var tableHeaderView: UIView!
     
     // MARK: VAR & LET
     
@@ -27,12 +26,6 @@ class TeamsLeagueTableViewController: UITableViewController {
     var leagueDetailModel = LeagueDetailModel() {
         didSet {
             updateUI()
-        }
-    }
-    var screenWidth: CGFloat = UIScreen.main.bounds.width {
-        didSet {
-            let screenWidth = UIScreen.main.bounds.width
-            tableHeaderView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: 37)
         }
     }
     let menuLauncher = MenuLauncher()
@@ -47,6 +40,7 @@ class TeamsLeagueTableViewController: UITableViewController {
         self.setupTitle()
         self.setupQMenu()
         self.setupTableViews()
+        self.setupTableViewHeaderCell()
         self.setupTableDataSource()
     }
     
@@ -66,6 +60,10 @@ class TeamsLeagueTableViewController: UITableViewController {
 // MARK: SETUP
 
 extension TeamsLeagueTableViewController {
+    
+    func setupTableViewHeaderCell() {
+        tableView.register(teamsTable.tableHeaderViewCellNib, forCellReuseIdentifier: TeamsLeagueTableView.CellIdentifiers.HEADER)
+    }
     
     func setupQMenu() {
         menuLauncher.menuSettings = [
@@ -180,14 +178,11 @@ extension TeamsLeagueTableViewController: EmptyProtocol {
         tableView.bringSubviewToFront(backgroundView)
         
         tableView.separatorStyle = .none
-        
-        teamsTable.isHidden = true
     }
     
     func hideEmptyView() {
         tableView.separatorStyle = .singleLine
         backgroundView.removeFromSuperview()
-        teamsTable.isHidden = false
     }
 }
 

@@ -11,14 +11,13 @@ import UIKit
 class TeamsLeagueTableView : NSObject {
     enum CellIdentifiers {
         static let TEAM = "cell_league_team"
+        static let HEADER = "cell_header_league_team"
+    }
+    enum HeaderCell {
+        static let COUNT = 1
     }
     
-    var tableHeaderView = TournamentTeamHeaderView()
-    var isHidden = false {
-        didSet {
-            self.tableHeaderView.isHidden = self.isHidden
-        }
-    }
+    let tableHeaderViewCellNib = UINib(nibName: "TournamentTeamHeaderCellTableViewCell", bundle: nil)
     var _dataSource: [LITeam] = []
     var dataSource: [LITeam] {
         get {
@@ -41,33 +40,41 @@ class TeamsLeagueTableView : NSObject {
     override init() { }
 }
 
+// MARK: EXTENSIONS
+
+// MARK: DELEGATE
+
 extension TeamsLeagueTableView : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
+// MARK: DATA SOURCE
+
 extension TeamsLeagueTableView : UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: Int(tableView.frame.width), height: TournamentTeamHeaderView.HEIGHT))
-        tableHeaderView.frame = CGRect(x: 0, y: 0, width: Int(UIScreen.main.bounds.width), height: TournamentTeamHeaderView.HEIGHT)
-        view.addSubview(tableHeaderView)
-        
-        return view
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSource.count
+        return self.dataSource.count + HeaderCell.COUNT
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.TEAM, for: indexPath) as! TeamLeagueTableViewCell
-        let model = dataSource[indexPath.row]
+        var cell: UITableViewCell!
+        if indexPath.row == 0
+        {
+            cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.HEADER, for: indexPath) as! TournamentTeamHeaderCellTableViewCell
+        }
+        else
+        {
+            cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.TEAM, for: indexPath) as! TeamLeagueTableViewCell
+            let model = dataSource[indexPath.row - HeaderCell.COUNT]
+            
+            (cell as! TeamLeagueTableViewCell).configure(team: model)
+        }
+        
         
         cell.selectionStyle = .none
-        
-        cell.configure(team: model)
         
         return cell
     }
