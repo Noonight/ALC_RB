@@ -40,7 +40,8 @@ class TeamLeagueTableViewCell: UITableViewCell {
             score_label.text = String(curTeam.groupScore!)
             wins_label.text = String(curTeam.wins!)
             
-            self.isContainsPlayersWithActiveDisquals = team?.isContainsPlayersWithActiveDisquals() ?? false
+            // self.isContainsPlayersWithActiveDisquals = team?.isContainsPlayersWithActiveDisquals() ?? false
+            // red card do not need for teams
             
             guard let curPlace = curTeam.place else { return }
             preparePosition(place: curPlace)

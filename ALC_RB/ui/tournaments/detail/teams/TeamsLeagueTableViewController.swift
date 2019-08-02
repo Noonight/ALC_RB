@@ -22,7 +22,8 @@ class TeamsLeagueTableViewController: UITableViewController {
     
     // MARK: VAR & LET
     
-    var teamsTable: TeamsLeagueTableView = TeamsLeagueTableView()
+    var filteredTeamsTable: FilteredTeamsLeagueTableView = FilteredTeamsLeagueTableView()
+    var allTeamsTable: AllTeamsLeagueTableView = AllTeamsLeagueTableView()
     var leagueDetailModel = LeagueDetailModel() {
         didSet {
             updateUI()
@@ -39,14 +40,16 @@ class TeamsLeagueTableViewController: UITableViewController {
         
         self.setupTitle()
         self.setupQMenu()
-        self.setupTableViews()
+//        self.setupTableViews()
         self.setupTableViewHeaderCell()
-        self.setupTableDataSource()
+//        self.setupTableDataSource()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         setupNavBtn()
+        
+        updateUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -62,7 +65,7 @@ class TeamsLeagueTableViewController: UITableViewController {
 extension TeamsLeagueTableViewController {
     
     func setupTableViewHeaderCell() {
-        tableView.register(teamsTable.tableHeaderViewCellNib, forCellReuseIdentifier: TeamsLeagueTableView.CellIdentifiers.HEADER)
+        tableView.register(filteredTeamsTable.tableHeaderViewCellNib, forCellReuseIdentifier: FilteredTeamsLeagueTableView.CellIdentifiers.HEADER)
     }
     
     func setupQMenu() {
@@ -79,15 +82,27 @@ extension TeamsLeagueTableViewController {
         self.title = " "
     }
     
-    func setupTableViews() {
-        self.tableView.delegate     = teamsTable
-        self.tableView.dataSource   = teamsTable
+    func setupFilteredTableViews() {
+        self.tableView.delegate     = filteredTeamsTable
+        self.tableView.dataSource   = filteredTeamsTable
         
         self.tableView.tableFooterView = UIView()
     }
     
-    func setupTableDataSource() {
-        self.teamsTable.initDataSource(teams: self.leagueDetailModel.leagueInfo.league.teams!)
+    func setupAllTableViews() {
+        self.tableView.delegate     = allTeamsTable
+        self.tableView.dataSource   = allTeamsTable
+        
+        self.tableView.tableFooterView = UIView()
+    }
+    
+    func setupFilteredTableDataSource() {
+        self.filteredTeamsTable.initDataSource(teams: self.leagueDetailModel.leagueInfo.league.teams!)
+        self.tableView.reloadData()
+    }
+    
+    func setupAllTableDataSource() {
+        self.allTeamsTable.initDataSource(teams: self.leagueDetailModel.leagueInfo.league.teams!)
         self.tableView.reloadData()
     }
     
@@ -125,21 +140,46 @@ extension TeamsLeagueTableViewController {
     }
     
     func updateUI() {
-        checkEmptyView()
-    }
-    
-    func checkEmptyView() {
-        if leagueTeamsIsEmpty() {
+        if leagueTeamsIsEmpty() == true
+        {
             showEmptyView()
-        } else {
+        }
+        else
+        {
+            if allTeamsIsContainsGroup() == true
+            {
+                Print.m("all teams contains groups")
+                self.setupFilteredTableViews()
+                self.setupFilteredTableDataSource()
+                Print.m("setup data source of fitlered teams and reload table view data")
+            }
+            else
+            {
+                Print.m("some teams do not contains groups")
+                self.setupAllTableViews()
+                self.setupAllTableDataSource()
+                Print.m("setup data source of all teams and reload table view data")
+            }
             hideEmptyView()
-            
-            tableView.reloadData()
         }
     }
     
     func leagueTeamsIsEmpty() -> Bool {
+//        Print.m(leagueDetailModel.league.teams) // group can bel nil
         return leagueDetailModel.league.teams!.isEmpty
+    }
+    
+    func allTeamsIsContainsGroup() -> Bool {
+        guard let teams = leagueDetailModel.leagueInfo.league.teams else { return false }
+        for team in teams
+        {
+//            guard team.group != nil else { return false }
+            if team.group?.count ?? 0 > 0
+            {
+                return false
+            }
+        }
+        return true
     }
 }
 
@@ -192,9 +232,17 @@ extension TeamsLeagueTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if  segue.identifier == SegueIdentifiers.DETAIL,
             let destination = segue.destination as? TeamLeagueDetailViewController,
-            let cellIndex = tableView.indexPathForSelectedRow?.row
+            let indexPath = tableView.indexPathForSelectedRow
         {
-            let team = leagueDetailModel.leagueInfo.league.teams![cellIndex]
+            var team: LITeam!
+            if self.allTeamsIsContainsGroup() == true
+            {
+                team = self.filteredTeamsTable.dataSource[indexPath.section].teams[indexPath.row - FilteredTeamsLeagueTableView.HeaderCell.COUNT]
+            }
+            else
+            {
+                team = self.allTeamsTable.dataSource[indexPath.row - AllTeamsLeagueTableView.HeaderCell.COUNT]
+            }
             destination.teamModel = team
             let matches = leagueDetailModel.leagueInfo.league.matches?.filter { (match) -> Bool in
                 return match.teamOne == team.id || match.teamTwo == team.id

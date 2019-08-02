@@ -37,15 +37,21 @@ class FilterTeamsByGroupHelper {
     static func filter(teams: [LITeam]) -> [GroupedLITeam] {
         let uniqueGroups = findUniqueGroups(teams: teams)
         var filteredTeams: [GroupedLITeam] = []
-        for i in 0...uniqueGroups.count - 1 // after index out of range
+        if uniqueGroups.count != 0
         {
-            filteredTeams.append(FilterTeamsByGroupHelper.GroupedLITeam(name: uniqueGroups[i]))
-//            filteredTeams[i].name = uniqueGroups[i]
-            for j in 0...teams.count - 1
+            for i in 0...uniqueGroups.count - 1 // after index out of range
             {
-                if uniqueGroups[i] == teams[j].group
+                filteredTeams.append(FilterTeamsByGroupHelper.GroupedLITeam(name: uniqueGroups[i]))
+                //            filteredTeams[i].name = uniqueGroups[i]
+                if teams.count != 0
                 {
-                    filteredTeams[i].add(team: teams[j])
+                    for j in 0...teams.count - 1
+                    {
+                        if uniqueGroups[i] == teams[j].group
+                        {
+                            filteredTeams[i].add(team: teams[j])
+                        }
+                    }
                 }
             }
         }

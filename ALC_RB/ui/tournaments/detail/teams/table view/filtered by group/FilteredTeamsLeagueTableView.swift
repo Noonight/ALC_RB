@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeamsLeagueTableView : NSObject {
+class FilteredTeamsLeagueTableView : NSObject {
     enum CellIdentifiers {
         static let TEAM = "cell_league_team"
         static let HEADER = "cell_header_league_team"
@@ -24,7 +24,7 @@ class TeamsLeagueTableView : NSObject {
             return self._dataSource
         }
         set {
-            var newVal = newValue
+            let newVal = newValue
             self._dataSource = newVal
         }
     }
@@ -41,7 +41,7 @@ class TeamsLeagueTableView : NSObject {
 
 // MARK: INIT
 
-extension TeamsLeagueTableView {
+extension FilteredTeamsLeagueTableView {
     func initDataSource(teams: [LITeam]) {
         self.dataSource = FilterTeamsByGroupHelper.filter(teams: teams)
     }
@@ -49,7 +49,7 @@ extension TeamsLeagueTableView {
 
 // MARK: DELEGATE
 
-extension TeamsLeagueTableView : UITableViewDelegate {
+extension FilteredTeamsLeagueTableView : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -57,7 +57,7 @@ extension TeamsLeagueTableView : UITableViewDelegate {
 
 // MARK: DATA SOURCE
 
-extension TeamsLeagueTableView : UITableViewDataSource {
+extension FilteredTeamsLeagueTableView : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.dataSource[section].name
