@@ -63,7 +63,6 @@ extension AllTeamsLeagueTableView : UITableViewDelegate {
 extension AllTeamsLeagueTableView : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        Print.m(dataSource.count + 1)
         return self.dataSource.count + HeaderCell.COUNT
     }
     
