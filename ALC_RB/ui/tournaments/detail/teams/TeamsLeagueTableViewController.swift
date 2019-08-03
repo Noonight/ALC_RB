@@ -161,6 +161,7 @@ extension TeamsLeagueTableViewController {
                 Print.m("setup data source of all teams and reload table view data")
             }
             hideEmptyView()
+            tableView.reloadData()
         }
     }
     
@@ -174,7 +175,8 @@ extension TeamsLeagueTableViewController {
         for team in teams
         {
 //            guard team.group != nil else { return false }
-            if team.group?.count ?? 0 > 0
+//            Print.m(team.group)
+            if team.group?.count ?? 0 == 0 // nothing
             {
                 return false
             }
