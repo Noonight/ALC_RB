@@ -9,7 +9,7 @@
 import UIKit
 
 class ProtocolAllFooterView: UIView {
-    static let HEIGHT = 53
+    static let HEIGHT = 54
     
     @IBOutlet var container_view: UIView!
     

@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum EndOfMatch: String {
+    case mainTime = "в основное время"
+    case extraTime = "в дополнительное время"
+}
+
 class ProtocolAllViewModel {
     
     var match: LIMatch!
@@ -39,8 +44,183 @@ class ProtocolAllViewModel {
     
     // MARK: PREPARE FOR DISPLAY
     
+    func preparePenaltyScore() -> String {
+        if hasPenaltySeriesEvents() == true
+        {
+            let penaltySeries = self.getEventsByTime("Серия пенальти")
+            var counterLeft = 0
+            var counterRight = 0
+            
+            let teamOneEvents = self.getEventsForTeam(team: .one, events: penaltySeries)
+            let teamTwoEvents = self.getEventsForTeam(team: .two, events: penaltySeries)
+            
+            for event in teamOneEvents
+            {
+                if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+                {
+                    counterLeft += 1
+                }
+                if event.getSystemEventType() == .autoGoal
+                {
+                    counterLeft -= 1
+                }
+            }
+            
+            for event in teamTwoEvents
+            {
+                if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+                {
+                    counterRight += 1
+                }
+                if event.getSystemEventType() == .autoGoal
+                {
+                    counterRight -= 1
+                }
+            }
+            
+            return "\(counterLeft) : \(counterRight)"
+        }
+        else
+        {
+            return ""
+        }
+    }
+    
+    func hasPenaltySeriesEvents() -> Bool {
+        if eventsController.events.contains(where: { event -> Bool in
+            return event.time == "Серия пенальти"
+        }) == true
+        {
+            return true
+        }
+        return false
+    }
+    
+    func prepareFirstTimeScore() -> String {
+        let firstTimeEvents = self.getEventsByTime("1 тайм")
+        var counterLeft = 0
+        var counterRight = 0
+        
+        let teamOneEvents = self.getEventsForTeam(team: .one, events: firstTimeEvents)
+        let teamTwoEvents = self.getEventsForTeam(team: .two, events: firstTimeEvents)
+        
+        for event in teamOneEvents
+        {
+            if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+            {
+                counterLeft += 1
+            }
+            if event.getSystemEventType() == .autoGoal
+            {
+                counterLeft -= 1
+            }
+        }
+        
+        for event in teamTwoEvents
+        {
+            if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+            {
+                counterRight += 1
+            }
+            if event.getSystemEventType() == .autoGoal
+            {
+                counterRight -= 1
+            }
+        }
+        
+        return "(\(counterLeft) : \(counterRight))"
+    }
+    
+    func prepareMainTimeScore() -> String {
+        let firstTimeEvents = self.getEventsByTime("1 тайм")
+        let secondTimeEvents = self.getEventsByTime("2 тайм")
+        var allEvents: [LIEvent] = []
+        allEvents.append(contentsOf: firstTimeEvents)
+        allEvents.append(contentsOf: secondTimeEvents)
+        
+        var counterLeft = 0
+        var counterRight = 0
+        
+        let teamOneEvents = self.getEventsForTeam(team: .one, events: allEvents)
+        let teamTwoEvents = self.getEventsForTeam(team: .two, events: allEvents)
+        
+        for event in teamOneEvents
+        {
+            if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+            {
+                counterLeft += 1
+            }
+            if event.getSystemEventType() == .autoGoal
+            {
+                counterLeft -= 1
+            }
+        }
+        for event in teamTwoEvents
+        {
+            if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+            {
+                counterRight += 1
+            }
+            if event.getSystemEventType() == .autoGoal
+            {
+                counterRight -= 1
+            }
+        }
+        
+        return "\(counterLeft) : \(counterRight)"
+    }
+    
+    func prepareResultScore() -> String {
+        guard let score = self.match.score else { return "" }
+        let separated = score.components(separatedBy: ":")
+        
+        return "\(separated[0]) : \(separated[1])"
+    }
+    
+    func prepareEndOfMatch() -> String {
+        return self.eventsController.getLastTime()
+    }
+    
+    func preparePlace() -> String {
+        guard let place = self.match.place else { return "Не указано" }
+        return place
+    }
+    
+    func prepareTime() -> String {
+        let date = self.match.date?.toDate()
+        guard let time = date?.toFormat("HH.mm") else { return "" }
+        return "\(time)ч"
+    }
+    
+    func prepareDate() -> String {
+        let date = self.match.date?.toDate()
+        guard let day = date?.dateComponents.day else { return "" }
+        guard let month = date?.monthName(.default) else { return "" }
+        
+        return "\(day) \(month)"
+    }
+    
+    func prepareDateAsWeekDay() -> String {
+        let date = self.match.date?.toDate()
+        guard let dayOfWeek = date?.weekdayName(.default, locale: Locale.current) else { return "" }
+        return dayOfWeek
+    }
+    
+    func prepareTournamentTitle() -> String {
+        var curName = ""
+        if let name = self.leagueDetailModel.leagueInfo.league.name {
+            curName = name
+        }
+        var curTourney = ""
+        if let tourney = self.leagueDetailModel.leagueInfo.league.name {
+            curTourney = tourney
+        }
+        return "\(curName). \(curTourney)"
+    }
+    
     func prepareTour() -> String {
-        return self.leagueDetailModel.leagueInfo.league.tourney ?? ""
+//        return self.leagueDetailModel.leagueInfo.league.tourney ?? ""
+        return ""
     }
     
     func prepareTeamTitle(team: ClubTeamHelper.TeamEnum) -> String {
@@ -126,6 +306,7 @@ class ProtocolAllViewModel {
         }
         
         group.notify(queue: .main) {
+            Print.m(dump(resultArray))
             completed(resultArray)
         }
     }

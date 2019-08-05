@@ -26,7 +26,6 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PoM-yV-AMx">
                     <rect key="frame" x="185.5" y="0.0" width="4" height="53"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="4" id="uMe-wc-f0w"/>
                     </constraints>

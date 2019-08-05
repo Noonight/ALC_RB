@@ -18,6 +18,26 @@ class ProtocolEventsController {
         self.events = events
     }
     
+    func getLastTime() -> String {
+//        if events.contains(where: { event -> Bool in
+//            return event.time == "Серия пенальти"
+//        }) == true
+//        {
+//            return "Серия пенальти"
+//        }
+//        else
+        if events.contains(where: { event -> Bool in
+            return event.time == "Дополнительное время"
+        }) == true
+        {
+            return "в дополнительное время"
+        }
+        else
+        {
+            return "в основное время"
+        }
+    }
+    
     func prepareNotAutoGoalFoulEvents() -> [LIEvent] {
         return events.filter({ event -> Bool in
             return event.getSystemEventType() != .autoGoal || event.getSystemEventType() != .foul

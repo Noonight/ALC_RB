@@ -38,6 +38,7 @@ class MatchProtocolViewController: UIViewController {
     @IBOutlet weak var teamTwoLogo: UIImageView!
     @IBOutlet weak var teamTwoTitle: UILabel!
     
+    @IBOutlet weak var main_time_label: UILabel!
     @IBOutlet weak var score_in_main_time_label: UILabel! // 3 : 3
     @IBOutlet weak var score_in_first_time_label: UILabel! // (1 : 2) example
     @IBOutlet weak var penalty_series_label: UILabel! // enable or not only
@@ -68,7 +69,7 @@ class MatchProtocolViewController: UIViewController {
         super.viewDidLoad()
         
         self.setupPresenter()
-        
+        self.setupTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,7 +78,7 @@ class MatchProtocolViewController: UIViewController {
         self.setupNavBarRightTour()
         self.setupView()
         self.setupTitle()
-        
+        self.setupTableDataSource()
     }
 }
 
@@ -87,7 +88,54 @@ class MatchProtocolViewController: UIViewController {
 
 extension MatchProtocolViewController {
     
+    func setupTableView() {
+        self.events_table_view.dataSource   = self.eventsTable
+        self.events_table_view.delegate     = self.eventsTable
+    }
+    
+    func setupTableDataSource() {
+        let hud = self.events_table_view.showLoadingViewHUD(with: "Настройка...")
+        self.viewModel.prepareTableViewDataSource { dataSource in
+            self.eventsTable.dataSource = dataSource
+            self.events_table_view.reloadData()
+            hud.hide(animated: true)
+        }
+    }
+    
     func setupView() {
+        
+        let hud = showLoadingViewHUD(with: "Настройка...")
+        
+        self.team_one_label.text = self.viewModel.prepareTeamTitle(team: .one)
+        self.team_two_label.text = self.viewModel.prepareTeamTitle(team: .two)
+        
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamOne!, league: self.viewModel.leagueDetailModel.leagueInfo.league)) { (image) in
+            self.team_one_image.image = image.af_imageRoundedIntoCircle()
+        }
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamTwo!, league: self.viewModel.leagueDetailModel.leagueInfo.league)) { (image) in
+            self.team_two_image.image = image.af_imageRoundedIntoCircle()
+        }
+        
+        self.tournament_name_label.text = self.viewModel.prepareTournamentTitle()
+        self.date_label.text = self.viewModel.prepareDate()
+        self.day_of_week_label.text = self.viewModel.prepareDateAsWeekDay()
+        self.time_label.text = self.viewModel.prepareTime()
+        self.place_label.text = self.viewModel.preparePlace()
+        
+        self.match_state_time_label.text = self.viewModel.prepareEndOfMatch()
+        self.result_score_label.text = self.viewModel.prepareResultScore()
+        self.score_in_main_time_label.text = self.viewModel.prepareMainTimeScore()
+        self.score_in_first_time_label.text = self.viewModel.prepareFirstTimeScore()
+        
+        if self.viewModel.hasPenaltySeriesEvents() == true {
+            self.penalty_series_label.isHidden = false
+            self.score_in_penalty_series_label.isHidden = false
+            
+            self.score_in_penalty_series_label.text = self.viewModel.preparePenaltyScore()
+        } else {
+            self.penalty_series_label.isHidden = true
+            self.score_in_penalty_series_label.isHidden = true
+        }
         
         
         self.teamOneTitle.text = self.viewModel.prepareTeamTitle(team: .one)
@@ -99,6 +147,8 @@ extension MatchProtocolViewController {
         presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamTwo!, league: self.viewModel.leagueDetailModel.leagueInfo.league)) { (image) in
             self.teamTwoLogo.image = image.af_imageRoundedIntoCircle()
         }
+        
+        hud.hide(animated: false)
     }
     
     func setupTitle() {

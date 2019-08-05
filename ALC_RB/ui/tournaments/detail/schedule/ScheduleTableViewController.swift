@@ -30,13 +30,14 @@ class ScheduleTableViewController: UITableViewController {
             if newValue.leagueInfo.league.matches?.count != 0
             {
                 var newVal = newValue
-                let hud = self.tableView.showLoadingViewHUD(with: "Сортируем по дате...")
+                let hud = self.tableView.showLoadingViewHUD(with: "Сортируем...")
                 if let curMatches = newVal.leagueInfo.league.matches {
                     
                     let sortedMatches = SortMatchesByDateHelper.sort(type: .lowToHigh, matches: curMatches) // sorting matches by date
                     newVal.leagueInfo.league.matches = sortedMatches
                 }
                 _leagueDetailModel = newVal
+                hud.hide(animated: false)
                 hud.showSuccessAfterAndHideAfter(withMessage: "Готово")
                 self.updateUI()
             }

@@ -50,7 +50,7 @@ struct ProtocolAllEventsSectionTable {
 
 class ProtocolTableEvents: NSObject {
     enum Header {
-        static let HEIGHT = 2
+        static let HEIGHT = 4
     }
     enum CellIdentifiers {
         static let CELL = "protocol_table_all_cell"
@@ -85,7 +85,32 @@ extension ProtocolTableEvents: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return ProtocolAllFooterView(frame: CGRect(x: 0, y: 0, width: Int(tableView.frame.width), height: ProtocolAllFooterView.HEIGHT))
+        
+        let footerView = ProtocolAllFooterView(frame: CGRect(x: 0, y: 0, width: Int(tableView.frame.width), height: ProtocolAllFooterView.HEIGHT))
+        footerView.leftFouls = dataSource[section].leftFooterFouls
+        footerView.rightFouls = dataSource[section].rightFooterFouls
+        
+        if footerView.isVisible() == true
+        {
+            return footerView
+        }
+        
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(Header.HEIGHT)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if dataSource[section].leftFooterFouls == 0 && dataSource[section].rightFooterFouls == 0
+        {
+            return 0
+        }
+        else
+        {
+            return CGFloat(ProtocolAllFooterView.HEIGHT)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
