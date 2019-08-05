@@ -120,7 +120,7 @@ class EventsMatchTableViewController: BaseStateTableViewController {
         presenter.getPlayer(player: model.player, get_player: { (person) in
 //            cell.name_label.text = person.person.getFullName()
             cell.name_label.text = person.person.getSurnameNP()
-            cell.type_label.text = model.getEventType().rawValue
+            cell.type_label.text = model.getEventType().getAbbreviation()
             if person.person.photo != nil {
                 self.presenter.getPlayerImage(player_photo: person.person.photo ?? " ", get_image: { (image) in
                     cell.photo_image.image = image

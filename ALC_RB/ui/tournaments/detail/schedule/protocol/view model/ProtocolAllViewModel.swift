@@ -536,23 +536,23 @@ class ProtocolAllViewModel {
             returnedModel = RefereeProtocolPlayerEventsModel()
             for event in playerEvents
             {
-                if event.getEventType() == .goal
+                if event.getEventType() == .player(.goal)
                 {
                     returnedModel.goals = returnedModel.goals + 1
                 }
-                if event.getEventType() == .penalty
+                if event.getEventType() == .player(.penalty)
                 {
                     returnedModel.successfulPenaltyGoals = returnedModel.successfulPenaltyGoals + 1
                 }
-                if event.getEventType() == .penaltyFailure
+                if event.getEventType() == .player(.penaltyFailure)
                 {
                     returnedModel.failurePenaltyGoals = returnedModel.failurePenaltyGoals + 1
                 }
-                if event.getEventType() == .yellowCard
+                if event.getEventType() == .player(.yellowCard)
                 {
                     returnedModel.yellowCards = returnedModel.yellowCards + 1
                 }
-                if event.getEventType() == .redCard
+                if event.getEventType() == .player(.redCard)
                 {
                     returnedModel.redCard = true
                 }

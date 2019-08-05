@@ -127,6 +127,61 @@ struct LIEvent: Codable {
     let player: String
     let time: String
     
+    init() {
+        self.id = ""
+        self.eventType = ""
+        self.player = ""
+        self.time = ""
+    }
+    
+    init(id: String, eventType: String, player: String, time: String) {
+        self.id = id
+        self.eventType = eventType
+        self.player = player
+        self.time = time
+    }
+    
+    init(matchID: String, eventType: EventPlayerType, playerID: String, time: EventTime) {
+        self.id = matchID
+        self.eventType = eventType.rawValue
+        self.player = playerID
+        self.time = time.rawValue
+    }
+    
+    init(matchID: String, eventType: EventTeamType, playerID: String, time: EventTime) {
+        self.id = matchID
+        self.eventType = eventType.rawValue
+        self.player = playerID
+        self.time = time.rawValue
+    }
+    
+    func getEventType() -> EventAllTypes {
+        switch eventType {
+        case EventPlayerType.goal.rawValue:
+            return EventAllTypes.player(EventPlayerType.goal)
+        case EventPlayerType.redCard.rawValue:
+            return EventAllTypes.player(EventPlayerType.redCard)
+        case EventPlayerType.yellowCard.rawValue:
+            return EventAllTypes.player(EventPlayerType.yellowCard)
+        case EventPlayerType.penalty.rawValue:
+            return EventAllTypes.player(EventPlayerType.penalty)
+        case EventPlayerType.penaltyFailure.rawValue:
+            return EventAllTypes.player(EventPlayerType.penaltyFailure)
+            
+            // team
+        case EventTeamType.autoGoal.rawValue:
+            return EventAllTypes.team(EventTeamType.autoGoal)
+        case EventTeamType.foul.rawValue:
+            return EventAllTypes.team(EventTeamType.foul)
+        case EventTeamType.penaltySeriesSuccess.rawValue:
+            return EventAllTypes.team(EventTeamType.penaltySeriesSuccess)
+        case EventTeamType.penaltySeriesFailure.rawValue:
+            return EventAllTypes.team(EventTeamType.penaltySeriesFailure)
+        default:
+            return EventAllTypes.none
+        }
+    }
+    
     func toDictionary() -> [String: Any] {
         return [
             CodingKeys.id.rawValue : id,
@@ -136,26 +191,26 @@ struct LIEvent: Codable {
         ]
     }
     
-    func getEventType() -> EventType {
-        switch eventType {
-        case "goal":
-            return .goal
-        case "yellowCard":
-            return .yellowCard
-        case "redCard":
-            return .redCard
-        case "foul":
-            return .foul
-        case "autoGoal":
-            return .autoGoal
-        case "penalty":
-            return .penalty
-        case "penaltyFailure":
-            return .penaltyFailure
-        default:
-            return EventType.non
-        }
-    }
+//    func getEventType() -> EventType {
+//        switch eventType {
+//        case "goal":
+//            return .goal
+//        case "yellowCard":
+//            return .yellowCard
+//        case "redCard":
+//            return .redCard
+//        case "foul":
+//            return .foul
+//        case "autoGoal":
+//            return .autoGoal
+//        case "penalty":
+//            return .penalty
+//        case "penaltyFailure":
+//            return .penaltyFailure
+//        default:
+//            return EventType.non
+//        }
+//    }
     
     enum EventType: String {
         case goal = "Г"
@@ -637,13 +692,6 @@ extension LIMatch {
 }
 
 extension LIEvent {
-    
-    init() {
-        id = " "
-        eventType = " "
-        player = " "
-        time = " "
-    }
     
     init(data: Data) throws {
         self = try newJSONDecoder().decode(LIEvent.self, from: data)

@@ -63,6 +63,8 @@ class EditEventsMatchTableViewController: UITableViewController {
         prepareTableModel(destination: eventsController.events)
 
         setupNavBtn()
+        
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItems = nil
     }
     
     // MARK: - Setup nav button

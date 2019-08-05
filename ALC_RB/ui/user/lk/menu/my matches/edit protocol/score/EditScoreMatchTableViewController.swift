@@ -91,7 +91,7 @@ class EditScoreMatchTableViewController: UITableViewController {
         var allEventTypes: [String] = []
         for event in destination {
             if !allEventTypes.contains(event.time) {
-                if event.getEventType() == LIEvent.EventType.goal || event.getEventType() == LIEvent.EventType.autoGoal {
+                if event.getEventType() == .player(.goal) {// || event.getEventType() == LIEvent.EventType.autoGoal {
                     allEventTypes.append(event.time)
                 }
             }
