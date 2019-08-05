@@ -161,8 +161,9 @@ extension ScheduleTableViewController {
             let destination = segue.destination as? MatchProtocolViewController,
             let cellIndex = tableView.indexPathForSelectedRow?.row
         {
-            destination.leagueDetailModel = self.leagueDetailModel
-            destination.match = self.leagueDetailModel.leagueInfo.league.matches![cellIndex]
+            destination.viewModel = ProtocolAllViewModel(match: self.leagueDetailModel.leagueInfo.league.matches![cellIndex], leagueDetailModel: self.leagueDetailModel)
+//            destination.leagueDetailModel = self.leagueDetailModel
+//            destination.match = self.leagueDetailModel.leagueInfo.league.matches![cellIndex]
         }
     }
 }

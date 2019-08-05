@@ -54,8 +54,11 @@ class MatchProtocolViewController: UIViewController {
     
     // MARK: VAR & LET
     
-    var leagueDetailModel = LeagueDetailModel()
-    var match = LIMatch()
+//    var leagueDetailModel = LeagueDetailModel()
+//    var match = LIMatch()
+
+    var viewModel: ProtocolAllViewModel!
+    var eventsTable: ProtocolTableEvents = ProtocolTableEvents()
     
     let presenter = MatchProtocolPresenter()
     
@@ -63,32 +66,60 @@ class MatchProtocolViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initPresenter()
+        
+        self.setupPresenter()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        navigationController?.navigationBar.topItem?.title = " "
-        title = "Протокол"
-        
-        teamOneTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
-        
-        teamTwoTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .two)
-        
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamOne!, league: leagueDetailModel.leagueInfo.league)) { (image) in
-            self.teamOneLogo.image = image.af_imageRoundedIntoCircle()
-        }
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamTwo!, league: leagueDetailModel.leagueInfo.league)) { (image) in
-            self.teamTwoLogo.image = image.af_imageRoundedIntoCircle()
-        }
-        
-        let navigationMatchScoreBtn = UIBarButtonItem(title: "Счет", style: .plain, target: self, action: #selector(onMatchScoreBtnPressed(sender:)))
-        navigationItem.rightBarButtonItem = navigationMatchScoreBtn
+        self.setupNavBarRightTour()
+        self.setupView()
+        self.setupTitle()
         
     }
+}
+
+// MARK: EXTENSIONS
+
+// MARK: SETUP
+
+extension MatchProtocolViewController {
     
-    // MARK: - Button Actions
+    func setupView() {
+        
+        
+        self.teamOneTitle.text = self.viewModel.prepareTeamTitle(team: .one)
+        self.teamTwoTitle.text = self.viewModel.prepareTeamTitle(team: .two)
+        
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamOne!, league: self.viewModel.leagueDetailModel.leagueInfo.league)) { (image) in
+            self.teamOneLogo.image = image.af_imageRoundedIntoCircle()
+        }
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamTwo!, league: self.viewModel.leagueDetailModel.leagueInfo.league)) { (image) in
+            self.teamTwoLogo.image = image.af_imageRoundedIntoCircle()
+        }
+    }
+    
+    func setupTitle() {
+        navigationController?.navigationBar.topItem?.title = " "
+        title = ""
+    }
+    
+    func setupNavBarRightTour() {
+        let navigationMatchScoreBtn = UIBarButtonItem(title: self.viewModel.prepareTour(), style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem = navigationMatchScoreBtn
+    }
+    
+    func setupPresenter() {
+        self.initPresenter()
+    }
+    
+}
+
+// MARK: ACTIONS
+
+extension MatchProtocolViewController {
     
     @IBAction func onTeamOneTap(_ sender: UITapGestureRecognizer) {
         
@@ -97,15 +128,15 @@ class MatchProtocolViewController: UIViewController {
         
     }
     @objc func onMatchScoreBtnPressed(sender: UIBarButtonItem) {
-        let score: ScoreMatchTableViewController = {
-            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            
-            let controller = storyboard.instantiateViewController(withIdentifier: "ScoreMatchTableViewController") as! ScoreMatchTableViewController
-            controller.leagueDetailModel = self.leagueDetailModel
-            controller.match = self.match
-            return controller
-        }()
-        navigationController?.show(score, sender: self)
+//        let score: ScoreMatchTableViewController = {
+//            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+//
+//            let controller = storyboard.instantiateViewController(withIdentifier: "ScoreMatchTableViewController") as! ScoreMatchTableViewController
+//            controller.leagueDetailModel = self.viewModel.leagueDetailModel
+//            controller.match = self.viewModel.match
+//            return controller
+//        }()
+//        navigationController?.show(score, sender: self)
     }
     
     @IBAction func teamOneBtnPressed(_ sender: UIButton) {
@@ -120,21 +151,42 @@ class MatchProtocolViewController: UIViewController {
     @IBAction func eventsBtnPressed(_ sender: UIButton) {
         
     }
-    
-    // MARK: - Navigation
+}
+
+// MARK: HELPERS
+
+extension MatchProtocolViewController {
+    func getPlayersTeam(team id: String) -> [LIPlayer] {
+        return (self.viewModel.leagueDetailModel.leagueInfo.league.teams?.filter({ (team) -> Bool in
+            return team.id == id
+        }).first?.players)!
+    }
+}
+
+// MARK: PRESENTER
+
+extension MatchProtocolViewController: MvpView {
+    func initPresenter() {
+        presenter.attachView(view: self)
+    }
+}
+
+// MARK: NAVIGATION
+
+extension MatchProtocolViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case segueOneId:
+        case SegueIdentifiers.TEAM_ONE:
             //let destination = segue.destination as?  TeamProtocolTableViewController
             prepareSegueDataModel(destination: segue.destination, team: .one)
-        case segueTwoId:
+        case SegueIdentifiers.TEAM_TWO:
             prepareSegueDataModel(destination: segue.destination, team: .two)
-        case segueReferee:
+        case SegueIdentifiers.REFEREES:
             prepareSegueDataModel(destination: segue.destination)
-        case segueEvents:
-            prepareSegueDataModel(destination: segue.destination)
-            break
+            //        case segueEvents:
+            //            prepareSegueDataModel(destination: segue.destination)
+        //            break
         default:
             break
         }
@@ -144,18 +196,18 @@ class MatchProtocolViewController: UIViewController {
         switch destination {
         case is TeamProtocolTableViewController:
             let controller = destination as! TeamProtocolTableViewController
-            controller.players = getPlayersTeam(team: match.teamOne!)
-            controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
+            controller.players = getPlayersTeam(team: self.viewModel.match.teamOne!)
+            controller.title = ClubTeamHelper.getTeamTitle(league: self.viewModel.leagueDetailModel.leagueInfo.league, match: self.viewModel.match, team: .one)
         case is RefereeTeamTableViewController:
             let controller = destination as! RefereeTeamTableViewController
-            controller.destinationData = match.referees
+            controller.destinationData = self.viewModel.match.referees
         case is EventsMatchTableViewController:
             let controller = destination as! EventsMatchTableViewController
-            controller.destinationModel = match.events
+            controller.destinationModel = self.viewModel.match.events
         case is ScoreMatchTableViewController:
             let controller = destination as! ScoreMatchTableViewController
-            controller.leagueDetailModel = leagueDetailModel
-            controller.match = match
+            controller.leagueDetailModel = self.viewModel.leagueDetailModel
+            controller.match = self.viewModel.match
         default:
             break
         }
@@ -167,26 +219,15 @@ class MatchProtocolViewController: UIViewController {
             let controller = destination as! TeamProtocolTableViewController
             switch team {
             case .one:
-                controller.players = getPlayersTeam(team: match.teamOne!)
-                controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
+                controller.players = getPlayersTeam(team: self.viewModel.match.teamOne!)
+                controller.title = ClubTeamHelper.getTeamTitle(league: self.viewModel.leagueDetailModel.leagueInfo.league, match: self.viewModel.match, team: .one)
             case .two:
-                controller.players = getPlayersTeam(team: match.teamTwo!)
-                controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .two)
+                controller.players = getPlayersTeam(team: self.viewModel.match.teamTwo!)
+                controller.title = ClubTeamHelper.getTeamTitle(league: self.viewModel.leagueDetailModel.leagueInfo.league, match: self.viewModel.match, team: .two)
             }
         default:
             break
         }
     }
     
-    func getPlayersTeam(team id: String) -> [LIPlayer] {
-        return (leagueDetailModel.leagueInfo.league.teams?.filter({ (team) -> Bool in
-            return team.id == id
-        }).first?.players)!
-    }
-}
-
-extension MatchProtocolViewController: MvpView {
-    func initPresenter() {
-        presenter.attachView(view: self)
-    }
 }

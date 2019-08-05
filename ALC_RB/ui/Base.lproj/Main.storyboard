@@ -1528,7 +1528,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="53" id="qXa-Ri-pVw">
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="protocol_table_all_cell" rowHeight="53" id="qXa-Ri-pVw" customClass="ProtocolAllTableEventsCell" customModule="ALC_RB" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="28" width="320" height="53"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qXa-Ri-pVw" id="xey-rg-IwW">
@@ -1587,6 +1587,12 @@
                                                                         <constraint firstItem="k1Z-iL-vVH" firstAttribute="centerY" secondItem="xey-rg-IwW" secondAttribute="centerY" id="qex-D2-vDM"/>
                                                                     </constraints>
                                                                 </tableViewCellContentView>
+                                                                <connections>
+                                                                    <outlet property="left_event_image" destination="1FX-gH-u4q" id="ak7-PD-Srd"/>
+                                                                    <outlet property="left_name_label" destination="k1Z-iL-vVH" id="OZ0-dl-rIF"/>
+                                                                    <outlet property="right_event_image" destination="zs4-H4-wpj" id="G2i-Gx-gPD"/>
+                                                                    <outlet property="right_name_label" destination="yv0-jI-fQ4" id="tQD-es-dTS"/>
+                                                                </connections>
                                                             </tableViewCell>
                                                         </prototypes>
                                                     </tableView>

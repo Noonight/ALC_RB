@@ -170,6 +170,27 @@ struct LIEvent: Codable {
     
     enum SystemEventType: String {
         case goal, yellowCard, redCard, foul, autoGoal, penalty, penaltyFailure, non
+        
+        func getImage() -> UIImage? {
+            switch self {
+            case .goal:
+                return UIImage(named: "ic_green_footbal")
+            case .foul:
+                return UIImage(named: "ic_faul")
+            case .penalty:
+                return UIImage(named: "ic_green_footbal_with_P")
+            case .penaltyFailure:
+                return UIImage(named: "ic_gray_footbal_with_P")
+            case .yellowCard:
+                return UIImage(named: "ic_yellowCard")
+            case .redCard:
+                return UIImage(named: "ic_redCard")
+            case .autoGoal:
+                return UIImage(named: "ic_goal")
+            case .non:
+                return UIImage(named: "ic_settings")
+            }
+        }
     }
     
     func getSystemEventType() -> SystemEventType {
