@@ -260,6 +260,7 @@
 		DBC6155622EE2DAD0078FAE3 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC6155422EE2DAD0078FAE3 /* Animator.swift */; };
 		DBC7C1AA22D754C100ECD690 /* NewsAllPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC7C1A922D754C100ECD690 /* NewsAllPresenter.swift */; };
 		DBC7C1AC22D75EDE00ECD690 /* AnnoucnesAllPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC7C1AB22D75EDE00ECD690 /* AnnoucnesAllPresenter.swift */; };
+		DBCA6C9E22F7EAA7001D6C0B /* ProtocolTableEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA6C9D22F7EAA7001D6C0B /* ProtocolTableEvents.swift */; };
 		DBCB1EBF2223FE3F005A6976 /* ApiRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCB1EBE2223FE3F005A6976 /* ApiRequests.swift */; };
 		DBD4D025225F946D00C8C8B3 /* EditTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD4D024225F946D00C8C8B3 /* EditTeamResponse.swift */; };
 		DBE0E7A2223BDDE800CC0EE2 /* OngoingLeaguesLKTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE0E7A1223BDDE800CC0EE2 /* OngoingLeaguesLKTableViewController.swift */; };
@@ -533,6 +534,7 @@
 		DBC6155422EE2DAD0078FAE3 /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		DBC7C1A922D754C100ECD690 /* NewsAllPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAllPresenter.swift; sourceTree = "<group>"; };
 		DBC7C1AB22D75EDE00ECD690 /* AnnoucnesAllPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnoucnesAllPresenter.swift; sourceTree = "<group>"; };
+		DBCA6C9D22F7EAA7001D6C0B /* ProtocolTableEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolTableEvents.swift; sourceTree = "<group>"; };
 		DBCB1EBE2223FE3F005A6976 /* ApiRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequests.swift; sourceTree = "<group>"; };
 		DBD4D024225F946D00C8C8B3 /* EditTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamResponse.swift; sourceTree = "<group>"; };
 		DBE0E7A1223BDDE800CC0EE2 /* OngoingLeaguesLKTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingLeaguesLKTableViewController.swift; sourceTree = "<group>"; };
@@ -1421,6 +1423,7 @@
 			children = (
 				DB595C7121EF2214000282F4 /* MatchProtocolViewController.swift */,
 				04DF5491220D6861001323A6 /* MatchProtocolPresenter.swift */,
+				DBCA6C9C22F7EA8E001D6C0B /* table events */,
 				DBB208E322117F8F0010B600 /* team */,
 				DBB208EB221305C80010B600 /* referee */,
 				04C024E12213DDB500A4A571 /* events */,
@@ -1883,6 +1886,22 @@
 			path = animation;
 			sourceTree = "<group>";
 		};
+		DBCA6C9C22F7EA8E001D6C0B /* table events */ = {
+			isa = PBXGroup;
+			children = (
+				DBCA6C9D22F7EAA7001D6C0B /* ProtocolTableEvents.swift */,
+				DBCA6C9F22F7EBB5001D6C0B /* footer */,
+			);
+			path = "table events";
+			sourceTree = "<group>";
+		};
+		DBCA6C9F22F7EBB5001D6C0B /* footer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = footer;
+			sourceTree = "<group>";
+		};
 		DBE0E7A0223BDDAC00CC0EE2 /* ongoing leagues */ = {
 			isa = PBXGroup;
 			children = (
@@ -2266,6 +2285,7 @@
 				187F2DFD22CB19440049EA77 /* EditRefereeTeamPresenter.swift in Sources */,
 				DB11CC9021C235460083773E /* ScheduleTableViewCell.swift in Sources */,
 				CE60234C21AE756C00B428EE /* NewsAnnounceTableViewController.swift in Sources */,
+				DBCA6C9E22F7EAA7001D6C0B /* ProtocolTableEvents.swift in Sources */,
 				18EB8BA2227056100087BD99 /* CommandAddPlayerTableViewCell.swift in Sources */,
 				DB5A00CF2237F1AF00B93EF5 /* AcceptRequest.swift in Sources */,
 				DB495B7E22AFE74F00FCC6F5 /* ScheduleRefTableViewCell.swift in Sources */,

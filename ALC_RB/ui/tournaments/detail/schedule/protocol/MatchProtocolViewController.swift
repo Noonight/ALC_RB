@@ -9,26 +9,50 @@
 import UIKit
 
 class MatchProtocolViewController: UIViewController {
-
-    // MARK: - Variables
+    enum SegueIdentifiers {
+        static let TEAM_ONE = "team_one_protocol_segue"
+        static let TEAM_TWO = "team_two_protocol_segue"
+        static let REFEREES = "referee_protocol_segue"
+    }
     
-    let segueOneId = "team_one_protocol_segue"
-    let segueTwoId = "team_two_protocol_segue"
-    let segueReferee = "referee_protocol_segue"
-    let segueEvents = "events_protocol_segue"
+    // MAKR: OUTLETS
+    
+    @IBOutlet weak var tournament_name_label: UILabel!
+    @IBOutlet weak var date_label: UILabel!
+    @IBOutlet weak var day_of_week_label: UILabel!
+    @IBOutlet weak var time_label: UILabel!
+    @IBOutlet weak var place_label: UILabel!
+    
+    @IBOutlet weak var match_state_label: UILabel! // status of match
+    @IBOutlet weak var match_state_time_label: UILabel! // time of end match
+    
+    @IBOutlet weak var result_score_label: UILabel!
+    
+    @IBOutlet weak var team_one_label: UILabel!
+    @IBOutlet weak var team_two_label: UILabel!
+    @IBOutlet weak var team_one_image: UIImageView!
+    @IBOutlet weak var team_two_image: UIImageView!
     
     @IBOutlet weak var teamOneLogo: UIImageView!
     @IBOutlet weak var teamOneTitle: UILabel!
     @IBOutlet weak var teamTwoLogo: UIImageView!
     @IBOutlet weak var teamTwoTitle: UILabel!
     
+    @IBOutlet weak var score_in_main_time_label: UILabel! // 3 : 3
+    @IBOutlet weak var score_in_first_time_label: UILabel! // (1 : 2) example
+    @IBOutlet weak var penalty_series_label: UILabel! // enable or not only
+    @IBOutlet weak var score_in_penalty_series_label: UILabel! // 3 : 2
+    
+    @IBOutlet weak var events_table_view: IntrinsicTableView!
+    
     @IBOutlet weak var teamOneBtn: UIButton!
     @IBOutlet weak var teamTwoBtn: UIButton!
     @IBOutlet weak var refereesBtn: UIButton!
-    @IBOutlet weak var eventsBtn: UIButton!
     
     @IBOutlet var teamOneTap: UITapGestureRecognizer!
     @IBOutlet var teamTwoTap: UITapGestureRecognizer!
+    
+    // MARK: VAR & LET
     
     var leagueDetailModel = LeagueDetailModel()
     var match = LIMatch()
