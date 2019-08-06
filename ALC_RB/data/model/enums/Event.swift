@@ -14,6 +14,8 @@ enum EventTime: String, Equatable {
     case extraTime = "extra time"
     case penaltySeries = "penalty series"
     
+    case none
+    
     static func ==(lhs: EventTime, rhs: EventTime) -> Bool
     {
         switch (lhs, rhs) {
@@ -25,8 +27,27 @@ enum EventTime: String, Equatable {
             return true
         case (.penaltySeries, .penaltySeries):
             return true
+        case (.none, .none):
+            return true
         default:
             return false
+        }
+    }
+    
+    func getTitle() -> String {
+        switch self {
+        case .oneHalf:
+            return "1 тайм"
+        case .twoHalf:
+            return "2 тайм"
+        case .extraTime:
+            return "Дополнительное время"
+        case .penaltySeries:
+            return "Серия пенальти"
+        case .none:
+            return "Не известное время none"
+        default:
+            return "Не известное время"
         }
     }
 }
@@ -74,6 +95,55 @@ enum EventAllTypes: Equatable {
             return true
         default:
             return false
+        }
+    }
+    
+    static func equal(type: EventPlayerType) -> Bool
+    {
+        if self.player(.goal) == type {
+            return true
+        }
+        if self.player(.penaltyFailure) == type {
+            return true
+        }
+        if self.player(.penalty) == type {
+            return true
+        }
+        if self.player(.redCard) == type {
+            return true
+        }
+        if self.player(.yellowCard) == type {
+            return true
+        }
+        return false
+    }
+    
+    static func ==(lhs: EventAllTypes, rhs: EventPlayerType) -> Bool
+    {
+        switch (lhs, rhs) {
+        case (.player(.goal), .goal):
+            return true
+        case (.player(.redCard), .redCard):
+            return true
+        case (.player(.yellowCard), .yellowCard):
+            return true
+        case (.player(.penalty), .penalty):
+            return true
+        case (.player(.penaltyFailure), .penaltyFailure):
+            return true
+        default:
+            return false
+        }
+    }
+    
+    func getTitle() -> String {
+        switch self {
+        case (let .player(inType)):
+            return inType.getTitle()
+        case (let .team(inType)):
+            return inType.getTitle()
+        case .none:
+            return "none"
         }
     }
     
@@ -139,6 +209,21 @@ enum EventPlayerType: String, Equatable {
         }
     }
     
+    func getTitle() -> String {
+        switch self {
+        case .goal:
+            return "Гол"
+        case .penalty:
+            return "Пенальти"
+        case .penaltyFailure:
+            return "Не забитое пенальти"
+        case .redCard:
+            return "Красная карточка"
+        case .yellowCard:
+            return "Желтая карточка"
+        }
+    }
+    
     static func ==(lhs: EventPlayerType, rhs: EventPlayerType) -> Bool
     {
         switch (lhs, rhs) {
@@ -174,6 +259,19 @@ enum EventTeamType: String, Equatable {
             return "П"
         case .penaltySeriesFailure:
             return "ПН"
+        }
+    }
+    
+    func getTitle() -> String {
+        switch self {
+        case .autoGoal:
+            return "Автогол"
+        case .foul:
+            return "Фол"
+        case .penaltySeriesSuccess:
+            return "Пенальти"
+        case .penaltySeriesFailure:
+            return "Не забитое пенальти"
         }
     }
     

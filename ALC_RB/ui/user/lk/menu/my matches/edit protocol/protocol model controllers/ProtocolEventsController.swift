@@ -32,6 +32,30 @@ class ProtocolEventsController {
         }
     }
     
+    func preparePlayerEvents() -> [LIEvent] {
+        return events.filter({ event -> Bool in
+            return event.getEventType() == .player(.goal) || event.getEventType() == .player(.penalty) || event.getEventType() == .player(.penaltyFailure) || event.getEventType() == .player(.redCard) || event.getEventType() == .player(.yellowCard)
+        })
+    }
+    
+    func preparePlayerEventsInTime(time: EventTime) -> [LIEvent] {
+        return events.filter({ event -> Bool in
+            return (event.getEventType() == .player(.goal) || event.getEventType() == .player(.penalty) || event.getEventType() == .player(.penaltyFailure) || event.getEventType() == .player(.redCard) || event.getEventType() == .player(.yellowCard)) && event.getEventTime() == time
+        })
+    }
+    
+    func prepareTeamEvents() -> [LIEvent] {
+        return events.filter({ event -> Bool in
+            return event.getEventType() == .team(.autoGoal) || event.getEventType() == .team(.foul) || event.getEventType() == .team(.penaltySeriesSuccess) || event.getEventType() == .team(.penaltySeriesFailure)
+        })
+    }
+    
+    func prepareTeamEventsInTime(time: EventTime) -> [LIEvent] {
+        return events.filter({ event -> Bool in
+            return (event.getEventType() == .team(.autoGoal) || event.getEventType() == .team(.foul) || event.getEventType() == .team(.penaltySeriesSuccess) || event.getEventType() == .team(.penaltySeriesFailure)) && event.getEventTime() == time
+        })
+    }
+    
     func prepareNotAutoGoalFoulEvents() -> [LIEvent] {
         return events.filter({ event -> Bool in
             return event.getSystemEventType() != .autoGoal || event.getSystemEventType() != .foul
@@ -58,7 +82,7 @@ class ProtocolEventsController {
     func removeFirstWith(event: EventMaker.DeleteEvent) -> Bool {
         for i in 0...events.count - 1
         {
-            if events[i].player == event.playerId && events[i].getSystemEventType() == event.eventType
+            if events[i].player == event.playerId && events[i].getEventType() == event.eventType
             {
                 events.remove(at: i)
                 return true

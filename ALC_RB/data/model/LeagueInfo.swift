@@ -155,6 +155,21 @@ struct LIEvent: Codable {
         self.time = time.rawValue
     }
     
+    func getEventTime() -> EventTime {
+        switch eventType {
+        case EventTime.oneHalf.rawValue:
+            return EventTime.oneHalf
+        case EventTime.twoHalf.rawValue:
+            return EventTime.twoHalf
+        case EventTime.extraTime.rawValue:
+            return EventTime.extraTime
+        case EventTime.penaltySeries.rawValue:
+            return EventTime.penaltySeries
+        default:
+            return EventTime.none
+        }
+    }
+    
     func getEventType() -> EventAllTypes {
         switch eventType {
         case EventPlayerType.goal.rawValue:

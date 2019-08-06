@@ -272,7 +272,7 @@ extension MatchProtocolViewController {
         }
     }
     
-    func prepareSegueDataModel(destination: UIViewController, team: ClubTeamHelper.TeamEnum) {
+    func prepareSegueDataModel(destination: UIViewController, team: TeamEnum) {
         switch destination {
         case is TeamProtocolTableViewController:
             let controller = destination as! TeamProtocolTableViewController

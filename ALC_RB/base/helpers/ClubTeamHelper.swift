@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum TeamEnum: Int {
+    case one = 1
+    case two = 2
+}
+
 class ClubTeamHelper {
     static func getClubIdByTeamId(_ teamId: String, league: LILeague) -> String {
         return league.teams?.filter({ (team) -> Bool in
@@ -47,8 +52,4 @@ class ClubTeamHelper {
 //        }
 //    }
     
-    enum TeamEnum: Int {
-        case one = 1
-        case two = 2
-    }
 }

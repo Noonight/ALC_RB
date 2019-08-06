@@ -43,7 +43,7 @@ class RefereeScoreModel {
 //
 //    }
     
-    func prepareTeamTitle(team: ClubTeamHelper.TeamEnum) -> String {
+    func prepareTeamTitle(team: TeamEnum) -> String {
         return ClubTeamHelper.getTeamTitle(league: self.leagueDetailModel.leagueInfo.league, match: self.match, team: team)
     }
     

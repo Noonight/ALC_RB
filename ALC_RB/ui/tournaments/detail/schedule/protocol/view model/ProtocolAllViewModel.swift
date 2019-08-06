@@ -265,7 +265,7 @@ class ProtocolAllViewModel {
         return ""
     }
     
-    func prepareTeamTitle(team: ClubTeamHelper.TeamEnum) -> String {
+    func prepareTeamTitle(team: TeamEnum) -> String {
         switch team {
         case .one:
             return ClubTeamHelper.getTeamTitle(league: self.leagueDetailModel.leagueInfo.league, match: match, team: .one)
@@ -274,7 +274,7 @@ class ProtocolAllViewModel {
         }
     }
     
-    func prepareTableViewCells(team: ClubTeamHelper.TeamEnum, completed: @escaping ([RefereeProtocolPlayerTeamCellModel]) -> ()) {
+    func prepareTableViewCells(team: TeamEnum, completed: @escaping ([RefereeProtocolPlayerTeamCellModel]) -> ()) {
         var returnedArray: [RefereeProtocolPlayerTeamCellModel] = []
         
         let group = DispatchGroup()
@@ -355,7 +355,7 @@ class ProtocolAllViewModel {
     
     // MARK: Helpers
     
-    private func getFoulsByTimeForTeam(time: String, team: ClubTeamHelper.TeamEnum, events: [LIEvent]) -> Int {
+    private func getFoulsByTimeForTeam(time: String, team: TeamEnum, events: [LIEvent]) -> Int {
         var count = 0
         
         if team == .one
@@ -382,7 +382,7 @@ class ProtocolAllViewModel {
         return count
     }
     
-    private func getEventsForTeam(team: ClubTeamHelper.TeamEnum, events: [LIEvent]) -> [LIEvent] {
+    private func getEventsForTeam(team: TeamEnum, events: [LIEvent]) -> [LIEvent] {
         var resultArray: [LIEvent] = []
         if team == .one
         {
@@ -466,7 +466,7 @@ class ProtocolAllViewModel {
         var person: Person
     }
     
-    private func getEventsAndPlayerByPlayerIdForTeam(team: ClubTeamHelper.TeamEnum, events: [LIEvent], complete: @escaping ([EventPLayer]) -> ()) {
+    private func getEventsAndPlayerByPlayerIdForTeam(team: TeamEnum, events: [LIEvent], complete: @escaping ([EventPLayer]) -> ()) {
         
         var resultArray: [EventPLayer] = []
         

@@ -64,7 +64,7 @@ class EventMaker: NSObject {
         }
     }
     
-    public func hideAdd(eventType: LIEvent.SystemEventType) -> LIEvent {
+    public func hideAdd(eventType: EventPlayerType) -> LIEvent {
         self.hideBackgroundView()
         return LIEvent().with(
             id: self.curMatchId,
@@ -74,7 +74,7 @@ class EventMaker: NSObject {
         )
     }
     
-    public func hideDelete(eventType: LIEvent.SystemEventType) -> DeleteEvent {
+    public func hideDelete(eventType: EventPlayerType) -> DeleteEvent {
         self.hideBackgroundView()
         return DeleteEvent(
             playerId: self.curPlayerId,
@@ -82,7 +82,7 @@ class EventMaker: NSObject {
         )
     }
     
-    func hide(eventType: LIEvent.SystemEventType) {
+    func hide(eventType: EventPlayerType) {
         if self.eventView.stateMinusActive == true
         {
             onHideDeleteTriggered(hideDelete(eventType: eventType))
@@ -133,7 +133,7 @@ extension EventMaker {
     
     struct DeleteEvent {
         var playerId: String
-        var eventType: LIEvent.SystemEventType
+        var eventType: EventPlayerType
     }
 
 }

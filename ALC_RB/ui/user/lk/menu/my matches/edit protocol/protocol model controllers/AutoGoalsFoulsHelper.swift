@@ -10,22 +10,22 @@ import Foundation
 
 // there is helper for counting auto goals and fouls for current team
 class AutoGoalsFoulsHelper {
-    static func autoGoals(for team: ClubTeamHelper.TeamEnum, playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> Int
+    static func autoGoals(for team: TeamEnum, playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> Int
     {
         return self.getPlayersAutoGoalEvents(playersController: playersController, eventsController: eventsController).count
     }
     
-    static func autoGoals(for team: ClubTeamHelper.TeamEnum, playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> [LIEvent]
+    static func autoGoals(for team: TeamEnum, playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> [LIEvent]
     {
         return self.getPlayersAutoGoalEvents(playersController: playersController, eventsController: eventsController)
     }
     
-    static func fouls(for team: ClubTeamHelper.TeamEnum, playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> Int
+    static func fouls(for team: TeamEnum, playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> Int
     {
         return self.getPlayersFoulsEvents(playersController: playersController, eventsController: eventsController).count
     }
     
-    static func fouls(for team: ClubTeamHelper.TeamEnum, playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> [LIEvent]
+    static func fouls(for team: TeamEnum, playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> [LIEvent]
     {
         return self.getPlayersFoulsEvents(playersController: playersController, eventsController: eventsController)
     }

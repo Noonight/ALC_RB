@@ -10,15 +10,8 @@ import Foundation
 
 class ProtocolRefereeViewModel {
     
-    enum CurrentTime: String {
-        case firstTime  = "1 тайм"
-        case secondTime = "2 тайм"
-        case moreTime   = "Дополнительное время"
-        case penalty    = "Пенальти"
-    }
-    
     // current time using for make event
-    var currentTime: CurrentTime = .firstTime
+    var currentTime: EventTime = .oneHalf
     
     var match: LIMatch!
     var leagueDetailModel: LeagueDetailModel!
@@ -26,11 +19,7 @@ class ProtocolRefereeViewModel {
     var teamOnePlayersController: ProtocolPlayersController!
     var teamTwoPlayersController: ProtocolPlayersController!
     var refereesController: ProtocolRefereesController!
-    var eventsController: ProtocolEventsController! {
-        didSet {
-            Print.m(eventsController.events)
-        }
-    }
+    var eventsController: ProtocolEventsController!
     
     var teamOneFoulsCount = 0 // TODO need update later
     var teamTwoFoulsCount = 0
@@ -52,25 +41,45 @@ class ProtocolRefereeViewModel {
     
     // MARK: UPDATE DATA
     
-    func upFoulsCount(for team: ClubTeamHelper.TeamEnum) {
-        if team == .one
-        {
-            self.teamOneFoulsCount += 1
-        }
-        if team == .two
-        {
-            self.teamTwoFoulsCount += 1
+    func upFoulsCount(team: TeamEnum) {
+        switch team {
+        case .one:
+            guard let teamId = self.match.teamOne else { return }
+            self.eventsController.add(LIEvent(
+                matchID: self.match.id,
+                eventType: .foul,
+                playerID: teamId,
+                time: self.currentTime)
+            )
+        case .two:
+            guard let teamId = self.match.teamTwo else { return }
+            self.eventsController.add(LIEvent(
+                matchID: self.match.id,
+                eventType: .foul,
+                playerID: teamId,
+                time: self.currentTime)
+            )
         }
     }
     
-    func upAutoGoalsCount(for team: ClubTeamHelper.TeamEnum) {
-        if team == .one
-        {
-            self.teamOneAutoGoalsCount += 1
-        }
-        if team == .two
-        {
-            self.teamTwoAutoGoalsCount += 1
+    func upAutoGoalsCount(team: TeamEnum) {
+        switch team {
+        case .one:
+            guard let teamId = self.match.teamOne else { return } // CHECK
+            self.eventsController.add(LIEvent(
+                matchID: self.match.id,
+                eventType: .autoGoal,
+                playerID: teamId,
+                time: self.currentTime)
+            )
+        case .two:
+            guard let teamId = self.match.teamTwo else { return } // CHECK
+            self.eventsController.add(LIEvent(
+                matchID: self.match.id,
+                eventType: .autoGoal,
+                playerID: teamId,
+                time: self.currentTime)
+            )
         }
     }
     
@@ -79,19 +88,19 @@ class ProtocolRefereeViewModel {
         self.teamTwoFoulsCount = 0
     }
     
-    func updateTime(time: CurrentTime) {
+    func updateTime(time: EventTime) {
         if self.currentTime != time
         {
             self.currentTime = time
-            if self.currentTime == .firstTime
+            if self.currentTime == .oneHalf
+            {
+                self.clearFouls() // MARK: CHECK IT IN FEATURE
+            }
+            if self.currentTime == .twoHalf
             {
                 self.clearFouls()
             }
-            if self.currentTime == .secondTime
-            {
-                self.clearFouls()
-            }
-            if self.currentTime == .penalty
+            if self.currentTime == .penaltySeries
             {
                 self.clearFouls()
             }
@@ -123,17 +132,20 @@ class ProtocolRefereeViewModel {
     
     // MARK: PREPARE FOR DISPLAY OR PREPARE DATA FOR SERVER REQUEST
     
-    func prepareAutogoalsCount(for team: ClubTeamHelper.TeamEnum) -> Int {
-        let countOfAutoGoals = 0
-        if team == .one
-        {
-            return self.teamOneAutoGoalsCount
-        }
-        if team == .two
-        {
-            return self.teamTwoAutoGoalsCount
-        }
-        return countOfAutoGoals
+    func prepareAutogoalsCountInCurrentTime(team: TeamEnum) -> Int { // OK
+        let teamEvents = self.eventsController.prepareTeamEventsInTime(time: self.currentTime)
+        
+        return getEventsForTeam(team: team, events: teamEvents).filter({ event -> Bool in
+            return event.getEventType() == .team(.autoGoal)
+        }).count
+    }
+    
+    func prepareFoulsCountInCurrentTime(team: TeamEnum) -> Int {
+        let teamEvents = self.eventsController.prepareTeamEventsInTime(time: self.currentTime)
+        
+        return getEventsForTeam(team: team, events: teamEvents).filter({ event -> Bool in
+            return event.getEventType() == .team(.foul)
+        }).count
     }
     
     func prepareCurrentTime() -> String {
@@ -152,7 +164,7 @@ class ProtocolRefereeViewModel {
         )
     }
     
-    func prepareFoulsCount(for team: ClubTeamHelper.TeamEnum) -> Int {
+    func prepareFoulsCount(for team: TeamEnum) -> Int {
         if team == .one
         {
             return self.teamOneFoulsCount
@@ -164,7 +176,7 @@ class ProtocolRefereeViewModel {
         return 0
     }
     
-    func prepareTableViewCells(team: ClubTeamHelper.TeamEnum, completed: @escaping ([RefereeProtocolPlayerTeamCellModel]) -> ()) {
+    func prepareTableViewCells(team: TeamEnum, completed: @escaping ([RefereeProtocolPlayerTeamCellModel]) -> ()) {
         var returnedArray: [RefereeProtocolPlayerTeamCellModel] = []
         
         let group = DispatchGroup()
@@ -212,6 +224,64 @@ class ProtocolRefereeViewModel {
     }
     
     // MARK: Helpers
+    
+    private func getEventsForTeam(team: TeamEnum, events: [LIEvent]) -> [LIEvent] {
+        var resultArray: [LIEvent] = []
+        if team == .one
+        {
+            for event in events
+            {
+                if teamOnePlayersController.players.contains(where: { liPlayer -> Bool in
+                    return liPlayer.playerId == event.player
+                }) == true
+                {
+                    resultArray.append(event)
+                }
+            }
+        }
+        
+        if team == .two
+        {
+            for event in events
+            {
+                if teamTwoPlayersController.players.contains(where: { liPlayer -> Bool in
+                    return liPlayer.playerId == event.player
+                }) == true
+                {
+                    resultArray.append(event)
+                }
+            }
+        }
+        
+        return resultArray
+    }
+    
+    private func getFoulsByTimeForTeam(time: String, team: TeamEnum, events: [LIEvent]) -> Int {
+        var count = 0
+        
+        if team == .one
+        {
+            for event in getEventsForTeam(team: .one, events: events)
+            {
+                if event.time == time && event.getSystemEventType() == .foul
+                {
+                    count += 1
+                }
+            }
+        }
+        
+        if team == .two
+        {
+            for event in getEventsForTeam(team: .two, events: events)
+            {
+                if event.time == time && event.getSystemEventType() == .foul
+                {
+                    count += 1
+                }
+            }
+        }
+        return count
+    }
     
     fileprivate func getPlayersId() -> [String] {
         return connectPlayersOfTeamOneAndTwo().map({ liPlayer -> String in

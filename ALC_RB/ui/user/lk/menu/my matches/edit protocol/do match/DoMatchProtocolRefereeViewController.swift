@@ -88,13 +88,13 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         
         self.setupPresenter()
         self.setupTableDataSources()
+        self.setupAutogoalsFooter()
         self.setupEventMaker()
         self.setupStaticView()
         self.setupDynamicView()
         self.setupTableViews()
         self.setupTableViewsActions()
         self.setupFoulsCounter()
-        self.setupAutogoalsFooter()
     }
     
 }
@@ -112,8 +112,8 @@ extension DoMatchProtocolRefereeViewController {
         self.playersTeamTwoAutoGoalsFooter = AutoGoalFooterView(frame: CGRect(x: 0, y: 0, width: self.playersTwo_table.frame.width, height: 40))
         self.playersTwo_table.tableFooterView = self.playersTeamTwoAutoGoalsFooter
         
-        self.playersTeamOneAutoGoalsFooter.countOfGoals = self.viewModel.prepareAutogoalsCount(for: .one)
-        self.playersTeamTwoAutoGoalsFooter.countOfGoals = self.viewModel.prepareAutogoalsCount(for: .two)
+//        self.playersTeamOneAutoGoalsFooter.countOfGoals = self.viewModel.prepareAutogoalsCount(for: .one)
+//        self.playersTeamTwoAutoGoalsFooter.countOfGoals = self.viewModel.prepareAutogoalsCount(for: .two)
         
         
         self.playersTeamOneAutoGoalsFooter.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapTeamOneAutoGoals)))
@@ -192,23 +192,27 @@ extension DoMatchProtocolRefereeViewController {
 extension DoMatchProtocolRefereeViewController {
     
     @objc func tapTeamOneAutoGoals() {
-        self.viewModel.upAutoGoalsCount(for: .one)
-        self.updateUIAutoGoals()
+        self.viewModel.upAutoGoalsCount(team: .one)
+        
+        self.addEventSaveProtocol()
     }
     
     @objc func tapTeamTwoAutoGoals() {
-        self.viewModel.upAutoGoalsCount(for: .two)
-        self.updateUIAutoGoals()
+        self.viewModel.upAutoGoalsCount(team: .two)
+        
+        self.addEventSaveProtocol()
     }
     
     @objc func tapTeamOneFouls() {
-        self.viewModel.upFoulsCount(for: .one)
-        self.updateUIFouls()
+        self.viewModel.upFoulsCount(team: .one)
+        
+        self.addEventSaveProtocol()
     }
     
     @objc func tapTeamTwoFouls() {
-        self.viewModel.upFoulsCount(for: .two)
-        self.updateUIFouls()
+        self.viewModel.upFoulsCount(team: .two)
+        
+        self.addEventSaveProtocol()
     }
     
     func eventMakerCompleteWork_ADD(event: LIEvent) { // TODO : need work with data base or smth
@@ -393,7 +397,7 @@ extension DoMatchProtocolRefereeViewController {
     }
     
     @IBAction func onFirstTimeBtnPressed(_ sender: UIButton) {
-        self.viewModel.updateTime(time: .firstTime)
+        self.viewModel.updateTime(time: .oneHalf)
 //        self.viewModel.currentTime = .firstTime
         self.title = self.viewModel.prepareCurrentTime()
         self.updateUIFouls()
@@ -401,19 +405,19 @@ extension DoMatchProtocolRefereeViewController {
     
     @IBAction func onSecondTimeBtnPressed(_ sender: UIButton) {
 //        self.viewModel.currentTime = .secondTime
-        self.viewModel.updateTime(time: .secondTime)
+        self.viewModel.updateTime(time: .twoHalf)
         self.title = self.viewModel.prepareCurrentTime()
         self.updateUIFouls()
     }
     
     @IBAction func onMoreTimeBtnPressed(_ sender: UIButton) {
-        self.viewModel.updateTime(time: .moreTime)
+        self.viewModel.updateTime(time: .extraTime)
         self.title = self.viewModel.prepareCurrentTime()
         self.updateUIFouls()
     }
     
     @IBAction func onPenaltyTimeBtnPressed(_ sender: UIButton) {
-        self.viewModel.updateTime(time: .penalty)
+        self.viewModel.updateTime(time: .penaltySeries)
         self.title = self.viewModel.prepareCurrentTime()
         self.updateUIFouls()
     }
@@ -437,14 +441,50 @@ extension DoMatchProtocolRefereeViewController: CellActions {
 
 extension DoMatchProtocolRefereeViewController {
     
+    func addEventSaveProtocol() {
+        let hud = self.showLoadingViewHUD(with: Texts.PROGRESS_ADD_EVENT)
+        
+        self.presenter.saveProtocol(
+            token: self.userDefaults.getToken(),
+            editedProtocol: self.viewModel.prepareEditProtocol(),
+            ok: { match in
+                self.viewModel.updateMatch(match: match.match!.convertToLIMatch())
+                hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_ADD_EVENT_COMPLETE)
+                
+                self.setupTableDataSources()
+                self.setupDynamicView()
+        },
+            failure: { error in
+                hud.hide(animated: true)
+                
+                let delete = UIAlertAction(title: Texts.DELETE, style: .default)
+                { alerter in
+                    self.viewModel.deleteLastAddedEvent()
+                    
+                    self.setupTableDataSources()
+                    self.setupDynamicView()
+                }
+                
+                let leave = UIAlertAction(title: Texts.LEAVE, style: .cancel)
+                { alerter in
+                    Print.m("NOTHING")
+                    
+                    self.setupTableDataSources()
+                    self.setupDynamicView()
+                }
+                
+                self.showAlert(title: Constants.Texts.FAILURE, message: error.localizedDescription, actions: [delete, leave])
+        })
+    }
+    
     func updateUIFouls() {
-        self.scoreAtTimeTeamOne_label.text = String(self.viewModel.prepareFoulsCount(for: .one))
-        self.scoreAtTimeTeamTwo_label.text = String(self.viewModel.prepareFoulsCount(for: .two))
+        self.scoreAtTimeTeamOne_label.text = String(self.viewModel.prepareFoulsCountInCurrentTime(team: .one))
+        self.scoreAtTimeTeamTwo_label.text = String(self.viewModel.prepareFoulsCountInCurrentTime(team: .two))
     }
     
     func updateUIAutoGoals() {
-        self.playersTeamOneAutoGoalsFooter.countOfGoals = self.viewModel.prepareAutogoalsCount(for: .one)
-        self.playersTeamTwoAutoGoalsFooter.countOfGoals = self.viewModel.prepareAutogoalsCount(for: .two)
+        self.playersTeamOneAutoGoalsFooter.countOfGoals = self.viewModel.prepareAutogoalsCountInCurrentTime(team: .one)
+        self.playersTeamTwoAutoGoalsFooter.countOfGoals = self.viewModel.prepareAutogoalsCountInCurrentTime(team: .two)
     }
 }
 
