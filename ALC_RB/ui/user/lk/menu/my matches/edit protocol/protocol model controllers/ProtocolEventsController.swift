@@ -18,14 +18,8 @@ class ProtocolEventsController {
         self.events = events
     }
     
+    // for view model, protocol for all users
     func getLastTime() -> String {
-//        if events.contains(where: { event -> Bool in
-//            return event.time == "Серия пенальти"
-//        }) == true
-//        {
-//            return "Серия пенальти"
-//        }
-//        else
         if events.contains(where: { event -> Bool in
             return event.time == "Дополнительное время"
         }) == true

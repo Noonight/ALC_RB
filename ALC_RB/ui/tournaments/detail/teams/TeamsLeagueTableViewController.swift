@@ -190,7 +190,7 @@ extension TeamsLeagueTableViewController {
 extension TeamsLeagueTableViewController: LeagueMainProtocol {
     func updateData(leagueDetailModel: LeagueDetailModel) {
         self.leagueDetailModel = leagueDetailModel
-        updateUI()
+//        updateUI()
     }
 }
 

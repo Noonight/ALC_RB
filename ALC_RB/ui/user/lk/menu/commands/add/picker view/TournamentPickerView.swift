@@ -49,13 +49,27 @@ class TournamentPickerHelper : NSObject, UIPickerViewDelegate, UIPickerViewDataS
             label = UILabel(frame: CGRect(x: 0, y: 0, width: pickerView.frame.width, height: 400))
         }
         
-//        label.text = rows[row]
         if let rows = rows {
-            //            return rows[row].name
-            if rows[row].tourney!.contains(".") {
-                label.text = "\(rows[row].tourney) \(rows[row].name)"
-            } else {
-                label.text = "\(rows[row].tourney). \(rows[row].name)"
+            if let tourney = rows[row].tourney
+            {
+                if tourney.contains(".")
+                {
+                    if let name = rows[row].name {
+                        label.text = "\(tourney) \(name)"
+                    }
+                }
+                else
+                {
+                    if let name = rows[row].name {
+                        label.text = "\(tourney). \(name)"
+                    }
+                }
+            }
+            else
+            {
+                if let name = rows[row].name {
+                    label.text = "\(name)"
+                }
             }
         }
         label.lineBreakMode = .byWordWrapping
@@ -69,10 +83,26 @@ class TournamentPickerHelper : NSObject, UIPickerViewDelegate, UIPickerViewDataS
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if let rows = rows {
 //            return rows[row].name
-            if rows[row].tourney!.contains(".") {
-                return "\(rows[row].tourney) \(rows[row].name)"
-            } else {
-                return "\(rows[row].tourney). \(rows[row].name)"
+            if let tourney = rows[row].tourney
+            {
+                if tourney.contains(".")
+                {
+                    if let name = rows[row].name {
+                        return "\(tourney) \(name)"
+                    }
+                }
+                else
+                {
+                    if let name = rows[row].name {
+                        return "\(tourney). \(name)"
+                    }
+                }
+            }
+            else
+            {
+                if let name = rows[row].name {
+                    return "\(name)"
+                }
             }
         }
         return " <<--->> "

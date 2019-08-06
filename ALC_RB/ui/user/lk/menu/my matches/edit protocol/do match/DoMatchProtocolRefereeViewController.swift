@@ -164,6 +164,9 @@ extension DoMatchProtocolRefereeViewController {
         
         // setup score // mb calculate before
         self.score_label.text = self.viewModel.match.score
+        
+        self.updateUIFouls()
+        self.updateUIAutoGoals()
     }
     
     func setupStaticView() {

@@ -21,7 +21,14 @@ class ProtocolAllViewModel {
     var teamOnePlayersController: ProtocolPlayersController!
     var teamTwoPlayersController: ProtocolPlayersController!
     var refereesController: ProtocolRefereesController!
-    var eventsController: ProtocolEventsController!
+    var eventsController: ProtocolEventsController! {
+        didSet {
+            if self.eventsController != nil && self.eventsController.events != nil
+            {
+                dump(self.eventsController.events)
+            }
+        }
+    }
     
     let dataManager = ApiRequests()
     
@@ -43,6 +50,41 @@ class ProtocolAllViewModel {
     }
     
     // MARK: PREPARE FOR DISPLAY
+    
+    func prepareResultScoreCalculated() -> String {
+        let allEvents = eventsController.events
+        
+        var counterLeft = 0
+        var counterRight = 0
+        
+        let teamOneEvents = self.getEventsForTeam(team: .one, events: allEvents)
+        let teamTwoEvents = self.getEventsForTeam(team: .two, events: allEvents)
+        
+        for event in teamOneEvents
+        {
+            if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+            {
+                counterLeft += 1
+            }
+            if event.getSystemEventType() == .autoGoal
+            {
+                counterLeft -= 1
+            }
+        }
+        for event in teamTwoEvents
+        {
+            if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+            {
+                counterRight += 1
+            }
+            if event.getSystemEventType() == .autoGoal
+            {
+                counterRight -= 1
+            }
+        }
+        
+        return "\(counterLeft) : \(counterRight)"
+    }
     
     func preparePenaltyScore() -> String {
         if hasPenaltySeriesEvents() == true

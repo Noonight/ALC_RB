@@ -123,8 +123,17 @@ extension MatchProtocolViewController {
         self.place_label.text = self.viewModel.preparePlace()
         
         self.match_state_time_label.text = self.viewModel.prepareEndOfMatch()
-        self.result_score_label.text = self.viewModel.prepareResultScore()
-        self.score_in_main_time_label.text = self.viewModel.prepareMainTimeScore()
+//        self.result_score_label.text = self.viewModel.prepareResultScore() TODO for feature score counted from server
+        self.result_score_label.text = self.viewModel.prepareResultScoreCalculated() // TODO CHANGE IT LATER
+        if self.viewModel.prepareEndOfMatch().contains("в основное время")
+        {
+            self.main_time_label.text = ""
+            self.score_in_main_time_label.text = ""
+        }
+        else
+        {
+            self.score_in_main_time_label.text = self.viewModel.prepareMainTimeScore()
+        }
         self.score_in_first_time_label.text = self.viewModel.prepareFirstTimeScore()
         
         if self.viewModel.hasPenaltySeriesEvents() == true {
