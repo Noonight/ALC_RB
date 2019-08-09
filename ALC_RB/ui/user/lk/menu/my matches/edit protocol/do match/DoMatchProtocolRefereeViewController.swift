@@ -67,6 +67,7 @@ class DoMatchProtocolRefereeViewController: UIViewController {
     @IBOutlet weak var playersTwo_table: UITableView!
     
     @IBOutlet weak var teamOne_width: NSLayoutConstraint!
+    
     // MARK: Var & Let
     
     let userDefaults = UserDefaultsHelper()
@@ -80,6 +81,7 @@ class DoMatchProtocolRefereeViewController: UIViewController {
     var playersTeamTwoAutoGoalsFooter: AutoGoalFooterView = AutoGoalFooterView()
     
     var eventMaker: EventMaker?
+    var foulsMaker: FoulsMaker?
     
     // MARK: LIFE CYCLE
     
@@ -90,6 +92,7 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         self.setupTableDataSources()
         self.setupAutogoalsFooter()
         self.setupEventMaker()
+        self.setupFoulsMaker()
         self.setupStaticView()
         self.setupDynamicView()
         self.setupTableViews()
@@ -135,13 +138,19 @@ extension DoMatchProtocolRefereeViewController {
         })
     }
     
+    func setupFoulsMaker() {
+        self.foulsMaker = FoulsMaker(completeBack: { value in
+            self.foulsMakerCompleteWork(value: value)
+        })
+    }
+    
     func setupTableViewsActions() {
         self.playersTeamOne.cellActions = self
         self.playersTeamTwo.cellActions = self
     }
     
     func setupTableDataSources() {
-        let teamOneHud = self.playersOne_table.showLoadingViewHUD()
+        let teamOneHud = self.playersOne_table.showLoadingViewHUD(with: Constants.Texts.CONFIGURE)
         self.viewModel.prepareTableViewCells(team: .one)
         { dataSource in
             self.playersTeamOne.dataSource = dataSource
@@ -150,7 +159,7 @@ extension DoMatchProtocolRefereeViewController {
             self.playersOne_table.reloadData()
         }
         
-        let teamTwoHud = self.playersTwo_table.showLoadingViewHUD()
+        let teamTwoHud = self.playersTwo_table.showLoadingViewHUD(with: Constants.Texts.CONFIGURE)
         self.viewModel.prepareTableViewCells(team: .two)
         { dataSource in
             self.playersTeamTwo.dataSource = dataSource
@@ -213,6 +222,10 @@ extension DoMatchProtocolRefereeViewController {
         self.viewModel.upFoulsCount(team: .two)
         
         self.addEventSaveProtocol()
+    }
+    
+    func foulsMakerCompleteWork(value: Int) {
+        // do smth 
     }
     
     func eventMakerCompleteWork_ADD(event: LIEvent) { // TODO : need work with data base or smth

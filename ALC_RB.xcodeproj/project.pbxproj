@@ -212,6 +212,11 @@
 		DB966A6B22EC820300064233 /* RefereeProtocolPlayerEventsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB966A6A22EC820300064233 /* RefereeProtocolPlayerEventsModel.swift */; };
 		DB966A6E22EC830E00064233 /* PlayerEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB966A6D22EC830E00064233 /* PlayerEventView.swift */; };
 		DB966A7022EC832100064233 /* PlayerEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB966A6F22EC832100064233 /* PlayerEventView.xib */; };
+		DB986B5522FDB2DD0050AC8F /* EditFoulsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB986B5422FDB2DD0050AC8F /* EditFoulsView.swift */; };
+		DB986B5722FDB2FF0050AC8F /* EditFoulsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB986B5622FDB2FF0050AC8F /* EditFoulsView.xib */; };
+		DB986B5B22FDBDD10050AC8F /* EditAutoGoalsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB986B5A22FDBDD10050AC8F /* EditAutoGoalsView.xib */; };
+		DB986B5D22FDBE0A0050AC8F /* EditAutoGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB986B5C22FDBE0A0050AC8F /* EditAutoGoalsView.swift */; };
+		DB986B5F22FDBEC90050AC8F /* FoulsMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB986B5E22FDBEC90050AC8F /* FoulsMaker.swift */; };
 		DB98E36822B11B190035DC78 /* Referee.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98E36722B11B190035DC78 /* Referee.swift */; };
 		DB98FACA225462AB002933D0 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FAC9225462AB002933D0 /* ErrorMessage.swift */; };
 		DB98FACD2254717B002933D0 /* CommandEditLKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FACC2254717B002933D0 /* CommandEditLKViewController.swift */; };
@@ -491,6 +496,11 @@
 		DB966A6A22EC820300064233 /* RefereeProtocolPlayerEventsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeProtocolPlayerEventsModel.swift; sourceTree = "<group>"; };
 		DB966A6D22EC830E00064233 /* PlayerEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerEventView.swift; sourceTree = "<group>"; };
 		DB966A6F22EC832100064233 /* PlayerEventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerEventView.xib; sourceTree = "<group>"; };
+		DB986B5422FDB2DD0050AC8F /* EditFoulsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoulsView.swift; sourceTree = "<group>"; };
+		DB986B5622FDB2FF0050AC8F /* EditFoulsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditFoulsView.xib; sourceTree = "<group>"; };
+		DB986B5A22FDBDD10050AC8F /* EditAutoGoalsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditAutoGoalsView.xib; sourceTree = "<group>"; };
+		DB986B5C22FDBE0A0050AC8F /* EditAutoGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAutoGoalsView.swift; sourceTree = "<group>"; };
+		DB986B5E22FDBEC90050AC8F /* FoulsMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoulsMaker.swift; sourceTree = "<group>"; };
 		DB98E36722B11B190035DC78 /* Referee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Referee.swift; sourceTree = "<group>"; };
 		DB98FAC9225462AB002933D0 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		DB98FACC2254717B002933D0 /* CommandEditLKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandEditLKViewController.swift; sourceTree = "<group>"; };
@@ -1230,21 +1240,22 @@
 		DB2E1F7122EAFACE00CDA5CD /* do match */ = {
 			isa = PBXGroup;
 			children = (
+				DB986B5122FDB1300050AC8F /* edit team events */,
 				DB4FCAF122EEBA0A00A89BE7 /* add event view */,
 				DB966A6322EC80F500064233 /* table view */,
-				DB2E1F7622EC11C700CDA5CD /* model */,
+				DB2E1F7622EC11C700CDA5CD /* view model */,
 				DB2E1F7222EAFAE800CDA5CD /* DoMatchProtocolRefereeViewController.swift */,
 				DB2E1F7422EAFB7B00CDA5CD /* DoMatchProtocolRefereePresenter.swift */,
 			);
 			path = "do match";
 			sourceTree = "<group>";
 		};
-		DB2E1F7622EC11C700CDA5CD /* model */ = {
+		DB2E1F7622EC11C700CDA5CD /* view model */ = {
 			isa = PBXGroup;
 			children = (
 				DB2E1F7722EC11E800CDA5CD /* ProtocolRefereeViewModel.swift */,
 			);
-			path = model;
+			path = "view model";
 			sourceTree = "<group>";
 		};
 		DB45709622EF4EB200455BFB /* model */ = {
@@ -1667,6 +1678,50 @@
 			path = "custom view";
 			sourceTree = "<group>";
 		};
+		DB986B5122FDB1300050AC8F /* edit team events */ = {
+			isa = PBXGroup;
+			children = (
+				DB986B5322FDB18E0050AC8F /* fouls */,
+				DB986B5222FDB14E0050AC8F /* autogoals */,
+			);
+			path = "edit team events";
+			sourceTree = "<group>";
+		};
+		DB986B5222FDB14E0050AC8F /* autogoals */ = {
+			isa = PBXGroup;
+			children = (
+				DB986B5922FDBD8B0050AC8F /* view */,
+			);
+			path = autogoals;
+			sourceTree = "<group>";
+		};
+		DB986B5322FDB18E0050AC8F /* fouls */ = {
+			isa = PBXGroup;
+			children = (
+				DB986B5822FDBD800050AC8F /* view */,
+				DB986B5E22FDBEC90050AC8F /* FoulsMaker.swift */,
+			);
+			path = fouls;
+			sourceTree = "<group>";
+		};
+		DB986B5822FDBD800050AC8F /* view */ = {
+			isa = PBXGroup;
+			children = (
+				DB986B5422FDB2DD0050AC8F /* EditFoulsView.swift */,
+				DB986B5622FDB2FF0050AC8F /* EditFoulsView.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		DB986B5922FDBD8B0050AC8F /* view */ = {
+			isa = PBXGroup;
+			children = (
+				DB986B5A22FDBDD10050AC8F /* EditAutoGoalsView.xib */,
+				DB986B5C22FDBE0A0050AC8F /* EditAutoGoalsView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		DB98FACB225470CF002933D0 /* edit */ = {
 			isa = PBXGroup;
 			children = (
@@ -2042,6 +2097,7 @@
 			files = (
 				DB9FA4A222EC986200BA5A52 /* RefereeProtocolPlayerTableViewCell.xib in Resources */,
 				CEA6EBA621A53CFE008F874D /* LaunchScreen.storyboard in Resources */,
+				DB986B5B22FDBDD10050AC8F /* EditAutoGoalsView.xib in Resources */,
 				CEA6EBA321A53CFE008F874D /* Assets.xcassets in Resources */,
 				189E1C7822C9EC280086E4DA /* LabelSwitchView.xib in Resources */,
 				1807709422F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.xib in Resources */,
@@ -2052,6 +2108,7 @@
 				1823DC2722952762000A1055 /* LoadingCell.xib in Resources */,
 				18606A3122D30B8200F5D2FE /* EventTypeView.xib in Resources */,
 				DB966A7022EC832100064233 /* PlayerEventView.xib in Resources */,
+				DB986B5722FDB2FF0050AC8F /* EditFoulsView.xib in Resources */,
 				18EFFABE22F3175800B17947 /* TournamentTeamHeaderView.xib in Resources */,
 				DB87FE7F2243D493001EBA7C /* EmptyViewNew.xib in Resources */,
 				DB4FCAF522EEBA3500A89BE7 /* AddEventView.xib in Resources */,
@@ -2244,6 +2301,8 @@
 				DBC7C1AC22D75EDE00ECD690 /* AnnoucnesAllPresenter.swift in Sources */,
 				DB2DCE6A22D782ED0030FD29 /* Reachability.swift in Sources */,
 				DB11CC8D21C22F890083773E /* ScheduleTableViewController.swift in Sources */,
+				DB986B5F22FDBEC90050AC8F /* FoulsMaker.swift in Sources */,
+				DB986B5522FDB2DD0050AC8F /* EditFoulsView.swift in Sources */,
 				DBC347612216F34B001D9B7D /* StringEx.swift in Sources */,
 				18870B3322C0DD1300126A87 /* ClubCreatePresenter.swift in Sources */,
 				DB87FE7C2243B522001EBA7C /* BaseStateViewController.swift in Sources */,
@@ -2367,6 +2426,7 @@
 				1801B87F2271872300BE0F7C /* CommandAddPlayerPresenter.swift in Sources */,
 				DBA77C2022CF4192000DCF02 /* ProtocolPlayersController.swift in Sources */,
 				DB932DE722C900C800C060C2 /* RefereeEditMatchesLKPresenter.swift in Sources */,
+				DB986B5D22FDBE0A0050AC8F /* EditAutoGoalsView.swift in Sources */,
 				18A82A5B22BB7B26006FA050 /* View Controller Alerts.swift in Sources */,
 				DBC5C5FA2220128100B0A1B6 /* UITextField.swift in Sources */,
 				CE47323E21A5513500199D79 /* HomeViewController.swift in Sources */,

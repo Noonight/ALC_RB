@@ -15,6 +15,7 @@ struct Constants {
         static let SUCCESS      = "Успех"
         static let FAILURE      = "Ошибка!"
         static let CANCEL       = "Отмена"
+        static let CONFIGURE    = "Настройка..."
     }
 //    struct Images {
 //        static let Q_INFO       = UIImage(named: "ic_info")
