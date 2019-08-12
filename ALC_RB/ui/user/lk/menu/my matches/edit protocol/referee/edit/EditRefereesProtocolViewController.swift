@@ -272,7 +272,6 @@ class EditRefereesProtocolViewController: BaseStateViewController {
     // edit match for userDefaults value at id match
     func setMatchValue(id: String, match: SoloMatch) {
         var user = userDefaults.getAuthorizedUser()
-        //        dump(user?.person)
         
         if user?.person.participationMatches!.contains(where: { pMatch -> Bool in
             return pMatch.id == match.match?.id

@@ -144,6 +144,10 @@ extension DoMatchProtocolRefereeViewController {
         })
     }
     
+    func setupAutoGoalsMaker() {
+        
+    }
+    
     func setupTableViewsActions() {
         self.playersTeamOne.cellActions = self
         self.playersTeamTwo.cellActions = self
@@ -213,7 +217,10 @@ extension DoMatchProtocolRefereeViewController {
     }
     
     @objc func tapTeamOneFouls() {
+        Print.m(self.viewModel.eventsController.events)
         self.viewModel.upFoulsCount(team: .one)
+        Print.m(self.viewModel.eventsController.events
+        )
         
         self.addEventSaveProtocol()
     }
@@ -461,6 +468,7 @@ extension DoMatchProtocolRefereeViewController {
             token: self.userDefaults.getToken(),
             editedProtocol: self.viewModel.prepareEditProtocol(),
             ok: { match in
+                Print.m(match)
                 self.viewModel.updateMatch(match: match.match!.convertToLIMatch())
                 hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_ADD_EVENT_COMPLETE)
                 

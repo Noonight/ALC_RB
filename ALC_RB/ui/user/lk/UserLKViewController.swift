@@ -128,7 +128,6 @@ class UserLKViewController: UIViewController {
 //        authUser = userDefaultsHelper.getAuthorizedUser()
         self.presenter.refreshUser(token: userDefaultsHelper.getAuthorizedUser()!.token)
         
-//        dump(authUser)
         
         menuHelper?.userType = authUser?.person.getUserType()
         

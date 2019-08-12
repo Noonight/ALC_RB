@@ -37,7 +37,6 @@ class LeagueDetailViewController: UIViewController {
         var viewController = storyboard.instantiateViewController(withIdentifier: "ScheduleTableViewController") as! ScheduleTableViewController
         
         viewController.leagueDetailModel.league = self.leagueDetailModel.league
-//        dump(self.leagueDetailModel)
         viewController.leagueDetailModel.leagueInfo = self.leagueDetailModel.leagueInfo
         
         //self.add(viewController)

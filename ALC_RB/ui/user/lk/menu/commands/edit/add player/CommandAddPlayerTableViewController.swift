@@ -167,8 +167,6 @@ extension CommandAddPlayerTableViewController {
             _id: leagueId,
             teamId: team.id,
             playerId: personId)
-//        dump(userDefaultsHelper.getAuthorizedUser()?.token)
-//        dump(addPlayer)
         presenter.addPlayerToTeamForLeague(token: userDefaultsHelper.getAuthorizedUser()!.token, addPlayerToTeam: addPlayer)
         currentAddId = sender.tag
     }

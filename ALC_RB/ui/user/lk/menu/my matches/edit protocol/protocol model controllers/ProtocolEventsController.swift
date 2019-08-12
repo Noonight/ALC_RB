@@ -18,6 +18,33 @@ class ProtocolEventsController {
         self.events = events
     }
     
+    func deleteLastFoulsBeforeCount(_ count: Int) {
+        let oldCount = events.count
+        
+        var counter = 0
+        var forDeleteEvents: [LIEvent] = []
+        
+        if oldCount < count
+        {
+            for event in events
+            {
+                if event.getEventType() == .team(.foul)
+                {
+                    counter += 1
+                    Print.m(counter)
+                    if counter > oldCount && counter <= count
+                    {
+                        Print.m(counter)
+                        Print.m(event.getEventType().getTitle())
+                        forDeleteEvents.append(event)
+                    }
+                }
+                
+            }
+        }
+        Print.m(forDeleteEvents)
+    }
+    
     // for view model, protocol for all users
     func getLastTime() -> String {
         if events.contains(where: { event -> Bool in
@@ -51,9 +78,30 @@ class ProtocolEventsController {
     }
     
     func prepareTeamEventsInTime(time: EventTime) -> [LIEvent] {
-        return events.filter({ event -> Bool in
-            return (event.getEventType() == .team(.autoGoal) || event.getEventType() == .team(.foul) || event.getEventType() == .team(.penaltySeriesSuccess) || event.getEventType() == .team(.penaltySeriesFailure)) && event.getEventTime() == time
-        })
+        var resultArray: [LIEvent] = []
+        for event in events
+        {
+            if event.getEventTime() == time
+            {
+                if event.getEventType() == .team(.autoGoal)
+                {
+                    resultArray.append(event)
+                }
+                if event.getEventType() == .team(.foul)
+                {
+                    resultArray.append(event)
+                }
+                if event.getEventType() == .team(.penaltySeriesSuccess)
+                {
+                    resultArray.append(event)
+                }
+                if event.getEventType() == .team(.penaltySeriesFailure)
+                {
+                    resultArray.append(event)
+                }
+            }
+        }
+        return resultArray
     }
     
     func prepareNotAutoGoalFoulEvents() -> [LIEvent] {

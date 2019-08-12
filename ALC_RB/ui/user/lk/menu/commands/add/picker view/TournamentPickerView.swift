@@ -19,7 +19,6 @@ class TournamentPickerHelper : NSObject, UIPickerViewDelegate, UIPickerViewDataS
     
     public func setRows (rows: [League]) {
         self.rows = rows
-//        dump(rows)
     }
     
     public func setSelectRowPickerHelper(selectRowProtocol: SelectRowTournamentPickerHelper) {

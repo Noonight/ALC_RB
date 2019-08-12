@@ -156,7 +156,7 @@ struct LIEvent: Codable {
     }
     
     func getEventTime() -> EventTime {
-        switch eventType {
+        switch time {
         case EventTime.oneHalf.rawValue:
             return EventTime.oneHalf
         case EventTime.twoHalf.rawValue:

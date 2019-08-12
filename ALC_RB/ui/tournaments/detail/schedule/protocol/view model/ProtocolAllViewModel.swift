@@ -348,7 +348,7 @@ class ProtocolAllViewModel {
         }
         
         group.notify(queue: .main) {
-            Print.m(dump(resultArray))
+            dump(resultArray)
             completed(resultArray)
         }
     }
@@ -388,9 +388,7 @@ class ProtocolAllViewModel {
         {
             for event in events
             {
-                if teamOnePlayersController.players.contains(where: { liPlayer -> Bool in
-                    return liPlayer.playerId == event.player
-                }) == true
+                if match.teamOne == event.player
                 {
                     resultArray.append(event)
                 }
@@ -401,9 +399,7 @@ class ProtocolAllViewModel {
         {
             for event in events
             {
-                if teamTwoPlayersController.players.contains(where: { liPlayer -> Bool in
-                    return liPlayer.playerId == event.player
-                }) == true
+                if match.teamTwo == event.player
                 {
                     resultArray.append(event)
                 }

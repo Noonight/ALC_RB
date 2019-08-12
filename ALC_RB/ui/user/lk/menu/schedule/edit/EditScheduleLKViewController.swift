@@ -301,7 +301,6 @@ class EditScheduleLKViewController: BaseStateViewController {
     // edit match for userDefaults value at id match
     func setMatchValue(id: String, match: SoloMatch) {
         var user = userDefaults.getAuthorizedUser()
-        //        dump(user?.person)
         
         if user?.person.participationMatches!.contains(where: { pMatch -> Bool in
             return pMatch.id == match.match?.id
@@ -324,7 +323,6 @@ class EditScheduleLKViewController: BaseStateViewController {
             user?.person.participationMatches!.append(match.match!)
         }
         userDefaults.setAuthorizedUser(user: user!)
-        //        dump(userDefaults.getAuthorizedUser()?.person)
     }
     
     func showRefereesPicker(sender: UIButton) {

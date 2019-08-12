@@ -90,7 +90,6 @@ class RefereeEditMatchesLKTableViewController: BaseStateTableViewController {
                 }),
                 UIAlertAction(title: "Сохранить", style: .destructive, handler: { alert in
                     let editedMatch = EditMatchReferees(id: (self.tableView.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as? RefereeEditMatchesLKTableViewCell)!.cellModel.activeMatch.id, referees: EditMatchReferees.Referees(referees: self.getRefereesArray(tag: sender.tag)))
-                    dump(editedMatch)
                     self.presenter.requestEditMatchReferee(
                         token: (self.userDefaults.getAuthorizedUser()?.token)!,
                         editMatchReferees: editedMatch)
@@ -185,7 +184,6 @@ extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
     func setMatchValue(id: String, match: SoloMatch) {
 //        Print.m(match)
         var user = userDefaults.getAuthorizedUser()
-//        dump(user?.person)
         
         if user?.person.participationMatches!.contains(where: { pMatch -> Bool in
             return pMatch.id == match.match?.id
@@ -208,7 +206,6 @@ extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
             user?.person.participationMatches!.append(match.match!)
         }
         userDefaults.setAuthorizedUser(user: user!)
-//        dump(userDefaults.getAuthorizedUser()?.person)
     }
     
     func onFetchModelSuccess(dataModel: [RefereeEditMatchesLKTableViewCell.CellModel]) {

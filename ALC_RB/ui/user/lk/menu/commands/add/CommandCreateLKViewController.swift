@@ -252,7 +252,6 @@ extension CommandCreateLKViewController : CommandCreateLKView {
 //        viewModel.tournaments = tournaments
         viewModel.tournaments = filterPendingTournaments(tournaments: tournaments)
 //        setState(state: .normal)
-//        dump(viewModel.tournaments)
         updateUI()
     }
     

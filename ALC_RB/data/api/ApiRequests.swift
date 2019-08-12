@@ -275,7 +275,6 @@ class ApiRequests {
                 case .success(let upload, _, _):
                     
 //                    upload.responseJSON(completionHandler: { response in
-//                        dump(response.result.value)
 //                    })
                     
                     upload.responseSoloPerson(completionHandler: { response in
@@ -319,14 +318,12 @@ class ApiRequests {
 //                case .success:
 //                    Print.m(response.result.value)
 //                    Print.m(String(data: response.data!, encoding: String.Encoding.utf8))
-//                    dump(response)
 //                case .failure(let error):
 //                    Print.m(error)
 //                    response_failure(error)
 //                }
 //        }
         
-//        dump(editTeam.toParams())
         
         Alamofire
             .request(ApiRoute.getApiURL(.post_edit_team), method: .post, parameters: editTeam.toParams(), encoding: JSONEncoding.default, headers: header)
@@ -469,7 +466,6 @@ class ApiRequests {
                 case .success(let upload, _, _):
 
 //                    upload.responseJSON(completionHandler: { response in
-//                        dump(response.result)
 //                    })
                     
                     upload.responseSoloLeague(completionHandler: { response in
@@ -536,7 +532,6 @@ class ApiRequests {
 //
 //            })
 //            .responseSingleLineMessage(completionHandler: { (response) in
-////                dump(response)
 //                Print.m(response.result.value)
 //                switch response.result {
 //                case .success(let value):
@@ -580,7 +575,6 @@ class ApiRequests {
 //                            Print.m(response.error)
 //                            return
 //                        }
-//                        dump(response)
 //                        Print.m(response.result.value)
 //                    })
 //
@@ -615,7 +609,6 @@ class ApiRequests {
             request
             .validate()
             .responseSoloMatch(completionHandler: { response in
-//                dump(response)
                 switch response.result {
                 case .success:
                     if let soloMatch = response.result.value {
@@ -759,7 +752,6 @@ class ApiRequests {
 //                    Print.m(error)
 //                    return
 //                }
-//                dump(response.result.value)
 //                do {
 //                    let decoder = JSONDecoder()
 //                    let decode = try decoder.decode(AuthUser.self, from: response.data!)
@@ -879,7 +871,6 @@ class ApiRequests {
         Alamofire
             .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
             .responsePlayers { response in
-//                dump(response)
 //                Print.m(response.result)
                 switch response.result {
                 case .success:
@@ -1037,9 +1028,6 @@ class ApiRequests {
         }
         
         group.notify(queue: .main) {
-//            dump(fActiveMatches)
-//            dump(fReferees)
-//            dump(fClubs)
             get_success(fActiveMatches, fReferees, fClubs)
         }
     }
@@ -1118,7 +1106,6 @@ class ApiRequests {
 //                                                    team1Name: tmpTeam1!.name,
 //                                                    team2Name: tmpTeam2!.name)
                                                 
-//                                                dump(value)
                                                 
                                                 models.append(MyMatchesRefTableViewCell.CellModel(
                                                     participationMatch: parMatch,
@@ -1127,8 +1114,6 @@ class ApiRequests {
                                                     team1Name: tmpTeam1!.name,
                                                     team2Name: tmpTeam2!.name)
                                                 )
-//                                                Print.m(models)
-//                                                dump(models)
                                                 get_success(models)
                                                 
                                                 dispatchGroup.leave()

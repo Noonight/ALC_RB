@@ -107,6 +107,23 @@ class ProtocolRefereeViewModel {
         }
     }
     
+//    func updateFouls(count: Int, team: TeamEnum) {
+//        let oldCountOfFouls = self.eventsController.events.count
+//        let newCountOfFouls = count
+//        if oldCountOfFouls < newCountOfFouls // lower
+//        {
+//            var eventsForAdd: [LIEvent] = []
+//            for i in 0...(newCountOfFouls - oldCountOfFouls)
+//            {
+//                eventsForAdd.append(LIEvent(matchID: <#T##String#>, eventType: <#T##EventPlayerType#>, playerID: <#T##String#>, time: <#T##EventTime#>))
+//            }
+//        }
+//        if oldCountOfFouls > newCountOfFouls // greather
+//        {
+//            self.eventsController.deleteLastFoulsBeforeCount(count)
+//        }
+//    }
+    
     func deleteLastAddedEvent() {
         self.eventsController.removeLastAdded()
     }
@@ -143,13 +160,15 @@ class ProtocolRefereeViewModel {
     func prepareFoulsCountInCurrentTime(team: TeamEnum) -> Int {
         let teamEvents = self.eventsController.prepareTeamEventsInTime(time: self.currentTime)
         
+        
+        
         return getEventsForTeam(team: team, events: teamEvents).filter({ event -> Bool in
             return event.getEventType() == .team(.foul)
         }).count
     }
     
     func prepareCurrentTime() -> String {
-        return self.currentTime.rawValue
+        return self.currentTime.getTitle()
     }
     
     func prepareMatchId() -> String {
@@ -231,9 +250,7 @@ class ProtocolRefereeViewModel {
         {
             for event in events
             {
-                if teamOnePlayersController.players.contains(where: { liPlayer -> Bool in
-                    return liPlayer.playerId == event.player
-                }) == true
+                if match.teamOne == event.player
                 {
                     resultArray.append(event)
                 }
@@ -244,9 +261,7 @@ class ProtocolRefereeViewModel {
         {
             for event in events
             {
-                if teamTwoPlayersController.players.contains(where: { liPlayer -> Bool in
-                    return liPlayer.playerId == event.player
-                }) == true
+                if match.teamTwo == event.player
                 {
                     resultArray.append(event)
                 }

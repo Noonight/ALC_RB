@@ -89,7 +89,6 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
     
     func onGetUpcomingMatchesSuccesful(data: MmUpcomingMatches) {
         tableData = data
-        dump(data)
         //try! print(tableData.jsonString())
         updateUI()
     }

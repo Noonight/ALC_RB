@@ -36,8 +36,6 @@ class InvitationLKPresenter: MvpPresenter<InvitationLKTableViewController> {
     let apiService = ApiRequests()
     
     func acceptRequest(token: String, acceptInfo: AcceptRequest) {
-//        dump(token)
-//        dump(acceptInfo)
         apiService.post_teamAcceptRequest(token: token, acceptInfo: acceptInfo, response_success: { soloPerson in
             self.getView().acceptRequestSuccess(soloPerson: soloPerson)
         }, response_message: { message in

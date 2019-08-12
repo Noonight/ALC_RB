@@ -42,7 +42,6 @@ class EditTeamProtocolTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        dump(playersController.playersSwitch)
         
         self.tmpPlayersController = playersController
         
@@ -89,7 +88,6 @@ class EditTeamProtocolTableViewController: UITableViewController {
         
 //        self.playersController.playersSwitch = tmpPlayersController.playersSwitch
         self.playersController.setSwitcherValues(playersSwitch: tmpPlayersController.playersSwitch)
-//        dump(playersController.playersSwitch)
         
         showAlert(title: "", message: "Для изменения команды нужно сохранить протокол") {
             self.navigationController?.popViewController(animated: true)
