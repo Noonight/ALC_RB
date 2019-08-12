@@ -21,12 +21,6 @@ class ProtocolRefereeViewModel {
     var refereesController: ProtocolRefereesController!
     var eventsController: ProtocolEventsController!
     
-    var teamOneFoulsCount = 0 // TODO need update later
-    var teamTwoFoulsCount = 0
-    
-    var teamOneAutoGoalsCount = 0 // TODO need smth
-    var teamTwoAutoGoalsCount = 0
-    
     let dataManager = ApiRequests()
     
     init(match: LIMatch, leagueDetailModel: LeagueDetailModel, teamOneModel: ProtocolPlayersController, teamTwoModel: ProtocolPlayersController,
@@ -83,27 +77,22 @@ class ProtocolRefereeViewModel {
         }
     }
     
-    func clearFouls() {
-        self.teamOneFoulsCount = 0
-        self.teamTwoFoulsCount = 0
-    }
-    
     func updateTime(time: EventTime) {
         if self.currentTime != time
         {
             self.currentTime = time
-            if self.currentTime == .oneHalf
-            {
-                self.clearFouls() // MARK: CHECK IT IN FEATURE
-            }
-            if self.currentTime == .twoHalf
-            {
-                self.clearFouls()
-            }
-            if self.currentTime == .penaltySeries
-            {
-                self.clearFouls()
-            }
+//            if self.currentTime == .oneHalf
+//            {
+//                self.clearFouls() // MARK: CHECK IT IN FEATURE
+//            }
+//            if self.currentTime == .twoHalf
+//            {
+//                self.clearFouls()
+//            }
+//            if self.currentTime == .penaltySeries
+//            {
+//                self.clearFouls()
+//            }
         }
     }
     
@@ -149,6 +138,19 @@ class ProtocolRefereeViewModel {
     
     // MARK: PREPARE FOR DISPLAY OR PREPARE DATA FOR SERVER REQUEST
     
+    func prepareTeamTitleFor(team: TeamEnum) -> String {
+        if team == .one
+        {
+            return ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
+        }
+        if team == .two
+        {
+            return ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .two)
+        }
+        return ""
+        
+    }
+    
     func prepareAutogoalsCountInCurrentTime(team: TeamEnum) -> Int { // OK
         let teamEvents = self.eventsController.prepareTeamEventsInTime(time: self.currentTime)
         
@@ -159,8 +161,6 @@ class ProtocolRefereeViewModel {
     
     func prepareFoulsCountInCurrentTime(team: TeamEnum) -> Int {
         let teamEvents = self.eventsController.prepareTeamEventsInTime(time: self.currentTime)
-        
-        
         
         return getEventsForTeam(team: team, events: teamEvents).filter({ event -> Bool in
             return event.getEventType() == .team(.foul)
@@ -181,18 +181,6 @@ class ProtocolRefereeViewModel {
             events: EditProtocol.Events(events: eventsController.events),
             playersList: self.getPlayersId()
         )
-    }
-    
-    func prepareFoulsCount(for team: TeamEnum) -> Int {
-        if team == .one
-        {
-            return self.teamOneFoulsCount
-        }
-        if team == .two
-        {
-            return self.teamTwoFoulsCount
-        }
-        return 0
     }
     
     func prepareTableViewCells(team: TeamEnum, completed: @escaping ([RefereeProtocolPlayerTeamCellModel]) -> ()) {

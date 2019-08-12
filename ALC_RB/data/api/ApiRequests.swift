@@ -647,23 +647,37 @@ class ApiRequests {
         }
     }
     
-    func post_changeProtocol(token: String, newProtocol: EditProtocol, success: @escaping (SoloMatch)->(), failure: @escaping (Error)->()) {
+    func post_changeProtocol(token: String, newProtocol: EditProtocol, success: @escaping (SoloMatch)->(), message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error)->()) {
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
             "auth" : "\(token)"
         ]
         
-        Alamofire
+        let instance = Alamofire
             .request(ApiRoute.getApiURL(.post_edit_protcol), method: .post, parameters: newProtocol.toParams(), encoding: JSONEncoding.default, headers: header)
+        
+        instance
+            .responseJSON(completionHandler: { response in
+            dump(response)
+        })
+        instance
+            .validate()
             .responseSoloMatch(completionHandler: { response in
-                switch response.result {
-                case .success(let value):
-                    success(value)
-                case .failure(let error):
-//                    Print.m(error)
-                    failure(error)
-                }
-            })
+            switch response.result {
+            case .success(let value):
+                success(value)
+            case .failure(let error):
+                instance.responseSingleLineMessage(completionHandler: { response in
+                    switch response.result {
+                    case .success(let value):
+                        Print.m(value.message)
+                    case .failure(let error):
+                        Print.m(error)
+                    }
+                })
+//                failure(error)
+            }
+        })
 //        func responseMessage(success: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
 //            request.responseSingleLineMessage { response in
 //                switch response.result {

@@ -1,18 +1,18 @@
 //
-//  FoulsMaker.swift
+//  AutoGoalsMaker.swift
 //  ALC_RB
 //
-//  Created by ayur on 09.08.2019.
+//  Created by Ayur Arkhipov on 12/08/2019.
 //  Copyright © 2019 test. All rights reserved.
 //
 
 import UIKit
 
-class FoulsMaker: NSObject {
+class AutoGoalsMaker: NSObject {
     static let SIZE = CGRect(x: 0, y: 0, width: 278, height: 153)
     static let BACKGROUND_COLOR = UIColor(white: 0, alpha: 0.1)
     
-    let foulsView = EditFoulsView(frame: SIZE)
+    let autoGoalsView = EditAutoGoalsView(frame: SIZE)
     var onHideTriggered: ((Int, String) -> ())
     var backgroundView = UIView()
     var curMatchId: String!
@@ -30,7 +30,7 @@ class FoulsMaker: NSObject {
         self.curTeamId = teamId
         self.curTime = time
         
-        self.foulsView.initValues(team: teamTitle, defValue: defValue, callBack: self)
+        self.autoGoalsView.initValues(team: teamTitle, defValue: defValue, callBack: self)
         
         if let window = UIApplication.shared.keyWindow {
             backgroundView.backgroundColor = EventMaker.BACKGROUND_COLOR
@@ -41,18 +41,18 @@ class FoulsMaker: NSObject {
             )
             
             window.addSubview(backgroundView)
-            window.addSubview(foulsView)
+            window.addSubview(autoGoalsView)
             
-            foulsView.setCenterFromParent()
+            autoGoalsView.setCenterFromParent()
             
             backgroundView.frame = window.frame
             
-            foulsView.alpha = 0
+            autoGoalsView.alpha = 0
             
             UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.backgroundView.alpha = 1
                 
-                self.foulsView.alpha = 1
+                self.autoGoalsView.alpha = 1
             }, completion: nil)
         }
     }
@@ -68,13 +68,13 @@ class FoulsMaker: NSObject {
         UIView.animate(withDuration: 0.2)
         {
             self.backgroundView.alpha = 0
-            self.foulsView.alpha = 0
+            self.autoGoalsView.alpha = 0
         }
     }
     
 }
 
-extension FoulsMaker: EditFoulsCallBack {
+extension AutoGoalsMaker: EditAutoGoalsCallBack {
     func complete(value: Int) {
         self.hide(value: value)
     }

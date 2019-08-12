@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EditAutoGoalsCallBack {
+    func complete(value: Int)
+}
+
 final class EditAutoGoalsView: UIView {
 
     @IBOutlet var container_view: UIView!
@@ -27,10 +31,16 @@ final class EditAutoGoalsView: UIView {
             self.value_label.text = String(value)
         }
     }
+    var callBack: EditAutoGoalsCallBack? {
+        didSet {
+            setupCallBacks()
+        }
+    }
     
-    public func initValues(team: String, defValue: Int) {
+    public func initValues(team: String, defValue: Int, callBack: EditAutoGoalsCallBack) {
         self.team = team
         self.value = defValue
+        self.callBack = callBack
         
         setupButtons()
     }
@@ -42,6 +52,13 @@ final class EditAutoGoalsView: UIView {
         self.plus_button.addTarget(self, action: #selector(onPlusPressed), for: .touchUpInside)
     }
     
+    private func setupCallBacks() {
+        if self.callBack != nil
+        {
+            accept_button.addTarget(self, action: #selector(onAcceptPressed), for: .touchUpInside)
+        }
+    }
+    
     // MARK: ACTIONS
     
     @objc func onMinusPressed() {
@@ -51,6 +68,11 @@ final class EditAutoGoalsView: UIView {
     @objc func onPlusPressed() {
         self.value += 1
     }
+    
+    @objc func onAcceptPressed() {
+        self.callBack?.complete(value: self.value)
+    }
+    
     // MARK: INIT
     
     override init(frame: CGRect) {

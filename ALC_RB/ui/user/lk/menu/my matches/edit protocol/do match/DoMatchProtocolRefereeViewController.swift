@@ -82,6 +82,7 @@ class DoMatchProtocolRefereeViewController: UIViewController {
     
     var eventMaker: EventMaker?
     var foulsMaker: FoulsMaker?
+    var autoGoalsMaker: AutoGoalsMaker?
     
     // MARK: LIFE CYCLE
     
@@ -93,6 +94,7 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         self.setupAutogoalsFooter()
         self.setupEventMaker()
         self.setupFoulsMaker()
+        self.setupAutoGoalsMaker()
         self.setupStaticView()
         self.setupDynamicView()
         self.setupTableViews()
@@ -121,11 +123,23 @@ extension DoMatchProtocolRefereeViewController {
         
         self.playersTeamOneAutoGoalsFooter.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapTeamOneAutoGoals)))
         self.playersTeamTwoAutoGoalsFooter.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapTeamTwoAutoGoals)))
+        
+        self.playersTeamOneAutoGoalsFooter.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTapTeamOneAutoGoals)))
+        self.playersTeamTwoAutoGoalsFooter.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTapTeamTwoAutoGoals)))
     }
     
     func setupFoulsCounter() {
         self.foulsTeamOneCount_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapTeamOneFouls)))
         self.foulsTeamTwoCount_view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapTeamTwoFouls)))
+        
+        let longTapTeamOne = UILongPressGestureRecognizer(target: self, action: #selector(longTapTeamOneFouls(gestureReconizer:)))
+        longTapTeamOne.delaysTouchesBegan = true
+        self.foulsTeamOneCount_view.addGestureRecognizer(longTapTeamOne)
+       
+        
+        let longTapTeamTwo = UILongPressGestureRecognizer(target: self, action: #selector(longTapTeamTwoFouls(gestureReconizer:)))
+        longTapTeamTwo.delaysTouchesBegan = true
+        self.foulsTeamTwoCount_view.addGestureRecognizer(longTapTeamTwo)
     }
     
     func setupEventMaker() {
@@ -139,13 +153,15 @@ extension DoMatchProtocolRefereeViewController {
     }
     
     func setupFoulsMaker() {
-        self.foulsMaker = FoulsMaker(completeBack: { value in
-            self.foulsMakerCompleteWork(value: value)
+        self.foulsMaker = FoulsMaker(completeBack: { value, teamId in
+            self.foulsMakerCompleteWork(value: value, teamId: teamId)
         })
     }
     
     func setupAutoGoalsMaker() {
-        
+        self.autoGoalsMaker = AutoGoalsMaker(completeBack: { value, teamId in
+            self.autoGoalsMakerCompleteWork(value: value, teamId: teamId)
+        })
     }
     
     func setupTableViewsActions() {
@@ -183,8 +199,8 @@ extension DoMatchProtocolRefereeViewController {
     }
     
     func setupStaticView() {
-        self.titleTeamOne_label.text = ClubTeamHelper.getTeamTitle(league: viewModel.leagueDetailModel.leagueInfo.league, match: viewModel.match, team: .one)
-        self.titleTeamTwo_label.text = ClubTeamHelper.getTeamTitle(league: viewModel.leagueDetailModel.leagueInfo.league, match: viewModel.match, team: .two)
+        self.titleTeamOne_label.text = self.viewModel.prepareTeamTitleFor(team: .one)
+        self.titleTeamTwo_label.text = self.viewModel.prepareTeamTitleFor(team: .two)
     }
     
     func setupTableViews() {
@@ -204,6 +220,62 @@ extension DoMatchProtocolRefereeViewController {
 
 extension DoMatchProtocolRefereeViewController {
     
+    @objc func longTapTeamOneFouls(gestureReconizer: UILongPressGestureRecognizer) {
+        if gestureReconizer.state == .began
+        {
+            guard let teamId = self.viewModel.match.teamOne else { return }
+            foulsMaker?.showWith(
+                matchId: self.viewModel.match.id,
+                teamId: teamId,
+                time: self.viewModel.currentTime.rawValue,
+                teamTitle: self.viewModel.prepareTeamTitleFor(team: .one),
+                defValue: self.viewModel.prepareFoulsCountInCurrentTime(team: .one)
+            )
+        }
+    }
+    
+    @objc func longTapTeamTwoFouls(gestureReconizer: UILongPressGestureRecognizer) {
+        if gestureReconizer.state == .began
+        {
+            guard let teamId = self.viewModel.match.teamTwo else { return }
+            foulsMaker?.showWith(
+                matchId: self.viewModel.match.id,
+                teamId: teamId,
+                time: self.viewModel.currentTime.rawValue,
+                teamTitle: self.viewModel.prepareTeamTitleFor(team: .two),
+                defValue: self.viewModel.prepareFoulsCountInCurrentTime(team: .one)
+            )
+        }
+    }
+    
+    @objc func longTapTeamOneAutoGoals(gestureReconizer: UILongPressGestureRecognizer) {
+        if gestureReconizer.state == .began
+        {
+            guard let teamId = self.viewModel.match.teamOne else { return }
+            autoGoalsMaker?.showWith(
+                matchId: self.viewModel.match.id,
+                teamId: teamId,
+                time: self.viewModel.currentTime.rawValue,
+                teamTitle: self.viewModel.prepareTeamTitleFor(team: .one),
+                defValue: self.viewModel.prepareAutogoalsCountInCurrentTime(team: .one)
+            )
+        }
+    }
+    
+    @objc func longTapTeamTwoAutoGoals(gestureReconizer: UILongPressGestureRecognizer) {
+        if gestureReconizer.state == .began
+        {
+            guard let teamId = self.viewModel.match.teamTwo else { return }
+            autoGoalsMaker?.showWith(
+                matchId: self.viewModel.match.id,
+                teamId: teamId,
+                time: self.viewModel.currentTime.rawValue,
+                teamTitle: self.viewModel.prepareTeamTitleFor(team: .two),
+                defValue: self.viewModel.prepareAutogoalsCountInCurrentTime(team: .two)
+            )
+        }
+    }
+    
     @objc func tapTeamOneAutoGoals() {
         self.viewModel.upAutoGoalsCount(team: .one)
         
@@ -217,10 +289,7 @@ extension DoMatchProtocolRefereeViewController {
     }
     
     @objc func tapTeamOneFouls() {
-        Print.m(self.viewModel.eventsController.events)
         self.viewModel.upFoulsCount(team: .one)
-        Print.m(self.viewModel.eventsController.events
-        )
         
         self.addEventSaveProtocol()
     }
@@ -231,8 +300,16 @@ extension DoMatchProtocolRefereeViewController {
         self.addEventSaveProtocol()
     }
     
-    func foulsMakerCompleteWork(value: Int) {
-        // do smth 
+    func foulsMakerCompleteWork(value: Int, teamId: String) {
+        Print.m("new value is \(value)")
+        
+        
+    }
+    
+    func autoGoalsMakerCompleteWork(value: Int, teamId: String) {
+        Print.m("new value of auto goals is \(value) and id is \(teamId)")
+        
+        
     }
     
     func eventMakerCompleteWork_ADD(event: LIEvent) { // TODO : need work with data base or smth

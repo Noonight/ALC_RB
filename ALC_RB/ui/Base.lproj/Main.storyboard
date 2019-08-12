@@ -4287,6 +4287,7 @@
                                                                     </label>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <gestureRecognizers/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="bottom" secondItem="EqQ-i9-9yB" secondAttribute="bottom" constant="5" id="DUE-RK-cRQ"/>
                                                                     <constraint firstItem="EqQ-i9-9yB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OLc-SD-Kk9" secondAttribute="leading" constant="8" id="Gsd-H9-vzi"/>
