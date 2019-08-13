@@ -54,6 +54,8 @@ class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> 
     func requestEditProtocol(token: String, editProtocol: EditProtocol) {
         dataManager.post_changeProtocol(token: token, newProtocol: editProtocol, success: { soloMatch in
             self.getView().requestEditProtocolSuccess(match: soloMatch)
+        }, message: { message in
+            
         }) { error in
             self.getView().requestEditProtocolFailure(error: error)
         }

@@ -655,41 +655,31 @@ class ApiRequests {
         
         let instance = Alamofire
             .request(ApiRoute.getApiURL(.post_edit_protcol), method: .post, parameters: newProtocol.toParams(), encoding: JSONEncoding.default, headers: header)
-        
         instance
-            .responseJSON(completionHandler: { response in
-            dump(response)
-        })
-        instance
-            .validate()
             .responseSoloMatch(completionHandler: { response in
-            switch response.result {
-            case .success(let value):
-                success(value)
-            case .failure(let error):
-                instance.responseSingleLineMessage(completionHandler: { response in
+                if response.response?.statusCode == 500
+                {
+                    instance
+                        .responseSingleLineMessage(completionHandler: { response in
+                            switch response.result {
+                            case .success(let value):
+                                message(value)
+                            case .failure(let error):
+                                failure(error)
+                            }
+                        })
+                }
+                else
+                {
                     switch response.result {
                     case .success(let value):
-                        Print.m(value.message)
+                        success(value)
                     case .failure(let error):
-                        Print.m(error)
+                        failure(error)
                     }
-                })
-//                failure(error)
-            }
+                }
+            
         })
-//        func responseMessage(success: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
-//            request.responseSingleLineMessage { response in
-//                switch response.result {
-//                case .success:
-//                    if let message = response.result.value {
-//                        success(message)
-//                    }
-//                case .failure(let error):
-//                    failure(error)
-//                }
-//            }
-//        }
     }
     
     func post_acceptProtocol(token: String, id: String, success: @escaping (SoloMatch) -> (), message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {

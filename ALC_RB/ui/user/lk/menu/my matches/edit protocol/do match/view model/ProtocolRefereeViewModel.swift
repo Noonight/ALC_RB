@@ -96,22 +96,147 @@ class ProtocolRefereeViewModel {
         }
     }
     
-//    func updateFouls(count: Int, team: TeamEnum) {
-//        let oldCountOfFouls = self.eventsController.events.count
-//        let newCountOfFouls = count
-//        if oldCountOfFouls < newCountOfFouls // lower
-//        {
-//            var eventsForAdd: [LIEvent] = []
-//            for i in 0...(newCountOfFouls - oldCountOfFouls)
-//            {
-//                eventsForAdd.append(LIEvent(matchID: <#T##String#>, eventType: <#T##EventPlayerType#>, playerID: <#T##String#>, time: <#T##EventTime#>))
-//            }
-//        }
-//        if oldCountOfFouls > newCountOfFouls // greather
-//        {
-//            self.eventsController.deleteLastFoulsBeforeCount(count)
-//        }
-//    }
+    func updateFouls(newCount: Int, teamId: String) {
+        if teamId == self.match.teamOne
+        {
+            let oldCountForTime = self.prepareFoulsCountInCurrentTime(team: .one)
+            if oldCountForTime < newCount // add new elements
+            {
+                for _ in 0...(newCount - oldCountForTime) - 1
+                {
+                    eventsController.add(LIEvent(
+                        matchID: self.match.id,
+                        eventType: .foul,
+                        playerID: teamId,
+                        time: self.currentTime)
+                    )
+                }
+            }
+            if oldCountForTime > newCount // delete last elements
+            {
+                var counter = 0
+                for i in (0...(self.eventsController.events.count - 1)).reversed()
+                {
+                    let event = self.eventsController.events[i]
+                    if counter < (oldCountForTime - newCount)
+                    {
+                        if event.getEventType() == .team(.foul)
+                            && event.getEventTime() == currentTime
+                            && event.player == teamId
+                        {
+                            counter += 1
+                            self.eventsController.events.remove(at: i)
+                        }
+                    }
+                }
+            }
+        }
+        if teamId == self.match.teamTwo
+        {
+            let oldCountForTime = self.prepareFoulsCountInCurrentTime(team: .two)
+            if oldCountForTime < newCount // add new elements
+            {
+                for _ in 0...(newCount - oldCountForTime) - 1
+                {
+                    eventsController.add(LIEvent(
+                        matchID: self.match.id,
+                        eventType: .foul,
+                        playerID: teamId,
+                        time: self.currentTime)
+                    )
+                }
+            }
+            if oldCountForTime > newCount // delete last elements
+            {
+                var counter = 0
+                for i in (0...(self.eventsController.events.count - 1)).reversed()
+                {
+                    let event = self.eventsController.events[i]
+                    if counter < (oldCountForTime - newCount)
+                    {
+                        if event.getEventType() == .team(.foul)
+                            && event.getEventTime() == currentTime
+                            && event.player == teamId
+                        {
+                            counter += 1
+                            self.eventsController.events.remove(at: i)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func updateAutoGoals(newCount: Int, teamId: String) {
+        if teamId == self.match.teamOne
+        {
+            let oldCountForTime = self.prepareAutogoalsCountInCurrentTime(team: .one)
+            if oldCountForTime < newCount // add new elements
+            {
+                for _ in 0...(newCount - oldCountForTime) - 1
+                {
+                    eventsController.add(LIEvent(
+                        matchID: self.match.id,
+                        eventType: .autoGoal,
+                        playerID: teamId,
+                        time: self.currentTime)
+                    )
+                }
+            }
+            if oldCountForTime > newCount // delete last elements
+            {
+                var counter = 0
+                for i in (0...(self.eventsController.events.count - 1)).reversed()
+                {
+                    let event = self.eventsController.events[i]
+                    if counter < (oldCountForTime - newCount)
+                    {
+                        if event.getEventType() == .team(.autoGoal)
+                            && event.getEventTime() == currentTime
+                            && event.player == teamId
+                        {
+                            counter += 1
+                            self.eventsController.events.remove(at: i)
+                        }
+                    }
+                }
+            }
+        }
+        if teamId == self.match.teamTwo
+        {
+            let oldCountForTime = self.prepareAutogoalsCountInCurrentTime(team: .two)
+            if oldCountForTime < newCount // add new elements
+            {
+                for _ in 0...(newCount - oldCountForTime) - 1
+                {
+                    eventsController.add(LIEvent(
+                        matchID: self.match.id,
+                        eventType: .autoGoal,
+                        playerID: teamId,
+                        time: self.currentTime)
+                    )
+                }
+            }
+            if oldCountForTime > newCount // delete last elements
+            {
+                var counter = 0
+                for i in (0...(self.eventsController.events.count - 1)).reversed()
+                {
+                    let event = self.eventsController.events[i]
+                    if counter < (oldCountForTime - newCount)
+                    {
+                        if event.getEventType() == .team(.autoGoal)
+                            && event.getEventTime() == currentTime
+                            && event.player == teamId
+                        {
+                            counter += 1
+                            self.eventsController.events.remove(at: i)
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     func deleteLastAddedEvent() {
         self.eventsController.removeLastAdded()

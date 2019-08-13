@@ -25,6 +25,8 @@ class DoMatchProtocolRefereePresenter: MvpPresenter<DoMatchProtocolRefereeViewCo
     func saveProtocol(token: String, editedProtocol: EditProtocol) {
         dataManager.post_changeProtocol(token: token, newProtocol: editedProtocol, success: { match in
             self.getView().onSaveProtocolSuccess(match: match)
+        }, message: { message in
+            
         }) { error in
             self.getView().onSaveProtocolFailure(error: error)
         }
@@ -33,6 +35,8 @@ class DoMatchProtocolRefereePresenter: MvpPresenter<DoMatchProtocolRefereeViewCo
     func saveProtocol(token: String, editedProtocol: EditProtocol, ok: @escaping (SoloMatch) -> (), failure: @escaping (Error) -> ()) {
         dataManager.post_changeProtocol(token: token, newProtocol: editedProtocol, success: { match in
             ok(match)
+        }, message: { message in
+            
         }) { error in
             failure(error)
         }

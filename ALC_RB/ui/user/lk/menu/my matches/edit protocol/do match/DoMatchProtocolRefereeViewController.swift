@@ -46,6 +46,8 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         
         static let PROGRESS_ADD_EVENT           = "Добавляем событие..."
         static let PROGRESS_ADD_EVENT_COMPLETE  = "Событие добавлено"
+        
+        static let PROGRESS_UPDATE  = "Обновляем..."
     }
     enum Segues {
         static let REFEREES = "segue_edit_referees_do_protocol"
@@ -243,7 +245,7 @@ extension DoMatchProtocolRefereeViewController {
                 teamId: teamId,
                 time: self.viewModel.currentTime.rawValue,
                 teamTitle: self.viewModel.prepareTeamTitleFor(team: .two),
-                defValue: self.viewModel.prepareFoulsCountInCurrentTime(team: .one)
+                defValue: self.viewModel.prepareFoulsCountInCurrentTime(team: .two)
             )
         }
     }
@@ -303,13 +305,17 @@ extension DoMatchProtocolRefereeViewController {
     func foulsMakerCompleteWork(value: Int, teamId: String) {
         Print.m("new value is \(value)")
         
+        self.viewModel.updateFouls(newCount: value, teamId: teamId)
         
+        self.addEventSaveProtocol()
     }
     
     func autoGoalsMakerCompleteWork(value: Int, teamId: String) {
         Print.m("new value of auto goals is \(value) and id is \(teamId)")
         
+        self.viewModel.updateAutoGoals(newCount: value, teamId: teamId)
         
+        self.addEventSaveProtocol()
     }
     
     func eventMakerCompleteWork_ADD(event: LIEvent) { // TODO : need work with data base or smth
@@ -322,8 +328,9 @@ extension DoMatchProtocolRefereeViewController {
             editedProtocol: self.viewModel.prepareEditProtocol(),
         ok: { match in
                 self.viewModel.updateMatch(match: match.match!.convertToLIMatch())
-                hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_ADD_EVENT_COMPLETE)
-                
+//                hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_ADD_EVENT_COMPLETE)
+                hud.hide(animated: true)
+            
                 self.setupTableDataSources()
                 self.setupDynamicView()
         },
@@ -360,7 +367,8 @@ extension DoMatchProtocolRefereeViewController {
                 editedProtocol: self.viewModel.prepareEditProtocol(),
                 ok: { match in
                     self.viewModel.updateMatch(match: match.match!.convertToLIMatch())
-                    hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_DELETE_EVENT_COMPLETE)
+//                    hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_DELETE_EVENT_COMPLETE)
+                    hud.hide(animated: true)
                     
                     self.setupTableDataSources()
                     self.setupDynamicView()
@@ -498,6 +506,7 @@ extension DoMatchProtocolRefereeViewController {
 //        self.viewModel.currentTime = .firstTime
         self.title = self.viewModel.prepareCurrentTime()
         self.updateUIFouls()
+        self.updateUIAutoGoals()
     }
     
     @IBAction func onSecondTimeBtnPressed(_ sender: UIButton) {
@@ -505,18 +514,21 @@ extension DoMatchProtocolRefereeViewController {
         self.viewModel.updateTime(time: .twoHalf)
         self.title = self.viewModel.prepareCurrentTime()
         self.updateUIFouls()
+        self.updateUIAutoGoals()
     }
     
     @IBAction func onMoreTimeBtnPressed(_ sender: UIButton) {
         self.viewModel.updateTime(time: .extraTime)
         self.title = self.viewModel.prepareCurrentTime()
         self.updateUIFouls()
+        self.updateUIAutoGoals()
     }
     
     @IBAction func onPenaltyTimeBtnPressed(_ sender: UIButton) {
         self.viewModel.updateTime(time: .penaltySeries)
         self.title = self.viewModel.prepareCurrentTime()
         self.updateUIFouls()
+        self.updateUIAutoGoals()
     }
 }
 
@@ -539,7 +551,7 @@ extension DoMatchProtocolRefereeViewController: CellActions {
 extension DoMatchProtocolRefereeViewController {
     
     func addEventSaveProtocol() {
-        let hud = self.showLoadingViewHUD(with: Texts.PROGRESS_ADD_EVENT)
+        let hud = self.showLoadingViewHUD(with: Texts.PROGRESS_UPDATE)
         
         self.presenter.saveProtocol(
             token: self.userDefaults.getToken(),
@@ -547,7 +559,8 @@ extension DoMatchProtocolRefereeViewController {
             ok: { match in
                 Print.m(match)
                 self.viewModel.updateMatch(match: match.match!.convertToLIMatch())
-                hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_ADD_EVENT_COMPLETE)
+//                hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_ADD_EVENT_COMPLETE)
+                hud.hide(animated: true)
                 
                 self.setupTableDataSources()
                 self.setupDynamicView()

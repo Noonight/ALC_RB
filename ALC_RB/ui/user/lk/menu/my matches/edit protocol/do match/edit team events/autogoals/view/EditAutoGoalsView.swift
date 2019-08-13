@@ -29,6 +29,14 @@ final class EditAutoGoalsView: UIView {
     var value: Int = 0 {
         didSet {
             self.value_label.text = String(value)
+            if self.value == 0
+            {
+                self.disableMinusBtn()
+            }
+            else
+            {
+                self.activeMinusBtn()
+            }
         }
     }
     var callBack: EditAutoGoalsCallBack? {
@@ -71,6 +79,16 @@ final class EditAutoGoalsView: UIView {
     
     @objc func onAcceptPressed() {
         self.callBack?.complete(value: self.value)
+    }
+    
+    // MARK: HELPER
+    
+    func disableMinusBtn() {
+        self.minus_button.isEnabled = false
+    }
+    
+    func activeMinusBtn() {
+        self.minus_button.isEnabled = true
     }
     
     // MARK: INIT
