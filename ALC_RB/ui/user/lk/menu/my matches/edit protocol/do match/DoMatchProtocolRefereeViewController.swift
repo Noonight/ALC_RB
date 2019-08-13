@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SPStorkController
 
 class DoMatchProtocolRefereeViewController: UIViewController {
     enum Texts {
@@ -529,6 +530,8 @@ extension DoMatchProtocolRefereeViewController {
         self.title = self.viewModel.prepareCurrentTime()
         self.updateUIFouls()
         self.updateUIAutoGoals()
+        
+        self.presentModalPenaltySeriesVC()
     }
 }
 
@@ -549,6 +552,17 @@ extension DoMatchProtocolRefereeViewController: CellActions {
 // MARK: HELPERS
 
 extension DoMatchProtocolRefereeViewController {
+    
+    @objc func presentModalPenaltySeriesVC() {
+        let modalVC = ModalPenaltySeriesVC(nibName: "ModalPenaltySeriesVC", bundle: nil)
+        let transitionDelegate = SPStorkTransitioningDelegate()
+        transitionDelegate.storkDelegate = self
+        transitionDelegate.confirmDelegate = modalVC
+        transitionDelegate.customHeight = self.view.frame.height / 3
+        modalVC.transitioningDelegate = transitionDelegate
+        modalVC.modalPresentationStyle = .custom
+        self.present(modalVC, animated: true, completion: nil)
+    }
     
     func addEventSaveProtocol() {
         let hud = self.showLoadingViewHUD(with: Texts.PROGRESS_UPDATE)
@@ -596,6 +610,19 @@ extension DoMatchProtocolRefereeViewController {
     func updateUIAutoGoals() {
         self.playersTeamOneAutoGoalsFooter.countOfGoals = self.viewModel.prepareAutogoalsCountInCurrentTime(team: .one)
         self.playersTeamTwoAutoGoalsFooter.countOfGoals = self.viewModel.prepareAutogoalsCountInCurrentTime(team: .two)
+    }
+}
+
+// MARK: SP STORKE CONTROLLER DELEGATE
+
+extension DoMatchProtocolRefereeViewController: SPStorkControllerDelegate {
+    
+    func didDismissStorkByTap() {
+        print("SPStorkControllerDelegate - didDismissStorkByTap")
+    }
+    
+    func didDismissStorkBySwipe() {
+        print("SPStorkControllerDelegate - didDismissStorkBySwipe")
     }
 }
 

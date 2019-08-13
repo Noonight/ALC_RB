@@ -67,6 +67,9 @@
 		189E1C7822C9EC280086E4DA /* LabelSwitchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189E1C7722C9EC280086E4DA /* LabelSwitchView.xib */; };
 		189E1C7A22C9EC3A0086E4DA /* LabelSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E1C7922C9EC3A0086E4DA /* LabelSwitchView.swift */; };
 		18A82A5B22BB7B26006FA050 /* View Controller Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A82A5A22BB7B26006FA050 /* View Controller Alerts.swift */; };
+		18B0F8812302BF6600080196 /* ModalPenaltySeriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B0F87F2302BF6600080196 /* ModalPenaltySeriesVC.swift */; };
+		18B0F8822302BF6600080196 /* ModalPenaltySeriesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B0F8802302BF6600080196 /* ModalPenaltySeriesVC.xib */; };
+		18B0F8842302C5E700080196 /* UIAlertController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B0F8832302C5E700080196 /* UIAlertController + Extension.swift */; };
 		18B1FEFA22E1CB1900D75F2D /* KingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B1FEF922E1CB1900D75F2D /* KingExtensions.swift */; };
 		18D89EA422BCA021007FF537 /* ParticipationMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D89EA322BCA021007FF537 /* ParticipationMatch.swift */; };
 		18E9D5E222C09D7400D20139 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E9D5E122C09D7400D20139 /* UIImageViewExtensions.swift */; };
@@ -346,6 +349,9 @@
 		189E1C7722C9EC280086E4DA /* LabelSwitchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelSwitchView.xib; sourceTree = "<group>"; };
 		189E1C7922C9EC3A0086E4DA /* LabelSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSwitchView.swift; sourceTree = "<group>"; };
 		18A82A5A22BB7B26006FA050 /* View Controller Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View Controller Alerts.swift"; sourceTree = "<group>"; };
+		18B0F87F2302BF6600080196 /* ModalPenaltySeriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPenaltySeriesVC.swift; sourceTree = "<group>"; };
+		18B0F8802302BF6600080196 /* ModalPenaltySeriesVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModalPenaltySeriesVC.xib; sourceTree = "<group>"; };
+		18B0F8832302C5E700080196 /* UIAlertController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController + Extension.swift"; sourceTree = "<group>"; };
 		18B1FEF922E1CB1900D75F2D /* KingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingExtensions.swift; sourceTree = "<group>"; };
 		18D89EA322BCA021007FF537 /* ParticipationMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipationMatch.swift; sourceTree = "<group>"; };
 		18E9D5E122C09D7400D20139 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
@@ -830,6 +836,15 @@
 			path = "custom views";
 			sourceTree = "<group>";
 		};
+		18B0F87E2302BECF00080196 /* penalty series */ = {
+			isa = PBXGroup;
+			children = (
+				18B0F87F2302BF6600080196 /* ModalPenaltySeriesVC.swift */,
+				18B0F8802302BF6600080196 /* ModalPenaltySeriesVC.xib */,
+			);
+			path = "penalty series";
+			sourceTree = "<group>";
+		};
 		18EB8B9D226EF8080087BD99 /* add player */ = {
 			isa = PBXGroup;
 			children = (
@@ -1040,6 +1055,7 @@
 				DB4C45DF22EDFD4900B28148 /* UITableView Extensions.swift */,
 				1886264422F00E5200DC75E3 /* UITableViewCell+MBProgressHUD.swift */,
 				18EFFAC122F3207200B17947 /* UIBarButtonItem+Custom.swift */,
+				18B0F8832302C5E700080196 /* UIAlertController + Extension.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -1242,6 +1258,7 @@
 		DB2E1F7122EAFACE00CDA5CD /* do match */ = {
 			isa = PBXGroup;
 			children = (
+				18B0F87E2302BECF00080196 /* penalty series */,
 				DB986B5122FDB1300050AC8F /* edit team events */,
 				DB4FCAF122EEBA0A00A89BE7 /* add event view */,
 				DB966A6322EC80F500064233 /* table view */,
@@ -2099,6 +2116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB9FA4A222EC986200BA5A52 /* RefereeProtocolPlayerTableViewCell.xib in Resources */,
+				18B0F8822302BF6600080196 /* ModalPenaltySeriesVC.xib in Resources */,
 				CEA6EBA621A53CFE008F874D /* LaunchScreen.storyboard in Resources */,
 				DB986B5B22FDBDD10050AC8F /* EditAutoGoalsView.xib in Resources */,
 				CEA6EBA321A53CFE008F874D /* Assets.xcassets in Resources */,
@@ -2129,7 +2147,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AMScrollingNavbar/AMScrollingNavbar.framework",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
@@ -2144,6 +2162,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SPStorkController/SPStorkController.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftDate/SwiftDate.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/UIScrollView-InfiniteScroll/UIScrollView_InfiniteScroll.framework",
@@ -2166,13 +2185,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SPStorkController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftDate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIScrollView_InfiniteScroll.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		51D949AE18D1EDAED4381B3B /* [CP] Check Pods Manifest.lock */ = {
@@ -2286,6 +2306,7 @@
 				04C024E82213E12C00A4A571 /* EventsProtocolTableViewCell.swift in Sources */,
 				DBA77C2722CFA953000DCF02 /* EditRefereesProtocolViewModel.swift in Sources */,
 				DB6AA18121C295C3007D4693 /* ClubsPresenter.swift in Sources */,
+				18B0F8842302C5E700080196 /* UIAlertController + Extension.swift in Sources */,
 				DB51CD9222150E3700A8D08E /* BaseCell.swift in Sources */,
 				DB98FAD82254B20B002933D0 /* CommandPlayersTableViewCell.swift in Sources */,
 				CE916AB021B4EE2D0025FECF /* NoSectionCellTableViewCell.swift in Sources */,
@@ -2329,6 +2350,7 @@
 				18606A3322D30B9200F5D2FE /* EventTypeView.swift in Sources */,
 				DB1CA1062226B8EE005E1FB9 /* UserDefaultsHelper.swift in Sources */,
 				DB11CC8A21C225610083773E /* StackView.swift in Sources */,
+				18B0F8812302BF6600080196 /* ModalPenaltySeriesVC.swift in Sources */,
 				DB4A789621C10C960071BA8F /* Tournaments.swift in Sources */,
 				1807709322F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.swift in Sources */,
 				DB8A68A1224E568900D3972A /* ClubPickerHelper.swift in Sources */,
