@@ -107,6 +107,11 @@
 		CEA6EBA621A53CFE008F874D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA6EBA421A53CFE008F874D /* LaunchScreen.storyboard */; };
 		CEA6EBB921A53FB9008F874D /* MvpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6EBB821A53FB9008F874D /* MvpView.swift */; };
 		CEA6EBBB21A53FD1008F874D /* MvpPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6EBBA21A53FD1008F874D /* MvpPresenter.swift */; };
+		DB0ABC8F2302FC4600FF6A8D /* PenaltySeriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0ABC8D2302FC4600FF6A8D /* PenaltySeriesTableViewCell.swift */; };
+		DB0ABC902302FC4600FF6A8D /* PenaltySeriesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB0ABC8E2302FC4600FF6A8D /* PenaltySeriesTableViewCell.xib */; };
+		DB0ABC9223030C1700FF6A8D /* PenaltyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0ABC9123030C1700FF6A8D /* PenaltyTableView.swift */; };
+		DB0ABC9623030C8F00FF6A8D /* GroupPenaltyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0ABC9523030C8F00FF6A8D /* GroupPenaltyState.swift */; };
+		DB0ABC9923030F8F00FF6A8D /* ModalPenaltySeriesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0ABC9823030F8F00FF6A8D /* ModalPenaltySeriesVM.swift */; };
 		DB0E0CBD22D6ABB5005342FE /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0E0CBC22D6ABB5005342FE /* View.swift */; };
 		DB11CC8A21C225610083773E /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB11CC8921C225610083773E /* StackView.swift */; };
 		DB11CC8D21C22F890083773E /* ScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB11CC8C21C22F890083773E /* ScheduleTableViewController.swift */; };
@@ -393,6 +398,11 @@
 		CEA6EBA721A53CFE008F874D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEA6EBB821A53FB9008F874D /* MvpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MvpView.swift; sourceTree = "<group>"; };
 		CEA6EBBA21A53FD1008F874D /* MvpPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MvpPresenter.swift; sourceTree = "<group>"; };
+		DB0ABC8D2302FC4600FF6A8D /* PenaltySeriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenaltySeriesTableViewCell.swift; sourceTree = "<group>"; };
+		DB0ABC8E2302FC4600FF6A8D /* PenaltySeriesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PenaltySeriesTableViewCell.xib; sourceTree = "<group>"; };
+		DB0ABC9123030C1700FF6A8D /* PenaltyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenaltyTableView.swift; sourceTree = "<group>"; };
+		DB0ABC9523030C8F00FF6A8D /* GroupPenaltyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPenaltyState.swift; sourceTree = "<group>"; };
+		DB0ABC9823030F8F00FF6A8D /* ModalPenaltySeriesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPenaltySeriesVM.swift; sourceTree = "<group>"; };
 		DB0E0CBC22D6ABB5005342FE /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		DB11CC8921C225610083773E /* StackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
 		DB11CC8C21C22F890083773E /* ScheduleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewController.swift; sourceTree = "<group>"; };
@@ -841,6 +851,9 @@
 			children = (
 				18B0F87F2302BF6600080196 /* ModalPenaltySeriesVC.swift */,
 				18B0F8802302BF6600080196 /* ModalPenaltySeriesVC.xib */,
+				DB0ABC9723030F7C00FF6A8D /* view model */,
+				DB5DFCD52302FAAF000B4376 /* penalty view */,
+				DB0ABC9423030C8000FF6A8D /* model */,
 			);
 			path = "penalty series";
 			sourceTree = "<group>";
@@ -1153,6 +1166,31 @@
 				CEA6EBBA21A53FD1008F874D /* MvpPresenter.swift */,
 			);
 			path = mvp;
+			sourceTree = "<group>";
+		};
+		DB0ABC9323030C6700FF6A8D /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				DB0ABC8D2302FC4600FF6A8D /* PenaltySeriesTableViewCell.swift */,
+				DB0ABC8E2302FC4600FF6A8D /* PenaltySeriesTableViewCell.xib */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		DB0ABC9423030C8000FF6A8D /* model */ = {
+			isa = PBXGroup;
+			children = (
+				DB0ABC9523030C8F00FF6A8D /* GroupPenaltyState.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		DB0ABC9723030F7C00FF6A8D /* view model */ = {
+			isa = PBXGroup;
+			children = (
+				DB0ABC9823030F8F00FF6A8D /* ModalPenaltySeriesVM.swift */,
+			);
+			path = "view model";
 			sourceTree = "<group>";
 		};
 		DB11CC8B21C22F300083773E /* schedule */ = {
@@ -1544,6 +1582,15 @@
 				DB98FACB225470CF002933D0 /* edit */,
 			);
 			path = commands;
+			sourceTree = "<group>";
+		};
+		DB5DFCD52302FAAF000B4376 /* penalty view */ = {
+			isa = PBXGroup;
+			children = (
+				DB0ABC9123030C1700FF6A8D /* PenaltyTableView.swift */,
+				DB0ABC9323030C6700FF6A8D /* cell */,
+			);
+			path = "penalty view";
 			sourceTree = "<group>";
 		};
 		DB673FDC22DDF41F00581E6D /* pages */ = {
@@ -2121,6 +2168,7 @@
 				DB986B5B22FDBDD10050AC8F /* EditAutoGoalsView.xib in Resources */,
 				CEA6EBA321A53CFE008F874D /* Assets.xcassets in Resources */,
 				189E1C7822C9EC280086E4DA /* LabelSwitchView.xib in Resources */,
+				DB0ABC902302FC4600FF6A8D /* PenaltySeriesTableViewCell.xib in Resources */,
 				1807709422F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.xib in Resources */,
 				DB99BB6C224CB46700EE30D7 /* AdView.xib in Resources */,
 				DB4C45DE22EDDE1B00B28148 /* AutoGoalFooterView.xib in Resources */,
@@ -2231,6 +2279,7 @@
 				CE158CE921AD532600CEECFE /* LeagueDetailViewController.swift in Sources */,
 				DB17385221BA897D00017B6D /* UpcomingGameTableViewCell.swift in Sources */,
 				18606A3522D3381500F5D2FE /* ProtocolEventsController.swift in Sources */,
+				DB0ABC9923030F8F00FF6A8D /* ModalPenaltySeriesVM.swift in Sources */,
 				DBB208F0221315110010B600 /* RefereeProtocolTableViewCell.swift in Sources */,
 				1826378C22F085BF0014C30A /* IntrinsicTableView.swift in Sources */,
 				187F2E0222CB19440049EA77 /* EditTeamProtocolTableViewController.swift in Sources */,
@@ -2313,6 +2362,7 @@
 				DBCA6CA522F7EDA7001D6C0B /* ProtocolAllFooterView.swift in Sources */,
 				DBA69215221E95C400BEFB26 /* UIColor.swift in Sources */,
 				DB59433821F219FE00945601 /* PlayersTeamLeagueDetailViewController.swift in Sources */,
+				DB0ABC9623030C8F00FF6A8D /* GroupPenaltyState.swift in Sources */,
 				DB932DEA22C9022800C060C2 /* RefereeEditMatchesLKTableViewCell.swift in Sources */,
 				DBCA6CAA22F7F26A001D6C0B /* ProtocolAllViewModel.swift in Sources */,
 				DBB0427A22F8399A009D6ABD /* Event.swift in Sources */,
@@ -2417,6 +2467,7 @@
 				DBE0E7AA223C063200CC0EE2 /* OngoingLeagueTableViewCell.swift in Sources */,
 				DBA8B3C422F3649A0008A16E /* FilterTeamsByGroupHelper.swift in Sources */,
 				DBBEE1BD22D5416800CFB17E /* ParticipationCommandsController.swift in Sources */,
+				DB0ABC8F2302FC4600FF6A8D /* PenaltySeriesTableViewCell.swift in Sources */,
 				DB52EAE52248E2E6004F7869 /* CommandCreateLKPresenter.swift in Sources */,
 				DB59433421F212BE00945601 /* SegmentHelper.swift in Sources */,
 				187F2DFD22CB19440049EA77 /* EditRefereeTeamPresenter.swift in Sources */,
@@ -2437,6 +2488,7 @@
 				04DF5492220D6861001323A6 /* MatchProtocolPresenter.swift in Sources */,
 				DB85B36522F15D5B0030D8A3 /* SoloLeague.swift in Sources */,
 				187F2E0422CB19440049EA77 /* EditTeamProtocolTableViewCell.swift in Sources */,
+				DB0ABC9223030C1700FF6A8D /* PenaltyTableView.swift in Sources */,
 				CE61551721AF9797008C4463 /* News.swift in Sources */,
 				DB1816E121D10161005375ED /* PlayerViewController.swift in Sources */,
 				18B1FEFA22E1CB1900D75F2D /* KingExtensions.swift in Sources */,

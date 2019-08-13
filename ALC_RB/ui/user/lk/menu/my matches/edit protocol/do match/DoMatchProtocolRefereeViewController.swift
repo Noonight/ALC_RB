@@ -558,7 +558,10 @@ extension DoMatchProtocolRefereeViewController {
         let transitionDelegate = SPStorkTransitioningDelegate()
         transitionDelegate.storkDelegate = self
         transitionDelegate.confirmDelegate = modalVC
-        transitionDelegate.customHeight = self.view.frame.height / 3
+        transitionDelegate.cornerRadius = -2
+        transitionDelegate.swipeToDismissEnabled = true
+        transitionDelegate.tapAroundToDismissEnabled = true
+//        transitionDelegate.customHeight = self.view.frame.height - 80
         modalVC.transitioningDelegate = transitionDelegate
         modalVC.modalPresentationStyle = .custom
         self.present(modalVC, animated: true, completion: nil)

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PenaltySeriesTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="EAJ-pG-4eG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_gray_circle" translatesAutoresizingMaskIntoConstraints="NO" id="2gP-qv-o1f">
+                                <rect key="frame" x="0.0" y="0.0" width="106.5" height="43.5"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_gray_circle" translatesAutoresizingMaskIntoConstraints="NO" id="giJ-JP-FGq">
+                                <rect key="frame" x="106.5" y="0.0" width="107" height="43.5"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_gray_circle" translatesAutoresizingMaskIntoConstraints="NO" id="rYk-b9-qdF">
+                                <rect key="frame" x="213.5" y="0.0" width="106.5" height="43.5"/>
+                            </imageView>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="EAJ-pG-4eG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Grl-Jl-9DH"/>
+                    <constraint firstItem="EAJ-pG-4eG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="LFJ-fe-qkI"/>
+                    <constraint firstAttribute="trailing" secondItem="EAJ-pG-4eG" secondAttribute="trailing" id="LOw-hX-zbU"/>
+                    <constraint firstAttribute="bottom" secondItem="EAJ-pG-4eG" secondAttribute="bottom" id="NTz-zp-8yT"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="first_image" destination="2gP-qv-o1f" id="VcL-Z2-eMS"/>
+                <outlet property="second_image" destination="giJ-JP-FGq" id="dFT-bS-oOB"/>
+                <outlet property="third_image" destination="rYk-b9-qdF" id="QJ2-9f-Jyq"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic_gray_circle" width="50" height="50"/>
+    </resources>
+</document>
