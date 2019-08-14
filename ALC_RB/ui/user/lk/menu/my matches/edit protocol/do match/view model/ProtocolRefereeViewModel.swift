@@ -263,6 +263,10 @@ class ProtocolRefereeViewModel {
     
     // MARK: PREPARE FOR DISPLAY OR PREPARE DATA FOR SERVER REQUEST
     
+    func preparePenaltySeriesEvents() -> [LIEvent] {
+        return self.eventsController.prepareTeamEventsInTime(time: .penaltySeries)
+    }
+    
     func prepareTeamTitleFor(team: TeamEnum) -> String {
         if team == .one
         {

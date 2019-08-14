@@ -43,7 +43,7 @@ class PenaltySeriesTableViewCell: UITableViewCell {
         case .failure:
             return UIImage(named: "ic_gray_circle")!
         case .none:
-            return UIImage()
+            return UIImage(named: "ic_invisible_circle")!
         }
     }
     

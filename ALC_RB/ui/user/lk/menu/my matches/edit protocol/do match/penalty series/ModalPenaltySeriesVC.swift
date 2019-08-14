@@ -18,8 +18,8 @@ class ModalPenaltySeriesVC: UIViewController {
     @IBOutlet weak var score_team_one_label: UILabel!
     @IBOutlet weak var score_team_two_label: UILabel!
     
-    @IBOutlet weak var first_team_table: UITableView!
-    @IBOutlet weak var second_team_table: UITableView!
+    @IBOutlet weak var first_team_table: IntrinsicTableView!
+    @IBOutlet weak var second_team_table: IntrinsicTableView!
     
     @IBOutlet weak var team_one_view: UIView!
     @IBOutlet weak var team_two_view: UIView!
@@ -52,13 +52,15 @@ class ModalPenaltySeriesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupStaticViews()
         self.setupTableViewCells()
         self.setupTableViewsDelegate()
         self.setupTeamViewButtons()
         self.setupPenaltyButtons()
         self.setupTableViewDataSources()
+        
+        self.setupDynamicViews()
     }
-
 }
 
 // MARK: EXTENSIONS
@@ -66,6 +68,16 @@ class ModalPenaltySeriesVC: UIViewController {
 // MARK: SETUP
 
 extension ModalPenaltySeriesVC {
+    
+    func setupStaticViews() {
+        self.team_one_label.text = self.viewModel.prepareTeamTitle(team: .one)
+        self.team_two_label.text = self.viewModel.prepareTeamTitle(team: .two)
+    }
+    
+    func setupDynamicViews() {
+        self.score_team_one_label.text = String(self.viewModel.prepareTeamPenaltyScore(team: .one))
+        self.score_team_two_label.text = String(self.viewModel.prepareTeamPenaltyScore(team: .two))
+    }
     
     func setupTableViewCells() {
         self.first_team_table.register(teamOneTable.cellNib, forCellReuseIdentifier: PenaltyTableView.CellIdentifiers.CELL)
@@ -86,6 +98,7 @@ extension ModalPenaltySeriesVC {
         
         self.first_team_table.reloadData()
         self.second_team_table.reloadData()
+//        self.view.layoutIfNeeded()
     }
     
     func setupTeamViewButtons() {
@@ -113,11 +126,16 @@ extension ModalPenaltySeriesVC {
     }
     
     @objc func onGoalPressed(_ btn: UIButton) {
-        
+        self.viewModel.updatePenaltyStatusFor(penaltyState: .success)
+//        self.viewModel.updatePenaltyScore(penaltyState: .success)
+        self.updatePenalties()
+        self.updatePenaltyScore()
     }
     
     @objc func onGoalFailurePressed(_ btn: UIButton) {
-        
+        self.viewModel.updatePenaltyStatusFor(penaltyState: .failure)
+        self.updatePenalties()
+        self.updatePenaltyScore()
     }
     
 }
@@ -125,6 +143,14 @@ extension ModalPenaltySeriesVC {
 // MARK: HELPERS
 
 extension ModalPenaltySeriesVC {
+    
+    func updatePenalties() {
+        self.setupTableViewDataSources()
+    }
+    
+    func updatePenaltyScore() {
+        self.setupDynamicViews()
+    }
     
 }
 

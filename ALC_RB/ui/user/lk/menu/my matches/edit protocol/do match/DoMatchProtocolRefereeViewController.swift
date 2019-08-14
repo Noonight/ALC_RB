@@ -9,6 +9,10 @@
 import UIKit
 import SPStorkController
 
+protocol DismissModalPenaltySeriesVC {
+    func dismiss(viewModel: ModalPenaltySeriesVM)
+}
+
 class DoMatchProtocolRefereeViewController: UIViewController {
     enum Texts {
         static let FIRST_TIME   = "1 тайм"
@@ -113,6 +117,29 @@ class DoMatchProtocolRefereeViewController: UIViewController {
 
 extension DoMatchProtocolRefereeViewController {
     
+    func setupNavItemPenalty() {
+//        if self.viewModel.currentTime == .penaltySeries
+//        {
+//            Print.m("current time is penalty series")
+////            self.navigationController?.navigationBar.topItem?.rightBarButtonItem = self.barButtonItem(type: .document, action: #selector(presentModalPenaltySeriesVC))
+////            self.navigationItem.rightBarButtonItem =
+//            let rightBarButtonItem = barButtonItem(type: .document, action: #selector(presentModalPenaltySeriesVC))
+//            rightBarButtonItem.title = "Smth..."
+////            navigationController?.navigationBar.topItem?.rightBarButtonItem = self.barButtonItem(type: .document, action: #selector(presentModalPenaltySeriesVC))
+//            Print.m(rightBarButtonItem)
+//            self.navigationController?.navigationBar.topItem?.rightBarButtonItem = rightBarButtonItem
+//            self.navigationItem.setRightBarButton(rightBarButtonItem, animated: true)
+//            Print.m(navigationController)
+//            Print.m(navigationController?.navigationBar)
+//            Print.m(navigationController?.navigationBar.topItem)
+//        }
+//        else
+//        {
+//            Print.m("current time is not penalty series")
+//            navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
+//        }
+    }
+    
     func setupAutogoalsFooter() {
         self.playersTeamOneAutoGoalsFooter = AutoGoalFooterView(frame: CGRect(x: 0, y: 0, width: self.playersOne_table.frame.width, height: 40))
         self.playersOne_table.tableFooterView = self.playersTeamOneAutoGoalsFooter
@@ -196,9 +223,12 @@ extension DoMatchProtocolRefereeViewController {
         
         // setup score // mb calculate before
         self.score_label.text = self.viewModel.match.score
+        self.title = self.viewModel.prepareCurrentTime()
         
         self.updateUIFouls()
         self.updateUIAutoGoals()
+        
+        self.setupNavItemPenalty()
     }
     
     func setupStaticView() {
@@ -504,32 +534,27 @@ extension DoMatchProtocolRefereeViewController {
     
     @IBAction func onFirstTimeBtnPressed(_ sender: UIButton) {
         self.viewModel.updateTime(time: .oneHalf)
-//        self.viewModel.currentTime = .firstTime
-        self.title = self.viewModel.prepareCurrentTime()
-        self.updateUIFouls()
-        self.updateUIAutoGoals()
+        
+        self.setupDynamicView()
     }
     
     @IBAction func onSecondTimeBtnPressed(_ sender: UIButton) {
 //        self.viewModel.currentTime = .secondTime
         self.viewModel.updateTime(time: .twoHalf)
-        self.title = self.viewModel.prepareCurrentTime()
-        self.updateUIFouls()
-        self.updateUIAutoGoals()
+        
+        self.setupDynamicView()
     }
     
     @IBAction func onMoreTimeBtnPressed(_ sender: UIButton) {
         self.viewModel.updateTime(time: .extraTime)
-        self.title = self.viewModel.prepareCurrentTime()
-        self.updateUIFouls()
-        self.updateUIAutoGoals()
+        
+        self.setupDynamicView()
     }
     
     @IBAction func onPenaltyTimeBtnPressed(_ sender: UIButton) {
-        self.viewModel.updateTime(time: .penaltySeries)
-        self.title = self.viewModel.prepareCurrentTime()
-        self.updateUIFouls()
-        self.updateUIAutoGoals()
+//        self.viewModel.updateTime(time: .penaltySeries)
+        
+//        self.setupDynamicView()
         
         self.presentModalPenaltySeriesVC()
     }
@@ -555,12 +580,24 @@ extension DoMatchProtocolRefereeViewController {
     
     @objc func presentModalPenaltySeriesVC() {
         let modalVC = ModalPenaltySeriesVC(nibName: "ModalPenaltySeriesVC", bundle: nil)
+        
+        guard let teamOneId = self.viewModel.match.teamOne else { return }
+        guard let teamTwoId = self.viewModel.match.teamTwo else { return }
+        modalVC.viewModel.initData(
+            teamOneTitle: self.viewModel.prepareTeamTitleFor(team: .one),
+            teamTwoTitle: self.viewModel.prepareTeamTitleFor(team: .two),
+            events: self.viewModel.preparePenaltySeriesEvents(),
+            match: self.viewModel.match
+        )
+        
         let transitionDelegate = SPStorkTransitioningDelegate()
         transitionDelegate.storkDelegate = self
         transitionDelegate.confirmDelegate = modalVC
         transitionDelegate.cornerRadius = -2
         transitionDelegate.swipeToDismissEnabled = true
         transitionDelegate.tapAroundToDismissEnabled = true
+        transitionDelegate.showIndicator = false
+        transitionDelegate.showCloseButton = true
 //        transitionDelegate.customHeight = self.view.frame.height - 80
         modalVC.transitioningDelegate = transitionDelegate
         modalVC.modalPresentationStyle = .custom

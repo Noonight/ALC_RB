@@ -18,6 +18,31 @@ struct GroupPenaltyState {
         self.secondItem = second
         self.thirdItem = third
     }
+    
+    init() {
+        self.firstItem = .none
+        self.secondItem = .none
+        self.thirdItem = .none
+    }
+    
+    mutating func addState(_ state: PenaltyState) -> Bool {
+        if firstItem == .none
+        {
+            firstItem = state
+            return true
+        }
+        if secondItem == .none
+        {
+            secondItem = state
+            return true
+        }
+        if thirdItem == .none
+        {
+            thirdItem = state
+            return true
+        }
+        return false
+    }
 }
 
 enum PenaltyState: Int {
