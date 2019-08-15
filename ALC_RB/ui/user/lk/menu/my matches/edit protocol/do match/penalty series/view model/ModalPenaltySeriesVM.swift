@@ -169,15 +169,11 @@ class ModalPenaltySeriesVM {
     }
     
     func prepareTableDataFor(team: TeamEnum) -> [GroupPenaltyState] {
-        if team == .one
-        {
-            return self.getGroupPenaltyModelFor(team: team)
-        }
-        if team == .two
-        {
-            return self.getGroupPenaltyModelFor(team: team)
-        }
-        return []
+        return self.getGroupPenaltyModelFor(team: team)
+    }
+    
+    func prepareTeamPenalties(team: TeamEnum) -> [LIEvent] {
+        return getPenalties(events: getEventsWith(team: team, events: self.events))
     }
     
 }
@@ -262,6 +258,7 @@ extension ModalPenaltySeriesVM {
                     localCounter = 0
                 }
             }
+            resultArray.append(penaltyStateElement)
         }
         if team == .two
         {
@@ -285,9 +282,88 @@ extension ModalPenaltySeriesVM {
                     penaltyStateElement = GroupPenaltyState(first: .none, second: .none, third: .none)
                     localCounter = 0
                 }
-            }        }
+            }
+            resultArray.append(penaltyStateElement)
+        }
+        if resultArray.last?.hasOne() == false
+        {
+            resultArray.removeLast()
+        }
         return resultArray
     }
+    
+//    private func getGroupPenaltyModel(team: TeamEnum) -> [GroupPenaltyState] {
+//
+//        func addElement(element: inout GroupPenaltyState, checkEvent: LIEvent) -> Bool {
+//            if element.isFull() == false
+//            {
+//                if checkEvent.getEventType() == .team(.penaltySeriesSuccess)
+//                {
+//                    return element.addState(.success)
+//                }
+//                if checkEvent.getEventType() == .team(.penaltySeriesFailure)
+//                {
+//                    return element.addState(.failure)
+//                }
+//            }
+//            if element.isFull() == true
+//            {
+//                return false
+//            }
+//            return false
+//        }
+//
+//        var resultArray: [GroupPenaltyState] = []
+//        var teamPenalties: [LIEvent] = []
+//        var localCounter = 0
+//        if team == .one
+//        {
+//            teamPenalties = getPenalties(events: getEventsWith(team: .one, events: self.events))
+//            var penaltyStateElement = GroupPenaltyState()
+//            if teamPenalties.count != 0
+//            {
+//                for i in 0...teamPenalties.count - 1
+//                {
+////                    if teamPenalties
+//                }
+//            }
+//        }
+//        if team == .two
+//        {
+//            teamPenalties = getPenalties(events: getEventsWith(team: .two, events: self.events))
+//            var penaltyStateElement = GroupPenaltyState()
+//            if teamPenalties.count != 0
+//            {
+//                for i in 0...teamPenalties.count - 1
+//                {
+//                    if teamPenalties[i].getEventType() == .team(.penaltySeriesSuccess)
+//                    {
+//                        penaltyStateElement.addState(.success)
+//                    }
+//                    if teamPenalties[i].getEventType() == .team(.penaltySeriesFailure)
+//                    {
+//                        penaltyStateElement.addState(.failure)
+//                    }
+//
+//                    localCounter += 1
+//                    if localCounter == 3
+//                    {
+//                        resultArray.append(penaltyStateElement)
+//                        penaltyStateElement = GroupPenaltyState()
+//                        localCounter = 0
+//                    }
+//                    else
+//                    if penaltyStateElement.isFull() == false && (((teamPenalties.count - 1) - i == 1) || ((teamPenalties.count - 1) - i == 0))
+//                    {
+//                        resultArray.append(penaltyStateElement)
+//                        penaltyStateElement = GroupPenaltyState()
+//                    //                        localCounter = 0
+//                    }
+//                }
+//            }
+//        }
+//        return resultArray
+//    }
     
     private func getSuccessPenalties(events: [LIEvent]) -> [LIEvent] {
         return events.filter({ event -> Bool in

@@ -24,6 +24,9 @@ class ModalPenaltySeriesVC: UIViewController {
     @IBOutlet weak var team_one_view: UIView!
     @IBOutlet weak var team_two_view: UIView!
     
+    @IBOutlet weak var team_one_count_of_penalties: UILabel!
+    @IBOutlet weak var team_two_count_of_penalties: UILabel!
+    
     @IBOutlet weak var current_status_view: UIView!
     @IBOutlet weak var goal_btn: UIButton!
     @IBOutlet weak var goal_failure_btn: UIButton!
@@ -46,6 +49,7 @@ class ModalPenaltySeriesVC: UIViewController {
         }
     }
     var viewModel: ModalPenaltySeriesVM = ModalPenaltySeriesVM()
+    var dismissalDelegate: DismissModalPenaltySeriesVC!
     
     // MARK: LIFE CYCLE
     
@@ -60,6 +64,14 @@ class ModalPenaltySeriesVC: UIViewController {
         self.setupTableViewDataSources()
         
         self.setupDynamicViews()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        dismissalDelegate.dismiss(viewModel: self.viewModel)
+        
+        Print.m("will disappear")
     }
 }
 
@@ -77,6 +89,9 @@ extension ModalPenaltySeriesVC {
     func setupDynamicViews() {
         self.score_team_one_label.text = String(self.viewModel.prepareTeamPenaltyScore(team: .one))
         self.score_team_two_label.text = String(self.viewModel.prepareTeamPenaltyScore(team: .two))
+        
+        self.team_one_count_of_penalties.text = String(self.viewModel.prepareTeamCountOfPenaltiesFor(team: .one))
+        self.team_two_count_of_penalties.text = String(self.viewModel.prepareTeamCountOfPenaltiesFor(team: .two))
     }
     
     func setupTableViewCells() {
@@ -98,7 +113,6 @@ extension ModalPenaltySeriesVC {
         
         self.first_team_table.reloadData()
         self.second_team_table.reloadData()
-//        self.view.layoutIfNeeded()
     }
     
     func setupTeamViewButtons() {

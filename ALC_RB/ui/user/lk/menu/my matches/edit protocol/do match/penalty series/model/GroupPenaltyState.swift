@@ -25,6 +25,22 @@ struct GroupPenaltyState {
         self.thirdItem = .none
     }
     
+    func hasOne() -> Bool {
+        if firstItem != .none || secondItem != .none || thirdItem != .none
+        {
+            return true
+        }
+        return false
+    }
+    
+    func isFull() -> Bool {
+        if firstItem != .none && secondItem != .none && thirdItem != .none
+        {
+            return true
+        }
+        return false
+    }
+    
     mutating func addState(_ state: PenaltyState) -> Bool {
         if firstItem == .none
         {
