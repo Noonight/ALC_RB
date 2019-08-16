@@ -365,6 +365,10 @@ extension DoMatchProtocolRefereeViewController {
                 self.setupTableDataSources()
                 self.setupDynamicView()
         },
+        r_message : { message in
+            hud.hide(animated: true )
+            self.showAlert(message: message.message)
+        },
         failure: { error in
                 hud.hide(animated: true)
                 
@@ -403,6 +407,11 @@ extension DoMatchProtocolRefereeViewController {
                     
                     self.setupTableDataSources()
                     self.setupDynamicView()
+            },
+                r_message: { message in
+                    hud.hide(animated: true)
+                    
+                    self.showAlert(message: message.message)
             },
                 failure: { error in
                     hud.hide(animated: true)
@@ -488,7 +497,12 @@ extension DoMatchProtocolRefereeViewController {
 //
 //                })
 
-            }, failure: { error in // protocol not saved
+            },
+            r_message: { message in
+                hud.hide(animated: true )
+                self.showAlert(message: message.message)
+            },
+            failure: { error in // protocol not saved
                 Print.m(error)
                 hud.setToFailureWith(detailMessage: error.localizedDescription)
                 hud.hideAfter()
@@ -509,7 +523,10 @@ extension DoMatchProtocolRefereeViewController {
                 // do some staff for saving protocol to models
                 
                 hud.showSuccessAfterAndHideAfter()
-            }, failure: { error in
+            }, r_message: { message in
+                
+            },
+               failure: { error in
                 Print.m(error)
                 hud.setToFailureWith(detailMessage: error.localizedDescription)
                 hud.hideAfter()
@@ -614,11 +631,15 @@ extension DoMatchProtocolRefereeViewController {
             ok: { match in
                 Print.m(match)
                 self.viewModel.updateMatch(match: match.match!.convertToLIMatch())
-//                hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_ADD_EVENT_COMPLETE)
+                //                hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_ADD_EVENT_COMPLETE)
                 hud.hide(animated: true)
                 
                 self.setupTableDataSources()
                 self.setupDynamicView()
+        },
+            r_message: { message in
+                hud.hide(animated: true)
+                self.showAlert(message: message.message)
         },
             failure: { error in
                 hud.hide(animated: true)

@@ -32,12 +32,11 @@ class DoMatchProtocolRefereePresenter: MvpPresenter<DoMatchProtocolRefereeViewCo
         }
     }
     
-    func saveProtocol(token: String, editedProtocol: EditProtocol, ok: @escaping (SoloMatch) -> (), failure: @escaping (Error) -> ()) {
+    func saveProtocol(token: String, editedProtocol: EditProtocol, ok: @escaping (SoloMatch) -> (), r_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
         dataManager.post_changeProtocol(token: token, newProtocol: editedProtocol, success: { match in
             ok(match)
         }, message: { message in
-            Print.m(message.message)
-            Print.m("some kind of message")
+            r_message(message)
         }) { error in
             failure(error)
         }
