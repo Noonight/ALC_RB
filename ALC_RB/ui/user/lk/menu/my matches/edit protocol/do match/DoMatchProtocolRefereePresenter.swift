@@ -36,7 +36,8 @@ class DoMatchProtocolRefereePresenter: MvpPresenter<DoMatchProtocolRefereeViewCo
         dataManager.post_changeProtocol(token: token, newProtocol: editedProtocol, success: { match in
             ok(match)
         }, message: { message in
-            
+            Print.m(message.message)
+            Print.m("some kind of message")
         }) { error in
             failure(error)
         }

@@ -35,6 +35,11 @@ class ProtocolRefereeViewModel {
     
     // MARK: UPDATE DATA
     
+    func updatePenaltySeriesEvents(penaltySeriesEvents: [LIEvent]) {
+        self.eventsController.deletePenaltySeriesEvents()
+        self.eventsController.addPenaltySeriesEvents(penaltySeriesEvents: penaltySeriesEvents)
+    }
+    
     func upFoulsCount(team: TeamEnum) {
         switch team {
         case .one:
@@ -360,6 +365,10 @@ class ProtocolRefereeViewModel {
     }
     
     // MARK: Helpers
+    
+    private func removePenaltySeriesEvents() {
+        
+    }
     
     private func getEventsForTeam(team: TeamEnum, events: [LIEvent]) -> [LIEvent] {
         var resultArray: [LIEvent] = []

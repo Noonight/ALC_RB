@@ -18,6 +18,16 @@ class ProtocolEventsController {
         self.events = events
     }
     
+    func deletePenaltySeriesEvents() {
+        self.events.removeAll { event -> Bool in
+            return event.getEventTime() == .penaltySeries
+        }
+    }
+    
+    func addPenaltySeriesEvents(penaltySeriesEvents: [LIEvent]) {
+        self.events.append(contentsOf: penaltySeriesEvents)
+    }
+    
     func deleteLastFoulsBeforeCount(_ count: Int) {
         let oldCount = events.count
         

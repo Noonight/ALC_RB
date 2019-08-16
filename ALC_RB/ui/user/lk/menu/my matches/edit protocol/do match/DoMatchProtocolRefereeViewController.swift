@@ -671,9 +671,8 @@ extension DoMatchProtocolRefereeViewController: SPStorkControllerDelegate {
 
 extension DoMatchProtocolRefereeViewController: DismissModalPenaltySeriesVC {
     func dismiss(viewModel: ModalPenaltySeriesVM) {
-        // do smth
-        Print.m("dismiss modal VC penalty series complete")
-        dump(viewModel)
+        self.viewModel.updatePenaltySeriesEvents(penaltySeriesEvents: viewModel.events)
+        self.addEventSaveProtocol()
     }
 }
 
