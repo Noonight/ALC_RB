@@ -42,87 +42,22 @@ class ModalPenaltySeriesVM {
     
     // MARK: UPDATE
     
-//    func updatePenaltyScore(penaltyState: PenaltyState) {
-//        if self.currentTurn == .one
-//        {
-//            if penaltyState == .success
-//            {
-//                self.teamOneScore += 1
-//            }
-//        }
-//        if self.currentTurn == .two
-//        {
-//            if penaltyState == .success
-//            {
-//                self.teamTwoScore += 1
-//            }
-//        }
-//    }
+    func undoLastEvent() {
+        if events.count != 0
+        {
+            for i in (0...events.count - 1).reversed()
+            {
+                if events[i].getEventType() == .team(.penaltySeriesSuccess)
+                    || events[i].getEventType() == .team(.penaltySeriesFailure)
+                {
+                    events.remove(at: i)
+                    return
+                }
+            }
+        }
+    }
     
     func updatePenaltyStatusFor(penaltyState: PenaltyState) {
-//        if self.currentTurn == .one
-//        {
-//            if teamOneData.count == 0
-//            {
-//                teamOneData.append(GroupPenaltyState(first: .none, second: .none, third: .none))
-//            }
-//            for i in 0...teamOneData.count
-//            {
-//                if teamOneData.count == i && teamOneData.last?.thirdItem != .none
-//                {
-//                    teamOneData.append(GroupPenaltyState(first: .none, second: .none, third: .none))
-//                    self.updatePenaltyStatusFor(penaltyState: penaltyState)
-//                    break
-//                }
-//                if teamOneData[i].firstItem == .none
-//                {
-//                    teamOneData[i].firstItem = penaltyState
-//                    break
-//                }
-//                if teamOneData[i].secondItem == .none
-//                {
-//                    teamOneData[i].secondItem = penaltyState
-//                    break
-//                }
-//                if teamOneData[i].thirdItem == .none
-//                {
-//                    teamOneData[i].thirdItem = penaltyState
-//                    break
-//                }
-//            }
-//        }
-//        if self.currentTurn == .two
-//        {
-//            if teamTwoData.count == 0
-//            {
-//                teamTwoData.append(GroupPenaltyState(first: .none, second: .none, third: .none))
-//            }
-//            for i in 0...teamTwoData.count
-//            {
-//                if teamTwoData.count == i && teamTwoData.last?.thirdItem != .none
-//                {
-//                    teamTwoData.append(GroupPenaltyState(first: .none, second: .none, third: .none))
-//                    self.updatePenaltyStatusFor(penaltyState: penaltyState)
-//                    break
-//                }
-//                if teamTwoData[i].firstItem == .none
-//                {
-//                    teamTwoData[i].firstItem = penaltyState
-//                    break
-//                }
-//                if teamTwoData[i].secondItem == .none
-//                {
-//                    teamTwoData[i].secondItem = penaltyState
-//                    break
-//                }
-//                if teamTwoData[i].thirdItem == .none
-//                {
-//                    teamTwoData[i].thirdItem = penaltyState
-//                    break
-//                }
-//            }
-//        }
-        
         self.addEvent(penaltyState: penaltyState)
     }
     
@@ -291,79 +226,6 @@ extension ModalPenaltySeriesVM {
         }
         return resultArray
     }
-    
-//    private func getGroupPenaltyModel(team: TeamEnum) -> [GroupPenaltyState] {
-//
-//        func addElement(element: inout GroupPenaltyState, checkEvent: LIEvent) -> Bool {
-//            if element.isFull() == false
-//            {
-//                if checkEvent.getEventType() == .team(.penaltySeriesSuccess)
-//                {
-//                    return element.addState(.success)
-//                }
-//                if checkEvent.getEventType() == .team(.penaltySeriesFailure)
-//                {
-//                    return element.addState(.failure)
-//                }
-//            }
-//            if element.isFull() == true
-//            {
-//                return false
-//            }
-//            return false
-//        }
-//
-//        var resultArray: [GroupPenaltyState] = []
-//        var teamPenalties: [LIEvent] = []
-//        var localCounter = 0
-//        if team == .one
-//        {
-//            teamPenalties = getPenalties(events: getEventsWith(team: .one, events: self.events))
-//            var penaltyStateElement = GroupPenaltyState()
-//            if teamPenalties.count != 0
-//            {
-//                for i in 0...teamPenalties.count - 1
-//                {
-////                    if teamPenalties
-//                }
-//            }
-//        }
-//        if team == .two
-//        {
-//            teamPenalties = getPenalties(events: getEventsWith(team: .two, events: self.events))
-//            var penaltyStateElement = GroupPenaltyState()
-//            if teamPenalties.count != 0
-//            {
-//                for i in 0...teamPenalties.count - 1
-//                {
-//                    if teamPenalties[i].getEventType() == .team(.penaltySeriesSuccess)
-//                    {
-//                        penaltyStateElement.addState(.success)
-//                    }
-//                    if teamPenalties[i].getEventType() == .team(.penaltySeriesFailure)
-//                    {
-//                        penaltyStateElement.addState(.failure)
-//                    }
-//
-//                    localCounter += 1
-//                    if localCounter == 3
-//                    {
-//                        resultArray.append(penaltyStateElement)
-//                        penaltyStateElement = GroupPenaltyState()
-//                        localCounter = 0
-//                    }
-//                    else
-//                    if penaltyStateElement.isFull() == false && (((teamPenalties.count - 1) - i == 1) || ((teamPenalties.count - 1) - i == 0))
-//                    {
-//                        resultArray.append(penaltyStateElement)
-//                        penaltyStateElement = GroupPenaltyState()
-//                    //                        localCounter = 0
-//                    }
-//                }
-//            }
-//        }
-//        return resultArray
-//    }
     
     private func getSuccessPenalties(events: [LIEvent]) -> [LIEvent] {
         return events.filter({ event -> Bool in

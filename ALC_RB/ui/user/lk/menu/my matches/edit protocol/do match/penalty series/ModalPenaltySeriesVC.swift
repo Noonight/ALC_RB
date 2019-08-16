@@ -31,6 +31,8 @@ class ModalPenaltySeriesVC: UIViewController {
     @IBOutlet weak var goal_btn: UIButton!
     @IBOutlet weak var goal_failure_btn: UIButton!
     
+    @IBOutlet weak var undo_last_btn: UIButton!
+    
     // MARK: VAR & LET
     
     var teamOneTable: PenaltyTableView = PenaltyTableView()
@@ -62,6 +64,7 @@ class ModalPenaltySeriesVC: UIViewController {
         self.setupTeamViewButtons()
         self.setupPenaltyButtons()
         self.setupTableViewDataSources()
+        self.setupUndoLastBtn()
         
         self.setupDynamicViews()
     }
@@ -80,6 +83,10 @@ class ModalPenaltySeriesVC: UIViewController {
 // MARK: SETUP
 
 extension ModalPenaltySeriesVC {
+    
+    func setupUndoLastBtn() {
+        self.undo_last_btn.addTarget(self, action: #selector(onUndoLastPressed(_:)), for: .touchUpInside)
+    }
     
     func setupStaticViews() {
         self.team_one_label.text = self.viewModel.prepareTeamTitle(team: .one)
@@ -130,6 +137,13 @@ extension ModalPenaltySeriesVC {
 // MARK: ACTIONS
 
 extension ModalPenaltySeriesVC {
+    
+    @objc func onUndoLastPressed(_ btn: UIButton) {
+        self.viewModel.undoLastEvent()
+        
+        self.updatePenalties()
+        self.updatePenaltyScore()
+    }
     
     @objc func onTeamOneViewPressed(_ view: UIView) {
         self.currentTurn = .one
