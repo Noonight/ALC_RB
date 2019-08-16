@@ -14,6 +14,7 @@
 		04C024E82213E12C00A4A571 /* EventsProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C024E72213E12C00A4A571 /* EventsProtocolTableViewCell.swift */; };
 		04C024EA221427F500A4A571 /* MenuLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C024E9221427F500A4A571 /* MenuLauncher.swift */; };
 		04C024EC22142F6600A4A571 /* MenuLauncherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C024EB22142F6600A4A571 /* MenuLauncherCell.swift */; };
+		04D01D42230689CB003AB74B /* AdverstingMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D01D41230689CB003AB74B /* AdverstingMaker.swift */; };
 		04DF5492220D6861001323A6 /* MatchProtocolPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5491220D6861001323A6 /* MatchProtocolPresenter.swift */; };
 		04DF5494220D6C25001323A6 /* ClubTeamHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5493220D6C25001323A6 /* ClubTeamHelper.swift */; };
 		1801B87F2271872300BE0F7C /* CommandAddPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1801B87E2271872300BE0F7C /* CommandAddPlayerPresenter.swift */; };
@@ -299,6 +300,7 @@
 		04C024E72213E12C00A4A571 /* EventsProtocolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsProtocolTableViewCell.swift; sourceTree = "<group>"; };
 		04C024E9221427F500A4A571 /* MenuLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLauncher.swift; sourceTree = "<group>"; };
 		04C024EB22142F6600A4A571 /* MenuLauncherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLauncherCell.swift; sourceTree = "<group>"; };
+		04D01D41230689CB003AB74B /* AdverstingMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdverstingMaker.swift; sourceTree = "<group>"; };
 		04DF5491220D6861001323A6 /* MatchProtocolPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchProtocolPresenter.swift; sourceTree = "<group>"; };
 		04DF5493220D6C25001323A6 /* ClubTeamHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubTeamHelper.swift; sourceTree = "<group>"; };
 		1801B87E2271872300BE0F7C /* CommandAddPlayerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerPresenter.swift; sourceTree = "<group>"; };
@@ -600,6 +602,7 @@
 		0432AB0323067A3700401E07 /* makers */ = {
 			isa = PBXGroup;
 			children = (
+				04D01D41230689CB003AB74B /* AdverstingMaker.swift */,
 			);
 			path = makers;
 			sourceTree = "<group>";
@@ -2375,6 +2378,7 @@
 				DBCA6CAA22F7F26A001D6C0B /* ProtocolAllViewModel.swift in Sources */,
 				DBB0427A22F8399A009D6ABD /* Event.swift in Sources */,
 				DBBEE1BB22D5413700CFB17E /* TeamCommandsController.swift in Sources */,
+				04D01D42230689CB003AB74B /* AdverstingMaker.swift in Sources */,
 				1839244822C7500D00A644F5 /* EditMatchReferees.swift in Sources */,
 				DB4C45DC22EDDE0600B28148 /* AutoGoalFooterView.swift in Sources */,
 				184A8E4022BB6DB20027BC8E /* mmUpcomingMatches.swift in Sources */,

@@ -14,7 +14,7 @@
             <connections>
                 <outlet property="advertisingImage" destination="rNk-Wc-9bg" id="59J-eM-MdX"/>
                 <outlet property="advertisingText" destination="Bix-cP-iBv" id="bfN-n8-Jdp"/>
-                <outlet property="containerView" destination="iN0-l3-epB" id="L5c-X9-uHR"/>
+                <outlet property="container_view" destination="iN0-l3-epB" id="L5c-X9-uHR"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
