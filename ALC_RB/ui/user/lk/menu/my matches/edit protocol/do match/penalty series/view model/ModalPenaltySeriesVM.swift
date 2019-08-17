@@ -34,10 +34,10 @@ class ModalPenaltySeriesVM {
     public func initData(teamOneTitle: String, teamTwoTitle: String, events: [LIEvent], match: LIMatch) {
         self.teamOneTitle = teamOneTitle
         self.teamTwoTitle = teamTwoTitle
-        self.teamOneScore = self.getSuccessPenalties(events: self.getEventsWith(team: .one, events: events)).count
-        self.teamTwoScore = self.getSuccessPenalties(events: self.getEventsWith(team: .two, events: events)).count
         self.events = events
         self.match = match
+        self.teamOneScore = self.getSuccessPenalties(events: self.getEventsWith(team: .one, events: events)).count
+        self.teamTwoScore = self.getSuccessPenalties(events: self.getEventsWith(team: .two, events: events)).count
     }
     
     // MARK: UPDATE
