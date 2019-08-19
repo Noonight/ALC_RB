@@ -80,6 +80,8 @@
 		18EFFAC022F3189800B17947 /* TournamentTeamHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EFFABF22F3189800B17947 /* TournamentTeamHeaderView.swift */; };
 		18EFFAC222F3207200B17947 /* UIBarButtonItem+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EFFAC122F3207200B17947 /* UIBarButtonItem+Custom.swift */; };
 		18FE29BF22AE1C420094C4D8 /* MenuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FE29BE22AE1C420094C4D8 /* MenuHelper.swift */; };
+		18FF4766230A8E4400CAEFC6 /* HomeAllVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF4764230A8E4400CAEFC6 /* HomeAllVC.swift */; };
+		18FF4767230A8E4400CAEFC6 /* HomeAllVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FF4765230A8E4400CAEFC6 /* HomeAllVC.xib */; };
 		9BCE331CF018A19CBE318D29 /* Pods_ALC_RB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8CAFADB419EC76B3B2A2418 /* Pods_ALC_RB.framework */; };
 		CE0AF81721C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0AF81621C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift */; };
 		CE0AF81A21C7A1C200F8F6A2 /* ClubDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0AF81921C7A1C200F8F6A2 /* ClubDetailViewController.swift */; };
@@ -367,6 +369,8 @@
 		18EFFABF22F3189800B17947 /* TournamentTeamHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentTeamHeaderView.swift; sourceTree = "<group>"; };
 		18EFFAC122F3207200B17947 /* UIBarButtonItem+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Custom.swift"; sourceTree = "<group>"; };
 		18FE29BE22AE1C420094C4D8 /* MenuHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHelper.swift; sourceTree = "<group>"; };
+		18FF4764230A8E4400CAEFC6 /* HomeAllVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAllVC.swift; sourceTree = "<group>"; };
+		18FF4765230A8E4400CAEFC6 /* HomeAllVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeAllVC.xib; sourceTree = "<group>"; };
 		264713EC4646AA805C58CFF2 /* Pods-ALC_RB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ALC_RB.release.xcconfig"; path = "Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.release.xcconfig"; sourceTree = "<group>"; };
 		94E91859B21FCA46298FEF92 /* Pods-ALC_RB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ALC_RB.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.debug.xcconfig"; sourceTree = "<group>"; };
 		C8CAFADB419EC76B3B2A2418 /* Pods_ALC_RB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ALC_RB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -905,6 +909,15 @@
 			path = header;
 			sourceTree = "<group>";
 		};
+		18FF4763230A8E2000CAEFC6 /* All */ = {
+			isa = PBXGroup;
+			children = (
+				18FF4764230A8E4400CAEFC6 /* HomeAllVC.swift */,
+				18FF4765230A8E4400CAEFC6 /* HomeAllVC.xib */,
+			);
+			path = All;
+			sourceTree = "<group>";
+		};
 		55F666B0C8F344025D76B0B9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -957,6 +970,7 @@
 		CE47323C21A5511B00199D79 /* home */ = {
 			isa = PBXGroup;
 			children = (
+				18FF4763230A8E2000CAEFC6 /* All */,
 				CE61551921AFA0A2008C4463 /* games */,
 				CE61551821AF9814008C4463 /* news_and_announce */,
 				CE47323D21A5513500199D79 /* HomeViewController.swift */,
@@ -2171,6 +2185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB9FA4A222EC986200BA5A52 /* RefereeProtocolPlayerTableViewCell.xib in Resources */,
+				18FF4767230A8E4400CAEFC6 /* HomeAllVC.xib in Resources */,
 				18B0F8822302BF6600080196 /* ModalPenaltySeriesVC.xib in Resources */,
 				CEA6EBA621A53CFE008F874D /* LaunchScreen.storyboard in Resources */,
 				DB986B5B22FDBDD10050AC8F /* EditAutoGoalsView.xib in Resources */,
@@ -2381,6 +2396,7 @@
 				DB641F8A222BB283004AC6CB /* UserLKPresenter.swift in Sources */,
 				DB2E1F7522EAFB7B00CDA5CD /* DoMatchProtocolRefereePresenter.swift in Sources */,
 				DBC7C1AC22D75EDE00ECD690 /* AnnoucnesAllPresenter.swift in Sources */,
+				18FF4766230A8E4400CAEFC6 /* HomeAllVC.swift in Sources */,
 				DB2DCE6A22D782ED0030FD29 /* Reachability.swift in Sources */,
 				DB11CC8D21C22F890083773E /* ScheduleTableViewController.swift in Sources */,
 				DB986B5F22FDBEC90050AC8F /* FoulsMaker.swift in Sources */,
