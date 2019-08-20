@@ -8,8 +8,27 @@
 
 import UIKit
 import Lightbox
+import Kingfisher
 
 extension UIImageView {
+    
+    func loadKFImage(path: String, placeholder: UIImage? = UIImage(named: "ic_logo")) {
+        let url = ApiRoute.getImageURL(image: path)
+        let processor = DownsamplingImageProcessor(size: self.frame.size)
+            .append(another: CroppingImageProcessorCustom(size: self .frame.size))
+            .append(another: RoundCornerImageProcessor(cornerRadius: self.getHalfWidthHeight()))
+        
+        self.kf.indicatorType = .activity
+        self.kf.setImage(
+            with: url,
+            placeholder: placeholder,
+            options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ])
+    }
     
     func animateTap()
     {

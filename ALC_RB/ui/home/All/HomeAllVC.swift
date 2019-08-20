@@ -8,23 +8,87 @@
 
 import UIKit
 
-class HomeAllVC: UIViewController {
+final class HomeAllVC: UIViewController {
 
+    @IBOutlet weak var news_collection: UICollectionView!
+    @IBOutlet weak var matches_table: IntrinsicTableView!
+    @IBOutlet weak var announces_table: IntrinsicTableView!
+    
+    var newsCollection: HomeNewsCollection?
+    var scheduleTable: HomeScheduleTable?
+    var announcesTable: HomeAnnouncesTable?
+    
+    var viewModel = HomeAllVM()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.setupNewsTable()
+        self.setupScheduleTable()
+        self.setupAnnouncesTable()
     }
+}
 
+// MARK: EXTENSIONS
 
-    /*
-    // MARK: - Navigation
+// MARK: SETUP
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension HomeAllVC {
+    
+    func setupNewsTable() {
+        self.newsCollection = HomeNewsCollection(actions: self)
+        self.news_collection.delegate = self.newsCollection
+        self.news_collection.dataSource = self.newsCollection
     }
-    */
+    
+    func setupNewsTableDataSource() {
+//        self.news_collection.dataSource = 
+    }
+    
+    func setupScheduleTable() {
+        self.scheduleTable = HomeScheduleTable(actions: self)
+        self.matches_table.delegate = self.scheduleTable
+        self.matches_table.dataSource = self.scheduleTable
+    }
+    
+    func setupScheduleTableDataSource() {
+        
+    }
+    
+    func setupAnnouncesTable() {
+        self.announcesTable = HomeAnnouncesTable(actions: self)
+        self.announces_table.delegate = self.announcesTable
+        self.announces_table.dataSource = self.announcesTable
+    }
+    
+    func setupAnnouncesTableDataSource() {
+        
+    }
+}
 
+// MARK: ACTIONS
+
+extension HomeAllVC {
+    
+}
+
+extension HomeAllVC: CellActions {
+    func onCellSelected(model: CellModel) {
+        switch model  {
+        case is NewsElement:
+            Print.m("news cell selected")
+        case is MmMatch:
+            Print.m("match cell selected")
+        case is AnnounceElement:
+            Print.m("announce cell selected")
+        default:
+            Print.m("default tap here")
+        }
+    }
+}
+
+// MARK: HELPERS
+
+extension HomeAllVC {
+    
 }
