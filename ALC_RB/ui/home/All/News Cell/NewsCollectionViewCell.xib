@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collection_view_news_cell" id="gTV-IL-0wX" customClass="NewsCollectionViewCell" customModule="ALC_RB" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="170" height="152"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="170" height="152"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News news news news news News news news news news News news news news news News news news news news News news news news news" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FqK-rE-Gql">
+                        <rect key="frame" x="0.0" y="0.0" width="170" height="72"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="j0b-sc-V24">
+                        <rect key="frame" x="0.0" y="72" width="170" height="80"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="j0b-sc-V24" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="4LT-Eg-ekz"/>
+                <constraint firstItem="j0b-sc-V24" firstAttribute="top" secondItem="FqK-rE-Gql" secondAttribute="bottom" id="OBD-OM-hck"/>
+                <constraint firstAttribute="trailing" secondItem="j0b-sc-V24" secondAttribute="trailing" id="em4-Np-pc9"/>
+                <constraint firstItem="FqK-rE-Gql" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="h1p-V3-vZH"/>
+                <constraint firstAttribute="trailing" secondItem="FqK-rE-Gql" secondAttribute="trailing" id="jn7-IL-osO"/>
+                <constraint firstItem="FqK-rE-Gql" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="vSK-vv-m7o"/>
+                <constraint firstAttribute="bottom" secondItem="j0b-sc-V24" secondAttribute="bottom" id="y40-NQ-eV2"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="170" height="160"/>
+            <point key="canvasLocation" x="137.59999999999999" y="96.251874062968525"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="ic_logo" width="196" height="140"/>
+    </resources>
+</document>
