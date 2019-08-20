@@ -42,7 +42,8 @@ extension HomeAllVC {
     }
     
     func setupNewsTableDataSource() {
-//        self.news_collection.dataSource = 
+        self.newsCollection!.dataSource = self.viewModel.prepareNewsDataSource()
+        self.news_collection.reloadData()
     }
     
     func setupScheduleTable() {
@@ -52,7 +53,8 @@ extension HomeAllVC {
     }
     
     func setupScheduleTableDataSource() {
-        
+        self.scheduleTable!.dataSource = self.viewModel.prepareScheduleDataSource()
+        self.matches_table.reloadData()
     }
     
     func setupAnnouncesTable() {
@@ -62,7 +64,8 @@ extension HomeAllVC {
     }
     
     func setupAnnouncesTableDataSource() {
-        
+        self.announcesTable!.dataSource = self.viewModel.prepareAnnouncesDataSource()
+        self.announces_table.reloadData()
     }
 }
 

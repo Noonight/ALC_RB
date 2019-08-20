@@ -11,7 +11,14 @@ import Foundation
 final class HomeAllVM {
     
     var news: News = News()
+    var schedule: MmUpcomingMatches = MmUpcomingMatches()
     var announces: Announce = Announce()
+    
+    var networkRep: HomeAllNetworkRep!
+    
+    init(networkRep: HomeAllNetworkRep) {
+        self.networkRep = networkRep
+    }
     
 }
 
@@ -19,7 +26,19 @@ final class HomeAllVM {
 
 extension HomeAllVM {
     
+    func updateNews(news: News, complete: @escaping (Result<>) -> ()) {
+        
+        self.news = news
+        complete()
+    }
     
+    func updateSchedule(matches: MmUpcomingMatches) {
+        self.schedule = matches
+    }
+    
+    func updateAnnounces(announces: Announce) {
+        self.announces = announces
+    }
     
 }
 
@@ -33,6 +52,10 @@ extension HomeAllVM {
     
     func prepareAnnouncesDataSource() -> [AnnounceElement] {
         return self.announces.announces
+    }
+    
+    func prepareScheduleDataSource() -> [MmMatch] {
+        return self.schedule.matches ?? []
     }
     
 }
