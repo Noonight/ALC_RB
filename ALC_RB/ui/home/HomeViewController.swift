@@ -41,7 +41,14 @@ class HomeViewController: UIViewController {
         
         firstInit()
         
-        
+        segmentedControl.subviews.flatMap{$0.subviews}.forEach { subview in
+            if let imageView = subview as? UIImageView, let image = imageView.image, image.size.width > 5 {
+                // The imageView which isn't separator
+                imageView.contentMode = .scaleAspectFit
+                imageView.image = imageView.image?.imageWithInsets(insets: UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0))
+                
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
