@@ -12,6 +12,7 @@ var segmentIndex = 0
 
 class HomeViewController: UIViewController {
     
+    private lazy var all : HomeAllVC = HomeAllVC()
     private lazy var newsTable: NewsAnnounceTableViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
@@ -40,15 +41,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         firstInit()
-        
-        segmentedControl.subviews.flatMap{$0.subviews}.forEach { subview in
-            if let imageView = subview as? UIImageView, let image = imageView.image, image.size.width > 5 {
-                // The imageView which isn't separator
-                imageView.contentMode = .scaleAspectFit
-                imageView.image = imageView.image?.imageWithInsets(insets: UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0))
-                
-            }
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,23 +50,29 @@ class HomeViewController: UIViewController {
     }
     
     private func firstInit() {
-        add(childVC: newsTable)
+        add(childVC: all )
     }
     
     // MARK: - Actions
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
-            case 0:
-                remove(childVC: gamesTable)
-                add(childVC: newsTable)
-                //print("Case 0")
-            case 1:
-                remove(childVC: newsTable)
-                add(childVC: gamesTable)
-                //print("Case 1")
+        case 0:
+            remove(childVC: gamesTable)
+            remove(childVC: newsTable)
+            add(childVC: all)
+        case 1:
+            remove(childVC: all)
+            remove(childVC: gamesTable)
+            add(childVC: newsTable)
+        //print("Case 0")
+        case 2:
+            remove(childVC: all)
+            remove(childVC: newsTable)
+            add(childVC: gamesTable)
+            //print("Case 1")
             
-            default:
-                break
+        default:
+            break
         }
     }
     

@@ -24,6 +24,31 @@ final class HomeAllNetworkRep {
         }
     }
     
+    func fetchUpcomingMatches(
+        success: @escaping (MmUpcomingMatches) -> (),
+        message: @escaping (SingleLineMessage) -> (),
+        local_error: @escaping (Error ) -> (),
+        server_error: @escaping (Error ) -> (),
+        universal_error: @escaping (Error) -> ()
+        )
+    {
+        self.dataManager.get_upcomingMatches { result  in
+            switch result
+            {
+            case .success(let value):
+                success(value)
+            case .message(let value):
+                message(value)
+            case .failure(.alamofire(let error)):
+                universal_error(error )
+            case .failure(.local(let error)):
+                local_error(error)
+            case .failure(.server(let error)):
+                server_error(error)
+            }
+        }
+    }
+    
     func fetchAnnounces(success: @escaping (Announce) -> (), failure: @escaping (Error) -> ()) {
         self.dataManager.get_announces(success: { announces  in
             success(announces)

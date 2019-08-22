@@ -18,7 +18,7 @@ final class HomeAllVC: UIViewController {
     var scheduleTable: HomeScheduleTable?
     var announcesTable: HomeAnnouncesTable?
     
-    var viewModel = HomeAllVM()
+    var viewModel = HomeAllVM(networkRep: HomeAllNetworkRep(dataManager: ApiRequests()))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +26,12 @@ final class HomeAllVC: UIViewController {
         self.setupNewsTable()
         self.setupScheduleTable()
         self.setupAnnouncesTable()
+        
+        self.viewModel.updateAll {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5, execute: {
+                self.setupAllDataSources()
+            })
+        }
     }
 }
 
@@ -37,6 +43,7 @@ extension HomeAllVC {
     
     func setupNewsTable() {
         self.newsCollection = HomeNewsCollection(actions: self)
+        self.news_collection.register(<#T##nib: UINib?##UINib?#>, forCellWithReuseIdentifier: <#T##String#>)
         self.news_collection.delegate = self.newsCollection
         self.news_collection.dataSource = self.newsCollection
     }
@@ -66,6 +73,12 @@ extension HomeAllVC {
     func setupAnnouncesTableDataSource() {
         self.announcesTable!.dataSource = self.viewModel.prepareAnnouncesDataSource()
         self.announces_table.reloadData()
+    }
+    
+    func setupAllDataSources() {
+        self.setupNewsTableDataSource()
+        self.setupScheduleTableDataSource()
+        self.setupAnnouncesTableDataSource()
     }
 }
 

@@ -26,18 +26,68 @@ final class HomeAllVM {
 
 extension HomeAllVM {
     
-    func updateNews(news: News, complete: @escaping (Result<>) -> ()) {
-        
-        self.news = news
-        complete()
+    func updateAll(completed: @escaping () -> ()) {
+        self.updateNews()
+        self.updateSchedule()
+        self.updateAnnounces()
     }
     
-    func updateSchedule(matches: MmUpcomingMatches) {
-        self.schedule = matches
+    func updateNews() {
+        self.fetchNews { news  in
+            self.news = news
+        }
     }
     
-    func updateAnnounces(announces: Announce) {
-        self.announces = announces
+    func updateSchedule() {
+        self.fetchSchedule { upcomingMatches  in
+            self.schedule = upcomingMatches
+        }
+    }
+    
+    func updateAnnounces() {
+        self.fetchAnnounces { announces  in
+            self.announces = announces
+        }
+    }
+    
+}
+
+// MARK: NETWORK
+
+extension HomeAllVM {
+    
+    func fetchNews(completed: @escaping (News) -> ())
+    {
+        self.networkRep.fetchNews(success: { news in
+            completed(news )
+        }) { error in
+            Print.m(error)
+        }
+    }
+    
+    func fetchSchedule(completed: @escaping (MmUpcomingMatches) -> ())
+    {
+        self.networkRep.fetchUpcomingMatches(
+            success: { upcomingMatches  in
+                completed(upcomingMatches)
+        }, message: { message  in
+            Print.m(message )
+        }, local_error: { error  in
+            Print.m(error )
+        }, server_error: { error  in
+            Print.m(error )
+        }, universal_error: { error  in
+            Print.m(error )
+        })
+    }
+    
+    func fetchAnnounces(completed: @escaping (Announce ) -> ())
+    {
+        self.networkRep.fetchAnnounces(success: { announces  in
+            completed(announces)
+        }) { error  in
+            Print.m(error)
+        }
     }
     
 }
