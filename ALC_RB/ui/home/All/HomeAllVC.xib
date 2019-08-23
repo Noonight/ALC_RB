@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeAllVC" customModule="ALC_RB" customModuleProvider="target">
             <connections>
-                <outlet property="announces_table" destination="bVI-m1-tMm" id="g8h-tf-069"/>
                 <outlet property="matches_table" destination="YY9-bF-QEb" id="E9l-hu-RbR"/>
                 <outlet property="news_collection" destination="z1e-cp-cHa" id="5R9-1y-XzN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -43,14 +42,7 @@
                                     </collectionViewFlowLayout>
                                 </collectionView>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YY9-bF-QEb" customClass="IntrinsicTableView" customModule="ALC_RB" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="128" width="320" height="200"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="200" id="nK9-Ki-AsV"/>
-                                    </constraints>
-                                </tableView>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bVI-m1-tMm" customClass="IntrinsicTableView" customModule="ALC_RB" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="328" width="320" height="220"/>
+                                    <rect key="frame" x="0.0" y="128" width="320" height="420"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </tableView>
                             </subviews>
@@ -61,11 +53,8 @@
                                 <constraint firstAttribute="trailing" secondItem="z1e-cp-cHa" secondAttribute="trailing" id="LAT-W8-sdv"/>
                                 <constraint firstItem="z1e-cp-cHa" firstAttribute="leading" secondItem="hkP-JV-vXS" secondAttribute="leading" id="Mkf-6f-QXG"/>
                                 <constraint firstItem="z1e-cp-cHa" firstAttribute="top" secondItem="hkP-JV-vXS" secondAttribute="top" id="b4g-Wx-BGo"/>
-                                <constraint firstAttribute="bottom" secondItem="bVI-m1-tMm" secondAttribute="bottom" id="gMS-vp-dce"/>
+                                <constraint firstAttribute="bottom" secondItem="YY9-bF-QEb" secondAttribute="bottom" id="hLl-5F-0kM"/>
                                 <constraint firstItem="YY9-bF-QEb" firstAttribute="top" secondItem="z1e-cp-cHa" secondAttribute="bottom" id="kUD-l3-B0p"/>
-                                <constraint firstItem="bVI-m1-tMm" firstAttribute="leading" secondItem="hkP-JV-vXS" secondAttribute="leading" id="nsI-SG-mg2"/>
-                                <constraint firstAttribute="trailing" secondItem="bVI-m1-tMm" secondAttribute="trailing" id="vKf-c2-DZn"/>
-                                <constraint firstItem="bVI-m1-tMm" firstAttribute="top" secondItem="YY9-bF-QEb" secondAttribute="bottom" id="zfS-ZI-d2K"/>
                             </constraints>
                         </view>
                     </subviews>

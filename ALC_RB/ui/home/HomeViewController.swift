@@ -34,7 +34,8 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var viewContainer: UIView!
-
+    @IBOutlet weak var announces_table: UITableView!
+    
 //    let advertising = Advertising(adImage: UIImage(named: "ic_logo")!, adText: "Some test text")
     
     override func viewDidLoad() {

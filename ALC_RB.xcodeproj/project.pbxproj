@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		047C0BEA230FC3550096AC62 /* HomeAnnounceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047C0BE8230FC3550096AC62 /* HomeAnnounceTableViewCell.swift */; };
+		047C0BEB230FC3550096AC62 /* HomeAnnounceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047C0BE9230FC3550096AC62 /* HomeAnnounceTableViewCell.xib */; };
 		048CB331230BC959006CF2A9 /* HomeNewsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048CB330230BC959006CF2A9 /* HomeNewsCollection.swift */; };
 		048CB334230BCE8F006CF2A9 /* HomeAllVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048CB333230BCE8F006CF2A9 /* HomeAllVM.swift */; };
 		048CB337230BD05C006CF2A9 /* HomeAllNetworkRep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048CB336230BD05C006CF2A9 /* HomeAllNetworkRep.swift */; };
@@ -310,6 +312,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		047C0BE8230FC3550096AC62 /* HomeAnnounceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAnnounceTableViewCell.swift; sourceTree = "<group>"; };
+		047C0BE9230FC3550096AC62 /* HomeAnnounceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeAnnounceTableViewCell.xib; sourceTree = "<group>"; };
 		048CB330230BC959006CF2A9 /* HomeNewsCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewsCollection.swift; sourceTree = "<group>"; };
 		048CB333230BCE8F006CF2A9 /* HomeAllVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAllVM.swift; sourceTree = "<group>"; };
 		048CB336230BD05C006CF2A9 /* HomeAllNetworkRep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAllNetworkRep.swift; sourceTree = "<group>"; };
@@ -637,6 +641,30 @@
 				04D01D41230689CB003AB74B /* AdverstingMaker.swift */,
 			);
 			path = makers;
+			sourceTree = "<group>";
+		};
+		047C0BE3230FC2930096AC62 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		047C0BE4230FC29F0096AC62 /* Announce Table */ = {
+			isa = PBXGroup;
+			children = (
+				047C0BE7230FC3410096AC62 /* Cell */,
+			);
+			path = "Announce Table";
+			sourceTree = "<group>";
+		};
+		047C0BE7230FC3410096AC62 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				047C0BE8230FC3550096AC62 /* HomeAnnounceTableViewCell.swift */,
+				047C0BE9230FC3550096AC62 /* HomeAnnounceTableViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		048CB32F230BC93C006CF2A9 /* News Collection */ = {
@@ -1077,6 +1105,8 @@
 		CE47323C21A5511B00199D79 /* home */ = {
 			isa = PBXGroup;
 			children = (
+				047C0BE4230FC29F0096AC62 /* Announce Table */,
+				047C0BE3230FC2930096AC62 /* View Model */,
 				18FF4763230A8E2000CAEFC6 /* All */,
 				CE61551921AFA0A2008C4463 /* games */,
 				CE61551821AF9814008C4463 /* news_and_announce */,
@@ -2324,6 +2354,7 @@
 				DB986B5722FDB2FF0050AC8F /* EditFoulsView.xib in Resources */,
 				18EFFABE22F3175800B17947 /* TournamentTeamHeaderView.xib in Resources */,
 				DB87FE7F2243D493001EBA7C /* EmptyViewNew.xib in Resources */,
+				047C0BEB230FC3550096AC62 /* HomeAnnounceTableViewCell.xib in Resources */,
 				DB4FCAF522EEBA3500A89BE7 /* AddEventView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2649,6 +2680,7 @@
 				DB1816E121D10161005375ED /* PlayerViewController.swift in Sources */,
 				18B1FEFA22E1CB1900D75F2D /* KingExtensions.swift in Sources */,
 				DB5AAC0622369FDB0097963E /* InvitationLKTableViewController.swift in Sources */,
+				047C0BEA230FC3550096AC62 /* HomeAnnounceTableViewCell.swift in Sources */,
 				DB495B7922AF77CB00FCC6F5 /* ScheduleRefViewModel.swift in Sources */,
 				DB51CD982215619E00A8D08E /* ScoreMatchTableViewCell.swift in Sources */,
 				DB17385D21BAAFDC00017B6D /* UpcomingGameCellPresenter.swift in Sources */,
