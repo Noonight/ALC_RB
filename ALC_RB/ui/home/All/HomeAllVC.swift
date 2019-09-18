@@ -12,7 +12,7 @@ final class HomeAllVC: UIViewController {
 
     @IBOutlet weak var news_collection: UICollectionView!
     @IBOutlet weak var matches_table: IntrinsicTableView!
-    @IBOutlet weak var announces_table: IntrinsicTableView!
+//    @IBOutlet weak var announces_table: IntrinsicTableView!
     
     var newsCollection: HomeNewsCollection?
     var scheduleTable: HomeScheduleTable?
@@ -25,12 +25,12 @@ final class HomeAllVC: UIViewController {
         
         self.setupNewsTable()
         self.setupScheduleTable()
-        self.setupAnnouncesTable()
+//        self.setupAnnouncesTable()
         
         self.viewModel.updateAll {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5, execute: {
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5, execute: {
                 self.setupAllDataSources()
-            })
+//            })
         }
     }
 }
@@ -43,7 +43,7 @@ extension HomeAllVC {
     
     func setupNewsTable() {
         self.newsCollection = HomeNewsCollection(actions: self)
-        self.news_collection.register(<#T##nib: UINib?##UINib?#>, forCellWithReuseIdentifier: <#T##String#>)
+        self.news_collection.register(self.newsCollection?.cellNib, forCellWithReuseIdentifier: HomeNewsCollectionViewCell.ID)
         self.news_collection.delegate = self.newsCollection
         self.news_collection.dataSource = self.newsCollection
     }
@@ -64,21 +64,21 @@ extension HomeAllVC {
         self.matches_table.reloadData()
     }
     
-    func setupAnnouncesTable() {
-        self.announcesTable = HomeAnnouncesTable(actions: self)
-        self.announces_table.delegate = self.announcesTable
-        self.announces_table.dataSource = self.announcesTable
-    }
-    
-    func setupAnnouncesTableDataSource() {
-        self.announcesTable!.dataSource = self.viewModel.prepareAnnouncesDataSource()
-        self.announces_table.reloadData()
-    }
+//    func setupAnnouncesTable() {
+//        self.announcesTable = HomeAnnouncesTable(actions: self)
+//        self.announces_table.delegate = self.announcesTable
+//        self.announces_table.dataSource = self.announcesTable
+//    }
+//
+//    func setupAnnouncesTableDataSource() {
+//        self.announcesTable!.dataSource = self.viewModel.prepareAnnouncesDataSource()
+//        self.announces_table.reloadData()
+//    }
     
     func setupAllDataSources() {
         self.setupNewsTableDataSource()
         self.setupScheduleTableDataSource()
-        self.setupAnnouncesTableDataSource()
+//        self.setupAnnouncesTableDataSource()
     }
 }
 

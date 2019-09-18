@@ -38,4 +38,12 @@ class SegmentHelper {
             viewController.removeFromParent()
         }
     }
+    
+    func removeAll() {
+        guard let childViewControllers = rootViewController?.children else { return }
+        for child in childViewControllers {
+            child.view.removeFromSuperview()
+            child.removeFromParent()
+        }
+    }
 }

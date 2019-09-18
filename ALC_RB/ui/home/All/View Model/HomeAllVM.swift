@@ -30,6 +30,7 @@ extension HomeAllVM {
         self.updateNews()
         self.updateSchedule()
         self.updateAnnounces()
+        completed()
     }
     
     func updateNews() {

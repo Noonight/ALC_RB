@@ -8,8 +8,6 @@
 
 import UIKit
 
-var segmentIndex = 0
-
 class HomeViewController: UIViewController {
     
     private lazy var all : HomeAllVC = HomeAllVC()
@@ -36,7 +34,12 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var announces_table: UITableView!
     
-//    let advertising = Advertising(adImage: UIImage(named: "ic_logo")!, adText: "Some test text")
+    private var segmentHelper: SegmentHelper?
+    
+    private var announcesTable: HomeAnnouncesTable?
+    private let viewModel = HomeViewModel()
+    
+    // MARK: LIFE CYCLE
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,50 +49,72 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-//        advertising.showAd()
-        
     }
     
     private func firstInit() {
-        add(childVC: all )
+        segmentHelper?.add(all)
     }
     
-    // MARK: - Actions
+}
+
+// MARK: EXTENSIONS
+
+// MARK: SETUP
+
+extension HomeViewController {
+    
+    func setupSegmentHelper() {
+        self.segmentHelper = SegmentHelper(self, viewContainer)
+    }
+    
+    func setupAnnouncesTable() {
+        self.announcesTable = HomeAnnouncesTable(actions: self)
+        self.announces_table.delegate = self.announcesTable
+        self.announces_table.dataSource = self.announcesTable
+    }
+    
+    func setupAnnouncesDataSource() {
+        self.viewModel.fetchAnnounces(completed: { announces in
+//            self.announcesTable?.dataSource = announces
+            self.announces_table.reloadData()
+        })
+    }
+    
+}
+
+// MARK: ACTIONS
+
+extension HomeViewController {
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            remove(childVC: gamesTable)
-            remove(childVC: newsTable)
-            add(childVC: all)
-        case 1:
-            remove(childVC: all)
-            remove(childVC: gamesTable)
-            add(childVC: newsTable)
-        //print("Case 0")
-        case 2:
-            remove(childVC: all)
-            remove(childVC: newsTable)
-            add(childVC: gamesTable)
-            //print("Case 1")
-            
+            segmentHelper?.removeAll()
+            segmentHelper?.add(all)
+        case 1: // My tournaments
+            segmentHelper?.removeAll()
+//            segmentHelper?.add(myTournaments)
+        case 2: // News
+            segmentHelper?.removeAll()
+            segmentHelper?.add(newsTable)
+        case 3: // Schedule
+            segmentHelper?.removeAll()
+//            segmentHelper?.add(schedule)
         default:
             break
         }
     }
-    
-    func add(childVC viewController: UIViewController) {
-        addChild(viewController) // xcode 10+
-        //addChildViewController(viewController)
-        
-        viewContainer.addSubview(viewController.view)
-        
-        viewController.view.frame = viewContainer.bounds
-        viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    }
-    
-    func remove(childVC viewController: UIViewController) {
-        viewController.view.removeFromSuperview()
-        viewController.removeFromParent() // xcode 10+
-        //viewController.removeFromParentViewController()
+}
+
+// MARK: CELL ACTIONS
+
+extension HomeViewController: CellActions {
+    func onCellSelected(model: CellModel) {
+        switch model {
+        case is AnnounceElement:
+            Print.m("the model of element is AnnounceElement")
+            return
+        default:
+            return
+        }
     }
 }
