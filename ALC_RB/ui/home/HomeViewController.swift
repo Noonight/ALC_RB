@@ -44,11 +44,15 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupSegmentHelper()
+        self.setupAnnouncesTable()
         firstInit()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        self.setupAnnouncesDataSource()
     }
     
     private func firstInit() {
@@ -71,6 +75,7 @@ extension HomeViewController {
         self.announcesTable = HomeAnnouncesTable(actions: self)
         self.announces_table.delegate = self.announcesTable
         self.announces_table.dataSource = self.announcesTable
+        self.announces_table.register(self.announcesTable?.cellNib, forCellReuseIdentifier: HomeAnonunceTableViewCell.ID)
     }
     
     func setupAnnouncesDataSource() {

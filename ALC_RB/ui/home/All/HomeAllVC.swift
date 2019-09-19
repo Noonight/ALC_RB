@@ -43,9 +43,9 @@ extension HomeAllVC {
     
     func setupNewsTable() {
         self.newsCollection = HomeNewsCollection(actions: self)
-        self.news_collection.register(self.newsCollection?.cellNib, forCellWithReuseIdentifier: HomeNewsCollectionViewCell.ID)
         self.news_collection.delegate = self.newsCollection
         self.news_collection.dataSource = self.newsCollection
+        self.news_collection.register(self.newsCollection?.cellNib, forCellWithReuseIdentifier: HomeNewsCollectionViewCell.ID)
     }
     
     func setupNewsTableDataSource() {

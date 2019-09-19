@@ -836,6 +836,45 @@ class ApiRequests {
         }
     }
     
+    func get_announces(get_result: @escaping (ResultMy<Announce, RequestError>) -> ()) {
+        let alamo = Alamofire.request(ApiRoute.getApiURL(.announce))
+        alamo
+            .validate()
+            .responseJSON { response in
+                let decoder = JSONDecoder()
+                switch response.result
+                {
+                case .success:
+                    do
+                    {
+                        if let announces = try? decoder.decode(Announce.self, from: response.data!)
+                        {
+                            get_result(.success(announces))
+                        }
+                        if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!)
+                        {
+                            get_result(.message(message))
+                        }
+                    }
+                case .failure(let error):
+                    let statusCode = response.response?.statusCode
+                    if (400..<500).contains(statusCode!)
+                    {
+                        get_result(.failure(.local(error)))
+                    }
+                    else
+                        if (500..<600).contains(statusCode!)
+                        {
+                            get_result(.failure(.server(error)))
+                        }
+                        else
+                        {
+                            get_result(.failure(.alamofire(error)))
+                    }
+                }
+        }
+    }
+    
     func get_activeMatches(limit: Int = 30, offset: Int = 0, played: String = "false", get_success: @escaping (ActiveMatches) -> (), get_message: @escaping (SingleLineMessage) -> (), get_failure: @escaping (Error) -> ()) {
         let parameters: Parameters = [
             "limit": limit,
