@@ -8,10 +8,10 @@
 
 import Foundation
 
-enum ResultMy<T, Error> {
+enum ResultMy<T, ErrorType> {
     case success(T)
     case message(SingleLineMessage)
-    case failure(Error)
+    case failure(ErrorType)
 }
 
 enum RequestError: Error {

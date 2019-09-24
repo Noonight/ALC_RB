@@ -79,10 +79,22 @@ extension HomeViewController {
     }
     
     func setupAnnouncesDataSource() {
-        self.viewModel.fetchAnnounces(completed: { announces in
-//            self.announcesTable?.dataSource = announces
+//        self.viewModel.fetchAnnounces(completed: { announces in
+////            self.announcesTable?.dataSource = announces
+//            self.announces_table.reloadData()
+//        })
+        self.viewModel.fetchAnnounces(success: { announces in
+            self.announcesTable?.dataSource = announces.announces
             self.announces_table.reloadData()
-        })
+        }, rMessage: { message in
+            self.announces_table.	
+        }, failureAll: { error in
+            
+        }, failureServer: { error in
+            
+        }) { error in
+            
+        }
     }
     
 }
