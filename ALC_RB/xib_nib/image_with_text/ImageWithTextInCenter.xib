@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImageWithTextInCenter" customModule="ALC_RB" customModuleProvider="target">
+            <connections>
+                <outlet property="container_view" destination="iN0-l3-epB" id="FH7-ly-JvD"/>
+                <outlet property="image_view" destination="cuG-vo-wvR" id="UNw-QF-hAX"/>
+                <outlet property="text_label" destination="WUx-wr-lgi" id="257-yr-lVr"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_green_circle" translatesAutoresizingMaskIntoConstraints="NO" id="cuG-vo-wvR">
+                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUx-wr-lgi">
+                    <rect key="frame" x="0.0" y="25" width="50" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="WUx-wr-lgi" secondAttribute="trailing" id="0sv-O5-75i"/>
+                <constraint firstItem="WUx-wr-lgi" firstAttribute="centerY" secondItem="cuG-vo-wvR" secondAttribute="centerY" id="EI5-s8-SjF"/>
+                <constraint firstItem="cuG-vo-wvR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="NcN-46-C4T"/>
+                <constraint firstItem="WUx-wr-lgi" firstAttribute="centerX" secondItem="cuG-vo-wvR" secondAttribute="centerX" id="SJD-A2-K52"/>
+                <constraint firstAttribute="trailing" secondItem="cuG-vo-wvR" secondAttribute="trailing" id="ZLr-ID-FOf"/>
+                <constraint firstItem="WUx-wr-lgi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="bY3-qk-vYU"/>
+                <constraint firstItem="cuG-vo-wvR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kEe-yY-1G1"/>
+                <constraint firstAttribute="bottom" secondItem="cuG-vo-wvR" secondAttribute="bottom" id="pOu-TI-4qZ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_green_circle" width="50" height="50"/>
+    </resources>
+</document>

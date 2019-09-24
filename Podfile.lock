@@ -6,6 +6,7 @@ PODS:
   - AMScrollingNavbar (5.2.0)
   - Cache (5.2.0)
   - ESPullToRefresh (2.7)
+  - FloatingPanel (1.6.2)
   - Imaginary (4.2.0):
     - Cache (~> 5.0)
   - IQKeyboardManagerSwift (6.2.0)
@@ -29,6 +30,7 @@ DEPENDENCIES:
   - AlamofireImage
   - AMScrollingNavbar
   - ESPullToRefresh
+  - FloatingPanel
   - IQKeyboardManagerSwift
   - Kingfisher (~> 5.7)
   - Lightbox
@@ -41,13 +43,14 @@ DEPENDENCIES:
   - UIScrollView-InfiniteScroll (~> 1.1.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - ActionSheetPicker-3.0
     - Alamofire
     - AlamofireImage
     - AMScrollingNavbar
     - Cache
     - ESPullToRefresh
+    - FloatingPanel
     - Imaginary
     - IQKeyboardManagerSwift
     - Kingfisher
@@ -68,6 +71,7 @@ SPEC CHECKSUMS:
   AMScrollingNavbar: 9df3652d6757f1a24646d8e90cb458591d8b1a6a
   Cache: 807c5d86d01a177f06ede9865add3aea269bbfd4
   ESPullToRefresh: 119e2710b82b75536aab2bbe4883ba119fca35c8
+  FloatingPanel: 87207ad540c8188621791349c66fe41f35ec3602
   Imaginary: dae33d06dbc2ada22f98afef5eb45cc061311a2c
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   Kingfisher: c7d211b54f1f30d8060aadab177d52b4349c825b
@@ -81,6 +85,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
 
-PODFILE CHECKSUM: 5ea60a1b0d8af50fb94d220ff20f07a8d0aeda89
+PODFILE CHECKSUM: f90e66490be7f0e9d68a004dab63707daca6c152
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.5.3

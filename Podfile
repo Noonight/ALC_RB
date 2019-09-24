@@ -28,6 +28,8 @@ target 'ALC_RB' do
   pod 'UIScrollView-InfiniteScroll', '~> 1.1.0'
   
   pod 'SPStorkController'
+  
+  pod 'FloatingPanel'
 
 end
 

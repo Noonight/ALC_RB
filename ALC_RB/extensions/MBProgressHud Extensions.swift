@@ -64,4 +64,27 @@ extension MBProgressHUD {
             self.hideAfter(seconds: hideAfter)
         })
     }
+    
+    func setToButtonHUD(message: String? = Constants.Texts.REPEAT, detailMessage: String? = "", btn: @escaping () -> ()) {
+        self.backgroundView.style = .solidColor
+        self.backgroundView.color = UIColor(white: 0, alpha: 0.1)
+        
+        self.label.text = message
+        self.detailsLabel.text = detailMessage
+        
+        self.tapAction(action: btn)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapOnHud))
+        self.addGestureRecognizer(tap)
+    }
+    
+    @objc private func tapOnHud() {
+        self.tapAction()
+    }
+    
+    private func tapAction(action: (() -> ())? = nil) {
+        struct __ { static var action :(() -> Void)? }
+        if action != nil { __.action = action }
+        else { __.action?() }
+    }
 }

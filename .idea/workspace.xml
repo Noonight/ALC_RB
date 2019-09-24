@@ -2,10 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12ca8836-b4f8-4f04-bd9b-95f2ce59baa9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/model/ProtocolRefereeModel.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.xib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ALC_RB.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereePresenter.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereePresenter.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereeViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereeViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/base/Result ++.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/base/Result ++.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/Base.lproj/Main.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/Base.lproj/Main.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces Table/Cell/HomeAnonunceTableViewCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Table/Cell/HomeAnonunceTableViewCell.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces Table/Cell/HomeAnonunceTableViewCell.xib" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Table/Cell/HomeAnonunceTableViewCell.xib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces Table/HomeAnnouncesTable.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Table/HomeAnnouncesTable.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/HomeViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/HomeViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/Podfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Manifest.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Manifest.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Pods-ALC_RB.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Pods-ALC_RB.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxAtomic.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxAtomic.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxCocoa.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxCocoa.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxSwift.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxSwift.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/SwiftDate.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/SwiftDate.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/SwiftyJSON.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/SwiftyJSON.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/UIScrollView-InfiniteScroll.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/UIScrollView-InfiniteScroll.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/AMScrollingNavbar/AMScrollingNavbar.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/AMScrollingNavbar/AMScrollingNavbar.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Alamofire/Alamofire.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Alamofire/Alamofire.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/AlamofireImage/AlamofireImage.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/AlamofireImage/AlamofireImage.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Cache/Cache.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Cache/Cache.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/ESPullToRefresh/ESPullToRefresh.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/ESPullToRefresh/ESPullToRefresh.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Imaginary/Imaginary.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Imaginary/Imaginary.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Kingfisher/Kingfisher.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Kingfisher/Kingfisher.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Lightbox/Lightbox.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Lightbox/Lightbox.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/MBProgressHUD/MBProgressHUD.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/MBProgressHUD/MBProgressHUD.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-acknowledgements.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-acknowledgements.markdown" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-acknowledgements.plist" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-acknowledgements.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.debug.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.release.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/RxCocoa/RxCocoa.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/RxCocoa/RxCocoa.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/RxSwift/RxSwift.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/RxSwift/RxSwift.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/SPStorkController/SPStorkController.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/SPStorkController/SPStorkController.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/SwiftDate/SwiftDate.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/SwiftDate/SwiftDate.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/SwiftyJSON/SwiftyJSON.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/SwiftyJSON/SwiftyJSON.xcconfig" afterDir="false" />
     </list>
     <ignored path="$USER_HOME$/Library/Developer/Xcode/DerivedData/ALC_RB-criteqptgmpqstfhosiglduwlnxs/" />
     <ignored path="$USER_HOME$/Library/Caches/AppCode2019.1/DerivedData/ALC_RB-diruytnehxazfvekyfnaxzratfak/Build/Intermediates.noindex/" />
@@ -15,22 +54,25 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos_" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos_c9dd5ab2cc894e7584136b728eb6461b403f59c6" />
   <component name="FileEditorManager">
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereeViewController.swift">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="467">
-                  <caret line="50" column="4" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
-                  <folding>
-                    <element signature="e#1294#1302#1" />
-                    <element signature="e#1376#1384#1" />
-                    <element signature="e#1474#1482#1" />
-                    <element signature="e#1558#1566#1" />
-                  </folding>
+                <state relative-caret-position="30">
+                  <caret line="2" column="10" lean-forward="true" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.swift">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="510">
+                  <caret line="35" column="54" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
                 </state>
               </provider>
             </entry>
@@ -38,34 +80,17 @@
         </leaf>
       </split-first>
       <split-second>
-        <splitter split-orientation="vertical" split-proportion="0.5">
-          <split-first>
-            <leaf>
-              <file pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereePresenter.swift">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="270">
-                      <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-first>
-          <split-second>
-            <leaf>
-              <file pinned="false" current-in-tab="true">
-                <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/model/ProtocolRefereeModel.swift">
-                  <provider selected="true" editor-type-id="text-editor">
-                    <state>
-                      <caret column="2" lean-forward="true" selection-start-column="2" selection-end-column="2" />
-                    </state>
-                  </provider>
-                </entry>
-              </file>
-            </leaf>
-          </split-second>
-        </splitter>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="225">
+                  <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
       </split-second>
     </splitter>
   </component>
@@ -79,13 +104,15 @@
         <option value="$PROJECT_DIR$/ALC_RB/ui/user/registration/RegistrationViewController.swift" />
         <option value="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereeViewController.swift" />
         <option value="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereePresenter.swift" />
+        <option value="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.swift" />
+        <option value="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1707" />
-    <option name="height" value="1001" />
+    <option name="width" value="2157" />
+    <option name="height" value="1002" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -94,6 +121,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Cidr.FilesView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -117,77 +146,20 @@
               <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
               <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
               <item name="ui" type="fcab9f18:XcodeViewNode" />
-              <item name="user" type="fcab9f18:XcodeViewNode" />
+              <item name="home" type="fcab9f18:XcodeViewNode" />
             </path>
             <path>
               <item name="" type="efc3779f:XcodeRootNode" />
               <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
               <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
               <item name="ui" type="fcab9f18:XcodeViewNode" />
-              <item name="user" type="fcab9f18:XcodeViewNode" />
-              <item name="lk" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
-              <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
-              <item name="ui" type="fcab9f18:XcodeViewNode" />
-              <item name="user" type="fcab9f18:XcodeViewNode" />
-              <item name="lk" type="fcab9f18:XcodeViewNode" />
-              <item name="menu" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
-              <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
-              <item name="ui" type="fcab9f18:XcodeViewNode" />
-              <item name="user" type="fcab9f18:XcodeViewNode" />
-              <item name="lk" type="fcab9f18:XcodeViewNode" />
-              <item name="menu" type="fcab9f18:XcodeViewNode" />
-              <item name="my matches" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
-              <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
-              <item name="ui" type="fcab9f18:XcodeViewNode" />
-              <item name="user" type="fcab9f18:XcodeViewNode" />
-              <item name="lk" type="fcab9f18:XcodeViewNode" />
-              <item name="menu" type="fcab9f18:XcodeViewNode" />
-              <item name="my matches" type="fcab9f18:XcodeViewNode" />
-              <item name="edit protocol" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
-              <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
-              <item name="ui" type="fcab9f18:XcodeViewNode" />
-              <item name="user" type="fcab9f18:XcodeViewNode" />
-              <item name="lk" type="fcab9f18:XcodeViewNode" />
-              <item name="menu" type="fcab9f18:XcodeViewNode" />
-              <item name="my matches" type="fcab9f18:XcodeViewNode" />
-              <item name="edit protocol" type="fcab9f18:XcodeViewNode" />
-              <item name="do match" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
-              <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
-              <item name="ui" type="fcab9f18:XcodeViewNode" />
-              <item name="user" type="fcab9f18:XcodeViewNode" />
-              <item name="lk" type="fcab9f18:XcodeViewNode" />
-              <item name="menu" type="fcab9f18:XcodeViewNode" />
-              <item name="my matches" type="fcab9f18:XcodeViewNode" />
-              <item name="edit protocol" type="fcab9f18:XcodeViewNode" />
-              <item name="do match" type="fcab9f18:XcodeViewNode" />
-              <item name="model" type="fcab9f18:XcodeViewNode" />
+              <item name="home" type="fcab9f18:XcodeViewNode" />
+              <item name="Announces" type="fcab9f18:XcodeViewNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Cidr.FilesView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -235,16 +207,18 @@
       <workItem from="1551870531437" duration="712000" />
       <workItem from="1561095180652" duration="1135000" />
       <workItem from="1564203678870" duration="393000" />
+      <workItem from="1569332446235" duration="118000" />
+      <workItem from="1569332583685" duration="328000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5680000" />
+    <option name="totallyTimeSpent" value="6126000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="2560" height="1002" extended-state="6" />
+    <frame x="0" y="23" width="2157" height="1002" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46583852" visible="true" weight="0.14733917" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46583852" visible="true" weight="0.1782506" />
       <window_info id="Designer" order="1" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -264,7 +238,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
-      <window_info anchor="right" id="Structure" order="5" sideWeight="0.5341615" side_tool="true" visible="true" weight="0.06989674" />
+      <window_info anchor="right" id="Structure" order="5" sideWeight="0.5341615" side_tool="true" visible="true" weight="0.08321513" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -295,30 +269,42 @@
     <entry file="file://$PROJECT_DIR$/Podfile">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereeViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="50" column="4" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
-          <folding>
-            <element signature="e#1294#1302#1" />
-            <element signature="e#1376#1384#1" />
-            <element signature="e#1474#1482#1" />
-            <element signature="e#1558#1566#1" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/model/ProtocolRefereeModel.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="2" lean-forward="true" selection-start-column="2" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/model/ProtocolRefereeModel.swift" />
     <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereePresenter.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
-          <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+          <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereeViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="57" column="63" lean-forward="true" selection-start-line="57" selection-start-column="63" selection-end-line="57" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/ru.lproj/Main.strings">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/HomeViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="8" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="35" column="54" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
         </state>
       </provider>
     </entry>
