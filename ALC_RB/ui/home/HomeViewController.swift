@@ -33,6 +33,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var announces_table: UITableView!
+    @IBOutlet weak var headerOfAnnounces_view: UIView!
+    @IBOutlet weak var announces_table_height: NSLayoutConstraint!
     
     private var segmentHelper: SegmentHelper?
     
@@ -53,6 +55,7 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(true)
         
         self.setupAnnouncesDataSource()
+        self.setupGesture()
     }
     
     private func firstInit() {
@@ -67,6 +70,34 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
     
+    func setupGesture() {
+        self.viewContainer.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panGesture(gestureRecognizer:))))
+    }
+    
+    @objc private func panGesture(gestureRecognizer: UIPanGestureRecognizer) {
+        guard gestureRecognizer.view != nil else { return }
+        let piece = gestureRecognizer.view
+        
+        let translation = gestureRecognizer.translation(in: piece?.superview)
+        if gestureRecognizer.state == .began {
+            // Save the view's original position.
+//            self.initialCenter = piece.center
+            Print.m(piece?.center)
+        }
+        // Update the position for the .began, .changed, and .ended states
+        if gestureRecognizer.state != .cancelled {
+            // Add the X and Y translation to the view's original position.
+//            let newCenter = CGPoint(x: initialCenter.x + translation.x, y: initialCenter.y + translation.y)
+//            piece.center = newCenter
+            Print.m("\(translation.x) + \(translation.y)")
+        }
+        else {
+            // On cancellation, return the piece to its original location.
+//            piece.center = initialCenter
+            Print.m("\(piece?.center)")
+        }
+    }
+    
     func setupSegmentHelper() {
         self.segmentHelper = SegmentHelper(self, viewContainer)
     }
@@ -79,9 +110,32 @@ extension HomeViewController {
     }
     
     func setupAnnouncesDataSource() {
-        self.viewModel.fetchAnnounces(completed: { announces in
-//            self.announcesTable?.dataSource = announces
-            self.announces_table.reloadData()
+        let hud = self.announces_table.showLoadingViewHUD()
+        self.viewModel.fetchAnnounces(completed: {
+            hud.hide(animated: true)
+            if self.viewModel.prepareAnnounces() != nil
+            {
+                self.announcesTable?.dataSource = self.viewModel.prepareAnnounces()!
+                self.announces_table.reloadData()
+            }
+            else
+            if self.viewModel.prepareMessage() != nil
+            {
+                self.announces_table.showMessageHUD(message: self.viewModel.prepareMessage()!.message)
+            }
+            else
+            if self.viewModel.prepareError() != nil
+            {
+                let hud = self.announces_table.showButtonHUD
+                {
+                    self.viewModel.fetchAnnounces
+                    {
+                        self.announcesTable!.dataSource = self.viewModel.prepareAnnounces()!
+                        self.announces_table.reloadData()
+                    }
+                }
+                hud.hideAfter()
+            }
         })
     }
     
@@ -90,6 +144,9 @@ extension HomeViewController {
 // MARK: ACTIONS
 
 extension HomeViewController {
+    
+    
+    
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:

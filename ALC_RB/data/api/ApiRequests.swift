@@ -841,19 +841,26 @@ class ApiRequests {
         alamo
             .validate()
             .responseJSON { response in
+//                dump(response)
                 let decoder = JSONDecoder()
                 switch response.result
                 {
                 case .success:
                     do
                     {
+                        Print.m("announces decode start")
                         if let announces = try? decoder.decode(Announce.self, from: response.data!)
                         {
+                            Print.m("announces decode end")
                             get_result(.success(announces))
+                            return
                         }
+                        Print.m("message decode start")
                         if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!)
                         {
+                            Print.m("message decode end")
                             get_result(.message(message))
+                            return
                         }
                     }
                 case .failure(let error):
@@ -861,15 +868,18 @@ class ApiRequests {
                     if (400..<500).contains(statusCode!)
                     {
                         get_result(.failure(.local(error)))
+                        return
                     }
                     else
                         if (500..<600).contains(statusCode!)
                         {
                             get_result(.failure(.server(error)))
+                            return
                         }
                         else
                         {
                             get_result(.failure(.alamofire(error)))
+                            return
                     }
                 }
         }
