@@ -149,6 +149,17 @@ extension HomeViewController: FloatingPanelControllerDelegate {
     func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
         switch newCollection.verticalSizeClass {
         case .compact:
+            Print.m("compact")
+            fpc.surfaceView.borderWidth = 1.0 / traitCollection.displayScale
+            fpc.surfaceView.borderColor = UIColor.black.withAlphaComponent(0.2)
+            return SearchPanelLandscapeLayout()
+        case .regular:
+            Print.m("regular")
+            fpc.surfaceView.borderWidth = 0.0
+            fpc.surfaceView.borderColor = nil
+            return SearchPanelLandscapeLayout()
+        case .unspecified:
+            Print.m("unspecified")
             fpc.surfaceView.borderWidth = 1.0 / traitCollection.displayScale
             fpc.surfaceView.borderColor = UIColor.black.withAlphaComponent(0.2)
             return SearchPanelLandscapeLayout()
@@ -160,13 +171,13 @@ extension HomeViewController: FloatingPanelControllerDelegate {
     }
     
     func floatingPanelDidMove(_ vc: FloatingPanelController) {
-//        let y = vc.surfaceView.frame.origin.y
-//        let tipY = vc.originYOfSurface(for: .tip)
-//        if y > tipY - 44.0 {
-//            let progress = max(0.0, min((tipY  - y) / 44.0, 1.0))
-//            self.announcesVC.announces_table.alpha = progress
-////            self.searchVC.tableView.alpha = progress
-//        }
+        let y = vc.surfaceView.frame.origin.y
+        let tipY = vc.originYOfSurface(for: .tip)
+        if y > tipY - 44.0 {
+            let progress = max(0.0, min((tipY  - y) / 44.0, 1.0))
+            self.announcesVC.announces_table.alpha = progress
+//            self.searchVC.tableView.alpha = progress
+        }
     }
     
     func floatingPanelWillBeginDragging(_ vc: FloatingPanelController) {
@@ -222,13 +233,13 @@ public class SearchPanelLandscapeLayout: FloatingPanelLayout {
     public func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
         if #available(iOS 11.0, *) {
             return [
-                surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 8.0),
-                surfaceView.widthAnchor.constraint(equalToConstant: 291),
+                surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 1.0),
+                surfaceView.widthAnchor.constraint(equalToConstant: view.frame.width),
             ]
         } else {
             return [
-                surfaceView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8.0),
-                surfaceView.widthAnchor.constraint(equalToConstant: 291),
+                surfaceView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 1.0),
+                surfaceView.widthAnchor.constraint(equalToConstant: view.frame.width),
             ]
         }
     }
