@@ -78,7 +78,7 @@ extension HomeViewController {
         fpc.delegate = self
         
         // Initialize FloatingPanelController and add the view
-        fpc.surfaceView.backgroundColor = .clear
+//        fpc.surfaceView.backgroundColor = .clear
         if #available(iOS 11, *) {
             fpc.surfaceView.cornerRadius = 9.0
         } else {
@@ -160,29 +160,30 @@ extension HomeViewController: FloatingPanelControllerDelegate {
     }
     
     func floatingPanelDidMove(_ vc: FloatingPanelController) {
-        let y = vc.surfaceView.frame.origin.y
-        let tipY = vc.originYOfSurface(for: .tip)
-        if y > tipY - 44.0 {
-            let progress = max(0.0, min((tipY  - y) / 44.0, 1.0))
-            self.announcesVC.announces_table.alpha = progress
-//            self.searchVC.tableView.alpha = progress
-        }
+//        let y = vc.surfaceView.frame.origin.y
+//        let tipY = vc.originYOfSurface(for: .tip)
+//        if y > tipY - 44.0 {
+//            let progress = max(0.0, min((tipY  - y) / 44.0, 1.0))
+//            self.announcesVC.announces_table.alpha = progress
+////            self.searchVC.tableView.alpha = progress
+//        }
     }
     
     func floatingPanelWillBeginDragging(_ vc: FloatingPanelController) {
-        if vc.position == .full {
-            Print.m("floating Panel Will Begin Dragging")
-//            announcesVC
-//            searchVC.searchBar.showsCancelButton = false
-//            searchVC.searchBar.resignFirstResponder()
-        }
+//        if vc.position == .full {
+//            Print.m("floating Panel Will Begin Dragging")
+////            announcesVC
+////            searchVC.searchBar.showsCancelButton = false
+////            searchVC.searchBar.resignFirstResponder()
+//        }
+//        Print.m(vc.position)
     }
     
     func floatingPanelDidEndDragging(_ vc: FloatingPanelController, withVelocity velocity: CGPoint, targetPosition: FloatingPanelPosition) {
-        if targetPosition != .full {
-            Print.m("floating Panel Did End Dragging")
-//            searchVC.hideHeader()
-        }
+//        if targetPosition != .full {
+//            Print.m("floating Panel Did End Dragging")
+////            searchVC.hideHeader()
+//        }
         
         UIView.animate(withDuration: 0.25,
                        delay: 0.0,
@@ -202,18 +203,18 @@ extension HomeViewController: FloatingPanelControllerDelegate {
 
 public class SearchPanelLandscapeLayout: FloatingPanelLayout {
     public var initialPosition: FloatingPanelPosition {
-//        return .tip
-        return FloatingPanelPosition.hidden
+        return .tip
+//        return FloatingPanelPosition.tip
     }
     
     public var supportedPositions: Set<FloatingPanelPosition> {
-        return [.full/*, .tip*/]
+        return [.tip, .full]
     }
     
     public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
         switch position {
-        case .full: return 16.0
-//        case .tip: return 69.0
+        case .tip: return 70.0
+        case .full: return 16
         default: return nil
         }
     }

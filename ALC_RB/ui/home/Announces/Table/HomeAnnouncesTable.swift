@@ -24,16 +24,12 @@ final class HomeAnnouncesTable: NSObject {
 }
 
 extension HomeAnnouncesTable: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if actions != nil
-//        {
-//            self.actions?.onCellSelected(model: dataSource[indexPath.row])
-//        }
-////        tableView.deselectRow(at: indexPath, animated: true)
-//    }
-    
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return nil
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if actions != nil
+        {
+            self.actions?.onCellSelected(model: dataSource[indexPath.row])
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
