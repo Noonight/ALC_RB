@@ -76,7 +76,7 @@ private extension AnnouncesVC {
         self.announcesTable = HomeAnnouncesTable(actions: self)
         self.announces_table.dataSource = self.announcesTable
         self.announces_table.delegate = self.announcesTable
-        self.announces_table.register(self.announcesTable.cellNib, forCellReuseIdentifier: HomeScheduleTableViewCell.ID)
+        self.announces_table.register(self.announcesTable.cellNib, forCellReuseIdentifier: HomeAnonunceTableViewCell.ID)
     }
     
     func setupAnnouncesDS() {
@@ -84,14 +84,19 @@ private extension AnnouncesVC {
         self.announcesPresenter.fetchAnnounces(
             success: { announces in
                 self.fSuccess(hud: hud, announces: announces)
+//                self.showHeaderNotificationCounterView()
         }, r_message: { message in
             self.fMessage(hud: hud, message: message)
+//            self.hideHeaderNotificationCounterView()
         }, all_failure: { error in
             self.fAllFailure(hud: hud, error: error)
+//            self.hideHeaderNotificationCounterView()
         }, server_failure: { error in
             self.fServerFailure(hud: hud, error: error)
+//            self.hideHeaderNotificationCounterView()
         }, local_failure: { error in
             self.fLocalFailure(hud: hud, error: error)
+//            self.hideHeaderNotificationCounterView()
         })
     }
 }
@@ -101,7 +106,7 @@ private extension AnnouncesVC {
 extension AnnouncesVC: CellActions {
     func onCellSelected(model: CellModel) {
         if model is AnnounceElement {
-            
+            Print.m((model as! AnnounceElement).content)
         }
     }
 }

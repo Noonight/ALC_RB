@@ -33,13 +33,13 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VkE-Us-yGr">
                                 <rect key="frame" x="0.0" y="72" width="375" height="575"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M0P-Kc-AAt">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Объявления" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOc-tX-dHO">
-                                        <rect key="frame" x="133.5" y="20.5" width="108" height="23"/>
+                                        <rect key="frame" x="133.5" y="25" width="108" height="23"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -53,11 +53,10 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="EOc-tX-dHO" firstAttribute="centerY" secondItem="M0P-Kc-AAt" secondAttribute="centerY" id="LPD-Cy-Zya"/>
                                     <constraint firstAttribute="trailing" secondItem="1Yx-rG-St7" secondAttribute="trailing" constant="16" id="Vu2-F3-j0P"/>
                                     <constraint firstItem="1Yx-rG-St7" firstAttribute="centerY" secondItem="M0P-Kc-AAt" secondAttribute="centerY" id="bzj-0M-jRa"/>
+                                    <constraint firstAttribute="bottom" secondItem="EOc-tX-dHO" secondAttribute="bottom" constant="16" id="hp4-nl-vQN"/>
                                     <constraint firstItem="EOc-tX-dHO" firstAttribute="centerX" secondItem="M0P-Kc-AAt" secondAttribute="centerX" id="mqJ-TQ-Ba8"/>
                                     <constraint firstAttribute="height" constant="64" id="urm-XE-wyn"/>
                                 </constraints>
@@ -76,7 +75,7 @@
                     <blurEffect style="light"/>
                 </visualEffectView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="ziv-nL-zyn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="5Ff-Yy-KQV"/>
                 <constraint firstItem="ziv-nL-zyn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eOk-3J-45T"/>

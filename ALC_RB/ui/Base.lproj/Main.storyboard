@@ -1900,48 +1900,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMa-0m-4H4">
-                                <rect key="frame" x="0.0" y="64" width="320" height="302"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="385"/>
                             </containerView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pJ8-JX-6N4">
-                                <rect key="frame" x="0.0" y="391" width="320" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="yWZ-Zx-1jL"/>
-                                </constraints>
-                            </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZsY-xy-Wls">
-                                <rect key="frame" x="0.0" y="366" width="320" height="25"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GEA-ot-10w">
-                                        <rect key="frame" x="32" y="10.5" width="256" height="4"/>
-                                        <color key="backgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="4" id="EE6-0E-z7E"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" name="linkColor" catalog="System" colorSpace="catalog"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstItem="GEA-ot-10w" firstAttribute="leading" secondItem="ZsY-xy-Wls" secondAttribute="leading" constant="32" id="C3e-sk-meU"/>
-                                    <constraint firstItem="GEA-ot-10w" firstAttribute="centerY" secondItem="ZsY-xy-Wls" secondAttribute="centerY" id="Faf-b0-kJq"/>
-                                    <constraint firstAttribute="trailing" secondItem="GEA-ot-10w" secondAttribute="trailing" constant="32" id="Y26-0a-kUJ"/>
-                                    <constraint firstAttribute="height" constant="25" id="lLW-z3-yG1"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="pJ8-JX-6N4" secondAttribute="trailing" id="B3t-PS-lvb"/>
-                            <constraint firstItem="VTE-9d-6hx" firstAttribute="top" secondItem="pJ8-JX-6N4" secondAttribute="bottom" id="GDG-vD-B2C"/>
-                            <constraint firstItem="ZsY-xy-Wls" firstAttribute="leading" secondItem="pme-s7-nUK" secondAttribute="leading" id="Lo6-eo-CAo"/>
                             <constraint firstItem="mMa-0m-4H4" firstAttribute="trailing" secondItem="pme-s7-nUK" secondAttribute="trailing" id="RqW-xI-uOG"/>
-                            <constraint firstItem="pJ8-JX-6N4" firstAttribute="top" secondItem="ZsY-xy-Wls" secondAttribute="bottom" id="VBb-bT-Znq"/>
-                            <constraint firstItem="ZsY-xy-Wls" firstAttribute="top" secondItem="mMa-0m-4H4" secondAttribute="bottom" id="XSZ-mL-lrw"/>
                             <constraint firstItem="mMa-0m-4H4" firstAttribute="top" secondItem="XhT-gS-21o" secondAttribute="bottom" id="ejP-fF-vMB"/>
                             <constraint firstItem="mMa-0m-4H4" firstAttribute="leading" secondItem="pme-s7-nUK" secondAttribute="leading" id="hMf-rz-kqL"/>
-                            <constraint firstAttribute="trailing" secondItem="ZsY-xy-Wls" secondAttribute="trailing" id="vI2-Jb-jXk"/>
-                            <constraint firstItem="pJ8-JX-6N4" firstAttribute="leading" secondItem="pme-s7-nUK" secondAttribute="leading" id="yR6-oe-W0V"/>
+                            <constraint firstItem="VTE-9d-6hx" firstAttribute="top" secondItem="mMa-0m-4H4" secondAttribute="bottom" constant="70" id="oWT-8r-r7T"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AtB-uw-s3E">
@@ -1961,9 +1928,6 @@
                         </segmentedControl>
                     </navigationItem>
                     <connections>
-                        <outlet property="announces_table" destination="pJ8-JX-6N4" id="SvO-c9-CCL"/>
-                        <outlet property="announces_table_height" destination="yWZ-Zx-1jL" id="uB1-vI-XwV"/>
-                        <outlet property="headerOfAnnounces_view" destination="ZsY-xy-Wls" id="ygV-2V-43P"/>
                         <outlet property="segmentedControl" destination="PD3-2a-Fqy" id="7KJ-TE-2je"/>
                         <outlet property="viewContainer" destination="mMa-0m-4H4" id="xAp-eV-ewY"/>
                     </connections>
@@ -1979,7 +1943,7 @@
                     <tabBar key="tabBar" autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" itemPositioning="centered" id="o00-2z-J5o">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <edgeInsets key="layoutMargins" top="40" left="8" bottom="40" right="8"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
