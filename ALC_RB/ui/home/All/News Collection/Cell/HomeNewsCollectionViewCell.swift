@@ -17,7 +17,7 @@ class HomeNewsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var news_image: UIImageView!
     
     func configure (_ item: NewsElement) {
-        self.title_label.text = item.caption
+        self.title_label.text = item.content
         self.news_image.loadKFImage(path: item.img)
     }
     

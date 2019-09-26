@@ -31,6 +31,15 @@ struct NewsElement: Codable {
     let id, caption, img, content: String
     let createdAt, updatedAt: String
     
+    init(id: String, caption: String, img: String, content: String, createdAt: String, updatedAt: String) {
+        self.id = id
+        self.caption = caption
+        self.img = img
+        self.content = content
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case caption, img, content, createdAt, updatedAt

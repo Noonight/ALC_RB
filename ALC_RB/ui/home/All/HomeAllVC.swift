@@ -25,13 +25,20 @@ final class HomeAllVC: UIViewController {
         
         self.setupNewsTable()
         self.setupScheduleTable()
-//        self.setupAnnouncesTable()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        self.viewModel.updateAll {
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5, execute: {
-                self.setupAllDataSources()
-//            })
-        }
+        self.newsCollection?.dataSource = [
+            NewsElement(id: "1", caption: "1", img: "1", content: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. ", createdAt: "01", updatedAt: "01"),
+            NewsElement(id: "1", caption: "1", img: "1", content: "content 1", createdAt: "01", updatedAt: "01"),
+            NewsElement(id: "1", caption: "1", img: "1", content: "content 1", createdAt: "01", updatedAt: "01"),
+            NewsElement(id: "1", caption: "1", img: "1", content: "content 1", createdAt: "01", updatedAt: "01"),
+            NewsElement(id: "1", caption: "1", img: "1", content: "content 1", createdAt: "01", updatedAt: "01"),
+            NewsElement(id: "1", caption: "1", img: "1", content: "content 1", createdAt: "01", updatedAt: "01"),
+        ]
+        self.news_collection.reloadData()
     }
 }
 
@@ -46,6 +53,7 @@ extension HomeAllVC {
         self.news_collection.delegate = self.newsCollection
         self.news_collection.dataSource = self.newsCollection
         self.news_collection.register(self.newsCollection?.cellNib, forCellWithReuseIdentifier: HomeNewsCollectionViewCell.ID)
+        Print.m("here")
     }
     
     func setupNewsTableDataSource() {
@@ -57,6 +65,7 @@ extension HomeAllVC {
         self.scheduleTable = HomeScheduleTable(actions: self)
         self.matches_table.delegate = self.scheduleTable
         self.matches_table.dataSource = self.scheduleTable
+        Print.m("here")
     }
     
     func setupScheduleTableDataSource() {

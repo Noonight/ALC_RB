@@ -19,13 +19,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="170" height="152"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News news news news news News news news news news News news news news news News news news news news News news news news news" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FqK-rE-Gql">
-                        <rect key="frame" x="0.0" y="0.0" width="170" height="72"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News news news news news News news news news news News news news news news News news news news news News news news news news" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FqK-rE-Gql">
+                        <rect key="frame" x="4" y="0.0" width="162" height="72"/>
+                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="j0b-sc-V24">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="j0b-sc-V24">
                         <rect key="frame" x="0.0" y="72" width="170" height="80"/>
                     </imageView>
                 </subviews>
@@ -34,8 +33,8 @@
                 <constraint firstItem="j0b-sc-V24" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="4LT-Eg-ekz"/>
                 <constraint firstItem="j0b-sc-V24" firstAttribute="top" secondItem="FqK-rE-Gql" secondAttribute="bottom" id="OBD-OM-hck"/>
                 <constraint firstAttribute="trailing" secondItem="j0b-sc-V24" secondAttribute="trailing" id="em4-Np-pc9"/>
-                <constraint firstItem="FqK-rE-Gql" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="h1p-V3-vZH"/>
-                <constraint firstAttribute="trailing" secondItem="FqK-rE-Gql" secondAttribute="trailing" id="jn7-IL-osO"/>
+                <constraint firstItem="FqK-rE-Gql" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="h1p-V3-vZH"/>
+                <constraint firstAttribute="trailing" secondItem="FqK-rE-Gql" secondAttribute="trailing" constant="4" id="jn7-IL-osO"/>
                 <constraint firstItem="FqK-rE-Gql" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="vSK-vv-m7o"/>
                 <constraint firstAttribute="bottom" secondItem="j0b-sc-V24" secondAttribute="bottom" id="y40-NQ-eV2"/>
             </constraints>
@@ -48,7 +47,4 @@
             <point key="canvasLocation" x="137.59999999999999" y="96.251874062968525"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="ic_logo" width="196" height="140"/>
-    </resources>
 </document>

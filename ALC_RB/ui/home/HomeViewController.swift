@@ -101,23 +101,14 @@ extension HomeViewController {
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-//            segmentHelper?.removeAll()
             segmentHelper?.removeAllExcept(vc: fpc)
             segmentHelper?.add(all)
-        case 1: // My tournaments
-//            segmentHelper?.removeAll()
-            segmentHelper?.removeAllExcept(vc: fpc)
-//            segmentHelper?.add(myTournaments)
-            Print.m("hello")
-        case 2: // News
-//            segmentHelper?.removeAll()
+        case 1: // News
             segmentHelper?.removeAllExcept(vc: fpc)
             segmentHelper?.add(newsTable)
-        case 3: // Schedule
-//            segmentHelper?.removeAll()
+        case 2: // Schedule
             segmentHelper?.removeAllExcept(vc: fpc)
-//            segmentHelper?.add(schedule)
-            Print.m("hello")
+//            segmentHelper?.add()
         default:
             break
         }
