@@ -12,7 +12,7 @@ import Kingfisher
 
 extension UIImageView {
     
-    func loadKFImage(path: String, placeholder: UIImage? = UIImage(named: "ic_logo")) {
+    func kfLoadRoundedImage(path: String, placeholder: UIImage? = UIImage(named: "ic_logo")) {
         let url = ApiRoute.getImageURL(image: path)
         let processor = DownsamplingImageProcessor(size: self.frame.size)
             .append(another: CroppingImageProcessorCustom(size: self .frame.size))
@@ -28,6 +28,31 @@ extension UIImageView {
                 .transition(.fade(1)),
                 .cacheOriginalImage
             ])
+    }
+    
+    func kfLoadImage(path: String, placeholder: UIImage? = UIImage(named: "ic_logo")){//, complete: @escaping (UIImage) -> ()?) {
+        let url = ApiRoute.getImageURL(image: path)
+        let processor = DownsamplingImageProcessor(size: self.frame.size)
+//            .append(another: CroppingImageProcessorCustom(size: self .frame.size))
+        
+        self.kf.indicatorType = .activity
+        self.kf.setImage(
+            with: url,
+            placeholder: placeholder,
+            options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ])//, completionHandler: { result in
+//                switch result
+//                {
+//                case .success(let image):
+//                    complete(image.image)
+//                case .failure(let error):
+//                    Print.m(error.errorDescription)
+//                }
+//        })
     }
     
     func animateTap()

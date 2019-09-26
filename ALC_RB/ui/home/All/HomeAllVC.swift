@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 final class HomeAllVC: UIViewController {
 
@@ -18,11 +19,12 @@ final class HomeAllVC: UIViewController {
     var scheduleTable: HomeScheduleTable?
     var announcesTable: HomeAnnouncesTable?
     
-    var viewModel = HomeAllVM(networkRep: HomeAllNetworkRep(dataManager: ApiRequests()))
+    private var homeAllPresenter: HomeAllPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupHomeAllPresenter()
         self.setupNewsTable()
         self.setupScheduleTable()
     }
@@ -30,15 +32,7 @@ final class HomeAllVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.newsCollection?.dataSource = [
-            NewsElement(id: "1", caption: "1", img: "1", content: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. ", createdAt: "01", updatedAt: "01"),
-            NewsElement(id: "1", caption: "1", img: "1", content: "content 1", createdAt: "01", updatedAt: "01"),
-            NewsElement(id: "1", caption: "1", img: "1", content: "content 1", createdAt: "01", updatedAt: "01"),
-            NewsElement(id: "1", caption: "1", img: "1", content: "content 1", createdAt: "01", updatedAt: "01"),
-            NewsElement(id: "1", caption: "1", img: "1", content: "content 1", createdAt: "01", updatedAt: "01"),
-            NewsElement(id: "1", caption: "1", img: "1", content: "content 1", createdAt: "01", updatedAt: "01"),
-        ]
-        self.news_collection.reloadData()
+        self.setupNewsDS()
     }
 }
 
@@ -48,6 +42,10 @@ final class HomeAllVC: UIViewController {
 
 extension HomeAllVC {
     
+    func setupHomeAllPresenter() {
+        self.homeAllPresenter = HomeAllPresenter(dataManager: ApiRequests())
+    }
+    
     func setupNewsTable() {
         self.newsCollection = HomeNewsCollection(actions: self)
         self.news_collection.delegate = self.newsCollection
@@ -56,56 +54,49 @@ extension HomeAllVC {
         Print.m("here")
     }
     
-    func setupNewsTableDataSource() {
-        self.newsCollection!.dataSource = self.viewModel.prepareNewsDataSource()
-        self.news_collection.reloadData()
+    func setupNewsDS() {
+        let  hud = self.news_collection.showLoadingViewHUD()
+        self.homeAllPresenter.fetchNews(success: { news in
+            self.fSuccess(hud: hud, news: news)
+        }, r_message: { message in
+            self.fMessage(hud: hud, message: message)
+        }, failureAll: { error in
+            self.fAllFailure(hud: hud, error: error)
+        }, failureServer: { error in
+            self.fServerFailure(hud: hud, error: error)
+        }, failureLocal: { error in
+            self.fLocalFailure(hud: hud, error: error)
+        })
     }
     
     func setupScheduleTable() {
         self.scheduleTable = HomeScheduleTable(actions: self)
         self.matches_table.delegate = self.scheduleTable
         self.matches_table.dataSource = self.scheduleTable
-        Print.m("here")
     }
     
     func setupScheduleTableDataSource() {
-        self.scheduleTable!.dataSource = self.viewModel.prepareScheduleDataSource()
-        self.matches_table.reloadData()
-    }
-    
-//    func setupAnnouncesTable() {
-//        self.announcesTable = HomeAnnouncesTable(actions: self)
-//        self.announces_table.delegate = self.announcesTable
-//        self.announces_table.dataSource = self.announcesTable
-//    }
-//
-//    func setupAnnouncesTableDataSource() {
-//        self.announcesTable!.dataSource = self.viewModel.prepareAnnouncesDataSource()
-//        self.announces_table.reloadData()
-//    }
-    
-    func setupAllDataSources() {
-        self.setupNewsTableDataSource()
-        self.setupScheduleTableDataSource()
-//        self.setupAnnouncesTableDataSource()
+        
     }
 }
 
 // MARK: ACTIONS
 
-extension HomeAllVC {
-    
-}
-
 extension HomeAllVC: CellActions {
     func onCellSelected(model: CellModel) {
         switch model  {
         case is NewsElement:
-            Print.m("news cell selected")
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let newViewController = storyBoard.instantiateViewController(withIdentifier: "NewsDetailViewController") as! NewsDetailViewController
+//            newViewController.newsElement = (model as! NewsElement)
+//            self.present(newViewController, animated: true, completion: nil)
+//            self.navigationController?.present(newViewController, animated: true, completion: nil)
+            let newsElement = model as! NewsElement
+            newViewController.newsElement = newsElement
+            self.navigationController?.show(newViewController, sender: self)
+//            NewsDetailViewController
         case is MmMatch:
             Print.m("match cell selected")
-        case is AnnounceElement:
-            Print.m("announce cell selected")
         default:
             Print.m("default tap here")
         }
@@ -115,5 +106,35 @@ extension HomeAllVC: CellActions {
 // MARK: HELPERS
 
 extension HomeAllVC {
+    
+    func fSuccess(hud: MBProgressHUD? = nil, news: News) {
+        hud?.hide(animated: true)
+        self.newsCollection?.dataSource = news.news
+        self.news_collection.reloadData()
+    }
+    
+    func fMessage(hud: MBProgressHUD? = nil, message: SingleLineMessage) {
+        hud?.setToButtonHUD(message: message.message, btn: {
+            self.setupNewsDS()
+        })
+    }
+    
+    func fAllFailure(hud: MBProgressHUD? = nil, error: Error) {
+        hud?.setToButtonHUD(message: Constants.Texts.UNDEFINED_FAILURE, detailMessage: error.localizedDescription, btn: {
+            self.setupNewsDS()
+        })
+    }
+    
+    func fServerFailure(hud: MBProgressHUD? = nil, error: Error) {
+        hud?.setToButtonHUD(message: Constants.Texts.SERVER_FAILURE, detailMessage: error.localizedDescription, btn: {
+            self.setupNewsDS()
+        })
+    }
+    
+    func fLocalFailure(hud: MBProgressHUD? = nil, error: Error) {
+        hud?.setToButtonHUD(message: Constants.Texts.FAILURE, detailMessage: error.localizedDescription, btn: {
+            self.setupNewsDS()
+        })
+    }
     
 }

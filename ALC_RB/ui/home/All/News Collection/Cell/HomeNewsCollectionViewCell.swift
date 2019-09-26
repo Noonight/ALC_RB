@@ -17,8 +17,8 @@ class HomeNewsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var news_image: UIImageView!
     
     func configure (_ item: NewsElement) {
-        self.title_label.text = item.content
-        self.news_image.loadKFImage(path: item.img)
+        self.title_label.text = item.caption
+        self.news_image.kfLoadImage(path: item.img)
     }
     
     override func awakeFromNib() {

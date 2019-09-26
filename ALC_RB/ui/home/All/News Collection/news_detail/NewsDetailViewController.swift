@@ -21,25 +21,7 @@ class NewsDetailViewController: UIViewController, MvpView {
     
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
     
-    struct NewsDetailContent {
-        var cTitle: String? = String()
-        var cDate: String? = String()
-        var cText: String? = String()
-        var cImagePath: String? = String()
-        
-        init(title: String, date: String, content: String, imagePath: String) {
-            cTitle = title
-            cDate = date
-            cText = content
-            cImagePath = imagePath
-        }
-    }
-    
-    var content: NewsDetailContent? {
-        didSet {
-            refreshUI()
-        }
-    }
+    var newsElement: NewsElement?
     
     private let presenter = NewsDetailPresenter()
     
@@ -57,10 +39,12 @@ class NewsDetailViewController: UIViewController, MvpView {
     }
     
     func refreshUI() {
-        mTitle?.text = content?.cTitle
-        mDate?.text = content?.cDate
-        mText?.text = content?.cText
-        presenter.getImage(imageName: (content?.cImagePath)!)
+        self.mTitle.text = newsElement?.caption
+        self.title = newsElement?.createdAt.toDate()?.toFormat("MM.dd.yyyy")
+        self.mText.text = newsElement?.content
+        if let imagePath = newsElement?.img {
+            self.presenter.getImage(imageName: imagePath)
+        }
     }
     
     func initPresenter() {

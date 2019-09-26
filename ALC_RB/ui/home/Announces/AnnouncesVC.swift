@@ -17,6 +17,7 @@ final class AnnouncesVC: UIViewController {
     @IBOutlet weak var header_view: UIView!
     @IBOutlet weak var loading_repeat_view: LoadingRepeatView!
     @IBOutlet weak var header_height: NSLayoutConstraint!
+    @IBOutlet weak var text_with_image_label: ImageWithTextInCenter!
     
     private lazy var shadowLayer: CAShapeLayer = CAShapeLayer()
     
@@ -108,15 +109,24 @@ private extension AnnouncesVC {
 
 extension AnnouncesVC: CellActions {
     func onCellSelected(model: CellModel) {
-        if model is AnnounceElement {
-            Print.m((model as! AnnounceElement).content)
-        }
+        if model is AnnounceElement { }
     }
 }
 
 // MARK: HELPERS
 
 extension AnnouncesVC {
+    
+    func showCounter() {
+        self.text_with_image_label.isHidden = false
+        self.text_with_image_label.text = String(self.announcesTable.dataSource.count)
+        self.text_with_image_label.backColor = .orange
+        self.text_with_image_label.textColor = .white
+    }
+    
+    func hideConunter() {
+        self.text_with_image_label.isHidden = true
+    }
     
     func repeatHelper() {
         self.setupAnnouncesDS()
@@ -139,10 +149,12 @@ extension AnnouncesVC {
         self.announcesTable.dataSource = announces.announces
         self.announces_table.reloadData()
         self.loading_repeat_view.isLoadingComplete = true
+        self.showCounter()
     }
     
     func fMessage(hud: MBProgressHUD? = nil, message: SingleLineMessage) {
         self.loading_repeat_view.isLoadingComplete = true
+        self.hideConunter()
         hud?.setToButtonHUD(message: message.message, btn: {
             self.setupAnnouncesDS()
         })
@@ -150,6 +162,7 @@ extension AnnouncesVC {
     
     func fAllFailure(hud: MBProgressHUD? = nil, error: Error) {
         self.loading_repeat_view.isLoadingComplete = true
+        self.hideConunter()
         hud?.setToButtonHUD(message: Constants.Texts.UNDEFINED_FAILURE, detailMessage: error.localizedDescription, btn: {
             self.setupAnnouncesDS()
         })
@@ -157,6 +170,7 @@ extension AnnouncesVC {
     
     func fServerFailure(hud: MBProgressHUD? = nil, error: Error) {
         self.loading_repeat_view.isLoadingComplete = true
+        self.hideConunter()
         hud?.setToButtonHUD(message: Constants.Texts.SERVER_FAILURE, detailMessage: error.localizedDescription, btn: {
             self.setupAnnouncesDS()
         })
@@ -164,6 +178,7 @@ extension AnnouncesVC {
     
     func fLocalFailure(hud: MBProgressHUD? = nil, error: Error) {
         self.loading_repeat_view.isLoadingComplete = true
+        self.hideConunter()
         hud?.setToButtonHUD(message: Constants.Texts.FAILURE, detailMessage: error.localizedDescription, btn: {
             self.setupAnnouncesDS()
         })

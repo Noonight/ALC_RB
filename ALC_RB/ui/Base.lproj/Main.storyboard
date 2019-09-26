@@ -5918,7 +5918,7 @@
         <!--News Detail VC-->
         <scene sceneID="mk7-F8-tCf">
             <objects>
-                <viewController id="Kv1-VO-635" userLabel="News Detail VC" customClass="NewsDetailViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewsDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Kv1-VO-635" userLabel="News Detail VC" customClass="NewsDetailViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dzq-dC-JTa"/>
                         <viewControllerLayoutGuide type="bottom" id="dtq-b9-3ec"/>
@@ -5939,7 +5939,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gba-rZ-hmu">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gba-rZ-hmu">
                                                 <rect key="frame" x="16" y="47" width="288" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.04767975956" green="0.46900761130000002" blue="0.74720400570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -122,11 +122,12 @@ class NewsAnnounceTableViewController: BaseStateTableViewController {
             let destination = segue.destination as? NewsDetailViewController,
             let cellIndex = tableView.indexPathForSelectedRow?.row
         {
-            destination.content = NewsDetailViewController.NewsDetailContent(
-                title: tableData.news.news[cellIndex].caption,
-                date: (tableData.news.news[cellIndex].updatedAt).convertDate(from: .utc, to: .local),
-                content: tableData.news.news[cellIndex].content,
-                imagePath: tableData.news.news[cellIndex].img)
+            destination.newsElement = tableData.news.news[cellIndex]
+//            destination.content = NewsDetailViewController.NewsDetailContent(
+//                title: tableData.news.news[cellIndex].caption,
+//                date: (tableData.news.news[cellIndex].updatedAt).convertDate(from: .utc, to: .local),
+//                content: tableData.news.news[cellIndex].content,
+//                imagePath: tableData.news.news[cellIndex].img)
         }
     }
 }

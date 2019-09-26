@@ -26,11 +26,11 @@ class HomeScheduleTableViewCell: UITableViewCell {
         
         if clubOne?.logo != nil
         {
-            self.team_one_image.loadKFImage(path: (clubOne?.logo)!)
+            self.team_one_image.kfLoadRoundedImage(path: (clubOne?.logo)!)
         }
         if clubTwo?.logo != nil
         {
-            self.team_two_image.loadKFImage(path: (clubTwo?.logo)!)
+            self.team_two_image.kfLoadRoundedImage(path: (clubTwo?.logo)!)
         }
         
         if item.played == true

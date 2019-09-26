@@ -32,10 +32,24 @@ class ImageWithTextInCenter: UIView {
         }
     }
     
-    var backgroundImage: UIImage = #imageLiteral(resourceName: "ic_green_circle") {
+    var backColor: UIColor = .yellow {
         didSet {
-            self.image_view.image = self.backgroundImage
+            self.image_view.image = createImage(color: self.backColor)
         }
+    }
+    
+    private func createImage(color: UIColor) -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: self.width, height: self.width))
+        let img = renderer.image { ctx in
+            ctx.cgContext.setFillColor(color.cgColor)
+            ctx.cgContext.setStrokeColor(color.cgColor)
+            ctx.cgContext.setLineWidth(0)
+            
+            let rectangle = CGRect(x: 0, y: 0, width: self.width, height: self.width)
+            ctx.cgContext.addEllipse(in: rectangle)
+            ctx.cgContext.drawPath(using: .fillStroke)
+        }
+        return img
     }
     
     // MARK: INIT
