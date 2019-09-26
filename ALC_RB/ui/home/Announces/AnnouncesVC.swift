@@ -15,7 +15,7 @@ final class AnnouncesVC: UIViewController {
     @IBOutlet weak var announces_table: UITableView!
     @IBOutlet weak var visual_effect_view: UIVisualEffectView!
     @IBOutlet weak var header_view: UIView!
-    @IBOutlet weak var header_notif_view: ImageWithTextInCenter!
+    @IBOutlet weak var loading_repeat_view: LoadingRepeatView!
     @IBOutlet weak var header_height: NSLayoutConstraint!
     
     private lazy var shadowLayer: CAShapeLayer = CAShapeLayer()
@@ -30,6 +30,7 @@ final class AnnouncesVC: UIViewController {
         
         self.setupAnnouncesPresenter()
         self.setupAnnouncesTable()
+        self.setupLoadingRepeatView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -68,6 +69,12 @@ final class AnnouncesVC: UIViewController {
 
 private extension AnnouncesVC {
     
+    func setupLoadingRepeatView() {
+        self.loading_repeat_view.configureAction {
+            self.repeatHelper()
+        }
+    }
+    
     func setupAnnouncesPresenter() {
         self.announcesPresenter = AnnouncesPresenter(dataManager: ApiRequests())
     }
@@ -81,22 +88,18 @@ private extension AnnouncesVC {
     
     func setupAnnouncesDS() {
         let hud = self.announces_table.showLoadingViewHUD()
+        self.loading_repeat_view.isLoadingComplete = false
         self.announcesPresenter.fetchAnnounces(
             success: { announces in
                 self.fSuccess(hud: hud, announces: announces)
-//                self.showHeaderNotificationCounterView()
         }, r_message: { message in
             self.fMessage(hud: hud, message: message)
-//            self.hideHeaderNotificationCounterView()
         }, all_failure: { error in
             self.fAllFailure(hud: hud, error: error)
-//            self.hideHeaderNotificationCounterView()
         }, server_failure: { error in
             self.fServerFailure(hud: hud, error: error)
-//            self.hideHeaderNotificationCounterView()
         }, local_failure: { error in
             self.fLocalFailure(hud: hud, error: error)
-//            self.hideHeaderNotificationCounterView()
         })
     }
 }
@@ -115,6 +118,10 @@ extension AnnouncesVC: CellActions {
 
 extension AnnouncesVC {
     
+    func repeatHelper() {
+        self.setupAnnouncesDS()
+    }
+    
     func showHeader() {
         UIView.animate(withDuration: 0.25) {
             self.header_height.constant = CGFloat(AnnouncesVC.HEADER_FULL_HEIGHT)
@@ -127,43 +134,36 @@ extension AnnouncesVC {
         }
     }
     
-    func showHeaderNotificationCounterView() {
-        if self.announcesTable.dataSource.count != 0
-        {
-            self.header_notif_view.isHidden = false
-            self.header_notif_view.text = String(self.announcesTable.dataSource.count)
-        }
-    }
-    
-    func hideHeaderNotificationCounterView() {
-        self.header_notif_view.isHidden = true
-    }
-    
     func fSuccess(hud: MBProgressHUD? = nil, announces: Announce) {
         hud?.hide(animated: true)
         self.announcesTable.dataSource = announces.announces
         self.announces_table.reloadData()
+        self.loading_repeat_view.isLoadingComplete = true
     }
     
     func fMessage(hud: MBProgressHUD? = nil, message: SingleLineMessage) {
+        self.loading_repeat_view.isLoadingComplete = true
         hud?.setToButtonHUD(message: message.message, btn: {
             self.setupAnnouncesDS()
         })
     }
     
     func fAllFailure(hud: MBProgressHUD? = nil, error: Error) {
+        self.loading_repeat_view.isLoadingComplete = true
         hud?.setToButtonHUD(message: Constants.Texts.UNDEFINED_FAILURE, detailMessage: error.localizedDescription, btn: {
             self.setupAnnouncesDS()
         })
     }
     
     func fServerFailure(hud: MBProgressHUD? = nil, error: Error) {
+        self.loading_repeat_view.isLoadingComplete = true
         hud?.setToButtonHUD(message: Constants.Texts.SERVER_FAILURE, detailMessage: error.localizedDescription, btn: {
             self.setupAnnouncesDS()
         })
     }
     
     func fLocalFailure(hud: MBProgressHUD? = nil, error: Error) {
+        self.loading_repeat_view.isLoadingComplete = true
         hud?.setToButtonHUD(message: Constants.Texts.FAILURE, detailMessage: error.localizedDescription, btn: {
             self.setupAnnouncesDS()
         })

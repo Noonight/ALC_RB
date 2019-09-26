@@ -17,16 +17,12 @@ class HomeViewController: UIViewController {
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "NewsTableViewController") as! NewsAnnounceTableViewController
         
-        //self.add(childVC: viewController)
-        
         return viewController
     }()
     private lazy var gamesTable: UpcomingGamesTableViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "UpcomingGamesTableViewController") as! UpcomingGamesTableViewController
-        
-        //self.add(childVC: viewController)
         
         return viewController
     }()
@@ -176,26 +172,12 @@ extension HomeViewController: FloatingPanelControllerDelegate {
         if y > tipY - 44.0 {
             let progress = max(0.0, min((tipY  - y) / 44.0, 1.0))
             self.announcesVC.announces_table.alpha = progress
-//            self.searchVC.tableView.alpha = progress
         }
     }
     
-    func floatingPanelWillBeginDragging(_ vc: FloatingPanelController) {
-//        if vc.position == .full {
-//            Print.m("floating Panel Will Begin Dragging")
-////            announcesVC
-////            searchVC.searchBar.showsCancelButton = false
-////            searchVC.searchBar.resignFirstResponder()
-//        }
-//        Print.m(vc.position)
-    }
+    func floatingPanelWillBeginDragging(_ vc: FloatingPanelController) { }
     
     func floatingPanelDidEndDragging(_ vc: FloatingPanelController, withVelocity velocity: CGPoint, targetPosition: FloatingPanelPosition) {
-//        if targetPosition != .full {
-//            Print.m("floating Panel Did End Dragging")
-////            searchVC.hideHeader()
-//        }
-        
         UIView.animate(withDuration: 0.25,
                        delay: 0.0,
                        options: .allowUserInteraction,
@@ -215,7 +197,6 @@ extension HomeViewController: FloatingPanelControllerDelegate {
 public class SearchPanelLandscapeLayout: FloatingPanelLayout {
     public var initialPosition: FloatingPanelPosition {
         return .tip
-//        return FloatingPanelPosition.tip
     }
     
     public var supportedPositions: Set<FloatingPanelPosition> {
