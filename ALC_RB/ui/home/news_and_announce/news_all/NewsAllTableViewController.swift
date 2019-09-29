@@ -35,6 +35,8 @@ class NewsAllTableViewController: BaseStateTableViewController {
 //        self.prepareTableViewRefreshController()
         self.fetch = self.presenter.fetch
         self.prepareEmptyView()
+        
+        self.presenter.fetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {

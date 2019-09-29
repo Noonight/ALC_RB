@@ -27,12 +27,13 @@ final class HomeAllVC: UIViewController {
         self.setupHomeAllPresenter()
         self.setupNewsTable()
         self.setupScheduleTable()
+        
+        self.setupNewsDS()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.setupNewsDS()
     }
 }
 

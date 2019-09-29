@@ -12,10 +12,10 @@ import FloatingPanel
 class HomeViewController: UIViewController {
     
     private lazy var all : HomeAllVC = HomeAllVC()
-    private lazy var newsTable: NewsAnnounceTableViewController = {
+    private lazy var newsTable: NewsAllTableViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
-        var viewController = storyboard.instantiateViewController(withIdentifier: "NewsTableViewController") as! NewsAnnounceTableViewController
+        var viewController = storyboard.instantiateViewController(withIdentifier: "NewsAllTableViewController") as! NewsAllTableViewController
         
         return viewController
     }()
@@ -108,7 +108,7 @@ extension HomeViewController {
             segmentHelper?.add(newsTable)
         case 2: // Schedule
             segmentHelper?.removeAllExcept(vc: fpc)
-//            segmentHelper?.add()
+            segmentHelper?.add(gamesTable)
         default:
             break
         }

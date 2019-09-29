@@ -1917,7 +1917,7 @@
                             <rect key="frame" x="8" y="7" width="304" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
-                                <segment title="" image="tab_home"/>
+                                <segment title="Все"/>
                                 <segment title="Новости"/>
                                 <segment title="Расписание"/>
                             </segments>
@@ -5743,7 +5743,7 @@
         <!--News All TVC-->
         <scene sceneID="Glb-kr-MnD">
             <objects>
-                <tableViewController storyboardIdentifier="NewsAllTableViewController" id="kpc-Jg-Muj" userLabel="News All TVC" customClass="NewsAllTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="NewsAllTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kpc-Jg-Muj" userLabel="News All TVC" customClass="NewsAllTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="kdc-yW-h2q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -7769,7 +7769,7 @@ E9QT2RPhE+QT9hP5E/4AAAAAAAACAQAAAAAAAABXAAAAAAAAAAAAAAAAAAAUAA
     <inferredMetricsTieBreakers>
         <segue reference="j6x-Mv-JVi"/>
         <segue reference="y82-Y0-kHs"/>
-        <segue reference="bxV-uX-kDR"/>
+        <segue reference="M4f-5t-IJv"/>
         <segue reference="zRJ-ru-EFb"/>
     </inferredMetricsTieBreakers>
 </document>

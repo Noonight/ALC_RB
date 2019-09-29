@@ -436,22 +436,46 @@ class ProtocolAllViewModel {
         }
         
         group.notify(queue: .main) {
-            for i in 0...max(teamOneEventsPlayers.count, teamTwoEventsPlayers.count) - 1
+            let maxOf = max(teamOneEventsPlayers.count, teamTwoEventsPlayers.count)
+            if maxOf - 1 >= 0
             {
-                var cellModel = ProtocolAllEventsCellModel()
-                if i <= teamOneEventsPlayers.count - 1
+                for i in 0...maxOf - 1
                 {
-                    cellModel.left_name = teamOneEventsPlayers[i].person.getSurnameNP()
-                    cellModel.left_event = teamOneEventsPlayers[i].event.getSystemEventType()
+                    var cellModel = ProtocolAllEventsCellModel()
+                    if i <= teamOneEventsPlayers.count - 1
+                    {
+                        cellModel.left_name = teamOneEventsPlayers[i].person.getSurnameNP()
+                        cellModel.left_event = teamOneEventsPlayers[i].event.getSystemEventType()
+                    }
+                    if i <= teamTwoEventsPlayers.count - 1
+                    {
+                        cellModel.right_name = teamTwoEventsPlayers[i].person.getSurnameNP()
+                        cellModel.right_event = teamTwoEventsPlayers[i].event.getSystemEventType()
+                    }
+                    resultCells.append(cellModel)
                 }
-                if i <= teamTwoEventsPlayers.count - 1
-                {
-                    cellModel.right_name = teamTwoEventsPlayers[i].person.getSurnameNP()
-                    cellModel.right_event = teamTwoEventsPlayers[i].event.getSystemEventType()
-                }
-                resultCells.append(cellModel)
+                completed(resultCells)
             }
-            completed(resultCells)
+            else
+            {
+                for i in 0...maxOf
+                {
+                    var cellModel = ProtocolAllEventsCellModel()
+                    if i <= teamOneEventsPlayers.count - 1
+                    {
+                        cellModel.left_name = teamOneEventsPlayers[i].person.getSurnameNP()
+                        cellModel.left_event = teamOneEventsPlayers[i].event.getSystemEventType()
+                    }
+                    if i <= teamTwoEventsPlayers.count - 1
+                    {
+                        cellModel.right_name = teamTwoEventsPlayers[i].person.getSurnameNP()
+                        cellModel.right_event = teamTwoEventsPlayers[i].event.getSystemEventType()
+                    }
+                    resultCells.append(cellModel)
+                }
+                completed(resultCells)
+            }
+            
         }
         
     }

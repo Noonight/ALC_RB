@@ -32,12 +32,13 @@ final class AnnouncesVC: UIViewController {
         self.setupAnnouncesPresenter()
         self.setupAnnouncesTable()
         self.setupLoadingRepeatView()
+        
+        self.setupAnnouncesDS()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.setupAnnouncesDS()
     }
     
     override func viewDidLayoutSubviews() {
