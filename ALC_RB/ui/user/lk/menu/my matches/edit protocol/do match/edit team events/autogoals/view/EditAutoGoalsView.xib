@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditAutoGoalsView" customModule="ALC_RB" customModuleProvider="target">
             <connections>
                 <outlet property="accept_button" destination="HD6-Cc-GeE" id="Bh5-tM-Hqu"/>
+                <outlet property="border_view" destination="rRN-59-Hpw" id="3KD-5A-j64"/>
                 <outlet property="container_view" destination="ZXy-L1-NGx" id="SpN-8d-908"/>
                 <outlet property="minus_button" destination="yKs-gq-tfd" id="dnK-Fw-wqE"/>
                 <outlet property="plus_button" destination="vKN-Qe-8ZW" id="ehu-7z-Glk"/>

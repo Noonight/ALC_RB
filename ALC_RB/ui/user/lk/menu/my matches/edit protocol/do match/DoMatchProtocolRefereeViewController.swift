@@ -75,6 +75,9 @@ class DoMatchProtocolRefereeViewController: UIViewController {
     
     @IBOutlet weak var teamOne_width: NSLayoutConstraint!
     
+    @IBOutlet weak var l_team_border_view: DesignableView!
+    @IBOutlet weak var r_team_border_view: DesignableView!
+    
     // MARK: Var & Let
     
     let userDefaults = UserDefaultsHelper()
@@ -96,6 +99,7 @@ class DoMatchProtocolRefereeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupBorderViews()
         self.setupPresenter()
         self.setupTableDataSources()
         self.setupAutogoalsFooter()
@@ -116,6 +120,13 @@ class DoMatchProtocolRefereeViewController: UIViewController {
 // MARK: SETUP
 
 extension DoMatchProtocolRefereeViewController {
+    
+    func setupBorderViews() {
+        self.l_team_border_view.borderWidth = 2
+        self.l_team_border_view.borderColor = .red
+        self.r_team_border_view.borderWidth = 2
+        self.r_team_border_view.borderColor = .red
+    }
     
     func setupNavItemPenalty() {
 //        if self.viewModel.currentTime == .penaltySeries

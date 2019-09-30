@@ -21,6 +21,8 @@ final class EditAutoGoalsView: UIView {
     @IBOutlet weak var plus_button: UIButton!
     @IBOutlet weak var accept_button: UIButton!
     
+    @IBOutlet weak var border_view: DesignableView!
+    
     private var team: String = "" {
         didSet {
             self.team_label.text = team
@@ -67,6 +69,11 @@ final class EditAutoGoalsView: UIView {
         }
     }
     
+    private func setupBorderView() {
+        self.border_view.borderWidth = 1
+        self.border_view.borderColor = .red
+    }
+    
     // MARK: ACTIONS
     
     @objc func onMinusPressed() {
@@ -96,11 +103,13 @@ final class EditAutoGoalsView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         initView()
+        self.setupBorderView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initView()
+        self.setupBorderView()
     }
     
     private func initView() {

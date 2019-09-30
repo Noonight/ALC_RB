@@ -33,6 +33,9 @@ class ModalPenaltySeriesVC: UIViewController {
     
     @IBOutlet weak var undo_last_btn: UIButton!
     
+    @IBOutlet weak var l_score_border_view: DesignableView!
+    @IBOutlet weak var r_score_border_view: DesignableView!
+    
     // MARK: VAR & LET
     
     var teamOneTable: PenaltyTableView = PenaltyTableView()
@@ -58,6 +61,7 @@ class ModalPenaltySeriesVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupViewBorders()
         self.setupStaticViews()
         self.setupTableViewCells()
         self.setupTableViewsDelegate()
@@ -83,6 +87,13 @@ class ModalPenaltySeriesVC: UIViewController {
 // MARK: SETUP
 
 extension ModalPenaltySeriesVC {
+    
+    func setupViewBorders() {
+        l_score_border_view.borderWidth = 2
+        l_score_border_view.borderColor = .red
+        r_score_border_view.borderWidth = 2
+        r_score_border_view.borderColor = .red
+    }
     
     func setupUndoLastBtn() {
         self.undo_last_btn.addTarget(self, action: #selector(onUndoLastPressed(_:)), for: .touchUpInside)

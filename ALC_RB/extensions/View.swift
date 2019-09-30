@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-@IBDesignable
+//@IBDesignable
 class DesignableView: UIView {}
 
-@IBDesignable
+//@IBDesignable
 class DesignableButton: UIButton {}
 
 extension DesignableView {
@@ -26,7 +26,7 @@ extension DesignableView {
     //        }
     //    }
     
-    @IBInspectable
+//    @IBInspectable
     var borderWidth: CGFloat {
         get {
             return layer.borderWidth
@@ -36,7 +36,7 @@ extension DesignableView {
         }
     }
     
-    @IBInspectable
+//    @IBInspectable
     var borderColor: UIColor? {
         get {
             if let color = layer.borderColor {
@@ -102,7 +102,7 @@ extension DesignableView {
 }
 
 extension DesignableButton {
-    @IBInspectable
+//    @IBInspectable
     var borderWidth: CGFloat {
         get {
             return layer.borderWidth
@@ -112,7 +112,7 @@ extension DesignableButton {
         }
     }
     
-    @IBInspectable
+//    @IBInspectable
     var borderColor: UIColor? {
         get {
             if let color = layer.borderColor {

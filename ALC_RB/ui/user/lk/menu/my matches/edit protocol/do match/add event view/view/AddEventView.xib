@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddEventView" customModule="ALC_RB" customModuleProvider="target">
             <connections>
                 <outlet property="active_minus_state_image" destination="29F-lI-Rvo" id="F87-Ff-1gJ"/>
+                <outlet property="border_view" destination="K9C-3k-hgg" id="nxu-Qq-97f"/>
                 <outlet property="container_view" destination="iN0-l3-epB" id="j7I-Mz-IMa"/>
                 <outlet property="failure_penalty_image" destination="SXb-1Q-dju" id="hO8-8B-bKr"/>
                 <outlet property="failure_penalty_label" destination="pLO-DF-bI8" id="mTY-3V-h7w"/>

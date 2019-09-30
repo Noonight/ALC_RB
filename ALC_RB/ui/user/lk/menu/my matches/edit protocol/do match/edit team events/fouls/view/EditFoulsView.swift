@@ -21,6 +21,8 @@ final class EditFoulsView: UIView {
     @IBOutlet var team_label: UILabel!
     @IBOutlet weak var accept_button: UIButton!
     
+    @IBOutlet weak var border_view: DesignableView!
+    
     private var team: String = "" {
         didSet {
             self.team_label.text = team
@@ -91,16 +93,23 @@ final class EditFoulsView: UIView {
         self.minus_button.isEnabled = true
     }
     
+    private func setupBorderView() {
+        self.border_view.borderWidth = 1
+        self.border_view.borderColor = .red
+    }
+    
     // MARK: INIT
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         initView()
+        setupBorderView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initView()
+        setupBorderView()
     }
     
     private func initView() {

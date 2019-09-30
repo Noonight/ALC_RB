@@ -39,6 +39,8 @@ class AddEventView: UIView {
     @IBOutlet weak var active_minus_state_image: UIImageView!
     @IBOutlet weak var rotate_view_image: UIImageView!
     
+    @IBOutlet weak var border_view: DesignableView!
+    
     var callBacks: EventCallBack? {
         didSet {
             setupCallBacks()
@@ -67,6 +69,11 @@ class AddEventView: UIView {
             minus_state_image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onMinusState)))
             rotate_view_image.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onRotateView)))
         }
+    }
+    
+    private func setupBorderView() {
+        self.border_view.borderColor = .blue
+        self.border_view.borderWidth = 2
     }
     
     // MARK: ACTIONS
@@ -142,11 +149,13 @@ class AddEventView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         initView()
+        setupBorderView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initView()
+        setupBorderView()
     }
     
     func initView() {

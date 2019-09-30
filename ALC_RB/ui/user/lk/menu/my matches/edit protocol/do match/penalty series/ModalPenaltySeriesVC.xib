@@ -16,6 +16,8 @@
                 <outlet property="first_team_table" destination="5Zk-2D-igb" id="Gg4-ih-Rw1"/>
                 <outlet property="goal_btn" destination="Fop-Dd-yhT" id="1Ut-B4-osg"/>
                 <outlet property="goal_failure_btn" destination="pqV-zK-C7h" id="4Jw-Z7-EiS"/>
+                <outlet property="l_score_border_view" destination="ecy-Yn-HjE" id="nHg-Ht-dfK"/>
+                <outlet property="r_score_border_view" destination="kc5-OP-qp6" id="Rmr-Iq-7f7"/>
                 <outlet property="score_team_one_label" destination="ibN-uQ-jD2" id="mV2-rz-Q8g"/>
                 <outlet property="score_team_two_label" destination="1ee-tk-0qw" id="FUl-CO-ey4"/>
                 <outlet property="second_team_table" destination="gfe-FZ-m9b" id="up5-jr-EGq"/>

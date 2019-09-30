@@ -58,14 +58,24 @@ class ProtocolAllFooterView: UIView {
         return false
     }
     
+    private func setupBorderViews() {
+        self.left_foul_view.borderWidth = 1
+        self.left_foul_view.borderColor = .red
+        
+        self.right_foul_view.borderWidth = 1
+        self.right_foul_view.borderColor = .red
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         initView()
+        setupBorderViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initView()
+        setupBorderViews()
     }
     
     func initView() {

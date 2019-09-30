@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditFoulsView" customModule="ALC_RB" customModuleProvider="target">
             <connections>
                 <outlet property="accept_button" destination="COI-KJ-hrI" id="clF-nb-evi"/>
+                <outlet property="border_view" destination="niL-fE-FbE" id="JcU-xD-FcC"/>
                 <outlet property="container_view" destination="iN0-l3-epB" id="dce-pa-8o0"/>
                 <outlet property="minus_button" destination="wx4-uY-h78" id="Mct-Wp-cBs"/>
                 <outlet property="plus_button" destination="jYr-pl-jLd" id="C8B-6A-S7G"/>

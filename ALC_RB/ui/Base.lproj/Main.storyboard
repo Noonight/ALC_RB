@@ -4742,8 +4742,10 @@
                     <connections>
                         <outlet property="foulsTeamOneCount_view" destination="OLc-SD-Kk9" id="tUn-gc-vrX"/>
                         <outlet property="foulsTeamTwoCount_view" destination="Kba-Cm-nNf" id="dw0-fo-Ah0"/>
+                        <outlet property="l_team_border_view" destination="OLc-SD-Kk9" id="CQb-1B-rjy"/>
                         <outlet property="playersOne_table" destination="eQv-G9-HmJ" id="5hV-CH-i40"/>
                         <outlet property="playersTwo_table" destination="nH9-dG-YV9" id="REr-FN-CoF"/>
+                        <outlet property="r_team_border_view" destination="Kba-Cm-nNf" id="ZWT-OK-9lE"/>
                         <outlet property="scoreAtTimeTeamOne_label" destination="EqQ-i9-9yB" id="92e-sA-Qfo"/>
                         <outlet property="scoreAtTimeTeamTwo_label" destination="vMM-O7-aEh" id="lz5-3V-TRK"/>
                         <outlet property="score_label" destination="Mmb-JB-qZc" id="BMB-xy-KuS"/>
