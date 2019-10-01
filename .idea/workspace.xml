@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12ca8836-b4f8-4f04-bd9b-95f2ce59baa9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/HomeViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/HomeViewController.swift" afterDir="false" />
-    </list>
+    <list default="true" id="12ca8836-b4f8-4f04-bd9b-95f2ce59baa9" name="Default Changelist" comment="" />
     <ignored path="$USER_HOME$/Library/Developer/Xcode/DerivedData/ALC_RB-criteqptgmpqstfhosiglduwlnxs/" />
     <ignored path="$USER_HOME$/Library/Caches/AppCode2019.1/DerivedData/ALC_RB-diruytnehxazfvekyfnaxzratfak/Build/Intermediates.noindex/" />
     <ignored path="$USER_HOME$/Library/Caches/AppCode2019.1/DerivedData/ALC_RB-aozpwlojhyhfmmgubnddlpvdxbbj/Build/Intermediates.noindex/" />
@@ -13,7 +11,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos_c9dd5ab2cc894e7584136b728eb6461b403f59c6" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos_9f78b08def0293de22dbaa748aa37bcf55ccae55" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
@@ -34,11 +32,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanel.swift">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="453">
               <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/All/Schedule Table/HomeScheduleTable.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
             </state>
           </provider>
         </entry>
@@ -97,7 +104,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
-      <autoscrollToSource ProjectPane="true" />
+      <autoscrollToSource ProjectPane="false" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -132,22 +139,16 @@
               <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
               <item name="ui" type="fcab9f18:XcodeViewNode" />
               <item name="home" type="fcab9f18:XcodeViewNode" />
-              <item name="Announces" type="fcab9f18:XcodeViewNode" />
+              <item name="All" type="fcab9f18:XcodeViewNode" />
             </path>
             <path>
               <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
-              <item name="Pods" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
-              <item name="Pods" type="fcab9f18:XcodeViewNode" />
-              <item name="FloatingPanel" type="fcab9f18:XcodeViewNode" />
+              <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
+              <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
+              <item name="ui" type="fcab9f18:XcodeViewNode" />
+              <item name="home" type="fcab9f18:XcodeViewNode" />
+              <item name="All" type="fcab9f18:XcodeViewNode" />
+              <item name="Schedule Table" type="fcab9f18:XcodeViewNode" />
             </path>
           </expand>
           <select />
@@ -218,18 +219,17 @@
       <workItem from="1564203678870" duration="393000" />
       <workItem from="1569332446235" duration="118000" />
       <workItem from="1569332583685" duration="328000" />
-      <workItem from="1569901766063" duration="1269000" />
+      <workItem from="1569901766063" duration="1670000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7395000" />
+    <option name="totallyTimeSpent" value="7796000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="811" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46583852" visible="true" weight="0.27181688" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.46583852" visible="true" weight="0.27181688" />
       <window_info id="Designer" order="1" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -249,7 +249,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
-      <window_info anchor="right" id="Structure" order="5" sideWeight="0.5341615" side_tool="true" visible="true" weight="0.1981402" />
+      <window_info active="true" anchor="right" id="Structure" order="5" sideWeight="0.5341615" side_tool="true" visible="true" weight="0.1981402" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,6 +344,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="453">
           <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/All/Schedule Table/HomeScheduleTable.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
         </state>
       </provider>
     </entry>

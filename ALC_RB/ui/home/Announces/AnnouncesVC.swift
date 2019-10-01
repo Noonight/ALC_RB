@@ -84,8 +84,13 @@ private extension AnnouncesVC {
     }
     
     func setupAnnouncesDS() {
-        let hud = self.announces_table.showLoadingViewHUD()
+        let hud = self.showLoadingViewHUD(addTo: self.announces_table)
+   
+        self.announces_table.turnOffScroll()
+        self.announces_table.hideSeparator()
+        
         self.loading_repeat_view.isLoadingComplete = false
+        
         self.announcesPresenter.fetchAnnounces(
             success: { announces in
                 self.fSuccess(hud: hud, announces: announces)
@@ -141,10 +146,17 @@ extension AnnouncesVC {
     }
     
     func fSuccess(hud: MBProgressHUD? = nil, announces: Announce) {
-        hud?.hide(animated: true)
+//        hud?.hide(animated: true)
+        hud?.hideAfter(seconds: 4)
+        
+        self.announces_table.turnOnScroll()
+        self.announces_table.showSeparator()
+        
+        self.loading_repeat_view.isLoadingComplete = true
+        
         self.announcesTable.dataSource = announces.announces
         self.announces_table.reloadData()
-        self.loading_repeat_view.isLoadingComplete = true
+        
         self.showCounter()
     }
     

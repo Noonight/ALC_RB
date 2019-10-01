@@ -23,6 +23,8 @@ struct Tournaments: Codable {
     }
 }
 
+extension League: CellModel {}
+
 struct League: Codable {
     var status: String?
     var matches: [String]?

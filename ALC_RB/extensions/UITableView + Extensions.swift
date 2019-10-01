@@ -11,19 +11,32 @@ import MBProgressHUD
 
 extension UITableView {
     
+    func turnOffScroll() {
+        self.isScrollEnabled = false
+        self.alwaysBounceVertical = false
+        self.bounces = false
+    }
+    
+    func turnOnScroll() {
+        self.isScrollEnabled = true
+        self.alwaysBounceVertical = true
+        self.bounces = true
+    }
+    
+    func hideSeparator() {
+        self.separatorStyle = .none
+    }
+    
+    func showSeparator() {
+        self.separatorStyle = .singleLine
+    }
+    
     func showButtonHUD(btn: @escaping () -> ()) -> MBProgressHUD {
         let hud = MBProgressHUD.showAdded(to: self, animated: true)
         hud.backgroundView.style = MBProgressHUDBackgroundStyle.solidColor
         hud.backgroundView.color = UIColor(white: 0, alpha: 0.1)
         
         hud.label.text = Constants.Texts.REPEAT
-        
-//        hud.mode = .determinate
-//
-//        hud.button.addTarget(self, action: #selector(tapOnHud(closure: {
-//            btn()
-//        })), for: .touchUpInside)
-//        hud.button.addTarget
         
         self.tapAction(action: btn)
         

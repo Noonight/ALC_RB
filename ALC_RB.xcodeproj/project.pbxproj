@@ -77,6 +77,7 @@
 		188F097B227BFF8700B827AC /* CommandAddPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */; };
 		189E1C7822C9EC280086E4DA /* LabelSwitchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189E1C7722C9EC280086E4DA /* LabelSwitchView.xib */; };
 		189E1C7A22C9EC3A0086E4DA /* LabelSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E1C7922C9EC3A0086E4DA /* LabelSwitchView.swift */; };
+		18A7ED8723431AB00096D281 /* TournamentsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7ED8623431AB00096D281 /* TournamentsTable.swift */; };
 		18A82A5B22BB7B26006FA050 /* View Controller Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A82A5A22BB7B26006FA050 /* View Controller Alerts.swift */; };
 		18B0F8812302BF6600080196 /* ModalPenaltySeriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B0F87F2302BF6600080196 /* ModalPenaltySeriesVC.swift */; };
 		18B0F8822302BF6600080196 /* ModalPenaltySeriesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B0F8802302BF6600080196 /* ModalPenaltySeriesVC.xib */; };
@@ -179,7 +180,7 @@
 		DB4B1A4E224114D100A9FB97 /* EditClubInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4B1A4D224114D100A9FB97 /* EditClubInfo.swift */; };
 		DB4C45DC22EDDE0600B28148 /* AutoGoalFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4C45DB22EDDE0600B28148 /* AutoGoalFooterView.swift */; };
 		DB4C45DE22EDDE1B00B28148 /* AutoGoalFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB4C45DD22EDDE1B00B28148 /* AutoGoalFooterView.xib */; };
-		DB4C45E022EDFD4900B28148 /* UITableView Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4C45DF22EDFD4900B28148 /* UITableView Extensions.swift */; };
+		DB4C45E022EDFD4900B28148 /* UITableView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4C45DF22EDFD4900B28148 /* UITableView + Extensions.swift */; };
 		DB4FCAF322EEBA2B00A89BE7 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4FCAF222EEBA2B00A89BE7 /* AddEventView.swift */; };
 		DB4FCAF522EEBA3500A89BE7 /* AddEventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB4FCAF422EEBA3500A89BE7 /* AddEventView.xib */; };
 		DB4FCAF822EECC5B00A89BE7 /* EventMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4FCAF722EECC5B00A89BE7 /* EventMaker.swift */; };
@@ -389,6 +390,7 @@
 		188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerViewModel.swift; sourceTree = "<group>"; };
 		189E1C7722C9EC280086E4DA /* LabelSwitchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelSwitchView.xib; sourceTree = "<group>"; };
 		189E1C7922C9EC3A0086E4DA /* LabelSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSwitchView.swift; sourceTree = "<group>"; };
+		18A7ED8623431AB00096D281 /* TournamentsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentsTable.swift; sourceTree = "<group>"; };
 		18A82A5A22BB7B26006FA050 /* View Controller Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View Controller Alerts.swift"; sourceTree = "<group>"; };
 		18B0F87F2302BF6600080196 /* ModalPenaltySeriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPenaltySeriesVC.swift; sourceTree = "<group>"; };
 		18B0F8802302BF6600080196 /* ModalPenaltySeriesVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModalPenaltySeriesVC.xib; sourceTree = "<group>"; };
@@ -495,7 +497,7 @@
 		DB4B1A4D224114D100A9FB97 /* EditClubInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditClubInfo.swift; sourceTree = "<group>"; };
 		DB4C45DB22EDDE0600B28148 /* AutoGoalFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoGoalFooterView.swift; sourceTree = "<group>"; };
 		DB4C45DD22EDDE1B00B28148 /* AutoGoalFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoGoalFooterView.xib; sourceTree = "<group>"; };
-		DB4C45DF22EDFD4900B28148 /* UITableView Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView Extensions.swift"; sourceTree = "<group>"; };
+		DB4C45DF22EDFD4900B28148 /* UITableView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + Extensions.swift"; sourceTree = "<group>"; };
 		DB4FCAF222EEBA2B00A89BE7 /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
 		DB4FCAF422EEBA3500A89BE7 /* AddEventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEventView.xib; sourceTree = "<group>"; };
 		DB4FCAF722EECC5B00A89BE7 /* EventMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMaker.swift; sourceTree = "<group>"; };
@@ -1057,6 +1059,7 @@
 			children = (
 				CE158CE321AD2CE000CEECFE /* TournamentsTableViewController.swift */,
 				DB4A789321C1084B0071BA8F /* TournamentsPresenter.swift */,
+				18A7ED8623431AB00096D281 /* TournamentsTable.swift */,
 				DB4A789221C1082D0071BA8F /* cell */,
 				CE158CE721AD52F900CEECFE /* detail */,
 			);
@@ -1196,7 +1199,7 @@
 				1821150A22E59F22000F86D5 /* CGSize Ext.swift */,
 				DB966A5C22EC589B00064233 /* MBProgressHud Extensions.swift */,
 				18A82A5A22BB7B26006FA050 /* View Controller Alerts.swift */,
-				DB4C45DF22EDFD4900B28148 /* UITableView Extensions.swift */,
+				DB4C45DF22EDFD4900B28148 /* UITableView + Extensions.swift */,
 				1886264422F00E5200DC75E3 /* UITableViewCell+MBProgressHUD.swift */,
 				18EFFAC122F3207200B17947 /* UIBarButtonItem+Custom.swift */,
 				18B0F8832302C5E700080196 /* UIAlertController + Extension.swift */,
@@ -2454,7 +2457,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				048CB342230BD741006CF2A9 /* HomeScheduleTable.swift in Sources */,
-				DB4C45E022EDFD4900B28148 /* UITableView Extensions.swift in Sources */,
+				DB4C45E022EDFD4900B28148 /* UITableView + Extensions.swift in Sources */,
 				187F2DFC22CB19440049EA77 /* EditRefereeProtocolTableViewCell.swift in Sources */,
 				DB5BDB992247CD0E0014C003 /* CommandsLKTableViewController.swift in Sources */,
 				DB4B1A452240AB2C00A9FB97 /* ClubLKViewController.swift in Sources */,
@@ -2654,6 +2657,7 @@
 				18FE29BF22AE1C420094C4D8 /* MenuHelper.swift in Sources */,
 				DB599A8B22F1CF5C002586C1 /* SortMatchesByDateHelper.swift in Sources */,
 				DB98FAD52254B0BC002933D0 /* CommandInvitePlayersTableViewHelper.swift in Sources */,
+				18A7ED8723431AB00096D281 /* TournamentsTable.swift in Sources */,
 				18870B3122C0DD0000126A87 /* ClubCreateViewController.swift in Sources */,
 				CE0AF81D21C7A27900F8F6A2 /* ClubDetailPresenter.swift in Sources */,
 				CE61551F21AFC799008C4463 /* NewsAnnouncePresenter.swift in Sources */,

@@ -57,28 +57,45 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
         let newEmptyView = EmptyViewNew()
         
         //        backgroundView = UIView()
-        backgroundView.frame = tableView.frame
+//        backgroundView.frame = tableView.frame
+//
+//        backgroundView.backgroundColor = .white
+//        backgroundView.addSubview(newEmptyView)
+//
+//        tableView.addSubview(backgroundView)
+//
+//        newEmptyView.setText(text: "На этой неделе нет матчей")
+//
+//        backgroundView.translatesAutoresizingMaskIntoConstraints = true
+//
+//        newEmptyView.setCenterFromParent()
+//        newEmptyView.containerView.setCenterFromParent()
+//
+//        backgroundView.setCenterFromParent()
+//
+//        tableView.bringSubviewToFront(backgroundView)
+//
+////        tableView.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
+////        tableView.backgroundView?.addSubview(empty_view)
+//        tableView.separatorStyle = .none
         
-        backgroundView.backgroundColor = .white
-        backgroundView.addSubview(newEmptyView)
         
-        tableView.addSubview(backgroundView)
-        
-        newEmptyView.setText(text: "На этой неделе нет матчей")
-        
-        backgroundView.translatesAutoresizingMaskIntoConstraints = true
-        
-        newEmptyView.setCenterFromParent()
-        newEmptyView.containerView.setCenterFromParent()
-        
-        backgroundView.setCenterFromParent()
-        
-        tableView.bringSubviewToFront(backgroundView)
-        
-//        tableView.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: tableView.frame.height))
-//        tableView.backgroundView?.addSubview(empty_view)
-        tableView.separatorStyle = .none
 //        empty_view.setCenterFromParent()
+//        let image = #imageLiteral(resourceName: "ic_empty")
+//        let imageView = UIImageView(image: image)
+//        imageView.contentMode = .scaleAspectFit
+//        imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+//        imageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+//        showCustomViewHUD(cView: imageView)
+        
+        showEmptyViewHUD {
+            self.hideHUD()
+            self.showToastHUD(message: "Уже загрузилося")
+        }
+        
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
+//            self.hideHUD()
+//        }
     }
     
     func hideEmptyView() {

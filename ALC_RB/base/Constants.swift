@@ -19,6 +19,8 @@ struct Constants {
         static let REPEAT               = "Повторить..."
         static let SERVER_FAILURE       = "Серверная ошибка!"
         static let UNDEFINED_FAILURE    = "Неизвестная ошибка!"
+        static let NOTHING              = "Ничего нет"
+        static let TAP_FOR_REPEAT       = "Нажмите чтобы перезагрузить..."
     }
 //    struct Images {
 //        static let Q_INFO       = UIImage(named: "ic_info")
