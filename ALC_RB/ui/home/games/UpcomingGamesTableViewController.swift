@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class UpcomingGamesTableViewController: UITableViewController, MvpView {
     
@@ -19,6 +20,8 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
     private let presenter = UpcomingGamesPresenter()
     
     var backgroundView = UIView()
+    
+    private var localHud: MBProgressHUD?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +91,7 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
 //        imageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
 //        showCustomViewHUD(cView: imageView)
         
-        showEmptyViewHUD {
+        self.localHud = showEmptyViewHUD {
             self.hideHUD()
             self.showToastHUD(message: "Уже загрузилося")
         }
@@ -172,5 +175,27 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        hideHUD()
+        if UIDevice.current.orientation.isLandscape
+        {
+            if self.localHud != nil
+            {
+                self.localHud = showEmptyViewHUD {
+                    self.showToastHUD(message: "Smth")
+                }
+            }
+        }
+        else
+        {
+            if self.localHud != nil
+            {
+                self.localHud = showEmptyViewHUD {
+                    self.showToastHUD(message: "Тоже")
+                }
+            }
+        }
     }
 }
