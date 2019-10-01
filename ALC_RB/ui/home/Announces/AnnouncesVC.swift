@@ -35,11 +35,6 @@ final class AnnouncesVC: UIViewController {
         
         self.setupAnnouncesDS()
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

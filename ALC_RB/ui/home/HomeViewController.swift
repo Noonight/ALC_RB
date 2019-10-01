@@ -137,7 +137,7 @@ extension HomeViewController: FloatingPanelControllerDelegate {
         switch newCollection.verticalSizeClass {
         case .compact:
             Print.m("compact")
-            fpc.surfaceView.borderWidth = 1.0 / traitCollection.displayScale
+            fpc.surfaceView.borderWidth = 0.0
             fpc.surfaceView.borderColor = UIColor.black.withAlphaComponent(0.2)
             return SearchPanelLandscapeLayout()
         case .regular:
@@ -203,17 +203,9 @@ public class SearchPanelLandscapeLayout: FloatingPanelLayout {
     }
     
     public func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
-        if #available(iOS 11.0, *) {
-            return [
-                surfaceView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 1.0),
-                surfaceView.widthAnchor.constraint(equalToConstant: view.frame.width),
-            ]
-        } else {
-            return [
-                surfaceView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 1.0),
-                surfaceView.widthAnchor.constraint(equalToConstant: view.frame.width),
-            ]
-        }
+        return [
+            surfaceView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 1.0),                 surfaceView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 1.0)
+        ]
     }
     
     public func backdropAlphaFor(position: FloatingPanelPosition) -> CGFloat {
