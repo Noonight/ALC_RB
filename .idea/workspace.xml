@@ -2,52 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12ca8836-b4f8-4f04-bd9b-95f2ce59baa9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.xib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/base/Result ++.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/base/Result ++.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/Base.lproj/Main.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/Base.lproj/Main.storyboard" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces Table/Cell/HomeAnonunceTableViewCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Table/Cell/HomeAnonunceTableViewCell.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces Table/Cell/HomeAnonunceTableViewCell.xib" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Table/Cell/HomeAnonunceTableViewCell.xib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces Table/HomeAnnouncesTable.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Table/HomeAnnouncesTable.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/HomeViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/HomeViewController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/Podfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Manifest.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Manifest.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Pods-ALC_RB.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Pods-ALC_RB.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxAtomic.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxAtomic.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxCocoa.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxCocoa.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxSwift.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxSwift.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/SwiftDate.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/SwiftDate.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/SwiftyJSON.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/SwiftyJSON.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/UIScrollView-InfiniteScroll.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/UIScrollView-InfiniteScroll.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/AMScrollingNavbar/AMScrollingNavbar.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/AMScrollingNavbar/AMScrollingNavbar.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Alamofire/Alamofire.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Alamofire/Alamofire.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/AlamofireImage/AlamofireImage.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/AlamofireImage/AlamofireImage.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Cache/Cache.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Cache/Cache.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/ESPullToRefresh/ESPullToRefresh.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/ESPullToRefresh/ESPullToRefresh.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Imaginary/Imaginary.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Imaginary/Imaginary.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Kingfisher/Kingfisher.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Kingfisher/Kingfisher.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Lightbox/Lightbox.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Lightbox/Lightbox.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/MBProgressHUD/MBProgressHUD.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/MBProgressHUD/MBProgressHUD.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-acknowledgements.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-acknowledgements.markdown" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-acknowledgements.plist" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-acknowledgements.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.debug.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.release.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/RxCocoa/RxCocoa.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/RxCocoa/RxCocoa.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/RxSwift/RxSwift.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/RxSwift/RxSwift.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/SPStorkController/SPStorkController.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/SPStorkController/SPStorkController.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/SwiftDate/SwiftDate.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/SwiftDate/SwiftDate.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/SwiftyJSON/SwiftyJSON.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/SwiftyJSON/SwiftyJSON.xcconfig" afterDir="false" />
     </list>
     <ignored path="$USER_HOME$/Library/Developer/Xcode/DerivedData/ALC_RB-criteqptgmpqstfhosiglduwlnxs/" />
     <ignored path="$USER_HOME$/Library/Caches/AppCode2019.1/DerivedData/ALC_RB-diruytnehxazfvekyfnaxzratfak/Build/Intermediates.noindex/" />
+    <ignored path="$USER_HOME$/Library/Caches/AppCode2019.1/DerivedData/ALC_RB-aozpwlojhyhfmmgubnddlpvdxbbj/Build/Intermediates.noindex/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,43 +15,62 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos_c9dd5ab2cc894e7584136b728eb6461b403f59c6" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="30">
-                  <caret line="2" column="10" lean-forward="true" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.swift">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
-                  <caret line="35" column="54" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="225">
-                  <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="34" selection-start-line="34" selection-end-line="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/HomeViewController.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="188">
+              <caret line="133" column="50" lean-forward="true" selection-start-line="133" selection-start-column="50" selection-end-line="133" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanel.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="453">
+              <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanelController.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-460">
+              <caret line="141" column="64" lean-forward="true" selection-start-line="141" selection-start-column="64" selection-end-line="141" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanelLayout.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="506" column="17" selection-start-line="506" selection-start-column="17" selection-end-line="506" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanelSurfaceView.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="262">
+              <caret line="157" column="66" lean-forward="true" selection-start-line="157" selection-start-column="66" selection-end-line="157" selection-end-column="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -106,10 +84,12 @@
         <option value="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereePresenter.swift" />
         <option value="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.swift" />
         <option value="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift" />
+        <option value="$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanelLayout.swift" />
+        <option value="$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanelSurfaceView.swift" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="23" />
     <option name="width" value="2157" />
     <option name="height" value="1002" />
@@ -121,8 +101,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Cidr.FilesView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -156,10 +134,27 @@
               <item name="home" type="fcab9f18:XcodeViewNode" />
               <item name="Announces" type="fcab9f18:XcodeViewNode" />
             </path>
+            <path>
+              <item name="" type="efc3779f:XcodeRootNode" />
+              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
+            </path>
+            <path>
+              <item name="" type="efc3779f:XcodeRootNode" />
+              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
+              <item name="Pods" type="fcab9f18:XcodeViewNode" />
+            </path>
+            <path>
+              <item name="" type="efc3779f:XcodeRootNode" />
+              <item name="Pods" type="1d218c8b:XcodeProjectNode" />
+              <item name="Pods" type="fcab9f18:XcodeViewNode" />
+              <item name="FloatingPanel" type="fcab9f18:XcodeViewNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Cidr.FilesView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -182,15 +177,29 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration default="false" name="ALC_RB" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ALC_RB" TARGET_NAME="ALC_RB" CONFIG_NAME="Debug" SCHEME_NAME="ALC_RB" IS_LOCATION_SIMULATION_ALLOWED="true" RUN_TARGET_PROJECT_NAME="ALC_RB" RUN_TARGET_NAME="ALC_RB" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
+  <component name="RunManager" selected="Application.ALC_RB">
+    <configuration default="false" name="ALC_RB" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ALC_RB" TARGET_NAME="ALC_RB" CONFIG_NAME="Debug" SCHEME_NAME="ALC_RB" IS_LOCATION_SIMULATION_ALLOWED="true" APPLICATION_LANGUAGE="IDELaunchSchemeLanguageUseSystemLanguage" APPLICATION_REGION="" RUN_TARGET_PROJECT_NAME="ALC_RB" RUN_TARGET_NAME="ALC_RB" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
       <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
         <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
       </EXTENSION>
+      <embedded_app_extension_list />
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RxAtomic" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="RxAtomic" CONFIG_NAME="Debug" SCHEME_NAME="RxAtomic" IS_LOCATION_SIMULATION_ALLOWED="true" APPLICATION_LANGUAGE="IDELaunchSchemeLanguageUseSystemLanguage" APPLICATION_REGION="" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
+      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
+        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
+      </EXTENSION>
+      <embedded_app_extension_list />
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.ALC_RB" />
+      <item itemvalue="Application.RxAtomic" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -209,16 +218,18 @@
       <workItem from="1564203678870" duration="393000" />
       <workItem from="1569332446235" duration="118000" />
       <workItem from="1569332583685" duration="328000" />
+      <workItem from="1569901766063" duration="1269000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6126000" />
+    <option name="totallyTimeSpent" value="7395000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="2157" height="1002" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="811" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46583852" visible="true" weight="0.1782506" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46583852" visible="true" weight="0.27181688" />
       <window_info id="Designer" order="1" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -238,7 +249,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
-      <window_info anchor="right" id="Structure" order="5" sideWeight="0.5341615" side_tool="true" visible="true" weight="0.08321513" />
+      <window_info anchor="right" id="Structure" order="5" sideWeight="0.5341615" side_tool="true" visible="true" weight="0.1981402" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,24 +298,52 @@
     <entry file="file://$PROJECT_DIR$/ALC_RB/ui/ru.lproj/Main.strings">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/HomeViewController.swift">
+    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="8" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
+        <state relative-caret-position="34">
+          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
-          <caret line="35" column="54" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift">
+    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/HomeViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="38" selection-start-line="15" selection-start-column="38" selection-end-line="15" selection-end-column="38" />
+        <state relative-caret-position="188">
+          <caret line="133" column="50" lean-forward="true" selection-start-line="133" selection-start-column="50" selection-end-line="133" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanelLayout.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="506" column="17" selection-start-line="506" selection-start-column="17" selection-end-line="506" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanelSurfaceView.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="157" column="66" lean-forward="true" selection-start-line="157" selection-start-column="66" selection-end-line="157" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanelController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-460">
+          <caret line="141" column="64" lean-forward="true" selection-start-line="141" selection-start-column="64" selection-end-line="141" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanel.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
         </state>
       </provider>
     </entry>

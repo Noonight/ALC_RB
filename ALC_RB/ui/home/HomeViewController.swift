@@ -139,17 +139,17 @@ extension HomeViewController: FloatingPanelControllerDelegate {
             Print.m("compact")
             fpc.surfaceView.borderWidth = 0.0
             fpc.surfaceView.borderColor = UIColor.black.withAlphaComponent(0.2)
-            return SearchPanelLandscapeLayout()
+            return MyPanelLayout()
         case .regular:
             Print.m("regular")
             fpc.surfaceView.borderWidth = 0.0
             fpc.surfaceView.borderColor = nil
-            return SearchPanelLandscapeLayout()
+            return MyPanelLayout()
         case .unspecified:
             Print.m("unspecified")
             fpc.surfaceView.borderWidth = 1.0 / traitCollection.displayScale
             fpc.surfaceView.borderColor = UIColor.black.withAlphaComponent(0.2)
-            return SearchPanelLandscapeLayout()
+            return MyPanelLayout()
         default:
             fpc.surfaceView.borderWidth = 0.0
             fpc.surfaceView.borderColor = nil
@@ -185,7 +185,7 @@ extension HomeViewController: FloatingPanelControllerDelegate {
 
 // MARK: FloatingPanelLayout
 
-public class SearchPanelLandscapeLayout: FloatingPanelLayout {
+public class MyPanelLayout: FloatingPanelLayout {
     public var initialPosition: FloatingPanelPosition {
         return .tip
     }
@@ -204,7 +204,8 @@ public class SearchPanelLandscapeLayout: FloatingPanelLayout {
     
     public func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
         return [
-            surfaceView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 1.0),                 surfaceView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 1.0)
+            surfaceView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            surfaceView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ]
     }
     
