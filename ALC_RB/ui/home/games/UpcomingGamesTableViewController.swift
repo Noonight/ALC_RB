@@ -177,25 +177,25 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        hideHUD()
-        if UIDevice.current.orientation.isLandscape
-        {
-            if self.localHud != nil
-            {
-                self.localHud = showEmptyViewHUD {
-                    self.showToastHUD(message: "Smth")
-                }
-            }
-        }
-        else
-        {
-            if self.localHud != nil
-            {
-                self.localHud = showEmptyViewHUD {
-                    self.showToastHUD(message: "Тоже")
-                }
-            }
-        }
-    }
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        hideHUD()
+//        if UIDevice.current.orientation.isLandscape
+//        {
+//            if self.localHud != nil
+//            {
+//                self.localHud = showEmptyViewHUD {
+//                    self.showToastHUD(message: "Smth")
+//                }
+//            }
+//        }
+//        else
+//        {
+//            if self.localHud != nil
+//            {
+//                self.localHud = showEmptyViewHUD {
+//                    self.showToastHUD(message: "Тоже")
+//                }
+//            }
+//        }
+//    }
 }

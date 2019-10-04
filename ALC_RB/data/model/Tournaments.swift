@@ -45,9 +45,11 @@ struct League: Codable {
     var teams: [Team]?
     
     func betweenBeginEndDate() -> Bool {
-        let firstDate = beginDate?.toDateCustom(type: .leagueDate)!
-        let lastDate = endDate?.toDateCustom(type: .leagueDate)!
-        return Date().isBetween(firstDate!, and: lastDate!)
+//        let firstDate = beginDate?.toDateCustom(type: .leagueDate)!
+//        let lastDate = endDate?.toDateCustom(type: .leagueDate)!
+        guard let firstDate = beginDate?.toDate()?.date else { return false }//.toFormat(DateFormats.leagueDate.rawValue) else { return false }
+        guard let lastDate = endDate?.toDate()?.date else { return false }//.toFormat(DateFormats.leagueDate.rawValue) else { return false }
+        return Date().isBetween(firstDate, and: lastDate)
     }
     
     func getStatus() -> Statuses {

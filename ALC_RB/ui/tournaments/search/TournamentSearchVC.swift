@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import ActionSheetPicker_3_0
 
 class TournamentSearchVC: UIViewController {
 
     @IBOutlet weak var table_view: UITableView!
+    @IBOutlet weak var region_btn: UIButton!
     
-//    private var tournamentSearchTable: TournamentSearchTable?
+    private var tournamentSearchTable: TournamentSearchTable?
     let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
@@ -23,6 +25,7 @@ class TournamentSearchVC: UIViewController {
 }
 
 // MARK: EXTENSIONS
+
 
 
 // MARK: SETUP
@@ -44,6 +47,16 @@ extension TournamentSearchVC {
     
 }
 
+// MARK: ACTIONS
+
+extension TournamentSearchVC {
+    
+    @IBAction func regionAction(_ sender: UIButton) {
+        Print.m("show region menu")
+        
+    }
+    
+}
 
 // MARK: SEARCH CONTROLLER
 
@@ -89,3 +102,25 @@ extension TournamentSearchVC {
 //    }
 //
 //}
+
+
+// MARK: HELPERS
+
+extension TournamentSearchVC {
+    
+    func showRefereesPicker(sender: UIButton) {
+        
+        let acp = ActionSheetStringPicker(title: "", rows: filteredRefereesWithFullName, initialSelection: 0, doneBlock: { (picker, index, value) in
+            sender.setTitleAndColorWith(title: (self.viewModel?.comingReferees.value.findPersonBy(fullName: value as! String)?.getFullName())!, color: Colors.YES_REF)
+        }, cancel: { (picker) in
+            
+        }, origin: sender)
+        
+        acp?.addCustomButton(withTitle: "Снять", actionBlock: {
+            sender.setTitleAndColorWith(title: Texts.NO_REF, color: Colors.NO_REF)
+        })
+        acp?.show()
+        
+    }
+    
+}
