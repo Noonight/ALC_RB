@@ -83,6 +83,24 @@ extension UIViewController {
         MBProgressHUD.hide(for: self.view, animated: true)
     }
     
+    func showCustomViewHUD(cView: UIView, to: UIView, message: String? = Constants.Texts.NOTHING, detailMessage: String? = Constants.Texts.NOTHING) -> MBProgressHUD {
+        let hud = MBProgressHUD.showAdded(to: to, animated: true)
+        
+        hud.mode = .customView
+        hud.customView = cView
+        hud.backgroundView.style = .solidColor
+        hud.bezelView.style = .solidColor
+        
+        hud.backgroundView.backgroundColor = .white//cView.backgroundColor ?? .white
+        hud.bezelView.backgroundColor = .white//cView.backgroundColor ?? .white
+        
+        hud.label.text = message
+        hud.detailsLabel.text = detailMessage
+//        hud.detailsLabel.textColor = .blue
+        
+        return hud
+    }
+    
     func showCustomViewHUD(cView: UIView, message: String? = Constants.Texts.NOTHING, detailMessage: String? = Constants.Texts.NOTHING) -> MBProgressHUD {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         
@@ -96,7 +114,34 @@ extension UIViewController {
         
         hud.label.text = message
         hud.detailsLabel.text = detailMessage
-//        hud.detailsLabel.textColor = .blue
+        //        hud.detailsLabel.textColor = .blue
+        
+        return hud
+    }
+    
+    func showEmptyViewHUD(addTo: UIView, message: String? = Constants.Texts.NOTHING, detailMessage: String? = Constants.Texts.TAP_FOR_REPEAT, tap: @escaping () -> ()) -> MBProgressHUD {
+        let image = #imageLiteral(resourceName: "ic_empty")
+        let imageView = UIImageView(image: image)
+        if UIDevice.current.orientation.isLandscape {
+            imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        }
+        else
+        {
+            imageView.widthAnchor.constraint(equalToConstant: 160).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: 160).isActive = true
+        }
+        
+        let hud = showCustomViewHUD(cView: imageView, to: addTo, message: message, detailMessage: detailMessage)
+        
+        hud.label.font = UIFont.systemFont(ofSize: 19)
+        hud.detailsLabel.font = UIFont.systemFont(ofSize: 15)
+        hud.detailsLabel.textColor = .blue
+        
+        self.tapAction(action: tap)
+        
+        hud.bezelView.isUserInteractionEnabled = true
+        hud.bezelView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnHud)))
         
         return hud
     }
@@ -117,7 +162,7 @@ extension UIViewController {
         let hud = showCustomViewHUD(cView: imageView, message: message, detailMessage: detailMessage)
         
         hud.label.font = UIFont.systemFont(ofSize: 19)
-        hud.detailsLabel.font = UIFont.systemFont(ofSize: 17)
+        hud.detailsLabel.font = UIFont.systemFont(ofSize: 15)
         hud.detailsLabel.textColor = .blue
         
         self.tapAction(action: tap)

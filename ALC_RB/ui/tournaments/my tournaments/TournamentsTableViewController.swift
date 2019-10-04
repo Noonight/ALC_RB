@@ -17,16 +17,12 @@ class TournamentsTableViewController: BaseStateTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initView()
         
         initPresenter()
+        self.setupTournamentsTable()
         self.fetch = self.presenter.getTournaments
-        refreshData()
         setEmptyMessage(message: "Здесь будут отображаться турниры")
-    }
-    
-    private func initView() {
-        tableView.tableFooterView = UIView()
+        refreshData()
     }
 }
 

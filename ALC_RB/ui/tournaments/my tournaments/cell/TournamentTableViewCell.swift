@@ -36,9 +36,9 @@ class TournamentTableViewCell: UITableViewCell {
             status.isHidden = true
         }
         
-        guard let beginDate = league.beginDate else { return }
-        guard let endDate = league.endDate else { return }
-        self.date.text = (beginDate.toDate()?.toFormat(DateFormats.local.rawValue))! + " - " + (endDate.toDate()?.toFormat(DateFormats.local.rawValue))!
+        guard let beginDate = league.beginDate?.toDate()?.toFormat(DateFormats.local.rawValue) else { return }
+        guard let endDate = league.endDate?.toDate()?.toFormat(DateFormats.local.rawValue) else { return }
+        self.date.text = (beginDate) + " - " + (endDate)
     }
 
 }

@@ -31,6 +31,10 @@ class LeagueDetailViewController: UIViewController {
         static let errorAlertRefresh = "Перезагрузка"
     }
     
+    @IBOutlet weak var announce_view: UIView!
+    @IBOutlet weak var announce_height: NSLayoutConstraint!
+    @IBOutlet weak var announce_label: UILabel!
+    
     private lazy var scheduleTable: ScheduleTableViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
@@ -38,8 +42,6 @@ class LeagueDetailViewController: UIViewController {
         
         viewController.leagueDetailModel.league = self.leagueDetailModel.league
         viewController.leagueDetailModel.leagueInfo = self.leagueDetailModel.leagueInfo
-        
-        //self.add(viewController)
         
         return viewController
     }()
