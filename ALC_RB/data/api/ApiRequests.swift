@@ -744,6 +744,59 @@ class ApiRequests {
     
     // MARK: - GET requests
     
+    func get_tourney(name: String?, limit: Int? = 20, offset: Int? = 0, get_result: @escaping (ResultMy<[Tourney], RequestError>) -> ()) {
+        var parameters: Parameters = [:]
+        if let newName = name {
+            parameters = [
+                "limit": "{" + String(limit!) + "}",
+                "offset": "{" + String(offset!) + "}",
+                "name": "{" + newName + "}"
+            ]
+        } else
+        {
+            parameters = [
+                "limit": "{" + String(limit!) + "}",
+                "offset": "{" + String(offset!) + "}"
+            ]
+        }
+        let alamofireInstance = Alamofire.request(ApiRoute.getApiURL(.tourney), method: .get, parameters: parameters, encoding: JSONEncoding.default)
+        alamofireInstance
+            .responseJSON { response in
+                let decoder = JSONDecoder()
+                
+                switch response.result
+                {
+                case .success:
+                    do
+                    {
+                        if let myRegions = try? decoder.decode([Tourney].self, from: response.data!)
+                        {
+                            get_result(.success(myRegions))
+                        }
+                        if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!)
+                        {
+                            get_result(.message(message))
+                        }
+                    }
+                case .failure(let error):
+                    let statusCode = response.response?.statusCode
+                    if (400..<500).contains(statusCode!)
+                    {
+                        get_result(.failure(.local(error )))
+                    }
+                    else
+                    if (500..<600).contains(statusCode!)
+                    {
+                        get_result(.failure(.server(error)))
+                    }
+                    else
+                    {
+                        get_result(.failure(.alamofire(error)))
+                    }
+                }
+        }
+    }
+    
     func get_regions(get_result: @escaping (ResultMy<[RegionMy], RequestError>) -> ()) {
         let alamofireInstance = Alamofire.request(ApiRoute.getApiURL(.region), method: .get, encoding: JSONEncoding.default)
         alamofireInstance

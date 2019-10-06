@@ -12,8 +12,13 @@ final class TournamentSearchVM {
     
     private var regions: [RegionMy] = []
     private var choosedRegion: RegionMy?
+    private var tourneyMIs: [TourneyModelItem] = []
     
     // MARK: PREPARE
+    
+    func prepareTourneysMI() -> [TourneyModelItem] {
+        return self.tourneyMIs
+    }
     
     func prepareRegions() -> [RegionMy] {
         return self.regions
@@ -23,7 +28,17 @@ final class TournamentSearchVM {
         return self.choosedRegion
     }
     
+    func prepareChoosedTourneyMI() -> [TourneyModelItem] {
+        return self.tourneyMIs.filter { tourney -> Bool in
+            return tourney.isSelected == true
+        }
+    }
+    
     // MARK: UPDATE
+    
+    func updateTourneysMI(tourneysMI: [TourneyModelItem]) {
+        self.tourneyMIs = tourneysMI
+    }
     
     func updateRegions(newRegions: [RegionMy]) {
         self.regions = newRegions
@@ -32,6 +47,12 @@ final class TournamentSearchVM {
     func updateChoosenRegion(newRegion: RegionMy) {
         self.choosedRegion = newRegion
     }
+    
+//    func updateChoosenTourneyMI(tourneyMI: TourneyModelItem) {
+//        for i in 0...tourneyMIs.count - 1 {
+//            if tourneyMI.name ==
+//        }
+//    }
     
 }
 

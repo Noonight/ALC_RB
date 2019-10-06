@@ -31,6 +31,8 @@ class TournamentSearchVC: UIViewController {
         self.setupViewModel()
         self.setupTable()
 //        self.configureSearchController()
+        
+        self.refreshData()
     }
 }
 
@@ -54,6 +56,9 @@ private extension TournamentSearchVC {
         self.tournamentSearchTable = TournamentSearchTable(actions: self)
         self.table_view.delegate = self.tournamentSearchTable
         self.table_view.dataSource = self.tournamentSearchTable
+        self.table_view.register(self.tournamentSearchTable?.cellNib, forCellReuseIdentifier: TournamentSearchTableViewCell.ID)
+        
+        self.table_view.allowsMultipleSelection = true
     }
     
 //    func setupSearchController() {
@@ -75,9 +80,9 @@ private extension TournamentSearchVC {
 
 extension TournamentSearchVC {
     
-    @IBAction func regionAction(_ sender: UIButton) {
+    @IBAction func regionAction(_ sender: ButtonActivity) {
         Print.m("show region menu")
-        
+        showRefereesPicker(sender: sender)
     }
     
 }
@@ -144,6 +149,47 @@ extension TournamentSearchVC: CellActions {
 // MARK: HELPERS
 
 extension TournamentSearchVC {
+    
+    func refreshData() {
+        
+        self.showLoadingViewHUD(addTo: self.table_view)
+        
+        self.presenter?.fetchTourneys(name: nil, success: { tourneys in
+            self.viewModel?.updateTourneysMI(tourneysMI: tourneys.map({ tourney -> TourneyModelItem in
+                return TourneyModelItem(item: tourney)
+            }))
+            self.tournamentSearchTable?.dataSource = self.viewModel?.prepareTourneysMI() ?? []
+            
+            self.table_view.reloadData()
+            self.hideHUD()
+        }, r_message: { r_message in
+            
+            self.hideHUD()
+            self.showAlert(message: r_message.message)
+            
+        }, localError: { error in
+            
+            self.hideHUD()
+            self.showEmptyViewHUD(addTo: self.table_view) {
+                self.refreshData()
+            }
+            
+        }, serverError: { error in
+            
+            self.hideHUD()
+            self.showEmptyViewHUD(addTo: self.table_view) {
+                self.refreshData()
+            }
+            
+        }, alamofireError: { error in
+            
+            self.hideHUD()
+            self.showEmptyViewHUD(addTo: self.table_view) {
+                self.refreshData()
+            }
+            
+        })
+    }
     
     func showRefereesPicker(sender: ButtonActivity) {
         

@@ -18,25 +18,22 @@ class TournamentSearchTableViewCell: UITableViewCell {
     
     static let ID = "tournament_search_cell_id"
     
-    func configure(tournament: Tournaments) {
-//        self.title_label.text = tournament.name
-//        if tournament.status ==
-        
-//        guard let beginDate = tournament.beginDate.toDate()?.toFormat(DateFormats.local.rawValue) else { return }
-//        guard let endDate = tournament.endDate.toDate()?.toFormat(DateFormats.local.rawValue) else { return }
-//        self.date_label.text = beginDate + " - " + endDate
-//        self.count_of_teams_label.text = String(tournament.maxTeams)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    var tourneyModelItem: TourneyModelItem? {
+        didSet {
+            self.title_label.text = tourneyModelItem?.name
+        }
     }
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        selectionStyle = .none
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        accessoryType = selected ? .checkmark : .none
+        
     }
     
 }

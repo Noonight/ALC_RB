@@ -12,7 +12,7 @@ final class TournamentSearchTable: NSObject {
     
     let cellNib = UINib(nibName: "TournamentSearchTableViewCell", bundle: Bundle.main)
     
-    var dataSource: [MmMatch] = []
+    var dataSource: [TourneyModelItem] = []
     
     var actions: CellActions?
     
@@ -23,11 +23,17 @@ final class TournamentSearchTable: NSObject {
 }
 
 extension TournamentSearchTable: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if actions != nil
         {
             self.actions?.onCellSelected(model: dataSource[indexPath.row])
         }
+        self.dataSource[indexPath.row].isSelected = true
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        self.dataSource[indexPath.row].isSelected = false
     }
 }
 
@@ -39,7 +45,7 @@ extension TournamentSearchTable: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TournamentSearchTableViewCell.ID, for: indexPath) as! TournamentSearchTableViewCell
         
-        
+        cell.tourneyModelItem = self.dataSource[indexPath.row]
         
         return cell
     }

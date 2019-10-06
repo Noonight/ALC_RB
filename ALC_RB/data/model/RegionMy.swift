@@ -19,3 +19,5 @@ struct RegionMy: Codable {
 //        case v = "__v"
 //    }
 }
+
+extension RegionMy: CellModel { }
