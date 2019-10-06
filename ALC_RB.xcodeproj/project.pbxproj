@@ -87,6 +87,7 @@
 		189E1C7A22C9EC3A0086E4DA /* LabelSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E1C7922C9EC3A0086E4DA /* LabelSwitchView.swift */; };
 		18A7ED8723431AB00096D281 /* TournamentsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7ED8623431AB00096D281 /* TournamentsTable.swift */; };
 		18A82A5B22BB7B26006FA050 /* View Controller + Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A82A5A22BB7B26006FA050 /* View Controller + Alert.swift */; };
+		18B03029234A586A00B1734B /* LocalTourneys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B03028234A586A00B1734B /* LocalTourneys.swift */; };
 		18B0F8812302BF6600080196 /* ModalPenaltySeriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B0F87F2302BF6600080196 /* ModalPenaltySeriesVC.swift */; };
 		18B0F8822302BF6600080196 /* ModalPenaltySeriesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B0F8802302BF6600080196 /* ModalPenaltySeriesVC.xib */; };
 		18B0F8842302C5E700080196 /* UIAlertController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B0F8832302C5E700080196 /* UIAlertController + Extension.swift */; };
@@ -412,6 +413,7 @@
 		189E1C7922C9EC3A0086E4DA /* LabelSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSwitchView.swift; sourceTree = "<group>"; };
 		18A7ED8623431AB00096D281 /* TournamentsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentsTable.swift; sourceTree = "<group>"; };
 		18A82A5A22BB7B26006FA050 /* View Controller + Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View Controller + Alert.swift"; sourceTree = "<group>"; };
+		18B03028234A586A00B1734B /* LocalTourneys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTourneys.swift; sourceTree = "<group>"; };
 		18B0F87F2302BF6600080196 /* ModalPenaltySeriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPenaltySeriesVC.swift; sourceTree = "<group>"; };
 		18B0F8802302BF6600080196 /* ModalPenaltySeriesVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModalPenaltySeriesVC.xib; sourceTree = "<group>"; };
 		18B0F8832302C5E700080196 /* UIAlertController + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController + Extension.swift"; sourceTree = "<group>"; };
@@ -1143,6 +1145,7 @@
 			isa = PBXGroup;
 			children = (
 				DB1CA1052226B8EE005E1FB9 /* UserDefaultsHelper.swift */,
+				18B03028234A586A00B1734B /* LocalTourneys.swift */,
 				DB673FE122DEFC8C00581E6D /* pagination */,
 				DB673FDC22DDF41F00581E6D /* pages */,
 				CE77AC7C21B0FBB300C0ED0D /* api */,
@@ -2792,6 +2795,7 @@
 				1801B87F2271872300BE0F7C /* CommandAddPlayerPresenter.swift in Sources */,
 				DBA77C2022CF4192000DCF02 /* ProtocolPlayersController.swift in Sources */,
 				DB932DE722C900C800C060C2 /* RefereeEditMatchesLKPresenter.swift in Sources */,
+				18B03029234A586A00B1734B /* LocalTourneys.swift in Sources */,
 				DB986B5D22FDBE0A0050AC8F /* EditAutoGoalsView.swift in Sources */,
 				18A82A5B22BB7B26006FA050 /* View Controller + Alert.swift in Sources */,
 				DBC5C5FA2220128100B0A1B6 /* UITextField.swift in Sources */,
