@@ -16,8 +16,22 @@ final class TournamentSearchPresenter {
         self.dataManager = dataManager
     }
     
-    func fetchRegions(success: @escaping (Regions) -> ()) {
-        
+    func fetchRegions(success: @escaping ([RegionMy]) -> (), r_message: @escaping (SingleLineMessage) -> (), localError: @escaping (Error) -> (), serverError: @escaping (Error) -> (), alamofireError: @escaping (Error) -> ()) {
+        self.dataManager.get_regions { resultMy in
+            switch resultMy
+            {
+            case .success(let regions):
+                success(regions)
+            case .message(let message):
+                r_message(message)
+            case .failure(.alamofire(let error)):
+                alamofireError(error)
+            case .failure(.local(let error)):
+                localError(error)
+            case .failure(.server(let error)):
+                serverError(error)
+            }
+        }
     }
     
 }

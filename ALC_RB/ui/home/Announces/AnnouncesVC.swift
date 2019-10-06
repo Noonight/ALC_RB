@@ -66,6 +66,8 @@ final class AnnouncesVC: UIViewController {
 
 // MARK: EXTENSIONS
 
+
+
 // MARK: SETUP
 
 private extension AnnouncesVC {
@@ -115,6 +117,21 @@ private extension AnnouncesVC {
 extension AnnouncesVC: CellActions {
     func onCellSelected(model: CellModel) {
         if model is AnnounceElement { }
+    }
+}
+
+// MARK: STATE
+
+extension AnnouncesVC {
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape
+        {
+            self.view.layoutIfNeeded()
+        }
+        else
+        {
+            self.view.layoutIfNeeded()
+        }
     }
 }
 

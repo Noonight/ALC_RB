@@ -11,15 +11,25 @@ import ActionSheetPicker_3_0
 
 class TournamentSearchVC: UIViewController {
 
-    @IBOutlet weak var table_view: UITableView!
-    @IBOutlet weak var region_btn: UIButton!
+    enum Texts {
+        static let REGION_NOT_FOUND_LOCAL_ERROR = "Регион не найден."
+    }
     
+    @IBOutlet weak var table_view: UITableView!
+    @IBOutlet weak var region_btn: ButtonActivity!
+    
+    private var presenter: TournamentSearchPresenter?
+    private var viewModel: TournamentSearchVM?
     private var tournamentSearchTable: TournamentSearchTable?
     let searchController = UISearchController(searchResultsController: nil)
+    private var acp: ActionSheetStringPicker?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupPresenter()
+        self.setupViewModel()
+        self.setupTable()
 //        self.configureSearchController()
     }
 }
@@ -30,9 +40,23 @@ class TournamentSearchVC: UIViewController {
 
 // MARK: SETUP
 
-extension TournamentSearchVC {
+private extension TournamentSearchVC {
     
-//    func configureSearchController() {
+    func setupViewModel() {
+        self.viewModel = TournamentSearchVM()
+    }
+    
+    func setupPresenter() {
+        self.presenter = TournamentSearchPresenter(dataManager: ApiRequests())
+    }
+    
+    func setupTable() {
+        self.tournamentSearchTable = TournamentSearchTable(actions: self)
+        self.table_view.delegate = self.tournamentSearchTable
+        self.table_view.dataSource = self.tournamentSearchTable
+    }
+    
+//    func setupSearchController() {
 //        searchController.searchResultsUpdater = self
 //        searchController.obscuresBackgroundDuringPresentation = false
 //        searchController.searchBar.placeholder = "Поиск игроков"
@@ -55,6 +79,19 @@ extension TournamentSearchVC {
         Print.m("show region menu")
         
     }
+    
+}
+
+extension TournamentSearchVC: CellActions {
+    func onCellSelected(model: CellModel) {
+        switch model {
+        case is RegionMy:
+            Print.m(model as! RegionMy)
+        default:
+            break
+        }
+    }
+    
     
 }
 
@@ -108,19 +145,64 @@ extension TournamentSearchVC {
 
 extension TournamentSearchVC {
     
-    func showRefereesPicker(sender: UIButton) {
+    func showRefereesPicker(sender: ButtonActivity) {
         
-        let acp = ActionSheetStringPicker(title: "", rows: filteredRefereesWithFullName, initialSelection: 0, doneBlock: { (picker, index, value) in
-            sender.setTitleAndColorWith(title: (self.viewModel?.comingReferees.value.findPersonBy(fullName: value as! String)?.getFullName())!, color: Colors.YES_REF)
-        }, cancel: { (picker) in
+        // show button's activity indicator
+        sender.showLoading()
+        
+        self.presenter?.fetchRegions(success: { regions in
             
-        }, origin: sender)
-        
-        acp?.addCustomButton(withTitle: "Снять", actionBlock: {
-            sender.setTitleAndColorWith(title: Texts.NO_REF, color: Colors.NO_REF)
+            // hide button's activity indicator
+            sender.hideLoading()
+            
+            self.viewModel?.updateRegions(newRegions: regions)
+            
+            self.acp = ActionSheetStringPicker(title: sender.titleLabel?.text, rows: self.viewModel?.prepareRegions().map { regionMy -> String in
+                return regionMy.name
+            }, initialSelection: 0, doneBlock: { (picker, index, value) in
+                
+                if let choosedRegion = self.viewModel?.findRegionByName(name: value as! String) {
+                    
+                    self.viewModel?.updateChoosenRegion(newRegion: choosedRegion)
+                    
+                    sender.setTitle(choosedRegion.name, for: .normal)
+                }
+                else
+                {
+                    self.acp?.hideWithCancelAction()
+                    self.showAlert(message: Texts.REGION_NOT_FOUND_LOCAL_ERROR)
+                }
+            }, cancel: { (picker) in
+                Print.m("acp cancel")
+            }, origin: sender)
+            
+            self.acp?.show()
+            
+        }, r_message: { r_message in
+            
+            sender.hideLoading()
+            self.showAlert(title: Constants.Texts.NOTHING, message: r_message.message)
+            
+        }, localError: { error in
+            
+            sender.hideLoading()
+            self.showAlert(title: Constants.Texts.FAILURE, message: error.localizedDescription)
+            
+        }, serverError: { error in
+            
+            sender.hideLoading()
+            self.showAlert(title: Constants.Texts.SERVER_FAILURE, message: error.localizedDescription)
+            
+        }, alamofireError: { error in
+            
+            sender.hideLoading()
+            self.showAlert(title: Constants.Texts.FAILURE, message: error.localizedDescription)
+            
         })
-        acp?.show()
         
+//        acp?.addCustomButton(withTitle: "Снять", actionBlock: {
+//            sender.setTitleAndColorWith(title: Texts.NO_REF, color: Colors.NO_REF)
+//        })
     }
     
 }
