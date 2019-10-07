@@ -35,7 +35,7 @@ final class TournamentSearchPresenter {
     }
     
     func fetchTourneys(name: String?, limit: Int? = 20, offset: Int? = 0, success: @escaping ([Tourney]) -> (), r_message: @escaping (SingleLineMessage) -> (), localError: @escaping (Error) -> (), serverError: @escaping (Error) -> (), alamofireError: @escaping (Error) -> ()) {
-        self.dataManager.get_tourney(name: name) { tourneys in
+        self.dataManager.get_tourney(name: name, limit: limit, offset: offset) { tourneys in
             switch tourneys
             {
             case .success(let tourney):

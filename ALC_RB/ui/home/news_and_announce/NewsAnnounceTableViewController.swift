@@ -24,7 +24,7 @@ class NewsAnnounceTableViewController: BaseStateTableViewController {
     
     struct NewsTableData {
         var news: News = News()
-        var announces: Announce = Announce()
+        var announces: [Announce] = []
         
         let header = [
             "НОВОСТИ", "ОБЪЯВЛЕНИЯ"
@@ -46,7 +46,7 @@ class NewsAnnounceTableViewController: BaseStateTableViewController {
             }
             if (section == 1) {
                 if (announces.count < countItemsOfSection) {
-                    return announces.announces.count
+                    return announces.count
                 }
                 return countItemsOfSection
             }
@@ -148,7 +148,7 @@ extension NewsAnnounceTableViewController: NewsAnnounceView {
         Print.m(error)
     }
     
-    func onFetchAnnouncesSuccess(announces: Announce) {
+    func onFetchAnnouncesSuccess(announces: [Announce]) {
         tableData.announces = announces
     }
     
@@ -190,7 +190,7 @@ extension NewsAnnounceTableViewController {
             return cellNews!
         }
         if (indexPath.section == 1) {
-            cellAnnounce?.content?.text = tableData.announces.announces[indexPath.row].content
+            cellAnnounce?.content?.text = tableData.announces[indexPath.row].content
             
             return cellAnnounce!
         }

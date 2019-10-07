@@ -13,7 +13,7 @@ protocol NewsAnnounceView: MvpView {
     func onFetchNewsSuccess(news: News)
     func onFetchNewsFailure(error: Error)
     
-    func onFetchAnnouncesSuccess(announces: Announce)
+    func onFetchAnnouncesSuccess(announces: [Announce])
     func onFetchAnnouncesFailure(error: Error)
     
     func fetchSuccessful()

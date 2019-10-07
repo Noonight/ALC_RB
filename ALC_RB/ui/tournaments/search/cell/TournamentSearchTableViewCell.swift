@@ -21,6 +21,7 @@ class TournamentSearchTableViewCell: UITableViewCell {
     var tourneyModelItem: TourneyModelItem? {
         didSet {
             self.title_label.text = tourneyModelItem?.name
+            self.setupCheckmark()
         }
     }
 
@@ -34,6 +35,17 @@ class TournamentSearchTableViewCell: UITableViewCell {
 
         accessoryType = selected ? .checkmark : .none
         
+    }
+    
+    private func setupCheckmark() {
+        if self.tourneyModelItem?.isSelected == true
+        {
+            accessoryType = .checkmark
+        }
+        else
+        {
+            accessoryType = .none
+        }
     }
     
 }

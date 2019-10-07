@@ -83,6 +83,10 @@ extension UIViewController {
         MBProgressHUD.hide(for: self.view, animated: true)
     }
     
+    func hideHUD(forView: UIView) {
+        MBProgressHUD.hide(for: forView, animated: true)
+    }
+    
     func showCustomViewHUD(cView: UIView, to: UIView, message: String? = Constants.Texts.NOTHING, detailMessage: String? = Constants.Texts.NOTHING) -> MBProgressHUD {
         let hud = MBProgressHUD.showAdded(to: to, animated: true)
         

@@ -10,6 +10,8 @@ import Foundation
 
 final class TournamentSearchVM {
     
+    private let localTourneys = LocalTourneys()
+    
     private var regions: [RegionMy] = []
     private var choosedRegion: RegionMy?
     private var tourneyMIs: [TourneyModelItem] = []
@@ -21,6 +23,7 @@ final class TournamentSearchVM {
     }
     
     func prepareRegions() -> [RegionMy] {
+        
         return self.regions
     }
     
@@ -36,8 +39,10 @@ final class TournamentSearchVM {
     
     // MARK: UPDATE
     
-    func updateTourneysMI(tourneysMI: [TourneyModelItem]) {
-        self.tourneyMIs = tourneysMI
+    func updateTourneys(tourneys: [Tourney]) {
+        self.tourneyMIs = getSelectedTourneysAndNot(tourneys: tourneys)
+//        Print.m(getSelectedTourneysAndNot(tourneys: tourneys))
+//        self.tourneyMIs = tourneysMI
     }
     
     func updateRegions(newRegions: [RegionMy]) {
@@ -59,6 +64,103 @@ final class TournamentSearchVM {
 // MARK: HELPERS
 
 extension TournamentSearchVM {
+    
+    func getSelectedTourneysAndNot(tourneys: [Tourney]) -> [TourneyModelItem] {
+        let alreadyChoosedTourneys = self.localTourneys.getLocalTourneyIds()
+        
+        var resultArray: [TourneyModelItem] = []
+        
+        if alreadyChoosedTourneys.count != 0
+        {
+            if tourneys.count - 1 >= 0
+            {
+                for i in 0...tourneys.count - 1
+                {
+                    if alreadyChoosedTourneys.count - 1 >= 0
+                    {
+                        for j in 0...alreadyChoosedTourneys.count - 1
+                        {
+                            if tourneys[i].id == alreadyChoosedTourneys[j].id
+                            {
+                                let tourneyModelItem = TourneyModelItem(item: tourneys[i])
+                                tourneyModelItem.isSelected = true
+                                resultArray.append(tourneyModelItem)
+                            }
+                            else
+                            {
+                                resultArray.append(TourneyModelItem(item: tourneys[i]))
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for j in 0...alreadyChoosedTourneys.count
+                        {
+                            if tourneys[i].id == alreadyChoosedTourneys[j].id
+                            {
+                                let tourneyModelItem = TourneyModelItem(item: tourneys[i])
+                                tourneyModelItem.isSelected = true
+                                resultArray.append(tourneyModelItem)
+                            }
+                            else
+                            {
+                                
+                                resultArray.append(TourneyModelItem(item: tourneys[i]))
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            else
+            {
+                for i in 0...tourneys.count
+                {
+                    if alreadyChoosedTourneys.count - 1 >= 0
+                    {
+                        for j in 0...alreadyChoosedTourneys.count - 1
+                        {
+                            if tourneys[i].id == alreadyChoosedTourneys[j].id
+                            {
+                                let tourneyModelItem = TourneyModelItem(item: tourneys[i])
+                                tourneyModelItem.isSelected = true
+                                resultArray.append(tourneyModelItem)
+                            }
+                            else
+                            {
+                                resultArray.append(TourneyModelItem(item: tourneys[i]))
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for j in 0...alreadyChoosedTourneys.count
+                        {
+                            if tourneys[i].id == alreadyChoosedTourneys[j].id
+                            {
+                                let tourneyModelItem = TourneyModelItem(item: tourneys[i])
+                                tourneyModelItem.isSelected = true
+                                resultArray.append(tourneyModelItem)
+                            }
+                            else
+                            {
+                                resultArray.append(TourneyModelItem(item: tourneys[i]))
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
+        else
+        {
+            resultArray = tourneys.map({ tourney -> TourneyModelItem in
+                return TourneyModelItem(item: tourney)
+            })
+        }
+        
+        return resultArray
+    }
     
     func findRegionByName(name: String) -> RegionMy? {
         return self.regions.filter { region -> Bool in

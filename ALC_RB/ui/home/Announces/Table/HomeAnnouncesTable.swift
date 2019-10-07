@@ -8,13 +8,13 @@
 
 import UIKit
 
-extension AnnounceElement : CellModel {}
+extension Announce : CellModel {}
 
 final class HomeAnnouncesTable: NSObject {
     
     let cellNib = UINib(nibName: "HomeAnonunceTableViewCell", bundle: Bundle.main)
     
-    var dataSource: [AnnounceElement] = []
+    var dataSource: [Announce] = []
     var actions: CellActions?
     
     init(actions: CellActions) {

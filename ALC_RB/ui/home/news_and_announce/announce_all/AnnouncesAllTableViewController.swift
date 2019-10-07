@@ -13,7 +13,7 @@ class AnnounceAllTableViewController: BaseStateTableViewController {
     // MARK: - Var & Let
     let cellId = "cell_announce_date"
     
-    var tableData: Announce? /*{
+    var tableData: [Announce]? /*{
         didSet {
             if tableData?.count == 0 {
                 self.setState(state: .empty)
@@ -90,14 +90,14 @@ class AnnounceAllTableViewController: BaseStateTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (tableData?.announces.count)!
+        return (tableData?.count)!
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? AnnounceDateTableViewCell
 
-        cell?.content.text = tableData?.announces[indexPath.row].content
-        cell?.date.text = tableData?.announces[indexPath.row].date.convertDate(from: .utc, to: .local)
+        cell?.content.text = tableData?[indexPath.row].content
+        cell?.date.text = tableData?[indexPath.row].date.toFormat(DateFormats.local.rawValue)//convertDate(from: .utc, to: .local)
         
         return cell!
     }
@@ -109,7 +109,7 @@ class AnnounceAllTableViewController: BaseStateTableViewController {
 }
 
 extension AnnounceAllTableViewController : AnnouncesAllView {
-    func fetchAnnouncesSuccess(announces: Announce) {
+    func fetchAnnouncesSuccess(announces: [Announce]) {
         self.tableData = announces
         endRefreshing()
     }

@@ -88,10 +88,10 @@ extension TournamentsTableViewController: TournamentsView {
     
     func onGetTournamentSuccess(tournament: Tournaments) {
 //        self.tournaments = tournament
-        if self.tournamentsTable != nil
-        {
-            self.tournamentsTable?.dataSource = tournament.leagues
-        }
+//        if self.tournamentsTable != nil
+//        {
+//            self.tournamentsTable?.dataSource = tournament.leagues
+//        }
         endRefreshing()
     }
     

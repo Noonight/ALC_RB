@@ -745,40 +745,45 @@ class ApiRequests {
     // MARK: - GET requests
     
     func get_tourney(name: String?, limit: Int? = 20, offset: Int? = 0, get_result: @escaping (ResultMy<[Tourney], RequestError>) -> ()) {
-        var parameters: Parameters = [:]
+        var header: HTTPHeaders = [:]
         if let newName = name {
-            parameters = [
+            header = [
                 "limit": "{" + String(limit!) + "}",
                 "offset": "{" + String(offset!) + "}",
                 "name": "{" + newName + "}"
             ]
         } else
         {
-            parameters = [
+            header = [
                 "limit": "{" + String(limit!) + "}",
                 "offset": "{" + String(offset!) + "}"
             ]
         }
-        let alamofireInstance = Alamofire.request(ApiRoute.getApiURL(.tourney), method: .get, parameters: parameters, encoding: JSONEncoding.default)
+        
+//        Print.m(name)
+        
+        let alamofireInstance = Alamofire.request(ApiRoute.getApiURL(.tourney), method: .get, encoding: JSONEncoding.default, headers: header)
         alamofireInstance
             .responseJSON { response in
-                let decoder = JSONDecoder()
-                
+                let decoder = ISO8601Decoder.getDecoder()
                 switch response.result
                 {
                 case .success:
                     do
                     {
-                        if let myRegions = try? decoder.decode([Tourney].self, from: response.data!)
+                        if let tourneys = try? decoder.decode([Tourney].self, from: response.data!)
                         {
-                            get_result(.success(myRegions))
+//                            Print.m("decode tourneys")
+                            get_result(.success(tourneys))
                         }
                         if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!)
                         {
+//                            Print.m("decode message")
                             get_result(.message(message))
                         }
                     }
                 case .failure(let error):
+                    Print.m("failure \(error)")
                     let statusCode = response.response?.statusCode
                     if (400..<500).contains(statusCode!)
                     {
@@ -928,20 +933,20 @@ class ApiRequests {
         }
     }
     
-    func get_announces(get_result: @escaping (ResultMy<Announce, RequestError>) -> ()) {
+    func get_announces(get_result: @escaping (ResultMy<[Announce], RequestError>) -> ()) {
         let alamo = Alamofire.request(ApiRoute.getApiURL(.announce))
         alamo
             .validate()
             .responseJSON { response in
-//                dump(response)
-                let decoder = JSONDecoder()
+                let decoder = ISO8601Decoder.getDecoder()
                 switch response.result
                 {
                 case .success:
                     do
                     {
-                        if let announces = try? decoder.decode(Announce.self, from: response.data!)
+                        if let announces = try? decoder.decode([Announce].self, from: response.data!)
                         {
+                            Print.m(announces)
                             get_result(.success(announces))
                             return
                         }
@@ -1410,7 +1415,7 @@ class ApiRequests {
         }
     }
     
-    func get_announces(success: @escaping (Announce) -> (), failure: @escaping (Error) -> ()) {
+    func get_announces(success: @escaping ([Announce]) -> (), failure: @escaping (Error) -> ()) {
         Alamofire
             .request(ApiRoute.getApiURL(.announce))
             .responseAnnounce { response in

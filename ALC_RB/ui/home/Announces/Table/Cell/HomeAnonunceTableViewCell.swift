@@ -14,7 +14,7 @@ class HomeAnonunceTableViewCell: UITableViewCell {
     
     @IBOutlet weak var text_label: UILabel!
     
-    func configure(_ item: AnnounceElement) {
+    func configure(_ item: Announce) {
         self.text_label.text = item.content
     }
     

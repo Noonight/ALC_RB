@@ -16,8 +16,9 @@ final class AnnouncesPresenter {
         self.dataManager = dataManager
     }
     
-    func fetchAnnounces(success: @escaping (Announce) -> (), r_message: @escaping (SingleLineMessage) -> (), all_failure: @escaping (Error) -> (), server_failure: @escaping (Error) -> (), local_failure: @escaping (Error) -> () ) {
+    func fetchAnnounces(success: @escaping ([Announce]) -> (), r_message: @escaping (SingleLineMessage) -> (), all_failure: @escaping (Error) -> (), server_failure: @escaping (Error) -> (), local_failure: @escaping (Error) -> () ) {
         self.dataManager.get_announces { result in
+            Print.m(result)
             switch result
             {
             case .success(let announces):

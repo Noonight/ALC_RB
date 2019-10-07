@@ -54,7 +54,6 @@ extension HomeAllVC {
         self.news_collection.delegate = self.newsCollection
         self.news_collection.dataSource = self.newsCollection
         self.news_collection.register(self.newsCollection?.cellNib, forCellWithReuseIdentifier: HomeNewsCollectionViewCell.ID)
-        Print.m("here")
     }
     
     func setupNewsDS() {

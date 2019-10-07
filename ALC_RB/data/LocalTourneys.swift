@@ -13,17 +13,17 @@ class LocalTourneys {
     let userKey = "localTourneys"
     let userDefaults = UserDefaults.standard
     
-    func getLocalTourneyIds() -> [String]? {
+    func getLocalTourneyIds() -> [Tourney] {
         do {
-            let tourneyIds = try self.userDefaults.get(objectType: [String].self, forKey: userKey)
-            return tourneyIds
+            let tourneyIds = try self.userDefaults.get(objectType: [Tourney].self, forKey: userKey)
+            return tourneyIds ?? []
         } catch {
             print("Some error with getting tourney from UserDefaults")
         }
-        return nil
+        return []
     }
     
-    func setLocalTourneyIds(tourneyIds: [String]) {
+    func setLocalTourneyIds(tourneyIds: [Tourney]) {
         do {
             try userDefaults.set(object: tourneyIds, forKey: userKey)
         } catch {

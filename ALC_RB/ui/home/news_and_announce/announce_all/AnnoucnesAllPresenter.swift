@@ -9,7 +9,7 @@
 import Foundation
 
 protocol AnnouncesAllView : MvpView {
-    func fetchAnnouncesSuccess(announces: Announce)
+    func fetchAnnouncesSuccess(announces: [Announce])
     func fetchAnnouncesFailure(error: Error)
 }
 

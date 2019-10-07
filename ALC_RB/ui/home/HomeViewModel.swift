@@ -10,7 +10,7 @@ import Foundation
 
 final class HomeViewModel {
     
-    private var announces: Announce?
+    private var announces: [Announce]?
     private var message: SingleLineMessage?
     private var error: RequestError?
     
@@ -18,8 +18,8 @@ final class HomeViewModel {
     
     // MARK: PREPARE
     
-    func prepareAnnounces() -> [AnnounceElement]? {
-        return announces?.announces
+    func prepareAnnounces() -> [Announce]? {
+        return announces
     }
     
     func prepareMessage() -> SingleLineMessage? {
@@ -40,7 +40,7 @@ final class HomeViewModel {
 //        }
 //    }
     
-    func fetchAnnounces(success: @escaping (Announce) -> (), rMessage: @escaping (SingleLineMessage) -> (), failureAll: @escaping (Error) -> (), failureServer: @escaping (Error) -> (), failureLocal: @escaping (Error) -> ()) {
+    func fetchAnnounces(success: @escaping ([Announce]) -> (), rMessage: @escaping (SingleLineMessage) -> (), failureAll: @escaping (Error) -> (), failureServer: @escaping (Error) -> (), failureLocal: @escaping (Error) -> ()) {
         dataManager.get_announces { result in
             switch result
             {

@@ -12,7 +12,7 @@ class TourneyModelItem {
     private var item: Tourney
     
     var isSelected = false
-    var name: String {
+    var name: String? {
         return item.name
     }
     

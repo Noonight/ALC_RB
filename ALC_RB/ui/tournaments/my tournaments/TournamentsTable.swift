@@ -10,7 +10,7 @@ import UIKit
 
 final class TournamentsTable: NSObject {
     
-    var dataSource: [League] = []
+    var dataSource: [TourneyModelItem] = []
     var cellActions: CellActions?
     
     init(actions: CellActions) {
@@ -36,7 +36,7 @@ extension TournamentsTable: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TournamentTableViewCell.ID) as! TournamentTableViewCell
         
-        cell.configure(league: dataSource[indexPath.row])
+        cell.tourney = dataSource[indexPath.row]
         
         return cell
     }

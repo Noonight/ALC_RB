@@ -98,15 +98,19 @@ private extension AnnouncesVC {
         self.loading_repeat_view.isLoadingComplete = false
         
         self.announcesPresenter.fetchAnnounces(
-            success: { announces in
-                self.fSuccess(hud: hud, announces: announces)
+            success: { announces_r in
+                Print.m(announces_r)
+                self.fSuccess(hud: hud, announces: announces_r)
         }, r_message: { message in
             self.fMessage(hud: hud, message: message)
         }, all_failure: { error in
+            Print.m(error)
             self.fAllFailure(hud: hud, error: error)
         }, server_failure: { error in
+            Print.m(error)
             self.fServerFailure(hud: hud, error: error)
         }, local_failure: { error in
+            Print.m(error)
             self.fLocalFailure(hud: hud, error: error)
         })
     }
@@ -116,7 +120,7 @@ private extension AnnouncesVC {
 
 extension AnnouncesVC: CellActions {
     func onCellSelected(model: CellModel) {
-        if model is AnnounceElement { }
+        if model is Announce { }
     }
 }
 
@@ -166,7 +170,7 @@ extension AnnouncesVC {
         }
     }
     
-    func fSuccess(hud: MBProgressHUD? = nil, announces: Announce) {
+    func fSuccess(hud: MBProgressHUD? = nil, announces: [Announce]) {
         hud?.hide(animated: true)
         
         self.announces_table.turnOnScroll()
@@ -174,7 +178,7 @@ extension AnnouncesVC {
         
         self.loading_repeat_view.isLoadingComplete = true
         
-        self.announcesTable.dataSource = announces.announces
+        self.announcesTable.dataSource = announces
         self.announces_table.reloadData()
         
         self.showCounter()

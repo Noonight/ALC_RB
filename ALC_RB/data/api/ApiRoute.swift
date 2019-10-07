@@ -48,9 +48,9 @@ struct ApiRoute {
 
 enum Routes: String {
     case news = "news"
-    case announce = "announce"
+    case announce = "crud/announce"
     case ads = "ads"
-    case upcomingMatches = "matches/upcoming"
+//    case upcomingMatches = "matches/upcoming"
     case clubs = "clubs"
     case tournaments = "leagues/all"
     case leagueInfo = "leagues/league"
@@ -60,6 +60,7 @@ enum Routes: String {
     case refreshUser = "refresh" // get user in header token of authorized user
     case region = "region"
     case tourney = "tourney"
+    case upcomingMatches = "upcoming/matches"
     
     case post_auth = "signin"
     case post_reg = "signup"

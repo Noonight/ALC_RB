@@ -122,7 +122,7 @@ extension HomeViewController {
 extension HomeViewController: CellActions {
     func onCellSelected(model: CellModel) {
         switch model {
-        case is AnnounceElement:
+        case is Announce:
             Print.m("the model of element is AnnounceElement")
             return
         default:
@@ -138,17 +138,17 @@ extension HomeViewController: FloatingPanelControllerDelegate {
     func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
         switch newCollection.verticalSizeClass {
         case .compact:
-            Print.m("compact")
+//            Print.m("compact")
             fpc.surfaceView.borderWidth = 0.0
             fpc.surfaceView.borderColor = UIColor.black.withAlphaComponent(0.2)
             return MyPanelLayout()
         case .regular:
-            Print.m("regular")
+//            Print.m("regular")
             fpc.surfaceView.borderWidth = 0.0
             fpc.surfaceView.borderColor = nil
             return MyPanelLayout()
         case .unspecified:
-            Print.m("unspecified")
+//            Print.m("unspecified")
             fpc.surfaceView.borderWidth = 1.0 / traitCollection.displayScale
             fpc.surfaceView.borderColor = UIColor.black.withAlphaComponent(0.2)
             return MyPanelLayout()
