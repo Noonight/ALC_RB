@@ -2883,14 +2883,14 @@
                         <viewControllerLayoutGuide type="bottom" id="z5v-Uk-bh2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EDO-rh-n1O">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="719"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCH-JD-Ole">
-                                <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="699"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ud-00-Ytq" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="563"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="577"/>
                                         <subviews>
                                             <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_add_photo" translatesAutoresizingMaskIntoConstraints="NO" id="DIA-GZ-Jra">
                                                 <rect key="frame" x="116" y="20" width="88" height="88"/>
@@ -2945,14 +2945,14 @@
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="hgp-Rn-6Qg">
-                                                <rect key="frame" x="16" y="339" width="288" height="216"/>
+                                                <rect key="frame" x="16" y="369" width="288" height="200"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="216" id="36H-Iv-eEH"/>
+                                                    <constraint firstAttribute="height" constant="200" id="36H-Iv-eEH"/>
                                                 </constraints>
                                                 <locale key="locale" localeIdentifier="ru_RU"/>
                                             </datePicker>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата рождения" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5B5-bn-jgS">
-                                                <rect key="frame" x="16" y="314" width="288" height="17"/>
+                                                <rect key="frame" x="16" y="352" width="288" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="17" id="8cW-FZ-W2m"/>
                                                 </constraints>
@@ -2960,18 +2960,29 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Регион" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eHV-Qc-Kxk" userLabel="Region Text Field">
+                                                <rect key="frame" x="16" y="314" width="288" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="taO-XP-wus"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="eHV-Qc-Kxk" secondAttribute="trailing" constant="16" id="19c-la-cyC"/>
                                             <constraint firstAttribute="trailing" secondItem="5B5-bn-jgS" secondAttribute="trailing" constant="16" id="1NF-Z6-ct1"/>
+                                            <constraint firstItem="5B5-bn-jgS" firstAttribute="top" secondItem="eHV-Qc-Kxk" secondAttribute="bottom" constant="8" id="1eX-Fl-Jap"/>
+                                            <constraint firstItem="eHV-Qc-Kxk" firstAttribute="top" secondItem="kFd-UT-zLb" secondAttribute="bottom" constant="8" id="1vG-5R-r31"/>
                                             <constraint firstItem="xGT-yl-wu4" firstAttribute="top" secondItem="DIA-GZ-Jra" secondAttribute="bottom" constant="16" id="22O-vr-Mac"/>
                                             <constraint firstItem="xGT-yl-wu4" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="2Br-6e-hEK"/>
                                             <constraint firstAttribute="trailing" secondItem="kFd-UT-zLb" secondAttribute="trailing" constant="16" id="4Jn-6j-Iuh"/>
                                             <constraint firstItem="DIA-GZ-Jra" firstAttribute="top" secondItem="5ud-00-Ytq" secondAttribute="top" constant="20" id="4XG-d6-j6d"/>
+                                            <constraint firstItem="eHV-Qc-Kxk" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="512-ma-MEg"/>
                                             <constraint firstItem="hgp-Rn-6Qg" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="68j-s7-NUg"/>
                                             <constraint firstItem="kFd-UT-zLb" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="E9l-KQ-gyM"/>
                                             <constraint firstItem="qyt-nw-RhY" firstAttribute="top" secondItem="xGT-yl-wu4" secondAttribute="bottom" constant="8" id="EJc-Yv-aqo"/>
-                                            <constraint firstItem="5B5-bn-jgS" firstAttribute="top" secondItem="kFd-UT-zLb" secondAttribute="bottom" constant="8" id="HaZ-sI-QHX"/>
                                             <constraint firstItem="kFd-UT-zLb" firstAttribute="top" secondItem="ucj-BO-9XC" secondAttribute="bottom" constant="8" id="Ky9-mS-dB6"/>
                                             <constraint firstItem="Mje-64-Syy" firstAttribute="top" secondItem="qyt-nw-RhY" secondAttribute="bottom" constant="8" id="PWD-kI-B1c"/>
                                             <constraint firstAttribute="trailing" secondItem="Mje-64-Syy" secondAttribute="trailing" constant="16" id="SUZ-zt-KLb"/>
@@ -2981,7 +2992,7 @@
                                             <constraint firstItem="ucj-BO-9XC" firstAttribute="top" secondItem="Mje-64-Syy" secondAttribute="bottom" constant="8" id="b3Q-46-1Ot"/>
                                             <constraint firstAttribute="trailing" secondItem="hgp-Rn-6Qg" secondAttribute="trailing" constant="16" id="cqf-vG-p30"/>
                                             <constraint firstItem="5B5-bn-jgS" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="gnd-4x-P8E"/>
-                                            <constraint firstItem="hgp-Rn-6Qg" firstAttribute="top" secondItem="5B5-bn-jgS" secondAttribute="bottom" constant="8" id="m3k-Sz-f97"/>
+                                            <constraint firstItem="hgp-Rn-6Qg" firstAttribute="top" secondItem="5B5-bn-jgS" secondAttribute="bottom" id="m3k-Sz-f97"/>
                                             <constraint firstItem="Mje-64-Syy" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="mZR-5F-13M"/>
                                             <constraint firstAttribute="trailing" secondItem="ucj-BO-9XC" secondAttribute="trailing" constant="16" id="nc9-3a-Bic"/>
                                             <constraint firstItem="ucj-BO-9XC" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="o6i-Bj-AbK"/>
@@ -3015,6 +3026,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <size key="freeformSize" width="320" height="768"/>
                     <connections>
                         <outlet property="barCompleteButton" destination="qJk-kD-x8w" id="Q2n-J3-gwR"/>
                         <outlet property="birthdayPicker" destination="hgp-Rn-6Qg" id="DsC-Q5-Jvz"/>
@@ -3034,7 +3046,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1119" y="237"/>
+            <point key="canvasLocation" x="-1117.5" y="341.19718309859155"/>
         </scene>
         <!--User VC-->
         <scene sceneID="sUy-e4-y0B">
@@ -6382,14 +6394,14 @@
                         <viewControllerLayoutGuide type="bottom" id="eLF-pd-ZkX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zD9-xN-5gd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="668"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zI-Tx-dSh">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="604"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="woy-Ku-Yer" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="525"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="539"/>
                                         <subviews>
                                             <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_add_photo" translatesAutoresizingMaskIntoConstraints="NO" id="XZ4-Oi-don">
                                                 <rect key="frame" x="116" y="20" width="88" height="88"/>
@@ -6435,15 +6447,8 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" textContentType="username"/>
                                             </textField>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="Nbi-6E-Cv7">
-                                                <rect key="frame" x="16" y="301" width="288" height="216"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="216" id="2DO-JX-cyg"/>
-                                                </constraints>
-                                                <locale key="locale" localeIdentifier="ru_RU"/>
-                                            </datePicker>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата рождения" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qiw-iV-Ggc">
-                                                <rect key="frame" x="16" y="276" width="288" height="17"/>
+                                                <rect key="frame" x="16" y="314" width="288" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="17" id="l6p-Xi-06B"/>
                                                 </constraints>
@@ -6451,12 +6456,29 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Регион" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zM5-nv-9Zo" userLabel="RegionTF">
+                                                <rect key="frame" x="16" y="276" width="288" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="VZs-m5-1XP"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                            </textField>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="Nbi-6E-Cv7">
+                                                <rect key="frame" x="16" y="331" width="288" height="200"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="2DO-JX-cyg"/>
+                                                </constraints>
+                                                <locale key="locale" localeIdentifier="ru_RU"/>
+                                            </datePicker>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="feO-Bv-Vw8" firstAttribute="leading" secondItem="woy-Ku-Yer" secondAttribute="leading" constant="16" id="1bb-tm-rGI"/>
                                             <constraint firstItem="TWP-aj-nKo" firstAttribute="leading" secondItem="woy-Ku-Yer" secondAttribute="leading" constant="16" id="1nM-ao-hgZ"/>
                                             <constraint firstItem="XZ4-Oi-don" firstAttribute="top" secondItem="woy-Ku-Yer" secondAttribute="top" constant="20" id="6QJ-Ri-GAR"/>
+                                            <constraint firstItem="Qiw-iV-Ggc" firstAttribute="top" secondItem="zM5-nv-9Zo" secondAttribute="bottom" constant="8" id="Fg1-f9-dfF"/>
+                                            <constraint firstItem="zM5-nv-9Zo" firstAttribute="top" secondItem="TWP-aj-nKo" secondAttribute="bottom" constant="8" id="G3c-Ub-v1G"/>
                                             <constraint firstAttribute="trailing" secondItem="Qiw-iV-Ggc" secondAttribute="trailing" constant="16" id="HJU-p2-SDE"/>
                                             <constraint firstItem="Qiw-iV-Ggc" firstAttribute="leading" secondItem="woy-Ku-Yer" secondAttribute="leading" constant="16" id="K3b-c3-6ex"/>
                                             <constraint firstItem="Evc-2b-piX" firstAttribute="top" secondItem="XZ4-Oi-don" secondAttribute="bottom" constant="16" id="KBJ-pm-0Rw"/>
@@ -6466,14 +6488,15 @@
                                             <constraint firstAttribute="trailing" secondItem="feO-Bv-Vw8" secondAttribute="trailing" constant="16" id="OEz-jo-fuc"/>
                                             <constraint firstItem="ZFY-07-wgT" firstAttribute="top" secondItem="feO-Bv-Vw8" secondAttribute="bottom" constant="8" id="PT4-rl-zIj"/>
                                             <constraint firstItem="Evc-2b-piX" firstAttribute="leading" secondItem="woy-Ku-Yer" secondAttribute="leading" constant="16" id="S60-Gg-tp9"/>
-                                            <constraint firstItem="Qiw-iV-Ggc" firstAttribute="top" secondItem="TWP-aj-nKo" secondAttribute="bottom" constant="8" id="TXS-My-H6k"/>
                                             <constraint firstItem="TWP-aj-nKo" firstAttribute="top" secondItem="ZFY-07-wgT" secondAttribute="bottom" constant="8" id="crv-W6-dGa"/>
                                             <constraint firstAttribute="bottom" secondItem="Nbi-6E-Cv7" secondAttribute="bottom" constant="8" id="eyT-9W-fw3"/>
                                             <constraint firstAttribute="trailing" secondItem="ZFY-07-wgT" secondAttribute="trailing" constant="16" id="k6u-FT-s3p"/>
+                                            <constraint firstItem="zM5-nv-9Zo" firstAttribute="leading" secondItem="woy-Ku-Yer" secondAttribute="leading" constant="16" id="kYl-fy-dv5"/>
                                             <constraint firstAttribute="trailing" secondItem="Evc-2b-piX" secondAttribute="trailing" constant="16" id="kkE-Xk-bUS"/>
-                                            <constraint firstItem="Nbi-6E-Cv7" firstAttribute="top" secondItem="Qiw-iV-Ggc" secondAttribute="bottom" constant="8" id="p75-QL-g6P"/>
+                                            <constraint firstItem="Nbi-6E-Cv7" firstAttribute="top" secondItem="Qiw-iV-Ggc" secondAttribute="bottom" id="p75-QL-g6P"/>
                                             <constraint firstItem="Nbi-6E-Cv7" firstAttribute="leading" secondItem="woy-Ku-Yer" secondAttribute="leading" constant="16" id="pYe-8w-q9F"/>
                                             <constraint firstItem="XZ4-Oi-don" firstAttribute="centerX" secondItem="woy-Ku-Yer" secondAttribute="centerX" id="pvW-R1-Tp0"/>
+                                            <constraint firstAttribute="trailing" secondItem="zM5-nv-9Zo" secondAttribute="trailing" constant="16" id="qVT-6g-Rsa"/>
                                             <constraint firstItem="feO-Bv-Vw8" firstAttribute="top" secondItem="Evc-2b-piX" secondAttribute="bottom" constant="8" id="sTf-iM-EuE"/>
                                         </constraints>
                                     </view>
@@ -6504,6 +6527,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <size key="freeformSize" width="320" height="668"/>
                     <connections>
                         <outlet property="barSaveBtn" destination="UEe-3G-91V" id="lgw-pI-B8a"/>
                         <outlet property="datePicker" destination="Nbi-6E-Cv7" id="5n0-3I-BYX"/>
@@ -6522,7 +6546,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="624" y="237"/>
+            <point key="canvasLocation" x="622.5" y="236.61971830985917"/>
         </scene>
         <!--Счет protocol-->
         <scene sceneID="7aK-DX-Nn7">
