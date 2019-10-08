@@ -172,8 +172,13 @@ class NewsAllTableViewController: BaseStateTableViewController {
         }
     }
 }
+
 // MARK: - Extensions
+
+
+
 // MARK: - Presenter
+
 extension NewsAllTableViewController: NewsAllView {
     func fetchNewsSuccessful(news: News) {
         self.tableData = news
