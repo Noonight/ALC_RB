@@ -47,6 +47,7 @@
 		18375E31234A34C300E77809 /* TourneyModelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18375E30234A34C300E77809 /* TourneyModelItem.swift */; };
 		1839244822C7500D00A644F5 /* EditMatchReferees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1839244722C7500D00A644F5 /* EditMatchReferees.swift */; };
 		1839244A22C7CC4000A644F5 /* SoloMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1839244922C7CC4000A644F5 /* SoloMatch.swift */; };
+		1844D35C234C902600FB24D9 /* UIScrollView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1844D35B234C902600FB24D9 /* UIScrollView + Extensions.swift */; };
 		184598602347142B0066DE2A /* TournamentSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845985E2347142B0066DE2A /* TournamentSearchTableViewCell.swift */; };
 		184598612347142B0066DE2A /* TournamentSearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1845985F2347142B0066DE2A /* TournamentSearchTableViewCell.xib */; };
 		18459863234739120066DE2A /* TournamentSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18459862234739120066DE2A /* TournamentSearchTable.swift */; };
@@ -368,6 +369,7 @@
 		18375E30234A34C300E77809 /* TourneyModelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourneyModelItem.swift; sourceTree = "<group>"; };
 		1839244722C7500D00A644F5 /* EditMatchReferees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMatchReferees.swift; sourceTree = "<group>"; };
 		1839244922C7CC4000A644F5 /* SoloMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloMatch.swift; sourceTree = "<group>"; };
+		1844D35B234C902600FB24D9 /* UIScrollView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView + Extensions.swift"; sourceTree = "<group>"; };
 		1845985E2347142B0066DE2A /* TournamentSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentSearchTableViewCell.swift; sourceTree = "<group>"; };
 		1845985F2347142B0066DE2A /* TournamentSearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TournamentSearchTableViewCell.xib; sourceTree = "<group>"; };
 		18459862234739120066DE2A /* TournamentSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentSearchTable.swift; sourceTree = "<group>"; };
@@ -1232,6 +1234,7 @@
 				18EFFAC122F3207200B17947 /* UIBarButtonItem+Custom.swift */,
 				18B0F8832302C5E700080196 /* UIAlertController + Extension.swift */,
 				DB5D9A8E233CB7CD0076E41D /* UICollectionView + Extensions.swift */,
+				1844D35B234C902600FB24D9 /* UIScrollView + Extensions.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -2542,6 +2545,7 @@
 				DB9FA4AA22EC9DCC00BA5A52 /* RefereeProtocolPlayerTeamCellModel.swift in Sources */,
 				18B9F80A2349A9E70095261F /* TournamentSearchVM.swift in Sources */,
 				DB97C3012339FB18001E205E /* AnnouncesVC.swift in Sources */,
+				1844D35C234C902600FB24D9 /* UIScrollView + Extensions.swift in Sources */,
 				18076941229E7D4900A10996 /* AddPlayerToTeam.swift in Sources */,
 				DB4FCAF822EECC5B00A89BE7 /* EventMaker.swift in Sources */,
 				DBA69210221E74A000BEFB26 /* DrawerMenuTableViewCell.swift in Sources */,

@@ -744,27 +744,54 @@ class ApiRequests {
     
     // MARK: - GET requests
     
-    func get_tourney(name: String?, limit: Int? = 20, offset: Int? = 0, get_result: @escaping (ResultMy<[Tourney], RequestError>) -> ()) {
-        var header: HTTPHeaders = [:]
+    func get_tourney(name: String?, region: RegionMy? = nil, limit: Int? = 20, offset: Int? = 0, get_result: @escaping (ResultMy<[Tourney], RequestError>) -> ()) {
+        var header: Parameters = [:]
         if let newName = name {
-            header = [
-                "limit": "{" + String(limit!) + "}",
-                "offset": "{" + String(offset!) + "}",
-                "name": "{" + newName + "}"
-            ]
+            if let newRegion = region {
+                header = [
+//                    "limit": "{" + String(limit!) + "}",
+//                    "offset": "{" + String(offset!) + "}",
+                    "name": newName,
+                    "region": newRegion._id
+//                    "name": "{" + newName + "}",
+//                    "region": "{" + newRegion._id + "}"
+                ]
+            }
+            else
+            {
+                header = [
+//                    "limit": "{" + String(limit!) + "}",
+//                    "offset": "{" + String(offset!) + "}",
+                    "name": newName
+//                    "name": "{" + newName + "}"
+                ]
+            }
+            
         } else
         {
-            header = [
-                "limit": "{" + String(limit!) + "}",
-                "offset": "{" + String(offset!) + "}"
-            ]
+            if let newRegion = region {
+                header = [
+//                    "limit": "{" + String(limit!) + "}",
+//                    "offset": "{" + String(offset!) + "}",
+                    "region": newRegion._id
+//                    "region": "{" + newRegion._id + "}"
+                ]
+            }
+            else
+            {
+                header = [:
+//                    "limit": "{" + String(limit!) + "}",
+//                    "offset": "{" + String(offset!) + "}"
+                ]
+            }
         }
         
 //        Print.m(name)
         
-        let alamofireInstance = Alamofire.request(ApiRoute.getApiURL(.tourney), method: .get, encoding: JSONEncoding.default, headers: header)
+        let alamofireInstance = Alamofire.request(ApiRoute.getApiURL(.tourney), method: .get, parameters: header , encoding: URLEncoding(destination: .queryString))
         alamofireInstance
             .responseJSON { response in
+//                dump(response)
                 let decoder = ISO8601Decoder.getDecoder()
                 switch response.result
                 {
@@ -773,12 +800,10 @@ class ApiRequests {
                     {
                         if let tourneys = try? decoder.decode([Tourney].self, from: response.data!)
                         {
-//                            Print.m("decode tourneys")
                             get_result(.success(tourneys))
                         }
                         if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!)
                         {
-//                            Print.m("decode message")
                             get_result(.message(message))
                         }
                     }
