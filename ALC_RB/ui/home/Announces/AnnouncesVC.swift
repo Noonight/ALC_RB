@@ -99,7 +99,6 @@ private extension AnnouncesVC {
         
         self.announcesPresenter.fetchAnnounces(
             success: { announces_r in
-                Print.m(announces_r)
                 self.fSuccess(hud: hud, announces: announces_r)
         }, r_message: { message in
             self.fMessage(hud: hud, message: message)
@@ -128,13 +127,18 @@ extension AnnouncesVC: CellActions {
 
 extension AnnouncesVC {
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        self.view.layoutSubviews()
+        
         if UIDevice.current.orientation.isLandscape
         {
             self.view.layoutIfNeeded()
+            self.view.layoutSubviews()
         }
         else
         {
             self.view.layoutIfNeeded()
+            self.view.layoutSubviews()
         }
     }
 }
