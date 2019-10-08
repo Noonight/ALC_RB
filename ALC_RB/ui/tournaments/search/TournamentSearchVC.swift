@@ -16,6 +16,7 @@ class TournamentSearchVC: UIViewController {
         static let REGION_NOT_FOUND_LOCAL_ERROR = "Регион не найден."
     }
     
+    @IBOutlet weak var search_bar: UISearchBar!
     @IBOutlet weak var table_view: UITableView!
     @IBOutlet weak var region_btn: ButtonActivity!
     
