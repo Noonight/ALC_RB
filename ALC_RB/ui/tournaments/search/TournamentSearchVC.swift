@@ -39,7 +39,7 @@ class TournamentSearchVC: UIViewController {
         self.setupViewModel()
         self.setupTable()
         self.setupSearchController()
-        self.setupInfiniteScrollController()
+//        self.setupInfiniteScrollController()
         self.setupPullToRefresh()
         
         self.refreshData()
@@ -60,14 +60,19 @@ private extension TournamentSearchVC {
         self.scroll_view.refreshControl = self.refreshController
     }
     
-    func setupInfiniteScrollController() {
-        self.table_view.infiniteScrollIndicatorMargin = 40
-        self.table_view.infiniteScrollTriggerOffset = 500
-        self.table_view.addInfiniteScroll { tableView in
-            Print.m("infinite scroll \(self.table_view.isAnimatingInfiniteScroll)")
-//            self.presenter.fetchInfScroll(offset: self.paginationH	elper.getCurrentCount())
-        }
-    }
+//    func setupInfiniteScrollController() {
+//        self.table_view.infiniteScrollIndicatorMargin = 40
+//        self.table_view.infiniteScrollTriggerOffset = 500
+//        self.table_view.addInfiniteScroll { tableView in
+////            if self.viewModel.isInfinite == true
+////            {
+////                Print.m("is infinite is true")
+//                self.refreshData()
+////            }
+////            Print.m("infinite scroll \(self.table_view.isAnimatingInfiniteScroll)")
+////            self.presenter.fetchInfScroll(offset: self.paginationH    elper.getCurrentCount())
+//        }
+//    }
     
     func setupKeyboardObservers() {
         registerForKeyboardWillShowNotification(table_view)
@@ -120,33 +125,6 @@ extension TournamentSearchVC: CellActions {
         }
     }
     
-    
-}
-
-// MARK: SEARCH CONTROLLER
-
-extension TournamentSearchVC: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        if searchController.isActive {
-            self.table_view.removeInfiniteScroll()
-//            self.refreshControl = nil
-            if searchController.searchBar.text?.count ?? 0 > 2 {
-//                filterContentForQuery(searchController.searchBar.text!)
-            } else {
-//                filteredPlayers.people = []
-                table_view.reloadData()
-            }
-            Print.m("search controller is active")
-        } else {
-            Print.m("search controller is not active")
-            self.table_view.reloadData()
-            // configure deleted interacive features
-//            self.setupPullToRefresh()
-//            self.configureInfiniteScrollController()
-
-        }
-    }
-
 }
 
 // MARK: UI SEARCH BAR DELEGATE
@@ -157,7 +135,6 @@ extension TournamentSearchVC: UISearchBarDelegate {
         
         if searchBarIsEmpty() == true
         {
-//            view.endEditing(false)
             self.viewModel.updateSearchingQuery(newQuery: nil)
         }
         else
@@ -199,15 +176,15 @@ extension TournamentSearchVC {
     
     // MARK: REFRESH DATA
     
-    func refreshData(limit: Int? = Constants.Values.LIMIT, offset: Int? = 0) {
+    func refreshData() {
         // check mbprogress hud inside view
         if self.tableView_hud == nil
         {
             self.tableView_hud = self.showLoadingViewHUD(addTo: self.table_view)
         }
-        
-        self.presenter?.fetchTourneys(name: self.viewModel.prepareSearchingQuery(), region: self.viewModel.prepareChoosedRegion(), limit: limit, offset: offset, success: { tourneys in
-            
+        Print.m("offset is \(self.viewModel.prepareOffset())")
+        self.presenter?.fetchTourneys(name: self.viewModel.prepareSearchingQuery(), region: self.viewModel.prepareChoosedRegion(), limit: Constants.Values.LIMIT, offset: self.viewModel.prepareOffset(), success: { tourneys in
+//            Print.m("tourney are \(tourneys)")
             self.hideHUD()
             
             self.viewModel?.updateTourneys(tourneys: tourneys)

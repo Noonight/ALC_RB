@@ -16,8 +16,17 @@ final class TournamentSearchVM {
     private var regions: [RegionMy] = []
     private var choosedRegion: RegionMy?
     private var searchingQuery: String?
+    
     private var tourneyMIs: [TourneyModelItem] = []
     private var filteredTourneysMIs: [TourneyModelItem] = []
+    
+    private var previousTourneys: Int = 0 {
+        didSet {
+            Print.m(self.previousTourneys)
+        }
+    }
+    private var previousFilteredTourneys: Int = 0
+    
     var isSearching: Bool {
         get {
             if self.searchingQuery == nil && self.choosedRegion == nil
@@ -25,6 +34,35 @@ final class TournamentSearchVM {
                 return false
             }
             return true
+        }
+    }
+    var isInfinite: Bool {
+        get {
+//            if self.isSearching
+//            {
+//                Print.m("\(filteredTourneysMIs.count) >= \(previousFilteredTourneys)")
+//                if filteredTourneysMIs.count >= previousFilteredTourneys
+//                {
+//                    return true
+//                }
+//                else
+//                {
+//                    return false
+//                }
+//            }
+//            else
+//            {
+//                Print.m("\(tourneyMIs.count) >= \(previousTourneys)")
+//                if tourneyMIs.count >= previousTourneys
+//                {
+//                    return true
+//                }
+//                else
+//                {
+//                    return false
+//                }
+//            }
+            return false
         }
     }
     
@@ -50,12 +88,13 @@ final class TournamentSearchVM {
         return self.tourneyMIs
     }
     // ------
-    func prepareCurrentCount() -> Int {
-        if self.isSearching == true
-        {
-            return self.filteredTourneysMIs.count - 1
-        }
-        return self.tourneyMIs.count - 1
+    func prepareOffset() -> Int {
+        return 0
+//        if self.isSearching == true
+//        {
+//            return self.previousFilteredTourneys
+//        }
+//        return self.previousTourneys
     }
     
     // MARK: UPDATE
@@ -75,10 +114,33 @@ final class TournamentSearchVM {
     func updateTourneys(tourneys: [Tourney]) {
         if self.isSearching == true
         {
-            self.filteredTourneysMIs = self.getSelectedTourneysAndNot(tourneys: tourneys)
-            return
+            if self.isInfinite == true
+            {
+                self.filteredTourneysMIs.append(contentsOf: self.getSelectedTourneysAndNot(tourneys: tourneys))
+                self.previousFilteredTourneys = self.filteredTourneysMIs.count
+                return
+            }
+            else
+            {
+                self.filteredTourneysMIs = self.getSelectedTourneysAndNot(tourneys: tourneys)
+                return
+            }
         }
-        self.tourneyMIs = getSelectedTourneysAndNot(tourneys: tourneys)
+        else
+        {
+            if self.isInfinite == true
+            {
+                self.tourneyMIs.append(contentsOf: self.getSelectedTourneysAndNot(tourneys: tourneys))
+                self.previousTourneys = self.tourneyMIs.count
+                return
+            }
+            else
+            {
+                self.tourneyMIs = getSelectedTourneysAndNot(tourneys: tourneys)
+                return
+            }
+        }
+        
     }
 }
 
