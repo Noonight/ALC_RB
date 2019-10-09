@@ -19,6 +19,8 @@ final class HomeAllVC: UIViewController {
     var scheduleTable: HomeScheduleTable?
     var announcesTable: HomeAnnouncesTable?
     
+    private var news_hud: MBProgressHUD?
+    
     private var homeAllPresenter: HomeAllPresenter!
     
     override func viewDidLoad() {
@@ -61,17 +63,17 @@ extension HomeAllVC {
     }
     
     func setupNewsDS() {
-        let  hud = self.news_collection.showLoadingViewHUD()
+        self.news_hud = self.showLoadingViewHUD(addTo: self.news_collection)
         self.homeAllPresenter.fetchNews(success: { news in
-            self.fSuccess(hud: hud, news: news)
+            self.fSuccess(news: news)
         }, r_message: { message in
-            self.fMessage(hud: hud, message: message)
+            self.fMessage(message: message)
         }, failureAll: { error in
-            self.fAllFailure(hud: hud, error: error)
+            self.fAllFailure(error: error)
         }, failureServer: { error in
-            self.fServerFailure(hud: hud, error: error)
+            self.fServerFailure(error: error)
         }, failureLocal: { error in
-            self.fLocalFailure(hud: hud, error: error)
+            self.fLocalFailure(error: error)
         })
     }
     
@@ -113,32 +115,32 @@ extension HomeAllVC: CellActions {
 
 extension HomeAllVC {
     
-    func fSuccess(hud: MBProgressHUD? = nil, news: News) {
-        hud?.hide(animated: true)
+    func fSuccess(news: News) {
+        news_hud?.hide(animated: true)
         self.newsCollection?.dataSource = news.news
         self.news_collection.reloadData()
     }
     
-    func fMessage(hud: MBProgressHUD? = nil, message: SingleLineMessage) {
-        hud?.setToButtonHUD(message: message.message, btn: {
+    func fMessage(message: SingleLineMessage) {
+        news_hud?.setToButtonHUD(message: message.message, btn: {
             self.setupNewsDS()
         })
     }
     
-    func fAllFailure(hud: MBProgressHUD? = nil, error: Error) {
-        hud?.setToButtonHUD(message: Constants.Texts.UNDEFINED_FAILURE, detailMessage: error.localizedDescription, btn: {
+    func fAllFailure(error: Error) {
+        news_hud?.setToButtonHUD(message: Constants.Texts.UNDEFINED_FAILURE, detailMessage: error.localizedDescription, btn: {
             self.setupNewsDS()
         })
     }
     
-    func fServerFailure(hud: MBProgressHUD? = nil, error: Error) {
-        hud?.setToButtonHUD(message: Constants.Texts.SERVER_FAILURE, detailMessage: error.localizedDescription, btn: {
+    func fServerFailure(error: Error) {
+        news_hud?.setToButtonHUD(message: Constants.Texts.SERVER_FAILURE, detailMessage: error.localizedDescription, btn: {
             self.setupNewsDS()
         })
     }
     
-    func fLocalFailure(hud: MBProgressHUD? = nil, error: Error) {
-        hud?.setToButtonHUD(message: Constants.Texts.FAILURE, detailMessage: error.localizedDescription, btn: {
+    func fLocalFailure(error: Error) {
+        news_hud?.setToButtonHUD(message: Constants.Texts.FAILURE, detailMessage: error.localizedDescription, btn: {
             self.setupNewsDS()
         })
     }

@@ -54,7 +54,7 @@ private extension TournamentSearchVC {
         self.table_view.infiniteScrollIndicatorMargin = 40
         self.table_view.infiniteScrollTriggerOffset = 500
         self.table_view.addInfiniteScroll { tableView in
-            self.showAlert(message: "infinity scroll, is animating infinite scroll \(self.table_view.isAnimatingInfiniteScroll)")
+            Print.m("infinite scroll \(self.table_view.isAnimatingInfiniteScroll)")
 //            self.presenter.fetchInfScroll(offset: self.paginationH	elper.getCurrentCount())
         }
     }
@@ -147,7 +147,7 @@ extension TournamentSearchVC: UISearchBarDelegate {
         
         if searchBarIsEmpty() == true
         {
-            view.endEditing(false)
+//            view.endEditing(false)
             self.viewModel.updateSearchingQuery(newQuery: nil)
         }
         else
@@ -160,12 +160,11 @@ extension TournamentSearchVC: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
         view.endEditing(false)
+        self.viewModel.updateSearchingQuery(newQuery: nil)
+        self.refreshData()
     }
-    
-//    func isFiltering() -> Bool {
-//        return search_bar.isActive && !searchBarIsEmpty()
-//    }
     
     func searchBarIsEmpty() -> Bool {
         return search_bar.text?.isEmpty ?? true
@@ -180,31 +179,38 @@ extension TournamentSearchVC {
     // MARK: REFRESH DATA
     
     func refreshData(limit: Int? = Constants.Values.LIMIT, offset: Int? = 0) {
-        self.tableView_hud = self.showLoadingViewHUD(addTo: self.table_view)
+        // check mbprogress hud inside view
+        if self.tableView_hud == nil
+        {
+            self.tableView_hud = self.showLoadingViewHUD(addTo: self.table_view)
+        }
         
         self.presenter?.fetchTourneys(name: self.viewModel.prepareSearchingQuery(), region: self.viewModel.prepareChoosedRegion(), limit: limit, offset: offset, success: { tourneys in
+            
             self.viewModel?.updateTourneys(tourneys: tourneys)
             self.tournamentSearchTable?.dataSource = self.viewModel.prepareTourneyMIs()
             
-//            if self.tournamentSearchTable.dataSource.count == 0
-//            {
-//                self.tableView_hud?.hide(animated: true)
-//                self.tableView_hud = self.showCustomViewHUD(cView: UIImageView(image: UIImage(named: "not")), addTo: self.table_view, detailMessage: "")
-//            }
-//            else
-//            {
+            if self.tournamentSearchTable.dataSource.count == 0
+            {
+                self.tableView_hud?.setToCustomView(with: UIImageView(image: UIImage(named: "not")))
+            }
+            else
+            {
                 self.table_view.reloadData()
                 self.tableView_hud?.hide(animated: true)
-//            }
+                self.tableView_hud = nil
+            }
             
         }, r_message: { r_message in
             
             self.tableView_hud?.hide(animated: true)
+            self.tableView_hud = nil
             self.showAlert(message: r_message.message)
             
         }, localError: { error in
             
             self.tableView_hud?.hide(animated: true)
+            self.tableView_hud = nil
             self.tableView_hud = self.showEmptyViewHUD(addTo: self.table_view) {
                 self.refreshData()
             }
@@ -212,6 +218,7 @@ extension TournamentSearchVC {
         }, serverError: { error in
             
             self.tableView_hud?.hide(animated: true)
+            self.tableView_hud = nil
             self.tableView_hud = self.showEmptyViewHUD(addTo: self.table_view) {
                 self.refreshData()
             }
@@ -219,6 +226,7 @@ extension TournamentSearchVC {
         }, alamofireError: { error in
             
             self.tableView_hud?.hide(animated: true)
+            self.tableView_hud = nil
             self.tableView_hud = self.showEmptyViewHUD(addTo: self.table_view) {
                 self.refreshData()
             }

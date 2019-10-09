@@ -45,7 +45,10 @@ extension TournamentSearchTable: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TournamentSearchTableViewCell.ID, for: indexPath) as! TournamentSearchTableViewCell
         
-        cell.tourneyModelItem = self.dataSource[indexPath.row]
+        if self.dataSource.count - 1 >= 0
+        {
+            cell.tourneyModelItem = self.dataSource[indexPath.row]
+        }
         
         return cell
     }

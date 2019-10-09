@@ -37,6 +37,8 @@ extension UIViewController {
         }
     }
     
+    // ------------------------------------------
+    
     func showToastHUD(message: String) -> MBProgressHUD {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         
@@ -52,6 +54,7 @@ extension UIViewController {
     }
     
     func showLoadingViewHUD(with message: String? = Constants.Texts.LOADING, addTo: UIView) -> MBProgressHUD {
+        MBProgressHUD.hide(for: addTo, animated: false)
         let hud = MBProgressHUD.showAdded(to: addTo, animated: true)
         
         hud.backgroundView.style = MBProgressHUDBackgroundStyle.solidColor
@@ -66,19 +69,21 @@ extension UIViewController {
     }
     
     func showLoadingViewHUD(with message: String? = Constants.Texts.LOADING) -> MBProgressHUD {
+        MBProgressHUD.hide(for: self.view, animated: false)
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        hud.mode = MBProgressHUDMode.indeterminate
         
         hud.backgroundView.style = MBProgressHUDBackgroundStyle.solidColor
         hud.backgroundView.color = UIColor(white: 0, alpha: 0.1)
         hud.bezelView.style = .solidColor
         hud.bezelView.color = hud.backgroundView.color
         
-        hud.mode = MBProgressHUDMode.indeterminate
         hud.label.text = message
         
         return hud
     }
-    
+    // ------------------------------------------
     func hideHUD() {
         MBProgressHUD.hide(for: self.view, animated: true)
     }
@@ -86,8 +91,9 @@ extension UIViewController {
     func hideHUD(forView: UIView) {
         MBProgressHUD.hide(for: forView, animated: true)
     }
-    
+    // ------------------------------------------
     func showCustomViewHUD(cView: UIView, to: UIView, message: String? = Constants.Texts.NOTHING, detailMessage: String? = Constants.Texts.NOTHING) -> MBProgressHUD {
+        MBProgressHUD.hide(for: to, animated: false)
         let hud = MBProgressHUD.showAdded(to: to, animated: true)
         
         hud.mode = .customView
@@ -100,12 +106,12 @@ extension UIViewController {
         
         hud.label.text = message
         hud.detailsLabel.text = detailMessage
-//        hud.detailsLabel.textColor = .blue
         
         return hud
     }
     
     func showCustomViewHUD(cView: UIView, message: String? = Constants.Texts.NOTHING, detailMessage: String? = Constants.Texts.NOTHING) -> MBProgressHUD {
+        MBProgressHUD.hide(for: self.view, animated: false)
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         
         hud.mode = .customView
@@ -124,6 +130,7 @@ extension UIViewController {
     }
     
     func showCustomViewHUD(cView: UIView, addTo: UIView, message: String? = Constants.Texts.NOTHING, detailMessage: String? = Constants.Texts.NOTHING) -> MBProgressHUD {
+        MBProgressHUD.hide(for: addTo, animated: false)
         let hud = MBProgressHUD.showAdded(to: addTo, animated: true)
         
         hud.mode = .customView
@@ -140,19 +147,13 @@ extension UIViewController {
         
         return hud
     }
-    
+    // ------------------------------------------
     func showEmptyViewHUD(addTo: UIView, message: String? = Constants.Texts.NOTHING, detailMessage: String? = Constants.Texts.TAP_FOR_REPEAT, tap: @escaping () -> ()) -> MBProgressHUD {
         let image = #imageLiteral(resourceName: "ic_empty")
         let imageView = UIImageView(image: image)
-        if UIDevice.current.orientation.isLandscape {
-            imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-            imageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        }
-        else
-        {
-            imageView.widthAnchor.constraint(equalToConstant: 160).isActive = true
-            imageView.heightAnchor.constraint(equalToConstant: 160).isActive = true
-        }
+        
+        imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         
         let hud = showCustomViewHUD(cView: imageView, to: addTo, message: message, detailMessage: detailMessage)
         
@@ -194,7 +195,7 @@ extension UIViewController {
         
         return hud
     }
-     
+     // ------------------------------------------
      @objc private func tapOnHud() {
          self.tapAction()
      }
@@ -204,7 +205,7 @@ extension UIViewController {
          if action != nil { __.action = action }
          else { __.action?() }
      }
-    
+    // ------------------------------------------
     func registerForKeyboardWillShowNotification(_ scrollView: UIScrollView, usingBlock block: ((CGSize?) -> Void)? = nil) {
         _ = NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil, using: { notification -> Void in
             let userInfo = notification.userInfo!
