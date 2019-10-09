@@ -21,6 +21,15 @@ class TournamentSearchTableViewCell: UITableViewCell {
     var tourneyModelItem: TourneyModelItem? {
         didSet {
             self.title_label.text = tourneyModelItem?.name
+            if tourneyModelItem?.beginDate?.toFormat(DateFormats.local.rawValue) != nil && tourneyModelItem?.endDate?.toFormat(DateFormats.local.rawValue) != nil
+            {
+                self.date_label.text = (tourneyModelItem?.beginDate?.toFormat(DateFormats.local.rawValue) ?? "") + " - " + (tourneyModelItem?.endDate?.toFormat(DateFormats.local.rawValue) ?? "")
+            }
+            else
+            {
+                self.date_label.text = ""
+            }
+            self.count_of_teams_label.text = String(tourneyModelItem?.countOfTeams ?? 0)
             self.setupCheckmark()
         }
     }

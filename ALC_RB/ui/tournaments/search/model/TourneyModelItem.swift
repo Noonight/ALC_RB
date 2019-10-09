@@ -15,6 +15,15 @@ class TourneyModelItem {
     var name: String? {
         return item.name
     }
+    var beginDate: Date? {
+        return item.beginDate
+    }
+    var endDate: Date? {
+        return item.endDate
+    }
+    var countOfTeams: Int? {
+        return item.maxTeams
+    }
     
     init(item: Tourney) {
         self.item = item

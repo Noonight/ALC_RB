@@ -75,9 +75,9 @@ extension UIViewController {
         hud.mode = MBProgressHUDMode.indeterminate
         
         hud.backgroundView.style = MBProgressHUDBackgroundStyle.solidColor
-        hud.backgroundView.color = UIColor(white: 0, alpha: 0.1)
         hud.bezelView.style = .solidColor
-        hud.bezelView.color = hud.backgroundView.color
+        hud.backgroundView.color = .white
+        hud.bezelView.color = .white
         
         hud.label.text = message
         

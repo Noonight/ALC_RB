@@ -20,6 +20,9 @@ class TournamentSearchVC: UIViewController {
     @IBOutlet weak var search_bar: UISearchBar!
     @IBOutlet weak var table_view: UITableView!
     @IBOutlet weak var region_btn: ButtonActivity!
+    @IBOutlet weak var scroll_view: UIScrollView!
+    
+    private var refreshController: UIRefreshControl!
     
     private var presenter: TournamentSearchPresenter!
     private var viewModel: TournamentSearchVM!
@@ -37,6 +40,7 @@ class TournamentSearchVC: UIViewController {
         self.setupTable()
         self.setupSearchController()
         self.setupInfiniteScrollController()
+        self.setupPullToRefresh()
         
         self.refreshData()
     }
@@ -49,6 +53,12 @@ class TournamentSearchVC: UIViewController {
 // MARK: SETUP
 
 private extension TournamentSearchVC {
+    
+    func setupPullToRefresh() {
+        self.refreshController = UIRefreshControl()
+        self.refreshController.addTarget(self, action: #selector(refreshControllerAction), for: .valueChanged)
+        self.scroll_view.refreshControl = self.refreshController
+    }
     
     func setupInfiniteScrollController() {
         self.table_view.infiniteScrollIndicatorMargin = 40
@@ -176,6 +186,17 @@ extension TournamentSearchVC: UISearchBarDelegate {
 
 extension TournamentSearchVC {
     
+    @objc func refreshControllerAction() {
+        self.showLoadingViewHUD()
+        self.search_bar.text = nil
+        view.endEditing(false)
+        self.viewModel.updateSearchingQuery(newQuery: nil)
+        self.viewModel.updateChoosenRegion(newRegion: nil)
+        self.region_btn.titleLabel?.text = self.makeButtonTitle(regionName: "Вcе")
+        
+        self.refreshData()
+    }
+    
     // MARK: REFRESH DATA
     
     func refreshData(limit: Int? = Constants.Values.LIMIT, offset: Int? = 0) {
@@ -187,12 +208,16 @@ extension TournamentSearchVC {
         
         self.presenter?.fetchTourneys(name: self.viewModel.prepareSearchingQuery(), region: self.viewModel.prepareChoosedRegion(), limit: limit, offset: offset, success: { tourneys in
             
+            self.hideHUD()
+            
             self.viewModel?.updateTourneys(tourneys: tourneys)
             self.tournamentSearchTable?.dataSource = self.viewModel.prepareTourneyMIs()
             
             if self.tournamentSearchTable.dataSource.count == 0
             {
-                self.tableView_hud?.setToCustomView(with: UIImageView(image: UIImage(named: "not")))
+                let imageView = UIImageView(image: UIImage(named: "not"))
+                imageView.contentMode = .scaleAspectFit
+                self.tableView_hud?.setToCustomView(with: imageView)
             }
             else
             {
@@ -201,13 +226,19 @@ extension TournamentSearchVC {
                 self.tableView_hud = nil
             }
             
+            self.refreshController.endRefreshing()
+            
         }, r_message: { r_message in
+            
+            self.hideHUD()
             
             self.tableView_hud?.hide(animated: true)
             self.tableView_hud = nil
             self.showAlert(message: r_message.message)
             
         }, localError: { error in
+            
+            self.hideHUD()
             
             self.tableView_hud?.hide(animated: true)
             self.tableView_hud = nil
@@ -217,6 +248,8 @@ extension TournamentSearchVC {
             
         }, serverError: { error in
             
+            self.hideHUD()
+            
             self.tableView_hud?.hide(animated: true)
             self.tableView_hud = nil
             self.tableView_hud = self.showEmptyViewHUD(addTo: self.table_view) {
@@ -224,6 +257,8 @@ extension TournamentSearchVC {
             }
             
         }, alamofireError: { error in
+            
+            self.hideHUD()
             
             self.tableView_hud?.hide(animated: true)
             self.tableView_hud = nil
@@ -275,7 +310,7 @@ extension TournamentSearchVC {
     }
     
     private func makeButtonTitle(regionName: String) -> String {
-        return "Регион : \(regionName)"
+        return "Регион: \(regionName)"
     }
     
     // MARK: SHOW Aciton Sheet Picker
