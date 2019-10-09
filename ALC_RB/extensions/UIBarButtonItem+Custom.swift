@@ -13,6 +13,7 @@ extension UIBarButtonItem {
     enum  BarButtonItemType:Int {
         case info
         case document
+        case add
 //        case back
 //        case backOrange
 //        case next
@@ -29,6 +30,8 @@ extension UIBarButtonItem {
                 imageName = "ic_info"
             case .document:
                 imageName = "ic_document"
+            case .add:
+                imageName = ""
             }
             
             let button = UIButton()

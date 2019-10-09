@@ -10,62 +10,85 @@ import Foundation
 
 final class TournamentSearchVM {
     
-    private let localTourneys = LocalTourneys()
+    private lazy var localTourneys = LocalTourneys()
+    private lazy var userDefaultsHelper = UserDefaultsHelper()
     
     private var regions: [RegionMy] = []
     private var choosedRegion: RegionMy?
-    private var tourneyMIs: [TourneyModelItem] = []
     private var searchingQuery: String?
-    var isSearching = false
+    private var tourneyMIs: [TourneyModelItem] = []
+    private var filteredTourneysMIs: [TourneyModelItem] = []
+    var isSearching: Bool {
+        get {
+            if self.searchingQuery == nil && self.choosedRegion == nil
+            {
+                return false
+            }
+            return true
+        }
+    }
     
     // MARK: PREPARE
     
+    func prepareRegions() -> [RegionMy] {
+        return self.regions
+    }
+    // ------
     func prepareSearchingQuery() -> String? {
         return self.searchingQuery
-    }
-    
-    func prepareTourneysMI() -> [TourneyModelItem] {
-        return self.tourneyMIs
-    }
-    
-    func prepareRegions() -> [RegionMy] {
-        
-        return self.regions
     }
     
     func prepareChoosedRegion() -> RegionMy? {
         return self.choosedRegion
     }
-    
-    func prepareChoosedTourneyMI() -> [TourneyModelItem] {
-        return self.tourneyMIs.filter { tourney -> Bool in
-            return tourney.isSelected == true
+    // ------
+    func prepareTourneyMIs() -> [TourneyModelItem] {
+        if self.isSearching == true
+        {
+            return self.filteredTourneysMIs
         }
+        return self.tourneyMIs
+    }
+    // ------
+    func prepareCurrentCount() -> Int {
+        if self.isSearching == true
+        {
+            return self.filteredTourneysMIs.count - 1
+        }
+        return self.tourneyMIs.count - 1
     }
     
     // MARK: UPDATE
     
-    func updateSearchingQuery(newQuery: String?) {
-        self.searchingQuery = newQuery
-    }
-    
-    func updateTourneys(tourneys: [Tourney]) {
-        self.tourneyMIs = getSelectedTourneysAndNot(tourneys: tourneys)
-    }
-    
     func updateRegions(newRegions: [RegionMy]) {
         self.regions = newRegions
+    }
+    // ------
+    func updateSearchingQuery(newQuery: String?) {
+        self.searchingQuery = newQuery
     }
     
     func updateChoosenRegion(newRegion: RegionMy?) {
         self.choosedRegion = newRegion
     }
-    
+    // ------
+    func updateTourneys(tourneys: [Tourney]) {
+        if self.isSearching == true
+        {
+            self.filteredTourneysMIs = self.getSelectedTourneysAndNot(tourneys: tourneys)
+            return
+        }
+        self.tourneyMIs = getSelectedTourneysAndNot(tourneys: tourneys)
+    }
 }
 
 // MARK: HELPERS
 
 extension TournamentSearchVM {
+    
+    func getParticipationTourneys() -> [Participation] {
+        return userDefaultsHelper.getAuthorizedUser()?.person.participation ?? []
+    }
     
     func getSelectedTourneysAndNot(tourneys: [Tourney]) -> [TourneyModelItem] {
         let alreadyChoosedTourneys = self.localTourneys.getLocalTourneyIds()

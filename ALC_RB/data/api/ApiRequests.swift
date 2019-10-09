@@ -744,13 +744,13 @@ class ApiRequests {
     
     // MARK: - GET requests
     
-    func get_tourney(name: String?, region: RegionMy? = nil, limit: Int? = 20, offset: Int? = 0, get_result: @escaping (ResultMy<[Tourney], RequestError>) -> ()) {
+    func get_tourney(name: String?, region: RegionMy? = nil, limit: Int? = Constants.Values.LIMIT, offset: Int? = 0, get_result: @escaping (ResultMy<[Tourney], RequestError>) -> ()) {
         var header: Parameters = [:]
         if let newName = name {
             if let newRegion = region {
                 header = [
-//                    "limit": "{" + String(limit!) + "}",
-//                    "offset": "{" + String(offset!) + "}",
+                    "_limit": String(limit!),
+                    "_offset": String(offset!),
                     "name": newName,
                     "region": newRegion._id
 //                    "name": "{" + newName + "}",
@@ -762,6 +762,8 @@ class ApiRequests {
                 header = [
 //                    "limit": "{" + String(limit!) + "}",
 //                    "offset": "{" + String(offset!) + "}",
+                    "_limit": String(limit!),
+                    "_offset": String(offset!),
                     "name": newName
 //                    "name": "{" + newName + "}"
                 ]
@@ -773,13 +775,17 @@ class ApiRequests {
                 header = [
 //                    "limit": "{" + String(limit!) + "}",
 //                    "offset": "{" + String(offset!) + "}",
+                    "_limit": String(limit!),
+                    "_offset": String(offset!),
                     "region": newRegion._id
 //                    "region": "{" + newRegion._id + "}"
                 ]
             }
             else
             {
-                header = [:
+                header = [
+                    "_limit": String(limit!),
+                    "_offset": String(offset!),
 //                    "limit": "{" + String(limit!) + "}",
 //                    "offset": "{" + String(offset!) + "}"
                 ]
@@ -791,7 +797,6 @@ class ApiRequests {
         let alamofireInstance = Alamofire.request(ApiRoute.getApiURL(.tourney), method: .get, parameters: header , encoding: URLEncoding(destination: .queryString))
         alamofireInstance
             .responseJSON { response in
-//                dump(response)
                 let decoder = ISO8601Decoder.getDecoder()
                 switch response.result
                 {
@@ -971,7 +976,6 @@ class ApiRequests {
                     {
                         if let announces = try? decoder.decode([Announce].self, from: response.data!)
                         {
-                            Print.m(announces)
                             get_result(.success(announces))
                             return
                         }

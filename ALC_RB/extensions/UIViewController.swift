@@ -123,6 +123,24 @@ extension UIViewController {
         return hud
     }
     
+    func showCustomViewHUD(cView: UIView, addTo: UIView, message: String? = Constants.Texts.NOTHING, detailMessage: String? = Constants.Texts.NOTHING) -> MBProgressHUD {
+        let hud = MBProgressHUD.showAdded(to: addTo, animated: true)
+        
+        hud.mode = .customView
+        hud.customView = cView
+        hud.backgroundView.style = .solidColor
+        hud.bezelView.style = .solidColor
+        
+        hud.backgroundView.backgroundColor = .white//cView.backgroundColor ?? .white
+        hud.bezelView.backgroundColor = .white//cView.backgroundColor ?? .white
+        
+        hud.label.text = message
+        hud.detailsLabel.text = detailMessage
+        //        hud.detailsLabel.textColor = .blue
+        
+        return hud
+    }
+    
     func showEmptyViewHUD(addTo: UIView, message: String? = Constants.Texts.NOTHING, detailMessage: String? = Constants.Texts.TAP_FOR_REPEAT, tap: @escaping () -> ()) -> MBProgressHUD {
         let image = #imageLiteral(resourceName: "ic_empty")
         let imageView = UIImageView(image: image)

@@ -58,8 +58,8 @@ enum Routes: String {
     case soloUser = "getuser"
     case activeMatches = "matches/active"
     case refreshUser = "refresh" // get user in header token of authorized user
-    case region = "region"
-    case tourney = "tourney"
+    case region = "crud/region"
+    case tourney = "crud/tourney"
     case upcomingMatches = "upcoming/matches"
     
     case post_auth = "signin"

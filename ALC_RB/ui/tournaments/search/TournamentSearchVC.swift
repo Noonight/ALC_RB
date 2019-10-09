@@ -9,6 +9,7 @@
 import UIKit
 import ActionSheetPicker_3_0
 import Alamofire
+import MBProgressHUD
 
 class TournamentSearchVC: UIViewController {
 
@@ -25,6 +26,7 @@ class TournamentSearchVC: UIViewController {
     private var tournamentSearchTable: TournamentSearchTable!
     let searchController = UISearchController(searchResultsController: nil)
     private var acp: ActionSheetStringPicker?
+    private var tableView_hud: MBProgressHUD?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,7 @@ class TournamentSearchVC: UIViewController {
         self.setupViewModel()
         self.setupTable()
         self.setupSearchController()
+        self.setupInfiniteScrollController()
         
         self.refreshData()
     }
@@ -51,7 +54,8 @@ private extension TournamentSearchVC {
         self.table_view.infiniteScrollIndicatorMargin = 40
         self.table_view.infiniteScrollTriggerOffset = 500
         self.table_view.addInfiniteScroll { tableView in
-//            self.presenter.fetchInfScroll(offset: self.paginationHelper.getCurrentCount())
+            self.showAlert(message: "infinity scroll, is animating infinite scroll \(self.table_view.isAnimatingInfiniteScroll)")
+//            self.presenter.fetchInfScroll(offset: self.paginationH	elper.getCurrentCount())
         }
     }
     
@@ -91,8 +95,7 @@ private extension TournamentSearchVC {
 extension TournamentSearchVC {
     
     @IBAction func regionAction(_ sender: ButtonActivity) {
-        Print.m("show region menu")
-        showRefereesPicker(sender: sender)
+        showRegionPicker(sender: sender)
     }
     
 }
@@ -145,12 +148,10 @@ extension TournamentSearchVC: UISearchBarDelegate {
         if searchBarIsEmpty() == true
         {
             view.endEditing(false)
-            self.viewModel.isSearching = false
             self.viewModel.updateSearchingQuery(newQuery: nil)
         }
         else
         {
-            self.viewModel.isSearching = true
             self.viewModel.updateSearchingQuery(newQuery: searchText)
         }
         
@@ -176,46 +177,58 @@ extension TournamentSearchVC: UISearchBarDelegate {
 
 extension TournamentSearchVC {
     
-    func refreshData(limit: Int? = 20, offset: Int? = 0) {
-        self.showLoadingViewHUD(addTo: self.table_view)
+    // MARK: REFRESH DATA
+    
+    func refreshData(limit: Int? = Constants.Values.LIMIT, offset: Int? = 0) {
+        self.tableView_hud = self.showLoadingViewHUD(addTo: self.table_view)
         
         self.presenter?.fetchTourneys(name: self.viewModel.prepareSearchingQuery(), region: self.viewModel.prepareChoosedRegion(), limit: limit, offset: offset, success: { tourneys in
             self.viewModel?.updateTourneys(tourneys: tourneys)
-            self.tournamentSearchTable?.dataSource = self.viewModel?.prepareTourneysMI() ?? []
+            self.tournamentSearchTable?.dataSource = self.viewModel.prepareTourneyMIs()
             
-            self.table_view.reloadData()
-            self.hideHUD(forView: self.table_view)
+//            if self.tournamentSearchTable.dataSource.count == 0
+//            {
+//                self.tableView_hud?.hide(animated: true)
+//                self.tableView_hud = self.showCustomViewHUD(cView: UIImageView(image: UIImage(named: "not")), addTo: self.table_view, detailMessage: "")
+//            }
+//            else
+//            {
+                self.table_view.reloadData()
+                self.tableView_hud?.hide(animated: true)
+//            }
             
         }, r_message: { r_message in
             
-            self.hideHUD()
+            self.tableView_hud?.hide(animated: true)
             self.showAlert(message: r_message.message)
             
         }, localError: { error in
             
-            self.hideHUD(forView: self.table_view)
-            self.showEmptyViewHUD(addTo: self.table_view) {
+            self.tableView_hud?.hide(animated: true)
+            self.tableView_hud = self.showEmptyViewHUD(addTo: self.table_view) {
                 self.refreshData()
             }
             
         }, serverError: { error in
             
-            self.hideHUD(forView: self.table_view)
-            self.showEmptyViewHUD(addTo: self.table_view) {
+            self.tableView_hud?.hide(animated: true)
+            self.tableView_hud = self.showEmptyViewHUD(addTo: self.table_view) {
                 self.refreshData()
             }
             
         }, alamofireError: { error in
             
-            self.hideHUD(forView: self.table_view)
-            self.showEmptyViewHUD(addTo: self.table_view) {
+            self.tableView_hud?.hide(animated: true)
+            self.tableView_hud = self.showEmptyViewHUD(addTo: self.table_view) {
                 self.refreshData()
             }
             
         })
     }
     
-    func showRefereesPicker(sender: ButtonActivity) {
+    // MARK: REGION PICKER
+    
+    func showRegionPicker(sender: ButtonActivity) {
         
         sender.showLoading()
         
@@ -232,7 +245,7 @@ extension TournamentSearchVC {
             sender.hideLoading()
             self.showAlert(title: Constants.Texts.NOTHING, message: r_message.message) {
                 self.acp?.hideWithCancelAction()
-                self.showRefereesPicker(sender: self.region_btn)
+                self.showRegionPicker(sender: self.region_btn)
             }
             
         }, localError: { error in
@@ -256,6 +269,8 @@ extension TournamentSearchVC {
     private func makeButtonTitle(regionName: String) -> String {
         return "Регион : \(regionName)"
     }
+    
+    // MARK: SHOW Aciton Sheet Picker
     
     func showACP(sender: UIButton) {
         self.acp = ActionSheetStringPicker(title: "", rows: self.viewModel?.prepareRegions().map { regionMy -> String in
@@ -284,7 +299,6 @@ extension TournamentSearchVC {
             self.viewModel.updateChoosenRegion(newRegion: nil)
             self.refreshData()
         })
-        
         self.acp?.show()
     }
     
