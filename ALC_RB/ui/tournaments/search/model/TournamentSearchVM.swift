@@ -83,12 +83,18 @@ final class TournamentSearchVM {
     func prepareTourneyMIs() -> [TourneyModelItem] {
         if self.isSearching == true
         {
+//            Print.m(self.getSelectedTourneysAndNot(tourneys: self.filteredTourneysMIs.map({ tourneyMI -> Tourney in
+//                return tourneyMI.getTourney()
+//            })))
             return self.getSelectedTourneysAndNot(tourneys: self.filteredTourneysMIs.map({ tourneyMI -> Tourney in
                 return tourneyMI.getTourney()
             }))
 //            return self.filteredTourneysMIs
         }
 //        return self.tourneyMIs
+//        Print.m(self.getSelectedTourneysAndNot(tourneys: self.tourneyMIs.map({ tourneyMI -> Tourney in
+//            return tourneyMI.getTourney()
+//        })))
         return self.getSelectedTourneysAndNot(tourneys: self.tourneyMIs.map({ tourneyMI -> Tourney in
             return tourneyMI.getTourney()
         }))
@@ -161,7 +167,7 @@ final class TournamentSearchVM {
             else
             {
                 self.tourneyMIs = getSelectedTourneysAndNot(tourneys: tourneys)
-                dump(self.tourneyMIs)
+//                dump(self.tourneyMIs)
                 return
             }
         }
@@ -206,44 +212,60 @@ extension TournamentSearchVM {
         
         var resultArray: [TourneyModelItem] = []
         
-        if alreadyChoosedTourneys.count == 0
+        for tourney in tourneys
         {
-            
-            for i in 0..<tourneys.count
+            if alreadyChoosedTourneys.contains(where: { alreadyTourney -> Bool in
+                return alreadyTourney.id == tourney.id
+            })
             {
-                
-                for j in 0..<alreadyChoosedTourneys.count
-                {
-                    if tourneys[i].id == alreadyChoosedTourneys[j].id
-                    {
-                        let tourneyModelItem = TourneyModelItem(item: tourneys[i])
-                        tourneyModelItem.isSelected = true
-                        if !resultArray.contains(where: { tourneyItem -> Bool in
-                            return tourneyItem.getTourney().id == tourneyModelItem.getTourney().id
-                        })
-                        {
-                            resultArray.append(tourneyModelItem)
-
-                        }
-                    }
-                    else
-                    {
-                        if !resultArray.contains(where: { tourneyItem -> Bool in
-                            return tourneyItem.getTourney().id == tourneys[i].id
-                        })
-                        {
-                            resultArray.append(TourneyModelItem(item: tourneys[i]))
-                        }
-                    }
-                }
+                let item = TourneyModelItem(item: tourney)
+                item.isSelected = true
+                resultArray.append(item)
+            }
+            else
+            {
+                resultArray.append(TourneyModelItem(item: tourney))
             }
         }
-        else
-        {
-            resultArray = tourneys.map({ tourney -> TourneyModelItem in
-                return TourneyModelItem(item: tourney)
-            })
-        }
+        
+//        if alreadyChoosedTourneys.count != 0
+//        {
+//
+//            for i in 0..<tourneys.count
+//            {
+//
+//                for j in 0..<alreadyChoosedTourneys.count
+//                {
+//                    if tourneys[i].id == alreadyChoosedTourneys[j].id
+//                    {
+//                        let tourneyModelItem = TourneyModelItem(item: tourneys[i])
+//                        tourneyModelItem.isSelected = true
+//                        if !resultArray.contains(where: { tourneyItem -> Bool in
+//                            return tourneyItem.getTourney().id == tourneyModelItem.getTourney().id
+//                        })
+//                        {
+//                            resultArray.append(tourneyModelItem)
+//
+//                        }
+//                    }
+//                    else
+//                    {
+//                        if !resultArray.contains(where: { tourneyItem -> Bool in
+//                            return tourneyItem.getTourney().id == tourneys[i].id
+//                        })
+//                        {
+//                            resultArray.append(TourneyModelItem(item: tourneys[i]))
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        else
+//        {
+//            resultArray = tourneys.map({ tourney -> TourneyModelItem in
+//                return TourneyModelItem(item: tourney)
+//            })
+//        }
         
         return resultArray
     }

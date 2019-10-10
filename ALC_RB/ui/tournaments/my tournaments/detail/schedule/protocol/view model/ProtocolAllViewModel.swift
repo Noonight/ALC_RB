@@ -348,7 +348,7 @@ class ProtocolAllViewModel {
         }
         
         group.notify(queue: .main) {
-            dump(resultArray)
+//            dump(resultArray)
             completed(resultArray)
         }
     }

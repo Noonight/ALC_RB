@@ -45,11 +45,6 @@ class TournamentSearchVC: UIViewController {
         
         self.refreshData()
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
-    }
 }
 
 // MARK: EXTENSIONS
@@ -59,11 +54,6 @@ class TournamentSearchVC: UIViewController {
 // MARK: SETUP
 
 private extension TournamentSearchVC {
-    
-    func setupDoneButton() {
-        let btn = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onNavDoneBtnPressed(_:)))
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = btn
-    }
     
     func setupPullToRefresh() {
         self.refreshController = UIRefreshControl()
@@ -108,10 +98,8 @@ private extension TournamentSearchVC {
     }
     
     func setupSearchController() {
-        
         search_bar.delegate = self
         search_bar.showsCancelButton = true
-        
     }
     
 }
@@ -119,10 +107,6 @@ private extension TournamentSearchVC {
 // MARK: ACTIONS
 
 extension TournamentSearchVC {
-    
-    @objc func onNavDoneBtnPressed(_ sender: UIBarButtonItem) {
-//         self.viewModel.setLocalTourneys() 
-    }
     
     @IBAction func regionAction(_ sender: ButtonActivity) {
         showRegionPicker(sender: sender)

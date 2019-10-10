@@ -12,9 +12,9 @@ import Kingfisher
 class TournamentSearchTableViewCell: UITableViewCell {
 
     @IBOutlet weak var title_label: UILabel!
-    @IBOutlet weak var status_label: UILabel!
     @IBOutlet weak var date_label: UILabel!
     @IBOutlet weak var count_of_teams_label: UILabel!
+    @IBOutlet weak var type_view: CellTypeView!
     
     static let ID = "tournament_search_cell_id"
     
@@ -27,17 +27,30 @@ class TournamentSearchTableViewCell: UITableViewCell {
             }
             else
             {
-                self.date_label.text = ""
+//                self.date_label.text = ""
             }
             self.count_of_teams_label.text = String(tourneyModelItem?.countOfTeams ?? 0)
-            self.setupCheckmark()
+            
+            self.type_view.type = tourneyModelItem?.isSelected ?? false ? .checkmark : .none
+//            Print.m(tourneyModelItem?.isSelected ?? false ? CellType.checkmark : CellType.none)
+            // check here layout if needed
+//            self.type_view.layoutIfNeeded()
+//            self.type_view.layoutSubviews()
+//            self.setupCheckmark()
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.type_view.type = tourneyModelItem?.isSelected ?? false ? .checkmark : .none
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
         selectionStyle = .none
+//        accessoryType = .checkmark
 //        accessoryType = self.tourneyModelItem?.isSelected ?? false ? .checkmark : .none
     }
     
@@ -45,14 +58,15 @@ class TournamentSearchTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         tourneyModelItem?.isSelected = selected
-        accessoryType = selected ? .checkmark : .none
+//        accessoryType = selected ? .checkmark : .none
+        
         
     }
     
     private func setupCheckmark() {
         if self.tourneyModelItem?.isSelected == true
         {
-            Print.m("is selected true")
+//            Print.m("is selected true")
             accessoryType = .checkmark
         }
         else

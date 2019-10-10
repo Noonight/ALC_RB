@@ -22,6 +22,7 @@ class LocalTourneys {
 //                }
 //            }
             let tourneys = try self.userDefaults.get(objectType: [Tourney].self, forKey: userKey)
+//            Print.m(tourneys)
             return tourneys ?? []
         } catch {
             Print.m("Some error with getting tourney from UserDefaults")
