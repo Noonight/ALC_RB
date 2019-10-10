@@ -24,6 +24,10 @@ class TourneyViewModel {
 }
 
 extension TourneyViewModel: CellActions {
+    func onCellDeselected(model: CellModel) {
+        
+    }
+    
     func onCellSelected(model: CellModel) {
         switch model {
         case is TourneyModelItem:

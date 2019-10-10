@@ -55,4 +55,14 @@ class CommandCreateLKPresenter : MvpPresenter<CommandCreateLKViewController> {
         }
     }
     
+    func createTeamNEW(token: String, teamInfo: CreateTeamInfo) {
+        apiService.post_createTeam(token: token, teamInfo: teamInfo, response_success: { (soloTeam) in
+            self.getView().onCreateTeamSuccess(team: soloTeam)
+        }, response_failure: { (error) in
+            self.getView().onCreateTeamFailure(error: error)
+        }) { (singleLineMessage) in
+            self.getView().onCreateTeamMessage(message: singleLineMessage)
+        }
+    }
+    
 }

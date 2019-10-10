@@ -1215,10 +1215,10 @@ class ApiRequests {
                 for element in fActiveMatches.matches
                 {
                     
-                    if element.teamOne.club.count > 1
+                    if element.teamOne.club?.count ?? 0 > 1
                     {
                         group.enter()
-                        self.get_clubById(id: element.teamOne.club, get_success: { (club) in
+                        self.get_clubById(id: element.teamOne.club ?? "", get_success: { (club) in
                             
                             fClubs.append(club)
                             
@@ -1229,10 +1229,10 @@ class ApiRequests {
                         })
                     }
                     
-                    if element.teamTwo.club.count > 1
+                    if element.teamTwo.club?.count ?? 0 > 1
                     {
                         group.enter()
-                        self.get_clubById(id: element.teamTwo.club, get_success: { (club) in
+                        self.get_clubById(id: element.teamTwo.club ?? "", get_success: { (club) in
                             
                             fClubs.append(club)
                             

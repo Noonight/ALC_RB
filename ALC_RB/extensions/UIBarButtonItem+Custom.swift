@@ -31,7 +31,7 @@ extension UIBarButtonItem {
             case .document:
                 imageName = "ic_document"
             case .add:
-                imageName = ""
+                imageName = "\(UIBarButtonItem.SystemItem.done)"
             }
             
             let button = UIButton()

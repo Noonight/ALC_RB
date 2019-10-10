@@ -10,6 +10,7 @@ import Foundation
 
 protocol CellActions {
     func onCellSelected(model: CellModel)
+    func onCellDeselected(model: CellModel)
 }
 
 protocol CellModel { }

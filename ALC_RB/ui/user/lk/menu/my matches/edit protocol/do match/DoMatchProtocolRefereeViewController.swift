@@ -591,6 +591,10 @@ extension DoMatchProtocolRefereeViewController {
 // MARK: TABLE ACITONS
 
 extension DoMatchProtocolRefereeViewController: CellActions {
+    func onCellDeselected(model: CellModel) {
+        
+    }
+    
     func onCellSelected(model: CellModel)
     {
         let curModel = model as! RefereeProtocolPlayerTeamCellModel

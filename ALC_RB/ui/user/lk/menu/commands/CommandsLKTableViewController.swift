@@ -107,7 +107,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         super.viewWillAppear(true)
         navigationController?.navigationBar.topItem?.rightBarButtonItem = createNewCommandBtn
 //        self.updateTableModel()
-        self.prepareCreateCommandBtn()
+//        self.prepareCreateCommandBtn()
         
         self.prepareModelController {
             self.tableView.reloadData()

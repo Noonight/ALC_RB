@@ -25,6 +25,11 @@ class TourneyModelItem {
         return item.maxTeams
     }
     
+    // for local storage
+    func getTourney() -> Tourney {
+        return self.item
+    }
+    
     init(item: Tourney) {
         self.item = item
     }

@@ -89,7 +89,7 @@ struct Team: Codable {
     var draws, groupScore: Int
     var id, name, creator: String
     var players: [Player]
-    var club: String
+    var club: String?
     
     func getTeamStatus() -> TeamStatus {
         if status == TeamStatus.approved.rawValue {

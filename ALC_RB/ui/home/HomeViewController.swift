@@ -120,6 +120,10 @@ extension HomeViewController {
 // MARK: CELL ACTIONS
 
 extension HomeViewController: CellActions {
+    func onCellDeselected(model: CellModel) {
+        
+    }
+    
     func onCellSelected(model: CellModel) {
         switch model {
         case is Announce:

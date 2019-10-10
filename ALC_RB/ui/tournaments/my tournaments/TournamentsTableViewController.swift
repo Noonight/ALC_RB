@@ -68,6 +68,10 @@ extension TournamentsTableViewController {
 // MARK: CELL ACTIONS
 
 extension TournamentsTableViewController: CellActions {
+    func onCellDeselected(model: CellModel) {
+        
+    }
+    
     func onCellSelected(model: CellModel) {
         if model is League
         {

@@ -25,15 +25,13 @@ final class TournamentSearchTable: NSObject {
 extension TournamentSearchTable: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if actions != nil
-        {
-            self.actions?.onCellSelected(model: dataSource[indexPath.row])
-        }
-        self.dataSource[indexPath.row].isSelected = true
+        self.actions?.onCellSelected(model: dataSource[indexPath.row])
+//        self.dataSource[indexPath.row].isSelected = true
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        self.dataSource[indexPath.row].isSelected = false
+        self.actions?.onCellDeselected(model: dataSource[indexPath.row])
+//        self.dataSource[indexPath.row].isSelected = false
     }
 }
 

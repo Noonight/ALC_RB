@@ -41,8 +41,14 @@ class TournamentSearchVC: UIViewController {
         self.setupSearchController()
 //        self.setupInfiniteScrollController()
         self.setupPullToRefresh()
+//        self.setupDoneButton()
         
         self.refreshData()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
     }
 }
 
@@ -53,6 +59,11 @@ class TournamentSearchVC: UIViewController {
 // MARK: SETUP
 
 private extension TournamentSearchVC {
+    
+    func setupDoneButton() {
+        let btn = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onNavDoneBtnPressed(_:)))
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = btn
+    }
     
     func setupPullToRefresh() {
         self.refreshController = UIRefreshControl()
@@ -109,6 +120,10 @@ private extension TournamentSearchVC {
 
 extension TournamentSearchVC {
     
+    @objc func onNavDoneBtnPressed(_ sender: UIBarButtonItem) {
+//         self.viewModel.setLocalTourneys() 
+    }
+    
     @IBAction func regionAction(_ sender: ButtonActivity) {
         showRegionPicker(sender: sender)
     }
@@ -120,6 +135,17 @@ extension TournamentSearchVC: CellActions {
         switch model {
         case is RegionMy:
             Print.m(model as! RegionMy)
+        case is TourneyModelItem:
+            self.viewModel.setLocalTourney(tourney: model as! TourneyModelItem)
+        default:
+            break
+        }
+    }
+    
+    func onCellDeselected(model: CellModel) {
+        switch model {
+        case is TourneyModelItem:
+            self.viewModel.setLocalTourney(tourney: model as! TourneyModelItem)
         default:
             break
         }

@@ -91,6 +91,10 @@ extension HomeAllVC {
 // MARK: ACTIONS
 
 extension HomeAllVC: CellActions {
+    func onCellDeselected(model: CellModel) {
+        
+    }
+    
     func onCellSelected(model: CellModel) {
         switch model  {
         case is NewsElement:

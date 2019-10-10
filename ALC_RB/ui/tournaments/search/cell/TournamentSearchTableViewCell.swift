@@ -36,12 +36,15 @@ class TournamentSearchTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         selectionStyle = .none
+//        accessoryType = self.tourneyModelItem?.isSelected ?? false ? .checkmark : .none
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
+        tourneyModelItem?.isSelected = selected
         accessoryType = selected ? .checkmark : .none
         
     }
@@ -49,6 +52,7 @@ class TournamentSearchTableViewCell: UITableViewCell {
     private func setupCheckmark() {
         if self.tourneyModelItem?.isSelected == true
         {
+            Print.m("is selected true")
             accessoryType = .checkmark
         }
         else

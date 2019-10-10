@@ -108,11 +108,12 @@ class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegat
         if !nameTextField.isEmpty() && tournamentItem != nil {
             presenter.createTeam(token: userDefaults.getAuthorizedUser()?.token ?? "", teamInfo: CreateTeamInfo(
                 name: nameTextField.text!,
-                _id: (tournamentItem?.id)!,
+                _id: (tournamentItem?.id)!//,
 //                club: (clubItem?.id)!,
-                club: (userDefaults.getAuthorizedUser()?.person.club)!,
-                creator: (userDefaults.getAuthorizedUser()?.person.id)!)
-            )
+//                club: (userDefaults.getAuthorizedUser()?.person.club)!,
+//                creator: (userDefaults.getAuthorizedUser()?.person.id)!)
+            ))
+//            presenter.createTeamNEW(token: userDefaults.getAuthorizedUser()?.token, teamInfo: <#T##CreateTeamInfo#>)
 //        } else if !nameTextField.isEmpty() && tournamentItem == nil || clubItem == nil {
         } else if !nameTextField.isEmpty() && tournamentItem == nil {
             showToast(message: "\(chooseTournament)")

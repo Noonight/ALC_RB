@@ -118,6 +118,10 @@ private extension AnnouncesVC {
 // MARK: ACITONS
 
 extension AnnouncesVC: CellActions {
+    func onCellDeselected(model: CellModel) {
+        
+    }
+    
     func onCellSelected(model: CellModel) {
         if model is Announce { }
     }
