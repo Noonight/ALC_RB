@@ -16,23 +16,33 @@ class CellTypeView: UIView {
     
     var type: CellType = .none {
         didSet {
-//            Print.m(type)
-            switch type {
-            case .none:
-                image_view.isHidden = true
-                image_view.image = nil
-                activity_indicator.isHidden = true
-            case .checkmark:
-                image_view.isHidden = false
-                image_view.image = #imageLiteral(resourceName: "hud_checkmark")
-                activity_indicator.isHidden = true
-            case .loading:
-                activity_indicator.startAnimating()
-                image_view.isHidden = true
-                image_view.image = nil
-                activity_indicator.isHidden = false
-            }
+            Print.m("new cell type is \(type)")
+            configureView()
         }
+    }
+    
+    private func configureView() {
+        switch type {
+        case .none:
+            image_view.isHidden = true
+            image_view.image = nil
+            activity_indicator.isHidden = true
+        case .checkmark:
+            image_view.isHidden = false
+            image_view.image = #imageLiteral(resourceName: "hud_checkmark")
+            activity_indicator.isHidden = true
+        case .loading:
+            activity_indicator.startAnimating()
+            image_view.isHidden = true
+            image_view.image = nil
+            activity_indicator.isHidden = false
+        }
+        layoutIfNeeded()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        configureView()
     }
     
     // MARK: INIT

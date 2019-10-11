@@ -180,7 +180,7 @@ final class TournamentSearchVM {
 extension TournamentSearchVM {
     
     func setLocalTourney(tourney: TourneyModelItem) {
-        Print.m("tourney is \(tourney.isSelected)")
+//        Print.m("tourney is \(tourney.isSelected)")
         if tourney.isSelected
         {
             localTourneys.appendTourney(tourney.getTourney())
@@ -189,7 +189,10 @@ extension TournamentSearchVM {
         {
             localTourneys.removeTourney(tourney.getTourney())
         }
-        Print.m("local tourneys are \(localTourneys.getLocalTourneys())")
+        let outLocalTourneys = localTourneys.getLocalTourneys().map { tourneyIn -> String in
+            return tourneyIn.name ?? ""
+        }
+        Print.m("local tourneys are \(outLocalTourneys)")
     }
     
 //    func setLocalTourneys() {

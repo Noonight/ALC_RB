@@ -717,7 +717,7 @@ class ApiRequests {
                 case .success(let upload, _, _):
                     
                     upload.responseJSON(completionHandler: { response in
-                        dump(response.result)
+//                        dump(response.result)
                     })
                     
                     upload.responseSoloMatch(completionHandler: { response in

@@ -18,61 +18,35 @@ class TournamentSearchTableViewCell: UITableViewCell {
     
     static let ID = "tournament_search_cell_id"
     
-    var tourneyModelItem: TourneyModelItem? {
+    var tourneyModelItem: TourneyModelItem! {
         didSet {
             self.title_label.text = tourneyModelItem?.name
-            if tourneyModelItem?.beginDate?.toFormat(DateFormats.local.rawValue) != nil && tourneyModelItem?.endDate?.toFormat(DateFormats.local.rawValue) != nil
+            if tourneyModelItem.beginDate?.toFormat(DateFormats.local.rawValue) != nil && tourneyModelItem.endDate?.toFormat(DateFormats.local.rawValue) != nil
             {
-                self.date_label.text = (tourneyModelItem?.beginDate?.toFormat(DateFormats.local.rawValue) ?? "") + " - " + (tourneyModelItem?.endDate?.toFormat(DateFormats.local.rawValue) ?? "")
+                self.date_label.text = (tourneyModelItem.beginDate?.toFormat(DateFormats.local.rawValue) ?? "") + " - " + (tourneyModelItem.endDate?.toFormat(DateFormats.local.rawValue) ?? "")
             }
             else
             {
-//                self.date_label.text = ""
+                self.date_label.text = ""
             }
-            self.count_of_teams_label.text = String(tourneyModelItem?.countOfTeams ?? 0)
-            
-            self.type_view.type = tourneyModelItem?.isSelected ?? false ? .checkmark : .none
-//            Print.m(tourneyModelItem?.isSelected ?? false ? CellType.checkmark : CellType.none)
-            // check here layout if needed
-//            self.type_view.layoutIfNeeded()
-//            self.type_view.layoutSubviews()
-//            self.setupCheckmark()
+            self.count_of_teams_label.text = String(tourneyModelItem.countOfTeams ?? 0)
         }
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        self.type_view.type = tourneyModelItem?.isSelected ?? false ? .checkmark : .none
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        selectionStyle = .none
-//        accessoryType = .checkmark
-//        accessoryType = self.tourneyModelItem?.isSelected ?? false ? .checkmark : .none
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        tourneyModelItem?.isSelected = selected
-//        accessoryType = selected ? .checkmark : .none
         
-        
+        self.accessoryType = selected ? .checkmark : .none
     }
     
-    private func setupCheckmark() {
-        if self.tourneyModelItem?.isSelected == true
-        {
-//            Print.m("is selected true")
-            accessoryType = .checkmark
-        }
-        else
-        {
-            accessoryType = .none
-        }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        selectionStyle = .none
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.accessoryType = self.tourneyModelItem.isSelected ? .checkmark : .none
+    }
 }

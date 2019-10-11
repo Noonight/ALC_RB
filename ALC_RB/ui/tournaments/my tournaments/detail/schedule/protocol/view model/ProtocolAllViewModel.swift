@@ -25,7 +25,7 @@ class ProtocolAllViewModel {
         didSet {
             if self.eventsController != nil && self.eventsController.events != nil
             {
-                dump(self.eventsController.events)
+//                dump(self.eventsController.events)
             }
         }
     }

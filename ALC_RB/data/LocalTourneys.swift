@@ -45,7 +45,7 @@ class LocalTourneys {
         var tourneys = getLocalTourneys()
                 
         tourneys.append(tourney)
-        Print.m(tourneys)
+//        Print.m(tourneys)
         setLocalTourneys(newTourneys: tourneys)
         
         
