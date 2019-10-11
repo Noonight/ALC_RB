@@ -41,8 +41,8 @@ class TournamentSearchVC: UIViewController {
         self.setupSearchController()
 //        self.setupInfiniteScrollController()
         self.setupPullToRefresh()
-//        self.setupDoneButton()
         
+        self.refreshRegions()
         self.refreshData()
     }
 }
@@ -109,7 +109,7 @@ private extension TournamentSearchVC {
 extension TournamentSearchVC {
     
     @IBAction func regionAction(_ sender: ButtonActivity) {
-        showRegionPicker(sender: sender)
+        self.showACP(sender: sender)
     }
     
 }
@@ -181,10 +181,43 @@ extension TournamentSearchVC {
         self.viewModel.updateChoosenRegion(newRegion: nil)
         self.region_btn.titleLabel?.text = self.makeButtonTitle(regionName: "Вcе")
         
+        self.refreshRegions()
         self.refreshData()
     }
     
     // MARK: REFRESH DATA
+    
+    func refreshRegions() {
+        region_btn.showLoading()
+        
+        self.presenter?.fetchRegions(success: { regions in
+            
+            self.region_btn.hideLoading()
+            
+            self.viewModel?.updateRegions(newRegions: regions)
+            
+        }, r_message: { r_message in
+            
+            self.region_btn.hideLoading()
+            self.showAlert(title: Constants.Texts.NOTHING, message: r_message.message)
+            
+        }, localError: { error in
+            
+            self.region_btn.hideLoading()
+            self.showAlert(title: Constants.Texts.FAILURE, message: error.localizedDescription)
+            
+        }, serverError: { error in
+            
+            self.region_btn.hideLoading()
+            self.showAlert(title: Constants.Texts.SERVER_FAILURE, message: error.localizedDescription)
+            
+        }, alamofireError: { error in
+            
+            self.region_btn.hideLoading()
+            self.showAlert(title: Constants.Texts.FAILURE, message: error.localizedDescription)
+            
+        })
+    }
     
     func refreshData() {
         // check mbprogress hud inside view
@@ -194,7 +227,7 @@ extension TournamentSearchVC {
         }
         Print.m("offset is \(self.viewModel.prepareOffset())")
         self.presenter?.fetchTourneys(name: self.viewModel.prepareSearchingQuery(), region: self.viewModel.prepareChoosedRegion(), limit: Constants.Values.LIMIT, offset: self.viewModel.prepareOffset(), success: { tourneys in
-//            Print.m("tourney are \(tourneys)")
+
             self.hideHUD()
             
             self.viewModel?.updateTourneys(tourneys: tourneys)
@@ -257,44 +290,6 @@ extension TournamentSearchVC {
     }
     
     // MARK: REGION PICKER
-    
-    func showRegionPicker(sender: ButtonActivity) {
-        
-        sender.showLoading()
-        
-        self.presenter?.fetchRegions(success: { regions in
-            
-            sender.hideLoading()
-            
-            self.viewModel?.updateRegions(newRegions: regions)
-            
-            self.showACP(sender: sender)
-            
-        }, r_message: { r_message in
-            
-            sender.hideLoading()
-            self.showAlert(title: Constants.Texts.NOTHING, message: r_message.message) {
-                self.acp?.hideWithCancelAction()
-                self.showRegionPicker(sender: self.region_btn)
-            }
-            
-        }, localError: { error in
-            
-            sender.hideLoading()
-            self.showAlert(title: Constants.Texts.FAILURE, message: error.localizedDescription)
-            
-        }, serverError: { error in
-            
-            sender.hideLoading()
-            self.showAlert(title: Constants.Texts.SERVER_FAILURE, message: error.localizedDescription)
-            
-        }, alamofireError: { error in
-            
-            sender.hideLoading()
-            self.showAlert(title: Constants.Texts.FAILURE, message: error.localizedDescription)
-            
-        })
-    }
     
     private func makeButtonTitle(regionName: String) -> String {
         return "Регион: \(regionName)"
