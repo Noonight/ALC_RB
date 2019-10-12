@@ -14,7 +14,6 @@ class TournamentSearchTableViewCell: UITableViewCell {
     @IBOutlet weak var title_label: UILabel!
     @IBOutlet weak var date_label: UILabel!
     @IBOutlet weak var count_of_teams_label: UILabel!
-    @IBOutlet weak var type_view: CellTypeView!
     
     static let ID = "tournament_search_cell_id"
     

@@ -19,24 +19,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="112.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Oy-Bz-baC" customClass="CellTypeView" customModule="ALC_RB" customModuleProvider="target">
-                        <rect key="frame" x="282" y="16" width="30" height="80.5"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="30" id="hkS-zu-Pkt"/>
-                        </constraints>
-                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UqR-eh-MU9">
-                        <rect key="frame" x="8" y="0.0" width="266" height="112.5"/>
+                        <rect key="frame" x="8" y="0.0" width="304" height="112.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Tournament name name name name name name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQ2-hZ-us1">
-                                <rect key="frame" x="0.0" y="8" width="266" height="41"/>
+                                <rect key="frame" x="0.0" y="8" width="304" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date from to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3at-qI-BmV">
-                                <rect key="frame" x="0.0" y="57" width="266" height="21.5"/>
+                                <rect key="frame" x="0.0" y="57" width="304" height="21.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -48,7 +41,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12.03.13" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLv-QG-VrD">
-                                <rect key="frame" x="153.5" y="86.5" width="112.5" height="18"/>
+                                <rect key="frame" x="153.5" y="86.5" width="150.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -73,13 +66,10 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="8Oy-Bz-baC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="AqS-Lg-MSs"/>
                     <constraint firstAttribute="bottom" secondItem="UqR-eh-MU9" secondAttribute="bottom" id="DDC-8p-ORw"/>
-                    <constraint firstAttribute="bottom" secondItem="8Oy-Bz-baC" secondAttribute="bottom" constant="16" id="ZNP-HN-u8T"/>
+                    <constraint firstAttribute="trailing" secondItem="UqR-eh-MU9" secondAttribute="trailing" constant="8" id="RND-Iq-x3o"/>
                     <constraint firstItem="UqR-eh-MU9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="i8j-Nk-rdI"/>
                     <constraint firstItem="UqR-eh-MU9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="kFX-qh-QJo"/>
-                    <constraint firstAttribute="trailing" secondItem="8Oy-Bz-baC" secondAttribute="trailing" constant="8" id="l7r-XV-ilp"/>
-                    <constraint firstItem="8Oy-Bz-baC" firstAttribute="leading" secondItem="UqR-eh-MU9" secondAttribute="trailing" constant="8" id="vD6-80-mt4"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -87,7 +77,6 @@
                 <outlet property="count_of_teams_label" destination="DLv-QG-VrD" id="kDu-Xe-kK5"/>
                 <outlet property="date_label" destination="3at-qI-BmV" id="Jmy-s0-9YZ"/>
                 <outlet property="title_label" destination="HQ2-hZ-us1" id="HEt-yf-2Op"/>
-                <outlet property="type_view" destination="8Oy-Bz-baC" id="sPi-rN-gMb"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="162.38839285714286"/>
         </tableViewCell>
