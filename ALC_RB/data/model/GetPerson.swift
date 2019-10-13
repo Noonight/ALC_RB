@@ -148,7 +148,7 @@ struct GetPerson: Codable {
             }
             
             init(data: Data) throws {
-                self = try newJSONDecoder().decode(PastLeague.self, from: data)
+                self = try JSONDecoder().decode(PastLeague.self, from: data)
             }
             
             init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -181,7 +181,7 @@ struct GetPerson: Codable {
             }
             
             func jsonData() throws -> Data {
-                return try newJSONEncoder().encode(self)
+                return try JSONEncoder().encode(self)
             }
             
             func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -220,7 +220,7 @@ struct GetPerson: Codable {
         }
         
         init(data: Data) throws {
-            self = try newJSONDecoder().decode(PastLeague.self, from: data)
+            self = try JSONDecoder().decode(PastLeague.self, from: data)
         }
         
         init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -249,7 +249,7 @@ struct GetPerson: Codable {
         }
         
         func jsonData() throws -> Data {
-            return try newJSONEncoder().encode(self)
+            return try JSONEncoder().encode(self)
         }
         
         func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -261,7 +261,7 @@ struct GetPerson: Codable {
 
 extension GetPerson {
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(GetPerson.self, from: data)
+        self = try JSONDecoder().decode(GetPerson.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -284,7 +284,7 @@ extension GetPerson {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -316,7 +316,7 @@ extension GetPerson.Person {
     }
     
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(GetPerson.Person.self, from: data)
+        self = try JSONDecoder().decode(GetPerson.Person.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -374,7 +374,7 @@ extension GetPerson.Person {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -391,7 +391,7 @@ extension DataRequest {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
             
-            return Result { try newJSONDecoder().decode(T.self, from: data) }
+            return Result { try JSONDecoder().decode(T.self, from: data) }
         }
     }
     

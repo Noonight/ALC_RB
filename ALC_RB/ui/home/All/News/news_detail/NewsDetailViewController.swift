@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import AlamofireImage
+import Kingfisher
 import Lightbox
 
-class NewsDetailViewController: UIViewController, MvpView {
+class NewsDetailViewController: UIViewController {
 
     @IBOutlet weak var mTitle: UILabel!
     @IBOutlet weak var mDate: UILabel!
@@ -21,17 +21,13 @@ class NewsDetailViewController: UIViewController, MvpView {
     
     @IBOutlet weak var imageHeight: NSLayoutConstraint!
     
-    var newsElement: NewsElement?
-    
-    private let presenter = NewsDetailPresenter()
+    var newsModelItem: NewsModelItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initPresenter()
-        
         mImage.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.flexibleBottomMargin.rawValue | UIView.AutoresizingMask.flexibleHeight.rawValue | UIView.AutoresizingMask.flexibleRightMargin.rawValue | UIView.AutoresizingMask.flexibleLeftMargin.rawValue | UIView.AutoresizingMask.flexibleTopMargin.rawValue | UIView.AutoresizingMask.flexibleWidth.rawValue)
-        mImage!.contentMode = UIView.ContentMode.scaleAspectFit
+        mImage!.contentMode = UIView.ContentMode.scaleAspectFill
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -39,24 +35,21 @@ class NewsDetailViewController: UIViewController, MvpView {
     }
     
     func refreshUI() {
-        self.mTitle.text = newsElement?.caption
-        self.title = newsElement?.createdAt.toDate()?.toFormat("MM.dd.yyyy")
-        self.mText.text = newsElement?.content
-        if let imagePath = newsElement?.img {
-            self.presenter.getImage(imageName: imagePath)
+        self.mTitle.text = newsModelItem?.caption
+        self.title = newsModelItem?.updatedAt
+        self.mText.text = newsModelItem?.content
+        guard let imagePath = newsModelItem?.imagePath else { return }
+        self.mImage.kfLoadImage(path: imagePath) { result in
+            switch result {
+            case .success(let image):
+//                self.imageHeight.constant = image.size.height
+//                self.containerView.layoutIfNeeded()
+                self.mImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.imageTap)))
+                self.mImage.isUserInteractionEnabled = true
+            case .failure(let error):
+                Print.m(error)
+            }
         }
-    }
-    
-    func initPresenter() {
-        presenter.attachView(view: self)
-    }
-    
-    func onGetImageSuccess(_ image: UIImage) {
-        mImage?.image = image
-        imageHeight.constant = image.size.height
-        containerView.layoutIfNeeded()
-        mImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTap)))
-        mImage.isUserInteractionEnabled = true
     }
     
     @objc func imageTap() {

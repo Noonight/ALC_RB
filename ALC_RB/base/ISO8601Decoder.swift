@@ -11,7 +11,7 @@ import Foundation
 class ISO8601Decoder {
     
     static func getDecoder() -> JSONDecoder {
-        let decoder = newJSONDecoder()
+        let decoder = JSONDecoder()
         
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)

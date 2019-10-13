@@ -59,7 +59,7 @@ extension DataRequest {
             guard let data = data else {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
-            let decoder = newJSONDecoder()
+            let decoder = JSONDecoder()
             
             let formatter = DateFormatter()
             formatter.calendar = Calendar(identifier: .iso8601)

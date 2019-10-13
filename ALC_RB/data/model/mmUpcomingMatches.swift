@@ -35,7 +35,7 @@ struct MmUpcomingMatches: Codable {
 
 extension MmUpcomingMatches {
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(MmUpcomingMatches.self, from: data)
+        self = try JSONDecoder().decode(MmUpcomingMatches.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -58,7 +58,7 @@ extension MmUpcomingMatches {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -126,7 +126,7 @@ struct MmMatch: Codable {
 
 extension MmMatch {
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(MmMatch.self, from: data)
+        self = try JSONDecoder().decode(MmMatch.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -187,7 +187,7 @@ extension MmMatch {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -221,7 +221,7 @@ struct MmReferee: Codable {
 
 extension MmReferee {
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(MmReferee.self, from: data)
+        self = try JSONDecoder().decode(MmReferee.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -248,7 +248,7 @@ extension MmReferee {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -308,7 +308,7 @@ struct MmTeam: Codable {
 
 extension MmTeam {
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(MmTeam.self, from: data)
+        self = try JSONDecoder().decode(MmTeam.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -361,7 +361,7 @@ extension MmTeam {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -411,7 +411,7 @@ struct MmPlayer: Codable {
 
 extension MmPlayer {
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(MmPlayer.self, from: data)
+        self = try JSONDecoder().decode(MmPlayer.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -454,7 +454,7 @@ extension MmPlayer {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -475,7 +475,7 @@ extension DataRequest {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
             
-            return Result { try newJSONDecoder().decode(T.self, from: data) }
+            return Result { try JSONDecoder().decode(T.self, from: data) }
         }
     }
     

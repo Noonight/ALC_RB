@@ -98,6 +98,27 @@ extension MBProgressHUD {
         detailsLabel.text = detailMessage
     }
     
+    func setToFailureView(message: String? = "", detailMessage: String? = Constants.Texts.FAILURE, tap: @escaping () -> ())
+    {
+        let image = #imageLiteral(resourceName: "ic_warning")
+        let imageView = UIImageView(image: image)
+        
+        imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        setToCustomView(with: imageView)
+        
+        label.font = UIFont.systemFont(ofSize: 19)
+        detailsLabel.font = UIFont.systemFont(ofSize: 15)
+//        detailsLabel.textColor = .blue
+        
+        self.tapAction(action: tap)
+        
+        bezelView.isUserInteractionEnabled = true
+        bezelView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnHud)))
+        
+    }
+    
     // also hide after 1 second
     
     func setToButtonHUD(message: String? = Constants.Texts.REPEAT, detailMessage: String? = "", btn: @escaping () -> ()) {

@@ -2,30 +2,98 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12ca8836-b4f8-4f04-bd9b-95f2ce59baa9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/HomeAllViewModel.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/News/HomeNewsViewModel.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/News/view model/NewsModelItem.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/tournaments/search/TournamentSearchVC.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/tournaments/search/TournamentSearchVC.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/tournaments/search/model/TournamentSearchVM.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/tournaments/search/model/TournamentSearchVM.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/AMScrollingNavbar.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/AMScrollingNavbar.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/ActionSheetPicker-3.0.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/ActionSheetPicker-3.0.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Alamofire.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Alamofire.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/AlamofireImage.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/AlamofireImage.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Cache.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Cache.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/ESPullToRefresh-ESPullToRefresh.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/ESPullToRefresh-ESPullToRefresh.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/ESPullToRefresh.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/ESPullToRefresh.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/FloatingPanel.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/FloatingPanel.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/IQKeyboardManagerSwift.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/IQKeyboardManagerSwift.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Imaginary.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Imaginary.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Kingfisher.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Kingfisher.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Lightbox.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Lightbox.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/MBProgressHUD.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/MBProgressHUD.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Pods-ALC_RB.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/Pods-ALC_RB.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxAtomic.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxAtomic.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxCocoa.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxCocoa.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxSwift.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/RxSwift.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/SPStorkController.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/SPStorkController.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/SwiftDate.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/SwiftDate.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/SwiftyJSON.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/SwiftyJSON.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/UIScrollView-InfiniteScroll.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayur.xcuserdatad/xcschemes/UIScrollView-InfiniteScroll.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/base/Constants.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/base/Constants.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/base/ISO8601Decoder.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/base/ISO8601Decoder.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/api/ApiRequests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/api/ApiRequests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/api/ApiRoute.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/api/ApiRoute.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/ActiveMatches.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/ActiveMatches.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/Announce.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/Announce.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/AuthUser.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/AuthUser.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/Clubs.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/Clubs.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/EditTeamResponse.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/EditTeamResponse.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/EditedProfilePerson.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/EditedProfilePerson.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/ErrorMessage.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/ErrorMessage.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/GetPerson.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/GetPerson.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/LeagueInfo.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/LeagueInfo.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/News.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/News.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/ParticipationMatch.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/ParticipationMatch.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/PastLeague.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/PastLeague.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/Players.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/Players.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/Referee.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/Referee.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/SingleLineMessage.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/SingleLineMessage.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/SoloClub.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/SoloClub.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/SoloLeague.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/SoloLeague.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/SoloMatch.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/SoloMatch.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/SoloPerson.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/SoloPerson.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/SoloTeam.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/SoloTeam.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/Tournaments.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/Tournaments.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/Tourney.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/Tourney.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/UpcomingMatches.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/UpcomingMatches.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/mmUpcomingMatches.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/mmUpcomingMatches.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/post/EditMatchReferees.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/post/EditMatchReferees.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/post/EditProtocol.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/post/EditProtocol.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/post/EditTeam.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/post/EditTeam.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/extensions/UIImageViewExtensions.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/extensions/UIImageViewExtensions.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/All/HomeAllPresenter.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/All/HomeAllVC.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/HomeAllVC.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/All/News Collection/Cell/HomeNewsCollectionViewCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/News/Cell/HomeNewsCollectionViewCell.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/All/News Collection/Cell/HomeNewsCollectionViewCell.xib" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/News/Cell/HomeNewsCollectionViewCell.xib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/All/News Collection/HomeNewsCollection.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/News/HomeNewsCollection.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/All/News Collection/news_detail/NewsDetailPresenter.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/News/news_detail/NewsDetailPresenter.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/All/News Collection/news_detail/NewsDetailViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/News/news_detail/NewsDetailViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/News/NewsAllPresenter.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/News/NewsAllPresenter.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/News/NewsAllTableViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/News/NewsAllTableViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Manifest.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Manifest.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/AMScrollingNavbar.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/AMScrollingNavbar.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/ActionSheetPicker-3.0.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/ActionSheetPicker-3.0.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Alamofire.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Alamofire.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/AlamofireImage.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/AlamofireImage.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Cache.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Cache.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/ESPullToRefresh-ESPullToRefresh.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/ESPullToRefresh-ESPullToRefresh.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/ESPullToRefresh.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/ESPullToRefresh.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/FloatingPanel.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/FloatingPanel.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/IQKeyboardManagerSwift.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/IQKeyboardManagerSwift.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Imaginary.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Imaginary.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Kingfisher.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Kingfisher.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Lightbox.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Lightbox.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/MBProgressHUD.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/MBProgressHUD.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Pods-ALC_RB.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Pods-ALC_RB.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/RxAtomic.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/RxAtomic.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/RxCocoa.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/RxCocoa.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/RxSwift.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/RxSwift.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/SPStorkController.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/SPStorkController.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/SwiftDate.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/SwiftDate.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/SwiftyJSON.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/SwiftyJSON.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/UIScrollView-InfiniteScroll.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/UIScrollView-InfiniteScroll.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/AMScrollingNavbar/AMScrollingNavbar.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/AMScrollingNavbar/AMScrollingNavbar.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Alamofire/Alamofire.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Alamofire/Alamofire.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/AlamofireImage/AlamofireImage.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/AlamofireImage/AlamofireImage.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Cache/Cache.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Cache/Cache.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/ESPullToRefresh/ESPullToRefresh.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/ESPullToRefresh/ESPullToRefresh.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/FloatingPanel/FloatingPanel.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/FloatingPanel/FloatingPanel.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Imaginary/Imaginary.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Imaginary/Imaginary.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Kingfisher/Kingfisher.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Kingfisher/Kingfisher.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Lightbox/Lightbox.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Lightbox/Lightbox.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/MBProgressHUD/MBProgressHUD.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/MBProgressHUD/MBProgressHUD.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.debug.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.release.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/RxAtomic/RxAtomic.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/RxAtomic/RxAtomic.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/RxCocoa/RxCocoa.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/RxCocoa/RxCocoa.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/RxSwift/RxSwift.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/RxSwift/RxSwift.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/SPStorkController/SPStorkController.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/SPStorkController/SPStorkController.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/SwiftDate/SwiftDate.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/SwiftDate/SwiftDate.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/SwiftyJSON/SwiftyJSON.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/SwiftyJSON/SwiftyJSON.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/UIScrollView-InfiniteScroll/UIScrollView-InfiniteScroll.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/UIScrollView-InfiniteScroll/UIScrollView-InfiniteScroll.xcconfig" afterDir="false" />
     </list>
     <ignored path="$USER_HOME$/Library/Developer/Xcode/DerivedData/ALC_RB-criteqptgmpqstfhosiglduwlnxs/" />
     <ignored path="$USER_HOME$/Library/Caches/AppCode2019.1/DerivedData/ALC_RB-diruytnehxazfvekyfnaxzratfak/Build/Intermediates.noindex/" />
@@ -36,40 +104,57 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="iphonesimulator_6F990BE7-5213-4E98-A22E-387725D4239D" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos_9f78b08def0293de22dbaa748aa37bcf55ccae55" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/TournamentSearchVC.swift">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="366">
-                  <caret line="200" column="73" selection-start-line="200" selection-start-column="73" selection-end-line="200" selection-end-column="73" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/model/TournamentSearchVM.swift">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="433">
-                  <caret line="92" column="93" selection-start-line="92" selection-start-column="93" selection-end-line="92" selection-end-column="93" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/TournamentSearchVC.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="319">
+              <caret line="197" column="12" selection-start-line="197" selection-start-column="12" selection-end-line="197" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/model/TourneyModelItem.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ALC_RB/base/ISO8601Decoder.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="213">
+              <caret line="13" column="33" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ALC_RB/data/model/post/EditMatchReferees.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="128" column="5" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
+    <findStrings>
+      <find>newJ</find>
+      <find>newJSONDecoder</find>
+      <find>newJSONEncoder</find>
+    </findStrings>
     <replaceStrings>
       <replace />
+      <replace>JSONDecoder</replace>
+      <replace>JSONEncoder</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -87,10 +172,11 @@
         <option value="$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanelLayout.swift" />
         <option value="$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanelSurfaceView.swift" />
         <option value="$PROJECT_DIR$/ALC_RB/ui/tournaments/search/model/TournamentSearchVM.swift" />
+        <option value="$PROJECT_DIR$/ALC_RB/data/model/post/EditMatchReferees.swift" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="23" />
     <option name="width" value="2157" />
     <option name="height" value="1002" />
@@ -172,207 +258,16 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ALC_RB">
-    <configuration default="false" name="ALC_RB" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ALC_RB" TARGET_NAME="ALC_RB" CONFIG_NAME="Debug" SCHEME_NAME="ALC_RB" IS_LOCATION_SIMULATION_ALLOWED="true" RUN_TARGET_PROJECT_NAME="ALC_RB" RUN_TARGET_NAME="ALC_RB" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
+  <component name="RunManager">
+    <configuration default="false" name="ALC_RB" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ALC_RB" TARGET_NAME="ALC_RB" CONFIG_NAME="Debug" SCHEME_NAME="ALC_RB" IS_LOCATION_SIMULATION_ALLOWED="true" APPLICATION_LANGUAGE="IDELaunchSchemeLanguageUseSystemLanguage" APPLICATION_REGION="" RUN_TARGET_PROJECT_NAME="ALC_RB" RUN_TARGET_NAME="ALC_RB" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
       <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
         <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
       </EXTENSION>
+      <embedded_app_extension_list />
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AMScrollingNavbar" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="AMScrollingNavbar" CONFIG_NAME="Debug" SCHEME_NAME="AMScrollingNavbar" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ActionSheetPicker-3.0" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="ActionSheetPicker-3.0" CONFIG_NAME="Debug" SCHEME_NAME="ActionSheetPicker-3.0" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Alamofire" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="Alamofire" CONFIG_NAME="Debug" SCHEME_NAME="Alamofire" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AlamofireImage" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="AlamofireImage" CONFIG_NAME="Debug" SCHEME_NAME="AlamofireImage" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Cache" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="Cache" CONFIG_NAME="Debug" SCHEME_NAME="Cache" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ESPullToRefresh-ESPullToRefresh" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="ESPullToRefresh-ESPullToRefresh" CONFIG_NAME="Debug" SCHEME_NAME="ESPullToRefresh-ESPullToRefresh" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ESPullToRefresh" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="ESPullToRefresh" CONFIG_NAME="Debug" SCHEME_NAME="ESPullToRefresh" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FloatingPanel" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="FloatingPanel" CONFIG_NAME="Debug" SCHEME_NAME="FloatingPanel" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="IQKeyboardManagerSwift" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="IQKeyboardManagerSwift" CONFIG_NAME="Debug" SCHEME_NAME="IQKeyboardManagerSwift" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Imaginary" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="Imaginary" CONFIG_NAME="Debug" SCHEME_NAME="Imaginary" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Kingfisher" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="Kingfisher" CONFIG_NAME="Debug" SCHEME_NAME="Kingfisher" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Lightbox" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="Lightbox" CONFIG_NAME="Debug" SCHEME_NAME="Lightbox" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MBProgressHUD" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="MBProgressHUD" CONFIG_NAME="Debug" SCHEME_NAME="MBProgressHUD" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Pods-ALC_RB" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="Pods-ALC_RB" CONFIG_NAME="Debug" SCHEME_NAME="Pods-ALC_RB" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RxAtomic" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="RxAtomic" CONFIG_NAME="Debug" SCHEME_NAME="RxAtomic" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RxCocoa" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="RxCocoa" CONFIG_NAME="Debug" SCHEME_NAME="RxCocoa" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RxSwift" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="RxSwift" CONFIG_NAME="Debug" SCHEME_NAME="RxSwift" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SPStorkController" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="SPStorkController" CONFIG_NAME="Debug" SCHEME_NAME="SPStorkController" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SwiftDate" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="SwiftDate" CONFIG_NAME="Debug" SCHEME_NAME="SwiftDate" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SwiftyJSON" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="SwiftyJSON" CONFIG_NAME="Debug" SCHEME_NAME="SwiftyJSON" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UIScrollView-InfiniteScroll" type="AppleRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Pods" TARGET_NAME="UIScrollView-InfiniteScroll" CONFIG_NAME="Debug" SCHEME_NAME="UIScrollView-InfiniteScroll" IS_LOCATION_SIMULATION_ALLOWED="true" MAKE_ACTIVE="TRUE" SHOULD_DEBUG_EXTENSIONS="false">
-      <EXTENSION ID="org.jetbrains.appcode.reveal.RevealRunConfigurationExtension">
-        <REVEAL_SETTINGS autoInject="false" autoInstall="true" askToEnableAutoInstall="true" />
-      </EXTENSION>
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.ALC_RB" />
-      <item itemvalue="Application.RxAtomic" />
-      <item itemvalue="Application.ActionSheetPicker-3.0" />
-      <item itemvalue="Application.Alamofire" />
-      <item itemvalue="Application.AlamofireImage" />
-      <item itemvalue="Application.AMScrollingNavbar" />
-      <item itemvalue="Application.Cache" />
-      <item itemvalue="Application.ESPullToRefresh-ESPullToRefresh" />
-      <item itemvalue="Application.ESPullToRefresh" />
-      <item itemvalue="Application.FloatingPanel" />
-      <item itemvalue="Application.Imaginary" />
-      <item itemvalue="Application.IQKeyboardManagerSwift" />
-      <item itemvalue="Application.Kingfisher" />
-      <item itemvalue="Application.Lightbox" />
-      <item itemvalue="Application.MBProgressHUD" />
-      <item itemvalue="Application.Pods-ALC_RB" />
-      <item itemvalue="Application.RxCocoa" />
-      <item itemvalue="Application.RxSwift" />
-      <item itemvalue="Application.SPStorkController" />
-      <item itemvalue="Application.SwiftDate" />
-      <item itemvalue="Application.SwiftyJSON" />
-      <item itemvalue="Application.UIScrollView-InfiniteScroll" />
-    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -394,16 +289,18 @@
       <workItem from="1569901766063" duration="1670000" />
       <workItem from="1570725130300" duration="41000" />
       <workItem from="1570725188493" duration="749000" />
+      <workItem from="1570967332326" duration="850000" />
+      <workItem from="1570977336046" duration="708000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8586000" />
+    <option name="totallyTimeSpent" value="10144000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="2157" height="1002" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="813" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.46583852" visible="true" weight="0.19196217" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46583852" visible="true" weight="0.29613733" />
       <window_info id="Designer" order="1" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -423,7 +320,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
-      <window_info anchor="right" id="Structure" order="5" sideWeight="0.5341615" side_tool="true" visible="true" weight="0.11111111" />
+      <window_info anchor="right" id="Structure" order="5" sideWeight="0.5341615" side_tool="true" visible="true" weight="0.16809729" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -529,17 +426,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/TournamentSearchVC.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="200" column="73" selection-start-line="200" selection-start-column="73" selection-end-line="200" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/model/TournamentSearchVM.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="433">
-          <caret line="92" column="93" selection-start-line="92" selection-start-column="93" selection-end-line="92" selection-end-column="93" />
+          <caret line="92" column="9" selection-start-line="92" selection-start-column="9" selection-end-line="92" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/TournamentSearchVC.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="197" column="12" selection-start-line="197" selection-start-column="12" selection-end-line="197" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/model/TourneyModelItem.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ALC_RB/base/ISO8601Decoder.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="13" column="33" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ALC_RB/data/model/post/EditMatchReferees.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="128" column="5" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
         </state>
       </provider>
     </entry>

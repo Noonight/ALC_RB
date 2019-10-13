@@ -8,38 +8,31 @@
 
 import UIKit
 import MBProgressHUD
+import RxSwift
+import RxCocoa
 
 final class HomeAllVC: UIViewController {
 
     @IBOutlet weak var news_collection: UICollectionView!
     @IBOutlet weak var matches_table: IntrinsicTableView!
-//    @IBOutlet weak var announces_table: IntrinsicTableView!
-    
-    var newsCollection: HomeNewsCollection?
-    var scheduleTable: HomeScheduleTable?
-    var announcesTable: HomeAnnouncesTable?
     
     private var news_hud: MBProgressHUD?
     
-    private var homeAllPresenter: HomeAllPresenter!
+    private var homeAllViewModel: HomeAllViewModel!
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupHomeAllPresenter()
-        self.setupNewsTable()
-        self.setupScheduleTable()
+        news_collection.delegate = nil
+        news_collection.dataSource = nil
         
-        self.setupNewsDS()
-
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        self.news_collection.layoutIfNeeded()
+        news_collection.register(UINib(nibName: "HomeNewsCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: HomeNewsCollectionViewCell.ID)
+        
+        setupHomeAllViewModel()
+        setupBinds()
+        
+        self.homeAllViewModel.fetch()
     }
 }
 
@@ -51,67 +44,55 @@ final class HomeAllVC: UIViewController {
 
 extension HomeAllVC {
     
-    func setupHomeAllPresenter() {
-        self.homeAllPresenter = HomeAllPresenter(dataManager: ApiRequests())
+    func setupHomeAllViewModel() {
+        homeAllViewModel = HomeAllViewModel(newDataManager: ApiRequests())
     }
     
-    func setupNewsTable() {
-        self.newsCollection = HomeNewsCollection(actions: self)
-        self.news_collection.delegate = self.newsCollection
-        self.news_collection.dataSource = self.newsCollection
-        self.news_collection.register(self.newsCollection?.cellNib, forCellWithReuseIdentifier: HomeNewsCollectionViewCell.ID)
-    }
-    
-    func setupNewsDS() {
-        self.news_hud = self.showLoadingViewHUD(addTo: self.news_collection)
-        self.homeAllPresenter.fetchNews(success: { news in
-            self.fSuccess(news: news)
-        }, r_message: { message in
-            self.fMessage(message: message)
-        }, failureAll: { error in
-            self.fAllFailure(error: error)
-        }, failureServer: { error in
-            self.fServerFailure(error: error)
-        }, failureLocal: { error in
-            self.fLocalFailure(error: error)
-        })
-    }
-    
-    func setupScheduleTable() {
-        self.scheduleTable = HomeScheduleTable(actions: self)
-        self.matches_table.delegate = self.scheduleTable
-        self.matches_table.dataSource = self.scheduleTable
-    }
-    
-    func setupScheduleTableDataSource() {
+    func setupBinds() {
         
-    }
-}
-
-// MARK: ACTIONS
-
-extension HomeAllVC: CellActions {
-    func onCellDeselected(model: CellModel) {
+        homeAllViewModel.newsViewModel
+            .items
+            .bind(to: news_collection.rx.items(cellIdentifier: HomeNewsCollectionViewCell.ID, cellType: HomeNewsCollectionViewCell.self)) { (row, news, cell) in
+            cell.newsModelItem = news
+        }.disposed(by: disposeBag)
         
-    }
-    
-    func onCellSelected(model: CellModel) {
-        switch model  {
-        case is NewsElement:
-            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let newViewController = storyBoard.instantiateViewController(withIdentifier: "NewsDetailViewController") as! NewsDetailViewController
-//            newViewController.newsElement = (model as! NewsElement)
-//            self.present(newViewController, animated: true, completion: nil)
-//            self.navigationController?.present(newViewController, animated: true, completion: nil)
-            let newsElement = model as! NewsElement
-            newViewController.newsElement = newsElement
-            self.navigationController?.show(newViewController, sender: self)
-//            NewsDetailViewController
-        case is MmMatch:
-            Print.m("match cell selected")
-        default:
-            Print.m("default tap here")
-        }
+        news_collection.rx
+            .itemSelected
+            .subscribe { indexPath in
+                guard let mIndexPath = indexPath.element else { return }
+                let cell = self.news_collection.cellForItem(at: mIndexPath) as! HomeNewsCollectionViewCell
+                self.showNewsDetail(news: cell.newsModelItem)
+        }.disposed(by: disposeBag)
+        
+        homeAllViewModel.newsViewModel
+            .loading
+            .subscribe { isLoading in
+                if isLoading.element ?? false {
+                    if self.news_hud != nil {
+                        self.news_hud?.setToLoadingView()
+                    } else {
+                        self.news_hud = self.showLoadingViewHUD(addTo: self.news_collection)
+                    }
+                } else {
+                    self.news_hud?.hide(animated: false)
+                    self.news_hud = nil
+                }
+        }.disposed(by: disposeBag)
+        
+        homeAllViewModel.newsViewModel
+            .error
+            .subscribe { error in
+                guard let mError = error.element else { return }
+                if self.news_hud != nil {
+                    self.news_hud?.setToFailureView(detailMessage: mError?.localizedDescription, tap: {
+                        self.homeAllViewModel.newsViewModel.fetch()
+                    })
+                } else {
+                    self.news_hud = self.showFailureViewHUD(addTo: self.news_collection, detailMessage: mError?.localizedDescription, tap: {
+                        self.homeAllViewModel.newsViewModel.fetch()
+                    })
+                }
+        }.disposed(by: disposeBag)
     }
 }
 
@@ -119,34 +100,11 @@ extension HomeAllVC: CellActions {
 
 extension HomeAllVC {
     
-    func fSuccess(news: News) {
-        news_hud?.hide(animated: true)
-        self.newsCollection?.dataSource = news.news
-        self.news_collection.reloadData()
-    }
-    
-    func fMessage(message: SingleLineMessage) {
-        news_hud?.setToButtonHUD(message: message.message, btn: {
-            self.setupNewsDS()
-        })
-    }
-    
-    func fAllFailure(error: Error) {
-        news_hud?.setToButtonHUD(message: Constants.Texts.UNDEFINED_FAILURE, detailMessage: error.localizedDescription, btn: {
-            self.setupNewsDS()
-        })
-    }
-    
-    func fServerFailure(error: Error) {
-        news_hud?.setToButtonHUD(message: Constants.Texts.SERVER_FAILURE, detailMessage: error.localizedDescription, btn: {
-            self.setupNewsDS()
-        })
-    }
-    
-    func fLocalFailure(error: Error) {
-        news_hud?.setToButtonHUD(message: Constants.Texts.FAILURE, detailMessage: error.localizedDescription, btn: {
-            self.setupNewsDS()
-        })
+    func showNewsDetail(news: NewsModelItem) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "NewsDetailViewController") as! NewsDetailViewController
+        newViewController.newsModelItem = news
+        self.navigationController?.show(newViewController, sender: self)
     }
     
 }

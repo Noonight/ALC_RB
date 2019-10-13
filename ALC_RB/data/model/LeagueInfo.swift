@@ -497,7 +497,7 @@ extension LILeagueInfo {
     }
     
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(LILeagueInfo.self, from: data)
+        self = try JSONDecoder().decode(LILeagueInfo.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -520,7 +520,7 @@ extension LILeagueInfo {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -551,7 +551,7 @@ extension LILeague {
     }
     
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(LILeague.self, from: data)
+        self = try JSONDecoder().decode(LILeague.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -606,7 +606,7 @@ extension LILeague {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -639,7 +639,7 @@ extension LIMatch {
     }
     
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(LIMatch.self, from: data)
+        self = try JSONDecoder().decode(LIMatch.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -698,7 +698,7 @@ extension LIMatch {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -709,7 +709,7 @@ extension LIMatch {
 extension LIEvent {
     
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(LIEvent.self, from: data)
+        self = try JSONDecoder().decode(LIEvent.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -738,7 +738,7 @@ extension LIEvent {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -748,7 +748,7 @@ extension LIEvent {
 
 extension LIReferee {
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(LIReferee.self, from: data)
+        self = try JSONDecoder().decode(LIReferee.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -775,7 +775,7 @@ extension LIReferee {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -805,7 +805,7 @@ extension LITeam {
     }
     
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(LITeam.self, from: data)
+        self = try JSONDecoder().decode(LITeam.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -858,7 +858,7 @@ extension LITeam {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -868,7 +868,7 @@ extension LITeam {
 
 extension LIPlayer {
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(LIPlayer.self, from: data)
+        self = try JSONDecoder().decode(LIPlayer.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -913,7 +913,7 @@ extension LIPlayer {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -932,7 +932,7 @@ extension DataRequest {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
             
-            return Result { try newJSONDecoder().decode(T.self, from: data) }
+            return Result { try JSONDecoder().decode(T.self, from: data) }
         }
     }
     

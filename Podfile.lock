@@ -43,7 +43,7 @@ DEPENDENCIES:
   - UIScrollView-InfiniteScroll (~> 1.1.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - ActionSheetPicker-3.0
     - Alamofire
     - AlamofireImage
@@ -87,4 +87,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: f90e66490be7f0e9d68a004dab63707daca6c152
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.8.3

@@ -162,7 +162,7 @@ extension PendingTeamInvite {
     }
     
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(PendingTeamInvite.self, from: data)
+        self = try JSONDecoder().decode(PendingTeamInvite.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -189,7 +189,7 @@ extension PendingTeamInvite {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -207,7 +207,7 @@ extension Players {
     }
     
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(Players.self, from: data)
+        self = try JSONDecoder().decode(Players.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -232,7 +232,7 @@ extension Players {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -264,7 +264,7 @@ extension Person {
     }
     
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(Person.self, from: data)
+        self = try JSONDecoder().decode(Person.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -322,7 +322,7 @@ extension Person {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -343,7 +343,7 @@ extension DataRequest {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
             
-            return Result { try newJSONDecoder().decode(T.self, from: data) }
+            return Result { try JSONDecoder().decode(T.self, from: data) }
         }
     }
     

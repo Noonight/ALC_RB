@@ -5647,10 +5647,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="invitation_cell" id="FwP-wZ-vQd" customClass="InvitationTableViewCell" customModule="ALC_RB" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="320" height="223.5"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="224.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FwP-wZ-vQd" id="z3i-TU-JMv">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="223.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="224.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwE-LX-Ij1">
@@ -6018,7 +6018,6 @@
                                 <connections>
                                     <outlet property="content" destination="xvI-nM-2fi" id="xMP-ek-wEt"/>
                                     <outlet property="date" destination="257-aO-Ymy" id="k1z-ZK-zzV"/>
-                                    <segue destination="Kv1-VO-635" kind="show" identifier="NewsDetailIdentifier" id="bxV-uX-kDR"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_announce_dynamic" id="stb-D9-7vd" customClass="AnnouncesTableViewCell" customModule="ALC_RB" customModuleProvider="target">
@@ -7959,7 +7958,6 @@ AAAAAAAAABQTA
     <inferredMetricsTieBreakers>
         <segue reference="j6x-Mv-JVi"/>
         <segue reference="y82-Y0-kHs"/>
-        <segue reference="bxV-uX-kDR"/>
         <segue reference="zRJ-ru-EFb"/>
     </inferredMetricsTieBreakers>
 </document>

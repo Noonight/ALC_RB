@@ -47,7 +47,8 @@ struct ApiRoute {
 }
 
 enum Routes: String {
-    case news = "news"
+    case newsOld = "news"
+    case news = "crud/news"
     case announce = "crud/announce"
     case ads = "ads"
 //    case upcomingMatches = "matches/upcoming"

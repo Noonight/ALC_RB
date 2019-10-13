@@ -7,194 +7,103 @@
 //
 
 import UIKit
-import SystemConfiguration
+import RxSwift
+import RxCocoa
+import MBProgressHUD
 
-class NewsAllTableViewController: BaseStateTableViewController {
-    // MARK: - Static variables
-    enum CellIdentifiers {
-        static let CELL = "cell_news_dynamic"
-    }
-    enum SegueIdentifiers {
-        static let DETAIL = "NewsDetailIdentifier"
-    }
-    enum Text {
-        static let TITLE = "Новости"
-    }
+class NewsAllTableViewController: UITableViewController {
     
-    // MARK: - Var & Let
-    private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.raywenderlich.com")
-    var tableData: News = News()
-    let presenter = NewsAllPresenter()
+    private var homeNewsViewModel: HomeNewsViewModel!
+    private let disposeBag = DisposeBag()
     
-    // MARK: - Controller lifecycle
+    private var hud: MBProgressHUD?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.initPresenter()
-        self.prepareView()
-        self.prepareTableView()
-//        self.prepareTableViewRefreshController()
-        self.fetch = self.presenter.fetch
-        self.prepareEmptyView()
         
-        self.presenter.fetch()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        self.setupInitialViewState()
-    }
-    
-    // MARK: - Prepare
-    func prepareView() {
-        self.title = Text.TITLE
-    }
-    func prepareTableView() {
-        tableView.tableFooterView = UIView()
-    }
-//    func prepareTableViewRefreshController() {
-//        self.refreshControl = UIRefreshControl()
-//        self.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-//    }
-    func prepareEmptyView() {
-        self.setEmptyMessage(message: "Здесь будут новости")
-    }
-    // MARK: - Reachable
-    private func checkReachable(){
-        var flags = SCNetworkReachabilityFlags()
-        SCNetworkReachabilityGetFlags(self.reachability!, &flags)
+        tableView.delegate = nil
+        tableView.dataSource = nil
         
-        if (isNetworkReachable(with: flags))
-        {
-            print (flags)
-            if flags.contains(.isWWAN) {
-                self.showAlert(title: "via mobile", message: "Reachable")
-                return
-            }
-            
-            self.showAlert(title:"via wifi",message:"Reachable")
-        }
-        else if (!isNetworkReachable(with: flags)) {
-            self.showAlert(title:"Sorry no connection",message: "unreachable")
-            print (flags)
-            return
-        }
-    }
-    private func isNetworkReachable(with flags: SCNetworkReachabilityFlags) -> Bool {
-        let isReachable = flags.contains(.reachable)
-        let needsConnection = flags.contains(.connectionRequired)
-        let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
-        let canConnectWithoutUserInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
-        return isReachable && (!needsConnection || canConnectWithoutUserInteraction)
-    }
-    @objc func reachabilityChanged(note: Notification) {
+        setupNewsViewModel()
+        setupBinds()
         
-        let reachability = note.object as! Reachability
-        
-        switch reachability.connection {
-        case .wifi:
-            print("Reachable via WiFi")
-        case .cellular:
-            print("Reachable via Cellular")
-        case .none:
-            print("Network not reachable")
-        }
+        homeNewsViewModel.fetch()
     }
     
-    // MARK: - UIRefreshController
-//    @objc func refreshData() {
-////        if lastState == .Loading { return }
-////        checkReachable()
-////        startLoading()
-//        if !tableView.isDragging
-//        {
-//            presenter.fetchNews { }
-//        }
-//    }
-//    func endRefreshing() {
-//        self.tableView.reloadData()
-////        self.endLoading(error: nil, completion: nil)
-//
-//        self.refreshControl?.endRefreshing()
-//        if tableData.count == 0 {
-//            self.setState(state: .empty)
-//        } else {
-//            self.setState(state: .normal)
-//        }
-//    }
-//    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
-//    {
-//        if refreshControl?.isRefreshing == true
-//        {
-//            refreshData()
-//        }
-//    }
-    override func hasContent() -> Bool {
-        if tableData.count != 0 {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    // MARK: - UITableViewDataSource
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.news.count
-    }
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.CELL, for: indexPath) as? NewsTableViewCell
-
-        cell?.content?.text = tableData.news[indexPath.row].caption
-        cell?.date?.text = tableData.news[indexPath.row].updatedAt.convertDate(from: .utc, to: .local)
-        
-        return cell!
-    }
-    
-    // MARK: - UITableViewDelegate
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if  segue.identifier == SegueIdentifiers.DETAIL,
-            let destination = segue.destination as? NewsDetailViewController,
-            let cellIndex = tableView.indexPathForSelectedRow?.row
-        {
-            destination.newsElement = tableData.news[cellIndex]
-//            destination.content = NewsDetailViewController.NewsDetailContent(
-//                title: tableData.news[cellIndex].caption,
-//                date: (tableData.news[cellIndex].updatedAt).convertDate(from: .utc, to: .local),
-//                content: tableData.news[cellIndex].content,
-//                imagePath: tableData.news[cellIndex].img)
-        }
-    }
 }
 
-// MARK: - Extensions
+// MARK: EXTENSIONS
 
 
 
-// MARK: - Presenter
+// MARK: SETUP
 
-extension NewsAllTableViewController: NewsAllView {
-    func fetchNewsSuccessful(news: News) {
-        self.tableData = news
-        self.endRefreshing()
+extension NewsAllTableViewController {
+    
+    func setupNewsViewModel() {
+        homeNewsViewModel = HomeNewsViewModel(newDataManager: ApiRequests())
     }
     
-    func fetchNewsFailure(error: Error) {
-        endRefreshing()
-        Print.m(error)
-        showFailFetchRepeatAlert(message: error.localizedDescription) {
-//            self.presenter.fetch()
-            self.refreshData()
-        }
+    func setupBinds() {
+        
+        homeNewsViewModel
+            .items
+            .bind(to: tableView.rx.items(cellIdentifier: NewsTableViewCell.ID, cellType: NewsTableViewCell.self)) { (row, news, cell) in
+                cell.newsModelItem = news
+        }.disposed(by: disposeBag)
+        
+        tableView.rx
+            .itemSelected
+            .subscribe { indexPath in
+                guard let mIndexPath = indexPath.element else { return }
+                let cell = self.tableView.cellForRow(at: mIndexPath) as! NewsTableViewCell
+                self.showNewsDetail(news: cell.newsModelItem)
+        }.disposed(by: disposeBag)
+        
+        homeNewsViewModel
+            .loading
+            .subscribe { isLoading in
+                if isLoading.element ?? false {
+                    if self.hud != nil {
+                        self.hud?.setToLoadingView()
+                    } else {
+                        self.hud = self.showLoadingViewHUD(addTo: self.tableView)
+                    }
+                } else {
+                    self.hud?.hide(animated: false)
+                    self.hud = nil
+                }
+        }.disposed(by: disposeBag)
+        
+        homeNewsViewModel
+            .error
+            .subscribe { error in
+                guard let mError = error.element else { return }
+                if self.hud != nil {
+                    self.hud?.setToFailureView(detailMessage: mError?.localizedDescription, tap: {
+                        self.homeNewsViewModel.fetch()
+                    })
+                } else {
+                    self.hud = self.showFailureViewHUD(addTo: self.tableView, detailMessage: mError?.localizedDescription, tap: {
+                        self.homeNewsViewModel.fetch()
+                    })
+                }
+        }.disposed(by: disposeBag)
+        
     }
     
-    func initPresenter() {
-        presenter.attachView(view: self)
+}
+
+// MARK: NAVIGATION
+
+extension NewsAllTableViewController {
+    
+    func showNewsDetail(news: NewsModelItem) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "NewsDetailViewController") as! NewsDetailViewController
+        newViewController.newsModelItem = news
+        self.navigationController?.show(newViewController, sender: self)
+        
     }
+    
 }

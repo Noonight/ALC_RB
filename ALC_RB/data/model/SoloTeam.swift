@@ -19,7 +19,7 @@ struct SoloTeam: Codable {
 
 extension SoloTeam {
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(SoloTeam.self, from: data)
+        self = try JSONDecoder().decode(SoloTeam.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -42,7 +42,7 @@ extension SoloTeam {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -59,7 +59,7 @@ extension DataRequest {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
             
-            return Result { try newJSONDecoder().decode(T.self, from: data) }
+            return Result { try JSONDecoder().decode(T.self, from: data) }
         }
     }
     

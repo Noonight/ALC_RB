@@ -28,7 +28,7 @@ struct EditProtocol: Codable {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func toParams() -> [String: Any] {

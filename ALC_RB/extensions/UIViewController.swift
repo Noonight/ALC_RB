@@ -148,6 +148,50 @@ extension UIViewController {
         return hud
     }
     // ------------------------------------------
+    func showFailureViewHUD(message: String? = "", detailMessage: String? = Constants.Texts.FAILURE, tap: @escaping () -> ()) -> MBProgressHUD
+    {
+        let image = #imageLiteral(resourceName: "ic_warning")
+        let imageView = UIImageView(image: image)
+        
+        imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        let hud = showCustomViewHUD(cView: imageView, message: message, detailMessage: detailMessage)
+        
+        hud.label.font = UIFont.systemFont(ofSize: 19)
+        hud.detailsLabel.font = UIFont.systemFont(ofSize: 15)
+        //            hud.detailsLabel.textColor = .blue
+        
+        self.tapAction(action: tap)
+        
+        hud.bezelView.isUserInteractionEnabled = true
+        hud.bezelView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnHud)))
+        
+        return hud
+    }
+    
+    func showFailureViewHUD(addTo: UIView, message: String? = "", detailMessage: String? = Constants.Texts.FAILURE, tap: @escaping () -> ()) -> MBProgressHUD
+    {
+        let image = #imageLiteral(resourceName: "ic_warning")
+        let imageView = UIImageView(image: image)
+        
+        imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        let hud = showCustomViewHUD(cView: imageView, addTo: addTo, message: message, detailMessage: detailMessage)
+        
+        hud.label.font = UIFont.systemFont(ofSize: 19)
+        hud.detailsLabel.font = UIFont.systemFont(ofSize: 15)
+        //            hud.detailsLabel.textColor = .blue
+        
+        self.tapAction(action: tap)
+        
+        hud.bezelView.isUserInteractionEnabled = true
+        hud.bezelView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnHud)))
+        
+        return hud
+    }
+    // ------------------------------------------
     func showEmptyViewHUD(addTo: UIView, message: String? = Constants.Texts.NOTHING, detailMessage: String? = Constants.Texts.TAP_FOR_REPEAT, tap: @escaping () -> ()) -> MBProgressHUD {
         let image = #imageLiteral(resourceName: "ic_empty")
         let imageView = UIImageView(image: image)

@@ -69,7 +69,7 @@ struct EditedProfilePerson: Codable {
 
 extension EditedProfile {
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(EditedProfile.self, from: data)
+        self = try JSONDecoder().decode(EditedProfile.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -92,7 +92,7 @@ extension EditedProfile {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -102,7 +102,7 @@ extension EditedProfile {
 
 extension EditedProfilePerson {
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(EditedProfilePerson.self, from: data)
+        self = try JSONDecoder().decode(EditedProfilePerson.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -159,7 +159,7 @@ extension EditedProfilePerson {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -178,7 +178,7 @@ extension DataRequest {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
             
-            return Result { try newJSONDecoder().decode(T.self, from: data) }
+            return Result { try JSONDecoder().decode(T.self, from: data) }
         }
     }
     

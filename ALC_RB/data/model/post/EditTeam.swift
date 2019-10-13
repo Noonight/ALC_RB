@@ -27,7 +27,7 @@ struct EditTeam : Codable {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func toParams() -> [String: Any] {
@@ -80,7 +80,7 @@ extension EditTeam.Players {
         players = []
     }
     init(data: Data) throws {
-        self =  try newJSONDecoder().decode(EditTeam.Players.self, from: data)
+        self =  try JSONDecoder().decode(EditTeam.Players.self, from: data)
     }
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
@@ -95,7 +95,7 @@ extension EditTeam.Players {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {

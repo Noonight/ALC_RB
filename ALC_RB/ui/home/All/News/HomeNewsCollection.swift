@@ -8,14 +8,12 @@
 
 import UIKit
 
-extension NewsElement : CellModel {}
-
 final class HomeNewsCollection: NSObject {
     
     let cellNib = UINib(nibName: "HomeNewsCollectionViewCell", bundle: Bundle.main)
     
     var cellActions: CellActions?
-    var dataSource: [NewsElement] = []
+    var dataSource: [NewsModelItem] = []
     
     init(actions: CellActions) {
         self.cellActions = actions
@@ -43,7 +41,7 @@ extension HomeNewsCollection: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeNewsCollectionViewCell.ID , for: indexPath) as! HomeNewsCollectionViewCell
         
-        cell.configure(self.dataSource[indexPath.row])
+        cell.newsModelItem = dataSource[indexPath.row]
         
         return cell
     }

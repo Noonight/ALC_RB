@@ -86,7 +86,7 @@ struct ParticipationMatch: Codable {
     }
     
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(ParticipationMatch.self, from: data)
+        self = try JSONDecoder().decode(ParticipationMatch.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -147,7 +147,7 @@ struct ParticipationMatch: Codable {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {

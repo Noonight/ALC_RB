@@ -107,7 +107,7 @@ struct SoloClub: Codable {
 
 extension SoloClub {
     init(data: Data) throws {
-        self = try newJSONDecoder().decode(SoloClub.self, from: data)
+        self = try JSONDecoder().decode(SoloClub.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -130,7 +130,7 @@ extension SoloClub {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -140,7 +140,7 @@ extension SoloClub {
 
 //extension Club {
 //    init(data: Data) throws {
-//        self = try newJSONDecoder().decode(Club.self, from: data)
+//        self = try JSONDecoder().decode(Club.self, from: data)
 //    }
 //
 //    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -177,7 +177,7 @@ extension SoloClub {
 //    }
 //
 //    func jsonData() throws -> Data {
-//        return try newJSONEncoder().encode(self)
+//        return try JSONEncoder().encode(self)
 //    }
 //
 //    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -187,7 +187,7 @@ extension SoloClub {
 //
 //extension Owner {
 //    init(data: Data) throws {
-//        self = try newJSONDecoder().decode(Owner.self, from: data)
+//        self = try JSONDecoder().decode(Owner.self, from: data)
 //    }
 //
 //    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -244,7 +244,7 @@ extension SoloClub {
 //    }
 //
 //    func jsonData() throws -> Data {
-//        return try newJSONEncoder().encode(self)
+//        return try JSONEncoder().encode(self)
 //    }
 //
 //    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -254,7 +254,7 @@ extension SoloClub {
 //
 //extension PastLeague {
 //    init(data: Data) throws {
-//        self = try newJSONDecoder().decode(PastLeague.self, from: data)
+//        self = try JSONDecoder().decode(PastLeague.self, from: data)
 //    }
 //
 //    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -287,7 +287,7 @@ extension SoloClub {
 //    }
 //
 //    func jsonData() throws -> Data {
-//        return try newJSONEncoder().encode(self)
+//        return try JSONEncoder().encode(self)
 //    }
 //
 //    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -536,7 +536,7 @@ extension SoloClub {
 //    }
 //}
 //
-//func newJSONDecoder() -> JSONDecoder {
+//func JSONDecoder() -> JSONDecoder {
 //    let decoder = JSONDecoder()
 //    if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
 //        decoder.dateDecodingStrategy = .iso8601
@@ -544,7 +544,7 @@ extension SoloClub {
 //    return decoder
 //}
 //
-//func newJSONEncoder() -> JSONEncoder {
+//func JSONEncoder() -> JSONEncoder {
 //    let encoder = JSONEncoder()
 //    if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
 //        encoder.dateEncodingStrategy = .iso8601
@@ -563,7 +563,7 @@ extension DataRequest {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
             
-            return Result { try newJSONDecoder().decode(T.self, from: data) }
+            return Result { try JSONDecoder().decode(T.self, from: data) }
         }
     }
     

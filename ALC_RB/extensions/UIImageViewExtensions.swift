@@ -10,6 +10,11 @@ import UIKit
 import Lightbox
 import Kingfisher
 
+enum ResultLoadImage {
+    case success(UIImage)
+    case failure(Error)
+}
+
 extension UIImageView {
     
     func kfLoadRoundedImage(path: String, placeholder: UIImage? = UIImage(named: "ic_logo")) {
@@ -30,12 +35,14 @@ extension UIImageView {
             ])
     }
     
-    func kfLoadImage(path: String, placeholder: UIImage? = UIImage(named: "ic_logo")){//, complete: @escaping (UIImage) -> ()?) {
-        let url = ApiRoute.getImageURL(image: path)
+    func kfLoadImage(path: String?, placeholder: UIImage? = UIImage(named: "ic_logo")) {
+        
+        guard let imagePath = path else { return }
+        let url = ApiRoute.getImageURL(image: imagePath)
         let processor = DownsamplingImageProcessor(size: self.frame.size)
 //            .append(another: CroppingImageProcessorCustom(size: self .frame.size))
         
-        self.kf.indicatorType = .activity
+        self.kf.indicatorType = .none
         self.kf.setImage(
             with: url,
             placeholder: placeholder,
@@ -44,16 +51,35 @@ extension UIImageView {
                 .scaleFactor(UIScreen.main.scale),
                 .transition(.fade(1)),
                 .cacheOriginalImage
-            ])//, completionHandler: { result in
-//                switch result
-//                {
-//                case .success(let image):
-//                    complete(image.image)
-//                case .failure(let error):
-//                    Print.m(error.errorDescription)
-//                }
-//        })
+            ])
     }
+    
+    func kfLoadImage(path: String?, placeholder: UIImage? = UIImage(named: "ic_logo"), complete: @escaping (ResultLoadImage) -> ()) {
+            
+            guard let imagePath = path else { return }
+            let url = ApiRoute.getImageURL(image: imagePath)
+            let processor = DownsamplingImageProcessor(size: self.frame.size)
+    //            .append(another: CroppingImageProcessorCustom(size: self .frame.size))
+            
+            self.kf.indicatorType = .none
+            self.kf.setImage(
+                with: url,
+                placeholder: placeholder,
+                options: [
+                    .processor(processor),
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(1)),
+                    .cacheOriginalImage
+                ]) { result in
+                    switch result
+                    {
+                    case .success(let image):
+                        complete(.success(image.image))
+                    case .failure(let error):
+                        complete(.failure(error))
+                    }
+            }
+        }
     
     func animateTap()
     {

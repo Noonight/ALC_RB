@@ -102,7 +102,7 @@ extension DataRequest {
 //    }
 //
 //    init(data: Data) throws {
-//        self = try newJSONDecoder().decode(Announce.self, from: data)
+//        self = try JSONDecoder().decode(Announce.self, from: data)
 //    }
 //
 //    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -127,7 +127,7 @@ extension DataRequest {
 //    }
 //
 //    func jsonData() throws -> Data {
-//        return try newJSONEncoder().encode(self)
+//        return try JSONEncoder().encode(self)
 //    }
 //
 //    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -137,7 +137,7 @@ extension DataRequest {
 //
 //extension AnnounceElement {
 //    init(data: Data) throws {
-//        self = try newJSONDecoder().decode(AnnounceElement.self, from: data)
+//        self = try JSONDecoder().decode(AnnounceElement.self, from: data)
 //    }
 //
 //    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -166,7 +166,7 @@ extension DataRequest {
 //    }
 //
 //    func jsonData() throws -> Data {
-//        return try newJSONEncoder().encode(self)
+//        return try JSONEncoder().encode(self)
 //    }
 //
 //    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
@@ -174,7 +174,7 @@ extension DataRequest {
 //    }
 //}
 //
-////func newJSONDecoder() -> JSONDecoder {
+////func JSONDecoder() -> JSONDecoder {
 ////    let decoder = JSONDecoder()
 ////    if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
 ////        decoder.dateDecodingStrategy = .iso8601
@@ -182,7 +182,7 @@ extension DataRequest {
 ////    return decoder
 ////}
 ////
-////func newJSONEncoder() -> JSONEncoder {
+////func JSONEncoder() -> JSONEncoder {
 ////    let encoder = JSONEncoder()
 ////    if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
 ////        encoder.dateEncodingStrategy = .iso8601
@@ -199,7 +199,7 @@ extension DataRequest {
 //                completionHandler(nil, response, error)
 //                return
 //            }
-//            completionHandler(try? newJSONDecoder().decode(T.self, from: data), response, nil)
+//            completionHandler(try? JSONDecoder().decode(T.self, from: data), response, nil)
 //        }
 //    }
 //
@@ -219,7 +219,7 @@ extension DataRequest {
 //                return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
 //            }
 //
-//            return Result { try newJSONDecoder().decode(T.self, from: data) }
+//            return Result { try JSONDecoder().decode(T.self, from: data) }
 //        }
 //    }
 //

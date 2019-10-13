@@ -1386,63 +1386,109 @@ class ApiRequests {
         
     }
     
-    func get_news(success: @escaping (News) -> (), failure: @escaping (Error) -> ()) {
-        Alamofire
-            .request(ApiRoute.getApiURL(.news))
-            .responseNews { response in
-                switch response.result {
-                case .success(let value):
-                    success(value)
-                case .failure(let error):
-                    failure(error)
-                }
-        }
-    }
+//    func get_news(success: @escaping (NewsOld) -> (), failure: @escaping (Error) -> ()) {
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.news))
+//            .responseNews { response in
+//                switch response.result {
+//                case .success(let value):
+//                    success(value)
+//                case .failure(let error):
+//                    failure(error)
+//                }
+//        }
+//    }
     
-    func get_news(get_result: @escaping (ResultMy<News, RequestError>) -> ()) {
-        let alamo = Alamofire.request(ApiRoute.getApiURL(.news))
-        alamo
-            .validate()
+    func get_news(tourney: String? = nil, limit: Int? = Constants.Values.LIMIT, offset: Int? = 0 , get_result: @escaping (ResultMy<[News], Error>) -> ()) {
+        
+        var parameters: [String : Any] = [:]
+        
+//        if tourney == nil {
+//            parameters = [
+//                "limit": limit,
+//                "offset": offset
+//            ]
+//        } else {
+//            parameters = [
+//                "tourney": tourney, // MARK: CHECK HERE
+//                "limit": limit,
+//                "offset": offset
+//            ]
+//        }
+        
+        
+        let alamofireInstance = Alamofire.request(ApiRoute.getApiURL(.news), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+        alamofireInstance
             .responseJSON { response in
-                //                dump(response)
-                let decoder = JSONDecoder()
-                switch response.result
+                
+                let decoder = ISO8601Decoder.getDecoder()
+                
+                do
                 {
-                case .success:
-                    do
+                    if let news = try? decoder.decode([News].self, from: response.data!)
                     {
-                        if let news = try? decoder.decode(News.self, from: response.data!)
-                        {
-                            get_result(.success(news))
-                            return
-                        }
-                        if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!)
-                        {
-                            get_result(.message(message))
-                            return
-                        }
-                    }
-                case .failure(let error):
-                    let statusCode = response.response?.statusCode
-                    if (400..<500).contains(statusCode!)
-                    {
-                        get_result(.failure(.local(error)))
+                        get_result(.success(news))
                         return
                     }
-                    else
-                        if (500..<600).contains(statusCode!)
-                        {
-                            get_result(.failure(.server(error)))
-                            return
-                        }
-                        else
-                        {
-                            get_result(.failure(.alamofire(error)))
-                            return
+                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!)
+                    {
+                        get_result(.message(message))
+                        return
                     }
                 }
+                
+                response.result.ifFailure {
+                    get_result(.failure(response.result.error!))
+                }
         }
+        
+        alamofireInstance.response
     }
+    
+//    func get_news(get_result: @escaping (ResultMy<NewsOld, RequestError>) -> ()) {
+//        let alamo = Alamofire.request(ApiRoute.getApiURL(.news))
+//        alamo
+//            .validate()
+//            .responseJSON { response in
+//                //                dump(response)
+//                let decoder = JSONDecoder()
+//                switch response.result
+//                {
+//                case .success:
+//                    do
+//                    {
+//                        if let news = try? decoder.decode(News.self, from: response.data!)
+//                        {
+//                            get_result(.success(news))
+//                            return
+//                        }
+//                        if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!)
+//                        {
+//                            get_result(.message(message))
+//                            return
+//                        }
+//                    }
+//                case .failure(let error):
+//                    let statusCode = response.response?.statusCode
+//                    if (400..<500).contains(statusCode!)
+//                    {
+//                        get_result(.failure(.local(error)))
+//                        return
+//                    }
+//                    else
+//                        if (500..<600).contains(statusCode!)
+//                        {
+//                            get_result(.failure(.server(error)))
+//                            return
+//                        }
+//                        else
+//                        {
+//                            get_result(.failure(.alamofire(error)))
+//                            return
+//                    }
+//                }
+//        }
+//    }
     
     func get_announces(success: @escaping ([Announce]) -> (), failure: @escaping (Error) -> ()) {
         Alamofire

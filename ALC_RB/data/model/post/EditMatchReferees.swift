@@ -27,7 +27,7 @@ struct EditMatchReferees: Codable {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func toParams() -> [String: Any] {
@@ -122,7 +122,7 @@ struct EditMatchReferee: Codable {
 extension EditMatchReferees.Referees {
     
     init(data: Data) throws {
-        self =  try newJSONDecoder().decode(EditMatchReferees.Referees.self, from: data)
+        self =  try JSONDecoder().decode(EditMatchReferees.Referees.self, from: data)
     }
     init(fromURL url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
@@ -137,7 +137,7 @@ extension EditMatchReferees.Referees {
     }
     
     func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
+        return try JSONEncoder().encode(self)
     }
     
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
