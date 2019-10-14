@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="matches_table" destination="YY9-bF-QEb" id="E9l-hu-RbR"/>
                 <outlet property="news_collection" destination="z1e-cp-cHa" id="5R9-1y-XzN"/>
+                <outlet property="scroll_view" destination="Aa7-TO-RDv" id="nsl-9x-Ffs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

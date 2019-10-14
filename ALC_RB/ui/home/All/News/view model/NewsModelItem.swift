@@ -11,7 +11,7 @@ import Foundation
 class NewsModelItem {
     
     private let news: News
-    private let tourney: Tourney?
+    var tourney: Tourney?
     
     init(news: News, tourney: Tourney?) {
         self.news = news

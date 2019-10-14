@@ -62,6 +62,7 @@
 		18606A3122D30B8200F5D2FE /* EventTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18606A3022D30B8200F5D2FE /* EventTypeView.xib */; };
 		18606A3322D30B9200F5D2FE /* EventTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18606A3222D30B9200F5D2FE /* EventTypeView.swift */; };
 		18606A3522D3381500F5D2FE /* ProtocolEventsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18606A3422D3381500F5D2FE /* ProtocolEventsController.swift */; };
+		1869CA1923545EDA00204697 /* Reactive ++ Binder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1869CA1823545EDA00204697 /* Reactive ++ Binder.swift */; };
 		187093FB22D4940F0013506F /* EditProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187093FA22D4940F0013506F /* EditProtocol.swift */; };
 		18717A5422BCD46600CD36C9 /* MyMatchesRefTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18717A5322BCD46600CD36C9 /* MyMatchesRefTableViewController.swift */; };
 		18717A5622BCD55100CD36C9 /* MyMatchesRefViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18717A5522BCD55100CD36C9 /* MyMatchesRefViewModel.swift */; };
@@ -387,6 +388,7 @@
 		18606A3022D30B8200F5D2FE /* EventTypeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventTypeView.xib; sourceTree = "<group>"; };
 		18606A3222D30B9200F5D2FE /* EventTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeView.swift; sourceTree = "<group>"; };
 		18606A3422D3381500F5D2FE /* ProtocolEventsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolEventsController.swift; sourceTree = "<group>"; };
+		1869CA1823545EDA00204697 /* Reactive ++ Binder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive ++ Binder.swift"; sourceTree = "<group>"; };
 		187093FA22D4940F0013506F /* EditProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProtocol.swift; sourceTree = "<group>"; };
 		18717A5322BCD46600CD36C9 /* MyMatchesRefTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMatchesRefTableViewController.swift; sourceTree = "<group>"; };
 		18717A5522BCD55100CD36C9 /* MyMatchesRefViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMatchesRefViewModel.swift; sourceTree = "<group>"; };
@@ -684,11 +686,11 @@
 		048CB32F230BC93C006CF2A9 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				185AF4212353470D00EC1F0A /* HomeNewsViewModel.swift */,
 				185AF41A235339E200EC1F0A /* view model */,
 				CE916ABA21B520B60025FECF /* news_detail */,
 				DB906D53230AA21C00C052B8 /* Cell */,
 				048CB330230BC959006CF2A9 /* HomeNewsCollection.swift */,
-				185AF4212353470D00EC1F0A /* HomeNewsViewModel.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -1251,6 +1253,7 @@
 				18B0F8832302C5E700080196 /* UIAlertController + Extension.swift */,
 				DB5D9A8E233CB7CD0076E41D /* UICollectionView + Extensions.swift */,
 				1844D35B234C902600FB24D9 /* UIScrollView + Extensions.swift */,
+				1869CA1823545EDA00204697 /* Reactive ++ Binder.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -2602,6 +2605,7 @@
 				DB48BE7822002BD1008B007D /* PlayersTeamLeagueDetailPresenter.swift in Sources */,
 				04C024EA221427F500A4A571 /* MenuLauncher.swift in Sources */,
 				187F2DFF22CB19440049EA77 /* EditScoreMatchTableViewController.swift in Sources */,
+				1869CA1923545EDA00204697 /* Reactive ++ Binder.swift in Sources */,
 				04C024EC22142F6600A4A571 /* MenuLauncherCell.swift in Sources */,
 				DBC5C6002220360B00B0A1B6 /* RegistrationPresenter.swift in Sources */,
 				DB59E5C022292B5900D1F62F /* EditProfile.swift in Sources */,

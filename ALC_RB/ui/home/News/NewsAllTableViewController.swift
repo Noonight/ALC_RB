@@ -26,6 +26,7 @@ class NewsAllTableViewController: UITableViewController {
         
         setupNewsViewModel()
         setupBinds()
+        setupPullToRefresh()
         
         homeNewsViewModel.fetch()
     }
@@ -39,6 +40,27 @@ class NewsAllTableViewController: UITableViewController {
 // MARK: SETUP
 
 extension NewsAllTableViewController {
+    
+    func setupPullToRefresh() {
+        let refreshController = UIRefreshControl()
+        tableView.refreshControl = refreshController
+        
+        refreshController.rx
+            .controlEvent(.valueChanged)
+            .map { _ in !refreshController.isRefreshing}
+            .filter { $0 == false }
+            .subscribe({ event in
+                self.homeNewsViewModel.fetch()
+            }).disposed(by: disposeBag)
+        
+        refreshController.rx.controlEvent(.valueChanged)
+            .map { _ in refreshController.isRefreshing }
+            .filter { $0 == true }
+            .subscribe({ event in
+                refreshController.endRefreshing()
+            })
+            .disposed(by: self.disposeBag)
+    }
     
     func setupNewsViewModel() {
         homeNewsViewModel = HomeNewsViewModel(newDataManager: ApiRequests())

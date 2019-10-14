@@ -13,6 +13,7 @@ import RxCocoa
 
 final class HomeAllVC: UIViewController {
 
+    @IBOutlet weak var scroll_view: UIScrollView!
     @IBOutlet weak var news_collection: UICollectionView!
     @IBOutlet weak var matches_table: IntrinsicTableView!
     
@@ -24,13 +25,10 @@ final class HomeAllVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        news_collection.delegate = nil
-        news_collection.dataSource = nil
-        
-        news_collection.register(UINib(nibName: "HomeNewsCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: HomeNewsCollectionViewCell.ID)
-        
+        setupNewsCollection()
         setupHomeAllViewModel()
         setupBinds()
+        setupPullToRefresh()
         
         self.homeAllViewModel.fetch()
     }
@@ -43,6 +41,34 @@ final class HomeAllVC: UIViewController {
 // MARK: SETUP
 
 extension HomeAllVC {
+    
+    func setupPullToRefresh() {
+        let refreshController = UIRefreshControl()
+        scroll_view.refreshControl = refreshController
+        
+        refreshController.rx
+            .controlEvent(.valueChanged)
+            .map { _ in !refreshController.isRefreshing}
+            .filter { $0 == false }
+            .subscribe({ event in
+                self.homeAllViewModel.fetch()
+            }).disposed(by: disposeBag)
+        
+        refreshController.rx.controlEvent(.valueChanged)
+            .map { _ in refreshController.isRefreshing }
+            .filter { $0 == true }
+            .subscribe({ event in
+                refreshController.endRefreshing()
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func setupNewsCollection() {
+        news_collection.delegate = nil
+        news_collection.dataSource = nil
+        
+        news_collection.register(UINib(nibName: "HomeNewsCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: HomeNewsCollectionViewCell.ID)
+    }
     
     func setupHomeAllViewModel() {
         homeAllViewModel = HomeAllViewModel(newDataManager: ApiRequests())
