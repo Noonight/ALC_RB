@@ -17,7 +17,6 @@ class HomeNewsViewModel {
     let message: PublishSubject<SingleLineMessage?> = PublishSubject()
     let loading: PublishSubject<Bool> = PublishSubject()
     
-//    private var newsCollection: HomeNewsCollection
     private let dataManger: ApiRequests
     private let localTourney = LocalTourneys()
     private let disposeBag = DisposeBag()

@@ -963,46 +963,29 @@ class ApiRequests {
         }
     }
     
-    func get_announces(get_result: @escaping (ResultMy<[Announce], RequestError>) -> ()) {
+    func get_announces(get_result: @escaping (ResultMy<[Announce], Error>) -> ()) {
         let alamo = Alamofire.request(ApiRoute.getApiURL(.announce))
         alamo
             .validate()
             .responseJSON { response in
                 let decoder = ISO8601Decoder.getDecoder()
-                switch response.result
+                
+                do
                 {
-                case .success:
-                    do
+                    if let announces = try? decoder.decode([Announce].self, from: response.data!)
                     {
-                        if let announces = try? decoder.decode([Announce].self, from: response.data!)
-                        {
-                            get_result(.success(announces))
-                            return
-                        }
-                        if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!)
-                        {
-                            get_result(.message(message))
-                            return
-                        }
-                    }
-                case .failure(let error):
-                    let statusCode = response.response?.statusCode
-                    if (400..<500).contains(statusCode!)
-                    {
-                        get_result(.failure(.local(error)))
+                        get_result(.success(announces))
                         return
                     }
-                    else
-                        if (500..<600).contains(statusCode!)
-                        {
-                            get_result(.failure(.server(error)))
-                            return
-                        }
-                        else
-                        {
-                            get_result(.failure(.alamofire(error)))
-                            return
+                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!)
+                    {
+                        get_result(.message(message))
+                        return
                     }
+                }
+                
+                if response.result.isFailure {
+                    get_result(.failure(response.error!))
                 }
         }
     }

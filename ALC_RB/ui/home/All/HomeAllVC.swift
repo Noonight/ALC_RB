@@ -29,6 +29,10 @@ final class HomeAllVC: UIViewController {
         setupHomeAllViewModel()
         setupBinds()
         setupPullToRefresh()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.homeAllViewModel.fetch()
     }
@@ -91,6 +95,30 @@ extension HomeAllVC {
         }.disposed(by: disposeBag)
         
         homeAllViewModel.newsViewModel
+            .items
+            .subscribe({ modelItems in
+                guard let mModelItems = modelItems.element else { return }
+                if mModelItems.count == 0 {
+                    if self.news_hud != nil {
+                        self.news_hud?.setToEmptyView(message: Constants.Texts.NO_STARRED_TOURNEYS, detailMessage: Constants.Texts.GO_TO_CHOOSE_TOURNEYS, tap: {
+                            self.showTourneyChooser()
+                        })
+                    } else {
+                        self.news_hud = self.showEmptyViewHUD(
+                            addTo: self.news_collection,
+                            message: Constants.Texts.NO_STARRED_TOURNEYS,
+                            detailMessage: Constants.Texts.GO_TO_CHOOSE_TOURNEYS,
+                            tap: {
+                                self.showTourneyChooser()
+                        })
+                    }
+                } else {
+                    self.news_hud?.hide(animated: false)
+                    self.news_hud = nil
+                }
+            }).disposed(by: disposeBag)
+        
+        homeAllViewModel.newsViewModel
             .loading
             .subscribe { isLoading in
                 if isLoading.element ?? false {
@@ -130,6 +158,12 @@ extension HomeAllVC {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "NewsDetailViewController") as! NewsDetailViewController
         newViewController.newsModelItem = news
+        self.navigationController?.show(newViewController, sender: self)
+    }
+    
+    func showTourneyChooser() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "TournamentSearchVC") as! TournamentSearchVC
         self.navigationController?.show(newViewController, sender: self)
     }
     

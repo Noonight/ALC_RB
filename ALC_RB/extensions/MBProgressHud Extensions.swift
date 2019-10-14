@@ -90,7 +90,7 @@ extension MBProgressHUD {
         mode = .indeterminate
         
         backgroundView.style = MBProgressHUDBackgroundStyle.solidColor
-        backgroundView.color = UIColor(white: 0, alpha: 0.1)
+        backgroundView.color = .white
         bezelView.style = .solidColor
         bezelView.color = backgroundView.color
         

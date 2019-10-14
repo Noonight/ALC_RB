@@ -27,6 +27,10 @@ class NewsAllTableViewController: UITableViewController {
         setupNewsViewModel()
         setupBinds()
         setupPullToRefresh()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         homeNewsViewModel.fetch()
     }
@@ -73,6 +77,30 @@ extension NewsAllTableViewController {
             .bind(to: tableView.rx.items(cellIdentifier: NewsTableViewCell.ID, cellType: NewsTableViewCell.self)) { (row, news, cell) in
                 cell.newsModelItem = news
         }.disposed(by: disposeBag)
+        
+        homeNewsViewModel
+            .items
+            .subscribe({ modelItems in
+                guard let mModelItems = modelItems.element else { return }
+                if mModelItems.count == 0 {
+                    if self.hud != nil {
+                        self.hud?.setToEmptyView(message: Constants.Texts.NO_STARRED_TOURNEYS, detailMessage: Constants.Texts.GO_TO_CHOOSE_TOURNEYS, tap: {
+                            self.showTourneyChooser()
+                        })
+                    } else {
+                        self.hud = self.showEmptyViewHUD(
+                            addTo: self.tableView,
+                            message: Constants.Texts.NO_STARRED_TOURNEYS,
+                            detailMessage: Constants.Texts.GO_TO_CHOOSE_TOURNEYS,
+                            tap: {
+                                self.showTourneyChooser()
+                        })
+                    }
+                } else {
+                    self.hud?.hide(animated: false)
+                    self.hud = nil
+                }
+            }).disposed(by: disposeBag)
         
         tableView.rx
             .itemSelected
@@ -126,6 +154,12 @@ extension NewsAllTableViewController {
         newViewController.newsModelItem = news
         self.navigationController?.show(newViewController, sender: self)
         
+    }
+    
+    func showTourneyChooser() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "TournamentSearchVC") as! TournamentSearchVC
+        self.navigationController?.show(newViewController, sender: self)
     }
     
 }

@@ -10,17 +10,19 @@ import Foundation
 
 struct Constants {
     struct Texts {
-        static let LOADING              = "Загрузка..."
-        static let COMPLETED            = "Завершена"
-        static let SUCCESS              = "Успех"
-        static let FAILURE              = "Ошибка!"
-        static let CANCEL               = "Отмена"
-        static let CONFIGURE            = "Настройка..."
-        static let REPEAT               = "Повторить..."
-        static let SERVER_FAILURE       = "Серверная ошибка!"
-        static let UNDEFINED_FAILURE    = "Неизвестная ошибка!"
-        static let NOTHING              = "Ничего нет"
-        static let TAP_FOR_REPEAT       = "Нажмите чтобы перезагрузить..."
+        static let LOADING                  = "Загрузка..."
+        static let COMPLETED                = "Завершена"
+        static let SUCCESS                  = "Успех"
+        static let FAILURE                  = "Ошибка!"
+        static let CANCEL                   = "Отмена"
+        static let CONFIGURE                = "Настройка..."
+        static let REPEAT                   = "Повторить..."
+        static let SERVER_FAILURE           = "Серверная ошибка!"
+        static let UNDEFINED_FAILURE        = "Неизвестная ошибка!"
+        static let NOTHING                  = "Ничего нет"
+        static let TAP_FOR_REPEAT           = "Нажмите чтобы перезагрузить..."
+        static let NO_STARRED_TOURNEYS      = "Нет отслеживаемых турниров"
+        static let GO_TO_CHOOSE_TOURNEYS    = "Нажмите, чтобы перейти к выбору турниров"
     }
 //    struct Images {
 //        static let Q_INFO       = UIImage(named: "ic_info")

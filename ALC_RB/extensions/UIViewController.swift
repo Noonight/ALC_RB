@@ -11,6 +11,8 @@ import MBProgressHUD
 
 extension UIViewController {
     
+    // MARK: Alert Controller
+    
     func showToast(message : String, seconds: Double) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
         alert.view.backgroundColor = UIColor.black
@@ -37,7 +39,11 @@ extension UIViewController {
         }
     }
     
-    // ------------------------------------------
+    // MARK: MBProgressHUD
+    
+    
+    
+    // MARK: TOAST
     
     func showToastHUD(message: String) -> MBProgressHUD {
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -52,6 +58,8 @@ extension UIViewController {
         
         return hud
     }
+    
+    // MARK: LOADING
     
     func showLoadingViewHUD(with message: String? = Constants.Texts.LOADING, addTo: UIView) -> MBProgressHUD {
         MBProgressHUD.hide(for: addTo, animated: false)
@@ -83,7 +91,7 @@ extension UIViewController {
         
         return hud
     }
-    // ------------------------------------------
+    // MARK: HIDE
     func hideHUD() {
         MBProgressHUD.hide(for: self.view, animated: true)
     }
@@ -91,7 +99,7 @@ extension UIViewController {
     func hideHUD(forView: UIView) {
         MBProgressHUD.hide(for: forView, animated: true)
     }
-    // ------------------------------------------
+    // MARK: CUSTOM
     func showCustomViewHUD(cView: UIView, to: UIView, message: String? = Constants.Texts.NOTHING, detailMessage: String? = Constants.Texts.NOTHING) -> MBProgressHUD {
         MBProgressHUD.hide(for: to, animated: false)
         let hud = MBProgressHUD.showAdded(to: to, animated: true)
@@ -147,7 +155,7 @@ extension UIViewController {
         
         return hud
     }
-    // ------------------------------------------
+    // MARK: FAILURE
     func showFailureViewHUD(message: String? = "", detailMessage: String? = Constants.Texts.FAILURE, tap: @escaping () -> ()) -> MBProgressHUD
     {
         let image = #imageLiteral(resourceName: "ic_warning")
@@ -191,7 +199,23 @@ extension UIViewController {
         
         return hud
     }
-    // ------------------------------------------
+    // MARK: EMPTY
+    func showEmptyViewHUD(addTo: UIView, message: String? = "", detailMessage: String? = "") -> MBProgressHUD {
+        let image = #imageLiteral(resourceName: "ic_empty")
+        let imageView = UIImageView(image: image)
+        
+        imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        let hud = showCustomViewHUD(cView: imageView, to: addTo, message: message, detailMessage: detailMessage)
+        
+        hud.label.font = UIFont.systemFont(ofSize: 19)
+        hud.detailsLabel.font = UIFont.systemFont(ofSize: 15)
+        hud.detailsLabel.textColor = .blue
+        
+        return hud
+    }
+    
     func showEmptyViewHUD(addTo: UIView, message: String? = Constants.Texts.NOTHING, detailMessage: String? = Constants.Texts.TAP_FOR_REPEAT, tap: @escaping () -> ()) -> MBProgressHUD {
         let image = #imageLiteral(resourceName: "ic_empty")
         let imageView = UIImageView(image: image)
@@ -239,7 +263,7 @@ extension UIViewController {
         
         return hud
     }
-     // ------------------------------------------
+     // MARK: HELPER ACTIONS
      @objc private func tapOnHud() {
          self.tapAction()
      }
@@ -249,7 +273,7 @@ extension UIViewController {
          if action != nil { __.action = action }
          else { __.action?() }
      }
-    // ------------------------------------------
+    // MARK: SCROLL VIEW KEYBOARD
     func registerForKeyboardWillShowNotification(_ scrollView: UIScrollView, usingBlock block: ((CGSize?) -> Void)? = nil) {
         _ = NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil, using: { notification -> Void in
             let userInfo = notification.userInfo!

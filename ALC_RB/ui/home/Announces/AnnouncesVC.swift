@@ -27,6 +27,7 @@ final class AnnouncesVC: UIViewController {
     
     private var announcesTable: HomeAnnouncesTable!
     private var announcesPresenter: AnnouncesPresenter!
+    private var hud: MBProgressHUD?
     
     private static let HEADER_FULL_HEIGHT = 64
     
@@ -36,8 +37,12 @@ final class AnnouncesVC: UIViewController {
         self.setupAnnouncesPresenter()
         self.setupAnnouncesTable()
         self.setupLoadingRepeatView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        self.setupAnnouncesDS()
+        fetchData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -88,34 +93,39 @@ private extension AnnouncesVC {
         self.announces_table.delegate = self.announcesTable
         self.announces_table.register(self.announcesTable.cellNib, forCellReuseIdentifier: HomeAnonunceTableViewCell.ID)
     }
+}
+
+// MARK: ACITONS
+
+extension AnnouncesVC {
     
-    func setupAnnouncesDS() {
-        let hud = self.showLoadingViewHUD(addTo: self.announces_table)
-   
-        self.announces_table.turnOffScroll()
-        self.announces_table.hideSeparator()
-        
+    func fetchData() {
+        if hud != nil {
+            self.hud?.setToLoadingView()
+        } else {
+            self.hud = self.showLoadingViewHUD(addTo: self.announces_table)
+        }
+             
         self.loading_repeat_view.isLoadingComplete = false
         
         self.announcesPresenter.fetchAnnounces(
             success: { announces_r in
-                self.fSuccess(hud: hud, announces: announces_r)
+                self.fSuccess(announces: announces_r)
         }, r_message: { message in
-            self.fMessage(hud: hud, message: message)
+            self.fMessage(message: message)
         }, all_failure: { error in
             Print.m(error)
-            self.fAllFailure(hud: hud, error: error)
+            self.fAllFailure(error: error)
         }, server_failure: { error in
             Print.m(error)
-            self.fServerFailure(hud: hud, error: error)
+            self.fServerFailure(error: error)
         }, local_failure: { error in
             Print.m(error)
-            self.fLocalFailure(hud: hud, error: error)
+            self.fLocalFailure(error: error)
         })
     }
+    
 }
-
-// MARK: ACITONS
 
 extension AnnouncesVC: CellActions {
     func onCellDeselected(model: CellModel) {
@@ -163,7 +173,7 @@ extension AnnouncesVC {
     }
     
     func repeatHelper() {
-        self.setupAnnouncesDS()
+        self.fetchData()
     }
     
     func showHeader() {
@@ -178,11 +188,11 @@ extension AnnouncesVC {
         }
     }
     
-    func fSuccess(hud: MBProgressHUD? = nil, announces: [Announce]) {
+    func fSuccess(announces: [Announce]) {
         hud?.hide(animated: true)
-        
-        self.announces_table.turnOnScroll()
-        self.announces_table.showSeparator()
+        if announces.count == 0 {
+            
+        }
         
         self.loading_repeat_view.isLoadingComplete = true
         
@@ -192,27 +202,27 @@ extension AnnouncesVC {
         self.showCounter()
     }
     
-    func fMessage(hud: MBProgressHUD? = nil, message: SingleLineMessage) {
+    func fMessage(message: SingleLineMessage) {
         self.loading_repeat_view.isLoadingComplete = true
         self.hideCounter()
         hud?.setToButtonHUD(message: message.message, btn: {
-            self.setupAnnouncesDS()
+            self.fetchData()
         })
     }
     
-    func fAllFailure(hud: MBProgressHUD? = nil, error: Error) {
+    func fAllFailure(error: Error) {
         self.loading_repeat_view.isLoadingComplete = true
         self.hideCounter()
         hud?.setToButtonHUD(message: Constants.Texts.UNDEFINED_FAILURE, detailMessage: error.localizedDescription, btn: {
-            self.setupAnnouncesDS()
+            self.fetchData()
         })
     }
     
-    func fServerFailure(hud: MBProgressHUD? = nil, error: Error) {
+    func fServerFailure(error: Error) {
         self.loading_repeat_view.isLoadingComplete = true
         self.hideCounter()
         hud?.setToButtonHUD(message: Constants.Texts.SERVER_FAILURE, detailMessage: error.localizedDescription, btn: {
-            self.setupAnnouncesDS()
+            self.fetchData()
         })
     }
     
@@ -220,7 +230,7 @@ extension AnnouncesVC {
         self.loading_repeat_view.isLoadingComplete = true
         self.hideCounter()
         hud?.setToButtonHUD(message: Constants.Texts.FAILURE, detailMessage: error.localizedDescription, btn: {
-            self.setupAnnouncesDS()
+            self.fetchData()
         })
     }
     

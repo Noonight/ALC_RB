@@ -14,7 +14,20 @@ final class HomeAnnouncesTable: NSObject {
     
     let cellNib = UINib(nibName: "HomeAnonunceTableViewCell", bundle: Bundle.main)
     
-    var dataSource: [Announce] = []
+    private let localTourneys = LocalTourneys()
+    private var _dataSource: [Announce] = []
+    var dataSource: [Announce] {
+        get {
+            return _dataSource.filter { announce -> Bool in
+                return localTourneys.getLocalTourneys().contains { tourney -> Bool in
+                    return tourney.id == announce.tourney
+                }
+            }
+        }
+        set {
+            _dataSource = newValue
+        }
+    }
     var actions: CellActions?
     
     init(actions: CellActions) {
