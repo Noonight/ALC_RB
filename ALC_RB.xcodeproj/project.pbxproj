@@ -10,7 +10,6 @@
 		048CB331230BC959006CF2A9 /* HomeNewsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048CB330230BC959006CF2A9 /* HomeNewsCollection.swift */; };
 		048CB33C230BD258006CF2A9 /* HomeAnonunceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048CB33A230BD258006CF2A9 /* HomeAnonunceTableViewCell.swift */; };
 		048CB33D230BD258006CF2A9 /* HomeAnonunceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048CB33B230BD258006CF2A9 /* HomeAnonunceTableViewCell.xib */; };
-		048CB33F230BD556006CF2A9 /* HomeAnnouncesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048CB33E230BD556006CF2A9 /* HomeAnnouncesTable.swift */; };
 		048CB342230BD741006CF2A9 /* HomeScheduleTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048CB341230BD741006CF2A9 /* HomeScheduleTable.swift */; };
 		048CB346230BD92F006CF2A9 /* HomeScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048CB344230BD92F006CF2A9 /* HomeScheduleTableViewCell.swift */; };
 		048CB347230BD92F006CF2A9 /* HomeScheduleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048CB345230BD92F006CF2A9 /* HomeScheduleTableViewCell.xib */; };
@@ -171,7 +170,6 @@
 		DB2E1F7322EAFAE800CDA5CD /* DoMatchProtocolRefereeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E1F7222EAFAE800CDA5CD /* DoMatchProtocolRefereeViewController.swift */; };
 		DB2E1F7522EAFB7B00CDA5CD /* DoMatchProtocolRefereePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E1F7422EAFB7B00CDA5CD /* DoMatchProtocolRefereePresenter.swift */; };
 		DB2E1F7822EC11E800CDA5CD /* ProtocolRefereeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E1F7722EC11E800CDA5CD /* ProtocolRefereeViewModel.swift */; };
-		DB443171233A528F00C8879D /* AnnouncesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB443170233A528F00C8879D /* AnnouncesPresenter.swift */; };
 		DB44F6A1233C4B6A00EAF293 /* LoadingRepeatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB44F6A0233C4B6A00EAF293 /* LoadingRepeatView.swift */; };
 		DB44F6A3233C4B7900EAF293 /* LoadingRepeatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB44F6A2233C4B7900EAF293 /* LoadingRepeatView.xib */; };
 		DB45709822EF4EC000455BFB /* RefereeScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB45709722EF4EC000455BFB /* RefereeScoreModel.swift */; };
@@ -337,7 +335,6 @@
 		048CB330230BC959006CF2A9 /* HomeNewsCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewsCollection.swift; sourceTree = "<group>"; };
 		048CB33A230BD258006CF2A9 /* HomeAnonunceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAnonunceTableViewCell.swift; sourceTree = "<group>"; };
 		048CB33B230BD258006CF2A9 /* HomeAnonunceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeAnonunceTableViewCell.xib; sourceTree = "<group>"; };
-		048CB33E230BD556006CF2A9 /* HomeAnnouncesTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAnnouncesTable.swift; sourceTree = "<group>"; };
 		048CB341230BD741006CF2A9 /* HomeScheduleTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScheduleTable.swift; sourceTree = "<group>"; };
 		048CB344230BD92F006CF2A9 /* HomeScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		048CB345230BD92F006CF2A9 /* HomeScheduleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeScheduleTableViewCell.xib; sourceTree = "<group>"; };
@@ -503,7 +500,6 @@
 		DB2E1F7222EAFAE800CDA5CD /* DoMatchProtocolRefereeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoMatchProtocolRefereeViewController.swift; sourceTree = "<group>"; };
 		DB2E1F7422EAFB7B00CDA5CD /* DoMatchProtocolRefereePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoMatchProtocolRefereePresenter.swift; sourceTree = "<group>"; };
 		DB2E1F7722EC11E800CDA5CD /* ProtocolRefereeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolRefereeViewModel.swift; sourceTree = "<group>"; };
-		DB443170233A528F00C8879D /* AnnouncesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncesPresenter.swift; sourceTree = "<group>"; };
 		DB44F6A0233C4B6A00EAF293 /* LoadingRepeatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingRepeatView.swift; sourceTree = "<group>"; };
 		DB44F6A2233C4B7900EAF293 /* LoadingRepeatView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingRepeatView.xib; sourceTree = "<group>"; };
 		DB45709722EF4EC000455BFB /* RefereeScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeScoreModel.swift; sourceTree = "<group>"; };
@@ -702,12 +698,11 @@
 		048CB338230BD209006CF2A9 /* Announces */ = {
 			isa = PBXGroup;
 			children = (
-				1869CA1E235488E700204697 /* View Model */,
-				DB97C3032339FB1C001E205E /* Table */,
 				DB97C2FF2339FB18001E205E /* AnnouncesVC.swift */,
 				DB97C3002339FB18001E205E /* AnnouncesVC.xib */,
-				DB443170233A528F00C8879D /* AnnouncesPresenter.swift */,
 				1869CA1C2354858900204697 /* AnnouncesViewModel.swift */,
+				048CB339230BD221006CF2A9 /* Cell */,
+				1869CA1E235488E700204697 /* View Model */,
 			);
 			path = Announces;
 			sourceTree = "<group>";
@@ -1983,15 +1978,6 @@
 			path = "custom view";
 			sourceTree = "<group>";
 		};
-		DB97C3032339FB1C001E205E /* Table */ = {
-			isa = PBXGroup;
-			children = (
-				048CB339230BD221006CF2A9 /* Cell */,
-				048CB33E230BD556006CF2A9 /* HomeAnnouncesTable.swift */,
-			);
-			path = Table;
-			sourceTree = "<group>";
-		};
 		DB986B5122FDB1300050AC8F /* edit team events */ = {
 			isa = PBXGroup;
 			children = (
@@ -2616,7 +2602,6 @@
 				DBE0E7A4223BDE0000CC0EE2 /* OngoingLeaguesLKPresenter.swift in Sources */,
 				DB98FACD2254717B002933D0 /* CommandEditLKViewController.swift in Sources */,
 				DB9EC0D3225F47DC00FC3A9E /* EditTeam.swift in Sources */,
-				DB443171233A528F00C8879D /* AnnouncesPresenter.swift in Sources */,
 				DB48BE7822002BD1008B007D /* PlayersTeamLeagueDetailPresenter.swift in Sources */,
 				04C024EA221427F500A4A571 /* MenuLauncher.swift in Sources */,
 				187F2DFF22CB19440049EA77 /* EditScoreMatchTableViewController.swift in Sources */,
@@ -2750,7 +2735,6 @@
 				DB673F5121D7A39B006205A8 /* Image.swift in Sources */,
 				DBC5C5FE2220349500B0A1B6 /* AuthPresenter.swift in Sources */,
 				DBA69218221EB83500BEFB26 /* AuthViewController.swift in Sources */,
-				048CB33F230BD556006CF2A9 /* HomeAnnouncesTable.swift in Sources */,
 				187F2DFE22CB19440049EA77 /* EditMatchProtocolViewController.swift in Sources */,
 				CE158CE421AD2CE000CEECFE /* TournamentsTableViewController.swift in Sources */,
 				CE158CE621AD3E8A00CEECFE /* TournamentTableViewCell.swift in Sources */,

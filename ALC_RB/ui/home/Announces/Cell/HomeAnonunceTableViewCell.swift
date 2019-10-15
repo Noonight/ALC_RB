@@ -14,8 +14,10 @@ class HomeAnonunceTableViewCell: UITableViewCell {
     
     @IBOutlet weak var text_label: UILabel!
     
-    func configure(_ item: Announce) {
-        self.text_label.text = item.content
+    var announceModelItem: AnnounceModelItem! {
+        didSet {
+            self.text_label.text = self.announceModelItem.content
+        }
     }
     
 }

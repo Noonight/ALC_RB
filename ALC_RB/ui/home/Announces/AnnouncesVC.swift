@@ -9,6 +9,8 @@
 import UIKit
 import FloatingPanel
 import MBProgressHUD
+import RxSwift
+import RxCocoa
 
 final class AnnouncesVC: UIViewController {
 
@@ -25,24 +27,25 @@ final class AnnouncesVC: UIViewController {
     
     private lazy var shadowLayer: CAShapeLayer = CAShapeLayer()
     
-    private var announcesTable: HomeAnnouncesTable!
-    private var announcesPresenter: AnnouncesPresenter!
-    private var hud: MBProgressHUD?
+    var announcesViewModel: AnnouncesViewModel!
+    var hud: MBProgressHUD?
+    private let disposeBag = DisposeBag()
     
     private static let HEADER_FULL_HEIGHT = 64
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupAnnouncesPresenter()
+        self.setupAnnouncesViewModel()
+        self.setupLoadingRepeatCounter()
         self.setupAnnouncesTable()
-        self.setupLoadingRepeatView()
+        setupBinds()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchData()
+        announcesViewModel.fetch()
     }
     
     override func viewDidLayoutSubviews() {
@@ -77,83 +80,67 @@ final class AnnouncesVC: UIViewController {
 
 private extension AnnouncesVC {
     
-    func setupLoadingRepeatView() {
-        self.loading_repeat_view.configureAction {
-            self.repeatHelper()
-        }
+    func setupLoadingRepeatCounter() {
+        self.text_with_image_label.backColor = .orange
+        self.text_with_image_label.textColor = .white
     }
     
-    func setupAnnouncesPresenter() {
-        self.announcesPresenter = AnnouncesPresenter(dataManager: ApiRequests())
+//    func setupLoadingRepeatView() {
+//        self.loading_repeat_view.configureAction {
+//            self.announcesViewModel.fetch()
+//        }
+//    }
+    
+    func setupAnnouncesViewModel() {
+        self.announcesViewModel = AnnouncesViewModel(newDataManager: ApiRequests())
     }
     
     func setupAnnouncesTable() {
-        self.announcesTable = HomeAnnouncesTable(actions: self)
-        self.announces_table.dataSource = self.announcesTable
-        self.announces_table.delegate = self.announcesTable
-        self.announces_table.register(self.announcesTable.cellNib, forCellReuseIdentifier: HomeAnonunceTableViewCell.ID)
-    }
-}
+        let cellNib = UINib(nibName: "HomeAnonunceTableViewCell", bundle: Bundle.main)
 
-// MARK: ACITONS
-
-extension AnnouncesVC {
-    
-    func fetchData() {
-        if hud != nil {
-            self.hud?.setToLoadingView()
-        } else {
-            self.hud = self.showLoadingViewHUD(addTo: self.announces_table)
-        }
-             
-        self.loading_repeat_view.isLoadingComplete = false
-        
-        self.announcesPresenter.fetchAnnounces(
-            success: { announces_r in
-                self.fSuccess(announces: announces_r)
-        }, r_message: { message in
-            self.fMessage(message: message)
-        }, all_failure: { error in
-            Print.m(error)
-            self.fAllFailure(error: error)
-        }, server_failure: { error in
-            Print.m(error)
-            self.fServerFailure(error: error)
-        }, local_failure: { error in
-            Print.m(error)
-            self.fLocalFailure(error: error)
-        })
+        self.announces_table.register(cellNib, forCellReuseIdentifier: HomeAnonunceTableViewCell.ID)
     }
     
-}
-
-extension AnnouncesVC: CellActions {
-    func onCellDeselected(model: CellModel) {
+    func setupBinds() {
         
-    }
-    
-    func onCellSelected(model: CellModel) {
-        if model is Announce { }
-    }
-}
-
-// MARK: STATE
-
-extension AnnouncesVC {
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        announcesViewModel
+            .items
+            .bind(to: announces_table.rx.items(cellIdentifier: HomeAnonunceTableViewCell.ID, cellType: HomeAnonunceTableViewCell.self)) { (row, announce, cell) in
+                cell.announceModelItem = announce
+            }
+            .disposed(by: disposeBag)
         
-        self.view.layoutSubviews()
+        announcesViewModel
+            .items
+            .map({ $0.count })
+            .bind(to: self.rx.countOfItems)
+            .disposed(by: disposeBag)
         
-        if UIDevice.current.orientation.isLandscape
-        {
-            self.view.layoutIfNeeded()
-            self.view.layoutSubviews()
-        }
-        else
-        {
-            self.view.layoutIfNeeded()
-            self.view.layoutSubviews()
-        }
+        announcesViewModel
+            .items
+            .map({ $0.count == 0})
+            .bind(to: self.rx.isEmpty)
+            .disposed(by: disposeBag)
+        
+        announcesViewModel
+            .loading
+            .bind(to: self.rx.isLoading)
+            .disposed(by: disposeBag)
+        
+        announcesViewModel
+            .error
+            .bind(to: self.rx.error)
+            .disposed(by: disposeBag)
+        
+        loading_repeat_view.btn
+            .rx
+            .tap
+            .bind(onNext: {
+                self.announcesViewModel.fetch()
+            })
+            .disposed(by: disposeBag)
+        
+        
     }
 }
 
@@ -161,77 +148,90 @@ extension AnnouncesVC {
 
 extension AnnouncesVC {
     
-    func showCounter() {
-        self.text_with_image_label.isHidden = false
-        self.text_with_image_label.text = String(self.announcesTable.dataSource.count)
-        self.text_with_image_label.backColor = .orange
-        self.text_with_image_label.textColor = .white
-    }
-    
-    func hideCounter() {
-        self.text_with_image_label.isHidden = true
-    }
-    
-    func repeatHelper() {
-        self.fetchData()
-    }
-    
-    func showHeader() {
-        UIView.animate(withDuration: 0.25) {
-            self.header_height.constant = CGFloat(AnnouncesVC.HEADER_FULL_HEIGHT)
+    func showEmptyViewGoToChooser() {
+        if self.hud != nil {
+            self.hud?.setToEmptyView(message: Constants.Texts.NO_STARRED_TOURNEYS, detailMessage: Constants.Texts.GO_TO_CHOOSE_TOURNEYS, tap: {
+                self.showTourneyPicker()
+            })
+        } else {
+            self.hud = showEmptyViewHUD(addTo: self.announces_table, message: Constants.Texts.NO_STARRED_TOURNEYS, detailMessage: Constants.Texts.GO_TO_CHOOSE_TOURNEYS, tap: {
+                self.showTourneyPicker()
+            })
         }
     }
     
-    func hideHeader() {
-        UIView.animate(withDuration: 0.25) {
-            self.header_height.constant = 0
-        }
+}
+
+// MARK: NAVIGATION
+
+extension AnnouncesVC {
+    
+    func showTourneyPicker() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "TournamentSearchVC") as! TournamentSearchVC
+        self.navigationController?.show(newViewController, sender: self)
     }
     
-    func fSuccess(announces: [Announce]) {
-        hud?.hide(animated: true)
-        if announces.count == 0 {
+}
+
+// MARK: REACTIVE
+
+extension Reactive where Base: AnnouncesVC {
+
+    internal var isLoading: Binder<Bool> {
+        return Binder(self.base) { vc, loading in
+            vc.text_with_image_label.isHidden = loading
+            if loading == true {
+                vc.loading_repeat_view.isLoadingComplete = false
+                if vc.hud != nil {
+                    vc.hud?.setToLoadingView()
+                } else {
+                    vc.hud = vc.showLoadingViewHUD(addTo: vc.announces_table)
+                }
+            } else {
+                vc.loading_repeat_view.isLoadingComplete = true
+                vc.hud?.hide(animated: false)
+                vc.hud = nil
+            }
             
         }
-        
-        self.loading_repeat_view.isLoadingComplete = true
-        
-        self.announcesTable.dataSource = announces
-        self.announces_table.reloadData()
-        
-        self.showCounter()
     }
     
-    func fMessage(message: SingleLineMessage) {
-        self.loading_repeat_view.isLoadingComplete = true
-        self.hideCounter()
-        hud?.setToButtonHUD(message: message.message, btn: {
-            self.fetchData()
-        })
+    internal var error: Binder<Error?> {
+        return Binder(self.base) { vc, error in
+            if error != nil {
+                if vc.hud != nil {
+                    vc.hud?.setToFailureView(detailMessage: error!.localizedDescription, tap: {
+                        vc.announcesViewModel.fetch()
+                    })
+                } else {
+                    vc.hud = vc.showFailureViewHUD(addTo: vc.announces_table, detailMessage: error!.localizedDescription, tap: {
+                        vc.announcesViewModel.fetch()
+                    })
+                }
+            } else {
+                vc.hud?.hide(animated: false)
+                vc.hud = nil
+            }
+            
+        }
     }
     
-    func fAllFailure(error: Error) {
-        self.loading_repeat_view.isLoadingComplete = true
-        self.hideCounter()
-        hud?.setToButtonHUD(message: Constants.Texts.UNDEFINED_FAILURE, detailMessage: error.localizedDescription, btn: {
-            self.fetchData()
-        })
+    internal var countOfItems: Binder<Int> {
+        return Binder(self.base) { vc, count in
+            vc.text_with_image_label.text = String(count)
+        }
     }
     
-    func fServerFailure(error: Error) {
-        self.loading_repeat_view.isLoadingComplete = true
-        self.hideCounter()
-        hud?.setToButtonHUD(message: Constants.Texts.SERVER_FAILURE, detailMessage: error.localizedDescription, btn: {
-            self.fetchData()
-        })
+    internal var isEmpty: Binder<Bool> {
+        return Binder(self.base) { vc, empty in
+            vc.text_with_image_label.isHidden = empty
+            if empty == true {
+                vc.showEmptyViewGoToChooser()
+            } else {
+                vc.hud?.hide(animated: false)
+                vc.hud = nil
+            }
+        }
     }
-    
-    func fLocalFailure(hud: MBProgressHUD? = nil, error: Error) {
-        self.loading_repeat_view.isLoadingComplete = true
-        self.hideCounter()
-        hud?.setToButtonHUD(message: Constants.Texts.FAILURE, detailMessage: error.localizedDescription, btn: {
-            self.fetchData()
-        })
-    }
-    
 }

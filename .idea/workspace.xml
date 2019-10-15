@@ -2,98 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12ca8836-b4f8-4f04-bd9b-95f2ce59baa9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/HomeAllViewModel.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/News/HomeNewsViewModel.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/News/view model/NewsModelItem.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ALC_RB.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/base/Constants.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/base/Constants.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/base/ISO8601Decoder.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/base/ISO8601Decoder.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/api/ApiRequests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/api/ApiRequests.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/api/ApiRoute.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/api/ApiRoute.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/ActiveMatches.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/ActiveMatches.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/Announce.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/Announce.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/AuthUser.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/AuthUser.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/Clubs.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/Clubs.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/EditTeamResponse.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/EditTeamResponse.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/EditedProfilePerson.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/EditedProfilePerson.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/ErrorMessage.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/ErrorMessage.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/GetPerson.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/GetPerson.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/LeagueInfo.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/LeagueInfo.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/News.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/News.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/ParticipationMatch.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/ParticipationMatch.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/PastLeague.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/PastLeague.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/Players.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/Players.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/Referee.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/Referee.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/SingleLineMessage.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/SingleLineMessage.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/SoloClub.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/SoloClub.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/SoloLeague.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/SoloLeague.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/SoloMatch.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/SoloMatch.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/SoloPerson.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/SoloPerson.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/SoloTeam.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/SoloTeam.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/Tournaments.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/Tournaments.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/Tourney.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/Tourney.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/UpcomingMatches.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/UpcomingMatches.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/mmUpcomingMatches.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/mmUpcomingMatches.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/post/EditMatchReferees.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/post/EditMatchReferees.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/post/EditProtocol.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/post/EditProtocol.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/model/post/EditTeam.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/model/post/EditTeam.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/extensions/UIImageViewExtensions.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/extensions/UIImageViewExtensions.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/All/HomeAllPresenter.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/All/HomeAllVC.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/HomeAllVC.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/All/News Collection/Cell/HomeNewsCollectionViewCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/News/Cell/HomeNewsCollectionViewCell.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/All/News Collection/Cell/HomeNewsCollectionViewCell.xib" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/News/Cell/HomeNewsCollectionViewCell.xib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/All/News Collection/HomeNewsCollection.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/News/HomeNewsCollection.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/All/News Collection/news_detail/NewsDetailPresenter.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/News/news_detail/NewsDetailPresenter.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/All/News Collection/news_detail/NewsDetailViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/All/News/news_detail/NewsDetailViewController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/News/NewsAllPresenter.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/News/NewsAllPresenter.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/News/NewsAllTableViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/News/NewsAllTableViewController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Manifest.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Manifest.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/AMScrollingNavbar.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/AMScrollingNavbar.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/ActionSheetPicker-3.0.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/ActionSheetPicker-3.0.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Alamofire.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Alamofire.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/AlamofireImage.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/AlamofireImage.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Cache.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Cache.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/ESPullToRefresh-ESPullToRefresh.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/ESPullToRefresh-ESPullToRefresh.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/ESPullToRefresh.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/ESPullToRefresh.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/FloatingPanel.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/FloatingPanel.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/IQKeyboardManagerSwift.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/IQKeyboardManagerSwift.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Imaginary.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Imaginary.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Kingfisher.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Kingfisher.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Lightbox.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Lightbox.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/MBProgressHUD.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/MBProgressHUD.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Pods-ALC_RB.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/Pods-ALC_RB.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/RxAtomic.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/RxAtomic.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/RxCocoa.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/RxCocoa.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/RxSwift.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/RxSwift.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/SPStorkController.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/SPStorkController.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/SwiftDate.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/SwiftDate.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/SwiftyJSON.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/SwiftyJSON.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/UIScrollView-InfiniteScroll.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Pods.xcodeproj/xcuserdata/ayurarkhipov.xcuserdatad/xcschemes/UIScrollView-InfiniteScroll.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/AMScrollingNavbar/AMScrollingNavbar.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/AMScrollingNavbar/AMScrollingNavbar.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/ActionSheetPicker-3.0/ActionSheetPicker-3.0.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Alamofire/Alamofire.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Alamofire/Alamofire.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/AlamofireImage/AlamofireImage.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/AlamofireImage/AlamofireImage.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Cache/Cache.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Cache/Cache.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/ESPullToRefresh/ESPullToRefresh.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/ESPullToRefresh/ESPullToRefresh.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/FloatingPanel/FloatingPanel.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/FloatingPanel/FloatingPanel.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Imaginary/Imaginary.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Imaginary/Imaginary.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Kingfisher/Kingfisher.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Kingfisher/Kingfisher.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Lightbox/Lightbox.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Lightbox/Lightbox.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/MBProgressHUD/MBProgressHUD.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/MBProgressHUD/MBProgressHUD.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.debug.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB.release.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/RxAtomic/RxAtomic.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/RxAtomic/RxAtomic.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/RxCocoa/RxCocoa.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/RxCocoa/RxCocoa.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/RxSwift/RxSwift.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/RxSwift/RxSwift.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/SPStorkController/SPStorkController.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/SPStorkController/SPStorkController.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/SwiftDate/SwiftDate.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/SwiftDate/SwiftDate.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/SwiftyJSON/SwiftyJSON.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/SwiftyJSON/SwiftyJSON.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pods/Target Support Files/UIScrollView-InfiniteScroll/UIScrollView-InfiniteScroll.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Pods/Target Support Files/UIScrollView-InfiniteScroll/UIScrollView-InfiniteScroll.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesViewModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesViewModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Table/Cell/HomeAnonunceTableViewCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Cell/HomeAnonunceTableViewCell.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Table/Cell/HomeAnonunceTableViewCell.xib" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Cell/HomeAnonunceTableViewCell.xib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Table/HomeAnnouncesTable.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/View Model/AnnounceModelItem.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/View Model/AnnounceModelItem.swift" afterDir="false" />
     </list>
     <ignored path="$USER_HOME$/Library/Developer/Xcode/DerivedData/ALC_RB-criteqptgmpqstfhosiglduwlnxs/" />
     <ignored path="$USER_HOME$/Library/Caches/AppCode2019.1/DerivedData/ALC_RB-diruytnehxazfvekyfnaxzratfak/Build/Intermediates.noindex/" />
@@ -104,13 +21,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos_9f78b08def0293de22dbaa748aa37bcf55ccae55" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos_" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/TournamentSearchVC.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
+            <state relative-caret-position="3298">
               <caret line="197" column="12" selection-start-line="197" selection-start-column="12" selection-end-line="197" selection-end-column="12" />
             </state>
           </provider>
@@ -119,7 +36,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/model/TourneyModelItem.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
+            <state relative-caret-position="289">
               <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
             </state>
           </provider>
@@ -128,7 +45,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ALC_RB/base/ISO8601Decoder.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
+            <state relative-caret-position="221">
               <caret line="13" column="33" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="33" />
             </state>
           </provider>
@@ -137,8 +54,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ALC_RB/data/model/post/EditMatchReferees.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="128" column="5" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
+            <state relative-caret-position="393">
+              <caret line="134" column="47" lean-forward="true" selection-start-line="134" selection-start-column="47" selection-end-line="134" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -176,10 +93,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="2157" />
-    <option name="height" value="1002" />
+    <option name="width" value="1440" />
+    <option name="height" value="813" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -234,8 +151,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Cidr.FilesView" />
       <pane id="Scope" />
+      <pane id="Cidr.FilesView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -291,16 +208,19 @@
       <workItem from="1570725188493" duration="749000" />
       <workItem from="1570967332326" duration="850000" />
       <workItem from="1570977336046" duration="708000" />
+      <workItem from="1571112324532" duration="49000" />
+      <workItem from="1571112449541" duration="31000" />
+      <workItem from="1571112520850" duration="21000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10144000" />
+    <option name="totallyTimeSpent" value="10245000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="813" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="813" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46583852" visible="true" weight="0.29613733" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46583852" visible="true" weight="0.3090129" />
       <window_info id="Designer" order="1" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -363,13 +283,7 @@
     <entry file="file://$PROJECT_DIR$/ALC_RB/ui/ru.lproj/Main.strings">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift" />
     <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/All/Schedule Table/HomeScheduleTable.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -435,29 +349,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/TournamentSearchVC.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
+        <state relative-caret-position="3298">
           <caret line="197" column="12" selection-start-line="197" selection-start-column="12" selection-end-line="197" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/model/TourneyModelItem.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
+        <state relative-caret-position="289">
           <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ALC_RB/base/ISO8601Decoder.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
+        <state relative-caret-position="221">
           <caret line="13" column="33" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ALC_RB/data/model/post/EditMatchReferees.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="128" column="5" selection-start-line="128" selection-start-column="5" selection-end-line="128" selection-end-column="5" />
+        <state relative-caret-position="393">
+          <caret line="134" column="47" lean-forward="true" selection-start-line="134" selection-start-column="47" selection-end-line="134" selection-end-column="47" />
         </state>
       </provider>
     </entry>

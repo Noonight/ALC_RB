@@ -40,44 +40,44 @@ final class HomeViewModel {
 //        }
 //    }
     
-    func fetchAnnounces(success: @escaping ([Announce]) -> (), rMessage: @escaping (SingleLineMessage) -> (), failureAll: @escaping (Error) -> (), failureServer: @escaping (Error) -> (), failureLocal: @escaping (Error) -> ()) {
-        dataManager.get_announces { result in
-            switch result
-            {
-            case .success(let announces):
-                success(announces)
-            case .message(let message):
-                rMessage(message)
-            case .failure(.alamofire(let error)):
-                failureAll(error)
-            case .failure(.server(let error)):
-                failureServer(error)
-            case .failure(.local(let error)):
-                failureLocal(error)
-            }
-        }
-    }
+//    func fetchAnnounces(success: @escaping ([Announce]) -> (), rMessage: @escaping (SingleLineMessage) -> (), failureAll: @escaping (Error) -> (), failureServer: @escaping (Error) -> (), failureLocal: @escaping (Error) -> ()) {
+//        dataManager.get_announces { result in
+//            switch result
+//            {
+//            case .success(let announces):
+//                success(announces)
+//            case .message(let message):
+//                rMessage(message)
+//            case .failure(.alamofire(let error)):
+//                failureAll(error)
+//            case .failure(.server(let error)):
+//                failureServer(error)
+//            case .failure(.local(let error)):
+//                failureLocal(error)
+//            }
+//        }
+//    }
             
-    func fetchAnnounces(completed: @escaping () -> ()) {
-        self.dataManager.get_announces { result in
-            Print.m("result here")
-//            Print.m(result)
-            self.clearAll()
-            switch result
-            {
-            case .success(let announces):
-                Print.m("announces")
-                self.announces = announces
-            case .message(let message):
-                Print.m("message")
-                self.message = message
-            case .failure(let error):
-                Print.m("error")
-                self.error = error
-            }
-            completed()
-        }
-    }
+//    func fetchAnnounces(completed: @escaping () -> ()) {
+//        self.dataManager.get_announces { result in
+//            Print.m("result here")
+////            Print.m(result)
+//            self.clearAll()
+//            switch result
+//            {
+//            case .success(let announces):
+//                Print.m("announces")
+//                self.announces = announces
+//            case .message(let message):
+//                Print.m("message")
+//                self.message = message
+//            case .failure(let error):
+//                Print.m("error")
+//                self.error = error
+//            }
+//            completed()
+//        }
+//    }
     
     // MARK: HELPER
     

@@ -23,7 +23,7 @@ class AnnouncesViewModel {
     private let disposeBag = DisposeBag()
     
     init(newDataManager: ApiRequests) {
-        self.dataManger = newDataManager
+        self.dataManager = newDataManager
         
         announces
             .map ({ mAnnounces -> [Announce] in
@@ -54,18 +54,17 @@ class AnnouncesViewModel {
     func fetch() {
         
         self.loading.onNext(true)
-        dataManger.get_news { result in
+        dataManager.get_announces { result in
             self.loading.onNext(false)
             switch result {
-            case .success(let news):
-                self.news.onNext(news)
+            case .success(let announces):
+                self.announces.onNext(announces)
             case .message(let message):
                 self.message.onNext(message)
             case .failure(let error):
                 self.error.onNext(error)
             }
         }
-        dataManager.get_announces(get_result: <#T##(ResultMy<[Announce], RequestError>) -> ()#>)
     }
     
 }

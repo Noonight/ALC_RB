@@ -10,7 +10,7 @@ import Foundation
 
 class AnnounceModelItem {
     
-    let announce: Announce
+    private let announce: Announce
     var tourney: Tourney?
     
     init(newAnnounce: Announce, tourney: Tourney?) {
