@@ -11,6 +11,7 @@ import UIKit
 final class MyTourneysTable: NSObject {
     
     let cellNib = UINib(nibName: "MyTourneyCell", bundle: Bundle.main)
+    let noCellNib = UINib(nibName: "NoLeaguesCell", bundle: Bundle.main)
     
     var dataSource: [TourneyModelItem] = []
     let cellActions: CellActions
@@ -26,8 +27,27 @@ extension MyTourneysTable: UITableViewDelegate {
         cellActions.onCellSelected(model: dataSource[indexPath.section].leagues![indexPath.row])
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let sectionView = UIView(frame: CGRect(x: 32, y: 0, width: tableView.frame.size.width, height: 80))
+        let header =  MyTourneyHeaderView()
+        sectionView.addSubview(header)
+        sectionView.leftAnchor.constraint(equalTo: header.leftAnchor).isActive = true
+        sectionView.rightAnchor.constraint(equalTo: header.rightAnchor).isActive = true
+        sectionView.bottomAnchor.constraint(equalTo: header.bottomAnchor).isActive = true
+        sectionView.topAnchor.constraint(equalTo: header.topAnchor).isActive = true
+        header.backgroundColor = .lightGray
+        header.separatorColor = tableView.separatorColor
+        header.tourneyModelItem = dataSource[section]
+        
+        header.action = { tourneyModelItem in
+            // navigate to league
+//            Print.m(tourneyModelItem.name)
+        }
+        return sectionView
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 80
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -45,12 +65,23 @@ extension MyTourneysTable: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let leagues = dataSource[section].leagues else { return dataSource[section].leagues?.count ?? 0 }
+        if leagues.count == 1 {
+            return 0
+        }
+        if leagues.count == 0 {
+            return 1
+        }
         return dataSource[section].leagues?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyTourneyCell.ID, for: indexPath) as! MyTourneyCell
-        
+
+        if dataSource[indexPath.section].leagues?.count ?? 0 == 0 {
+            let noCell = tableView.dequeueReusableCell(withIdentifier: NoLeaguesCell.ID) as! NoLeaguesCell
+            return noCell
+        }
         cell.leagueModelItem = dataSource[indexPath.section].leagues?[indexPath.row]
         
         return cell

@@ -45,6 +45,7 @@ extension MyTourneysTVC {
     func setupTourneyTable() {
         tourneyTable = MyTourneysTable(cellActions: self)
         tableView.register(tourneyTable.cellNib, forCellReuseIdentifier: MyTourneyCell.ID)
+        tableView.register(tourneyTable.noCellNib, forCellReuseIdentifier: NoLeaguesCell.ID)
         tableView.delegate = tourneyTable
         tableView.dataSource = tourneyTable
         tableView.separatorInset = .zero
