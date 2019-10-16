@@ -55,8 +55,6 @@
 		1845986D234746CB0066DE2A /* RegionMy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845986C234746CB0066DE2A /* RegionMy.swift */; };
 		184A8E4022BB6DB20027BC8E /* mmUpcomingMatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184A8E3F22BB6DB20027BC8E /* mmUpcomingMatches.swift */; };
 		184DBF052357162800BBEFCE /* MyTourneyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184DBF042357162800BBEFCE /* MyTourneyHeaderView.swift */; };
-		184DBF082357347700BBEFCE /* NoLeaguesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184DBF062357347700BBEFCE /* NoLeaguesCell.swift */; };
-		184DBF092357347700BBEFCE /* NoLeaguesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184DBF072357347700BBEFCE /* NoLeaguesCell.xib */; };
 		185669BF2301679100BCC565 /* AutoGoalsMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185669BE2301679100BCC565 /* AutoGoalsMaker.swift */; };
 		185AF41C235339F200EC1F0A /* NewsModelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185AF41B235339F200EC1F0A /* NewsModelItem.swift */; };
 		185AF4222353470D00EC1F0A /* HomeNewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185AF4212353470D00EC1F0A /* HomeNewsViewModel.swift */; };
@@ -399,8 +397,6 @@
 		1845986C234746CB0066DE2A /* RegionMy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionMy.swift; sourceTree = "<group>"; };
 		184A8E3F22BB6DB20027BC8E /* mmUpcomingMatches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mmUpcomingMatches.swift; sourceTree = "<group>"; };
 		184DBF042357162800BBEFCE /* MyTourneyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTourneyHeaderView.swift; sourceTree = "<group>"; };
-		184DBF062357347700BBEFCE /* NoLeaguesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoLeaguesCell.swift; sourceTree = "<group>"; };
-		184DBF072357347700BBEFCE /* NoLeaguesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoLeaguesCell.xib; sourceTree = "<group>"; };
 		185669BE2301679100BCC565 /* AutoGoalsMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoGoalsMaker.swift; sourceTree = "<group>"; };
 		185AF41B235339F200EC1F0A /* NewsModelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModelItem.swift; sourceTree = "<group>"; };
 		185AF4212353470D00EC1F0A /* HomeNewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewsViewModel.swift; sourceTree = "<group>"; };
@@ -1113,8 +1109,6 @@
 			children = (
 				189482782356F018000C8A2A /* MyTourneyCell.swift */,
 				189482792356F018000C8A2A /* MyTourneyCell.xib */,
-				184DBF062357347700BBEFCE /* NoLeaguesCell.swift */,
-				184DBF072357347700BBEFCE /* NoLeaguesCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2522,7 +2516,6 @@
 				18FF4767230A8E4400CAEFC6 /* HomeAllVC.xib in Resources */,
 				18B0F8822302BF6600080196 /* ModalPenaltySeriesVC.xib in Resources */,
 				CEA6EBA621A53CFE008F874D /* LaunchScreen.storyboard in Resources */,
-				184DBF092357347700BBEFCE /* NoLeaguesCell.xib in Resources */,
 				DB986B5B22FDBDD10050AC8F /* EditAutoGoalsView.xib in Resources */,
 				048CB34C230BF18F006CF2A9 /* HomeScheduleHeaderView.xib in Resources */,
 				DB9C5239233A65DC003E54C1 /* ImageWithTextInCenter.xib in Resources */,
@@ -2873,7 +2866,6 @@
 				DBA8B3C422F3649A0008A16E /* FilterTeamsByGroupHelper.swift in Sources */,
 				DBBEE1BD22D5416800CFB17E /* ParticipationCommandsController.swift in Sources */,
 				DB0ABC8F2302FC4600FF6A8D /* PenaltySeriesTableViewCell.swift in Sources */,
-				184DBF082357347700BBEFCE /* NoLeaguesCell.swift in Sources */,
 				DB52EAE52248E2E6004F7869 /* CommandCreateLKPresenter.swift in Sources */,
 				DB59433421F212BE00945601 /* SegmentHelper.swift in Sources */,
 				187F2DFD22CB19440049EA77 /* EditRefereeTeamPresenter.swift in Sources */,

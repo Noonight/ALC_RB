@@ -24,6 +24,7 @@ class MyTourneysTVC: UITableViewController {
         self.setupViewModel()
         self.setupTourneyTable()
         self.setupBinds()
+        self.setupPullToRefresh()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,14 +45,45 @@ extension MyTourneysTVC {
     
     func setupTourneyTable() {
         tourneyTable = MyTourneysTable(cellActions: self)
+        tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(tourneyTable.cellNib, forCellReuseIdentifier: MyTourneyCell.ID)
-        tableView.register(tourneyTable.noCellNib, forCellReuseIdentifier: NoLeaguesCell.ID)
         tableView.delegate = tourneyTable
         tableView.dataSource = tourneyTable
         tableView.separatorInset = .zero
+        tableView.allowsMultipleSelection = false
     }
     
     func setupBinds() {
+        
+        tableView
+            .rx
+            .itemSelected
+            .subscribe({ indexPath in
+                Print.m("tap tap tap.. indexPath is \(indexPath.element!)")
+            })
+            .disposed(by: disposeBag)
+        
+        tableView
+            .rx
+            .itemSelected
+            .subscribe({ indexPath in
+                guard let mIndexPath = indexPath.element else { return }
+                let cell = self.tableView.cellForRow(at: mIndexPath) as! MyTourneyCell
+                
+                cell.layoutIfNeeded()
+                UIView.animate(withDuration: 0.1, animations: {
+                    cell.transform = CGAffineTransform(scaleX: 0.98, y: 0.98)
+                }) { completed in
+                    if completed {
+                        UIView.animate(withDuration: 0.1) {
+                            cell.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                        }
+                    } else {
+                        Print.m("completed = \(completed)")
+                    }
+                }
+        })
+            .disposed(by: disposeBag)
         
         viewModel
             .items
@@ -85,7 +117,30 @@ extension MyTourneysTVC {
         
     }
     
+    func setupPullToRefresh() {
+        let refreshController = UIRefreshControl()
+        tableView.refreshControl = refreshController
+        
+        refreshController.rx
+            .controlEvent(.valueChanged)
+            .map { _ in !refreshController.isRefreshing}
+            .filter { $0 == false }
+            .subscribe({ event in
+                self.viewModel.fetch()
+            }).disposed(by: disposeBag)
+        
+        refreshController.rx.controlEvent(.valueChanged)
+            .map { _ in refreshController.isRefreshing }
+            .filter { $0 == true }
+            .subscribe({ event in
+                refreshController.endRefreshing()
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
 }
+
+// MARK: ACTION
 
 extension MyTourneysTVC: CellActions {
     func onCellSelected(model: CellModel) {
@@ -95,8 +150,6 @@ extension MyTourneysTVC: CellActions {
     func onCellDeselected(model: CellModel) {
         Print.m(model)
     }
-    
-    
 }
 
 // MARK: HELPER

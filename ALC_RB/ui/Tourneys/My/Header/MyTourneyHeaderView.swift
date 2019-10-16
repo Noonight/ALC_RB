@@ -27,6 +27,17 @@ final class MyTourneyHeaderView: UIView {
         
         return label
     }()
+    private let disclosureImageView: UIImageView = {
+        let imageView = UIImageView()
+        let image = #imageLiteral(resourceName: "ic_arrow_right")
+        imageView.image = image
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 15).isActive = true
+        imageView.isHidden = true
+        
+        return imageView
+    }()
     private let bottomSeparatorView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -57,20 +68,33 @@ final class MyTourneyHeaderView: UIView {
             }
         }
     }
+    var isDisclosure = false {
+        didSet {
+            if self.isDisclosure == true {
+                self.disclosureImageView.isHidden = false
+            } else {
+                self.disclosureImageView.isHidden = true
+            }
+        }
+    }
     
     func initView() {
         self.translatesAutoresizingMaskIntoConstraints = false
         addSubview(nameLabel)
         addSubview(dateLabel)
+        addSubview(disclosureImageView)
         addSubview(bottomSeparatorView)
         nameLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
         nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        nameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 8).isActive = true
+        nameLabel.rightAnchor.constraint(equalTo: disclosureImageView.leftAnchor, constant: 8).isActive = true
         
         dateLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
-        dateLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 8).isActive = true
+        dateLabel.rightAnchor.constraint(equalTo: disclosureImageView.leftAnchor, constant: 8).isActive = true
         dateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8).isActive = true
 //        dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 8).isActive = true
+        
+        disclosureImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        disclosureImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
         
         bottomSeparatorView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8).isActive = true
         bottomSeparatorView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
@@ -80,18 +104,15 @@ final class MyTourneyHeaderView: UIView {
     
     @objc func tapOnView() {
         self.action?(self.tourneyModelItem)
-        var color = backgroundColor
-        let transformerStart = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        let transformerStart = CGAffineTransform(scaleX: 0.98, y: 0.98)
         let transformerEnd = CGAffineTransform(scaleX: 1.0, y: 1.0)
         
         layoutIfNeeded()
         UIView.animate(withDuration: 0.1, animations: {
-//            self.backgroundColor = UIColor(white: 0, alpha: 0.1)
             self.transform = transformerStart
         }) { completed in
             if completed {
                 UIView.animate(withDuration: 0.1) {
-//                    self.backgroundColor = color
                     self.transform = transformerEnd
                 }
             } else {

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,30 +16,42 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Tourney name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7S-lx-NSJ">
-                        <rect key="frame" x="8" y="8" width="304" height="55"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Tourney date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kb7-qn-UTA">
-                        <rect key="frame" x="8" y="71" width="304" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xJl-LO-Ffb">
+                        <rect key="frame" x="32" y="8" width="280" height="83.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Tourney name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7S-lx-NSJ">
+                                <rect key="frame" x="0.0" y="0.0" width="280" height="54.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Tourney date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kb7-qn-UTA">
+                                <rect key="frame" x="0.0" y="62.5" width="280" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="P7S-lx-NSJ" secondAttribute="trailing" id="8bG-h6-kMd"/>
+                            <constraint firstItem="Kb7-qn-UTA" firstAttribute="top" secondItem="P7S-lx-NSJ" secondAttribute="bottom" constant="8" id="AAp-ec-X7g"/>
+                            <constraint firstItem="P7S-lx-NSJ" firstAttribute="leading" secondItem="xJl-LO-Ffb" secondAttribute="leading" id="PxO-fq-oHf"/>
+                            <constraint firstItem="Kb7-qn-UTA" firstAttribute="leading" secondItem="xJl-LO-Ffb" secondAttribute="leading" id="bwU-b4-Oq1"/>
+                            <constraint firstItem="P7S-lx-NSJ" firstAttribute="top" secondItem="xJl-LO-Ffb" secondAttribute="top" id="ccL-wq-t2d"/>
+                            <constraint firstAttribute="trailing" secondItem="Kb7-qn-UTA" secondAttribute="trailing" id="nNe-at-r2e"/>
+                            <constraint firstAttribute="bottom" secondItem="Kb7-qn-UTA" secondAttribute="bottom" id="sed-gm-Mp9"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="P7S-lx-NSJ" secondAttribute="trailing" constant="8" id="CGx-md-0co"/>
-                    <constraint firstItem="P7S-lx-NSJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Gdf-br-rWL"/>
-                    <constraint firstAttribute="trailing" secondItem="Kb7-qn-UTA" secondAttribute="trailing" constant="8" id="KCl-3i-Z0B"/>
-                    <constraint firstItem="Kb7-qn-UTA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="OL0-uQ-4v3"/>
-                    <constraint firstAttribute="bottom" secondItem="Kb7-qn-UTA" secondAttribute="bottom" constant="8" id="eIO-ie-4F9"/>
-                    <constraint firstItem="Kb7-qn-UTA" firstAttribute="top" secondItem="P7S-lx-NSJ" secondAttribute="bottom" constant="8" id="ph8-7u-aYw"/>
-                    <constraint firstItem="P7S-lx-NSJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="r7S-BZ-FjT"/>
+                    <constraint firstAttribute="trailing" secondItem="xJl-LO-Ffb" secondAttribute="trailing" constant="8" id="Fly-r1-Uxq"/>
+                    <constraint firstItem="xJl-LO-Ffb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="JoS-Ga-d4M"/>
+                    <constraint firstItem="xJl-LO-Ffb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="bwI-La-gr1"/>
+                    <constraint firstAttribute="bottom" secondItem="xJl-LO-Ffb" secondAttribute="bottom" constant="8" id="fc7-Gn-gDZ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

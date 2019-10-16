@@ -30,11 +30,11 @@ struct News: Codable {
     }
 }
 
-typealias NewsArray = [News]
-
-extension NewsArray {
-    init?(data: Data) {
-        guard let instance = try? ISO8601Decoder.getDecoder().decode([News].self, from: data) else { return nil }
-        self = instance
-    }
-}
+//typealias NewsArray = [News]
+//
+//extension NewsArray {
+//    init?(data: Data) {
+//        guard let instance = try? ISO8601Decoder.getDecoder().decode([News].self, from: data) else { return nil }
+//        self = instance
+//    }
+//}
