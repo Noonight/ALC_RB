@@ -47,6 +47,7 @@ extension MyTourneysTVC {
         tableView.register(tourneyTable.cellNib, forCellReuseIdentifier: MyTourneyCell.ID)
         tableView.delegate = tourneyTable
         tableView.dataSource = tourneyTable
+        tableView.separatorInset = .zero
     }
     
     func setupBinds() {
@@ -68,6 +69,11 @@ extension MyTourneysTVC {
         viewModel
             .error
             .bind(to: self.rx.error)
+            .disposed(by: disposeBag)
+        
+        viewModel
+            .message
+            .bind(to: self.rx.message)
             .disposed(by: disposeBag)
         
         viewModel
@@ -100,7 +106,7 @@ extension MyTourneysTVC {
         if self.hud != nil {
             self.hud?.setToLoadingView()
         } else {
-            self.hud = self.showLoadingViewHUD()
+            self.hud = self.showLoadingViewHUD(addTo: tableView)
         }
     }
     
@@ -154,6 +160,21 @@ extension Reactive where Base: MyTourneysTVC {
                 })
             } else {
                 vc.hud = vc.showFailureViewHUD(detailMessage: mError.localizedDescription, tap: {
+                    vc.viewModel.fetch()
+                })
+            }
+        }
+    }
+    
+    internal var message: Binder<SingleLineMessage?> {
+        return Binder(self.base) { vc, message in
+            guard let mMessage = message else { return }
+            if vc.hud != nil {
+                vc.hud?.setToFailureView(detailMessage: mMessage.message, tap: {
+                    vc.viewModel.fetch()
+                })
+            } else {
+                vc.hud = vc.showFailureViewHUD(detailMessage: mMessage.message, tap: {
                     vc.viewModel.fetch()
                 })
             }

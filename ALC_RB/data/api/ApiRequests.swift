@@ -1531,17 +1531,20 @@ class ApiRequests {
             
             let tourneyModelItem = TourneyModelItem(tourney: t, leagues: nil)
             group.enter()
-            
+
             self.get_leagues_by_single(tourney: t) { result in
                 switch result {
                 case .success(let leagues):
+                    Print.m(leagues)
                     tourneyModelItem.leagues = leagues
                     tourneyModelItems.append(tourneyModelItem)
                     group.leave()
                 case .message(let message):
+                    Print.m(message.message)
                     mMessage = message
                     group.leave()
                 case .failure(let error):
+                    Print.m(error.localizedDescription)
                     mError = error
                     group.leave()
                 }
@@ -1550,6 +1553,7 @@ class ApiRequests {
         group.leave()
         
         group.notify(queue: .main) {
+            Print.m("message is \(mMessage?.message), error is \(mError), items are \(tourneyModelItems)")
             if let message = mMessage {
                 get_result(.message(message))
             }
@@ -1569,22 +1573,34 @@ class ApiRequests {
             get_result(.success([]))
             return
         }
-        let params = ["tourney" : mTourney.id]
+        let params = ["tourney" : mTourney.id!]
+//        Print.m(params)
         
         Alamofire
             .request(ApiRoute.getApiURL(.league), method: .get, parameters: params , encoding: URLEncoding(destination: .queryString))
             .responseJSON(completionHandler: { response in
                 let decoder = ISO8601Decoder.getDecoder()
-                
+                Print.m("\(response.result)) || tourney  <= \(mTourney.id!)")
                 do {
                     if let leagues = try? decoder.decode([_League].self, from: response.data!) {
+                        let leaguees = leagues.map({ league -> LeagueModelItem in
+                            return LeagueModelItem(league: league)
+                        })
+                        Print.m("leagues => \(leaguees)")
                         get_result(.success(leagues.map({ league -> LeagueModelItem in
                             return LeagueModelItem(league: league)
                         })))
+//                        Print.m("it is not decoding")
+                    } else {
+//                        dump(response)
+//                        Print.m(try! decoder.decode([_League].self, from: response.data!))
+                        get_result(.success([]))
                     }
                     if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
                         get_result(.message(message))
                     }
+                } catch {
+                    Print.m(error)
                 }
                 if response.result.isFailure {
                     get_result(.failure(response.result.error!))

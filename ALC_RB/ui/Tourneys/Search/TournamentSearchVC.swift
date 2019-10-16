@@ -119,7 +119,7 @@ extension TournamentSearchVC: CellActions {
         switch model {
         case is RegionMy:
             Print.m(model as! RegionMy)
-        case is TourneyModelItem:
+        case is SearchTourneyModelItem:
             self.viewModel.setLocalTourney(tourney: model as! SearchTourneyModelItem)
         default:
             break
@@ -128,7 +128,7 @@ extension TournamentSearchVC: CellActions {
     
     func onCellDeselected(model: CellModel) {
         switch model {
-        case is TourneyModelItem:
+        case is SearchTourneyModelItem:
             self.viewModel.setLocalTourney(tourney: model as! SearchTourneyModelItem)
         default:
             break

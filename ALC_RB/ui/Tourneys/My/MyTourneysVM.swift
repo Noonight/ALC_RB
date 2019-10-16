@@ -29,19 +29,17 @@ final class MyTourneysVM {
     func fetch() {
         
         self.loading.onNext(true)
-        if dataManager is ApiRequests {
-            (dataManager as! ApiRequests)
-                .get_league(tourneys: localTourney.getLocalTourneys()) { result in
-                    self.loading.onNext(false)
-                    switch result {
-                    case .success(let modelItems):
-                        self.items.onNext(modelItems)
-                    case .message(let message):
-                        self.message.onNext(message)
-                    case .failure(let error):
-                        self.error.onNext(error)
-                    }
-            }
+        dataManager
+            .get_league(tourneys: localTourney.getLocalTourneys()) { result in
+                self.loading.onNext(false)
+                switch result {
+                case .success(let modelItems):
+                    self.items.onNext(modelItems)
+                case .message(let message):
+                    self.message.onNext(message)
+                case .failure(let error):
+                    self.error.onNext(error)
+                }
         }
     }
     

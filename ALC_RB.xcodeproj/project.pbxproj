@@ -877,6 +877,13 @@
 			path = "button + activity indicator";
 			sourceTree = "<group>";
 		};
+		184DBF032357134800BBEFCE /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		185AF41A235339E200EC1F0A /* view model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1084,6 +1091,7 @@
 		1894826E2356EEB8000C8A2A /* My */ = {
 			isa = PBXGroup;
 			children = (
+				184DBF032357134800BBEFCE /* New Group */,
 				1894826F2356EFA8000C8A2A /* MyTourneysTVC.swift */,
 				189482702356EFA8000C8A2A /* MyTourneysTVC.xib */,
 				189482732356EFC8000C8A2A /* MyTourneysVM.swift */,
