@@ -17,8 +17,8 @@ final class TournamentSearchVM {
     private var choosedRegion: RegionMy?
     private var searchingQuery: String?
     
-    private var tourneyMIs: [TourneyModelItem] = []
-    private var filteredTourneysMIs: [TourneyModelItem] = []
+    private var tourneyMIs: [SearchTourneyModelItem] = []
+    private var filteredTourneysMIs: [SearchTourneyModelItem] = []
     
     private var previousTourneys: Int = 0 {
         didSet {
@@ -80,7 +80,7 @@ final class TournamentSearchVM {
         return self.choosedRegion
     }
     // ------
-    func prepareTourneyMIs() -> [TourneyModelItem] {
+    func prepareTourneyMIs() -> [SearchTourneyModelItem] {
         if self.isSearching == true
         {
 //            Print.m(self.getSelectedTourneysAndNot(tourneys: self.filteredTourneysMIs.map({ tourneyMI -> Tourney in
@@ -179,7 +179,7 @@ final class TournamentSearchVM {
 
 extension TournamentSearchVM {
     
-    func setLocalTourney(tourney: TourneyModelItem) {
+    func setLocalTourney(tourney: SearchTourneyModelItem) {
 //        Print.m("tourney is \(tourney.isSelected)")
         if tourney.isSelected
         {
@@ -210,10 +210,10 @@ extension TournamentSearchVM {
         return userDefaultsHelper.getAuthorizedUser()?.person.participation ?? []
     }
     
-    func getSelectedTourneysAndNot(tourneys: [Tourney]) -> [TourneyModelItem] {
+    func getSelectedTourneysAndNot(tourneys: [Tourney]) -> [SearchTourneyModelItem] {
         let alreadyChoosedTourneys = self.localTourneys.getLocalTourneys()
         
-        var resultArray: [TourneyModelItem] = []
+        var resultArray: [SearchTourneyModelItem] = []
         
         for tourney in tourneys
         {
@@ -221,13 +221,13 @@ extension TournamentSearchVM {
                 return alreadyTourney.id == tourney.id
             })
             {
-                let item = TourneyModelItem(item: tourney)
+                let item = SearchTourneyModelItem(item: tourney)
                 item.isSelected = true
                 resultArray.append(item)
             }
             else
             {
-                resultArray.append(TourneyModelItem(item: tourney))
+                resultArray.append(SearchTourneyModelItem(item: tourney))
             }
         }
         

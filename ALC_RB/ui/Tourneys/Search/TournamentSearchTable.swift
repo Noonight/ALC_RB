@@ -12,7 +12,7 @@ final class TournamentSearchTable: NSObject {
     
     let cellNib = UINib(nibName: "TournamentSearchTableViewCell", bundle: Bundle.main)
     
-    var dataSource: [TourneyModelItem] = []
+    var dataSource: [SearchTourneyModelItem] = []
     
     var actions: CellActions?
     

@@ -17,7 +17,7 @@ class TournamentSearchTableViewCell: UITableViewCell {
     
     static let ID = "tournament_search_cell_id"
     
-    var tourneyModelItem: TourneyModelItem! {
+    var tourneyModelItem: SearchTourneyModelItem! {
         didSet {
             self.title_label.text = tourneyModelItem?.name
             if tourneyModelItem.beginDate?.toFormat(DateFormats.local.rawValue) != nil && tourneyModelItem.endDate?.toFormat(DateFormats.local.rawValue) != nil

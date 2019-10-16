@@ -62,6 +62,7 @@ enum Routes: String {
     case region = "crud/region"
     case tourney = "crud/tourney"
     case upcomingMatches = "upcoming/matches"
+    case league = "crud/league"
     
     case post_auth = "signin"
     case post_reg = "signup"

@@ -1513,4 +1513,85 @@ class ApiRequests {
         }
     }
     
+    // MARK: TOURNEY MODEL ITEM
+    func get_league(
+        tourneys: [Tourney]?,
+        limit: Int? = Constants.Values.LIMIT,
+        offset: Int? = 0,
+        get_result: @escaping (ResultMy<[TourneyModelItem], Error>) -> ())
+    {
+        var mMessage: SingleLineMessage?
+        var mError: Error?
+        var tourneyModelItems: [TourneyModelItem] = []
+        let group = DispatchGroup()
+        
+        guard let mTourneys = tourneys else { return }
+        group.enter()
+        for t in mTourneys {
+            
+            let tourneyModelItem = TourneyModelItem(tourney: t, leagues: nil)
+            group.enter()
+            
+            self.get_leagues_by_single(tourney: t) { result in
+                switch result {
+                case .success(let leagues):
+                    tourneyModelItem.leagues = leagues
+                    tourneyModelItems.append(tourneyModelItem)
+                    group.leave()
+                case .message(let message):
+                    mMessage = message
+                    group.leave()
+                case .failure(let error):
+                    mError = error
+                    group.leave()
+                }
+            }
+        }
+        group.leave()
+        
+        group.notify(queue: .main) {
+            if let message = mMessage {
+                get_result(.message(message))
+            }
+            if let error = mError {
+                get_result(.failure(error))
+            }
+            get_result(.success(tourneyModelItems))
+        }
+        
+    }
+    
+    func get_leagues_by_single(
+        tourney: Tourney?,
+        get_result: @escaping (ResultMy<[LeagueModelItem], Error>) -> ())
+    {
+        guard let mTourney = tourney else {
+            get_result(.success([]))
+            return
+        }
+        let params = ["tourney" : mTourney.id]
+        
+        Alamofire
+            .request(ApiRoute.getApiURL(.league), method: .get, parameters: params , encoding: URLEncoding(destination: .queryString))
+            .responseJSON(completionHandler: { response in
+                let decoder = ISO8601Decoder.getDecoder()
+                
+                do {
+                    if let leagues = try? decoder.decode([_League].self, from: response.data!) {
+                        get_result(.success(leagues.map({ league -> LeagueModelItem in
+                            return LeagueModelItem(league: league)
+                        })))
+                    }
+                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+                        get_result(.message(message))
+                    }
+                }
+                if response.result.isFailure {
+                    get_result(.failure(response.result.error!))
+                }
+            })
+    }
+    
+    // MARK: END
+    
 }

@@ -13,10 +13,10 @@ class TournamentVC: UIViewController {
     @IBOutlet weak var segment_controller: UISegmentedControl!
     @IBOutlet weak var container_view: UIView!
     
-    private lazy var myTournaments: TournamentsTableViewController = {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+    private lazy var myTournaments: MyTourneysTVC = {
+//        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
-        var viewController = storyboard.instantiateViewController(withIdentifier: "TournamentsTableViewController") as! TournamentsTableViewController
+        var viewController = MyTourneysTVC()
         
         return viewController
     }()

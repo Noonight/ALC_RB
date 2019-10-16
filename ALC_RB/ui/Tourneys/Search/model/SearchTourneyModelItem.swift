@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TourneyModelItem {
+class SearchTourneyModelItem {
     private var item: Tourney
     
     var isSelected = false
@@ -36,4 +36,4 @@ class TourneyModelItem {
     
 }
 
-extension TourneyModelItem: CellModel {}
+extension SearchTourneyModelItem: CellModel {}
