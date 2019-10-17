@@ -87,6 +87,7 @@ extension MyTourneysTVC {
         
         viewModel
             .items
+            .observeOn(MainScheduler.instance)
             .subscribe({
                 guard let items = $0.element else { return }
                 self.tourneyTable.dataSource = items
@@ -126,7 +127,7 @@ extension MyTourneysTVC {
             .map { _ in !refreshController.isRefreshing}
             .filter { $0 == false }
             .subscribe({ event in
-                self.viewModel.fetch()
+                self.viewModel.fetchPullToRefresh()
             }).disposed(by: disposeBag)
         
         refreshController.rx.controlEvent(.valueChanged)
@@ -160,7 +161,7 @@ extension MyTourneysTVC {
         if self.hud != nil {
             self.hud?.setToLoadingView()
         } else {
-            self.hud = self.showLoadingViewHUD(addTo: tableView)
+            self.hud = self.showLoadingViewHUD()
         }
     }
     

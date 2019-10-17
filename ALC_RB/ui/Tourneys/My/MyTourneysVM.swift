@@ -43,4 +43,18 @@ final class MyTourneysVM {
         }
     }
     
+    func fetchPullToRefresh() {
+        dataManager
+            .get_league(tourneys: localTourney.getLocalTourneys()) { result in
+                switch result {
+                case .success(let modelItems):
+                    self.items.onNext(modelItems)
+                case .message(let message):
+                    self.message.onNext(message)
+                case .failure(let error):
+                    self.error.onNext(error)
+                }
+        }
+    }
+    
 }
