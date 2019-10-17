@@ -1094,6 +1094,7 @@
 		1894826E2356EEB8000C8A2A /* My */ = {
 			isa = PBXGroup;
 			children = (
+				CE158CE721AD52F900CEECFE /* detail */,
 				1894826F2356EFA8000C8A2A /* MyTourneysTVC.swift */,
 				189482702356EFA8000C8A2A /* MyTourneysTVC.xib */,
 				189482732356EFC8000C8A2A /* MyTourneysVM.swift */,
@@ -1741,7 +1742,6 @@
 				DB4A789321C1084B0071BA8F /* TournamentsPresenter.swift */,
 				18A7ED8623431AB00096D281 /* TournamentsTable.swift */,
 				DB4A789221C1082D0071BA8F /* cell */,
-				CE158CE721AD52F900CEECFE /* detail */,
 			);
 			path = "my tournaments";
 			sourceTree = "<group>";
