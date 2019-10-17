@@ -16,7 +16,7 @@ final class TournamentSearchPresenter {
         self.dataManager = dataManager
     }
     
-    func fetchRegions(success: @escaping ([RegionMy]) -> (), r_message: @escaping (SingleLineMessage) -> (), localError: @escaping (Error) -> (), serverError: @escaping (Error) -> (), alamofireError: @escaping (Error) -> ()) {
+    func fetchRegions(success: @escaping ([RegionMy]) -> (), r_message: @escaping (SingleLineMessage) -> (), r_error: @escaping (Error) -> ()) {
         self.dataManager.get_regions { resultMy in
             switch resultMy
             {
@@ -24,30 +24,23 @@ final class TournamentSearchPresenter {
                 success(regions)
             case .message(let message):
                 r_message(message)
-            case .failure(.alamofire(let error)):
-                alamofireError(error)
-            case .failure(.local(let error)):
-                localError(error)
-            case .failure(.server(let error)):
-                serverError(error)
+            case .failure(let error):
+                r_error(error)
             }
         }
     }
     
-    func fetchTourneys(name: String?, region: RegionMy? = nil, limit: Int? = 20, offset: Int? = 0, success: @escaping ([Tourney]) -> (), r_message: @escaping (SingleLineMessage) -> (), localError: @escaping (Error) -> (), serverError: @escaping (Error) -> (), alamofireError: @escaping (Error) -> ()) {
+    func fetchTourneys(name: String?, region: RegionMy? = nil, limit: Int? = 20, offset: Int? = 0, success: @escaping ([Tourney]) -> (), r_message: @escaping (SingleLineMessage) -> (), r_error: @escaping (Error) -> ()) {
         self.dataManager.get_tourney(name: name, region: region, limit: limit, offset: offset) { tourneys in
             switch tourneys
             {
             case .success(let tourney):
+                Print.m(tourney)
                 success(tourney)
             case .message(let message):
                 r_message(message)
-            case .failure(.alamofire(let error)):
-                alamofireError(error)
-            case .failure(.local(let error)):
-                localError(error)
-            case .failure(.server(let error)):
-                serverError(error)
+            case .failure(let error):
+                r_error(error)
             }
         }
     }

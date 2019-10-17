@@ -201,17 +201,7 @@ extension TournamentSearchVC {
             self.region_btn.hideLoading()
             self.showAlert(title: Constants.Texts.NOTHING, message: r_message.message)
             
-        }, localError: { error in
-            
-            self.region_btn.hideLoading()
-            self.showAlert(title: Constants.Texts.FAILURE, message: error.localizedDescription)
-            
-        }, serverError: { error in
-            
-            self.region_btn.hideLoading()
-            self.showAlert(title: Constants.Texts.SERVER_FAILURE, message: error.localizedDescription)
-            
-        }, alamofireError: { error in
+        }, r_error: { error in
             
             self.region_btn.hideLoading()
             self.showAlert(title: Constants.Texts.FAILURE, message: error.localizedDescription)
@@ -256,27 +246,7 @@ extension TournamentSearchVC {
             self.tableView_hud = nil
             self.showAlert(message: r_message.message)
             
-        }, localError: { error in
-            
-            self.hideHUD()
-            
-            self.tableView_hud?.hide(animated: true)
-            self.tableView_hud = nil
-            self.tableView_hud = self.showEmptyViewHUD(addTo: self.table_view) {
-                self.refreshData()
-            }
-            
-        }, serverError: { error in
-            
-            self.hideHUD()
-            
-            self.tableView_hud?.hide(animated: true)
-            self.tableView_hud = nil
-            self.tableView_hud = self.showEmptyViewHUD(addTo: self.table_view) {
-                self.refreshData()
-            }
-            
-        }, alamofireError: { error in
+        }, r_error: { error in
             
             self.hideHUD()
             
