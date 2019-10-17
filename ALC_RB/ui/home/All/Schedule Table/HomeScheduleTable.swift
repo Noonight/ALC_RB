@@ -16,9 +16,9 @@ final class HomeScheduleTable: NSObject {
     
     var dataSource: [MmMatch] = []
     var helperDataSource: [Club] = []
-    var actions: CellActions?
+    var actions: TableActions?
     
-    init(actions: CellActions) {
+    init(actions: TableActions) {
         self.actions = actions
     }
     

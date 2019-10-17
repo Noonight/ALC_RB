@@ -20,32 +20,31 @@ final class MyTourneysVM {
     private let dataManager: ApiRequests
     private let localTourney = LocalTourneys()
     private let disposeBag = DisposeBag()
+    private var firstLoad = true
     
     init(dataManager: ApiRequests) {
         self.dataManager = dataManager
-        
+        items
+            .observeOn(MainScheduler.instance)
+            .subscribe({
+                guard let items = $0.element else { return }
+                if items.count == 0 {
+                    self.firstLoad = true
+                } else {
+                    self.firstLoad = false
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     func fetch() {
         
-        self.loading.onNext(true)
+        if firstLoad == true {
+            self.loading.onNext(true)
+        }
         dataManager
             .get_league(tourneys: localTourney.getLocalTourneys()) { result in
                 self.loading.onNext(false)
-                switch result {
-                case .success(let modelItems):
-                    self.items.onNext(modelItems)
-                case .message(let message):
-                    self.message.onNext(message)
-                case .failure(let error):
-                    self.error.onNext(error)
-                }
-        }
-    }
-    
-    func fetchPullToRefresh() {
-        dataManager
-            .get_league(tourneys: localTourney.getLocalTourneys()) { result in
                 switch result {
                 case .success(let modelItems):
                     self.items.onNext(modelItems)

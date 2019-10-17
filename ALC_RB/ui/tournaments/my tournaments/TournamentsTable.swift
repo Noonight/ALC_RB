@@ -11,9 +11,9 @@ import UIKit
 final class TournamentsTable: NSObject {
     
     var dataSource: [TourneyModelItem] = []
-    var cellActions: CellActions?
+    var cellActions: TableActions?
     
-    init(actions: CellActions) {
+    init(actions: TableActions) {
         self.cellActions = actions
     }
 }

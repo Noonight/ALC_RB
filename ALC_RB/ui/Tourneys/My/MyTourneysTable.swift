@@ -14,9 +14,9 @@ final class MyTourneysTable: NSObject {
     let noCellNib = UINib(nibName: "NoLeaguesCell", bundle: Bundle.main)
     
     var dataSource: [TourneyModelItem] = []
-    let cellActions: CellActions
+    let cellActions: TableActions
     
-    init(cellActions: CellActions) {
+    init(cellActions: TableActions) {
         self.cellActions = cellActions
     }
     
@@ -45,8 +45,7 @@ extension MyTourneysTable: UITableViewDelegate {
         if dataSource[section].leagues?.count == 1 {
             header.isDisclosure = true
             header.action = { tourneyModelItem in
-                // navigate to league
-                //            Print.m(tourneyModelItem.name)
+                self.cellActions.onHeaderPressed(model: tourneyModelItem.leagues!.first!)
             }
         }
         return sectionView

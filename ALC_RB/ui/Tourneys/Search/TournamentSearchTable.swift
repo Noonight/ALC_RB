@@ -14,9 +14,9 @@ final class TournamentSearchTable: NSObject {
     
     var dataSource: [SearchTourneyModelItem] = []
     
-    var actions: CellActions?
+    var actions: TableActions?
     
-    init(actions: CellActions) {
+    init(actions: TableActions) {
         self.actions = actions
     }
     

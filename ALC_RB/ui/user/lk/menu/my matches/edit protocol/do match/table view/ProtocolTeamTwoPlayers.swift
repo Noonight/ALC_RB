@@ -14,10 +14,10 @@ class ProtocolTeamTwoPlayers : NSObject {
         static let HEIGHT = CGFloat(integerLiteral: 50)
     }
     
-    var cellActions: CellActions?
+    var cellActions: TableActions?
     var dataSource: [RefereeProtocolPlayerTeamCellModel] = []
     
-    init(dataSource: [RefereeProtocolPlayerTeamCellModel], cellActions: CellActions) {
+    init(dataSource: [RefereeProtocolPlayerTeamCellModel], cellActions: TableActions) {
         self.dataSource = dataSource
         self.cellActions = cellActions
     }

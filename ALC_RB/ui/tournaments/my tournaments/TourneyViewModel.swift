@@ -23,7 +23,7 @@ class TourneyViewModel {
     
 }
 
-extension TourneyViewModel: CellActions {
+extension TourneyViewModel: TableActions {
     func onCellDeselected(model: CellModel) {
         
     }

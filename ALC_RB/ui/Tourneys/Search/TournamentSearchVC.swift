@@ -114,7 +114,7 @@ extension TournamentSearchVC {
     
 }
 
-extension TournamentSearchVC: CellActions {
+extension TournamentSearchVC: TableActions {
     func onCellSelected(model: CellModel) {
         switch model {
         case is RegionMy:

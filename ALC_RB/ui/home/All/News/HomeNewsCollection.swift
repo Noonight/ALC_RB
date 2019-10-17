@@ -12,10 +12,10 @@ final class HomeNewsCollection: NSObject {
     
     let cellNib = UINib(nibName: "HomeNewsCollectionViewCell", bundle: Bundle.main)
     
-    var cellActions: CellActions?
+    var cellActions: TableActions?
     var dataSource: [NewsModelItem] = []
     
-    init(actions: CellActions) {
+    init(actions: TableActions) {
         self.cellActions = actions
     }
     

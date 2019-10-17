@@ -294,7 +294,7 @@
 		DB9FA4A522EC9B6200BA5A52 /* RefereeProtocolPlayerTeamOneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FA4A422EC9B6200BA5A52 /* RefereeProtocolPlayerTeamOneTableViewCell.swift */; };
 		DB9FA4A722EC9B7700BA5A52 /* RefereeProtocolPlayerTeamTwoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FA4A622EC9B7700BA5A52 /* RefereeProtocolPlayerTeamTwoTableViewCell.swift */; };
 		DB9FA4AA22EC9DCC00BA5A52 /* RefereeProtocolPlayerTeamCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FA4A922EC9DCC00BA5A52 /* RefereeProtocolPlayerTeamCellModel.swift */; };
-		DB9FA4AC22ECA1A000BA5A52 /* CellActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FA4AB22ECA1A000BA5A52 /* CellActions.swift */; };
+		DB9FA4AC22ECA1A000BA5A52 /* TableActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FA4AB22ECA1A000BA5A52 /* TableActions.swift */; };
 		DB9FA4AE22ECA35A00BA5A52 /* ProtocolTeamTwoPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FA4AD22ECA35A00BA5A52 /* ProtocolTeamTwoPlayers.swift */; };
 		DBA119F8225735830006904D /* CommandInvitePlayersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA119F7225735830006904D /* CommandInvitePlayersTableViewCell.swift */; };
 		DBA69210221E74A000BEFB26 /* DrawerMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA6920F221E74A000BEFB26 /* DrawerMenuTableViewCell.swift */; };
@@ -642,7 +642,7 @@
 		DB9FA4A422EC9B6200BA5A52 /* RefereeProtocolPlayerTeamOneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeProtocolPlayerTeamOneTableViewCell.swift; sourceTree = "<group>"; };
 		DB9FA4A622EC9B7700BA5A52 /* RefereeProtocolPlayerTeamTwoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeProtocolPlayerTeamTwoTableViewCell.swift; sourceTree = "<group>"; };
 		DB9FA4A922EC9DCC00BA5A52 /* RefereeProtocolPlayerTeamCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeProtocolPlayerTeamCellModel.swift; sourceTree = "<group>"; };
-		DB9FA4AB22ECA1A000BA5A52 /* CellActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellActions.swift; sourceTree = "<group>"; };
+		DB9FA4AB22ECA1A000BA5A52 /* TableActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableActions.swift; sourceTree = "<group>"; };
 		DB9FA4AD22ECA35A00BA5A52 /* ProtocolTeamTwoPlayers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolTeamTwoPlayers.swift; sourceTree = "<group>"; };
 		DBA119F7225735830006904D /* CommandInvitePlayersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandInvitePlayersTableViewCell.swift; sourceTree = "<group>"; };
 		DBA6920F221E74A000BEFB26 /* DrawerMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -2028,7 +2028,7 @@
 			children = (
 				CE0AF81621C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift */,
 				DB78E13E21D529DC001C885D /* EmptyProtocol.swift */,
-				DB9FA4AB22ECA1A000BA5A52 /* CellActions.swift */,
+				DB9FA4AB22ECA1A000BA5A52 /* TableActions.swift */,
 			);
 			path = protocols;
 			sourceTree = "<group>";
@@ -2645,7 +2645,7 @@
 				DBB208F0221315110010B600 /* RefereeProtocolTableViewCell.swift in Sources */,
 				1826378C22F085BF0014C30A /* IntrinsicTableView.swift in Sources */,
 				187F2E0222CB19440049EA77 /* EditTeamProtocolTableViewController.swift in Sources */,
-				DB9FA4AC22ECA1A000BA5A52 /* CellActions.swift in Sources */,
+				DB9FA4AC22ECA1A000BA5A52 /* TableActions.swift in Sources */,
 				DB1CA1082226BC38005E1FB9 /* RuntimeError.swift in Sources */,
 				DBDE79C6234FB15C00E2F73B /* CellType.swift in Sources */,
 				DB966A6522EC811600064233 /* ProtocolTeamOnePlayers.swift in Sources */,

@@ -128,7 +128,7 @@ extension MyTourneysTVC {
             .map { _ in !refreshController.isRefreshing}
             .filter { $0 == false }
             .subscribe({ event in
-                self.viewModel.fetchPullToRefresh()
+                self.viewModel.fetch()
             }).disposed(by: disposeBag)
         
         refreshController.rx.controlEvent(.valueChanged)
@@ -144,15 +144,17 @@ extension MyTourneysTVC {
 
 // MARK: ACTION
 
-extension MyTourneysTVC: CellActions {
+extension MyTourneysTVC: TableActions {
     func onCellSelected(model: CellModel) {
         if model is LeagueModelItem {
             self.showLeagueDetail(leagueModelItem: model as! LeagueModelItem)
         }
     }
     
-    func onCellDeselected(model: CellModel) {
-        Print.m(model)
+    func onHeaderPressed(model: CellModel) {
+        if model is LeagueModelItem {
+            self.showLeagueDetail(leagueModelItem: model as! LeagueModelItem)
+        }
     }
 }
 

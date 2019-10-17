@@ -1512,15 +1512,15 @@ class ApiRequests {
             self.get_leagues_by_single(tourney: tourneyModelItems[i].tourney) { result in
                 switch result {
                 case .success(let leagues):
-                    Print.m(leagues)
+//                    Print.m(leagues)
                     tourneyModelItems[i].leagues = leagues
                     group.leave()
                 case .message(let message):
-                    Print.m(message.message)
+//                    Print.m(message.message)
                     mMessage = message
                     group.leave()
                 case .failure(let error):
-                    Print.m(error.localizedDescription)
+//                    Print.m(error.localizedDescription)
                     mError = error
                     group.leave()
                 }
@@ -1557,13 +1557,10 @@ class ApiRequests {
             .request(ApiRoute.getApiURL(.league), method: .get, parameters: params , encoding: URLEncoding(destination: .queryString))
             .responseJSON(completionHandler: { response in
                 let decoder = ISO8601Decoder.getDecoder()
-                Print.m("\(response.result)) || tourney  <= \(mTourney.id!)")
+//                Print.m("\(response.result)) || tourney  <= \(mTourney.id!)")
                 do {
                     if let leagues = try? decoder.decode([_League].self, from: response.data!) {
-                        let leaguees = leagues.map({ league -> LeagueModelItem in
-                            return LeagueModelItem(league: league)
-                        })
-                        Print.m("leagues => \(leaguees)")
+//                        Print.m("leagues => \(leaguees)")
                         get_result(.success(leagues.map({ league -> LeagueModelItem in
                             return LeagueModelItem(league: league)
                         })))

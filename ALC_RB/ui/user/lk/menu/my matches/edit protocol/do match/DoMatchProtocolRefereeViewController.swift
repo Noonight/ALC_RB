@@ -590,7 +590,7 @@ extension DoMatchProtocolRefereeViewController {
 
 // MARK: TABLE ACITONS
 
-extension DoMatchProtocolRefereeViewController: CellActions {
+extension DoMatchProtocolRefereeViewController: TableActions {
     func onCellDeselected(model: CellModel) {
         
     }

@@ -119,7 +119,7 @@ extension HomeViewController {
 
 // MARK: CELL ACTIONS
 
-extension HomeViewController: CellActions {
+extension HomeViewController: TableActions {
     func onCellDeselected(model: CellModel) {
         
     }

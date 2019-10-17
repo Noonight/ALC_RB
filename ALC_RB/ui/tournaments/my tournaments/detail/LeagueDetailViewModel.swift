@@ -19,5 +19,6 @@ final class LeagueDetailViewModel {
     init(dataManager: ApiRequests) {
         self.dataManager = dataManager
     }
-    
+    // MARK: TODO
+    // fetch
 }
