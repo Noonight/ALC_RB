@@ -22,6 +22,8 @@ class ScheduleTableViewCell: UITableViewCell {
     @IBOutlet weak var mTitleTeam2: UILabel!
     @IBOutlet weak var mImageTeam2: UIImageView!
     
+    static let ID = "cell_schedule"
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

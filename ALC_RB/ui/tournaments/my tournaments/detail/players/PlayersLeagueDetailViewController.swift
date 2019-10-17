@@ -217,12 +217,12 @@ extension PlayersLeagueDetailViewController: MvpView {
     }
 }
 
-extension PlayersLeagueDetailViewController: LeagueMainProtocol {
-    func updateData(leagueDetailModel: LeagueDetailModel) {
-        self.leagueDetailModel = leagueDetailModel
-        updateUI()
-    }
-}
+//extension PlayersLeagueDetailViewController: LeagueMainProtocol {
+//    func updateData(leagueDetailModel: LeagueDetailModel) {
+//        self.leagueDetailModel = leagueDetailModel
+//        updateUI()
+//    }
+//}
 
 extension PlayersLeagueDetailViewController: UITableViewDataSource {
     

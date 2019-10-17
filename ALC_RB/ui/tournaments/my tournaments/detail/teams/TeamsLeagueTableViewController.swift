@@ -187,12 +187,12 @@ extension TeamsLeagueTableViewController {
 
 // MARK: LEAGUE MAIN PROTOCOL
 
-extension TeamsLeagueTableViewController: LeagueMainProtocol {
-    func updateData(leagueDetailModel: LeagueDetailModel) {
-        self.leagueDetailModel = leagueDetailModel
-//        updateUI()
-    }
-}
+//extension TeamsLeagueTableViewController: LeagueMainProtocol {
+//    func updateData(leagueDetailModel: LeagueDetailModel) {
+//        self.leagueDetailModel = leagueDetailModel
+////        updateUI()
+//    }
+//}
 
 // MARK: EMPTY VIEW PROTOCOL
 

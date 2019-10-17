@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+import RxSwift
+import RxCocoa
+import MBProgressHUD
 struct LeagueDetailModel {
     var league = League()
     var leagueInfo = LILeagueInfo()
@@ -18,160 +20,171 @@ struct LeagueDetailModel {
         self.league = league
     }
 }
-
-protocol LeagueMainProtocol {
-    /// updating data in controller
-    func updateData(leagueDetailModel: LeagueDetailModel)
+fileprivate enum Segments: Int {
+    case schedule = 0
+    case teams = 1
+    case players = 2
+    
+    static func instance(index: Int) -> Segments {
+        switch index {
+        case 0:
+            return Segments.schedule
+        case 1:
+            return Segments.teams
+        case 2:
+            return Segments.players
+        default:
+            return Segments.schedule
+        }
+    }
 }
 
 class LeagueDetailViewController: UIViewController {
-    private enum Variables {
-        static let errorAlertTitle = "Ошибка!"
-        static let errorAlertOk = "Ок"
-        static let errorAlertRefresh = "Перезагрузка"
-    }
     
     @IBOutlet weak var announce_view: UIView!
     @IBOutlet weak var announce_height: NSLayoutConstraint!
     @IBOutlet weak var announce_label: UILabel!
     
-    private lazy var scheduleTable: ScheduleTableViewController = {
+    lazy var scheduleTable: ScheduleTableViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "ScheduleTableViewController") as! ScheduleTableViewController
         
-        viewController.leagueDetailModel.league = self.leagueDetailModel.league
-        viewController.leagueDetailModel.leagueInfo = self.leagueDetailModel.leagueInfo
+//        viewController.leagueDetailModel.league = self.leagueDetailModel.league
+//        viewController.leagueDetailModel.leagueInfo = self.leagueDetailModel.leagueInfo
         
         return viewController
     }()
-    private lazy var teamsTable: TeamsLeagueTableViewController = {
+    lazy var teamsTable: TeamsLeagueTableViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "TeamsLeagueTableViewController") as! TeamsLeagueTableViewController
         
-        viewController.leagueDetailModel = self.leagueDetailModel
+//        viewController.leagueDetailModel = self.leagueDetailModel
         
         return viewController
     }()
-    private lazy var playersTable: PlayersLeagueDetailViewController = {
+    lazy var playersTable: PlayersLeagueDetailViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "PlayersLeagueDetailViewController") as! PlayersLeagueDetailViewController
         
-        viewController.leagueDetailModel = self.leagueDetailModel
+//        viewController.leagueDetailModel = self.leagueDetailModel
         
         return viewController
     }()
-
     
-    //MARK: - Outlets    
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var mTitle: UILabel!
     
-    var leagueDetailModel = LeagueDetailModel()
-    
-    let presenter = LeagueDetailPresenter()
+    var leagueModelItem: LeagueModelItem!
+    var segmentHelper: SegmentHelper!
+    private var viewModel: LeagueDetailViewModel!
+    var hud: MBProgressHUD?
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initPresenter()
+        setupSegmentHelper()
+        setupViewModel()
+        setupBinds()
+        setupView()
         
-        initFirst()
-        updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        initView()
-        presenter.getTournamentInfo(id: leagueDetailModel.league.id!)
-    }
     
-    func initView() {
-        stackView.addBackground(color: navigationController?.navigationBar.barTintColor ?? UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0))
         navigationController?.navigationBar.hideBorderLine()
     }
     
-    func initFirst() {
-        add(scheduleTable)
-    }
-    
-    func updateUI() {
-        scheduleTable.leagueDetailModel = self.leagueDetailModel
-        mTitle.text = leagueDetailModel.league.tourney
-    }
-    
-    @IBAction func segmentChanged(_ sender: UISegmentedControl) {
-        switch segmentControl.selectedSegmentIndex {
-        case 0:
-            remove(teamsTable)
-            remove(playersTable)
-//            remove()
-            add(scheduleTable)
-//            add()
-            break
-        case 1:
-            remove(scheduleTable)
-            remove(playersTable)
-            add(teamsTable)
-            break
-        case 2:
-            remove(scheduleTable)
-            remove(teamsTable)
-            add(playersTable)
-            break
-        default:
-            break
-        }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
-    }
-    
-    func add(_ viewController: UIViewController) {
-        addChild(viewController) // xcode 10+
-        //addChildViewController(viewController)
-        
-        viewContainer.addSubview(viewController.view)
-        
-        viewController.view.frame = viewContainer.bounds
-        viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    }
-    
-    func remove(_ viewController: UIViewController) {
-        viewController.view.removeFromSuperview()
-        viewController.removeFromParent() // xcode 10+
-        //viewController.removeFromParentViewController()
+        navigationController?.navigationBar.showBorderLine()
     }
 }
 
-extension LeagueDetailViewController: LeagueDetailView {
-    func onGetLeagueInfoFailure(error: Error) {
-//        showAlert(title: Variables.errorAlertTitle, message: error.localizedDescription, actions:
-//            [
-//                UIAlertAction(title: Variables.errorAlertOk, style: .default, handler: nil),
-//                UIAlertAction(title: Variables.errorAlertRefresh, style: .default, handler: { (alertAction) in
-//
-//                })
-//            ]
-//        )
-        showRefreshAlert(message: error.localizedDescription) {
-            self.presenter.getTournamentInfo(id: self.leagueDetailModel.league.id!)
+// MARK: - SETUP
+
+extension LeagueDetailViewController {
+    
+    func setupView() {
+//        self.segmentHelper.add(scheduleTable)
+        self.mTitle.text = leagueModelItem.name
+        stackView.addBackground(color: navigationController?.navigationBar.barTintColor ?? UIColor(red: 0.969, green: 0.969, blue: 0.969, alpha: 1.0))
+    }
+    
+    func setupViewModel() {
+        self.viewModel = LeagueDetailViewModel(dataManager: ApiRequests())
+    }
+    
+    func setupBinds() {
+        
+        segmentControl
+            .rx
+            .selectedSegmentIndex
+            .bind(to: self.rx.choosedSegment)
+            .disposed(by: disposeBag)
+        
+    }
+    
+    func setupSegmentHelper() {
+        self.segmentHelper = SegmentHelper(self, viewContainer)
+    }
+    
+}
+
+// MARK: REACTIVE
+
+extension Reactive where Base: LeagueDetailViewController {
+    
+    internal var choosedSegment: Binder<Int> {
+        return Binder(self.base) { vc, segmentIndex in
+            let segment = Segments.instance(index: segmentIndex)
+            vc.segmentHelper.removeAll()
+            switch segment {
+            case .schedule:
+                vc.segmentHelper.add(vc.scheduleTable)
+            case .teams:
+                vc.segmentHelper.add(vc.teamsTable)
+            case .players:
+                vc.segmentHelper.add(vc.playersTable)
+            }
         }
     }
     
-    func onGetLeagueInfoSuccess(leagueInfo: LILeagueInfo) {
-        self.leagueDetailModel.leagueInfo = leagueInfo
-//        self.scheduleTable.leagueDetailModel.leagueInfo = leagueInfo
-        //scheduleTable.leagueDetailModel = self.leagueDetailModel
-        //print(leagueInfo)
-        //try! debugPrint(leagueDetailModel.leagueInfo.jsonString())
-        scheduleTable.updateData(leagueDetailModel: self.leagueDetailModel)
-        updateUI()
+    internal var isLoading: Binder<Bool> {
+        return Binder(self.base) { vc, loading in
+            if loading == true {
+                if vc.hud != nil {
+                    vc.hud?.setToLoadingView()
+                } else {
+                    vc.hud = vc.showLoadingViewHUD()
+                }
+            } else {
+                vc.hud?.hide(animated: false)
+                vc.hud = nil
+            }
+        }
     }
     
-    func initPresenter() {
-        presenter.attachView(view: self)
+    internal var error: Binder<Error?> {
+        return Binder(self.base) { vc, error in
+            guard let mError = error else { return }
+            if vc.hud != nil {
+                vc.hud?.setToFailureView(detailMessage: mError.localizedDescription, tap: {
+                    
+                })
+            } else {
+                vc.hud = vc.showFailureViewHUD(detailMessage: mError.localizedDescription, tap: {
+                    
+                })
+            }
+        }
     }
 }
+

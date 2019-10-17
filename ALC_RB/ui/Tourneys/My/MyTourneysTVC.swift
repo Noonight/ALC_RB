@@ -21,6 +21,7 @@ class MyTourneysTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.topItem?.title = "Мои турниры"
         self.setupViewModel()
         self.setupTourneyTable()
         self.setupBinds()
@@ -55,13 +56,13 @@ extension MyTourneysTVC {
     
     func setupBinds() {
         
-        tableView
-            .rx
-            .itemSelected
-            .subscribe({ indexPath in
-                Print.m("tap tap tap.. indexPath is \(indexPath.element!)")
-            })
-            .disposed(by: disposeBag)
+//        tableView
+//            .rx
+//            .itemSelected
+//            .subscribe({ indexPath in
+//                self.showLeagueDetail(leagueModelItem: <#T##LeagueModelItem#>)
+//            })
+//            .disposed(by: disposeBag)
         
         tableView
             .rx
@@ -145,7 +146,9 @@ extension MyTourneysTVC {
 
 extension MyTourneysTVC: CellActions {
     func onCellSelected(model: CellModel) {
-        Print.m(model)
+        if model is LeagueModelItem {
+            self.showLeagueDetail(leagueModelItem: model as! LeagueModelItem)
+        }
     }
     
     func onCellDeselected(model: CellModel) {
@@ -182,6 +185,13 @@ extension MyTourneysTVC {
 // MARK: NAVIGATION
 
 extension MyTourneysTVC {
+    
+    func showLeagueDetail(leagueModelItem: LeagueModelItem) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "LeagueDetailViewController") as! LeagueDetailViewController
+        newViewController.leagueModelItem = leagueModelItem
+        self.navigationController?.show(newViewController, sender: self)
+    }
     
     func showTourneyPicker() {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
