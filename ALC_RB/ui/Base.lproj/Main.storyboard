@@ -301,7 +301,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUp-90-mhN">
                                 <rect key="frame" x="0.0" y="119.5" width="320" height="0.5"/>
-                                <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="separatorColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="d5H-p5-FLX"/>
                                 </constraints>
@@ -1232,7 +1232,6 @@
                                     <outlet property="mTitleTeam1" destination="0wv-zA-S46" id="Sil-Hv-uc3"/>
                                     <outlet property="mTitleTeam2" destination="RPo-C8-j2Z" id="Ei8-XV-xNh"/>
                                     <outlet property="mTour" destination="txL-ec-NEx" id="0Cc-rG-o3d"/>
-                                    <segue destination="rC7-tw-qtL" kind="show" identifier="segue_schedule_protocol" id="ath-Bt-nm2"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1241,70 +1240,28 @@
                             <outlet property="delegate" destination="Bnq-4j-LAg" id="dq3-Vy-V4b"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <outlet property="empty_view" destination="bf6-9T-AuM" id="jQH-43-5RS"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3rE-Mn-Cy3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="bf6-9T-AuM">
-                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
-                    <autoresizingMask key="autoresizingMask"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ничего нет" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fP-Lo-7BU">
-                            <rect key="frame" x="16" y="316" width="268" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="smG-FK-Ozw"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Здесь будут отображаться матчи" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvy-MR-ps4">
-                            <rect key="frame" x="16" y="352" width="268" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="du2-wE-6RZ"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_empty" translatesAutoresizingMaskIntoConstraints="NO" id="fe0-69-G8S">
-                            <rect key="frame" x="70" y="0.0" width="160" height="256"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="9fP-Lo-7BU" firstAttribute="leading" secondItem="bf6-9T-AuM" secondAttribute="leading" constant="16" id="2g9-Gy-ZGn"/>
-                        <constraint firstItem="gvy-MR-ps4" firstAttribute="leading" secondItem="bf6-9T-AuM" secondAttribute="leading" constant="16" id="91r-cd-ncP"/>
-                        <constraint firstItem="9fP-Lo-7BU" firstAttribute="top" secondItem="fe0-69-G8S" secondAttribute="bottom" constant="60" id="Bmy-hv-Mri"/>
-                        <constraint firstItem="fe0-69-G8S" firstAttribute="top" secondItem="bf6-9T-AuM" secondAttribute="top" id="FFZ-xl-oq3"/>
-                        <constraint firstItem="fe0-69-G8S" firstAttribute="centerX" secondItem="9fP-Lo-7BU" secondAttribute="centerX" id="Xtz-xX-nQA"/>
-                        <constraint firstItem="gvy-MR-ps4" firstAttribute="top" secondItem="9fP-Lo-7BU" secondAttribute="bottom" constant="15" id="b17-NY-Fxw"/>
-                        <constraint firstAttribute="trailing" secondItem="gvy-MR-ps4" secondAttribute="trailing" constant="16" id="hZ4-32-otS"/>
-                        <constraint firstAttribute="trailing" secondItem="9fP-Lo-7BU" secondAttribute="trailing" constant="16" id="wdG-9y-vEh"/>
-                        <constraint firstItem="fe0-69-G8S" firstAttribute="leading" secondItem="bf6-9T-AuM" secondAttribute="leading" constant="70" id="x21-oJ-iwy"/>
-                    </constraints>
-                </view>
             </objects>
             <point key="canvasLocation" x="624.375" y="-3517.605633802817"/>
         </scene>
         <!--Match Protocol VC-->
         <scene sceneID="zJl-Zt-Cem">
             <objects>
-                <viewController id="rC7-tw-qtL" userLabel="Match Protocol VC" customClass="MatchProtocolViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MatchProtocolViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rC7-tw-qtL" userLabel="Match Protocol VC" customClass="MatchProtocolViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ORX-qi-FnU"/>
                         <viewControllerLayoutGuide type="bottom" id="HnM-H2-zX9"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hlW-hy-wJD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N51-OM-cr4">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FAU-8V-cVi" userLabel="scroll content view">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FkE-iD-9tw">
                                                 <rect key="frame" x="0.0" y="8" width="320" height="274"/>
@@ -1541,7 +1498,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ihn-eT-VNJ">
-                                                <rect key="frame" x="0.0" y="346.5" width="320" height="144.5"/>
+                                                <rect key="frame" x="0.0" y="366.5" width="320" height="144.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Составы команд" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iKx-Re-ej3">
                                                         <rect key="frame" x="12" y="8" width="143" height="20.5"/>
@@ -1657,7 +1614,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZAq-XS-rrp" userLabel="referee_view">
-                                                <rect key="frame" x="0.0" y="491" width="320" height="57"/>
+                                                <rect key="frame" x="0.0" y="511" width="320" height="57"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ответственные лица" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmB-fE-gKY">
                                                         <rect key="frame" x="12" y="18" width="166" height="21"/>
@@ -1691,10 +1648,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7Z-5F-3eB">
-                                                <rect key="frame" x="0.0" y="290" width="320" height="56.5"/>
+                                                <rect key="frame" x="0.0" y="290" width="320" height="76.5"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="d84-vK-ZQa" customClass="IntrinsicTableView" customModule="ALC_RB" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="56.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="76.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="protocol_table_all_cell" rowHeight="53" id="qXa-Ri-pVw" customClass="ProtocolAllTableEventsCell" customModule="ALC_RB" customModuleProvider="target">
@@ -1812,6 +1769,7 @@
                             <constraint firstAttribute="bottom" secondItem="N51-OM-cr4" secondAttribute="bottom" id="zOV-EW-uNE"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="MUg-5Y-EbG"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="date_label" destination="Gd5-Mc-zdS" id="Ddn-ue-mVO"/>
@@ -1862,7 +1820,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="TeamProtocolTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SIp-1O-G6N" userLabel="Team Protocol TVC" customClass="TeamProtocolTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="jt0-KA-zv1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -1927,6 +1885,7 @@
                             <outlet property="delegate" destination="SIp-1O-G6N" id="KCk-tk-rJa"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="mC5-xo-Urg"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CaC-Lj-g6p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1937,7 +1896,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="RefereeTeamTableViewController" title="Ответственные лица" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8Gc-MA-pFE" customClass="RefereeTeamTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Tfa-Ok-wa4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -1983,6 +1942,7 @@
                             <outlet property="delegate" destination="8Gc-MA-pFE" id="jY5-Ox-OOG"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="kZU-yc-eaU"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jHW-M7-GYy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

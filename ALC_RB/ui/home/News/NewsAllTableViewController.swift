@@ -16,7 +16,7 @@ class NewsAllTableViewController: UITableViewController {
     private var homeNewsViewModel: HomeNewsViewModel!
     private let disposeBag = DisposeBag()
     
-    private var hud: MBProgressHUD?
+//    private var hud: MBProgressHUD?
     
     override func viewDidLoad() {
         super.viewDidLoad()

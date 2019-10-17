@@ -82,7 +82,7 @@ class LeagueDetailViewController: UIViewController {
     var leagueModelItem: LeagueModelItem!
     var segmentHelper: SegmentHelper!
     private var viewModel: LeagueDetailViewModel!
-    var hud: MBProgressHUD?
+//    var hud: MBProgressHUD?
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {

@@ -14,7 +14,7 @@ import MBProgressHUD
 class MyTourneysTVC: UITableViewController {
         
     var viewModel: MyTourneysVM!
-    var hud: MBProgressHUD?
+//    var hud: MBProgressHUD?
     private let disposeBag = DisposeBag()
     private var tourneyTable: MyTourneysTable!
     

@@ -28,7 +28,7 @@ final class AnnouncesVC: UIViewController {
     private lazy var shadowLayer: CAShapeLayer = CAShapeLayer()
     
     var announcesViewModel: AnnouncesViewModel!
-    var hud: MBProgressHUD?
+//    var hud: MBProgressHUD?
     private let disposeBag = DisposeBag()
     
     private static let HEADER_FULL_HEIGHT = 64
