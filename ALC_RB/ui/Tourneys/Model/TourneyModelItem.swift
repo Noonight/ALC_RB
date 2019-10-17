@@ -12,7 +12,7 @@ extension TourneyModelItem : CellModel {}
 
 final class TourneyModelItem {
     
-    private let tourney: Tourney
+    let tourney: Tourney
     var leagues: [LeagueModelItem]?
     
     init(tourney: Tourney, leagues: [LeagueModelItem]?) {

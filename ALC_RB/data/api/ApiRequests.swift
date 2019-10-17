@@ -1527,17 +1527,19 @@ class ApiRequests {
         
         guard let mTourneys = tourneys else { return }
         group.enter()
+        
         for t in mTourneys {
+            tourneyModelItems.append(TourneyModelItem(tourney: t, leagues: nil))
+        }
+        for i in 0..<tourneyModelItems.count {
             
-            let tourneyModelItem = TourneyModelItem(tourney: t, leagues: nil)
             group.enter()
 
-            self.get_leagues_by_single(tourney: t) { result in
+            self.get_leagues_by_single(tourney: tourneyModelItems[i].tourney) { result in
                 switch result {
                 case .success(let leagues):
                     Print.m(leagues)
-                    tourneyModelItem.leagues = leagues
-                    tourneyModelItems.append(tourneyModelItem)
+                    tourneyModelItems[i].leagues = leagues
                     group.leave()
                 case .message(let message):
                     Print.m(message.message)
@@ -1553,13 +1555,14 @@ class ApiRequests {
         group.leave()
         
         group.notify(queue: .main) {
-            Print.m("message is \(mMessage?.message), error is \(mError), items are \(tourneyModelItems)")
+//            Print.m("message is \(mMessage?.message), error is \(mError), items are \(tourneyModelItems)")
             if let message = mMessage {
                 get_result(.message(message))
             }
             if let error = mError {
                 get_result(.failure(error))
             }
+            
             get_result(.success(tourneyModelItems))
         }
         
