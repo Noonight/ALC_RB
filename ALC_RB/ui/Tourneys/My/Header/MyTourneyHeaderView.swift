@@ -59,9 +59,11 @@ final class MyTourneyHeaderView: UIView {
     }
     var tourneyModelItem: TourneyModelItem! {
         didSet {
-            if let first = tourneyModelItem.leagues?.first {
-                self.nameLabel.text = self.tourneyModelItem.name ?? "" + " ." + (first.name ?? "")
-                self.dateLabel.text = (first.beginDate ?? "") + " - " + (first.endDate ?? "")
+            if tourneyModelItem.leagues?.count ?? 0 == 1 {
+                if let first = tourneyModelItem.leagues?.first {
+                    self.nameLabel.text = "\(tourneyModelItem.name ?? ""). \(first.name ?? "")"
+                    self.dateLabel.text = (first.beginDate ?? "") + " - " + (first.endDate ?? "")
+                }
             } else {
                 self.nameLabel.text = self.tourneyModelItem.name
                 self.dateLabel.text = (self.tourneyModelItem.beginDate ?? "") + " - " + (self.tourneyModelItem.endDate ?? "")
