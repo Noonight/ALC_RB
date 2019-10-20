@@ -10,6 +10,14 @@ import UIKit
 
 class PlayersLeagueDetailViewController: UIViewController {
     
+    static func getInstance() -> PlayersLeagueDetailViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        let viewController = storyboard.instantiateViewController(withIdentifier: "PlayersLeagueDetailViewController") as! PlayersLeagueDetailViewController
+        
+        return viewController
+    }
+    
     @IBOutlet weak var header_view: UIView!
     @IBOutlet weak var filter_type_btn: UIButton!
     @IBOutlet weak var table_view: UITableView!

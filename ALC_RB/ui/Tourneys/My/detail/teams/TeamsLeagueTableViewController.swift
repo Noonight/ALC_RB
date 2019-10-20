@@ -9,6 +9,15 @@
 import UIKit
 
 class TeamsLeagueTableViewController: UITableViewController {
+    
+    static func getInstance() -> TeamsLeagueTableViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        let viewController = storyboard.instantiateViewController(withIdentifier: "TeamsLeagueTableViewController") as! TeamsLeagueTableViewController
+        
+        return viewController
+    }
+    
     enum Texts {
         static let HERE_WILL_SHOW_TEAMS = "Здесь будут отображаться команды"
     }

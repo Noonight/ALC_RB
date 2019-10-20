@@ -45,35 +45,6 @@ class LeagueDetailViewController: UIViewController {
     @IBOutlet weak var announce_height: NSLayoutConstraint!
     @IBOutlet weak var announce_label: UILabel!
     
-    lazy var scheduleTable: ScheduleTableViewController = {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
-        var viewController = storyboard.instantiateViewController(withIdentifier: "ScheduleTableViewController") as! ScheduleTableViewController
-        
-//        viewController.leagueDetailModel.league = self.leagueDetailModel.league
-//        viewController.leagueDetailModel.leagueInfo = self.leagueDetailModel.leagueInfo
-        
-        return viewController
-    }()
-    lazy var teamsTable: TeamsLeagueTableViewController = {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
-        var viewController = storyboard.instantiateViewController(withIdentifier: "TeamsLeagueTableViewController") as! TeamsLeagueTableViewController
-        
-//        viewController.leagueDetailModel = self.leagueDetailModel
-        
-        return viewController
-    }()
-    lazy var playersTable: PlayersLeagueDetailViewController = {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
-        var viewController = storyboard.instantiateViewController(withIdentifier: "PlayersLeagueDetailViewController") as! PlayersLeagueDetailViewController
-        
-//        viewController.leagueDetailModel = self.leagueDetailModel
-        
-        return viewController
-    }()
-    
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var stackView: UIStackView!
@@ -90,7 +61,6 @@ class LeagueDetailViewController: UIViewController {
         setupSegmentHelper()
         setupBinds()
         setupView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -147,11 +117,18 @@ extension Reactive where Base: LeagueDetailViewController {
             vc.segmentHelper.removeAll()
             switch segment {
             case .schedule:
-                vc.segmentHelper.add(vc.scheduleTable)
+//                vc.segmentHelper.add(vc.scheduleTable)
+                let nVc = ScheduleTableViewController.getInstance()
+                nVc.viewModel.leagueDetailModel = vc.viewModel.leagueDetailModel
+                vc.segmentHelper.add(nVc)
             case .teams:
-                vc.segmentHelper.add(vc.teamsTable)
+                let nVc = TeamsLeagueTableViewController.getInstance()
+//                nVc.viewModel.leagueDetailModel = vc.viewModel.leagueDetailModel
+                vc.segmentHelper.add(nVc)
             case .players:
-                vc.segmentHelper.add(vc.playersTable)
+                let nVc = PlayersLeagueDetailViewController.getInstance()
+//                nVc.viewModel.leagueDetailModel = vc.viewModel.leagueDetailModel
+                vc.segmentHelper.add(nVc)
             }
         }
     }

@@ -12,6 +12,14 @@ import RxCocoa
 
 class ScheduleTableViewController: UITableViewController {
     
+    static func getInstance() -> ScheduleTableViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ScheduleTableViewController") as! ScheduleTableViewController
+        
+        return viewController
+    }
+    
 //    var _leagueDetailModel = LeagueDetailModel()
 //    var leagueDetailModel: LeagueDetailModel
 //    {
@@ -40,24 +48,21 @@ class ScheduleTableViewController: UITableViewController {
 //        }
 //    }
     
-    private var viewModel: ScheduleTableViewModel!
+    var viewModel = ScheduleTableViewModel(dataManager: ApiRequests())
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupViewModel()
         setupBinds()
+        
+        viewModel.fetch()
     }
 }
 
 // MARK: - SETUP
 
 extension ScheduleTableViewController {
-    
-    func setupViewModel() {
-        self.viewModel = ScheduleTableViewModel(dataManager: ApiRequests())
-    }
     
     func setupBinds() {
         
@@ -71,6 +76,12 @@ extension ScheduleTableViewController {
         }
         .disposed(by: disposeBag)
         
+        viewModel
+            .items
+            .map({ $0.count == 0})
+            .bind(to: self.rx.empty)
+            .disposed(by: disposeBag)
+        
         tableView
             .rx
             .itemSelected
@@ -83,6 +94,18 @@ extension ScheduleTableViewController {
             .loading
             .asDriver(onErrorJustReturn: false)
             .drive(self.rx.isLoading)
+            .disposed(by: disposeBag)
+        
+        viewModel
+            .error
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.rx.error)
+            .disposed(by: disposeBag)
+        
+        viewModel
+            .mMessage
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.rx.message)
             .disposed(by: disposeBag)
         
     }
@@ -102,4 +125,73 @@ extension ScheduleTableViewController {
         self.navigationController?.show(viewController, sender: self)
     }
     
+}
+
+// MARK: REACTIVE
+
+extension Reactive where Base: ScheduleTableViewController {
+    
+    internal var isLoading: Binder<Bool> {
+        return Binder(self.base) { vc, loading in
+            if loading == true {
+                if vc.hud != nil {
+                    vc.hud?.setToLoadingView()
+                } else {
+                    vc.hud = vc.showLoadingViewHUD()
+                }
+            } else {
+                vc.hud?.hide(animated: false)
+                vc.hud = nil
+            }
+        }
+    }
+    
+    internal var error: Binder<Error?> {
+        return Binder(self.base) { vc, error in
+            guard let mError = error else { return }
+            if vc.hud != nil {
+                vc.hud?.setToFailureView(detailMessage: mError.localizedDescription, tap: {
+//                    vc.viewModel.fetch()
+                })
+            } else {
+                vc.hud = vc.showFailureViewHUD(detailMessage: mError.localizedDescription, tap: {
+//                    vc.viewModel.fetch()
+                })
+            }
+        }
+    }
+    
+    internal var message: Binder<SingleLineMessage?> {
+        return Binder(self.base) { vc, message in
+            guard let mMessage = message else { return }
+            if vc.hud != nil {
+                vc.hud?.setToFailureView(detailMessage: mMessage.message, tap: {
+//                    vc.viewModel.fetch()
+                })
+            } else {
+                vc.hud = vc.showFailureViewHUD(detailMessage: mMessage.message, tap: {
+//                    vc.viewModel.fetch()
+                })
+            }
+        }
+    }
+    
+    internal var empty: Binder<Bool> {
+        return Binder(self.base) { vc, isEmpty in
+            if isEmpty == true {
+                if vc.hud != nil {
+                    vc.hud?.setToEmptyView(message: "", detailMessage: "Матчей нет", tap: {
+                        vc.viewModel.fetch()
+                    })
+                } else {
+                    vc.hud = vc.showEmptyViewHUD(message: "", detailMessage: "Матчей нет", tap: {
+                        vc.viewModel.fetch()
+                    })
+                }
+            } else {
+                vc.hud?.hide(animated: false)
+                vc.hud = nil
+            }
+        }
+    }
 }

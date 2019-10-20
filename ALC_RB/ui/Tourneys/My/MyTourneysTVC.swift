@@ -17,6 +17,7 @@ class MyTourneysTVC: UITableViewController {
 //    var hud: MBProgressHUD?
     private let disposeBag = DisposeBag()
     private var tourneyTable: MyTourneysTable!
+//    var leagueDetailModel = BehaviorRelay<_LeagueDetailModel>(value: _LeagueDetailModel())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +27,14 @@ class MyTourneysTVC: UITableViewController {
         self.setupTourneyTable()
         self.setupBinds()
         self.setupPullToRefresh()
+        
+        viewModel.fetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.fetch()
+//        dump(self.leagueDetailModel)
     }
     
 }
@@ -194,10 +197,10 @@ extension MyTourneysTVC {
     
     func showLeagueDetail(leagueModelItem: LeagueModelItem) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "LeagueDetailViewController") as! LeagueDetailViewController
+        var newViewController = storyBoard.instantiateViewController(withIdentifier: "LeagueDetailViewController") as! LeagueDetailViewController
         
-        newViewController.viewModel.leagueDetailModel.value.league = leagueModelItem
-        
+        newViewController.viewModel.leagueDetailModel = BehaviorRelay<_LeagueDetailModel>(value: _LeagueDetailModel(league: leagueModelItem, matches: nil))
+//        self.leagueDetailModel = newViewController.viewModel.leagueDetailModel
         self.navigationController?.show(newViewController, sender: self)
     }
     

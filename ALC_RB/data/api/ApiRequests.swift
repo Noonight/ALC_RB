@@ -1594,7 +1594,7 @@ class ApiRequests {
                 let decoder = ISO8601Decoder.getDecoder()
                 
                 do {
-                    if let matches = try? decoder.decode([_Match].self, from: response.data!) {
+                    if let matches = try? decoder.decode([_Match].self, from: response.data!) { // MARK: TODO - league matches reques not ok see request
                         result(.success(matches))
                     }
                     if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
