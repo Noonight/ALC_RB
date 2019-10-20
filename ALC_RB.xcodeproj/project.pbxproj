@@ -1145,7 +1145,7 @@
 				189482752356EFD7000C8A2A /* MyTourneysTable.swift */,
 				184DBF032357134800BBEFCE /* Header */,
 				189482772356EFFE000C8A2A /* Cell */,
-				CE158CE721AD52F900CEECFE /* detail */,
+				CE158CE721AD52F900CEECFE /* League */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -1276,7 +1276,7 @@
 			path = tournaments;
 			sourceTree = "<group>";
 		};
-		CE158CE721AD52F900CEECFE /* detail */ = {
+		CE158CE721AD52F900CEECFE /* League */ = {
 			isa = PBXGroup;
 			children = (
 				CE158CE821AD532600CEECFE /* LeagueDetailViewController.swift */,
@@ -1286,7 +1286,7 @@
 				DB595C7321EF366E000282F4 /* teams */,
 				DBFB838F2201CE4C008A8F79 /* players */,
 			);
-			path = detail;
+			path = League;
 			sourceTree = "<group>";
 		};
 		CE47323C21A5511B00199D79 /* home */ = {
