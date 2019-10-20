@@ -151,6 +151,10 @@ extension MyTourneysTVC: TableActions {
         }
     }
     
+    func onCellDeselected(model: CellModel) {
+        
+    }
+    
     func onHeaderPressed(model: CellModel) {
         if model is LeagueModelItem {
             self.showLeagueDetail(leagueModelItem: model as! LeagueModelItem)
@@ -191,7 +195,9 @@ extension MyTourneysTVC {
     func showLeagueDetail(leagueModelItem: LeagueModelItem) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "LeagueDetailViewController") as! LeagueDetailViewController
-        newViewController.leagueModelItem = leagueModelItem
+        
+        newViewController.viewModel.leagueDetailModel.value.league = leagueModelItem
+        
         self.navigationController?.show(newViewController, sender: self)
     }
     

@@ -31,10 +31,12 @@ class ApiRequests {
                     to: ApiRoute.getApiURL(.post_auth),
                     method: .post)
             { (result) in
+//                dump(result)
                 switch result {
                 case .success(let upload, _, _):
                     
                     upload.responseAuthUser { (response) in
+//                        dump(response)
                         switch response.result {
                         case .success:
                             if let authUser = response.result.value {
@@ -1583,5 +1585,27 @@ class ApiRequests {
     }
     
     // MARK: END
+    
+    func get_leagueMatches(leagueId: String, result: @escaping (ResultMy<[_Match], Error>) -> () ) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.leagueMatches, id: leagueId))
+            .responseJSON { response in
+                
+                let decoder = ISO8601Decoder.getDecoder()
+                
+                do {
+                    if let matches = try? decoder.decode([_Match].self, from: response.data!) {
+                        result(.success(matches))
+                    }
+                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+                        result(.message(message))
+                    }
+                }
+                
+                if response.result.isFailure {
+                    result(.failure(response.result.error!))
+                }
+        }
+    }
     
 }

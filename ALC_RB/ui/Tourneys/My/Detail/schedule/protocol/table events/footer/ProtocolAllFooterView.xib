@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProtocolAllFooterView" customModule="ALC_RB" customModuleProvider="target">
+            <connections>
+                <outlet property="container_view" destination="iN0-l3-epB" id="06x-OX-dka"/>
+                <outlet property="left_foul_score_label" destination="uLu-mA-aqU" id="eb0-ZQ-64K"/>
+                <outlet property="left_foul_view" destination="Ixv-ah-VdG" id="sSY-O2-aLd"/>
+                <outlet property="right_foul_score_label" destination="S8b-p7-Ikc" id="Gpp-5a-PnA"/>
+                <outlet property="right_foul_view" destination="4m6-rI-bxc" id="A13-SB-Nl7"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="53"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PoM-yV-AMx">
+                    <rect key="frame" x="185.5" y="0.0" width="4" height="53"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="4" id="uMe-wc-f0w"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4m6-rI-bxc" customClass="DesignableView" customModule="ALC_RB" customModuleProvider="target">
+                    <rect key="frame" x="154.5" y="12" width="27" height="29"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uLu-mA-aqU">
+                            <rect key="frame" x="8" y="4" width="11" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="uLu-mA-aqU" secondAttribute="trailing" constant="8" id="4Bu-aB-3c5"/>
+                        <constraint firstItem="uLu-mA-aqU" firstAttribute="top" secondItem="4m6-rI-bxc" secondAttribute="top" constant="4" id="Psq-fy-CxO"/>
+                        <constraint firstAttribute="bottom" secondItem="uLu-mA-aqU" secondAttribute="bottom" constant="4" id="Q42-8p-9lC"/>
+                        <constraint firstItem="uLu-mA-aqU" firstAttribute="leading" secondItem="4m6-rI-bxc" secondAttribute="leading" constant="8" id="Vsx-q5-o5G"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.84705882349999995" green="0.1960784314" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ixv-ah-VdG" customClass="DesignableView" customModule="ALC_RB" customModuleProvider="target">
+                    <rect key="frame" x="193.5" y="12" width="27" height="29"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8b-p7-Ikc">
+                            <rect key="frame" x="8" y="4" width="11" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="S8b-p7-Ikc" firstAttribute="leading" secondItem="Ixv-ah-VdG" secondAttribute="leading" constant="8" id="0xb-jf-Wui"/>
+                        <constraint firstAttribute="trailing" secondItem="S8b-p7-Ikc" secondAttribute="trailing" constant="8" id="7UE-ZQ-Fq4"/>
+                        <constraint firstItem="S8b-p7-Ikc" firstAttribute="top" secondItem="Ixv-ah-VdG" secondAttribute="top" constant="4" id="f05-e5-kDw"/>
+                        <constraint firstAttribute="bottom" secondItem="S8b-p7-Ikc" secondAttribute="bottom" constant="4" id="oZY-Mb-3dB"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" red="0.84705882349999995" green="0.1960784314" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Ixv-ah-VdG" firstAttribute="leading" secondItem="PoM-yV-AMx" secondAttribute="trailing" constant="4" id="6mA-ga-cxD"/>
+                <constraint firstItem="PoM-yV-AMx" firstAttribute="leading" secondItem="4m6-rI-bxc" secondAttribute="trailing" constant="4" id="EPy-mE-HxX"/>
+                <constraint firstItem="4m6-rI-bxc" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="Gsk-pf-oWh"/>
+                <constraint firstAttribute="bottom" secondItem="PoM-yV-AMx" secondAttribute="bottom" id="Wvw-OE-3Jc"/>
+                <constraint firstItem="Ixv-ah-VdG" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="fx2-8C-wNC"/>
+                <constraint firstItem="PoM-yV-AMx" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="leV-Xv-D4L"/>
+                <constraint firstItem="PoM-yV-AMx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oAl-qE-0Jr"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="132" y="154.27286356821591"/>
+        </view>
+    </objects>
+</document>

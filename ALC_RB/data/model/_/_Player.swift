@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-enum _InviteStatus: String, Codable {
+enum _PlayerInviteStatus: String, Codable {
     case pending = "Pending"
     case accepted = "Accepted"
     case rejected = "Rejected"
@@ -17,7 +17,7 @@ enum _InviteStatus: String, Codable {
 
 // MARK: - _Player
 struct _Player: Codable {
-    let inviteStatus: _InviteStatus?
+    let inviteStatus: _PlayerInviteStatus?
     let number: String?
     let activeYellowCards: Int?
     let yellowCards: Int?

@@ -20,7 +20,8 @@ struct UpcomingMatches: Codable {
 
 struct Match: Codable {
     var id, date: String
-    var stage, played: Bool
+    var stage: Int
+    var played: Bool
     var tour: String
 //    var playersList: [JSONAny] // mb String
     var playersList: [String]
@@ -45,7 +46,7 @@ struct Match: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
         self.date = try container.decodeIfPresent(String.self, forKey: .date) ?? ""
-        self.stage = try container.decodeIfPresent(Bool.self, forKey: .stage) ?? false
+        self.stage = try container.decodeIfPresent(Int.self, forKey: .stage) ?? -1
         self.played = try container.decodeIfPresent(Bool.self, forKey: .played) ?? false
         self.tour = try container.decodeIfPresent(String.self, forKey: .tour) ?? ""
 //        self.playersList = try container.decodeIfPresent([JSONAny].self, forKey: .playersList) ?? []
@@ -238,7 +239,7 @@ extension Match {
     init() {
         id = ""
         date = ""
-        stage = false
+        stage = -1
         played = false
         tour = ""
         playersList = []
@@ -278,7 +279,7 @@ extension Match {
     func with(
         id: String? = nil,
         date: String? = nil,
-        stage: Bool? = nil,
+        stage: Int? = nil,
         played: Bool? = nil,
         tour: String? = nil,
 //        playersList: [JSONAny]? = nil,

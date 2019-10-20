@@ -10,11 +10,15 @@ import Foundation
 
 struct ParticipationMatch: Codable {
     var id, date: String
-    var stage, played: Bool
+    var stage: Int
+    var played: Bool
+    var round: String
     var tour: String
+    var group: String
     var playersList: [String]
     var place: String
-    var winner, autoGoals: String
+    var winner: String
+    var autoGoals: String
     var fouls: String
     var score: String
     var league: String
@@ -26,7 +30,7 @@ struct ParticipationMatch: Codable {
     var leagueID: String
     
     func convertToLIMatch() -> LIMatch {
-        return LIMatch(date: date, stage: stage, played: played, tour: tour, playersList: playersList, place: place, winner: winner, score: score, fouls: fouls, autoGoals: autoGoals, id: id, league: leagueID, teamOne: teamOne, teamTwo: teamTwo, events: events, referees: referees.map({ referee -> LIReferee in
+        return LIMatch(date: date, stage: stage, played: played, tour: tour, playersList: playersList, place: place, winner: winner, score: score, fouls: fouls, autoGoals: autoGoals, id: id, league: league, teamOne: teamOne, teamTwo: teamTwo, events: events, referees: referees.map({ referee -> LIReferee in
             return LIReferee(id: referee.id, person: referee.person, type: referee.type)
         }), createdAt: createdAt, updatedAt: updatedAt, v: v)
     }
@@ -35,8 +39,10 @@ struct ParticipationMatch: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
         self.date = try container.decodeIfPresent(String.self, forKey: .date) ?? ""
-        self.stage = try container.decodeIfPresent(Bool.self, forKey: .stage) ?? false
+        self.stage = try container.decodeIfPresent(Int.self, forKey: .stage) ?? 0
         self.played = try container.decodeIfPresent(Bool.self, forKey: .played) ?? false
+        self.round = try container.decodeIfPresent(String.self, forKey: .tour) ?? ""
+        self.group = try container.decodeIfPresent(String.self, forKey: .tour) ?? ""
         self.tour = try container.decodeIfPresent(String.self, forKey: .tour) ?? ""
         self.playersList = try container.decodeIfPresent([String].self, forKey: .playersList) ?? []
         self.place = try container.decodeIfPresent(String.self, forKey: .place) ?? ""
@@ -57,7 +63,7 @@ struct ParticipationMatch: Codable {
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case date, stage, played, tour, playersList, place, winner, score, fouls, autoGoals, league, teamOne, teamTwo, events, referees, createdAt, updatedAt
+        case date, stage, played, round, group, tour, playersList, place, winner, score, fouls, autoGoals, league, teamOne, teamTwo, events, referees, createdAt, updatedAt
         case v = "__v"
         case leagueID = "leagueId"
     }
@@ -65,7 +71,7 @@ struct ParticipationMatch: Codable {
     init() {
         id = ""
         date = ""
-        stage = false
+        stage = -1
         played = false
         tour = ""
         playersList = []
@@ -83,6 +89,8 @@ struct ParticipationMatch: Codable {
         updatedAt = ""
         v = -1
         leagueID = ""
+        round = ""
+        group = ""
     }
     
     init(data: Data) throws {
@@ -103,7 +111,7 @@ struct ParticipationMatch: Codable {
     func with(
         id: String? = nil,
         date: String? = nil,
-        stage: Bool? = nil,
+        stage: Int? = nil,
         played: Bool? = nil,
         tour: String? = nil,
         playersList: [String]? = nil,

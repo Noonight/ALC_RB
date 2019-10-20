@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-enum _Status: String, Codable {
+enum _TeamStatus: String, Codable {
     case pending = "Pending"
     case approved = "Approved"
     case rejected = "Rejected"
@@ -17,7 +17,7 @@ enum _Status: String, Codable {
 
 // MARK: - _Team
 struct _Team: Codable {
-    let status: _Status?
+    let status: _TeamStatus?
     let place: Int?
     let playoffPlace: Int?
     let madeToPlayoff: Bool?

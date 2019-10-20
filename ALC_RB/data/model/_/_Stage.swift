@@ -20,11 +20,13 @@ struct _Stage: Codable {
     let id: String?
     let stageType: _StageType?
     let toNextStage: Int?
+    let sheduleIsCreated: Bool?
 
     enum CodingKeys: String, CodingKey {
         case groupStage = "groupStage"
         case id = "_id"
         case stageType = "stageType"
         case toNextStage = "toNextStage"
+        case sheduleIsCreated = "sheduleIsCreated"
     }
 }
