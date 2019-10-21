@@ -17,7 +17,7 @@ final class ScheduleTableViewModel {
     var mMessage: PublishSubject<SingleLineMessage> = PublishSubject()
     var error: PublishSubject<Error?> = PublishSubject()
     var firstLoad: BehaviorRelay<Bool> = BehaviorRelay(value: true)
-    var leagueDetailModel = BehaviorRelay<_LeagueDetailModel>(value: _LeagueDetailModel())
+    var leagueDetailModel = BehaviorRelay<LeagueDetailModel>(value: LeagueDetailModel())
     
     private let dataManager: ApiRequests
     
@@ -26,21 +26,21 @@ final class ScheduleTableViewModel {
     }
     
     func fetch() {
-        if firstLoad.value == true {
-            loading.onNext(true)
-        }
-        dataManager.get_leagueMatches(leagueId: (leagueDetailModel.value.league?.league.id)!) { result in
-            self.loading.onNext(false)
-            switch result {
-            case .success(let matches):
-                let mMatches = matches.map({ MatchScheduleModelItem(match: $0, teamOne: nil, teamTwo: nil) })
-                self.leagueDetailModel.value.matches = mMatches
-                self.items.onNext(mMatches)
-            case .message(let message):
-                self.mMessage.onNext(message)
-            case .failure(let error):
-                self.error.onNext(error)
-            }
-        }
+//        if firstLoad.value == true {
+//            loading.onNext(true)
+//        }
+//        dataManager.get_leagueMatches(leagueId: (leagueDetailModel.value.league.id)!) { result in
+//            self.loading.onNext(false)
+//            switch result {
+//            case .success(let matches):
+//                let mMatches = matches.map({ MatchScheduleModelItem(match: $0, teamOne: nil, teamTwo: nil) })
+//                self.leagueDetailModel.value.matches = mMatches
+//                self.items.onNext(mMatches)
+//            case .message(let message):
+//                self.mMessage.onNext(message)
+//            case .failure(let error):
+//                self.error.onNext(error)
+//            }
+//        }
     }
 }

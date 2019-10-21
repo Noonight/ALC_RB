@@ -69,18 +69,35 @@ extension ScheduleTableViewController {
         tableView.delegate = nil
         tableView.dataSource = nil
         
+//        viewModel
+//            .items
+//            .bind(to: tableView.rx.items(cellIdentifier: ScheduleTableViewCell.ID, cellType: ScheduleTableViewCell.self)) { (index, match, cell) in
+//                cell.matchScheduleModelItem = match
+//        }
+//        .disposed(by: disposeBag)
+        
         viewModel
-            .items
-            .bind(to: tableView.rx.items(cellIdentifier: ScheduleTableViewCell.ID, cellType: ScheduleTableViewCell.self)) { (index, match, cell) in
+            .leagueDetailModel
+            .map({ $0.leagueInfo.league.matches ?? [] })
+            .map({ $0.map({ MatchScheduleModelItem(match: $0, teamOne: nil, teamTwo: nil) }) })
+            .asDriver(onErrorJustReturn: [])
+            .drive(tableView.rx.items(cellIdentifier: ScheduleTableViewCell.ID, cellType: ScheduleTableViewCell.self)) { (index, match, cell) in
                 cell.matchScheduleModelItem = match
-        }
+            }
         .disposed(by: disposeBag)
         
         viewModel
-            .items
-            .map({ $0.count == 0})
+            .leagueDetailModel
+            .map({ $0.leagueInfo.league.matches ?? [] })
+            .map({ $0.count == 0 })
             .bind(to: self.rx.empty)
             .disposed(by: disposeBag)
+        
+//        viewModel
+//            .items
+//            .map({ $0.count == 0})
+//            .bind(to: self.rx.empty)
+//            .disposed(by: disposeBag)
         
         tableView
             .rx

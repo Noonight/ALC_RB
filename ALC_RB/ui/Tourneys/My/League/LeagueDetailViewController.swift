@@ -11,12 +11,12 @@ import RxSwift
 import RxCocoa
 import MBProgressHUD
 struct LeagueDetailModel {
-    var league = League()
+    var league: _League!
     var leagueInfo = LILeagueInfo()
 
     init() { }
     
-    init (_ league: League) {
+    init (_ league: _League) {
         self.league = league
     }
 }
@@ -89,7 +89,7 @@ extension LeagueDetailViewController {
         viewModel
             .leagueDetailModel
             .asDriver()
-            .map({ $0.league?.name })
+            .map({ $0.league.name })
             .drive(self.mTitle.rx.text)
             .disposed(by: disposeBag)
         
@@ -124,10 +124,12 @@ extension Reactive where Base: LeagueDetailViewController {
             case .teams:
                 let nVc = TeamsLeagueTableViewController.getInstance()
 //                nVc.viewModel.leagueDetailModel = vc.viewModel.leagueDetailModel
+                nVc.leagueDetailModel = vc.viewModel.leagueDetailModel.value
                 vc.segmentHelper.add(nVc)
             case .players:
                 let nVc = PlayersLeagueDetailViewController.getInstance()
 //                nVc.viewModel.leagueDetailModel = vc.viewModel.leagueDetailModel
+                nVc.leagueDetailModel = vc.viewModel.leagueDetailModel.value
                 vc.segmentHelper.add(nVc)
             }
         }

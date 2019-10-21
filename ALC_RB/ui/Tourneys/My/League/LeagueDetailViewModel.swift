@@ -15,9 +15,9 @@ final class LeagueDetailViewModel {
     let loading: PublishSubject<Bool> = PublishSubject()
     let error: PublishSubject<Error?> = PublishSubject()
     // as variable and as observable object, subject
-    var leagueDetailModel = BehaviorRelay<_LeagueDetailModel>(value: _LeagueDetailModel()) {
+    var leagueDetailModel = BehaviorRelay<LeagueDetailModel>(value: LeagueDetailModel()) {
         didSet {
-            Print.m(self.leagueDetailModel.value.league?.name)
+            Print.m(self.leagueDetailModel.value.league.name)
         }
     }
     

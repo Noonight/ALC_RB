@@ -197,11 +197,17 @@ extension MyTourneysTVC {
     
     func showLeagueDetail(leagueModelItem: LeagueModelItem) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        var newViewController = storyBoard.instantiateViewController(withIdentifier: "LeagueDetailViewController") as! LeagueDetailViewController
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "LeagueDetailViewController") as! LeagueDetailViewController
         
-        newViewController.viewModel.leagueDetailModel = BehaviorRelay<_LeagueDetailModel>(value: _LeagueDetailModel(league: leagueModelItem, matches: nil))
-//        self.leagueDetailModel = newViewController.viewModel.leagueDetailModel
-        self.navigationController?.show(newViewController, sender: self)
+        var leagueModel = LeagueDetailModel(leagueModelItem.league)
+        
+        self.viewModel.fetchLeagueInfo(leagueId: leagueModelItem.league.id!, success: { leagueInfo in
+            leagueModel.leagueInfo = leagueInfo
+            
+            newViewController.viewModel.leagueDetailModel = BehaviorRelay<LeagueDetailModel>(value: leagueModel)
+            
+            self.navigationController?.show(newViewController, sender: self)
+        })
     }
     
     func showTourneyPicker() {

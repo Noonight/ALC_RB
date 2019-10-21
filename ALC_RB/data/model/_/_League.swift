@@ -39,6 +39,29 @@ struct _League: Codable {
     let v: Int?
     let tourney: String?
 
+//    init() {
+//        creator
+//        status
+//        matches
+//        stages
+//        id
+//        name
+//        beginDate
+//        endDate
+//        maxTeams
+//        teams
+//        transferBegin
+//        transferEnd
+//        playersMin
+//        playersMax
+//        playersCapacit
+//        yellowCardsToDisqual
+//        ageAllowedMin: Int?
+//        ageAllowedMax: Int?
+//        v: Int?
+//        tourney: String?
+//    }
+    
     enum CodingKeys: String, CodingKey {
         case creator = "creator"
         case status = "status"
