@@ -249,15 +249,16 @@ class ProtocolAllViewModel {
     }
     
     func prepareTournamentTitle() -> String {
-        var curName = ""
-        if let name = self.leagueDetailModel.leagueInfo.league.name {
-            curName = name
-        }
+//        var curName = ""
+//        if let name = self.leagueDetailModel.leagueInfo.league.name {
+//            curName = name
+//        }
         var curTourney = ""
         if let tourney = self.leagueDetailModel.leagueInfo.league.name {
             curTourney = tourney
         }
-        return "\(curName). \(curTourney)"
+//        return "\(curName). \(curTourney)"
+        return curTourney
     }
     
     func prepareTour() -> String {

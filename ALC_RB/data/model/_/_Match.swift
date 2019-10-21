@@ -16,7 +16,7 @@ struct _Match: Codable {
     let teamOne: String?
     let teamTwo: String?
     
-    let stage: Int?
+    let stage: String?
     let tour: String?
     let round: String?
     let group: String?

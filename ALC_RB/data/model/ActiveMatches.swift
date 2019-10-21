@@ -81,7 +81,7 @@ extension DataRequest {
 struct ActiveMatch: Codable {
     var id: String
     var date: String
-    var stage: Int
+    var stage: String
     var played: Bool
     var tour: String?
     var playersList: [String]
@@ -107,7 +107,7 @@ struct ActiveMatch: Codable {
         return ParticipationMatch().with(id: id, date: date, stage: stage, played: played, tour: tour, playersList: playersList, place: place, winner: winner, score: score, fouls: fouls, autoGoals: autoGoals, league: league, teamOne: teamOne.id, teamTwo: teamTwo.id, events: events, referees: referees, createdAt: createdAt, updatedAt: updatedAt, v: v, leagueID: leagueID)
     }
     
-    init(id: String, date: String, stage: Int, played: Bool, tour: String, playersList: [String], place: String, autoGoals: String, score: String, league: String, teamOne: Team, teamTwo: Team, events: [LIEvent], referees: [Referee], penalty: String, createdAt: String, updatedAt: String, v: Int, leagueID: String, winner: String, fouls: String) {
+    init(id: String, date: String, stage: String, played: Bool, tour: String, playersList: [String], place: String, autoGoals: String, score: String, league: String, teamOne: Team, teamTwo: Team, events: [LIEvent], referees: [Referee], penalty: String, createdAt: String, updatedAt: String, v: Int, leagueID: String, winner: String, fouls: String) {
         self.id = id
         self.date = date
         self.stage = stage
@@ -137,7 +137,7 @@ struct ActiveMatch: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
         self.date = try container.decodeIfPresent(String.self, forKey: .date) ?? ""
-        self.stage = try container.decodeIfPresent(Int.self, forKey: .stage) ?? -1
+        self.stage = try container.decodeIfPresent(String.self, forKey: .stage) ?? ""
         self.played = try container.decodeIfPresent(Bool.self, forKey: .played) ?? false
         self.tour = try container.decodeIfPresent(String.self, forKey: .tour) ?? ""
         self.playersList = try container.decodeIfPresent([String].self, forKey: .playersList) ?? []
@@ -177,7 +177,7 @@ extension ActiveMatch {
     init() {
         id = ""
         date = ""
-        stage = -1
+        stage = ""
         played = false
         tour = ""
         playersList = []
@@ -217,7 +217,7 @@ extension ActiveMatch {
     func with(
         id: String? = nil,
         date: String? = nil,
-        stage: Int? = nil,
+        stage: String? = nil,
         played: Bool? = nil,
         tour: String? = nil,
         playersList: [String]? = nil,

@@ -10,7 +10,7 @@ import Foundation
 
 struct ParticipationMatch: Codable {
     var id, date: String
-    var stage: Int
+    var stage: String
     var played: Bool
     var round: String
     var tour: String
@@ -39,7 +39,7 @@ struct ParticipationMatch: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
         self.date = try container.decodeIfPresent(String.self, forKey: .date) ?? ""
-        self.stage = try container.decodeIfPresent(Int.self, forKey: .stage) ?? 0
+        self.stage = try container.decodeIfPresent(String.self, forKey: .stage) ?? ""
         self.played = try container.decodeIfPresent(Bool.self, forKey: .played) ?? false
         self.round = try container.decodeIfPresent(String.self, forKey: .tour) ?? ""
         self.group = try container.decodeIfPresent(String.self, forKey: .tour) ?? ""
@@ -71,7 +71,7 @@ struct ParticipationMatch: Codable {
     init() {
         id = ""
         date = ""
-        stage = -1
+        stage = ""
         played = false
         tour = ""
         playersList = []
@@ -111,7 +111,7 @@ struct ParticipationMatch: Codable {
     func with(
         id: String? = nil,
         date: String? = nil,
-        stage: Int? = nil,
+        stage: String? = nil,
         played: Bool? = nil,
         tour: String? = nil,
         playersList: [String]? = nil,

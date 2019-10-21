@@ -54,13 +54,14 @@ class UserLKViewController: UIViewController {
         return viewController
     }()
     
-    private lazy var ongoingLeagues: OngoingLeaguesLKTableViewController = {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
-        var viewController = storyboard.instantiateViewController(withIdentifier: "OngoingLeaguesLKTableViewController") as! OngoingLeaguesLKTableViewController
-        
-        return viewController
-    }()
+//    private lazy var ongoingLeagues: OngoingLeaguesLKTableViewController = {
+//        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+//
+//        var viewController = storyboard.instantiateViewController(withIdentifier: "OngoingLeaguesLKTableViewController") as! OngoingLeaguesLKTableViewController
+//
+//        return viewController
+//    }()
+    private lazy var ongoingLeagues: UserTourneysVC = UserTourneysVC()
     
     private lazy var club: ClubLKViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)

@@ -100,6 +100,12 @@
 		18870B3322C0DD1300126A87 /* ClubCreatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18870B3222C0DD1300126A87 /* ClubCreatePresenter.swift */; };
 		188B53CD23586D9700149AD1 /* HUD TO STATIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B53CC23586D9700149AD1 /* HUD TO STATIC.swift */; };
 		188F097B227BFF8700B827AC /* CommandAddPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */; };
+		1890FBC4235DBE1A00514E33 /* UserTourneysVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1890FBC2235DBE1A00514E33 /* UserTourneysVC.swift */; };
+		1890FBC5235DBE1A00514E33 /* UserTourneysVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1890FBC3235DBE1A00514E33 /* UserTourneysVC.xib */; };
+		1890FBC9235DC33C00514E33 /* InsideTourneysVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1890FBC7235DC33B00514E33 /* InsideTourneysVC.swift */; };
+		1890FBCA235DC33C00514E33 /* InsideTourneysVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1890FBC8235DC33C00514E33 /* InsideTourneysVC.xib */; };
+		1890FBCE235DC36900514E33 /* MyTourneysVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1890FBCC235DC36900514E33 /* MyTourneysVC.swift */; };
+		1890FBCF235DC36900514E33 /* MyTourneysVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1890FBCD235DC36900514E33 /* MyTourneysVC.xib */; };
 		1894825E2356DA0C000C8A2A /* _League.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894825D2356DA0C000C8A2A /* _League.swift */; };
 		189482602356EBEA000C8A2A /* _Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894825F2356EBEA000C8A2A /* _Stage.swift */; };
 		189482622356EC35000C8A2A /* _GroupStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189482612356EC35000C8A2A /* _GroupStage.swift */; };
@@ -453,6 +459,12 @@
 		18870B3222C0DD1300126A87 /* ClubCreatePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubCreatePresenter.swift; sourceTree = "<group>"; };
 		188B53CC23586D9700149AD1 /* HUD TO STATIC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HUD TO STATIC.swift"; sourceTree = "<group>"; };
 		188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerViewModel.swift; sourceTree = "<group>"; };
+		1890FBC2235DBE1A00514E33 /* UserTourneysVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTourneysVC.swift; sourceTree = "<group>"; };
+		1890FBC3235DBE1A00514E33 /* UserTourneysVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTourneysVC.xib; sourceTree = "<group>"; };
+		1890FBC7235DC33B00514E33 /* InsideTourneysVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsideTourneysVC.swift; sourceTree = "<group>"; };
+		1890FBC8235DC33C00514E33 /* InsideTourneysVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InsideTourneysVC.xib; sourceTree = "<group>"; };
+		1890FBCC235DC36900514E33 /* MyTourneysVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTourneysVC.swift; sourceTree = "<group>"; };
+		1890FBCD235DC36900514E33 /* MyTourneysVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTourneysVC.xib; sourceTree = "<group>"; };
 		1894825D2356DA0C000C8A2A /* _League.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _League.swift; sourceTree = "<group>"; };
 		1894825F2356EBEA000C8A2A /* _Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Stage.swift; sourceTree = "<group>"; };
 		189482612356EC35000C8A2A /* _GroupStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _GroupStage.swift; sourceTree = "<group>"; };
@@ -1093,6 +1105,35 @@
 				188F097A227BFF8700B827AC /* CommandAddPlayerViewModel.swift */,
 			);
 			path = "view model";
+			sourceTree = "<group>";
+		};
+		1890FBC1235DBDEB00514E33 /* Tourneys */ = {
+			isa = PBXGroup;
+			children = (
+				1890FBC2235DBE1A00514E33 /* UserTourneysVC.swift */,
+				1890FBC3235DBE1A00514E33 /* UserTourneysVC.xib */,
+				1890FBCB235DC35400514E33 /* My */,
+				1890FBC6235DC32000514E33 /* Inside */,
+			);
+			path = Tourneys;
+			sourceTree = "<group>";
+		};
+		1890FBC6235DC32000514E33 /* Inside */ = {
+			isa = PBXGroup;
+			children = (
+				1890FBC7235DC33B00514E33 /* InsideTourneysVC.swift */,
+				1890FBC8235DC33C00514E33 /* InsideTourneysVC.xib */,
+			);
+			path = Inside;
+			sourceTree = "<group>";
+		};
+		1890FBCB235DC35400514E33 /* My */ = {
+			isa = PBXGroup;
+			children = (
+				1890FBCC235DC36900514E33 /* MyTourneysVC.swift */,
+				1890FBCD235DC36900514E33 /* MyTourneysVC.xib */,
+			);
+			path = My;
 			sourceTree = "<group>";
 		};
 		189482692356ECE8000C8A2A /* _ */ = {
@@ -2261,6 +2302,7 @@
 		DBA69211221E757800BEFB26 /* menu */ = {
 			isa = PBXGroup;
 			children = (
+				1890FBC1235DBDEB00514E33 /* Tourneys */,
 				DBA69212221E759600BEFB26 /* MenuOptions.swift */,
 				18FE29BE22AE1C420094C4D8 /* MenuHelper.swift */,
 				DB5AAC0422369F6F0097963E /* invitation */,
@@ -2564,6 +2606,7 @@
 				DB9FA4A222EC986200BA5A52 /* RefereeProtocolPlayerTableViewCell.xib in Resources */,
 				18FF4767230A8E4400CAEFC6 /* HomeAllVC.xib in Resources */,
 				18B0F8822302BF6600080196 /* ModalPenaltySeriesVC.xib in Resources */,
+				1890FBC5235DBE1A00514E33 /* UserTourneysVC.xib in Resources */,
 				CEA6EBA621A53CFE008F874D /* LaunchScreen.storyboard in Resources */,
 				DB986B5B22FDBDD10050AC8F /* EditAutoGoalsView.xib in Resources */,
 				048CB34C230BF18F006CF2A9 /* HomeScheduleHeaderView.xib in Resources */,
@@ -2582,9 +2625,11 @@
 				DB4C45DE22EDDE1B00B28148 /* AutoGoalFooterView.xib in Resources */,
 				DBCA6CA722F7EDC4001D6C0B /* ProtocolAllFooterView.xib in Resources */,
 				CEA6EBA121A53CFE008F874D /* Main.storyboard in Resources */,
+				1890FBCF235DC36900514E33 /* MyTourneysVC.xib in Resources */,
 				1823DC2722952762000A1055 /* LoadingCell.xib in Resources */,
 				DB906D57230AA23D00C052B8 /* HomeNewsCollectionViewCell.xib in Resources */,
 				18606A3122D30B8200F5D2FE /* EventTypeView.xib in Resources */,
+				1890FBCA235DC33C00514E33 /* InsideTourneysVC.xib in Resources */,
 				189482722356EFA8000C8A2A /* MyTourneysTVC.xib in Resources */,
 				DB966A7022EC832100064233 /* PlayerEventView.xib in Resources */,
 				DB986B5722FDB2FF0050AC8F /* EditFoulsView.xib in Resources */,
@@ -2886,6 +2931,7 @@
 				1894827A2356F018000C8A2A /* MyTourneyCell.swift in Sources */,
 				185AF41C235339F200EC1F0A /* NewsModelItem.swift in Sources */,
 				DBD4D025225F946D00C8C8B3 /* EditTeamResponse.swift in Sources */,
+				1890FBC4235DBE1A00514E33 /* UserTourneysVC.swift in Sources */,
 				189482602356EBEA000C8A2A /* _Stage.swift in Sources */,
 				187F2E0322CB19440049EA77 /* EditTeamProtocolPresenter.swift in Sources */,
 				189482642356EC5B000C8A2A /* _Group.swift in Sources */,
@@ -2966,6 +3012,7 @@
 				1842795E235A0AC0006F2C4C /* _Referee.swift in Sources */,
 				18B03029234A586A00B1734B /* LocalTourneys.swift in Sources */,
 				DB986B5D22FDBE0A0050AC8F /* EditAutoGoalsView.swift in Sources */,
+				1890FBC9235DC33C00514E33 /* InsideTourneysVC.swift in Sources */,
 				18A82A5B22BB7B26006FA050 /* View Controller + Alert.swift in Sources */,
 				DBC5C5FA2220128100B0A1B6 /* UITextField.swift in Sources */,
 				CE47323E21A5513500199D79 /* HomeViewController.swift in Sources */,
@@ -2987,6 +3034,7 @@
 				DB595C7821EF7373000282F4 /* TeamLeagueTableViewCell.swift in Sources */,
 				DB17385721BA9CBB00017B6D /* UpcomingGamesPresenter.swift in Sources */,
 				DB1816DE21D0DB81005375ED /* PastLeague.swift in Sources */,
+				1890FBCE235DC36900514E33 /* MyTourneysVC.swift in Sources */,
 				1845986B234745DF0066DE2A /* TournamentSearchPresenter.swift in Sources */,
 				DBA77C2A22D24A11000DCF02 /* AddEventsProtocolViewController.swift in Sources */,
 				DB4B1A4C2240FD1300A9FB97 /* ClubEditLKPresenter.swift in Sources */,
