@@ -26,12 +26,15 @@ class ScheduleTableViewCell: UITableViewCell {
     
     var matchScheduleModelItem: MatchScheduleModelItem! {
         didSet {
+//            dump(self.matchScheduleModelItem)
             self.mDate.text = self.matchScheduleModelItem.date
             self.mTime.text = self.matchScheduleModelItem.time
             self.mTour.text = self.matchScheduleModelItem.tour
             self.mPlace.text = self.matchScheduleModelItem.place
-            self.mTitleTeam1.text = self.matchScheduleModelItem.teamOne?.name
-            self.mTitleTeam2.text = self.matchScheduleModelItem.teamTwo?.name
+//            self.mTitleTeam1.text = self.matchScheduleModelItem.teamOne?.name
+//            self.mTitleTeam2.text = self.matchScheduleModelItem.teamTwo?.name
+            self.mTitleTeam1.text = self.matchScheduleModelItem.teamOneName
+            self.mTitleTeam2.text = self.matchScheduleModelItem.teamTwoName
             self.mScore.text = self.matchScheduleModelItem.score
         }
     }

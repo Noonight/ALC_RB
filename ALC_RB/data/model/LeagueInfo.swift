@@ -23,6 +23,11 @@ struct LILeagueInfo: Codable {
 
 struct LILeague: Codable {
     let status: String?
+    
+    var creator: String?
+    var stages: [_Stage]?
+    
+    
     var matches: [LIMatch]?
     let id: String?
     let tourney: String?
@@ -57,6 +62,8 @@ struct LILeague: Codable {
     enum CodingKeys: String, CodingKey {
         case status = "status"
         case matches = "matches"
+        case stages
+        case creator
         case id = "_id"
         case tourney = "tourney"
         case name = "name"
@@ -77,7 +84,9 @@ struct LILeague: Codable {
 
 struct LIMatch: Codable {
     let date: String?
-    let stage: Int
+    let stage: Int?
+    var round: String?
+    var group: String?
     var played: Bool
     let tour: String
     let playersList: [String]
@@ -87,7 +96,7 @@ struct LIMatch: Codable {
     let fouls: String?
     let autoGoals: String?
     let id: String
-    let league: String
+    let league: String?
     let teamOne: String?
     let teamTwo: String?
     var events: [LIEvent]

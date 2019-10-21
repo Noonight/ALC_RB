@@ -800,7 +800,7 @@ class ApiRequests {
         alamofireInstance
             .responseJSON { response in
                 let decoder = ISO8601Decoder.getDecoder()
-                dump(response)
+//                dump(response)
                 do
                 {
                     if let tourneys = try? decoder.decode([Tourney].self, from: response.data!)
@@ -978,6 +978,7 @@ class ApiRequests {
             .request(ApiRoute.getApiURL(.activeMatches), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
             
         instance.responseActiveMatches { (response) in
+//            dump(response)
                 switch response.result {
                 case .success(let value):
                     get_success(value)
@@ -1033,6 +1034,7 @@ class ApiRequests {
         Alamofire
             .request(ApiRoute.getApiLeagueURL(id))
             .responseLILeagueInfo { response in
+//                dump(response)
                 switch response.result {
                 case .success:
                     if let leagueInfo = response.result.value {
@@ -1042,6 +1044,29 @@ class ApiRequests {
                     get_error(error)
                 }
         }
+    }
+    
+    func get_tournamentLeague(id: String, result: @escaping (ResultMy<LILeagueInfo, Error>) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiLeagueURL(id))
+            .responseJSON(completionHandler: { response in
+//                dump(response)
+                let decoder = ISO8601Decoder.getDecoder()
+                do {
+                    if let leagueInfo = try? decoder.decode(LILeagueInfo.self, from: response.data!) {
+                        result(.success(leagueInfo))
+                    } else {
+//                        try! decoder.decode(LILeagueInfo.self, from: response.data!)
+                    }
+                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+                        result(.message(message))
+                    }
+                }
+                if response.result.isFailure {
+                    result(.failure(response.result.error!))
+                }
+            })
+        
     }
     
     func get_getPerson(id: String, success: @escaping (GetPerson)->(), failure: @escaping (Error)->()) {

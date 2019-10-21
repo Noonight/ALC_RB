@@ -301,7 +301,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUp-90-mhN">
                                 <rect key="frame" x="0.0" y="119.5" width="320" height="0.5"/>
-                                <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="separatorColor" red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="d5H-p5-FLX"/>
                                 </constraints>
@@ -2246,28 +2246,28 @@
                                 <rect key="frame" x="0.0" y="41" width="320" height="527"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_players_tournament" rowHeight="38" id="Zda-ub-gzu" customClass="PlayersLeagueTableViewCell" customModule="ALC_RB" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="38"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_players_tournament" rowHeight="30" id="Zda-ub-gzu" customClass="PlayersLeagueTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zda-ub-gzu" id="fMH-cP-NKG">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="38"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="stn-TT-iQi">
-                                                    <rect key="frame" x="8" y="9" width="22" height="20"/>
+                                                    <rect key="frame" x="8" y="9" width="22" height="12"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="22" id="634-ue-1Y7"/>
                                                         <constraint firstAttribute="height" constant="22" id="xdV-aE-kum"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gST-i3-p2h">
-                                                    <rect key="frame" x="46" y="8" width="129" height="22"/>
+                                                    <rect key="frame" x="46" y="8" width="129" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="88J-yV-BOt">
-                                                    <rect key="frame" x="246" y="8" width="28" height="22"/>
+                                                    <rect key="frame" x="246" y="8" width="28" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="28" id="RM0-tM-Ke2"/>
                                                     </constraints>
@@ -2276,7 +2276,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bde-Eb-Bjf">
-                                                    <rect key="frame" x="220" y="8" width="10" height="22"/>
+                                                    <rect key="frame" x="220" y="8" width="10" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="10" id="V3F-um-K0b"/>
                                                     </constraints>
@@ -2285,7 +2285,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRG-Bg-xVG">
-                                                    <rect key="frame" x="191" y="8" width="13" height="22"/>
+                                                    <rect key="frame" x="191" y="8" width="13" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="13" id="Ugk-gd-2pt"/>
                                                     </constraints>
@@ -2294,7 +2294,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6L-rw-cd9">
-                                                    <rect key="frame" x="290" y="8" width="22" height="22"/>
+                                                    <rect key="frame" x="290" y="8" width="22" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="22" id="lDu-vJ-gJd"/>
                                                     </constraints>

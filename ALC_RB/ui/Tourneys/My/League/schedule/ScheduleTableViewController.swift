@@ -71,15 +71,26 @@ extension ScheduleTableViewController {
         
 //        viewModel
 //            .items
+//            .observeOn(MainScheduler.instance)
 //            .bind(to: tableView.rx.items(cellIdentifier: ScheduleTableViewCell.ID, cellType: ScheduleTableViewCell.self)) { (index, match, cell) in
 //                cell.matchScheduleModelItem = match
-//        }
-//        .disposed(by: disposeBag)
+//            }
+//            .disposed(by: disposeBag)
         
         viewModel
             .leagueDetailModel
             .map({ $0.leagueInfo.league.matches ?? [] })
-            .map({ $0.map({ MatchScheduleModelItem(match: $0, teamOne: nil, teamTwo: nil) }) })
+            .map({ $0.map({ match in
+                return MatchScheduleModelItem(
+                match: match,
+                teamOne: self.viewModel.leagueDetailModel.value.leagueInfo.league.teams?.filter({ team in
+                    return team.id == match.teamOne
+                    }).first,
+                teamTwo: self.viewModel.leagueDetailModel.value.leagueInfo.league.teams?.filter({ team in
+                    return team.id == match.teamTwo
+                    }).first  )
+            })
+            })
             .asDriver(onErrorJustReturn: [])
             .drive(tableView.rx.items(cellIdentifier: ScheduleTableViewCell.ID, cellType: ScheduleTableViewCell.self)) { (index, match, cell) in
                 cell.matchScheduleModelItem = match
@@ -102,8 +113,10 @@ extension ScheduleTableViewController {
         tableView
             .rx
             .itemSelected
-            .subscribe({ _ in
-                self.showProtocol()
+            .subscribe({ indexPath in
+                let cell = self.tableView.cellForRow(at: indexPath.element!) as! ScheduleTableViewCell
+                
+                self.showProtocol(match: cell.matchScheduleModelItem.match)
             })
             .disposed(by: disposeBag)
         
@@ -133,11 +146,11 @@ extension ScheduleTableViewController {
 
 extension ScheduleTableViewController {
     
-    func showProtocol() {
+    func showProtocol(match: LIMatch) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         var viewController = storyboard.instantiateViewController(withIdentifier: "MatchProtocolViewController") as! MatchProtocolViewController
         
-        
+        viewController.viewModel = ProtocolAllViewModel(match: match, leagueDetailModel: self.viewModel.leagueDetailModel.value)
         
         self.navigationController?.show(viewController, sender: self)
     }

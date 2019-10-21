@@ -270,9 +270,9 @@ extension PlayersLeagueDetailViewController: UITableViewDataSource {
         {
             cell.name_label.text = person.getSurnameNP()
             
-            self.presenter.getClubImageByClubId(user: self.getClubByUserId(user: player.playerId)) { (img) in
-                cell.photo_img.image = img.af_imageRoundedIntoCircle()
-            }
+//            self.presenter.getClubImageByClubId(user: self.getClubByUserId(user: player.playerId)) { (img) in
+//                cell.photo_img.image = img.af_imageRoundedIntoCircle()
+//            }
             
             cell.games_label.text = String(player.matches)
             cell.goals_label.text = String(player.goals)
@@ -294,17 +294,18 @@ extension PlayersLeagueDetailViewController: UITableViewDataSource {
         
     }
     
-    func getClubByUserId(user id: String) -> String {
-        let teams = leagueDetailModel.leagueInfo.league.teams
-        for i in teams! {
-            for j in i.players! {
-                if j.playerId == id {
-                    return i.club!
-                }
-            }
-        }
-        return " "
-    }
+//    func getClubByUserId(user id: String) -> String {
+//        let teams = leagueDetailModel.leagueInfo.league.teams
+//        for i in teams! {
+//            for j in i.players! {
+//                if j.playerId == id {
+//                    guard let club = i.club else { return " "}
+//                    return club
+//                }
+//            }
+//        }
+//        return " "
+//    }
 }
 
 extension PlayersLeagueDetailViewController: UITableViewDelegate {

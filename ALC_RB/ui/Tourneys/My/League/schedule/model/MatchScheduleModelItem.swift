@@ -11,10 +11,10 @@ import Foundation
 final class MatchScheduleModelItem {
     
     let match: LIMatch
-    var teamOne: _Team?
-    var teamTwo: _Team?
+    var teamOne: LITeam?
+    var teamTwo: LITeam?
     
-    init(match: LIMatch, teamOne: _Team?, teamTwo: _Team?) {
+    init(match: LIMatch, teamOne: LITeam?, teamTwo: LITeam?) {
         self.match = match
         self.teamOne = teamOne
         self.teamTwo = teamTwo
@@ -40,6 +40,12 @@ final class MatchScheduleModelItem {
     }
     var isPlayed: Bool {
         return match.played
+    }
+    var teamOneName: String? {
+        return self.teamOne?.name
+    }
+    var teamTwoName: String? {
+        return self.teamTwo?.name
     }
     
 }

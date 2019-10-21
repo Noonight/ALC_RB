@@ -58,13 +58,26 @@ final class MyTourneysVM {
     
     func fetchLeagueInfo(leagueId: String, success: @escaping (LILeagueInfo) -> ()) {
         self.loading.onNext(true)
+//        dataManager
+//            .get_tournamentLeague(id: leagueId, get_success: { leagueInfo in
+//                self.loading.onNext(false)
+//                success(leagueInfo)
+//            }) { error in
+//                self.loading.onNext(false)
+//                self.error.onNext(error)
+//        }
         dataManager
-            .get_tournamentLeague(id: leagueId, get_success: { leagueInfo in
+            .get_tournamentLeague(id: leagueId) { result in
                 self.loading.onNext(false)
-                success(leagueInfo)
-            }) { error in
-                self.loading.onNext(false)
-                self.error.onNext(error)
+                switch result {
+                case .success(let leagueInfo):
+                    success(leagueInfo)
+                case .message(let message):
+//                    rMessage(message)
+                    self.message.onNext(message)
+                case .failure(let error):
+                    self.error.onNext(error)
+                }
         }
     }
     

@@ -45,11 +45,11 @@ class PlayersTeamLeagueDetailViewController: UIViewController {
     }
     
     func initView() {
-        presenter.getClubOwnerImage(club: team.club!, get_image: { (image) in
-            self.photo_trainer_img.image = image//.af_imageRoundedIntoCircle()
-        }) {
-            // noting but if something went wrong make it
-        }
+//        presenter.getClubOwnerImage(club: team.club!, get_image: { (image) in
+//            self.photo_trainer_img.image = image//.af_imageRoundedIntoCircle()
+//        }) {
+//            // noting but if something went wrong make it
+//        }
         presenter.getTeamCreatorName(creator: team.creator!) { (name) in
             self.name_trainer_label.text = name
         }
