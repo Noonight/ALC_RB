@@ -53,7 +53,6 @@ class RegistrationViewController: UIViewController {
         super.viewWillAppear(true)
         
         self.setupNavController()
-        self.setupScrollKeyboard()
     }
     
     @IBAction func imageTap(_ sender: UITapGestureRecognizer) {
@@ -165,14 +164,8 @@ extension RegistrationViewController {
         
     }
     
-    func setupScrollKeyboard() {
-        scrollView.keyboardDismissMode = .onDrag
-        self.view.addGestureRecognizer(UIGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
-    }
-    
     func setupNavController() {
         self.navigationController?.isNavigationBarHidden = false
-        self.barCompleteButton.image =  barCompleteButton.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
     }
     
 }
