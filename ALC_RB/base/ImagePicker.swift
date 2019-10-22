@@ -56,8 +56,6 @@ open class ImagePicker: NSObject {
             alertController.addAction(action)
         }
         
-        if let action = self.action(for: .)
-        
         alertController.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
         
         if UIDevice.current.userInterfaceIdiom == .pad {

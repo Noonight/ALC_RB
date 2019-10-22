@@ -75,6 +75,16 @@ extension RegistrationViewController {
             }
             .disposed(by: bag)
         
+        viewModel
+            .regions
+            .subscribe({ elements in
+                guard let regions = elements.element else { return }
+                if self.viewModel.choosedRegion.value == nil {
+                    self.viewModel.choosedRegion.accept(regions.first)
+                }
+            })
+            .disposed(by: bag)
+        
         regionPicker
             .rx
             .modelSelected(RegionMy.self)
