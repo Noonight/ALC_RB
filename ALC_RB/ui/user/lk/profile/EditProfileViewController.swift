@@ -22,6 +22,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var loginTF: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var barSaveBtn: UIBarButtonItem!
+    @IBOutlet weak var regionPicker: UIPickerView!
     
     @IBOutlet weak var scrollView: UIScrollView!
     

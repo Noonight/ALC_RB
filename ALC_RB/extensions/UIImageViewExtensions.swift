@@ -38,7 +38,9 @@ extension UIImageView {
     func kfLoadImage(path: String?, placeholder: UIImage? = UIImage(named: "ic_logo")) {
         
         guard let imagePath = path else { return }
+        Print.m(imagePath)
         let url = ApiRoute.getImageURL(image: imagePath)
+        Print.m(url.absoluteString)
         let processor = DownsamplingImageProcessor(size: self.frame.size)
 //            .append(another: CroppingImageProcessorCustom(size: self .frame.size))
         
@@ -56,11 +58,13 @@ extension UIImageView {
     
     func kfLoadImage(path: String?, placeholder: UIImage? = UIImage(named: "ic_logo"), complete: @escaping (ResultLoadImage) -> ()) {
             
-            guard let imagePath = path else { return }
-            let url = ApiRoute.getImageURL(image: imagePath)
-            let processor = DownsamplingImageProcessor(size: self.frame.size)
-    //            .append(another: CroppingImageProcessorCustom(size: self .frame.size))
+        guard let imagePath = path else { return }
+        let url = ApiRoute.getImageURL(image: imagePath)
+        let processor = SVGProcessor(size: self.frame.size)
+            .append(another: DownsamplingImageProcessor(size: self.frame.size))
             
+        //                .append(another: CroppingImageProcessorCustom(size: self .frame.size))
+        
             self.kf.indicatorType = .none
             self.kf.setImage(
                 with: url,

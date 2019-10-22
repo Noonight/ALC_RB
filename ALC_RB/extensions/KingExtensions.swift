@@ -8,55 +8,20 @@
 
 import UIKit
 import Kingfisher
+import SVGKit
 
 public struct CroppingImageProcessorCustom: ImageProcessor {
     
-    /// Identifier of the processor.
-    /// - Note: See documentation of `ImageProcessor` protocol for more.
     public let identifier: String
-    
-    /// Target size of output image should be.
     public let size: CGSize
-    
-    /// Anchor point from which the output size should be calculate.
-    /// The anchor point is consisted by two values between 0.0 and 1.0.
-    /// It indicates a related point in current image.
-    /// See `CroppingImageProcessor.init(size:anchor:)` for more.
     public let anchor: CGPoint
     
-    /// Creates a `CroppingImageProcessor`.
-    ///
-    /// - Parameters:
-    ///   - size: Target size of output image should be.
-    ///   - anchor: The anchor point from which the size should be calculated.
-    ///             Default is `CGPoint(x: 0.5, y: 0.5)`, which means the center of input image.
-    /// - Note:
-    ///   The anchor point is consisted by two values between 0.0 and 1.0.
-    ///   It indicates a related point in current image, eg: (0.0, 0.0) for top-left
-    ///   corner, (0.5, 0.5) for center and (1.0, 1.0) for bottom-right corner.
-    ///   The `size` property of `CroppingImageProcessor` will be used along with
-    ///   `anchor` to calculate a target rectangle in the size of image.
-    ///
-    ///   The target size will be automatically calculated with a reasonable behavior.
-    ///   For example, when you have an image size of `CGSize(width: 100, height: 100)`,
-    ///   and a target size of `CGSize(width: 20, height: 20)`:
-    ///   - with a (0.0, 0.0) anchor (top-left), the crop rect will be `{0, 0, 20, 20}`;
-    ///   - with a (0.5, 0.5) anchor (center), it will be `{40, 40, 20, 20}`
-    ///   - while with a (1.0, 1.0) anchor (bottom-right), it will be `{80, 80, 20, 20}`
     public init(size: CGSize, anchor: CGPoint = CGPoint(x: 0.5, y: 0.5)) {
         self.size = size
         self.anchor = anchor
         self.identifier = "com.onevcat.Kingfisher.CroppingImageProcessorCustom(\(size)_\(anchor))"
     }
     
-    /// Processes the input `ImageProcessItem` with this processor.
-    ///
-    /// - Parameters:
-    ///   - item: Input item which will be processed by `self`.
-    ///   - options: Options when processing the item.
-    /// - Returns: The processed image.
-    ///
-    /// - Note: See documentation of `ImageProcessor` protocol for more.
     public func process(item: ImageProcessItem, options: KingfisherParsedOptionsInfo) -> Image? {
         switch item {
         case .image(let image):
@@ -67,3 +32,56 @@ public struct CroppingImageProcessorCustom: ImageProcessor {
         }
     }
 }
+
+struct SVGProcessor: ImageProcessor {
+    
+    // `identifier` should be the same for processors with the same properties/functionality
+    // It will be used when storing and retrieving the image to/from cache.
+    let identifier = "svgprocessor"
+    var size: CGSize!
+    init(size: CGSize) {
+        self.size = size
+    }
+    // Convert input data/image to target image and return it.
+    func process(item: ImageProcessItem, options: KingfisherParsedOptionsInfo) -> Image? {
+        switch item {
+        case .image(let image):
+//            print("already an image")
+            return image
+        case .data(let data):
+//            print("svg string")
+            let image = SVGKImage(data: data)
+            Print.m(data.kf.imageFormat == .unknown)
+//            SVGKImage(contentsOfFile: data.kf.contains(jpeg: ImageFormat.JPEGMarker.))
+            return image?.uiImage
+        }
+    }
+}
+//struct SVGCacheSerializer: CacheSerializer {
+//    func image(with data: Data, options: KingfisherParsedOptionsInfo) -> Image? {
+//        return generateSVGImage(data: data) ?? image(with: data, options: options)
+//    }
+//
+//    func data(with image: Image, original: Data?) -> Data? {
+//        return original
+//    }
+//}
+//
+//func generateSVGImage(data: Data, size: CGSize? = CGSize(width:250, height:250)) -> UIImage?{
+//    let frame = CGRect(x: 0, y: 0, width: size!.width, height: size!.height)
+//    if let svgString = String(data: data, encoding: .utf8){
+//        let svgLayer = SVGLayer(layer: svgString)
+//        svgLayer.frame = frame
+//        return snapshotImage(for: svgLayer)
+//    }
+//    return nil
+//}
+//
+//func snapshotImage(for layer: CALayer) -> UIImage? {
+//    UIGraphicsBeginImageContextWithOptions(layer.bounds.size, false, UIScreen.main.scale)
+//    guard let context = UIGraphicsGetCurrentContext() else { return nil }
+//    layer.render(in: context)
+//    let image = UIGraphicsGetImageFromCurrentImageContext()
+//    UIGraphicsEndImageContext()
+//    return image
+//}

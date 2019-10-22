@@ -20,6 +20,7 @@ target 'ALC_RB' do
   #pod 'StatusAlert'#, '~> 1.1.1' # like toast alert
   pod 'AMScrollingNavbar'
   pod 'Kingfisher', '~> 5.7' # loading image
+  pod 'SVGKit'
   #pod 'SDWebImage', '~> 5.0'
   #pod "CollieGallery"
   pod 'Lightbox' # full screen images

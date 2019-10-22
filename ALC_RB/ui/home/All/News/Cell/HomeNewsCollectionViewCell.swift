@@ -19,7 +19,14 @@ class HomeNewsCollectionViewCell: UICollectionViewCell {
     var newsModelItem: NewsModelItem! {
         didSet {
             self.title_label.text = newsModelItem.caption
-            self.news_image.kfLoadImage(path: newsModelItem.imagePath)
+            self.news_image.kfLoadImage(path: newsModelItem.imagePath) { result in
+                switch result {
+                case .success(let image):
+                    Print.m(image)
+                case .failure(let error):
+                    Print.m(error)
+                }
+            }
         }
     }
     

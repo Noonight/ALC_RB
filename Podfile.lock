@@ -5,6 +5,9 @@ PODS:
     - Alamofire (~> 4.7)
   - AMScrollingNavbar (5.2.0)
   - Cache (5.2.0)
+  - CocoaLumberjack (3.6.0):
+    - CocoaLumberjack/Core (= 3.6.0)
+  - CocoaLumberjack/Core (3.6.0)
   - ESPullToRefresh (2.7)
   - FloatingPanel (1.6.2)
   - Imaginary (4.2.0):
@@ -20,6 +23,8 @@ PODS:
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
   - SPStorkController (1.7.6)
+  - SVGKit (2.1.1):
+    - CocoaLumberjack (~> 3.0)
   - SwiftDate (5.1.0)
   - SwiftyJSON (4.2.0)
   - UIScrollView-InfiniteScroll (1.1.0)
@@ -38,6 +43,7 @@ DEPENDENCIES:
   - RxCocoa
   - RxSwift
   - SPStorkController
+  - SVGKit
   - SwiftDate (~> 5.0)
   - SwiftyJSON (~> 4.0)
   - UIScrollView-InfiniteScroll (~> 1.1.0)
@@ -63,6 +69,9 @@ SPEC REPOS:
     - SwiftDate
     - SwiftyJSON
     - UIScrollView-InfiniteScroll
+  trunk:
+    - CocoaLumberjack
+    - SVGKit
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
@@ -70,6 +79,7 @@ SPEC CHECKSUMS:
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
   AMScrollingNavbar: 9df3652d6757f1a24646d8e90cb458591d8b1a6a
   Cache: 807c5d86d01a177f06ede9865add3aea269bbfd4
+  CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
   ESPullToRefresh: 119e2710b82b75536aab2bbe4883ba119fca35c8
   FloatingPanel: 87207ad540c8188621791349c66fe41f35ec3602
   Imaginary: dae33d06dbc2ada22f98afef5eb45cc061311a2c
@@ -81,10 +91,11 @@ SPEC CHECKSUMS:
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
   SPStorkController: 6d0d0716a4e9e8245aa80715ffc57491b428569e
+  SVGKit: 652cdf7bef8bec8564d04a8511d3ab50c7595fac
   SwiftDate: 6329e58969a2de31cea7f1ee1143b247693196e7
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
 
-PODFILE CHECKSUM: f90e66490be7f0e9d68a004dab63707daca6c152
+PODFILE CHECKSUM: ccb781a4eb720f67155dbf86d151c4d254dd8d99
 
 COCOAPODS: 1.8.3
