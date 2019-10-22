@@ -2889,7 +2889,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="719"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ud-00-Ytq" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="577"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="756"/>
                                         <subviews>
                                             <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_add_photo" translatesAutoresizingMaskIntoConstraints="NO" id="DIA-GZ-Jra">
                                                 <rect key="frame" x="116" y="20" width="88" height="88"/>
@@ -2944,14 +2944,14 @@
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="hgp-Rn-6Qg">
-                                                <rect key="frame" x="16" y="369" width="288" height="200"/>
+                                                <rect key="frame" x="16" y="548" width="288" height="200"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="36H-Iv-eEH"/>
                                                 </constraints>
                                                 <locale key="locale" localeIdentifier="ru_RU"/>
                                             </datePicker>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата рождения" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5B5-bn-jgS">
-                                                <rect key="frame" x="16" y="352" width="288" height="17"/>
+                                                <rect key="frame" x="16" y="531" width="288" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="17" id="8cW-FZ-W2m"/>
                                                 </constraints>
@@ -2959,43 +2959,53 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Регион" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eHV-Qc-Kxk" userLabel="Region Text Field">
-                                                <rect key="frame" x="16" y="314" width="288" height="30"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите регион" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bV6-Vz-wew">
+                                                <rect key="frame" x="16" y="314" width="288" height="18"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="taO-XP-wus"/>
+                                                    <constraint firstAttribute="height" constant="18" id="VTL-HT-GKb"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0L8-c0-f4O">
+                                                <rect key="frame" x="16" y="340" width="288" height="200"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="bke-RD-omq"/>
+                                                </constraints>
+                                            </pickerView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="eHV-Qc-Kxk" secondAttribute="trailing" constant="16" id="19c-la-cyC"/>
                                             <constraint firstAttribute="trailing" secondItem="5B5-bn-jgS" secondAttribute="trailing" constant="16" id="1NF-Z6-ct1"/>
-                                            <constraint firstItem="5B5-bn-jgS" firstAttribute="top" secondItem="eHV-Qc-Kxk" secondAttribute="bottom" constant="8" id="1eX-Fl-Jap"/>
-                                            <constraint firstItem="eHV-Qc-Kxk" firstAttribute="top" secondItem="kFd-UT-zLb" secondAttribute="bottom" constant="8" id="1vG-5R-r31"/>
                                             <constraint firstItem="xGT-yl-wu4" firstAttribute="top" secondItem="DIA-GZ-Jra" secondAttribute="bottom" constant="16" id="22O-vr-Mac"/>
                                             <constraint firstItem="xGT-yl-wu4" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="2Br-6e-hEK"/>
                                             <constraint firstAttribute="trailing" secondItem="kFd-UT-zLb" secondAttribute="trailing" constant="16" id="4Jn-6j-Iuh"/>
                                             <constraint firstItem="DIA-GZ-Jra" firstAttribute="top" secondItem="5ud-00-Ytq" secondAttribute="top" constant="20" id="4XG-d6-j6d"/>
-                                            <constraint firstItem="eHV-Qc-Kxk" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="512-ma-MEg"/>
                                             <constraint firstItem="hgp-Rn-6Qg" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="68j-s7-NUg"/>
                                             <constraint firstItem="kFd-UT-zLb" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="E9l-KQ-gyM"/>
                                             <constraint firstItem="qyt-nw-RhY" firstAttribute="top" secondItem="xGT-yl-wu4" secondAttribute="bottom" constant="8" id="EJc-Yv-aqo"/>
                                             <constraint firstItem="kFd-UT-zLb" firstAttribute="top" secondItem="ucj-BO-9XC" secondAttribute="bottom" constant="8" id="Ky9-mS-dB6"/>
+                                            <constraint firstItem="hgp-Rn-6Qg" firstAttribute="top" secondItem="0L8-c0-f4O" secondAttribute="bottom" constant="8" id="MLC-t5-ufd"/>
+                                            <constraint firstItem="bV6-Vz-wew" firstAttribute="top" secondItem="kFd-UT-zLb" secondAttribute="bottom" constant="8" id="PEA-OG-jae"/>
                                             <constraint firstItem="Mje-64-Syy" firstAttribute="top" secondItem="qyt-nw-RhY" secondAttribute="bottom" constant="8" id="PWD-kI-B1c"/>
                                             <constraint firstAttribute="trailing" secondItem="Mje-64-Syy" secondAttribute="trailing" constant="16" id="SUZ-zt-KLb"/>
                                             <constraint firstItem="qyt-nw-RhY" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="Ush-uF-3bu"/>
                                             <constraint firstItem="DIA-GZ-Jra" firstAttribute="centerX" secondItem="5ud-00-Ytq" secondAttribute="centerX" id="WSd-gn-gl1"/>
+                                            <constraint firstItem="0L8-c0-f4O" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="ZI7-hk-WwA"/>
                                             <constraint firstAttribute="bottom" secondItem="hgp-Rn-6Qg" secondAttribute="bottom" constant="8" id="ZXh-uW-cGR"/>
                                             <constraint firstItem="ucj-BO-9XC" firstAttribute="top" secondItem="Mje-64-Syy" secondAttribute="bottom" constant="8" id="b3Q-46-1Ot"/>
                                             <constraint firstAttribute="trailing" secondItem="hgp-Rn-6Qg" secondAttribute="trailing" constant="16" id="cqf-vG-p30"/>
+                                            <constraint firstAttribute="trailing" secondItem="bV6-Vz-wew" secondAttribute="trailing" constant="16" id="eEj-sY-as2"/>
                                             <constraint firstItem="5B5-bn-jgS" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="gnd-4x-P8E"/>
+                                            <constraint firstAttribute="trailing" secondItem="0L8-c0-f4O" secondAttribute="trailing" constant="16" id="h5Q-AC-5UQ"/>
                                             <constraint firstItem="hgp-Rn-6Qg" firstAttribute="top" secondItem="5B5-bn-jgS" secondAttribute="bottom" id="m3k-Sz-f97"/>
                                             <constraint firstItem="Mje-64-Syy" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="mZR-5F-13M"/>
                                             <constraint firstAttribute="trailing" secondItem="ucj-BO-9XC" secondAttribute="trailing" constant="16" id="nc9-3a-Bic"/>
                                             <constraint firstItem="ucj-BO-9XC" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="o6i-Bj-AbK"/>
+                                            <constraint firstItem="0L8-c0-f4O" firstAttribute="top" secondItem="bV6-Vz-wew" secondAttribute="bottom" constant="8" id="sP9-Nq-O2c"/>
                                             <constraint firstAttribute="trailing" secondItem="xGT-yl-wu4" secondAttribute="trailing" constant="16" id="wjm-P0-pSB"/>
+                                            <constraint firstItem="bV6-Vz-wew" firstAttribute="leading" secondItem="5ud-00-Ytq" secondAttribute="leading" constant="16" id="y7Y-Ps-STU"/>
                                             <constraint firstAttribute="trailing" secondItem="qyt-nw-RhY" secondAttribute="trailing" constant="16" id="zLh-Fu-Vm0"/>
                                         </constraints>
                                     </view>
@@ -3035,6 +3045,7 @@
                         <outlet property="passwordTF" destination="kFd-UT-zLb" id="Ovf-Jx-MC6"/>
                         <outlet property="patronymicTextField" destination="Mje-64-Syy" id="xsP-ZK-HrB"/>
                         <outlet property="photoImageView" destination="DIA-GZ-Jra" id="fT2-hi-w6k"/>
+                        <outlet property="regionPicker" destination="0L8-c0-f4O" id="FTD-d1-9a3"/>
                         <outlet property="scrollView" destination="RCH-JD-Ole" id="koS-57-1h8"/>
                     </connections>
                 </viewController>

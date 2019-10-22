@@ -71,14 +71,10 @@ extension Reactive where Base: UserTourneysVC {
                 vc.segmentHelper.removeAll()
                 switch segment {
                 case .inside:
-    //                vc.segmentHelper.add(vc.scheduleTable)
-                    let nVc = InsideTourneysVC.getInstance()
-//                    nVc.viewModel.leagueDetailModel = vc.viewModel.leagueDetailModel
+                    let nVc = InsideTourneysVC(nibName: "InsideTourneysVC", bundle: Bundle.main)
                     vc.segmentHelper.add(nVc)
                 case .my:
-                    let nVc = MyTourneysVC.getInstance()
-//    //                nVc.viewModel.leagueDetailModel = vc.viewModel.leagueDetailModel
-//                    nVc.leagueDetailModel = vc.viewModel.leagueDetailModel.value
+                    let nVc = MyTourneysVC(nibName: "MyTourneysVC", bundle: Bundle.main)
                     vc.segmentHelper.add(nVc)
                 }
             }

@@ -191,21 +191,6 @@ extension Reactive where Base: ScheduleTableViewController {
         }
     }
     
-    internal var message: Binder<SingleLineMessage?> {
-        return Binder(self.base) { vc, message in
-            guard let mMessage = message else { return }
-            if vc.hud != nil {
-                vc.hud?.setToFailureView(detailMessage: mMessage.message, tap: {
-//                    vc.viewModel.fetch()
-                })
-            } else {
-                vc.hud = vc.showFailureViewHUD(detailMessage: mMessage.message, tap: {
-//                    vc.viewModel.fetch()
-                })
-            }
-        }
-    }
-    
     internal var empty: Binder<Bool> {
         return Binder(self.base) { vc, isEmpty in
             if isEmpty == true {

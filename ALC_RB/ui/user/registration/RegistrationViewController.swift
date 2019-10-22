@@ -7,13 +7,13 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class RegistrationViewController: UIViewController {
     enum Texts {
         static let FILL_ALL_FIELDS = "Заполните все поля"
     }
-    
-    // MARK: - Variables
     
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var familyTextField: UITextField!
@@ -23,35 +23,30 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var birthdayPicker: UIDatePicker!
     @IBOutlet weak var barCompleteButton: UIBarButtonItem!
-    
+    @IBOutlet weak var regionPicker: UIPickerView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    // MARK: Var & Let
+    private var imagePicker: ImagePicker?
+    private let viewModel = RegistrationViewModel(dataManager: ApiRequests())
+    private let bag = DisposeBag()
     
-    var choosedImage: UIImage? {
-        didSet {
-            self.photoImageView.image = self.choosedImage?.af_imageRoundedIntoCircle()
-        }
-    }
-    
-    var imagePicker: ImagePicker?
-    
-    let presenter = RegistrationPresenter()
-    
-    var authUser: AuthUser?
-    
-    let userDefaultsHelper = UserDefaultsHelper()
-    
-    // MARK: LIFE CYCLE
+    // MARK: - LIFE CYCLE
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupPresenter()
-        self.setupScrollKeyboard()
-        self.setupTextFields()
-        self.setupImagePicker()
+        errorAction = {
+            Print.m("У нас тут еррор такто")
+            self.viewModel.error.onNext(nil)
+        }
+        emptyAction = {
+            Print.m("Баг тут такого не должно быть")
+        }
         
+        setupBinds()
+        setupImagePicker()
+        
+        self.viewModel.fetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,22 +56,105 @@ class RegistrationViewController: UIViewController {
         self.setupScrollKeyboard()
     }
     
-    // MARK: SETUP
-    
-    func setupTextFields() {
-        self.familyTextField.delegate = self
-        self.nameTextField.delegate = self
-        self.patronymicTextField.delegate = self
-        self.loginTextField.delegate = self
-        self.passwordTF.delegate = self
+    @IBAction func imageTap(_ sender: UITapGestureRecognizer) {
+        imagePicker!.present(from: self.view)
     }
+
+}
+
+// MARK: SETUP
+
+extension RegistrationViewController {
+    
+    func setupBinds() {
+        
+        viewModel
+            .regions
+            .bind(to: regionPicker.rx.itemTitles) { _, item in
+                return "\(item.name)"
+            }
+            .disposed(by: bag)
+        
+        regionPicker
+            .rx
+            .modelSelected(RegionMy.self)
+            .subscribe({ event in
+                guard let regions = event.element else { return }
+                self.viewModel.choosedRegion.accept(regions.first)
+            })
+            .disposed(by: bag)
+        
+        barCompleteButton
+            .rx
+            .tap
+            .observeOn(MainScheduler.instance)
+            .subscribe({ event in
+                if !self.fieldsIsEmpty() {
+                    let dateOfBirth = self.birthdayPicker.date.getStringOfType(type: .iso8601)
+                    let region = self.viewModel.choosedRegion.value!._id
+                    let regData = Registration(
+                        type: "player",
+                        name: self.nameTextField.getTextOrEmptyString(),
+                        surName: self.familyTextField.getTextOrEmptyString(),
+                        lastName: self.patronymicTextField.getTextOrEmptyString(),
+                        login: self.loginTextField.text!,
+                        password: self.passwordTF.text!,
+                        birthdate: dateOfBirth,
+                        region: region)
+                    self.viewModel.registration(userData: regData)
+                } else {
+                    self.viewModel.message.onNext(SingleLineMessage(message: "Заполните все поля"))
+                }
+            })
+            .disposed(by: bag)
+        
+        viewModel
+            .choosedImage
+            .observeOn(MainScheduler.instance)
+            .subscribe({ element in
+                guard let image = element.element else {
+                    self.photoImageView.image = UIImage(named: "ic_add_photo")
+                    return
+                }
+                self.photoImageView.image = image?.af_imageRoundedIntoCircle()
+            })
+            .disposed(by: bag)
+        
+        viewModel
+            .authorizedUser
+            .asObserver()
+            .subscribeOn(MainScheduler.instance)
+            .subscribe({ user_event in
+                guard let user = user_event.element else { return }
+                self.replaceUserLKVC(authUser: user)
+            })
+            .disposed(by: bag)
+        
+        viewModel
+            .loading
+            .asDriver(onErrorJustReturn: false)
+            .drive(self.rx.loading)
+            .disposed(by: bag)
+        
+        viewModel
+            .error
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.rx.error)
+            .disposed(by: bag)
+        
+        viewModel
+            .message
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.rx.message)
+            .disposed(by: bag)
+    }
+    
     func setupImagePicker() {
+        self.photoImageView.image = UIImage(named: "ic_add_photo")
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
         
     }
-    func setupPresenter() {
-        self.initPresenter()
-    }
+    
     func setupScrollKeyboard() {
         scrollView.keyboardDismissMode = .onDrag
         self.view.addGestureRecognizer(UIGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
@@ -87,62 +165,17 @@ class RegistrationViewController: UIViewController {
         self.barCompleteButton.image =  barCompleteButton.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
     }
     
-    // MARK: - Actions
-    
-    @IBAction func completeRegistration(_ sender: UIBarButtonItem) {
-        if (!self.fieldsIsEmpty()) {
-            let dateOfBirth = birthdayPicker.date.getStringOfType(type: .GMT)
-            presenter.registration(userData: Registration(
-                type: "player",
-                name: nameTextField.getTextOrEmptyString(),
-                surName: familyTextField.getTextOrEmptyString(),
-                lastName: patronymicTextField.getTextOrEmptyString(),
-                login: loginTextField.text!,
-                password: passwordTF.text!,
-                birthdate: dateOfBirth), profileImage: self.choosedImage)
-        } else {
-            showAlert(message: Texts.FILL_ALL_FIELDS)
-        }
-    }
-    
-    @IBAction func imageTap(_ sender: UITapGestureRecognizer) {
-        imagePicker!.present(from: self.view)
-    }
-    
-    // MARK: - Helpers
+}
 
+// MARK: HELPER
+
+extension RegistrationViewController {
+    
     func fieldsIsEmpty() -> Bool {
-        if familyTextField.isEmpty() || nameTextField.isEmpty() || patronymicTextField.isEmpty() || loginTextField.isEmpty() || passwordTF.isEmpty() {
+        if familyTextField.isEmpty() || nameTextField.isEmpty() || patronymicTextField.isEmpty() || loginTextField.isEmpty() || passwordTF.isEmpty() || viewModel.choosedRegion.value == nil {
             return true
         }
         return false
-    }
-
-}
-
-// MARK: - PRESENTER
-
-extension RegistrationViewController: RegistrationView {
-    func registrationMessage(message: SingleLineMessage) {
-        showAlert(title: message.message, message: "")
-    }
-    
-    func initPresenter() {
-        presenter.attachView(view: self)
-    }
-    
-    func registrationComplete(authUser: AuthUser) {
-        self.userDefaultsHelper.deleteAuthorizedUser()
-        self.userDefaultsHelper.setAuthorizedUser(user: authUser)
-        
-        Print.d(object: authUser)
-        
-        replaceUserLKVC(authUser: authUser)
-    }
-    
-    func registrationError(error: Error) {
-        showAlert(message: error.localizedDescription)
-        Print.d(object: error)
     }
     
     func replaceUserLKVC(authUser: AuthUser) {
@@ -157,22 +190,21 @@ extension RegistrationViewController: RegistrationView {
         
         tabBarController?.viewControllers![countOfViewControllers! - 1] = viewController
     }
+    
 }
 
 // MARK: IMAGE PICKER
 
 extension RegistrationViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
-//        photoImageView.image = image?.af_imageRoundedIntoCircle()
-        self.choosedImage = image
+        self.viewModel.choosedImage.accept(image)
     }
 }
 
-// MARK: TEXT FIELDS
+// MARK: - REACTIVE
 
-extension RegistrationViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.endEditing(true)
-        return true
-    }
+extension Reactive where Base: RegistrationViewController {
+    
+    
+    
 }

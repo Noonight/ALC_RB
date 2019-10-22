@@ -23,6 +23,7 @@ struct Constants {
         static let TAP_FOR_REPEAT           = "Нажмите чтобы перезагрузить..."
         static let NO_STARRED_TOURNEYS      = "Нет отслеживаемых турниров"
         static let GO_TO_CHOOSE_TOURNEYS    = "Нажмите, чтобы перейти к выбору турниров"
+        static let MESSAGE                  = "Сообщение"
     }
 //    struct Images {
 //        static let Q_INFO       = UIImage(named: "ic_info")

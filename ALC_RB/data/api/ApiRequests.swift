@@ -104,6 +104,46 @@ class ApiRequests {
         }
     }
     
+    func post_registration(userData: Registration, profileImage: UIImage?, resultMy: @escaping (ResultMy<AuthUser, Error>) -> ()) {
+            Alamofire
+                .upload(multipartFormData: { (multipartFormData) in
+                    if let image = profileImage {
+                        multipartFormData.append(image.jpegData(compressionQuality: 100.0)!, withName: "photo", fileName: "jpg", mimeType: "image/jpg")
+                    }
+                    for (key, value) in userData.toParams() {
+                        let strValue = value as! String
+                        multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
+                    }
+                },
+                        usingThreshold: UInt64(),
+                        to: ApiRoute.getApiURL(.post_reg),
+                        method: .post)
+                { (result) in
+                    switch result {
+                    case .success(let upload, _, _):
+                        
+                        upload.responseString { response in
+                            Print.m(response)
+                            let decoder = ISO8601Decoder.getDecoder()
+                            do {
+                                if let authUser = try? decoder.decode(AuthUser.self, from: response.data!) {
+                                    resultMy(.success(authUser))
+                                }
+                                if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+                                    resultMy(.message(message))
+                                }
+                            }
+                            if response.result.isFailure {
+                                resultMy(.failure(response.error!))
+                            }
+                        }
+                        
+                    case .failure(let error):
+                        resultMy(.failure(error))
+                    }
+            }
+        }
+    
     func post_edit_profile(token: String, profileInfo: EditProfile, profileImage: UIImage?, response_success: @escaping (SoloPerson) -> (), response_failure: @escaping (Error) -> () ) {
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in

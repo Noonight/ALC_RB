@@ -16,8 +16,9 @@ struct Registration {
     var login = ""
     var password = ""
     var birthdate = ""
+    var region = ""
     
-    init(type: String, name: String, surName: String, lastName: String, login: String, password: String, birthdate: String) {
+    init(type: String, name: String, surName: String, lastName: String, login: String, password: String, birthdate: String, region: String) {
         self.type = type
         self.name = name
         self.surName = surName
@@ -25,6 +26,7 @@ struct Registration {
         self.login = login
         self.password = password
         self.birthdate = birthdate
+        self.region = region
     }
     
     func toParams() -> [String: Any] {
@@ -35,7 +37,8 @@ struct Registration {
             Fields.lastname.value() : self.lastName,
             Fields.login.value() : self.login,
             Fields.password.value() : self.password,
-            Fields.birthdate.value() : self.birthdate
+            Fields.birthdate.value() : self.birthdate,
+            Fields.region.value() : self.region
         ]
     }
     
@@ -47,6 +50,7 @@ struct Registration {
         case login = "login"
         case password = "password"
         case birthdate = "birthdate"
+        case region = "region"
         
         func value() -> String {
             return self.rawValue

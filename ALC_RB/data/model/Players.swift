@@ -48,6 +48,7 @@ struct Person: Codable {
     var updatedAt: String
     var v: Int
     var club: String?
+    var region: String
     
     enum TypeOfPerson: String {
         case player = "player"
@@ -75,6 +76,7 @@ struct Person: Codable {
         case updatedAt = "updatedAt"
         case v = "__v"
         case club = "club"
+        case region = "region"
     }
     
     init(from decoder: Decoder) throws {
@@ -97,6 +99,7 @@ struct Person: Codable {
         self.updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
         self.v = try container.decodeIfPresent(Int.self, forKey: .v) ?? -1
         self.club = try container.decodeIfPresent(String.self, forKey: .club) ?? ""
+        self.region = try container.decodeIfPresent(String.self, forKey: .region) ?? ""
     }
     
     func compareFullName(with fullName: String) -> Bool {
@@ -261,6 +264,7 @@ extension Person {
         updatedAt = ""
         v = -1
         club = ""
+        region = ""
     }
     
     init(data: Data) throws {

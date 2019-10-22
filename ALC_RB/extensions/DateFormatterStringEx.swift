@@ -17,6 +17,8 @@ enum DateFormats: String {
     case GMT = "EEE MMM dd HH:mm:ss zzz yyyy"
     
     case leagueDate = "yyyy-MM-dd"
+    
+    case iso8601 = "yyyy-MM-ddTHH:mm:ss:SSSZ"
 }
 //internal static let builtInAutoFormat: [String] =  [
 //    DateFormats.iso8601,
