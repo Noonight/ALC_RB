@@ -159,12 +159,12 @@ final class MyTourneyHeaderView: UIView {
         
         bringSubviewToFront(containerView)
         
-        let left = UIPanGestureRecognizer(target: self, action: #selector(panGesture(_:)))
-//        left.direction = .left
+        let left = UISwipeGestureRecognizer(target: self, action: #selector(panGesture(_:)))
+        left.direction = .left
         containerView.addGestureRecognizer(left)
-//        let right = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture(_:)))
-//        right.direction = .right
-//        containerView.addGestureRecognizer(right)
+        let right = UISwipeGestureRecognizer(target: self, action: #selector(panGesture(_:)))
+        right.direction = .right
+        containerView.addGestureRecognizer(right)
     }
     
     override init(frame: CGRect) {
@@ -181,110 +181,110 @@ final class MyTourneyHeaderView: UIView {
     var startPoint: CGPoint?
     var startingRightConst: CGFloat?
     
-    @objc func panGesture(_ sender: UIPanGestureRecognizer) {
-        switch sender.state {
-        case .began:
-            self.startPoint = sender.translation(in: self.containerView)
-            self.startingRightConst = self.containerRightAnchor?.constant
-            break;
-        case .changed:
-            var currentPoint = sender.translation(in: self.containerView)
-            var deltaX = currentPoint.x - self.startPoint!.x
-            var panningLeft = false
-            
-            if currentPoint.x < self.startPoint!.x {
-                panningLeft = true
-            }
-            if startingRightConst == 0 {
-                if !panningLeft {
-                    var constant = max(-deltaX, 0)
-                    if constant == 0 {
-                        hideButtons()
-                    } else {
-                        UIView.animate(withDuration: 0.1) {
-                            self.containerRightAnchor?.constant = constant
-                        }
-                    }
-                } else {
-                    var constant = min(-deltaX, 100)
-                    if constant == 100 {
-                        showButtons()
-                    } else {
-                        self.containerRightAnchor?.constant = constant
-                    }
-                }
-            } else {
-                var adjustment = self.startingRightConst! - deltaX
-                if !panningLeft {
-                    var constant = max(adjustment, 0)
-                    if constant == 0 {
-                        hideButtons()
-                    } else {
-                        self.containerRightAnchor?.constant = constant
-                    }
-                } else {
-                    var constant = min(adjustment, 100)
-                    if constant == 100 {
-                        showButtons()
-                    } else {
-                        self.containerRightAnchor!.constant = constant
-                    }
-                }
-            }
-            
-            self.containerLeftAnchor!.constant = -self.containerRightAnchor!.constant
-            break
-        case .ended:
-//            if self.startingRightConst == 0 {
-//                var half = 25
-//                if Int(containerRightAnchor!.constant) >= half {
-//                    showButtons()
+    @objc func panGesture(_ sender: UISwipeGestureRecognizer) {
+//        switch sender.state {
+//        case .began:
+//            self.startPoint = sender.translation(in: self.containerView)
+//            self.startingRightConst = self.containerRightAnchor?.constant
+//            break;
+//        case .changed:
+//            var currentPoint = sender.translation(in: self.containerView)
+//            var deltaX = currentPoint.x - self.startPoint!.x
+//            var panningLeft = false
+//
+//            if currentPoint.x < self.startPoint!.x {
+//                panningLeft = true
+//            }
+//            if startingRightConst == 0 {
+//                if !panningLeft {
+//                    var constant = max(-deltaX, 0)
+//                    if constant == 0 {
+//                        hideButtons()
+//                    } else {
+//                        UIView.animate(withDuration: 0.1) {
+//                            self.containerRightAnchor?.constant = constant
+//                        }
+//                    }
 //                } else {
-//                    hideButtons()
+//                    var constant = min(-deltaX, 100)
+//                    if constant == 100 {
+//                        showButtons()
+//                    } else {
+//                        self.containerRightAnchor?.constant = constant
+//                    }
 //                }
 //            } else {
-//                var totalSize = 50
-//                if Int(containerRightAnchor!.constant) >= totalSize {
-//                    showButtons()
+//                var adjustment = self.startingRightConst! - deltaX
+//                if !panningLeft {
+//                    var constant = max(adjustment, 0)
+//                    if constant == 0 {
+//                        hideButtons()
+//                    } else {
+//                        self.containerRightAnchor?.constant = constant
+//                    }
 //                } else {
-//                    hideButtons()
+//                    var constant = min(adjustment, 100)
+//                    if constant == 100 {
+//                        showButtons()
+//                    } else {
+//                        self.containerRightAnchor!.constant = constant
+//                    }
 //                }
 //            }
-            break
-        case .cancelled:
-            if startingRightConst == 0 {
-                hideButtons()
-            } else {
-                showButtons()
-            }
-            break
-        case .possible:
-            Print.m("possible")
-            break
-        case .failed:
-            Print.m("failed")
-            break
-        }
-//        switch sender.direction {
-//        case .left:
-//            Print.m("left gesture")
-//            layoutIfNeeded()
-//            UIView.animate(withDuration: 0.2) {
-//                self.containerRightAnchor?.constant = -100
-//                self.containerLeftAnchor?.constant = -100
-//                self.layoutIfNeeded()
+//
+//            self.containerLeftAnchor!.constant = -self.containerRightAnchor!.constant
+//            break
+//        case .ended:
+////            if self.startingRightConst == 0 {
+////                var half = 25
+////                if Int(containerRightAnchor!.constant) >= half {
+////                    showButtons()
+////                } else {
+////                    hideButtons()
+////                }
+////            } else {
+////                var totalSize = 50
+////                if Int(containerRightAnchor!.constant) >= totalSize {
+////                    showButtons()
+////                } else {
+////                    hideButtons()
+////                }
+////            }
+//            break
+//        case .cancelled:
+//            if startingRightConst == 0 {
+//                hideButtons()
+//            } else {
+//                showButtons()
 //            }
-//        case .right:
-//            Print.m("right gesture")
-//            layoutIfNeeded()
-//            UIView.animate(withDuration: 0.2) {
-//                self.containerRightAnchor?.constant = 0
-//                self.containerLeftAnchor?.constant = 0
-//                self.layoutIfNeeded()
-//            }
-//        default:
-//            Print.m("not left and right")
+//            break
+//        case .possible:
+//            Print.m("possible")
+//            break
+//        case .failed:
+//            Print.m("failed")
+//            break
 //        }
+        switch sender.direction {
+        case .left:
+            Print.m("left gesture")
+            layoutIfNeeded()
+            UIView.animate(withDuration: 0.2) {
+                self.containerRightAnchor?.constant = -100
+                self.containerLeftAnchor?.constant = -100
+                self.layoutIfNeeded()
+            }
+        case .right:
+            Print.m("right gesture")
+            layoutIfNeeded()
+            UIView.animate(withDuration: 0.2) {
+                self.containerRightAnchor?.constant = 0
+                self.containerLeftAnchor?.constant = 0
+                self.layoutIfNeeded()
+            }
+        default:
+            Print.m("not left and right")
+        }
     }
     
     func hideButtons() {
