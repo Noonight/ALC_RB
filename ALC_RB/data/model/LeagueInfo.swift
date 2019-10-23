@@ -22,28 +22,28 @@ struct LILeagueInfo: Codable {
 }
 
 struct LILeague: Codable {
-    let status: String?
+    var status: String?
     
     var creator: String?
     var stages: [_Stage]?
     
     
     var matches: [LIMatch]?
-    let id: String?
-    let tourney: String?
-    let name: String?
+    var id: String?
+    var tourney: String?
+    var name: String?
     var beginDate: String?
     var endDate: String?
-    let maxTeams: Int?
-    let teams: [LITeam]?
-    let transferBegin: String?
-    let transferEnd: String?
-    let playersMin: Int?
-    let playersMax: Int?
-    let playersCapacity: Int?
-    let yellowCardsToDisqual: Int?
-    let ageAllowedMin: Int?
-    let ageAllowedMax: Int?
+    var maxTeams: Int?
+    var teams: [LITeam]?
+    var transferBegin: String?
+    var transferEnd: String?
+    var playersMin: Int?
+    var playersMax: Int?
+    var playersCapacity: Int?
+    var yellowCardsToDisqual: Int?
+    var ageAllowedMin: Int?
+    var ageAllowedMax: Int?
     
     func convertToLeague() -> League {
         func getMatchArray() -> [String] {
@@ -83,27 +83,27 @@ struct LILeague: Codable {
 }
 
 struct LIMatch: Codable {
-    let date: String?
-    let stage: String?
+    var date: String?
+    var stage: String?
     var round: String?
     var group: String?
     var played: Bool
-    let tour: String
-    let playersList: [String]
-    let place: String?
-    let winner: String?
-    let score: String?
-    let fouls: String?
-    let autoGoals: String?
-    let id: String
-    let league: String?
-    let teamOne: String?
-    let teamTwo: String?
+    var tour: String
+    var playersList: [String]
+    var place: String?
+    var winner: String?
+    var score: String?
+    var fouls: String?
+    var autoGoals: String?
+    var id: String
+    var league: String?
+    var teamOne: String?
+    var teamTwo: String?
     var events: [LIEvent]
-    let referees: [LIReferee]
-    let createdAt: String
-    let updatedAt: String
-    let v: Int
+    var referees: [LIReferee]
+    var createdAt: String
+    var updatedAt: String
+    var v: Int
     
     
     
@@ -539,25 +539,25 @@ extension LILeagueInfo {
 
 extension LILeague {
     
-    init() {
-        status = ""
-        matches = []
-        id = ""
-        tourney = ""
-        name = ""
-        beginDate = ""
-        endDate = ""
-        maxTeams = -1
-        teams = []
-        transferBegin = ""
-        transferEnd = ""
-        playersMin = -1
-        playersMax = -1
-        playersCapacity = -1
-        yellowCardsToDisqual = -1
-        ageAllowedMin = -1
-        ageAllowedMax = -1
-    }
+//    init() {
+//        status = ""
+//        matches = []
+//        id = ""
+//        tourney = ""
+//        name = ""
+//        beginDate = ""
+//        endDate = ""
+//        maxTeams = -1
+//        teams = []
+//        transferBegin = ""
+//        transferEnd = ""
+//        playersMin = -1
+//        playersMax = -1
+//        playersCapacity = -1
+//        yellowCardsToDisqual = -1
+//        ageAllowedMin = -1
+//        ageAllowedMax = -1
+//    }
     
     init(data: Data) throws {
         self = try JSONDecoder().decode(LILeague.self, from: data)
@@ -593,25 +593,26 @@ extension LILeague {
         ageAllowedMin: Int? = nil,
         ageAllowedMax: Int? = nil
         ) -> LILeague {
-        return LILeague(
-            status: status ?? self.status,
-            matches: matches ?? self.matches,
-            id: id ?? self.id,
-            tourney: tourney ?? self.tourney,
-            name: name ?? self.name,
-            beginDate: beginDate ?? self.beginDate,
-            endDate: endDate ?? self.endDate,
-            maxTeams: maxTeams ?? self.maxTeams,
-            teams: teams ?? self.teams,
-            transferBegin: transferBegin ?? self.transferBegin,
-            transferEnd: transferEnd ?? self.transferEnd,
-            playersMin: playersMin ?? self.playersMin,
-            playersMax: playersMax ?? self.playersMax,
-            playersCapacity: playersCapacity ?? self.playersCapacity,
-            yellowCardsToDisqual: yellowCardsToDisqual ?? self.yellowCardsToDisqual,
-            ageAllowedMin: ageAllowedMin ?? self.ageAllowedMin,
-            ageAllowedMax: ageAllowedMax ?? self.ageAllowedMax
-        )
+        var league = LILeague()
+        league.status = status ?? self.status
+        league.matches = matches ?? self.matches
+        league.id = id ?? self.id
+        league.tourney = tourney ?? self.tourney
+        league.name = name ?? self.name
+        league.beginDate = beginDate ?? self.beginDate
+        league.endDate = endDate ?? self.endDate
+        league.maxTeams = maxTeams ?? self.maxTeams
+        league.teams = teams ?? self.teams
+        league.transferBegin = transferBegin ?? self.transferBegin
+        league.transferEnd = transferEnd ?? self.transferEnd
+        league.playersMin = playersMin ?? self.playersMin
+        league.playersMax = playersMax ?? self.playersMax
+        league.playersCapacity = playersCapacity ?? self.playersCapacity
+        league.yellowCardsToDisqual = yellowCardsToDisqual ?? self.yellowCardsToDisqual
+        league.ageAllowedMin = ageAllowedMin ?? self.ageAllowedMin
+        league.ageAllowedMax = ageAllowedMax ?? self.ageAllowedMax
+        
+        return league
     }
     
     func jsonData() throws -> Data {
@@ -683,27 +684,28 @@ extension LIMatch {
         updatedAt: String? = nil,
         v: Int? = nil
         ) -> LIMatch {
-        return LIMatch(
-            date: date ?? self.date,
-            stage: stage ?? self.stage,
-            played: played ?? self.played,
-            tour: tour ?? self.tour,
-            playersList: playersList ?? self.playersList,
-            place: place ?? self.place,
-            winner: winner ?? self.winner,
-            score: score ?? self.score,
-            fouls: fouls ?? self.fouls,
-            autoGoals: autoGoals ?? self.autoGoals,
-            id: id ?? self.id,
-            league: league ?? self.league,
-            teamOne: teamOne ?? self.teamOne,
-            teamTwo: teamTwo ?? self.teamTwo,
-            events: events ?? self.events,
-            referees: referees ?? self.referees,
-            createdAt: createdAt ?? self.createdAt,
-            updatedAt: updatedAt ?? self.updatedAt,
-            v: v ?? self.v
-        )
+        var match = LIMatch()
+        match.date = date ?? self.date
+        match.stage = stage ?? self.stage
+        match.played = played ?? self.played
+        match.tour = tour ?? self.tour
+        match.playersList = playersList ?? self.playersList
+        match.place = place ?? self.place
+        match.winner = winner ?? self.winner
+        match.score = score ?? self.score
+        match.fouls = fouls ?? self.fouls
+        match.autoGoals = autoGoals ?? self.autoGoals
+        match.id = id ?? self.id
+        match.league = league ?? self.league
+        match.teamOne = teamOne ?? self.teamOne
+        match.teamTwo = teamTwo ?? self.teamTwo
+        match.events = events ?? self.events
+        match.referees = referees ?? self.referees
+        match.createdAt = createdAt ?? self.createdAt
+        match.updatedAt = updatedAt ?? self.updatedAt
+        match.v = v ?? self.v
+        
+        return match
     }
     
     func jsonData() throws -> Data {

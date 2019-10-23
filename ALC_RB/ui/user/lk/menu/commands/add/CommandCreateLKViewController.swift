@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegate {
 
@@ -21,17 +23,9 @@ class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegat
     }
     
     @IBOutlet weak var saveBtn: UIBarButtonItem!
-    
     @IBOutlet weak var nameTextField: UITextField!
-    
-    @IBOutlet weak var tournamentBtn: UIButton!
-    @IBOutlet weak var tournamentPickerViewHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var clubBtn: UIButton!
-    @IBOutlet weak var clubPickerViewHeight: NSLayoutConstraint!
-    
+    @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var tournamentPickerView: UIPickerView!
-    @IBOutlet weak var clubPickerView: UIPickerView!
     
     let presenter = CommandCreateLKPresenter()
     
@@ -138,59 +132,59 @@ class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegat
         self.view.layoutIfNeeded()
         tournamentPickerView.layoutIfNeeded()
         
-        UIView.animate(withDuration: 0.5) {
-            self.tournamentPickerViewHeight.constant = 120
-            self.view.layoutIfNeeded()
-            self.tournamentPickerView.layoutIfNeeded()
-        }
+//        UIView.animate(withDuration: 0.5) {
+////            self.tournamentPickerViewHeight.constant = 120
+//            self.view.layoutIfNeeded()
+//            self.tournamentPickerView.layoutIfNeeded()
+//        }
     }
     
     func hideTournamentPicker() {
         self.view.layoutIfNeeded()
         tournamentPickerView.layoutIfNeeded()
         
-        UIView.animate(withDuration: 0.5) {
-            self.tournamentPickerViewHeight.constant = 0
-            self.view.layoutIfNeeded()
-            self.tournamentPickerView.layoutIfNeeded()
-        }
+//        UIView.animate(withDuration: 0.5) {
+//            self.tournamentPickerViewHeight.constant = 0
+//            self.view.layoutIfNeeded()
+//            self.tournamentPickerView.layoutIfNeeded()
+//        }
         tournamentPickerView.isHidden = true
         
     }
     
     // MARK: - Club picker view
     
-    @IBAction func onClubBtnPressed(_ sender: UIButton) {
-        if clubPickerView.isHidden {
-            showClubPicker()
-        } else {
-            hideClubPicker()
-        }
-    }
+//    @IBAction func onClubBtnPressed(_ sender: UIButton) {
+//        if clubPickerView.isHidden {
+//            showClubPicker()
+//        } else {
+//            hideClubPicker()
+//        }
+//    }
+//
+//    func showClubPicker() {
+//        clubPickerView.isHidden = false
+//        self.view.layoutIfNeeded()
+//        clubPickerView.layoutIfNeeded()
+//
+//        UIView.animate(withDuration: 0.5) {
+//            self.clubPickerViewHeight.constant = 120
+//            self.view.layoutIfNeeded()
+//            self.clubPickerView.layoutIfNeeded()
+//        }
+//    }
     
-    func showClubPicker() {
-        clubPickerView.isHidden = false
-        self.view.layoutIfNeeded()
-        clubPickerView.layoutIfNeeded()
-        
-        UIView.animate(withDuration: 0.5) {
-            self.clubPickerViewHeight.constant = 120
-            self.view.layoutIfNeeded()
-            self.clubPickerView.layoutIfNeeded()
-        }
-    }
-    
-    func hideClubPicker() {
-        self.view.layoutIfNeeded()
-        clubPickerView.layoutIfNeeded()
-        
-        UIView.animate(withDuration: 0.5) {
-            self.clubPickerViewHeight.constant = 0
-            self.view.layoutIfNeeded()
-            self.clubPickerView.layoutIfNeeded()
-        }
-        clubPickerView.isHidden = true
-    }
+//    func hideClubPicker() {
+//        self.view.layoutIfNeeded()
+//        clubPickerView.layoutIfNeeded()
+//        
+//        UIView.animate(withDuration: 0.5) {
+//            self.clubPickerViewHeight.constant = 0
+//            self.view.layoutIfNeeded()
+//            self.clubPickerView.layoutIfNeeded()
+//        }
+//        clubPickerView.isHidden = true
+//    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)
@@ -216,7 +210,7 @@ extension CommandCreateLKViewController : SelectRowTournamentPickerHelper {
 extension CommandCreateLKViewController : SelectRowClubPickerHelper {
     func onSelectRow(row: Int, element: Club) {
         clubItem = element
-        clubBtn.setTitle(element.name, for: .normal)
+//        clubBtn.setTitle(element.name, for: .normal)
     }
 }
 

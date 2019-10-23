@@ -8,7 +8,7 @@
 
 import UIKit
 import Kingfisher
-import SVGKit
+//import SVGKit
 
 public struct CroppingImageProcessorCustom: ImageProcessor {
     
@@ -33,30 +33,30 @@ public struct CroppingImageProcessorCustom: ImageProcessor {
     }
 }
 
-struct SVGProcessor: ImageProcessor {
-    
-    // `identifier` should be the same for processors with the same properties/functionality
-    // It will be used when storing and retrieving the image to/from cache.
-    let identifier = "svgprocessor"
-    var size: CGSize!
-    init(size: CGSize) {
-        self.size = size
-    }
-    // Convert input data/image to target image and return it.
-    func process(item: ImageProcessItem, options: KingfisherParsedOptionsInfo) -> Image? {
-        switch item {
-        case .image(let image):
-//            print("already an image")
-            return image
-        case .data(let data):
-//            print("svg string")
-            let image = SVGKImage(data: data)
-            Print.m(data.kf.imageFormat == .unknown)
-//            SVGKImage(contentsOfFile: data.kf.contains(jpeg: ImageFormat.JPEGMarker.))
-            return image?.uiImage
-        }
-    }
-}
+//struct SVGProcessor: ImageProcessor {
+//
+//    // `identifier` should be the same for processors with the same properties/functionality
+//    // It will be used when storing and retrieving the image to/from cache.
+//    let identifier = "svgprocessor"
+//    var size: CGSize!
+//    init(size: CGSize) {
+//        self.size = size
+//    }
+//    // Convert input data/image to target image and return it.
+//    func process(item: ImageProcessItem, options: KingfisherParsedOptionsInfo) -> Image? {
+//        switch item {
+//        case .image(let image):
+////            print("already an image")
+//            return image
+//        case .data(let data):
+////            print("svg string")
+//            let image = SVGKImage(data: data)
+//            Print.m(data.kf.imageFormat == .unknown)
+////            SVGKImage(contentsOfFile: data.kf.contains(jpeg: ImageFormat.JPEGMarker.))
+//            return image?.uiImage
+//        }
+//    }
+//}
 //struct SVGCacheSerializer: CacheSerializer {
 //    func image(with data: Data, options: KingfisherParsedOptionsInfo) -> Image? {
 //        return generateSVGImage(data: data) ?? image(with: data, options: options)

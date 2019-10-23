@@ -30,9 +30,32 @@ struct ParticipationMatch: Codable {
     var leagueID: String
     
     func convertToLIMatch() -> LIMatch {
-        return LIMatch(date: date, stage: stage, played: played, tour: tour, playersList: playersList, place: place, winner: winner, score: score, fouls: fouls, autoGoals: autoGoals, id: id, league: league, teamOne: teamOne, teamTwo: teamTwo, events: events, referees: referees.map({ referee -> LIReferee in
+        var match = LIMatch()
+        match.id = id
+        match.date = date
+        match.played = played
+        match.tour = tour
+        match.playersList = playersList
+        match.place = place
+        match.winner = winner
+        match.score = score
+        match.fouls = fouls
+        match.autoGoals = autoGoals
+        match.league = league
+        match.teamOne = teamOne
+        match.teamTwo = teamTwo
+        match.events = events
+        match.referees = referees.map({ referee -> LIReferee in
             return LIReferee(id: referee.id, person: referee.person, type: referee.type)
-        }), createdAt: createdAt, updatedAt: updatedAt, v: v)
+        })
+        match.createdAt = createdAt
+        match.updatedAt = updatedAt
+        match.v = v
+        
+        return match
+//        return LIMatch(date: date, stage: stage, played: played, tour: tour, playersList: playersList, place: place, winner: winner, score: score, fouls: fouls, autoGoals: autoGoals, id: id, league: league, teamOne: teamOne, teamTwo: teamTwo, events: events, referees: referees.map({ referee -> LIReferee in
+//            return LIReferee(id: referee.id, person: referee.person, type: referee.type)
+//        }), createdAt: createdAt, updatedAt: updatedAt, v: v)
     }
     
     init(from decoder: Decoder) throws {

@@ -60,9 +60,10 @@ extension UIImageView {
             
         guard let imagePath = path else { return }
         let url = ApiRoute.getImageURL(image: imagePath)
-        let processor = SVGProcessor(size: self.frame.size)
-            .append(another: DownsamplingImageProcessor(size: self.frame.size))
-            
+        let processor = DownsamplingImageProcessor(size: self.frame.size)
+            //SVGProcessor(size: self.frame.size)
+//            .append(another: DownsamplingImageProcessor(size: self.frame.size))
+        
         //                .append(another: CroppingImageProcessorCustom(size: self .frame.size))
         
             self.kf.indicatorType = .none
