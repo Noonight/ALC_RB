@@ -15,6 +15,47 @@ class ApiRequests {
     
     // MARK: - POST requests
     
+    func post_authorization(userData: SignIn, resultMy: @escaping (ResultMy<AuthUser, Error>) -> ()) {
+            let params: [String: Any] = [
+                SignIn.Fields.login.rawValue: userData.login,
+                SignIn.Fields.password.rawValue: userData.password
+            ]
+            Alamofire
+                .upload(multipartFormData: { (multipartFormData) in
+                    for (key, value) in params {
+                        let strValue = value as! String
+                        multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
+                    }
+                },
+                        usingThreshold: UInt64(),
+                        to: ApiRoute.getApiURL(.post_auth),
+                        method: .post)
+                { (result) in
+    //                dump(result)
+                    switch result {
+                    case .success(let upload, _, _):
+                        
+                        upload.responseData { response in
+                            let decoder = ISO8601Decoder.getDecoder()
+                            do {
+                                if let authUser = try? decoder.decode(AuthUser.self, from: response.data!) {
+                                    resultMy(.success(authUser))
+                                }
+                                if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+                                    resultMy(.message(message))
+                                }
+                            }
+                            if response.result.isFailure {
+                                resultMy(.failure(response.error!))
+                            }
+                        }
+                        
+                    case .failure(let error):
+                        resultMy(.failure(error))
+                    }
+            }
+        }
+    
     func post_authorization(userData: SignIn, get_auth_user: @escaping (AuthUser) -> (), get_error: @escaping (Error) -> (), get_message: @escaping (SingleLineMessage) -> ()) {
         let params: [String: Any] = [
             SignIn.Fields.login.rawValue: userData.login,

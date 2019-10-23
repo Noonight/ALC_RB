@@ -112,7 +112,7 @@ extension RegistrationViewController {
                         region: region)
                     self.viewModel.registration(userData: regData)
                 } else {
-                    self.viewModel.message.onNext(SingleLineMessage(message: "Заполните все поля"))
+                    self.viewModel.message.onNext(SingleLineMessage(message: Constants.Texts.FILL_ALL_FIELDS))
                 }
             })
             .disposed(by: bag)

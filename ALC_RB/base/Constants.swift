@@ -24,6 +24,8 @@ struct Constants {
         static let NO_STARRED_TOURNEYS      = "Нет отслеживаемых турниров"
         static let GO_TO_CHOOSE_TOURNEYS    = "Нажмите, чтобы перейти к выбору турниров"
         static let MESSAGE                  = "Сообщение"
+        static let FILL_ALL_FIELDS          = "Заполните все поля"
+        static let AUTHORIZATION            = "Авторизуемся..."
     }
 //    struct Images {
 //        static let Q_INFO       = UIImage(named: "ic_info")

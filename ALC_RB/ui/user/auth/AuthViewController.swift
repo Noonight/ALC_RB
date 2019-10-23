@@ -7,100 +7,104 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class AuthViewController: UIViewController {
-
-    // MARK: - Properties
     
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var backgroundImage: UIImageView!
+    @IBOutlet weak var signInButton: UIButton!
     
-    let presenter = AuthPresenter()
-    
-    let userDefaultHelper = UserDefaultsHelper()
-    
-    // MARK: - Life cycle
+    private var viewModel: AuthViewModel!
+    private let bag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initPresenter()
+        setupViewModel()
+        setupBinds()
         
-        loginTextField.delegate = self
-        passwordTextField.delegate = self
-        
-        if userDefaultHelper.userIsAuthorized() {
-            replaceUserLKVC(authUser: userDefaultHelper.getAuthorizedUser()!)
-        }
+        checkUserAuthorization()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
         navigationController?.isNavigationBarHidden = true
-        
-//        self.view.addGestureRecognizer(UIGestureRecognizer(target: self.view, action: Selector("endEditing:")))
-        
-//        self.backgroundImage.addGestureRecognizer(UIGestureRecognizer(target: self.backgroundImage, action: Selector("endEditing:")))
     }
     
-    // MARK: - Actions
-    
-    @IBAction func signInBtnPressed(_ sender: UIButton) {
-        signIn()
-        //authorizationComplete(authUser: AuthUser())
-    }
-
-    // MARK: - logic
-    
-    func signIn() {
-        if !fieldsIsEmpty() {
-            presenter.signIn(userData: SignIn(
-                login: loginTextField.text!,
-                password: passwordTextField.text!)
-            )
-        } else {
-            showToast(message: "Заполните все поля")
-        }
-        
-    }
-    
-    func fieldsIsEmpty() -> Bool {
-        if loginTextField.isEmpty() || passwordTextField.isEmpty() {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
 }
 
-// MARK: Presenter
+// MARK: - SETUP
 
-extension AuthViewController: AuthView {
-    func authorizationMessage(message: SingleLineMessage) {
-        showAlert(title: message.message, message: "")
+extension AuthViewController {
+    
+    func setupViewModel() {
+        viewModel = AuthViewModel(dataManager: ApiRequests())
     }
     
-    func initPresenter() {
-        presenter.attachView(view: self)
+    func setupBinds() {
+        
+        viewModel
+            .authUser
+//            .observeOn(MainScheduler.instance)
+            .subscribe({ uUser in
+                guard let user = uUser.element else { return }
+                self.replaceUserLKVC(authUser: user)
+            })
+            .disposed(by: bag)
+        
+        signInButton
+            .rx
+            .tap
+            .observeOn(MainScheduler.instance)
+            .subscribe({ _ in
+                if self.fieldsIsEmpty() == false {
+                    let signIn = SignIn(
+                        login: self.loginTextField.text!,
+                        password: self.passwordTextField.text!)
+                    self.viewModel.authorization(userData: signIn)
+                } else {
+                    self.viewModel.message.onNext(SingleLineMessage(message: Constants.Texts.FILL_ALL_FIELDS))
+                }
+            })
+            .disposed(by: bag)
+        
+        viewModel
+            .loading
+            .asDriver(onErrorJustReturn: false)
+            .drive(self.rx.loading)
+            .disposed(by: bag)
+        
+        viewModel
+            .error
+            .asDriver(onErrorJustReturn: nil)
+            .drive(self.rx.error)
+            .disposed(by: bag)
+        
+        viewModel
+            .message
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.rx.message)
+            .disposed(by: bag)
     }
     
-    func authorizationComplete(authUser: AuthUser) {
-        
-        userDefaultHelper.deleteAuthorizedUser()
-        userDefaultHelper.setAuthorizedUser(user: authUser)
-        
-        replaceUserLKVC(authUser: authUser)
+}
+
+// MARK: - HELPER
+
+extension AuthViewController {
+    
+    func checkUserAuthorization() {
+        if viewModel.userDefaults.userIsAuthorized() == true {
+            viewModel.authUser.onNext(viewModel.userDefaults.getAuthorizedUser()!)
+        }
     }
     
     func replaceUserLKVC(authUser: AuthUser) {
+        Print.m("replace")
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let viewController = storyboard.instantiateViewController(withIdentifier: "UserNC") as! UINavigationController
         
@@ -113,35 +117,33 @@ extension AuthViewController: AuthView {
         tabBarController?.viewControllers![countOfViewControllers! - 1] = viewController
     }
     
-    func authorizationError(error: Error) {
-        Print.m(error)
-        showAlert(message: error.localizedDescription)
-//        showToast(message: "Неверные данные", seconds: 3.0)
+    func fieldsIsEmpty() -> Bool {
+        if loginTextField.isEmpty() || passwordTextField.isEmpty() {
+            return true
+        } else {
+            return false
+        }
     }
+    
 }
 
-extension AuthViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch textField {
-        case loginTextField:
-//            if loginTextField.isEmpty() {
-//                showToast(message: "Login field is empty", seconds: 1.0)
-//            } else {
-//                passwordTextField.becomeFirstResponder()
-//            }
-            textField.endEditing(true)
-        case passwordTextField:
-//            if passwordTextField.isEmpty() {
-//                showToast(message: "Password field is empty", seconds: 1.0)
-//            } else {
-//                passwordTextField.resignFirstResponder()
-//                signIn()
-//                // start sign in function
-//            }
-            textField.endEditing(true)
-        default:
-            textField.endEditing(true)
+// MARK: - REACTIVE
+
+extension Reactive where Base: AuthViewController {
+    
+    internal var loading: Binder<Bool> {
+        return Binder(self.base) { vc, isLoading in
+            if isLoading == true {
+                if vc.hud != nil {
+                    vc.hud?.setToLoadingView(message: Constants.Texts.AUTHORIZATION, detailMessage: "")
+                } else {
+                    vc.hud = vc.showLoadingViewHUD(with: Constants.Texts.AUTHORIZATION)
+                }
+            } else {
+                vc.hud?.hide(animated: false)
+                vc.hud = nil
+            }
         }
-        return true
     }
+    
 }
