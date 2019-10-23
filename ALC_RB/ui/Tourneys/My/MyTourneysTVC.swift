@@ -27,14 +27,12 @@ class MyTourneysTVC: UITableViewController {
         self.setupTourneyTable()
         self.setupBinds()
         self.setupPullToRefresh()
-        
-        viewModel.fetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        dump(self.leagueDetailModel)
+        viewModel.fetch()
     }
     
 }

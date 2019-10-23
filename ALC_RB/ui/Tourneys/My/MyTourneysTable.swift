@@ -23,6 +23,7 @@ final class MyTourneysTable: NSObject {
 }
 
 extension MyTourneysTable: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         if dataSource[indexPath.section].leagues?.count != 0 {

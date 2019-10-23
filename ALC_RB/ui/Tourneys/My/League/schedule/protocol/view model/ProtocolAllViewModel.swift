@@ -627,7 +627,7 @@ class ProtocolAllViewModel {
     
     func preConfigureModelControllers() {
         teamOnePlayersController = nil
-        teamTwoPlayersController = nil
+        teamTwoPlayersController = nil// MARK: TODO team can be empty
         teamOnePlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamOne!))
         teamTwoPlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamTwo!))
         refereesController = nil
