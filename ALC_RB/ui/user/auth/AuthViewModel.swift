@@ -32,7 +32,7 @@ final class AuthViewModel {
             case .success(let authUser):
                 Print.m(authUser)
                 self.authUser.onNext(authUser)
-//                self.authUser.onCompleted()
+                self.authUser.onCompleted()
                 self.userDefaults.setAuthorizedUser(user: authUser)
             case .message(let message):
                 Print.m(message)

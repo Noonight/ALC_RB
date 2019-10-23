@@ -100,6 +100,7 @@ extension AuthViewController {
     func checkUserAuthorization() {
         if viewModel.userDefaults.userIsAuthorized() == true {
             viewModel.authUser.onNext(viewModel.userDefaults.getAuthorizedUser()!)
+            viewModel.authUser.onCompleted()
         }
     }
     

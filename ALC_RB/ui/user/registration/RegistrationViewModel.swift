@@ -51,6 +51,7 @@ final class RegistrationViewModel {
             switch response {
             case .success(let authUser):
                 self.authorizedUser.onNext(authUser)
+                self.authorizedUser.onCompleted()
                 self.userDefaults.setAuthorizedUser(user: authUser)
             case .message(let message):
                 self.message.onNext(message)
