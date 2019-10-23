@@ -368,7 +368,7 @@ struct LIReferee: Codable {
 struct LITeam: Codable {
     let status: String?
     let place: Int?
-    let playoffPlace: JSONNull?
+    let playoffPlace: Int?
     let madeToPlayoff: Bool?
     let group: String?
     let goals: Int?
@@ -833,7 +833,7 @@ extension LITeam {
     func with(
         status: String? = nil,
         place: Int? = nil,
-        playoffPlace: JSONNull?? = nil,
+        playoffPlace: Int? = nil,
         madeToPlayoff: Bool? = nil,
         group: String? = nil,
         goals: Int? = nil,

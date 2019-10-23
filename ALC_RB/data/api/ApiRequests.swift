@@ -497,6 +497,8 @@ class ApiRequests {
                 case .success(let upload, _, _):
                     
                     upload.responseSoloTeam(completionHandler: { (response) in
+                        
+                        dump(response)
                         switch response.result {
                         case .success:
                             if let soloTeam = response.result.value {

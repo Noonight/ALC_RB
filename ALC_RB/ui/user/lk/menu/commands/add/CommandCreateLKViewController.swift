@@ -13,9 +13,7 @@ import RxCocoa
 class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegate {
 
     struct ViewModel {
-//        var tournaments = Tournaments()
         var tournaments: [League] = []
-//        var clubs = Clubs()
         
         func isEmpty() -> Bool {
             return tournaments.count < 1 //&& clubs.clubs.count == 0
@@ -35,7 +33,6 @@ class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegat
     var viewModel = ViewModel()
     
     let fieldsCantBeEmpty = "Заполните все поля."
-//    let teamCreatedMessage = "Команда создана.\n Название: "
     let chooseTournament = "Выберите турнир."
     
     let userDefaults = UserDefaultsHelper()
@@ -51,11 +48,13 @@ class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         initPresenter()
 //        presenter.getTournaments()
 //        presenter.getClubs()
         
-        nameTextField.delegate = self
+//        nameTextField.delegate = self
+        phoneNumberTextField.delegate = self
         
 //        tournamentPickerHelper.setRows(rows: <#T##[League]#>)
         tournamentPickerHelper.setSelectRowPickerHelper(selectRowProtocol: self)
@@ -66,6 +65,23 @@ class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegat
         
 //        clubPickerView.delegate = clubPickerHelper
 //        clubPickerView.dataSource = clubPickerHelper
+    }
+    
+    private func formattedNumber(number: String) -> String {
+        let cleanPhoneNumber = number.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        let mask = "+X (XXX) XXX-XX-XX"
+        
+        var result = ""
+        var index = cleanPhoneNumber.startIndex
+        for ch in mask where index < cleanPhoneNumber.endIndex {
+            if ch == "X" {
+                result.append(cleanPhoneNumber[index])
+                index = cleanPhoneNumber.index(after: index)
+            } else {
+                result.append(ch)
+            }
+        }
+        return result
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,10 +115,11 @@ class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegat
     
     @IBAction func onSaveBtnPressed(_ sender: UIBarButtonItem) {
 //        if !nameTextField.isEmpty() && tournamentItem != nil && clubItem != nil {
-        if !nameTextField.isEmpty() && tournamentItem != nil {
+        if !nameTextField.isEmpty() && tournamentItem != nil && !phoneNumberTextField.isEmpty() {
             presenter.createTeam(token: userDefaults.getAuthorizedUser()?.token ?? "", teamInfo: CreateTeamInfo(
                 name: nameTextField.text!,
-                _id: (tournamentItem?.id)!//,
+                _id: (tournamentItem?.id)!,
+                creatorPhone: phoneNumberTextField.text!//,
 //                club: (clubItem?.id)!,
 //                club: (userDefaults.getAuthorizedUser()?.person.club)!,
 //                creator: (userDefaults.getAuthorizedUser()?.person.id)!)
@@ -132,59 +149,21 @@ class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegat
         self.view.layoutIfNeeded()
         tournamentPickerView.layoutIfNeeded()
         
-//        UIView.animate(withDuration: 0.5) {
-////            self.tournamentPickerViewHeight.constant = 120
-//            self.view.layoutIfNeeded()
-//            self.tournamentPickerView.layoutIfNeeded()
-//        }
     }
     
     func hideTournamentPicker() {
         self.view.layoutIfNeeded()
         tournamentPickerView.layoutIfNeeded()
         
-//        UIView.animate(withDuration: 0.5) {
-//            self.tournamentPickerViewHeight.constant = 0
-//            self.view.layoutIfNeeded()
-//            self.tournamentPickerView.layoutIfNeeded()
-//        }
         tournamentPickerView.isHidden = true
         
     }
     
-    // MARK: - Club picker view
-    
-//    @IBAction func onClubBtnPressed(_ sender: UIButton) {
-//        if clubPickerView.isHidden {
-//            showClubPicker()
-//        } else {
-//            hideClubPicker()
-//        }
-//    }
-//
-//    func showClubPicker() {
-//        clubPickerView.isHidden = false
-//        self.view.layoutIfNeeded()
-//        clubPickerView.layoutIfNeeded()
-//
-//        UIView.animate(withDuration: 0.5) {
-//            self.clubPickerViewHeight.constant = 120
-//            self.view.layoutIfNeeded()
-//            self.clubPickerView.layoutIfNeeded()
-//        }
-//    }
-    
-//    func hideClubPicker() {
-//        self.view.layoutIfNeeded()
-//        clubPickerView.layoutIfNeeded()
-//        
-//        UIView.animate(withDuration: 0.5) {
-//            self.clubPickerViewHeight.constant = 0
-//            self.view.layoutIfNeeded()
-//            self.clubPickerView.layoutIfNeeded()
-//        }
-//        clubPickerView.isHidden = true
-//    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+        textField.text = formattedNumber(number: newString)
+        return false
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.endEditing(true)

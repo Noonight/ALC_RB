@@ -51,23 +51,30 @@ class TournamentPickerHelper : NSObject, UIPickerViewDelegate, UIPickerViewDataS
         if let rows = rows {
             if let tourney = rows[row].tourney
             {
-                if tourney.contains(".")
-                {
-                    if let name = rows[row].name {
-                        label.text = "\(tourney) \(name)"
-                    }
+                if let name = rows[row].name {
+                    label.text = name
+                } else {
+                    label.text = "Не указано"
                 }
-                else
-                {
-                    if let name = rows[row].name {
-                        label.text = "\(tourney). \(name)"
-                    }
-                }
+//                if tourney.contains(".")
+//                {
+//                    if let name = rows[row].name {
+//                        label.text = "\(tourney) \(name)"
+//                    }
+//                }
+//                else
+//                {
+//                    if let name = rows[row].name {
+//                        label.text = "\(tourney). \(name)"
+//                    }
+//                }
             }
             else
             {
                 if let name = rows[row].name {
                     label.text = "\(name)"
+                } else {
+                    label.text = "Не указано"
                 }
             }
         }

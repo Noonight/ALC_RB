@@ -83,7 +83,7 @@ struct Match: Codable {
 struct Team: Codable {
     var status: String
     var place: Int
-    var playoffPlace: JSONNull?
+    var playoffPlace: Int?
     var madeToPlayoff: Bool
     var group: String?
     var goals, goalsReceived, wins, losses: Int
@@ -407,7 +407,7 @@ extension Team {
     func with(
         status: String? = nil,
         place: Int? = nil,
-        playoffPlace: JSONNull?? = nil,
+        playoffPlace: Int? = nil,
         madeToPlayoff: Bool? = nil,
         group: String? = nil,
         goals: Int? = nil,

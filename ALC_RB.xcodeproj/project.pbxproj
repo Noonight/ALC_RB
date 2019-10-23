@@ -281,6 +281,7 @@
 		DB8D30C022537328006355A7 /* SingleLineMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8D30BF22537328006355A7 /* SingleLineMessage.swift */; };
 		DB906D56230AA23D00C052B8 /* HomeNewsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB906D54230AA23D00C052B8 /* HomeNewsCollectionViewCell.swift */; };
 		DB906D57230AA23D00C052B8 /* HomeNewsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB906D55230AA23D00C052B8 /* HomeNewsCollectionViewCell.xib */; };
+		DB90C33D2360C95300943885 /* CommandCreateLKViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB90C33C2360C95300943885 /* CommandCreateLKViewModel.swift */; };
 		DB932DE422C8FF9000C060C2 /* RefereeEditMatchesLKTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB932DE322C8FF9000C060C2 /* RefereeEditMatchesLKTableViewController.swift */; };
 		DB932DE722C900C800C060C2 /* RefereeEditMatchesLKPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB932DE622C900C800C060C2 /* RefereeEditMatchesLKPresenter.swift */; };
 		DB932DEA22C9022800C060C2 /* RefereeEditMatchesLKTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB932DE922C9022800C060C2 /* RefereeEditMatchesLKTableViewCell.swift */; };
@@ -647,6 +648,7 @@
 		DB8D30BF22537328006355A7 /* SingleLineMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleLineMessage.swift; sourceTree = "<group>"; };
 		DB906D54230AA23D00C052B8 /* HomeNewsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewsCollectionViewCell.swift; sourceTree = "<group>"; };
 		DB906D55230AA23D00C052B8 /* HomeNewsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeNewsCollectionViewCell.xib; sourceTree = "<group>"; };
+		DB90C33C2360C95300943885 /* CommandCreateLKViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandCreateLKViewModel.swift; sourceTree = "<group>"; };
 		DB932DE322C8FF9000C060C2 /* RefereeEditMatchesLKTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeEditMatchesLKTableViewController.swift; sourceTree = "<group>"; };
 		DB932DE622C900C800C060C2 /* RefereeEditMatchesLKPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeEditMatchesLKPresenter.swift; sourceTree = "<group>"; };
 		DB932DE922C9022800C060C2 /* RefereeEditMatchesLKTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefereeEditMatchesLKTableViewCell.swift; sourceTree = "<group>"; };
@@ -1823,6 +1825,7 @@
 				DB8A689D224E0D2600D3972A /* picker view */,
 				DB52EAE22248E2C7004F7869 /* CommandCreateLKViewController.swift */,
 				DB52EAE42248E2E6004F7869 /* CommandCreateLKPresenter.swift */,
+				DB90C33C2360C95300943885 /* CommandCreateLKViewModel.swift */,
 			);
 			path = add;
 			sourceTree = "<group>";
@@ -2883,6 +2886,7 @@
 				DB59E5B9222802F000D1F62F /* EditProfilePresenter.swift in Sources */,
 				187F2DFB22CB19440049EA77 /* EditRefereeTeamTableViewController.swift in Sources */,
 				DB495B7B22AFC4BF00FCC6F5 /* ActiveMatches.swift in Sources */,
+				DB90C33D2360C95300943885 /* CommandCreateLKViewModel.swift in Sources */,
 				DB5A6DF422DFA617001D4119 /* LeagueController.swift in Sources */,
 				04C024E52213DE2D00A4A571 /* EventsMatchPresenter.swift in Sources */,
 				189E1C7A22C9EC3A0086E4DA /* LabelSwitchView.swift in Sources */,
