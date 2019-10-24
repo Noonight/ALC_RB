@@ -100,7 +100,6 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         self.prepareEmptyState()
         self.prepareTableView()
         
-        self.refreshData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,6 +107,8 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         navigationController?.navigationBar.topItem?.rightBarButtonItem = createNewCommandBtn
 //        self.updateTableModel()
 //        self.prepareCreateCommandBtn()
+        
+        self.refreshData()
         
         self.prepareModelController {
             self.tableView.reloadData()

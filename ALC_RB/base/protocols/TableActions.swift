@@ -12,11 +12,13 @@ protocol TableActions {
     func onCellSelected(model: CellModel)
     func onCellDeselected(model: CellModel)
     func onHeaderPressed(model: CellModel)
+    func onHeaderDeletePressed(model: CellModel)
 }
 extension TableActions {
     func onCellselected(model: CellModel) {}
     func onCellDeselected(model: CellModel) {}
     func onHeaderPressed(model: CellModel) {}
+    func onHeaderDeletePressed(model: CellModel) {}
 }
 
 protocol CellModel { }

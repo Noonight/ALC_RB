@@ -17,6 +17,7 @@ class MyTourneysTVC: UITableViewController {
 //    var hud: MBProgressHUD?
     private let disposeBag = DisposeBag()
     private var tourneyTable: MyTourneysTable!
+    private let localTourneys = LocalTourneys()
 //    var leagueDetailModel = BehaviorRelay<_LeagueDetailModel>(value: _LeagueDetailModel())
     
     override func viewDidLoad() {
@@ -56,15 +57,7 @@ extension MyTourneysTVC {
     }
     
     func setupBinds() {
-        
-//        tableView
-//            .rx
-//            .itemSelected
-//            .subscribe({ indexPath in
-//                self.showLeagueDetail(leagueModelItem: <#T##LeagueModelItem#>)
-//            })
-//            .disposed(by: disposeBag)
-        
+                
         tableView
             .rx
             .itemSelected
@@ -152,13 +145,16 @@ extension MyTourneysTVC: TableActions {
         }
     }
     
-    func onCellDeselected(model: CellModel) {
-        
-    }
-    
     func onHeaderPressed(model: CellModel) {
         if model is LeagueModelItem {
             self.showLeagueDetail(leagueModelItem: model as! LeagueModelItem)
+        }
+    }
+    
+    func onHeaderDeletePressed(model: CellModel) {
+        if model is TourneyModelItem {
+            self.localTourneys.removeTourney((model as! TourneyModelItem).tourney)
+            tableView.reloadData()
         }
     }
 }

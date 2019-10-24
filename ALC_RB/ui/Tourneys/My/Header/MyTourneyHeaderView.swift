@@ -60,6 +60,7 @@ final class MyTourneyHeaderView: UIView {
         button.widthAnchor.constraint(equalToConstant: 100).isActive = true
         button.setTitle("Удалить", for: .normal)
         button.backgroundColor = .red
+        button.isUserInteractionEnabled = true
         
         return button
     }()
@@ -68,7 +69,7 @@ final class MyTourneyHeaderView: UIView {
     
     var deleteAction : ((TourneyModelItem) -> ())? {
         didSet {
-            self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnDelete)))
+            Print.m("delete action")
         }
     }
     // MARK: -
@@ -154,7 +155,7 @@ final class MyTourneyHeaderView: UIView {
         disclosureImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         disclosureImageView.rightAnchor.constraint(equalTo: containerView.rightAnchor, constant: -8).isActive = true
         
-        containerView.backgroundColor = .blue
+//        containerView.backgroundColor = .blue
         
         
         bringSubviewToFront(containerView)
@@ -165,6 +166,9 @@ final class MyTourneyHeaderView: UIView {
         let right = UISwipeGestureRecognizer(target: self, action: #selector(panGesture(_:)))
         right.direction = .right
         containerView.addGestureRecognizer(right)
+        
+        deleteButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnDelete)))
+        
     }
     
     override init(frame: CGRect) {
@@ -338,6 +342,7 @@ final class MyTourneyHeaderView: UIView {
     }
     
     @objc func tapOnDelete() {
+        Print.m("delete btn")
         self.deleteAction?(self.tourneyModelItem)
     }
 }

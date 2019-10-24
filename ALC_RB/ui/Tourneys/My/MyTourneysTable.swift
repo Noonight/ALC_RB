@@ -43,6 +43,15 @@ extension MyTourneysTable: UITableViewDelegate {
         header.separatorColor = tableView.separatorColor
         header.tourneyModelItem = dataSource[section]
         
+        header.deleteAction = { tourneyModelItem in
+            Print.m("tourney is \(tourneyModelItem)")
+            self.cellActions.onHeaderDeletePressed(model: self.dataSource[section])
+            tableView.beginUpdates()
+            self.dataSource.remove(at: section)
+            tableView.deleteSections([section], with: .left)
+            tableView.endUpdates()
+        }
+        
         if dataSource[section].leagues?.count == 1 {
             header.isDisclosure = true
             header.action = { tourneyModelItem in

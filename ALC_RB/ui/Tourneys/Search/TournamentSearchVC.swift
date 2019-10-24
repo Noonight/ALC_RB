@@ -41,6 +41,10 @@ class TournamentSearchVC: UIViewController {
         self.setupSearchController()
 //        self.setupInfiniteScrollController()
         self.setupPullToRefresh()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.refreshRegions()
         self.refreshData()
