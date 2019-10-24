@@ -199,12 +199,7 @@ extension PlayersTableViewController {
 //        }
         cell.mName.text = player.getSurnameNP()
         
-        if (player.birthdate.count > 3) {
-            cell.mBirthDate.text = player.birthdate.convertDate(from: .GMT, to: .local)
-//            cell.mBirthDate.text = player.birthdate
-        } else {
-            cell.mBirthDate.text = ""
-        }
+        cell.mBirthDate.text = player.birthdate.toFormat(DateFormats.local.rawValue)
         
         if player.photo?.count ?? 0 != 0 {
             let url = ApiRoute.getImageURL(image: player.photo!)

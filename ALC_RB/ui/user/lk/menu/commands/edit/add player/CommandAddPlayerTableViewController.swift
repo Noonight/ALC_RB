@@ -348,21 +348,21 @@ extension CommandAddPlayerTableViewController {
                 cell.configure(with: person, status: .invitedIn("\(Texts.PLAYER_IN_ANOTHER_TEAM)\(team!.name)"))
             }
             
-            if let player = leagueController.getPlayerById(person.id) {
-                
-                if player.getInviteStatus() == .accepted || player.getInviteStatus() == .approved // Подтвержден или одобрен
-                {
-                    cell.configure(with: person, status: .plyedIn("\(Texts.PLAYER_IN_ANOTHER_TEAM)\(leagueController.getTeamByPlayerId(person.id)?.name ?? "другой команды")"))
-                }
-                
-                if player.getInviteStatus() == .pending // Ожидание
-                {
-                    cell.configure(with: person, status: .invitedIn("\(Texts.PLAYER_INVITED_TO)\(leagueController.getTeamByPlayerId(person.id)?.name ?? "N")"))
-                }
-                
-            } else { // user not found in league
+//            if let player = leagueController.getPlayerById(person.id) {
+//
+//                if player.getInviteStatus() == .accepted || player.getInviteStatus() == .approved // Подтвержден или одобрен
+//                {
+//                    cell.configure(with: person, status: .plyedIn("\(Texts.PLAYER_IN_ANOTHER_TEAM)\(leagueController.getTeamByPlayerId(person.id)?.name ?? "другой команды")"))
+//                }
+//
+//                if player.getInviteStatus() == .pending // Ожидание
+//                {
+//                    cell.configure(with: person, status: .invitedIn("\(Texts.PLAYER_INVITED_TO)\(leagueController.getTeamByPlayerId(person.id)?.name ?? "N")"))
+//                }
+//
+//            } else { // user not found in league
                 cell.configure(with: person, status: .notUsed)
-            }
+//            }
         }
         
         let player: Person

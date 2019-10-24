@@ -101,10 +101,6 @@ class CommandAddPlayerTableViewCell: UITableViewCell {
     }
     
     func setupPlayerDateOfBirth(player: Person) {
-        if player.birthdate.count > 3 {
-            self.player_date_of_birth.text = player.birthdate.convertDate(from: .GMT, to: .local)
-        } else {
-            self.player_date_of_birth.text = ""
-        }
+        self.player_date_of_birth.text = player.birthdate.toFormat(DateFormats.local.rawValue)
     }
 }

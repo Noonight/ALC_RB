@@ -50,6 +50,8 @@ extension UIView {
     
     private struct HUD {
         static var _hud = [String: MBProgressHUD]()
+        static var _error_action = [String: () -> ()]()
+        static var _empty_action = [String: () -> ()]()
     }
     
     var hud: MBProgressHUD? {
@@ -58,6 +60,24 @@ extension UIView {
         }
         set(newValue) {
             HUD._hud[self.debugDescription] = newValue
+        }
+    }
+    
+    var emptyAction: (() -> ())? {
+        get {
+            return HUD._empty_action[self.debugDescription]
+        }
+        set(newValue) {
+            HUD._empty_action[self.debugDescription] = newValue
+        }
+    }
+    
+    var errorAction: (() -> ())? {
+        get {
+            return HUD._error_action[self.debugDescription]
+        }
+        set(newValue) {
+            HUD._error_action[self.debugDescription] = newValue
         }
     }
     

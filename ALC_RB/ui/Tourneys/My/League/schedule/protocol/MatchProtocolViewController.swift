@@ -94,11 +94,13 @@ extension MatchProtocolViewController {
     }
     
     func setupTableDataSource() {
-        let hud = self.events_table_view.showLoadingViewHUD(with: "Настройка...")
+//        let hud = self.events_table_view.showLoadingViewHUD(with: "Настройка...") // TODO
+//        let hud = self.events_table_view.backgroundView?.showLoadingViewHUD(with: "Настройка...")
+        hud = self.events_table_view.showLoadingViewHUD(with: "Настройка...")
         self.viewModel.prepareTableViewDataSource { dataSource in
             self.eventsTable.dataSource = dataSource
             self.events_table_view.reloadData()
-            hud.hide(animated: true)
+            self.hud?.hide(animated: true)
         }
     }
     

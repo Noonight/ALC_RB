@@ -78,11 +78,7 @@ class PlayerViewController: UIViewController {
 //        mName.text = content?.person.name
         mName.text = content.person.getFullName()
 //        Print.d(message: "\(content?.person.birthdate)")
-        if content.person.birthdate.count > 3 {
-            mBirthDate.text = content.person.birthdate.convertDate(from: .utc, to: .local)
-        } else {
-            mBirthDate.text = ""
-        }
+        mBirthDate.text = content.person.birthdate.toFormat(DateFormats.local.rawValue)
     }
     
     func prepareTableView() {

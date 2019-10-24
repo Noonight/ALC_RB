@@ -33,7 +33,7 @@ struct Person: Codable {
     var surname: String
     var name: String
     var lastname: String
-    var birthdate: String
+    var birthdate: Date
     var photo: String?
     var desc: String
     var participationMatches: [ParticipationMatch]?
@@ -84,7 +84,7 @@ struct Person: Codable {
         self.surname = try container.decodeIfPresent(String.self, forKey: .surname) ?? ""
         self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? ""
         self.lastname = try container.decodeIfPresent(String.self, forKey: .lastname) ?? ""
-        self.birthdate = try container.decodeIfPresent(String.self, forKey: .birthdate) ?? ""
+        self.birthdate = try container.decodeIfPresent(Date.self, forKey: .birthdate) ?? Date()
         self.photo = try container.decodeIfPresent(String.self, forKey: .photo) ?? ""
         self.desc = try container.decodeIfPresent(String.self, forKey: .desc) ?? ""
         self.participationMatches = try container.decodeIfPresent([ParticipationMatch].self, forKey: .participationMatches) ?? []
@@ -249,7 +249,7 @@ extension Person {
         surname = ""
         name = ""
         lastname = ""
-        birthdate = ""
+        birthdate = Date()
         photo = ""
         desc = ""
         participationMatches = []
@@ -286,7 +286,7 @@ extension Person {
         surname: String? = nil,
         name: String? = nil,
         lastname: String? = nil,
-        birthdate: String? = nil,
+        birthdate: Date? = nil,
         photo: String?? = nil,
         desc: String? = nil,
         participationMatches: [ParticipationMatch]? = nil,
@@ -347,7 +347,7 @@ extension DataRequest {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
             
-            return Result { try JSONDecoder().decode(T.self, from: data) }
+            return Result { try ISO8601Decoder.getDecoder().decode(T.self, from: data) }
         }
     }
     

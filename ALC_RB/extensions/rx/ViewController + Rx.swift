@@ -74,3 +74,63 @@ extension Reactive where Base: UIViewController {
     }
     
 }
+
+extension Reactive where Base: UIView {
+    
+    internal var loading: Binder<Bool> {
+        return Binder(self.base) { vc, isLoading in
+            if isLoading == true {
+                if vc.hud != nil {
+                    vc.hud?.setToLoadingView()
+                } else {
+                    vc.hud = vc.showLoadingViewHUD()
+                }
+            } else {
+                vc.hud?.hide(animated: false)
+                vc.hud = nil
+            }
+        }
+    }
+    
+    internal var error: Binder<Error?> {
+        return Binder(self.base) { vc, error in
+            if error != nil {
+                if vc.hud != nil {
+                    vc.hud?.setToFailureView(message: "", detailMessage: error?.localizedDescription, tap: {
+                        vc.errorAction?()
+                    })
+                } else {
+                    vc.hud = vc.showFailureViewHUD(message: "", detailMessage: error?.localizedDescription, tap: {
+                        vc.errorAction?()
+                    })
+                }
+            } else {
+                vc.hud?.hide(animated: false)
+                vc.hud = nil
+            }
+            
+        }
+    }
+    
+    internal var empty: Binder<Bool> {
+        return Binder(self.base) { vc, isEmpty in
+            if isEmpty == true {
+                if vc.hud != nil {
+                    vc.hud?.setToEmptyView(tap: {
+                        vc.emptyAction?()
+                    })
+                } else {
+                    vc.hud = vc.showEmptyViewHUD {
+                        vc.emptyAction?()
+                    }
+                }
+            } else {
+                vc.hud?.hide(animated: false)
+                vc.hud = nil
+            }
+            
+        }
+    }
+    
+}
+

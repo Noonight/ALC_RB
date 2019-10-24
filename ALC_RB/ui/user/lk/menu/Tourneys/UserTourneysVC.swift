@@ -37,6 +37,9 @@ class UserTourneysVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        view.frame = UIScreen.main.bounds
+        
         setupSegmentHelper()
         setupBinds()
     }

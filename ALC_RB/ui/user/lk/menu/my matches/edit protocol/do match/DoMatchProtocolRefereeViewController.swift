@@ -211,21 +211,21 @@ extension DoMatchProtocolRefereeViewController {
     }
     
     func setupTableDataSources() {
-        let teamOneHud = self.playersOne_table.showLoadingViewHUD(with: Constants.Texts.CONFIGURE)
+        self.playersOne_table.hud = self.playersOne_table.showLoadingViewHUD(with: Constants.Texts.CONFIGURE)
         self.viewModel.prepareTableViewCells(team: .one)
         { dataSource in
             self.playersTeamOne.dataSource = dataSource
             
-            teamOneHud.hide(animated: true)
+            self.playersOne_table.hideHUD()
             self.playersOne_table.reloadData()
         }
         
-        let teamTwoHud = self.playersTwo_table.showLoadingViewHUD(with: Constants.Texts.CONFIGURE)
+        self.playersTwo_table.hud = self.playersTwo_table.showLoadingViewHUD(with: Constants.Texts.CONFIGURE)
         self.viewModel.prepareTableViewCells(team: .two)
         { dataSource in
             self.playersTeamTwo.dataSource = dataSource
             
-            teamTwoHud.hide(animated: true)
+            self.playersTwo_table.hideHUD()
             self.playersTwo_table.reloadData()
         }
     }

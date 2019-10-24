@@ -189,7 +189,8 @@ class UserLKViewController: UIViewController {
         if  segue.identifier == segueEditProfile,
             let destination = segue.destination as? EditProfileViewController
         {
-            destination.authUser = self.authUser
+//            destination.authUser = self.authUser
+            // MARK: TODO CHECK IT 
         }
     }
     

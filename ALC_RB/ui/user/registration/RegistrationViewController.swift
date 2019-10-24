@@ -99,7 +99,7 @@ extension RegistrationViewController {
             .observeOn(MainScheduler.instance)
             .subscribe({ event in
                 if !self.fieldsIsEmpty() {
-                    let dateOfBirth = self.birthdayPicker.date.getStringOfType(type: .iso8601)
+                    let birthdate = self.birthdayPicker.date
                     let region = self.viewModel.choosedRegion.value!._id
                     let regData = Registration(
                         type: "player",
@@ -108,7 +108,7 @@ extension RegistrationViewController {
                         lastName: self.patronymicTextField.getTextOrEmptyString(),
                         login: self.loginTextField.text!,
                         password: self.passwordTF.text!,
-                        birthdate: dateOfBirth,
+                        birthdate: birthdate,   
                         region: region)
                     self.viewModel.registration(userData: regData)
                 } else {

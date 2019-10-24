@@ -12,8 +12,6 @@ import RxCocoa
 import Kingfisher
 
 class EditProfileViewController: UIViewController {
-
-    // MARK: - Variables
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var familyTF: UITextField!
@@ -26,152 +24,204 @@ class EditProfileViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    // MARK: Var & Let
-    let presenter = EditProfilePresenter()
-    
+    let viewModel = EditProfileViewModel(dataManager: ApiRequests())
     var imagePicker: ImagePicker?
-    
-    var authUser: AuthUser?
-    
-    let userDefaultHelper = UserDefaultsHelper()
-    
-    var profileInfoChanged = false
-    
-    var choosedImage: UIImage? {
-        didSet {
-            self.imageView.image = self.choosedImage?.af_imageRoundedIntoCircle()
-        }
-    }
+    private let bag = DisposeBag()
     
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        initPresenter()
         
-        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+        errorAction = {
+            
+        }
+        emptyAction = {
+            
+        }
         
-        self.familyTF.delegate = self
-        self.nameTF.delegate = self
-        self.patronymicTF.delegate = self
-        self.loginTF.delegate = self
+        setupImagePicker()
+        setupBinds()
         
-        scrollView.keyboardDismissMode = .onDrag
-        
-//        firstInit()
+        viewModel.fetch()
+        showAuthUser()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        navigationController?.isNavigationBarHidden = false
-        barSaveBtn.image = barSaveBtn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
         
-        self.firstInit()
+        setupNavBar()
     }
     
-    // MARK: - First init
-    
-    func firstInit() {
-        self.nameTF.text = authUser?.person.name
-        self.familyTF.text = authUser?.person.surname
-        self.patronymicTF.text = authUser?.person.lastname
-        self.loginTF.text = authUser?.person.login
-        
-        datePicker.date = (authUser?.person.birthdate.getDateOfType(type: .GMT))!
+}
 
-        presenter.photoProfile(imagePath: authUser?.person.photo ?? "")
-//        if let image = authUser?.person.photo {
-//            let url = ApiRoute.getImageURL(image: image)
-//            let processor = CroppingImageProcessorCustom(size: self.imageView.frame.size)
-//                .append(another: RoundCornerImageProcessor(cornerRadius: self.imageView.getHalfWidthHeight()))
-//
-//            self.imageView.kf.indicatorType = .activity
-//            self.imageView.kf.setImage(
-//                with: url,
-//                placeholder: UIImage(named: "ic_logo"),
-//                options: [
-//                    .processor(processor),
-//                    .scaleFactor(UIScreen.main.scale),
-//                    .transition(.fade(1)),
-//                    .cacheOriginalImage
-//                ])
-//        }
+// MARK: - SETUP
+
+extension EditProfileViewController {
+    
+    func setupImagePicker() {
+        self.imageView.image = UIImage(named: "ic_add_photo")
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
     
-    // MARK: - Actions
-    
-    @IBAction func onSaveBtnPressed(_ sender: UIBarButtonItem) {
+    func setupBinds() {
         
-        let dateOfBirth = datePicker.date.getStringOfType(type: .GMT)
-        presenter.editProfile(token: (authUser?.token)!, profileInfo: EditProfile(
-            name: nameTF.text!,
-            surname: familyTF.text!,
-            lastname: patronymicTF.text!,
-            login: loginTF.text!,
-            _id: (authUser?.person.id)!,
-            birthdate: dateOfBirth), profileImage: choosedImage)
+        viewModel
+            .regionViewModel
+            .regions
+            .bind(to: regionPicker.rx.itemTitles) { _, item in
+                return "\(item.name)"
+            }
+            .disposed(by: bag)
+        
+        viewModel
+            .regionViewModel
+            .regions
+            .subscribe({ elements in
+                guard let regions = elements.element else { return }
+                if self.viewModel.regionViewModel.choosedRegion.value == nil {
+                    self.viewModel.regionViewModel.choosedRegion.accept(regions.first)
+                }
+            })
+            .disposed(by: bag)
+        
+        regionPicker
+            .rx
+            .modelSelected(RegionMy.self)
+            .subscribe({ event in
+                guard let regions = event.element else { return }
+                self.viewModel.regionViewModel.choosedRegion.accept(regions.first)
+            })
+            .disposed(by: bag)
+        
+        barSaveBtn
+            .rx
+            .tap
+            .observeOn(MainScheduler.instance)
+            .subscribe({ _ in
+                if self.fieldsIsEmpty() == false {
+                    let birthdate = self.datePicker.date
+                    let region = self.viewModel.regionViewModel.choosedRegion.value!._id
+                    let profile = EditProfile(
+                        name: self.nameTF.getTextOrEmptyString(),
+                        surname: self.familyTF.getTextOrEmptyString(),
+                        lastname: self.patronymicTF.getTextOrEmptyString(),
+                        login: self.loginTF.text!,
+                        _id: self.viewModel.authorizedUser!.person.id,
+                        birthdate: birthdate,
+                        region: region
+                    )
+                    self.viewModel.editProfile(profileInfo: profile)
+                } else {
+                    self.viewModel.message.onNext(SingleLineMessage(message: Constants.Texts.FILL_ALL_FIELDS))
+                }
+            })
+            .disposed(by: bag)
+        
+        viewModel
+            .choosedImage
+            .observeOn(MainScheduler.instance)
+            .subscribe({ element in
+                guard let image = element.element else {
+                    self.imageView.image = UIImage(named: "ic_add_photo")
+                    return
+                }
+                self.imageView.image = image?.af_imageRoundedIntoCircle()
+            })
+            .disposed(by: bag)
+        
+        viewModel
+            .editedPerson
+            .asObserver()
+            .subscribeOn(MainScheduler.instance)
+            .subscribe({ uUser in
+                guard let user = uUser.element else { return }
+                self.showAuthUser()
+            })
+            .disposed(by: bag)
+        
+        viewModel.regionViewModel
+            .loading
+            .asDriver(onErrorJustReturn: false)
+            .drive(regionPicker.rx.loading)
+            .disposed(by: bag)
+        
+        viewModel.regionViewModel
+            .error
+            .asDriver(onErrorJustReturn: nil)
+            .drive(regionPicker.rx.error)
+            .disposed(by: bag)
+        
+        viewModel
+            .loading
+            .asDriver(onErrorJustReturn: false)
+            .drive(self.rx.loading)
+            .disposed(by: bag)
+        
+        viewModel
+            .error
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.rx.error)
+            .disposed(by: bag)
+        
+        viewModel
+            .message
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.rx.message)
+            .disposed(by: bag)
         
     }
+    
+    func setupNavBar() {
+        navigationController?.isNavigationBarHidden = false
+    }
+    
+}
+
+// MARK: - ACTIONs
+
+extension EditProfileViewController {
     
     @IBAction func onImagePressed(_ sender: UITapGestureRecognizer) {
         imagePicker?.present(from: self.view)
     }
+    
 }
 
-// MARK: - Presenter view ex methods
-extension EditProfileViewController: EditProfileView {
-    func showLoadingProfileImage() {
-        
-    }
+// MARK: - HELPER
+
+extension EditProfileViewController {
     
-    func hideLoadingProfileImage() {
-        
-    }
-    
-    func getProfilePhotoSuccessful(image: UIImage) {
-        self.choosedImage = image.af_imageRoundedIntoCircle()
-    }
-    
-    func getProfilePhotoFailure(error: Error) {
-        Print.d(error: error)
-        if self.authUser?.person.photo == nil || self.authUser?.person.photo?.count ?? 0 < 2 {
-            self.imageView.image = UIImage(named: "ic_add_photo")
-        }
-        
-    }
-    
-    func changeProfileSuccessful(editedProfile: SoloPerson) {
-        
-        var user = self.userDefaultHelper.getAuthorizedUser()
-        user?.person = editedProfile.person
-        self.userDefaultHelper.setAuthorizedUser(user: user!)
-        
-        navigationController?.popViewController(animated: true)
-        self.dismiss(animated: true) {
-            Print.d(message: "Dismiss complete")
+    func showAuthUser() {
+        if let authUser = viewModel.authorizedUser {
+            nameTF.text = authUser.person.name
+            familyTF.text = authUser.person.surname
+            patronymicTF.text = authUser.person.lastname
+            loginTF.text = authUser.person.login
+            
+            datePicker.date = authUser.person.birthdate
+            
         }
     }
     
-    func changeProfileFailure(error: Error) {
-        Print.d(error: error)
+    func fieldsIsEmpty() -> Bool {
+        if nameTF.isEmpty() == true
+            || familyTF.isEmpty() == true
+            || patronymicTF.isEmpty() == true
+            || loginTF.isEmpty() == true
+            || viewModel.regionViewModel.choosedRegion.value == nil {
+            return true
+        } else {
+            return false
+        }
     }
     
-    func initPresenter() {
-        self.presenter.attachView(view: self)
-    }
 }
+
+// MARK: - IMAGE PICKER
 
 extension EditProfileViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
-        self.choosedImage = image
-//        self.imageView.image = image?.af_imageRoundedIntoCircle()
-    }
-}
-
-extension EditProfileViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.endEditing(true)
-        return true
+        viewModel.choosedImage.accept(image)
     }
 }

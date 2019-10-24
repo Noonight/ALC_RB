@@ -15,10 +15,10 @@ struct Registration {
     var lastName = ""
     var login = ""
     var password = ""
-    var birthdate = ""
+    var birthdate = Date()
     var region = ""
     
-    init(type: String, name: String, surName: String, lastName: String, login: String, password: String, birthdate: String, region: String) {
+    init(type: String, name: String, surName: String, lastName: String, login: String, password: String, birthdate: Date, region: String) {
         self.type = type
         self.name = name
         self.surName = surName
@@ -37,7 +37,7 @@ struct Registration {
             Fields.lastname.value() : self.lastName,
             Fields.login.value() : self.login,
             Fields.password.value() : self.password,
-            Fields.birthdate.value() : self.birthdate,
+            Fields.birthdate.value() : self.birthdate.toFormat(DateFormats.iso8601.rawValue),
             Fields.region.value() : self.region
         ]
     }

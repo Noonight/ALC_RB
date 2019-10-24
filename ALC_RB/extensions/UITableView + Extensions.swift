@@ -67,16 +67,16 @@ extension UITableView {
         return hud
     }
     
-    func showLoadingViewHUD(with message: String? = Constants.Texts.LOADING) -> MBProgressHUD {
-        let hud = MBProgressHUD.showAdded(to: self, animated: true)
-        hud.backgroundView.style = MBProgressHUDBackgroundStyle.solidColor
-        hud.backgroundView.color = UIColor(white: 0, alpha: 0.1)
-        
-        hud.mode = MBProgressHUDMode.indeterminate
-        hud.label.text = message
-        
-        return hud
-    }
+//    func showLoadingViewHUD(with message: String? = Constants.Texts.LOADING) -> MBProgressHUD {
+//        let hud = MBProgressHUD.showAdded(to: self, animated: true)
+//        hud.backgroundView.style = MBProgressHUDBackgroundStyle.solidColor
+//        hud.backgroundView.color = UIColor(white: 0, alpha: 0.1)
+//
+//        hud.mode = MBProgressHUDMode.indeterminate
+//        hud.label.text = message
+//
+//        return hud
+//    }
     
     func isLastVisibleCell(at indexPath: IndexPath) -> Bool {
         guard let lastIndexPath = indexPathsForVisibleRows?.last else {
