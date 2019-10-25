@@ -125,7 +125,7 @@ extension DataRequest {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
             
-            return Result { try JSONDecoder().decode(T.self, from: data) }
+            return Result { try ISO8601Decoder.getDecoder().decode(T.self, from: data) }
         }
     }
     
