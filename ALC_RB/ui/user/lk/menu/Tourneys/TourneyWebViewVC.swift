@@ -20,6 +20,8 @@ final class TourneyWebViewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Мой турнир"
+        
         setupWebView()
         setupPullToRefresh()
         
@@ -70,8 +72,12 @@ extension TourneyWebViewVC {
 
 extension TourneyWebViewVC: WKNavigationDelegate {
     
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        self.hud = showLoadingViewHUD()
+    }
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.navigationController?.navigationBar.topItem?.title = webView.title
+//        self.navigationController?.navigationBar.topItem?.title = webView.title
+        self.hideHUD()
     }
 }
-

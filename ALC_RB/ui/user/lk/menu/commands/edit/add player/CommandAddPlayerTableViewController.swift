@@ -17,6 +17,8 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
         static let playerInTeam = "Игрок уже получил приглашение в эту команду"
         static let PLAYER_IN_ANOTHER_TEAM = "В составе "
         static let PLAYER_INVITED_TO = "Приглашен в команду "
+        static let IN_YOUR_TEAM = "В составе вашей команды"
+        static let INVITED_INTO_YOUR_TEAM = "Приглашен в вашу команду"
     }
     
     struct TableModel {
@@ -332,21 +334,38 @@ extension CommandAddPlayerTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.list, for: indexPath) as! CommandAddPlayerTableViewCell
         
         func setupStatus(person: Person) {
-            if leagueController.league.teams!.contains(where: { team -> Bool in
-                return team.id == self.team.id && team.players.contains(where: { inPlayer -> Bool in
-                    return person.id == inPlayer.playerID
-                })
+            
+            if leagueController.league.teams!.contains(where:  { team -> Bool in
+                return team.id == self.team.id
             }) {
-                cell.configure(with: person, status: .invitedIn("В вашей команде"))
+                if self.team.players.contains(where: { player -> Bool in
+                    return player.playerID == person.id
+                }) {
+                    let player = leagueController.getPlayerById(person.id)
+                    if player?.inviteStatus == InviteStatus.accepted.rawValue {
+                        cell.configure(with: person, status: .plyedIn(Texts.IN_YOUR_TEAM))
+                    }
+                    if player?.inviteStatus == InviteStatus.pending.rawValue {
+                        cell.configure(with: person, status: .invitedIn(Texts.INVITED_INTO_YOUR_TEAM))
+                    }
+                }
             }
-            let team = leagueController.league.teams!.filter { team -> Bool in
-                return team.id != self.team.id && team.players.contains(where: { inPlayer -> Bool in
-                    return person.id == inPlayer.playerID && (inPlayer.inviteStatus == InviteStatus.approved.rawValue || inPlayer.inviteStatus == InviteStatus.accepted.rawValue || inPlayer.inviteStatus == InviteStatus.rejected.rawValue)
-                })
-                }.first
-            if team != nil {
-                cell.configure(with: person, status: .invitedIn("\(Texts.PLAYER_IN_ANOTHER_TEAM)\(team!.name)"))
-            }
+            
+//            if leagueController.league.teams!.contains(where: { team -> Bool in
+//                return team.id == self.team.id && team.players.contains(where: { inPlayer -> Bool in
+//                    return person.id == inPlayer.playerID
+//                })
+//            }) {
+//                cell.configure(with: person, status: .invitedIn("В вашей команде"))
+//            }
+//            let team = leagueController.league.teams!.filter { team -> Bool in
+//                return team.id != self.team.id && team.players.contains(where: { inPlayer -> Bool in
+//                    return person.id == inPlayer.playerID && (inPlayer.inviteStatus == InviteStatus.approved.rawValue || inPlayer.inviteStatus == InviteStatus.accepted.rawValue || inPlayer.inviteStatus == InviteStatus.rejected.rawValue)
+//                })
+//                }.first
+//            if team != nil {
+//                cell.configure(with: person, status: .invitedIn("\(Texts.PLAYER_IN_ANOTHER_TEAM)\(team!.name)"))
+//            }
             
 //            if let player = leagueController.getPlayerById(person.id) {
 //
@@ -361,7 +380,7 @@ extension CommandAddPlayerTableViewController {
 //                }
 //
 //            } else { // user not found in league
-                cell.configure(with: person, status: .notUsed)
+//                cell.configure(with: person, status: .notUsed)
 //            }
         }
         
