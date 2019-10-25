@@ -43,6 +43,7 @@
 		182394C123618198007D6954 /* TourneysViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182394C023618198007D6954 /* TourneysViewModel.swift */; };
 		182394C42361BA1C007D6954 /* UIView + MBProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182394C32361BA1C007D6954 /* UIView + MBProgressHUD.swift */; };
 		182394C62362B33B007D6954 /* Static functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182394C52362B33B007D6954 /* Static functions.swift */; };
+		182394C82362C9B5007D6954 /* TourneyWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182394C72362C9B5007D6954 /* TourneyWebViewVC.swift */; };
 		1823DC2622952762000A1055 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1823DC2422952762000A1055 /* LoadingCell.swift */; };
 		1823DC2722952762000A1055 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1823DC2522952762000A1055 /* LoadingCell.xib */; };
 		1824601322C5CC6F0061E877 /* Button Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824601222C5CC6F0061E877 /* Button Extensions.swift */; };
@@ -408,6 +409,7 @@
 		182394C023618198007D6954 /* TourneysViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourneysViewModel.swift; sourceTree = "<group>"; };
 		182394C32361BA1C007D6954 /* UIView + MBProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + MBProgressHUD.swift"; sourceTree = "<group>"; };
 		182394C52362B33B007D6954 /* Static functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Static functions.swift"; sourceTree = "<group>"; };
+		182394C72362C9B5007D6954 /* TourneyWebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourneyWebViewVC.swift; sourceTree = "<group>"; };
 		1823DC2422952762000A1055 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		1823DC2522952762000A1055 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		1824601222C5CC6F0061E877 /* Button Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button Extensions.swift"; sourceTree = "<group>"; };
@@ -1131,6 +1133,7 @@
 		1890FBC1235DBDEB00514E33 /* Tourneys */ = {
 			isa = PBXGroup;
 			children = (
+				182394C72362C9B5007D6954 /* TourneyWebViewVC.swift */,
 				1890FBC2235DBE1A00514E33 /* UserTourneysVC.swift */,
 				1890FBC3235DBE1A00514E33 /* UserTourneysVC.xib */,
 				1890FBCB235DC35400514E33 /* My */,
@@ -2817,6 +2820,7 @@
 				DB59E5BC222829FC00D1F62F /* Registration.swift in Sources */,
 				DB966A6222EC61BE00064233 /* Constants.swift in Sources */,
 				DB1816E621D11B29005375ED /* PlayerPastLeaguesTableViewCell.swift in Sources */,
+				182394C82362C9B5007D6954 /* TourneyWebViewVC.swift in Sources */,
 				DBC5C5FC222015A300B0A1B6 /* UIViewController.swift in Sources */,
 				DB8A689F224E0D5C00D3972A /* TournamentPickerView.swift in Sources */,
 				DB78E13F21D529DC001C885D /* EmptyProtocol.swift in Sources */,

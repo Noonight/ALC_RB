@@ -20,7 +20,7 @@ enum PlayerMenuOption: Int, CustomStringConvertible {
     var description: String {
         switch self {
         case .Invites: return "Приглашения"
-        case .Tournaments: return "Турниры"
+        case .Tournaments: return "Мой турнир"
         case .Clubs: return "Клубы"
         case .Teams: return "Команды"
         //        case .Referees: return "Судьи"

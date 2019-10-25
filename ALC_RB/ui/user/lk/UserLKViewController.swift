@@ -61,7 +61,7 @@ class UserLKViewController: UIViewController {
 //
 //        return viewController
 //    }()
-    private lazy var ongoingLeagues: UserTourneysVC = UserTourneysVC()
+    private lazy var ongoingLeagues = TourneyWebViewVC()
     
     private lazy var club: ClubLKViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
