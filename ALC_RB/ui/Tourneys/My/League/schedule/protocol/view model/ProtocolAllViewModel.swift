@@ -229,13 +229,13 @@ class ProtocolAllViewModel {
     }
     
     func prepareTime() -> String {
-        let date = self.match.date?.toDate()
+        let date = self.match.date
         guard let time = date?.toFormat("HH.mm") else { return "" }
         return "\(time)ч"
     }
     
     func prepareDate() -> String {
-        let date = self.match.date?.toDate()
+        let date = self.match.date
         guard let day = date?.dateComponents.day else { return "" }
         guard let month = date?.monthName(.default) else { return "" }
         
@@ -243,7 +243,7 @@ class ProtocolAllViewModel {
     }
     
     func prepareDateAsWeekDay() -> String {
-        let date = self.match.date?.toDate()
+        let date = self.match.date
         guard let dayOfWeek = date?.weekdayName(.default, locale: Locale.current) else { return "" }
         return dayOfWeek
     }

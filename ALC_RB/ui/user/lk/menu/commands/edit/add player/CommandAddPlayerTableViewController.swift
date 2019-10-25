@@ -268,7 +268,10 @@ extension CommandAddPlayerTableViewController : CommandAddPlayerView {
 //        setStateRow()
 //        self.leagueController.league = liLeagueInfo.league.convertToLeague()
         self.leagueController.league = soloLeague.league
+        self.tableView.beginUpdates()
         self.tableView.reloadRows(at: [IndexPath(row: currentAddId!, section: 0)], with: UITableView.RowAnimation.automatic)
+        self.tableView.endUpdates()
+//        self.tableView.reloadData()
     }
     
     func onFetchQueryPersonsSuccess(players: Players) {
@@ -335,53 +338,53 @@ extension CommandAddPlayerTableViewController {
         
         func setupStatus(person: Person) {
             
-            if leagueController.league.teams!.contains(where:  { team -> Bool in
-                return team.id == self.team.id
+//            if leagueController.league.teams!.contains(where:  { team -> Bool in
+//                return team.id == self.team.id
+//            }) {
+//                if self.team.players.contains(where: { player -> Bool in
+//                    return player.playerID == person.id
+//                }) {
+//                    let player = leagueController.getPlayerById(person.id)
+//                    if player?.inviteStatus == InviteStatus.accepted.rawValue {
+//                        cell.configure(with: person, status: .plyedIn(Texts.IN_YOUR_TEAM))
+//                    }
+//                    if player?.inviteStatus == InviteStatus.pending.rawValue {
+//                        cell.configure(with: person, status: .invitedIn(Texts.INVITED_INTO_YOUR_TEAM))
+//                    }
+//                }
+//            }
+            
+            if leagueController.league.teams!.contains(where: { team -> Bool in
+                return team.id == self.team.id && team.players.contains(where: { inPlayer -> Bool in
+                    return person.id == inPlayer.playerID
+                })
             }) {
-                if self.team.players.contains(where: { player -> Bool in
-                    return player.playerID == person.id
-                }) {
-                    let player = leagueController.getPlayerById(person.id)
-                    if player?.inviteStatus == InviteStatus.accepted.rawValue {
-                        cell.configure(with: person, status: .plyedIn(Texts.IN_YOUR_TEAM))
-                    }
-                    if player?.inviteStatus == InviteStatus.pending.rawValue {
-                        cell.configure(with: person, status: .invitedIn(Texts.INVITED_INTO_YOUR_TEAM))
-                    }
-                }
+                cell.configure(with: person, status: .invitedIn("В вашей команде"))
+            }
+            let team = leagueController.league.teams!.filter { team -> Bool in
+                return team.id != self.team.id && team.players.contains(where: { inPlayer -> Bool in
+                    return person.id == inPlayer.playerID && (inPlayer.inviteStatus == InviteStatus.approved.rawValue || inPlayer.inviteStatus == InviteStatus.accepted.rawValue || inPlayer.inviteStatus == InviteStatus.rejected.rawValue)
+                })
+                }.first
+            if team != nil {
+                cell.configure(with: person, status: .invitedIn("\(Texts.PLAYER_IN_ANOTHER_TEAM)\(team!.name)"))
             }
             
-//            if leagueController.league.teams!.contains(where: { team -> Bool in
-//                return team.id == self.team.id && team.players.contains(where: { inPlayer -> Bool in
-//                    return person.id == inPlayer.playerID
-//                })
-//            }) {
-//                cell.configure(with: person, status: .invitedIn("В вашей команде"))
-//            }
-//            let team = leagueController.league.teams!.filter { team -> Bool in
-//                return team.id != self.team.id && team.players.contains(where: { inPlayer -> Bool in
-//                    return person.id == inPlayer.playerID && (inPlayer.inviteStatus == InviteStatus.approved.rawValue || inPlayer.inviteStatus == InviteStatus.accepted.rawValue || inPlayer.inviteStatus == InviteStatus.rejected.rawValue)
-//                })
-//                }.first
-//            if team != nil {
-//                cell.configure(with: person, status: .invitedIn("\(Texts.PLAYER_IN_ANOTHER_TEAM)\(team!.name)"))
-//            }
-            
-//            if let player = leagueController.getPlayerById(person.id) {
-//
-//                if player.getInviteStatus() == .accepted || player.getInviteStatus() == .approved // Подтвержден или одобрен
-//                {
-//                    cell.configure(with: person, status: .plyedIn("\(Texts.PLAYER_IN_ANOTHER_TEAM)\(leagueController.getTeamByPlayerId(person.id)?.name ?? "другой команды")"))
-//                }
-//
-//                if player.getInviteStatus() == .pending // Ожидание
-//                {
-//                    cell.configure(with: person, status: .invitedIn("\(Texts.PLAYER_INVITED_TO)\(leagueController.getTeamByPlayerId(person.id)?.name ?? "N")"))
-//                }
-//
-//            } else { // user not found in league
-//                cell.configure(with: person, status: .notUsed)
-//            }
+            if let player = leagueController.getPlayerById(person.id) {
+
+                if player.getInviteStatus() == .accepted || player.getInviteStatus() == .approved // Подтвержден или одобрен
+                {
+                    cell.configure(with: person, status: .plyedIn("\(Texts.PLAYER_IN_ANOTHER_TEAM)\(leagueController.getTeamByPlayerId(person.id)?.name ?? "другой команды")"))
+                }
+
+                if player.getInviteStatus() == .pending // Ожидание
+                {
+                    cell.configure(with: person, status: .invitedIn("\(Texts.PLAYER_INVITED_TO)\(leagueController.getTeamByPlayerId(person.id)?.name ?? "N")"))
+                }
+
+            } else { // user not found in league
+                cell.configure(with: person, status: .notUsed)
+            }
         }
         
         let player: Person

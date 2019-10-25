@@ -44,8 +44,8 @@ extension MatchesTeamLeagueDetailTableViewController {
     }
     
     func configureCell(cell: MatchesTeamLeagueDetailTableViewCell, match: LIMatch, league: LILeague) {
-        cell.mDate.text = match.date?.convertDate(from: .utc, to: .local)
-        cell.mTime.text = match.date?.convertDate(from: .utcTime, to: .localTime)
+        cell.mDate.text = match.date?.toFormat(DateFormats.local.rawValue)//.convertDate(from: .utc, to: .local)
+        cell.mTime.text = match.date?.toFormat(DateFormats.localTime.rawValue)//.convertDate(from: .utcTime, to: .localTime)
         cell.mTour.text = match.tour
         cell.mPlace.text = match.place
         

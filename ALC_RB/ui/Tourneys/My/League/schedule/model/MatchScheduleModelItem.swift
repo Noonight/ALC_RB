@@ -21,10 +21,10 @@ final class MatchScheduleModelItem {
     }
     
     var date: String? {
-        return match.date//.toFormat(DateFormats.local.rawValue)
+        return match.date?.toFormat(DateFormats.local.rawValue)//.toFormat(DateFormats.local.rawValue)
     }
     var time: String? {
-        return match.date//.toFormat(DateFormats.localTime.rawValue)
+        return match.date?.toFormat(DateFormats.localTime.rawValue)//.toFormat(DateFormats.localTime.rawValue)
     }
     var score: String? {
         return match.score

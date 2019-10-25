@@ -75,8 +75,8 @@ class ScheduleRefTableViewCell: UITableViewCell {
         self.cellModel = cellModel
         reset()
         
-        date_label.text = cellModel.activeMatch.date.convertDate(from: .utcTime, to: .local)
-        time_label.text = cellModel.activeMatch.date.convertDate(from: .utcTime, to: .localTime)
+        date_label.text = cellModel.activeMatch.date.toFormat(DateFormats.local.rawValue)//convertDate(from: .utcTime, to: .local)
+        time_label.text = cellModel.activeMatch.date.toFormat(DateFormats.localTime.rawValue)//convertDate(from: .utcTime, to: .localTime)
         league_label.text = cellModel.activeMatch.tour
         stadium_label.text = cellModel.activeMatch.place
         

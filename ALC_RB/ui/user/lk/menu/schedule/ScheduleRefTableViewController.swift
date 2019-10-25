@@ -165,7 +165,8 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
             .map({ cellModel -> [ScheduleRefTableViewCell.CellModel] in
                 return cellModel.sorted(by: { (lModel, rModel) -> Bool in
 //                    Print.m(lModel.activeMatch.date)
-                    return lModel.activeMatch.date.getDateOfType(type: .utcTime) < rModel.activeMatch.date.getDateOfType(type: .utcTime)
+                    return lModel.activeMatch.date < rModel.activeMatch.date
+//                    return lModel.activeMatch.date.getDateOfType(type: .utcTime) < rModel.activeMatch.date.getDateOfType(type: .utcTime)
                 })
             })
             .bind(to: tableView.rx.items(cellIdentifier: CellIdentifiers.cell, cellType: ScheduleRefTableViewCell.self)) {  (row,cellModel,cell) in

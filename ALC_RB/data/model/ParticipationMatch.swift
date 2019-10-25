@@ -9,7 +9,8 @@
 import Foundation
 
 struct ParticipationMatch: Codable {
-    var id, date: String
+    var id: String
+    var date: Date
     var stage: String
     var played: Bool
     var round: String
@@ -25,7 +26,7 @@ struct ParticipationMatch: Codable {
     var teamOne, teamTwo: String
     var events: [LIEvent]
     var referees: [Referee]
-    var createdAt, updatedAt: String
+    var createdAt, updatedAt: Date
     var v: Int
     var leagueID: String
     
@@ -61,7 +62,7 @@ struct ParticipationMatch: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
-        self.date = try container.decodeIfPresent(String.self, forKey: .date) ?? ""
+        self.date = try container.decodeIfPresent(Date.self, forKey: .date) ?? Date()
         self.stage = try container.decodeIfPresent(String.self, forKey: .stage) ?? ""
         self.played = try container.decodeIfPresent(Bool.self, forKey: .played) ?? false
         self.round = try container.decodeIfPresent(String.self, forKey: .tour) ?? ""
@@ -78,8 +79,8 @@ struct ParticipationMatch: Codable {
         self.teamTwo = try container.decodeIfPresent(String.self, forKey: .teamTwo) ?? ""
         self.events = try container.decodeIfPresent([LIEvent].self, forKey: .events) ?? []
         self.referees = try container.decodeIfPresent([Referee].self, forKey: .referees) ?? []
-        self.createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) ?? ""
-        self.updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
+        self.createdAt = try container.decodeIfPresent(Date.self, forKey: .createdAt) ?? Date()
+        self.updatedAt = try container.decodeIfPresent(Date.self, forKey: .updatedAt) ?? Date()
         self.v = try container.decodeIfPresent(Int.self, forKey: .v) ?? -1
         self.leagueID = try container.decodeIfPresent(String.self, forKey: .leagueID) ?? ""
     }
@@ -93,7 +94,7 @@ struct ParticipationMatch: Codable {
     
     init() {
         id = ""
-        date = ""
+        date = Date()
         stage = ""
         played = false
         tour = ""
@@ -108,8 +109,8 @@ struct ParticipationMatch: Codable {
         teamTwo = ""
         events = []
         referees = []
-        createdAt = ""
-        updatedAt = ""
+        createdAt = Date()
+        updatedAt = Date()
         v = -1
         leagueID = ""
         round = ""
@@ -117,7 +118,7 @@ struct ParticipationMatch: Codable {
     }
     
     init(data: Data) throws {
-        self = try JSONDecoder().decode(ParticipationMatch.self, from: data)
+        self = try ISO8601Decoder.getDecoder().decode(ParticipationMatch.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -133,7 +134,7 @@ struct ParticipationMatch: Codable {
     
     func with(
         id: String? = nil,
-        date: String? = nil,
+        date: Date? = nil,
         stage: String? = nil,
         played: Bool? = nil,
         tour: String? = nil,
@@ -148,8 +149,8 @@ struct ParticipationMatch: Codable {
         teamTwo: String? = nil,
         events: [LIEvent]? = nil,
         referees: [Referee]? = nil,
-        createdAt: String? = nil,
-        updatedAt: String? = nil,
+        createdAt: Date? = nil,
+        updatedAt: Date? = nil,
         v: Int? = nil,
         leagueID: String? = nil
         ) -> ParticipationMatch {

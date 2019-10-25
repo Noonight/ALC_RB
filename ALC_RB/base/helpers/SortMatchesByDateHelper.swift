@@ -17,8 +17,10 @@ class SortMatchesByDateHelper {
         if type == .lowToHigh
         {
             let matchesWithDate = getMatchesWithDate(matches: matches).sorted { lMatch, rMatch -> Bool in
-                guard let leftDate = lMatch.date?.toDate()?.date else { return false }
-                guard let rightDate = rMatch.date?.toDate()?.date else { return false }
+//                guard let leftDate = lMatch.date?.toDate()?.date else { return false }
+//                guard let rightDate = rMatch.date?.toDate()?.date else { return false }
+                guard let leftDate = lMatch.date else { return false }
+                guard let rightDate = rMatch.date else { return false }
 //                Print.m("left = \(leftDate) ------ right = \(rightDate)")
                 return leftDate < rightDate
             }
@@ -28,8 +30,10 @@ class SortMatchesByDateHelper {
         if type == .highToLow
         {
             let matchesWithDate = getMatchesWithDate(matches: matches).sorted { lMatch, rMatch -> Bool in
-                guard let leftDate = lMatch.date?.toDate()?.date else { return false }
-                guard let rightDate = rMatch.date?.toDate()?.date else { return false }
+//                guard let leftDate = lMatch.date?.toDate()?.date else { return false }
+//                guard let rightDate = rMatch.date?.toDate()?.date else { return false }
+                guard let leftDate = lMatch.date else { return false }
+                guard let rightDate = rMatch.date else { return false }
                 return leftDate > rightDate
             }
             sortedArray.append(contentsOf: matchesWithDate)
@@ -44,7 +48,8 @@ class SortMatchesByDateHelper {
         
         for match in matches
         {
-            if match.date?.count ?? 0 == 0
+//            if match.date?.count ?? 0 == 0
+            if match.date == nil
             {
                 matchesWithoutDate.append(match)
             }
@@ -59,7 +64,8 @@ class SortMatchesByDateHelper {
         
         for match in matches
         {
-            if match.date?.count ?? 0 != 0
+//            if match.date?.count ?? 0 != 0
+            if match.date != nil
             {
                 matchesWithDate.append(match)
             }

@@ -30,8 +30,9 @@ class MatchProtocolPresenter: MvpPresenter<MatchProtocolViewController> {
     
     func getClubImage(id club: String, getting: @escaping (UIImage) -> ()) {
         getClubs(id: club) { (clubs) in
+            guard let clubFirstLogo = clubs.clubs.first?.logo else { return }
             Alamofire
-                .request(ApiRoute.getImageURL(image: (clubs.clubs.first?.logo)!))
+                .request(ApiRoute.getImageURL(image: clubFirstLogo))
                 .responseImage(completionHandler: { response in
                     if let img = response.result.value {
                         debugPrint("get club image complete")

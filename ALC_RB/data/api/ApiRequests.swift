@@ -402,6 +402,7 @@ class ApiRequests {
 //                    })
                     
                     upload.responseSoloPerson(completionHandler: { response in
+//                        dump(response)
                         switch response.result {
                         case .success:
                             if let user = response.result.value {
@@ -539,7 +540,7 @@ class ApiRequests {
                     
                     upload.responseSoloTeam(completionHandler: { (response) in
                         
-                        dump(response)
+//                        dump(response)
                         switch response.result {
                         case .success:
                             if let soloTeam = response.result.value {
@@ -1216,7 +1217,7 @@ class ApiRequests {
         Alamofire
             .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
             .responsePlayers { response in
-//                Print.m(response.result)
+                Print.m(response.result)
                 switch response.result {
                 case .success:
                     if let players = response.result.value {
@@ -1323,33 +1324,33 @@ class ApiRequests {
                 for element in fActiveMatches.matches
                 {
                     
-                    if element.teamOne.club?.count ?? 0 > 1
-                    {
-                        group.enter()
-                        self.get_clubById(id: element.teamOne.club ?? "", get_success: { (club) in
-                            
-                            fClubs.append(club)
-                            
-                            group.leave()
-                            
-                        }, get_failure: { (error) in
-                            get_failure(error)
-                        })
-                    }
-                    
-                    if element.teamTwo.club?.count ?? 0 > 1
-                    {
-                        group.enter()
-                        self.get_clubById(id: element.teamTwo.club ?? "", get_success: { (club) in
-                            
-                            fClubs.append(club)
-                            
-                            group.leave()
-                            
-                        }, get_failure: { (error) in
-                            get_failure(error)
-                        })
-                    }
+//                    if element.teamOne.club?.count ?? 0 > 1
+//                    {
+//                        group.enter()
+//                        self.get_clubById(id: element.teamOne.club ?? "", get_success: { (club) in
+//
+//                            fClubs.append(club)
+//
+//                            group.leave()
+//
+//                        }, get_failure: { (error) in
+//                            get_failure(error)
+//                        })
+//                    }
+//
+//                    if element.teamTwo.club?.count ?? 0 > 1
+//                    {
+//                        group.enter()
+//                        self.get_clubById(id: element.teamTwo.club ?? "", get_success: { (club) in
+//
+//                            fClubs.append(club)
+//
+//                            group.leave()
+//
+//                        }, get_failure: { (error) in
+//                            get_failure(error)
+//                        })
+//                    }
                     
                 }
             }
@@ -1755,6 +1756,74 @@ class ApiRequests {
                     result(.failure(response.result.error!))
                 }
         }
+    }
+    
+    // MARK: - ACTIVE MATCHES
+    
+    func get_activeMatches(resultMy: @escaping (ResultMy<ActiveMatches, Error>) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.activeMatches), method: .get)
+            .responseData { response in
+                let decoder = ISO8601Decoder.getDecoder()
+                do {
+                    if let activeMatches = try? decoder.decode(ActiveMatches.self, from: response.data!) {
+                        resultMy(.success(activeMatches))
+                    }
+                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+                        resultMy(.message(message))
+                    }
+                }
+                if response.result.isFailure {
+                    resultMy(.failure(response.error!))
+                }
+        }
+    }
+    
+    func get_referees(resultMy: @escaping (ResultMy<Players, Error>) -> ()) {
+        let parameters: Parameters = [
+            "type": "referee"//,
+            //            "limit": 32575,
+            //            "offset": 0
+        ]
+            
+        Alamofire
+            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+            .responseData(completionHandler: { response in
+                let decoder = ISO8601Decoder.getDecoder()
+                do {
+                    if let referees = try? decoder.decode(Players.self, from: response.data!) {
+                        resultMy(.success(referees))
+                    }
+                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+                        resultMy(.message(message))
+                    }
+                }
+                if response.result.isFailure {
+                    resultMy(.failure(response.error!))
+                }
+            })
+    }
+      
+
+    func get_club(id: String, resultMy: @escaping (ResultMy<SoloClub, Error>) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.clubs, id: id))
+            .responseData(completionHandler: { response in
+                let decoder = ISO8601Decoder.getDecoder()
+                do {
+                    if let club = try? decoder.decode(SoloClub.self, from: response.data!) {
+                        resultMy(.success(club))
+                    }
+                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+                        resultMy(.message(message))
+                    }
+                }
+                if response.result.isFailure {
+                    resultMy(.failure(response.error!))
+                }
+            })
+        
+
     }
     
 }

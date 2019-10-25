@@ -80,7 +80,7 @@ extension DataRequest {
 
 struct ActiveMatch: Codable {
     var id: String
-    var date: String
+    var date: Date
     var stage: String
     var played: Bool
     var tour: String?
@@ -98,8 +98,8 @@ struct ActiveMatch: Codable {
     var events: [LIEvent]
     var referees: [Referee]
     var penalty: String?
-    var createdAt: String
-    var updatedAt: String
+    var createdAt: Date
+    var updatedAt: Date
     var leagueID: String
     var v: Int
     
@@ -107,7 +107,7 @@ struct ActiveMatch: Codable {
         return ParticipationMatch().with(id: id, date: date, stage: stage, played: played, tour: tour, playersList: playersList, place: place, winner: winner, score: score, fouls: fouls, autoGoals: autoGoals, league: league, teamOne: teamOne.id, teamTwo: teamTwo.id, events: events, referees: referees, createdAt: createdAt, updatedAt: updatedAt, v: v, leagueID: leagueID)
     }
     
-    init(id: String, date: String, stage: String, played: Bool, tour: String, playersList: [String], place: String, autoGoals: String, score: String, league: String, teamOne: Team, teamTwo: Team, events: [LIEvent], referees: [Referee], penalty: String, createdAt: String, updatedAt: String, v: Int, leagueID: String, winner: String, fouls: String) {
+    init(id: String, date: Date, stage: String, played: Bool, tour: String, playersList: [String], place: String, autoGoals: String, score: String, league: String, teamOne: Team, teamTwo: Team, events: [LIEvent], referees: [Referee], penalty: String, createdAt: Date, updatedAt: Date, v: Int, leagueID: String, winner: String, fouls: String) {
         self.id = id
         self.date = date
         self.stage = stage
@@ -136,7 +136,7 @@ struct ActiveMatch: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
-        self.date = try container.decodeIfPresent(String.self, forKey: .date) ?? ""
+        self.date = try container.decodeIfPresent(Date.self, forKey: .date) ?? Date()
         self.stage = try container.decodeIfPresent(String.self, forKey: .stage) ?? ""
         self.played = try container.decodeIfPresent(Bool.self, forKey: .played) ?? false
         self.tour = try container.decodeIfPresent(String.self, forKey: .tour) ?? ""
@@ -153,8 +153,8 @@ struct ActiveMatch: Codable {
         self.teamTwo = try container.decodeIfPresent(Team.self, forKey: .teamTwo) ?? Team()
         self.events = try container.decodeIfPresent([LIEvent].self, forKey: .events) ?? []
         self.referees = try container.decodeIfPresent([Referee].self, forKey: .referees) ?? []
-        self.createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) ?? ""
-        self.updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
+        self.createdAt = try container.decodeIfPresent(Date.self, forKey: .createdAt) ?? Date()
+        self.updatedAt = try container.decodeIfPresent(Date.self, forKey: .updatedAt) ?? Date()
         self.v = try container.decodeIfPresent(Int.self, forKey: .v) ?? -1
         
         self.leagueID = try container.decodeIfPresent(String.self, forKey: .leagueID) ?? ""
@@ -176,7 +176,7 @@ extension ActiveMatch {
     
     init() {
         id = ""
-        date = ""
+        date = Date()
         stage = ""
         played = false
         tour = ""
@@ -193,8 +193,8 @@ extension ActiveMatch {
         //        teamTwo = ""
         events = []
         referees = []
-        createdAt = ""
-        updatedAt = ""
+        createdAt = Date()
+        updatedAt = Date()
         v = -1
                 leagueID = ""
     }
@@ -216,7 +216,7 @@ extension ActiveMatch {
     
     func with(
         id: String? = nil,
-        date: String? = nil,
+        date: Date? = nil,
         stage: String? = nil,
         played: Bool? = nil,
         tour: String? = nil,
@@ -235,8 +235,8 @@ extension ActiveMatch {
         teamTwo: Team? = nil,
         events: [LIEvent]? = nil,
         referees: [Referee]? = nil,
-        createdAt: String? = nil,
-        updatedAt: String? = nil,
+        createdAt: Date? = nil,
+        updatedAt: Date? = nil,
         v: Int? = nil,
         penalty: String? = ""
         ) -> ActiveMatch {

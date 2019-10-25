@@ -44,8 +44,8 @@ struct Person: Codable {
     var type: String
     var pendingTeamInvites: [PendingTeamInvite]
     var participation: [Participation]
-    var createdAt: String
-    var updatedAt: String
+    var createdAt: Date
+    var updatedAt: Date
     var v: Int
     var club: String?
     var region: String
@@ -95,8 +95,8 @@ struct Person: Codable {
         self.type = try container.decodeIfPresent(String.self, forKey: .type) ?? ""
         self.pendingTeamInvites = try container.decodeIfPresent([PendingTeamInvite].self, forKey: .pendingTeamInvites) ?? []
         self.participation = try container.decodeIfPresent([Participation].self, forKey: .participation) ?? []
-        self.createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) ?? ""
-        self.updatedAt = try container.decodeIfPresent(String.self, forKey: .updatedAt) ?? ""
+        self.createdAt = try container.decodeIfPresent(Date.self, forKey: .createdAt) ?? Date()
+        self.updatedAt = try container.decodeIfPresent(Date.self, forKey: .updatedAt) ?? Date()
         self.v = try container.decodeIfPresent(Int.self, forKey: .v) ?? -1
         self.club = try container.decodeIfPresent(String.self, forKey: .club) ?? ""
         self.region = try container.decodeIfPresent(String.self, forKey: .region) ?? ""
@@ -165,7 +165,7 @@ extension PendingTeamInvite {
     }
     
     init(data: Data) throws {
-        self = try JSONDecoder().decode(PendingTeamInvite.self, from: data)
+        self = try ISO8601Decoder.getDecoder().decode(PendingTeamInvite.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -192,6 +192,7 @@ extension PendingTeamInvite {
     }
     
     func jsonData() throws -> Data {
+//        return try ISO8601Decoder.getDecoder().encode(self)
         return try JSONEncoder().encode(self)
     }
     
@@ -210,7 +211,7 @@ extension Players {
     }
     
     init(data: Data) throws {
-        self = try JSONDecoder().decode(Players.self, from: data)
+        self = try ISO8601Decoder.getDecoder().decode(Players.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -260,15 +261,15 @@ extension Person {
         type = ""
         pendingTeamInvites = []
         participation = []
-        createdAt = ""
-        updatedAt = ""
+        createdAt = Date()
+        updatedAt = Date()
         v = -1
         club = ""
         region = ""
     }
     
     init(data: Data) throws {
-        self = try JSONDecoder().decode(Person.self, from: data)
+        self = try ISO8601Decoder.getDecoder().decode(Person.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -297,8 +298,8 @@ extension Person {
         type: String? = nil,
         pendingTeamInvites: [PendingTeamInvite]? = nil,
         participation: [Participation]? = nil,
-        createdAt: String? = nil,
-        updatedAt: String? = nil,
+        createdAt: Date? = nil,
+        updatedAt: Date? = nil,
         v: Int? = nil,
         club: String?? = nil
         ) -> Person {

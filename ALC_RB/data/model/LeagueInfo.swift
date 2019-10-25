@@ -83,7 +83,7 @@ struct LILeague: Codable {
 }
 
 struct LIMatch: Codable {
-    var date: String?
+    var date: Date?
     var stage: String?
     var round: String?
     var group: String?
@@ -101,8 +101,8 @@ struct LIMatch: Codable {
     var teamTwo: String?
     var events: [LIEvent]
     var referees: [LIReferee]
-    var createdAt: String
-    var updatedAt: String
+    var createdAt: Date
+    var updatedAt: Date
     var v: Int
     
     
@@ -627,7 +627,7 @@ extension LILeague {
 extension LIMatch {
     
     init() {
-        date = ""
+        date = Date()
         stage = ""
         played = false
         tour = ""
@@ -643,8 +643,8 @@ extension LIMatch {
         teamTwo = ""
         events = []
         referees = []
-        createdAt = ""
-        updatedAt = ""
+        createdAt = Date()
+        updatedAt = Date()
         v = -1
     }
     
@@ -664,7 +664,7 @@ extension LIMatch {
     }
     
     func with(
-        date: String? = nil,
+        date: Date? = nil,
         stage: String? = nil,
         played: Bool? = nil,
         tour: String? = nil,
@@ -680,8 +680,8 @@ extension LIMatch {
         teamTwo: String? = nil,
         events: [LIEvent]? = nil,
         referees: [LIReferee]? = nil,
-        createdAt: String? = nil,
-        updatedAt: String? = nil,
+        createdAt: Date? = nil,
+        updatedAt: Date? = nil,
         v: Int? = nil
         ) -> LIMatch {
         var match = LIMatch()

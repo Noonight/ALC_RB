@@ -88,12 +88,29 @@ extension ScheduleTableViewController {
                     }).first,
                 teamTwo: self.viewModel.leagueDetailModel.value.leagueInfo.league.teams?.filter({ team in
                     return team.id == match.teamTwo
-                    }).first  )
+                    }).first
+                )
+                })
             })
+            .map({ matches -> [MatchScheduleModelItem] in
+                let mMatches = matches.filter { match -> Bool in
+                    return match.teamOne != nil && match.teamTwo != nil
+                }
+                return mMatches
             })
+//            .map({ matches -> [MatchScheduleModelItem] in
+//                return matches.filter { match -> Bool in
+//                    return match.teamOne != nil && match.teamTwo != nil
+//                }
+//            })
             .asDriver(onErrorJustReturn: [])
             .drive(tableView.rx.items(cellIdentifier: ScheduleTableViewCell.ID, cellType: ScheduleTableViewCell.self)) { (index, match, cell) in
                 cell.matchScheduleModelItem = match
+                if cell.matchScheduleModelItem.teamOne == nil || cell.matchScheduleModelItem.teamTwo == nil {
+                    cell.accessoryType = .none
+                } else {
+                    cell.accessoryType = .disclosureIndicator
+                }
             }
         .disposed(by: disposeBag)
         
@@ -115,8 +132,9 @@ extension ScheduleTableViewController {
             .itemSelected
             .subscribe({ indexPath in
                 let cell = self.tableView.cellForRow(at: indexPath.element!) as! ScheduleTableViewCell
-                
-                self.showProtocol(match: cell.matchScheduleModelItem.match)
+                if cell.accessoryType == .disclosureIndicator {
+                    self.showProtocol(match: cell.matchScheduleModelItem.match)
+                }
             })
             .disposed(by: disposeBag)
         
