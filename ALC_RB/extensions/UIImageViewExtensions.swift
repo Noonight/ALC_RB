@@ -35,6 +35,33 @@ extension UIImageView {
             ])
     }
     
+    func kfLoadRoundedImage(path: String, placeholder: UIImage? = UIImage(named: "ic_logo"), complete: @escaping (ResultLoadImage) -> ()) {
+        let url = ApiRoute.getImageURL(image: path)
+        let processor = DownsamplingImageProcessor(size: self.frame.size)
+            .append(another: CroppingImageProcessorCustom(size: self .frame.size))
+            .append(another: RoundCornerImageProcessor(cornerRadius: self.getHalfWidthHeight()))
+        
+        self.kf.indicatorType = .activity
+        self.kf.setImage(
+            with: url,
+            placeholder: placeholder,
+            options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ]) { result in
+                switch result
+                {
+                case .success(let image):
+                    complete(.success(image.image))
+                case .failure(let error):
+                    complete(.failure(error))
+                }
+        }
+    }
+
+    
     func kfLoadImage(path: String?, placeholder: UIImage? = UIImage(named: "ic_logo")) {
         
         guard let imagePath = path else { return }

@@ -31,8 +31,6 @@ final class EditProfileViewModel {
     init(dataManager: ApiRequests) {
         self.dataManager = dataManager
         self.regionViewModel = RegionsViewModel(dataManager: dataManager)
-        
-        
     }
     
     func fetch() {
@@ -45,10 +43,10 @@ final class EditProfileViewModel {
             self.loading.onNext(false)
             switch result {
             case .success(let person):
-                self.editedPerson.onNext(person)
                 var authPerson = self.userDefaults.getAuthorizedUser()
                 authPerson?.person = person.person
                 self.userDefaults.setAuthorizedUser(user: authPerson!)
+                self.editedPerson.onNext(person)
             case .message(let message):
                 self.message.onNext(message)
             case .failure(let error):

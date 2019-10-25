@@ -79,9 +79,20 @@ extension EditProfileViewController {
             .regions
             .subscribe({ elements in
                 guard let regions = elements.element else { return }
-                if self.viewModel.regionViewModel.choosedRegion.value == nil {
-                    self.viewModel.regionViewModel.choosedRegion.accept(regions.first)
+                
+                
+                var index = 0
+                var region: RegionMy?
+                for i in 0..<regions.count {
+                    if regions[i]._id == self.viewModel.authorizedUser?.person.region {
+                        index = i
+                        region = regions[i]
+                    }
                 }
+                
+                self.viewModel.regionViewModel.choosedRegion.accept(region)
+                
+                self.regionPicker.selectRow(index, inComponent: 0, animated: true)
             })
             .disposed(by: bag)
         
@@ -201,6 +212,17 @@ extension EditProfileViewController {
             
             datePicker.date = authUser.person.birthdate
             
+            if let imagePath = authUser.person.photo {
+                kfLoadImage(imagePath: imagePath) { result in
+                    switch result {
+                    case .success(let image):
+                        self.viewModel.choosedImage.accept(image)
+                    case .failure(let error):
+                        self.viewModel.choosedImage.accept(nil)
+                        Print.m("loading image failure \(error)")
+                    }
+                }
+            }
         }
     }
     
