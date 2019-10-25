@@ -142,21 +142,24 @@ class UserLKViewController: UIViewController {
 ////            self.userHeaderMenuImage.image = UIImage(named: "ic_user")
 //            self.userHeaderMenuImage.image = UIImage(named: "ic_logo")?.af_imageRoundedIntoCircle()
 //        }
-        if let image = authUser?.person.photo {
-            let url = ApiRoute.getImageURL(image: image)
-            let processor = CroppingImageProcessorCustom(size: self.userHeaderMenuImage.frame.size)
-                .append(another: RoundCornerImageProcessor(cornerRadius: self.userHeaderMenuImage.getHalfWidthHeight()))
-            
-            self.userHeaderMenuImage.kf.indicatorType = .activity
-            self.userHeaderMenuImage.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: "ic_logo"),
-                options: [
-                    .processor(processor),
-                    .scaleFactor(UIScreen.main.scale),
-                    .transition(.fade(1))//,
-//                    .cacheOriginalImage
-                ])
+//        if let image = authUser?.person.photo {
+//            let url = ApiRoute.getImageURL(image: image)
+//            let processor = CroppingImageProcessorCustom(size: self.userHeaderMenuImage.frame.size)
+//                .append(another: RoundCornerImageProcessor(cornerRadius: self.userHeaderMenuImage.getHalfWidthHeight()))
+//
+//            self.userHeaderMenuImage.kf.indicatorType = .activity
+//            self.userHeaderMenuImage.kf.setImage(
+//                with: url,
+//                placeholder: UIImage(named: "ic_logo"),
+//                options: [
+//                    .processor(processor),
+//                    .scaleFactor(UIScreen.main.scale)//,
+////                    .transition(.fade(1))//,
+////                    .cacheOriginalImage
+//                ])
+//        }
+        if let imagePath = authUser?.person.photo {
+            self.userHeaderMenuImage.kfLoadRoundedImage(path: imagePath, placeholder: #imageLiteral(resourceName: "ic_account2"))
         }
         
     }
@@ -355,14 +358,14 @@ extension UserLKViewController: UserLKView {
 //        Print.m("referees")
 //    }
     
-    func getProfileImageSuccessful(image: UIImage) {
-        self.userHeaderMenuImage.image = image.af_imageRoundedIntoCircle()
-    }
-    
-    func getProfileImageFailure(error: Error) {
-        Print.d(error: error)
-        self.userHeaderMenuImage.image = UIImage(named: "ic_user")
-    }
+//    func getProfileImageSuccessful(image: UIImage) {
+//        self.userHeaderMenuImage.image = image.af_imageRoundedIntoCircle()
+//    }
+//
+//    func getProfileImageFailure(error: Error) {
+//        Print.d(error: error)
+//        self.userHeaderMenuImage.image = UIImage(named: "ic_user")
+//    }
     
     func initPresenter() {
         self.presenter.attachView(view: self)

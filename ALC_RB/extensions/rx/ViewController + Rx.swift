@@ -86,6 +86,7 @@ extension Reactive where Base: UIView {
                     vc.hud = vc.showLoadingViewHUD()
                 }
             } else {
+                vc.hideHUD()
                 vc.hud?.hide(animated: false)
                 vc.hud = nil
             }

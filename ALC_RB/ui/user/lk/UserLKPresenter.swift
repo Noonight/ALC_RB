@@ -10,9 +10,9 @@ import UIKit
 
 protocol UserLKView: MvpView {
     
-    func getProfileImageSuccessful(image: UIImage)
-    
-    func getProfileImageFailure(error: Error)
+//    func getProfileImageSuccessful(image: UIImage)
+//
+//    func getProfileImageFailure(error: Error)
     
 //    func fetchRefereesSuccess(referees: Players)
 //    func fetchRefereesFailure(error: Error)
@@ -25,13 +25,13 @@ class UserLKPresenter: MvpPresenter<UserLKViewController> {
     
     private let apiService = ApiRequests()
     
-    func getProfileImage(imagePath: String) {
-        apiService.get_image(imagePath: imagePath, get_success: { (image) in
-            self.getView().getProfileImageSuccessful(image: image)
-        }) { (error) in
-            self.getView().getProfileImageFailure(error: error)
-        }
-    }
+//    func getProfileImage(imagePath: String) {
+//        apiService.get_image(imagePath: imagePath, get_success: { (image) in
+//            self.getView().getProfileImageSuccessful(image: image)
+//        }) { (error) in
+//            self.getView().getProfileImageFailure(error: error)
+//        }
+//    }
     
     func refreshUser(token: String) {
         apiService.get_refreshAuthUser(token: token, success: { authUser in
