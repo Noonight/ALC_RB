@@ -40,13 +40,13 @@ extension UITableView {
         
         self.tapAction(action: btn)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapOnHud))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapTableViewHud))
         hud.addGestureRecognizer(tap)
         
         return hud
     }
     
-    @objc private func tapOnHud() {
+    @objc private func tapTableViewHud() {
         self.tapAction()
     }
     

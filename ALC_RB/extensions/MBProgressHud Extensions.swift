@@ -81,7 +81,7 @@ extension MBProgressHUD {
         self.tapAction(action: tap)
         
         bezelView.isUserInteractionEnabled = true
-        bezelView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnHud)))
+        bezelView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnHudHUD)))
         
     }
     
@@ -115,7 +115,7 @@ extension MBProgressHUD {
         self.tapAction(action: tap)
         
         bezelView.isUserInteractionEnabled = true
-        bezelView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnHud)))
+        bezelView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnHudHUD)))
         
     }
     
@@ -130,11 +130,11 @@ extension MBProgressHUD {
         
         self.tapAction(action: btn)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(tapOnHud))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapOnHudHUD))
         self.addGestureRecognizer(tap)
     }
     
-    @objc private func tapOnHud() {
+    @objc private func tapOnHudHUD() {
         self.tapAction()
     }
     

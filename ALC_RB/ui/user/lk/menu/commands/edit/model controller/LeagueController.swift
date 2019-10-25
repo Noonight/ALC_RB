@@ -28,6 +28,24 @@ class LeagueController {
             }
         }
     }
+    func setTeamPlayersById(teamId: String, players: [Player]) {
+        guard let teams = league.teams else { return }
+        for i in 0..<teams.count {
+            if teams[i].id == teamId {
+                league.teams![i].players = players
+            }
+        }
+    }
+    func setTeamPlayerById(playerId: String, player: Player) {
+        guard let teams = league.teams else { return }
+        for i in 0..<teams.count {
+            for j in 0..<teams[i].players.count {
+                if playerId == teams[i].players[j].playerID {
+                    league.teams![i].players[j] = player
+                }
+            }
+        }
+    }
     
     func getPlayerById(_ id: String) -> Player? {
         let team = league.teams!.filter { team -> Bool in
