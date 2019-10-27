@@ -14,8 +14,8 @@ class CommandEditLKViewController: BaseStateViewController {
     }
     
     @IBOutlet weak var saveBtn: UIBarButtonItem!
-    @IBOutlet weak var commandPlayers: UITableView!
-    @IBOutlet weak var commandInvitePlayers: UITableView!
+    @IBOutlet weak var commandPlayers: IntrinsicTableView!
+    @IBOutlet weak var commandInvitePlayers: IntrinsicTableView!
     
     // MARK: Var & Let
     
