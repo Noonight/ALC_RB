@@ -64,13 +64,23 @@ class EditScheduleViewModel {
         }
     }
     
-    func fetchLeagueInfo(id: String, success: @escaping (LILeagueInfo)->(), failure: @escaping (Error)->()) {
-        dataManager.get_tournamentLeague(id: id, get_success: { leagueInfo in
-            success(leagueInfo)
-        }, get_error: { error in
-            failure(error)
-//            Print.m(error)
-        })
+    func fetchLeagueInfo(id: String, success: @escaping (LILeagueInfo)->(), r_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error)->()) {
+//        dataManager.get_tournamentLeague(id: id, get_success: { leagueInfo in
+//            success(leagueInfo)
+//        }, get_error: { error in
+//            failure(error)
+////            Print.m(error)
+//        })
+        dataManager.get_tournamentLeague(id: id) { result in
+            switch result {
+            case .success(let league):
+                success(league)
+            case .message(let message):
+                r_message(message)
+            case .failure(let error):
+                failure(error)
+            }
+        }
     }
     
     func editMatchReferees(token: String, editMatchReferees: EditMatchReferees, success: @escaping (SoloMatch)->(), message_single: @escaping (SingleLineMessage)->(), failure: @escaping (Error)->()) {

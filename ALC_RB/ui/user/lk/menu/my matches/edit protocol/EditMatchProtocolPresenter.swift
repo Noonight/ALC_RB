@@ -40,14 +40,18 @@ class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> 
     
     func getClubImage(id club: String, getting: @escaping (UIImage) -> ()) {
         getClubs(id: club) { (clubs) in
-            Alamofire
-                .request(ApiRoute.getImageURL(image: (clubs.clubs.first?.logo)!))
-                .responseImage(completionHandler: { response in
-                    if let img = response.result.value {
-                        debugPrint("get club image complete")
-                        getting(img)
-                    }
-                })
+            if let mClub = clubs.clubs.first {
+                if let logo = mClub.logo {
+                    Alamofire
+                        .request(ApiRoute.getImageURL(image: logo))
+                        .responseImage(completionHandler: { response in
+                            if let img = response.result.value {
+                                debugPrint("get club image complete")
+                                getting(img)
+                            }
+                        })
+                }
+            }
         }
     }
     

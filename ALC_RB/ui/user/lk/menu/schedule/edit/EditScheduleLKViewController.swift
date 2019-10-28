@@ -225,12 +225,15 @@ class EditScheduleLKViewController: BaseStateViewController {
                 self.refProtocol.preConfigureModelControllers()
 
                 self.show(self.refProtocol, sender: self)
-        },
-            failure: { error in
+        }, r_message: { message in
+            sender.customView = defaultView
+            
+            self.showAlert(message: message.message)
+            
+        }, failure: { error in
                 self.showAlert(message: error.localizedDescription)
                 Print.m(error)
-        }
-        )
+        })
         
 //        }
     }
