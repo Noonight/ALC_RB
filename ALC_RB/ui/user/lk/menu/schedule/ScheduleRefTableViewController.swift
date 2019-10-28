@@ -156,7 +156,7 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
                         }).first
                     }
                     
-                    let cell = ScheduleRefTableViewCell.CellModel(activeMatch: element, clubTeamOne: teamOne!, clubTeamTwo: teamTwo!, referee1: ref1, referee2: ref2, referee3: ref3, timekeeper: timekeep)
+                    let cell = ScheduleRefTableViewCell.CellModel(activeMatch: element, clubTeamOne: teamOne, clubTeamTwo: teamTwo, referee1: ref1, referee2: ref2, referee3: ref3, timekeeper: timekeep)
                     cellModels.append(cell)
                     
                 }

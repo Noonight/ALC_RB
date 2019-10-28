@@ -1760,6 +1760,95 @@ class ApiRequests {
     
     // MARK: - ACTIVE MATCHES
     
+    func get_scheduleRefereeData(resultMy: @escaping (ResultMy<(ActiveMatches, Players, [SoloClub]), Error>) -> ()) {
+        let group = DispatchGroup()
+        
+//        var activeMatches = ActiveMatches()
+//        var players = Players()
+//        var clubs = [SoloClub]()
+        var mMessage: SingleLineMessage?
+        var mError: Error?
+        var mResult = (ActiveMatches(), Players(), [SoloClub]())
+        
+        group.enter()
+        self.get_activeMatches { result in
+            switch result {
+            case .success(let activeMatches):
+                mResult.0 = activeMatches
+                
+                for match in activeMatches.matches {
+                    
+                    if let clubOne = match.teamOne.club {
+                        if clubOne.count > 2 {
+                            group.enter()
+                            self.get_club(id: clubOne) { result in
+                                switch result {
+                                case .success(let club):
+                                    mResult.2.append(club)
+                                case .message(let message):
+                                    mMessage = message
+                                case .failure(let error):
+                                    mError = error
+                                }
+                                group.leave()
+                            }
+                        }
+                        
+                    }
+                    
+                    if let clubTwo = match.teamTwo.club {
+                        if clubTwo.count > 2 {
+                            group.enter()
+                            self.get_club(id: clubTwo) { result in
+                                switch result {
+                                case .success(let club):
+                                    mResult.2.append(club)
+                                case .message(let message):
+                                    mMessage = message
+                                case .failure(let error):
+                                    mError = error
+                                }
+                                group.leave()
+                            }
+                        }
+                        
+                    }
+                }
+                
+            case .message(let message):
+                mMessage = message
+            case .failure(let error):
+                mError = error
+            }
+            group.leave()
+        }
+        group.enter()
+        self.get_referees { result in
+            switch result {
+            case .success(let referees):
+                mResult.1 = referees
+            case .message(let message):
+                mMessage = message
+            case .failure(let error):
+                mError = error
+            }
+            group.leave()
+        }
+        
+        group.notify(queue: .main) {
+            if let error = mError {
+                resultMy(.failure(error))
+            }
+            if let message = mMessage {
+                resultMy(.message(message))
+            }
+            
+            resultMy(.success(mResult))
+            
+        }
+        
+    }
+    
     func get_activeMatches(resultMy: @escaping (ResultMy<ActiveMatches, Error>) -> ()) {
         Alamofire
             .request(ApiRoute.getApiURL(.activeMatches), method: .get)
@@ -1822,7 +1911,6 @@ class ApiRequests {
                     resultMy(.failure(response.error!))
                 }
             })
-        
 
     }
     

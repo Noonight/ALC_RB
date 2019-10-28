@@ -37,8 +37,8 @@ class ScheduleRefTableViewCell: UITableViewCell {
     
     struct CellModel {
         var activeMatch: ActiveMatch
-        var clubTeamOne: Club
-        var clubTeamTwo: Club
+        var clubTeamOne: Club?
+        var clubTeamTwo: Club?
         var referee1: Person?
         var referee2: Person?
         var referee3: Person?
@@ -54,7 +54,7 @@ class ScheduleRefTableViewCell: UITableViewCell {
             self.timekeeper = nil
         }
         
-        init(activeMatch: ActiveMatch, clubTeamOne: Club, clubTeamTwo: Club, referee1: Person?, referee2: Person?, referee3: Person?, timekeeper: Person?) {
+        init(activeMatch: ActiveMatch, clubTeamOne: Club?, clubTeamTwo: Club?, referee1: Person?, referee2: Person?, referee3: Person?, timekeeper: Person?) {
             self.activeMatch = activeMatch
             self.clubTeamOne = clubTeamOne
             self.clubTeamTwo = clubTeamTwo
@@ -65,7 +65,7 @@ class ScheduleRefTableViewCell: UITableViewCell {
         }
         
         func convertToMyMatchesRefTableViewCellCellModle() -> MyMatchesRefTableViewCell.CellModel {
-            return MyMatchesRefTableViewCell.CellModel(participationMatch: activeMatch.convertToParticipationMatch(), club1: clubTeamOne, club2: clubTeamTwo, team1Name: clubTeamOne.name!, team2Name: clubTeamTwo.name!)
+            return MyMatchesRefTableViewCell.CellModel(participationMatch: activeMatch.convertToParticipationMatch(), club1: clubTeamOne, club2: clubTeamTwo, team1Name: clubTeamOne?.name, team2Name: clubTeamTwo?.name)
         }
     }
     
@@ -84,7 +84,8 @@ class ScheduleRefTableViewCell: UITableViewCell {
         teamNameTwo_label.text = cellModel.activeMatch.teamTwo.name
 //        if cellModel.clubTeamOne.logo?.count ?? 0 > 1 {
         
-            if let urlOne = cellModel.clubTeamOne.logo {
+        if let clubOne = cellModel.clubTeamOne {
+            if let urlOne = clubOne.logo {
                 let url = ApiRoute.getImageURL(image: urlOne)
                 let processor = DownsamplingImageProcessor(size: teamLogoOne_image.frame.size)
                     .append(another: CroppingImageProcessorCustom(size: teamLogoOne_image.frame.size))
@@ -103,6 +104,10 @@ class ScheduleRefTableViewCell: UITableViewCell {
             } else {
                 teamLogoOne_image.image = #imageLiteral(resourceName: "ic_logo")
             }
+        } else {
+            teamLogoOne_image.image = #imageLiteral(resourceName: "ic_logo")
+        }
+            
             
 //            teamLogoOne_image.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.clubTeamOne.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true) { (response) in
 //                self.teamLogoOne_image.image = response.result.value?.af_imageRoundedIntoCircle()
@@ -116,26 +121,30 @@ class ScheduleRefTableViewCell: UITableViewCell {
 //            }
 //
 //        }
-        
-        if let urlTwo = cellModel.clubTeamTwo.logo {
-            let url = ApiRoute.getImageURL(image: urlTwo)
-            let processor = DownsamplingImageProcessor(size: teamLogoTwo_image.frame.size)
-                .append(another: CroppingImageProcessorCustom(size: teamLogoTwo_image.frame.size))
-                .append(another: RoundCornerImageProcessor(cornerRadius: teamLogoTwo_image.getHalfWidthHeight()))
-            
-            teamLogoTwo_image.kf.indicatorType = .activity
-            teamLogoTwo_image.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: "ic_logo"),
-                options: [
-                    .processor(processor),
-                    .scaleFactor(UIScreen.main.scale),
-                    .transition(.fade(1)),
-                    .cacheOriginalImage
-                ])
+        if let clubTwo = cellModel.clubTeamTwo {
+            if let urlTwo = clubTwo.logo {
+                let url = ApiRoute.getImageURL(image: urlTwo)
+                let processor = DownsamplingImageProcessor(size: teamLogoTwo_image.frame.size)
+                    .append(another: CroppingImageProcessorCustom(size: teamLogoTwo_image.frame.size))
+                    .append(another: RoundCornerImageProcessor(cornerRadius: teamLogoTwo_image.getHalfWidthHeight()))
+                
+                teamLogoTwo_image.kf.indicatorType = .activity
+                teamLogoTwo_image.kf.setImage(
+                    with: url,
+                    placeholder: UIImage(named: "ic_logo"),
+                    options: [
+                        .processor(processor),
+                        .scaleFactor(UIScreen.main.scale),
+                        .transition(.fade(1)),
+                        .cacheOriginalImage
+                    ])
+            } else {
+                teamLogoTwo_image.image = #imageLiteral(resourceName: "ic_logo")
+            }
         } else {
             teamLogoTwo_image.image = #imageLiteral(resourceName: "ic_logo")
         }
+        
         
         if cellModel.activeMatch.score == "" {
             score_label.text = " - "

@@ -20,6 +20,12 @@ class ScheduleRefViewModel {
             self.referees = referees
             self.clubs = clubs
         }
+        
+        init(tuple: (ActiveMatches, Players, [SoloClub])) {
+            self.activeMatches = tuple.0
+            self.referees = tuple.1
+            self.clubs = tuple.2
+        }
     }
     
     var error: PublishSubject<Error?> = PublishSubject()
@@ -37,23 +43,37 @@ class ScheduleRefViewModel {
     func fetch(closure: @escaping () -> ()) {
         refreshing.onNext(true)
         
-        dataManager.getActiveMatchesForView(get_success: { (activeMatches, referees, clubs) in
-            
+        dataManager.get_scheduleRefereeData { result in
             self.refreshing.onNext(false)
-            self.dataModel.onNext(ScheduleRefViewModel.DataModel(
-                activeMatches: activeMatches,
-                referees: referees,
-                clubs: clubs)
-            )
-            closure()
-            
-        }, get_message: { message in
-            self.message.onNext(message)
-            closure()
-        }) { (error) in
-            Print.m(error)
-            self.error.onNext(error)
+            switch result {
+            case .success(let tuple):
+                Print.m(tuple)
+                self.dataModel.onNext(DataModel(tuple: tuple))
+            case .message(let message):
+                self.message.onNext(message)
+            case .failure(let error):
+                self.error.onNext(error)
+            }
             closure()
         }
+        
+//        dataManager.getActiveMatchesForView(get_success: { (activeMatches, referees, clubs) in
+//
+//            self.refreshing.onNext(false)
+//            self.dataModel.onNext(ScheduleRefViewModel.DataModel(
+//                activeMatches: activeMatches,
+//                referees: referees,
+//                clubs: clubs)
+//            )
+//            closure()
+//
+//        }, get_message: { message in
+//            self.message.onNext(message)
+//            closure()
+//        }) { (error) in
+//            Print.m(error)
+//            self.error.onNext(error)
+//            closure()
+//        }
     }
 }

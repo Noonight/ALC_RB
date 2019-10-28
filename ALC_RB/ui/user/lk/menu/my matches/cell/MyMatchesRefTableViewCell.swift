@@ -31,7 +31,7 @@ class MyMatchesRefTableViewCell: UITableViewCell {
         var club2: Club?
         var team1Name, team2Name: String?
         
-        init(participationMatch: ParticipationMatch, club1: Club, club2: Club, team1Name: String, team2Name: String) {
+        init(participationMatch: ParticipationMatch, club1: Club?, club2: Club?, team1Name: String?, team2Name: String?) {
             self.participationMatch = participationMatch
             self.club1 = club1
             self.club2 = club2
