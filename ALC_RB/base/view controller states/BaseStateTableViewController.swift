@@ -136,32 +136,46 @@ extension BaseStateTableViewController : PullToRefresh {
 extension BaseStateTableViewController : EmptyProtocol {
     
     func showEmptyView() {
-        backgroundView = UIView()
-        
-        backgroundView?.frame = view.frame
-
-        backgroundView?.backgroundColor = .white
-        backgroundView?.addSubview(emptyView)
-        
-        view.addSubview(backgroundView!)
-        
-        backgroundView?.translatesAutoresizingMaskIntoConstraints = true
-        
-        emptyView.setText(text: emptyMessage)
-        
-        emptyView.setCenterFromParentTrue()
-        emptyView.containerView.setCenterFromParentTrue()
+//        backgroundView = UIView()
+//
+//        backgroundView?.frame = view.frame
+//
+//        backgroundView?.backgroundColor = .white
+//        backgroundView?.addSubview(emptyView)
+//
+//        view.addSubview(backgroundView!)
+//
+//        backgroundView?.translatesAutoresizingMaskIntoConstraints = true
+//
+//        emptyView.setText(text: emptyMessage)
+//
+//        emptyView.setCenterFromParentTrue()
+//        emptyView.containerView.setCenterFromParentTrue()
         
         tableView.isScrollEnabled = false
+        
+        if self.hud != nil {
+            self.hud?.setToEmptyView {
+                self.emptyAction?()
+            }
+        } else {
+            self.hud = self.showEmptyViewHUD {
+                self.emptyAction?()
+            }
+        }
+        
     }
     
     func hideEmptyView() {
-        tableView.separatorStyle = .singleLine
+//        tableView.separatorStyle = .singleLine
+//        tableView.isScrollEnabled = true
+//
+//        if let backgroundView = backgroundView {
+//            backgroundView.removeFromSuperview()
+//        }
         tableView.isScrollEnabled = true
-        
-        if let backgroundView = backgroundView {
-            backgroundView.removeFromSuperview()
-        }
+        self.hideHUD()
+        self.hud = nil
     }
 }
 
@@ -170,38 +184,45 @@ extension BaseStateTableViewController : EmptyProtocol {
 extension BaseStateTableViewController : ActivityIndicatorProtocol {
     func showLoading() {
         
-        backgroundView = UIView()
-        
-        backgroundView?.frame = view.frame
-        backgroundView?.backgroundColor = .white
-        backgroundView?.addSubview(activityIndicator)
-        
-        view.addSubview(backgroundView!)
-        
-        backgroundView?.translatesAutoresizingMaskIntoConstraints = true
-        
-        activityIndicator.frame = view.frame
-        activityIndicator.backgroundColor = .white
-        
-        activityIndicator.setCenterFromParent()
-        
-        activityIndicator.startAnimating()
-        
+//        backgroundView = UIView()
+//
+//        backgroundView?.frame = view.frame
+//        backgroundView?.backgroundColor = .white
+//        backgroundView?.addSubview(activityIndicator)
+//
+//        view.addSubview(backgroundView!)
+//
+//        backgroundView?.translatesAutoresizingMaskIntoConstraints = true
+//
+//        activityIndicator.frame = view.frame
+//        activityIndicator.backgroundColor = .white
+//
+//        activityIndicator.setCenterFromParent()
+//
+//        activityIndicator.startAnimating()
+//
         tableView.isScrollEnabled = false
-        
-        view.bringSubviewToFront(backgroundView!)
-        
-        activityIndicator.startAnimating()  
+//
+//        view.bringSubviewToFront(backgroundView!)
+//
+//        activityIndicator.startAnimating()
+        if self.hud != nil {
+            self.hud?.setToLoadingView()
+        } else {
+            self.hud = self.showLoadingViewHUD()
+        }
     }
     
     func hideLoading() {
-        activityIndicator.stopAnimating()
-        
-        if let backgroundView = backgroundView {
-            backgroundView.removeFromSuperview()
-        }
+//        activityIndicator.stopAnimating()
+//
+//        if let backgroundView = backgroundView {
+//            backgroundView.removeFromSuperview()
+//        }
         tableView.isScrollEnabled = true
         
+        self.hideHUD()
+        self.hud = nil
     }
     
 }

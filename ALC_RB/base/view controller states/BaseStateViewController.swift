@@ -83,64 +83,85 @@ extension BaseStateViewController : BaseStateActions {
 
 extension BaseStateViewController : EmptyProtocol {
     func showEmptyView() {
-        backgroundView = UIView()
+//        backgroundView = UIView()
+//
+//        backgroundView?.frame = view.frame
+//        backgroundView?.backgroundColor = .white
+//
+//        backgroundView?.addSubview(emptyView)
+//        view.addSubview(backgroundView!)
+//
+//        backgroundView?.translatesAutoresizingMaskIntoConstraints = true
+//
+//        emptyView.setText(text: emptyMessage)
+//
+//        emptyView.setCenterFromParentTrue()
+//        emptyView.containerView.setCenterFromParentTrue()
+
         
-        backgroundView?.frame = view.frame
-        backgroundView?.backgroundColor = .white
-        
-        backgroundView?.addSubview(emptyView)
-        view.addSubview(backgroundView!)
-        
-        backgroundView?.translatesAutoresizingMaskIntoConstraints = true
-        
-        emptyView.setText(text: emptyMessage)
-        
-        emptyView.setCenterFromParentTrue()
-        emptyView.containerView.setCenterFromParentTrue()
+        if self.hud != nil {
+            self.hud?.setToEmptyView {
+                self.emptyAction?()
+            }
+        } else {
+            self.hud = self.showEmptyViewHUD {
+                self.emptyAction?()
+            }
+        }
         
     }
     
     func hideEmptyView() {
-        if let backgroundView = backgroundView {
-//            backgroundView.removeFromSuperview()
-            UIView.animate(withDuration: 0.2) {
-                backgroundView.removeFromSuperview()
-            }
-        }
+//        if let backgroundView = backgroundView {
+////            backgroundView.removeFromSuperview()
+//            UIView.animate(withDuration: 0.2) {
+//                backgroundView.removeFromSuperview()
+//            }
+//        }
+        self.hideHUD()
+        self.hud = nil
     }
 }
 
 extension BaseStateViewController : ActivityIndicatorProtocol {
     func showLoading() {
-        backgroundView = UIView()
-        
-        backgroundView?.frame = view.frame
-        backgroundView?.backgroundColor = .white
-        
-        backgroundView?.addSubview(activityIndicator)
-        view.addSubview(backgroundView!)
-        
-        backgroundView?.translatesAutoresizingMaskIntoConstraints = true
-        
-        activityIndicator.frame = view.frame
-        activityIndicator.backgroundColor = .white
-        
-//        view.addSubview(activityIndicator)
-//        view.bringSubviewToFront(activityIndicator)
-        
-        activityIndicator.setCenterFromParent()
-        
-        activityIndicator.startAnimating()
+//        backgroundView = UIView()
+//
+//        backgroundView?.frame = view.frame
+//        backgroundView?.backgroundColor = .white
+//
+//        backgroundView?.addSubview(activityIndicator)
+//        view.addSubview(backgroundView!)
+//
+//        backgroundView?.translatesAutoresizingMaskIntoConstraints = true
+//
+//        activityIndicator.frame = view.frame
+//        activityIndicator.backgroundColor = .white
+//
+////        view.addSubview(activityIndicator)
+////        view.bringSubviewToFront(activityIndicator)
+//
+//        activityIndicator.setCenterFromParent()
+//
+//        activityIndicator.startAnimating()
+        if self.hud != nil {
+            self.hud?.setToLoadingView()
+        } else {
+            self.hud = self.showLoadingViewHUD()
+        }
     }
     
     func hideLoading() {
-        activityIndicator.stopAnimating()
-        
-        if let backgroundView = backgroundView {
-            UIView.animate(withDuration: 0.2) {
-                backgroundView.removeFromSuperview()
-            }
-        }
+//        activityIndicator.stopAnimating()
+//
+//        if let backgroundView = backgroundView {
+//            UIView.animate(withDuration: 0.2) {
+//                backgroundView.removeFromSuperview()
+//            }
+//        }
 //        activityIndicator.removeFromSuperview()
+        
+        self.hideHUD()
+        self.hud = nil
     }
 }
