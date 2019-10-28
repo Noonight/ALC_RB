@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+//import RxCocoa
 
 class EditScheduleViewModel {
     struct SlidersData {
@@ -33,6 +34,7 @@ class EditScheduleViewModel {
     
     var refreshing: PublishSubject<Bool> = PublishSubject()
     var error: PublishSubject<Error> = PublishSubject()
+    var message = PublishSubject<SingleLineMessage>()
 //    var activeMatch: PublishSubject<ActiveMatch> = PublishSubject()
 //    var referees: PublishSubject<Players> = PublishSubject()
     
@@ -40,6 +42,8 @@ class EditScheduleViewModel {
     var comingReferees: Variable<Players> = Variable<Players>(Players())
     
     var sliderData: PublishSubject<SlidersData> = PublishSubject()
+    
+    var editedMatch = Variable<SoloMatch?>(nil)
     
     private let dataManager: ApiRequests
     
@@ -71,13 +75,27 @@ class EditScheduleViewModel {
     
     func editMatchReferees(token: String, editMatchReferees: EditMatchReferees, success: @escaping (SoloMatch)->(), message_single: @escaping (SingleLineMessage)->(), failure: @escaping (Error)->()) {
         self.cache = editMatchReferees
-        dataManager.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees, response_success: { soloMatch in
-                success(soloMatch)
-            }, response_message: { message in
-                message_single(message)
-            }) { error in
-                failure(error)
+//        dataManager.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees, response_success: { soloMatch in
+//                success(soloMatch)
+//            }, response_message: { message in
+//                message_single(message)
+//            }) { error in
+//                failure(error)
+//            }
+        self.refreshing.onNext(true)
+        dataManager.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees) { result in
+            self.refreshing.onNext(false)
+            switch result {
+            case .success(let match):
+                self.editedMatch.value = match
+            case .message(let message):
+                Print.m(message.message)
+                self.message.onNext(message)
+            case .failure(let error):
+                Print.m(error)
+                self.error.onNext(error)
             }
+        }
     }
     
 //    func acceptMatch(token: String, protocolID: String, success: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {

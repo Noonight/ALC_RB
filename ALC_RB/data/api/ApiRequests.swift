@@ -669,6 +669,33 @@ class ApiRequests {
 //            })
 //    }
     
+    func post_matchSetReferee(token: String, editMatchReferees: EditMatchReferees, resultMy: @escaping (ResultMy<SoloMatch, Error>) -> ()) {
+            
+            let header: HTTPHeaders = [
+                "Content-Type" : "application/json",
+                "auth" : "\(token)"
+            ]
+            
+            let request = Alamofire
+                .request(ApiRoute.getApiURL(.post_edit_match_referee), method: .post, parameters: editMatchReferees.toParams(), encoding: JSONEncoding.default, headers: header)
+            
+                request
+                    .responseData { response in
+                        let decoder = ISO8601Decoder.getDecoder()
+                        do {
+                            if let match = try? decoder.decode(SoloMatch.self, from: response.data!) {
+                                resultMy(.success(match))
+                            }
+                            if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+                                resultMy(.message(message))
+                            }
+                        }
+                        if response.result.isFailure {
+                            resultMy(.failure(response.error!))
+                        }
+                    }
+        }
+    
     func post_matchSetReferee(token: String, editMatchReferees: EditMatchReferees, response_success: @escaping (SoloMatch) -> (), response_message: @escaping (SingleLineMessage) -> (), response_failure: @escaping (Error) -> ()) {
         
         let header: HTTPHeaders = [

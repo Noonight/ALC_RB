@@ -150,6 +150,22 @@ class EditScheduleLKViewController: BaseStateViewController {
             }
             .disposed(by: disposeBag)
         
+        viewModel!.message
+            .asDriver(onErrorJustReturn: SingleLineMessage(message: "Ошибка драйвера"))
+            .drive(self.rx.message)
+            .disposed(by: disposeBag)
+        
+        viewModel!.editedMatch
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe({ element in
+                guard let match = element.element else { return }
+                if let mMatch = match {
+                    self.onResponseSuccess(soloMatch: mMatch)
+                }
+            })
+            .disposed(by: disposeBag)
+        
     }
     
     @IBAction func onReferee1BtnPressed(_ sender: UIButton) {
