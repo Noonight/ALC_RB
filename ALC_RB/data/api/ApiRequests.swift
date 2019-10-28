@@ -864,24 +864,6 @@ class ApiRequests {
     }
     
     func post_acceptProtocol(token: String, id: String, success: @escaping (SoloMatch) -> (), message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
-//        let header: HTTPHeaders = [
-//            "Content-Type" : "application/json",
-//            "auth" : "\(token)"
-//        ]
-//        let parameter: Parameters = [
-//            "_id" : id
-//        ]
-        
-//        Alamofire
-//            .request(ApiRoute.getApiURL(.post_accept_protocol), method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: header)
-//            .responseSingleLineMessage(completionHandler: { response in
-//                switch response.result {
-//                case .success(let value):
-//                    success(value)
-//                case .failure(let error):
-//                    failure(error)
-//                }
-//            })
         
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in
@@ -922,6 +904,43 @@ class ApiRequests {
                 }
         }
     }
+    
+    func post_acceptProtocol(token: String, id: String, resultMy: @escaping (ResultMy<SoloMatch, Error>) -> ()) {
+            
+            Alamofire
+                .upload(multipartFormData: { (multipartFormData) in
+                    
+                    multipartFormData.append(id.data(using: String.Encoding.utf8)!, withName: "_id")
+                    
+                },
+                        usingThreshold: UInt64(),
+                        to: ApiRoute.getApiURL(.post_accept_protocol),
+                        method: .post,
+                        headers: ["auth" : token])
+                { (result) in
+                    switch result {
+                    case .success(let upload, _, _):
+                        
+                        upload.responseData { response in
+                            let decoder = ISO8601Decoder.getDecoder()
+                            do {
+                                if let match = try? decoder.decode(SoloMatch.self, from: response.data!) {
+                                    resultMy(.success(match))
+                                }// else { try! decoder.decode(SoloMatch.self, from: response.data!) }
+                                if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+                                    resultMy(.message(message))
+                                }
+                            }
+                            if response.result.isFailure {
+                                resultMy(.failure(response.error!))
+                            }
+                        }
+                        
+                    case .failure(let error):
+                        resultMy(.failure(error))
+                    }
+            }
+        }
     
     // MARK: - GET requests
     

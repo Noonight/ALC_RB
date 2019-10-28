@@ -21,16 +21,6 @@ protocol DoMatchProtocolRefereeView: MvpView {
 class DoMatchProtocolRefereePresenter: MvpPresenter<DoMatchProtocolRefereeViewController> {
     
     let dataManager = ApiRequests()
-
-    func saveProtocol(token: String, editedProtocol: EditProtocol) {
-        dataManager.post_changeProtocol(token: token, newProtocol: editedProtocol, success: { match in
-            self.getView().onSaveProtocolSuccess(match: match)
-        }, message: { message in
-            
-        }) { error in
-            self.getView().onSaveProtocolFailure(error: error)
-        }
-    }
     
     func saveProtocol(token: String, editedProtocol: EditProtocol, ok: @escaping (SoloMatch) -> (), r_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
         dataManager.post_changeProtocol(token: token, newProtocol: editedProtocol) { result in
@@ -54,17 +44,15 @@ class DoMatchProtocolRefereePresenter: MvpPresenter<DoMatchProtocolRefereeViewCo
 //    }
     
     func acceptProtocol(token: String, matchId: String, ok: @escaping (SoloMatch) -> (), response_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
-//        dataManager.post_acceptProtocol(token: token, id: matchId, success: { message in
-//            ok(message)
-//        }) { error in
-//            failure(error)
-//        }
-        dataManager.post_acceptProtocol(token: token, id: matchId, success: { match in
-            ok(match)
-        }, message: { message in
-            response_message(message)
-        }) { error in
-            failure(error)
+        dataManager.post_acceptProtocol(token: token, id: matchId) { result in
+            switch result {
+            case .success(let match):
+                ok(match)
+            case .message(let message):
+                response_message(message)
+            case .failure(let error):
+                failure(error)
+            }
         }
     }
     

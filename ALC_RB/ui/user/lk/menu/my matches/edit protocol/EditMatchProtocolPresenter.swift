@@ -12,6 +12,7 @@ import AlamofireImage
 
 protocol EditMatchProtocolView : MvpView {
     func requestEditProtocolSuccess(match: SoloMatch)
+    func requestEditProtocolMessage(message: SingleLineMessage)
     func requestEditProtocolFailure(error: Error)
     
     func requestAcceptProtocolSuccess(message: SingleLineMessage)
@@ -56,27 +57,22 @@ class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> 
     }
     
     func requestEditProtocol(token: String, editProtocol: EditProtocol) {
-        dataManager.post_changeProtocol(token: token, newProtocol: editProtocol, success: { soloMatch in
-            self.getView().requestEditProtocolSuccess(match: soloMatch)
-        }, message: { message in
-            
-        }) { error in
-            self.getView().requestEditProtocolFailure(error: error)
-        }
-    }
-    
-    func requestAcceptProtocol(token: String, matchId: String) {
-//        dataManager.post_acceptProtocol(token: token, id: matchId, success: { message in
-//            self.getView().requestAcceptProtocolSuccess(message: message)
+//        dataManager.post_changeProtocol(token: token, newProtocol: editProtocol, success: { soloMatch in
+//            self.getView().requestEditProtocolSuccess(match: soloMatch)
+//        }, message: { message in
+//
 //        }) { error in
-//            self.getView().requestAcceptProtocolFailure(error: error)
+//            self.getView().requestEditProtocolFailure(error: error)
 //        }
-        dataManager.post_acceptProtocol(token: token, id: matchId, success: { match in
-            
-        }, message: { message in
-            
-        }) { error in
-            
+        dataManager.post_changeProtocol(token: token, newProtocol: editProtocol) { result in
+            switch result {
+            case .success(let match):
+                self.getView().requestEditProtocolSuccess(match: match)
+            case .message(let message):
+                self.getView().requestEditProtocolMessage(message: message)
+            case .failure(let error):
+                self.getView().requestEditProtocolFailure(error: error)
+            }
         }
     }
 }

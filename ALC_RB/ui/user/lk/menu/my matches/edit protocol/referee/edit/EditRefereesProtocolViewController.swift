@@ -154,6 +154,11 @@ class EditRefereesProtocolViewController: BaseStateViewController {
             }
             .disposed(by: disposeBag)
         
+        viewModel!.message
+            .asDriver(onErrorJustReturn: SingleLineMessage(message: "Ошибка драйвера"))
+            .drive(self.rx.message)
+            .disposed(by: disposeBag)
+        
     }
     
     @IBAction func onInspectorBtnPressed(_ sender: UIButton) {

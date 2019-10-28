@@ -13,6 +13,7 @@ class EditRefereesProtocolViewModel {
     
     var refreshing: PublishSubject<Bool> = PublishSubject()
     var error: PublishSubject<Error> = PublishSubject()
+    var message = PublishSubject<SingleLineMessage>()
     
 //    var comingReferees: Variable<Players> = Variable<Players>(Players())
     
@@ -29,26 +30,33 @@ class EditRefereesProtocolViewModel {
     
     func fetchReferees(closure: @escaping () -> ()) {
         self.refreshing.onNext(true)
-        dataManager.get_referees(get_success: { (referees) in
-            
-            self.referees.value = referees
+        dataManager.get_referees { result in
             self.refreshing.onNext(false)
-            
+            switch result {
+            case .success(let referees):
+                self.referees.value = referees
+            case .message(let message):
+                self.message.onNext(message)
+            case .failure(let error):
+                self.error.onNext(error)
+            }
             closure()
-            
-        }) { (error) in
-            self.error.onNext(error)
         }
     }
     
     func editMatchReferees(token: String, editMatchReferees: EditMatchReferees, success: @escaping (SoloMatch)->(), message_single: @escaping (SingleLineMessage)->(), failure: @escaping (Error)->()) {
         self.cache = editMatchReferees
-        dataManager.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees, response_success: { soloMatch in
-            success(soloMatch)
-        }, response_message: { message in
-            message_single(message)
-        }) { error in
-            failure(error)
+        self.refreshing.onNext(true)
+        dataManager.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees) { result in
+            self.refreshing.onNext(false)
+            switch result {
+            case .success(let match):
+                success(match)
+            case .message(let message):
+                message_single(message)
+            case .failure(let error):
+                failure(error)
+            }
         }
     }
     

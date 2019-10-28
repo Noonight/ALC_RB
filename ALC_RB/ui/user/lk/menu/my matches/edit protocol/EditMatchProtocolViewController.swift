@@ -317,6 +317,10 @@ extension EditMatchProtocolViewController: EditMatchProtocolView {
         showAlert(title: "Протокол сохранен", message: "")
     }
     
+    func requestEditProtocolMessage(message: SingleLineMessage) {
+        showAlert(message: message.message)
+    }
+    
     func requestEditProtocolFailure(error: Error) {
         showAlert(message: error.localizedDescription)
     }
