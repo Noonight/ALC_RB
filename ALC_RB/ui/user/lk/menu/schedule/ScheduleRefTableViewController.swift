@@ -42,6 +42,17 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
             
         }
         
+        emptyAction = {
+            self.hideHUD()
+            self.hud = nil
+            self.fetch()
+        }
+        errorAction = {
+            self.hideHUD()
+            self.hud = nil
+            self.fetch()
+        }
+        
         tableView.delegate = nil
         tableView.dataSource = nil
         

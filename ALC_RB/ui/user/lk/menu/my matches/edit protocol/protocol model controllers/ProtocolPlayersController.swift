@@ -20,6 +20,21 @@ class ProtocolPlayersController {
     
     var players: [LIPlayer] = []
     var playersSwitch: [PlayersSwitch] = []
+    var matchPlayers: [LIPlayer] = []
+    
+    init(teamPlayers: [LIPlayer], matchPlayers: [LIPlayer]) {
+        players = teamPlayers
+        self.matchPlayers = matchPlayers
+        for i in 0..<players.count {
+            if matchPlayers.contains(where: { player -> Bool in
+                return player.playerId == players[i].playerId
+            }) {
+                playersSwitch.append(PlayersSwitch(key: players[i].playerId, value: true))
+            } else {
+                playersSwitch.append(PlayersSwitch(key: players[i].playerId, value: false))
+            }
+        }
+    }
     
     init(players: [LIPlayer]) {
         self.players = players

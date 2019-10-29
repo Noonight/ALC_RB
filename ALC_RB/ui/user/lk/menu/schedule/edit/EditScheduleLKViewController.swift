@@ -105,6 +105,9 @@ class EditScheduleLKViewController: BaseStateViewController {
         {
             mainRefShowProtocol_btn.isEnabled = true
         }
+        if viewModel?.comingCellModel.value.clubTeamOne == nil || viewModel?.comingCellModel.value.clubTeamTwo == nil {
+            mainRefShowProtocol_btn.isEnabled = false
+        }
     }
     
     func setupReferee() {

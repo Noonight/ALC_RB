@@ -119,10 +119,10 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
             .map({ (cellModel) -> [MyMatchesRefTableViewCell.CellModel] in
                 return cellModel.sorted(by: { (lModel, rModel) -> Bool in
                     return lModel.participationMatch!.date < rModel.participationMatch!.date
-//                    return lModel.participationMatch!.date.getDateOfType(type: .utcTime) < rModel.participationMatch!.date.getDateOfType(type: .utcTime)
                 })
             })
             .bind(to: tableView.rx.items(cellIdentifier: CellIdentifiers.cell, cellType: MyMatchesRefTableViewCell.self)) {  (row, model, cell) in
+                Print.m(model)
                 cell.configure(with: model)
             }
             .disposed(by: disposeBag)

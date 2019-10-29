@@ -32,6 +32,7 @@
 		1807709322F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1807709122F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.swift */; };
 		1807709422F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1807709222F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.xib */; };
 		180C084D22C1F74A00ADC90D /* CreateClub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180C084C22C1F74A00ADC90D /* CreateClub.swift */; };
+		180DAB9323682B740064C291 /* SaveProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180DAB9223682B740064C291 /* SaveProtocol.swift */; };
 		180F236722B25F1700ADE8FD /* EditScheduleLKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */; };
 		180F236922B262AD00ADE8FD /* EditScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */; };
 		1814452722E6BFCF00C9D45E /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1814452622E6BFCF00C9D45E /* MainTabBarViewController.swift */; };
@@ -398,6 +399,7 @@
 		1807709122F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentTeamHeaderCellTableViewCell.swift; sourceTree = "<group>"; };
 		1807709222F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TournamentTeamHeaderCellTableViewCell.xib; sourceTree = "<group>"; };
 		180C084C22C1F74A00ADC90D /* CreateClub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClub.swift; sourceTree = "<group>"; };
+		180DAB9223682B740064C291 /* SaveProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProtocol.swift; sourceTree = "<group>"; };
 		180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleLKViewController.swift; sourceTree = "<group>"; };
 		180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewModel.swift; sourceTree = "<group>"; };
 		1814452622E6BFCF00C9D45E /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
@@ -868,6 +870,14 @@
 			path = "as cell";
 			sourceTree = "<group>";
 		};
+		180DAB9123682B570064C291 /* Save protocol */ = {
+			isa = PBXGroup;
+			children = (
+				180DAB9223682B740064C291 /* SaveProtocol.swift */,
+			);
+			path = "Save protocol";
+			sourceTree = "<group>";
+		};
 		180F236522B25EA000ADE8FD /* edit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1026,6 +1036,7 @@
 		187F2DE222CB19440049EA77 /* edit protocol */ = {
 			isa = PBXGroup;
 			children = (
+				180DAB9123682B570064C291 /* Save protocol */,
 				187F2DE822CB19440049EA77 /* EditMatchProtocolViewController.swift */,
 				187F2DF322CB19440049EA77 /* EditMatchProtocolPresenter.swift */,
 				DBA77C1C22CF4154000DCF02 /* protocol model controllers */,
@@ -3032,6 +3043,7 @@
 				18375E31234A34C300E77809 /* SearchTourneyModelItem.swift in Sources */,
 				04DF5492220D6861001323A6 /* MatchProtocolPresenter.swift in Sources */,
 				DB85B36522F15D5B0030D8A3 /* SoloLeague.swift in Sources */,
+				180DAB9323682B740064C291 /* SaveProtocol.swift in Sources */,
 				187F2E0422CB19440049EA77 /* EditTeamProtocolTableViewCell.swift in Sources */,
 				DB0ABC9223030C1700FF6A8D /* PenaltyTableView.swift in Sources */,
 				181E4A1E234B0B30003779C5 /* TourneyViewModel.swift in Sources */,

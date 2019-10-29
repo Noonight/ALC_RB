@@ -57,7 +57,6 @@ class EditMatchProtocolViewController: UIViewController {
         super.viewDidLoad()
         
         self.setupPresenter()
-//        self.setupNavController()
         
         
     }
@@ -68,7 +67,6 @@ class EditMatchProtocolViewController: UIViewController {
         self.setupNavController()
         self.setupView()
         
-//        self.preConfigureModelControllers()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -84,7 +82,6 @@ class EditMatchProtocolViewController: UIViewController {
     }
     
     func setupView() {
-//        setMatchByUserDefaults()
         
         teamOneTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
         
@@ -120,8 +117,10 @@ class EditMatchProtocolViewController: UIViewController {
     func preConfigureModelControllers() {
         teamOnePlayersController = nil
         teamTwoPlayersController = nil
-        teamOnePlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamOne!))
-        teamTwoPlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamTwo!))
+//        teamOnePlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamOne!))
+        teamOnePlayersController = ProtocolPlayersController(teamPlayers: getPlayersTeam(team: match.teamOne!), matchPlayers: getMatchPlayers(team: match.teamOne!))
+//        teamTwoPlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamTwo!))
+        teamTwoPlayersController = ProtocolPlayersController(teamPlayers: getPlayersTeam(team: match.teamTwo!), matchPlayers: getMatchPlayers(team: match.teamTwo!))
         refereesController = nil
         refereesController = ProtocolRefereesController(referees: match.referees)
         eventsController = nil
@@ -134,19 +133,34 @@ class EditMatchProtocolViewController: UIViewController {
 // MARK: Helpers
 
 extension EditMatchProtocolViewController {
+    
+    func connectPlayersOfTeamOneAndTwo() -> [LIPlayer] {
+        return [teamOnePlayersController.getPlayingPlayers(), teamTwoPlayersController.getPlayingPlayers()].flatMap({ liPlayer -> [LIPlayer] in
+            return liPlayer
+        })
+    }
+    
     func getPlayersTeam(team id: String) -> [LIPlayer] {
         return (leagueDetailModel.leagueInfo.league.teams?.filter({ (team) -> Bool in
             return team.id == id
         }).first?.players)!
     }
     
-//    func setMatchByUserDefaults() {
-//        let tmpSelfMatch = self.match
-//        let match = userDefaults.getAuthorizedUser()?.person.participationMatches!.filter({ pMatch -> Bool in
-//            return pMatch.id == tmpSelfMatch.id
-//        }).first
-//        self.match = (match?.covertToLIMatch())!
-//    }
+    func getMatchPlayers(team id: String) -> [LIPlayer] {
+        let teamPlayers = (leagueDetailModel.leagueInfo.league.teams?.filter({ team -> Bool in
+            return team.id == id
+        }).first?.players!)!
+        var players = [LIPlayer]()
+        for teamPlayer in teamPlayers {
+            for playerId in match.playersList {
+                if teamPlayer.playerId == playerId {
+                    players.append(teamPlayer)
+                }
+            }
+        }
+        return players
+    }
+    
 }
 
 // MARK: Actions
@@ -166,25 +180,18 @@ extension EditMatchProtocolViewController {
                 events: self.eventsController
             )
             
-//            controller.leagueDetailModel = self.leagueDetailModel
-//            controller.match = self.match
             return controller
         }()
         navigationController?.show(score, sender: self)
     }
     
     @IBAction func saveBtnPressed(_ sender: UIBarButtonItem) {
-        func connectPlayersOfTeamOneAndTwo() -> [LIPlayer] {
-//            return [teamOnePlayersController.players, teamTwoPlayersController.players].flatMap({ liPlayer -> [LIPlayer] in
-            return [teamOnePlayersController.getPlayingPlayers(), teamTwoPlayersController.getPlayingPlayers()].flatMap({ liPlayer -> [LIPlayer] in
-                return liPlayer
-            })
-        }
+        
         showAlertOkCancel(title: "Сохранить протокол?", message: "", ok: {
             let request = EditProtocol(
                 id: self.match.id,
                 events: EditProtocol.Events(events: self.eventsController.events),
-                playersList: connectPlayersOfTeamOneAndTwo().map({ liPlayer -> String in
+                playersList: self.connectPlayersOfTeamOneAndTwo().map({ liPlayer -> String in
                     return liPlayer.playerId
                 })
             )
@@ -198,14 +205,6 @@ extension EditMatchProtocolViewController {
         
     }
     
-//    @IBAction func acceptProtocolPressed(_ sender: UIBarButtonItem) {
-//        showAlertOkCancel(title: "Подтвердить протокол?", message: "После подтверждения протокола матч нельзя будет редактировать", ok: {
-//            self.presenter.requestAcceptProtocol(token: (self.userDefaults.getAuthorizedUser()?.token)!, matchId: self.match.id)
-//        }) {
-//            Print.m("Cancel: accept protocol")
-//        }
-//    }
-    
     @IBAction func teamOneBtnPressed(_ sender: UIButton) { }
     @IBAction func teamTwoBtnPressed(_ sender: UIButton) { }
     @IBAction func refereeBtnPressed(_ sender: UIButton) { }
@@ -218,7 +217,6 @@ extension EditMatchProtocolViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case SegueIdentifiers.TEAM_ONE:
-            //let destination = segue.destination as?  TeamProtocolTableViewController
             prepareSegueDataModel(destination: segue.destination, team: .one)
         case SegueIdentifiers.TEAM_TWO:
             prepareSegueDataModel(destination: segue.destination, team: .two)
@@ -247,6 +245,7 @@ extension EditMatchProtocolViewController {
             let controller = destination as! EditTeamProtocolTableViewController
             controller.playersController = teamOnePlayersController
             controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
+            controller.saveProtocol = self
         case is EditRefereeTeamTableViewController:
             let controller = destination as! EditRefereeTeamTableViewController
             controller.refereesController = self.refereesController
@@ -266,9 +265,6 @@ extension EditMatchProtocolViewController {
                 teamTwoPlayers: self.teamTwoPlayersController,
                 events: self.eventsController
             )
-//            controller.leagueDetailModel = leagueDetailModel
-//            setMatchByUserDefaults()
-//            controller.match = match
         default:
             break
         }
@@ -297,9 +293,7 @@ extension EditMatchProtocolViewController {
 
 extension EditMatchProtocolViewController: EditMatchProtocolView {
     func requestAcceptProtocolSuccess(message: SingleLineMessage) {
-//        self.match.played = true
         showAlert(title: message.message, message: "")
-//        self.userDefaults.setParticipationMatchPlayedBy(id: self.match.id)
     }
     
     func requestAcceptProtocolFailure(error: Error) {
@@ -313,7 +307,6 @@ extension EditMatchProtocolViewController: EditMatchProtocolView {
         })
         user?.person.participationMatches!.append(match.match!)
         self.userDefaults.setAuthorizedUser(user: user!)
-//        setMatchByUserDefaults()
         showAlert(title: "Протокол сохранен", message: "")
     }
     
@@ -327,5 +320,22 @@ extension EditMatchProtocolViewController: EditMatchProtocolView {
     
     func initPresenter() {
         presenter.attachView(view: self)
+    }
+}
+
+extension EditMatchProtocolViewController: SaveProtocol {
+    func save() {
+        Print.m("save staff")
+        let request = EditProtocol(
+            id: self.match.id,
+            events: EditProtocol.Events(events: self.eventsController.events),
+            playersList: connectPlayersOfTeamOneAndTwo().map({ liPlayer -> String in
+                return liPlayer.playerId
+            })
+        )
+        self.presenter.requestEditProtocol(
+            token: (self.userDefaults.getAuthorizedUser()?.token)!,
+            editProtocol: request
+        )
     }
 }

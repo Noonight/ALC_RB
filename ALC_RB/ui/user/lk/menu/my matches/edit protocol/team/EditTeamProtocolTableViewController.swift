@@ -15,6 +15,7 @@ class EditTeamProtocolTableViewController: UITableViewController {
     let cellId = "team_protocol_cell"
     
     let presenter = EditTeamProtocolPresenter()
+    var saveProtocol: SaveProtocol?
     
 //    var players = [LIPlayer]()
     
@@ -65,6 +66,9 @@ class EditTeamProtocolTableViewController: UITableViewController {
             self.navigationController?.navigationBar.prefersLargeTitles = false
         } else {
             // Fallback on earlier versions
+        }
+        if self.isBeingDismissed {
+            self.saveProtocol?.save()
         }
     }
     
