@@ -84,7 +84,7 @@ extension FilteredTeamsLeagueTableView : UITableViewDataSource {
             
             (cell as! TeamLeagueTableViewCell).configure(team: model)
             
-            (cell as! TeamLeagueTableViewCell).position_label.text = String(indexPath.row - HeaderCell.COUNT)
+            (cell as! TeamLeagueTableViewCell).position_label.text = String((indexPath.row + 1) - HeaderCell.COUNT)
         }
         
         cell.selectionStyle = .none

@@ -1636,7 +1636,7 @@ class ApiRequests {
                 }).first {
                     model.team1Name = team1.name
                     
-                    if team1.club?.count != 0 {
+                    if team1.club?.count ?? 0 > 1 {
                         group.enter()
                         self.get_club(id: team1.club!) { cResult in
                             switch cResult {
@@ -1656,7 +1656,7 @@ class ApiRequests {
                 }).first {
                     model.team2Name = team2.name
                     
-                    if team2.club?.count != 0 {
+                    if team2.club?.count ?? 0 > 1 {
                         group.enter()
                         self.get_club(id: team2.club!) { cResult in
                             switch cResult {

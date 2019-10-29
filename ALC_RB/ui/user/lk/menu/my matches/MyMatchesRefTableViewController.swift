@@ -102,6 +102,10 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
     // MARK: - Binds
     func bindViews() {
         
+        viewModel.message
+            .bind(to: self.rx.message)
+            .disposed(by: disposeBag)
+        
         viewModel.refreshing
             .subscribe { (refreshing) in
                 self.tableView.es.stopPullToRefresh()

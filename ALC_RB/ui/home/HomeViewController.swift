@@ -49,6 +49,8 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        segmentedControl.setTitle("Всё", forSegmentAt: 0)
+        segmentedControl.setTitle("Новости", forSegmentAt: 1)
     }
     
     override func viewDidAppear(_ animated: Bool) {

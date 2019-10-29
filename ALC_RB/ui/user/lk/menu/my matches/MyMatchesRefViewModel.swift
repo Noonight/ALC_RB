@@ -52,6 +52,7 @@ class MyMatchesRefViewModel {
                 self.refreshing.onNext(false)
                 switch result {
                 case .success(let cells):
+                    dump(cells)
                     self.tableModel.onNext(cells)
                 case .message(let message):
                     self.message.onNext(message)
