@@ -1482,6 +1482,7 @@ class ApiRequests {
 //                        Print.m(tmpTeams)
                         var tmpClub1: Club?
                         
+                        Print.m(" team one = \(parMatch.teamOne). team two = \(parMatch.teamTwo)")
                         if parMatch.teamOne.count > 1
                         {
                             dispatchGroup.enter()
@@ -1547,7 +1548,29 @@ class ApiRequests {
                                 })
                             }
                         }
-                        
+                        else
+                        {
+                            var tmpTeam1 = String()
+                            var tmpTeam2 = String()
+                            for i in 0..<tmpTournaments.leagues.count {
+                                for j in 0..<tmpTournaments.leagues[i].teams!.count {
+                                    if tmpTournaments.leagues[i].teams![j].id == parMatch.teamOne {
+                                        tmpTeam1 = tmpTournaments.leagues[i].teams![j].name
+                                    }
+                                    if tmpTournaments.leagues[i].teams![j].id == parMatch.teamTwo {
+                                        tmpTeam2 = tmpTournaments.leagues[i].teams![j].name
+                                    }
+                                }
+                            }
+                            
+                            models.append(MyMatchesRefTableViewCell.CellModel(
+                                participationMatch: parMatch,
+                                club1: nil,
+                                club2: nil,
+                                team1Name: tmpTeam1,
+                                team2Name: tmpTeam2
+                            ))
+                        }
 
                         dispatchGroup.leave()
                     }

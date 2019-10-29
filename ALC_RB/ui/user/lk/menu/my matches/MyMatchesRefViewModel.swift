@@ -25,7 +25,7 @@ class MyMatchesRefViewModel {
     
     func fetch(closure: @escaping () -> ())
     {
-//        Print.m(participationMatches.value)
+        Print.m(participationMatches.value)
         if participationMatches.value.count > 0 {
             refreshing.onNext(true)
             
