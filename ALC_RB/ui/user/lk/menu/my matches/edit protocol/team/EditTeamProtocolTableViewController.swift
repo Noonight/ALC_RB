@@ -92,10 +92,10 @@ class EditTeamProtocolTableViewController: UITableViewController {
         
 //        self.playersController.playersSwitch = tmpPlayersController.playersSwitch
         self.playersController.setSwitcherValues(playersSwitch: tmpPlayersController.playersSwitch)
-        
-        showAlert(title: "", message: "Для изменения команды нужно сохранить протокол") {
-            self.navigationController?.popViewController(animated: true)
-        }
+        self.saveProtocol?.save()
+//        showAlert(title: "", message: "Для изменения команды нужно сохранить протокол") {
+//            self.navigationController?.popViewController(animated: true)
+//        }
 //        navigationController?.popViewController(animated: true)
     }
     

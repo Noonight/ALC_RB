@@ -99,9 +99,11 @@ extension ScheduleTableViewController {
                 return mMatches
             })
 //            .map({ matches -> [MatchScheduleModelItem] in
-//                return matches.filter { match -> Bool in
-//                    return match.teamOne != nil && match.teamTwo != nil
+//                var mMatches = matches
+//                mMatches.sort { left, right -> Bool in
+//                    return left.match.date?.date < right.match.date?.date
 //                }
+//                return mMatches
 //            })
             .asDriver(onErrorJustReturn: [])
             .drive(tableView.rx.items(cellIdentifier: ScheduleTableViewCell.ID, cellType: ScheduleTableViewCell.self)) { (index, match, cell) in

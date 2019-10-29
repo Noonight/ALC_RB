@@ -36,14 +36,17 @@ class EditScoreMatchPresenter: MvpPresenter<EditScoreMatchTableViewController> {
     
     func getClubImage(id club: String, getting: @escaping (UIImage) -> ()) {
         getClubs(id: club) { (clubs) in
-            Alamofire
-                .request(ApiRoute.getImageURL(image: (clubs.clubs.first?.logo)!))
+            if let mClub = clubs.clubs.first {
+                Alamofire
+                .request(ApiRoute.getImageURL(image: mClub.logo ?? ""))
                 .responseImage(completionHandler: { response in
                     if let img = response.result.value {
                         debugPrint("get club image complete")
                         getting(img)
                     }
                 })
+            }
+            
         }
     }
     

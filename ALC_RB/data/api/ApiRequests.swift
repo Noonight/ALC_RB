@@ -1972,8 +1972,13 @@ class ApiRequests {
     }
     
     func get_activeMatches(resultMy: @escaping (ResultMy<ActiveMatches, Error>) -> ()) {
+        let parameters: Parameters = [
+//            "type": "referee"//,
+                        "limit": 32575,
+                        "offset": 0
+        ]
         Alamofire
-            .request(ApiRoute.getApiURL(.activeMatches), method: .get)
+            .request(ApiRoute.getApiURL(.activeMatches), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString))
             .responseData { response in
                 let decoder = ISO8601Decoder.getDecoder()
                 do {

@@ -183,6 +183,7 @@ extension TeamsLeagueTableViewController {
         guard let teams = leagueDetailModel.leagueInfo.league.teams else { return false }
         for team in teams
         {
+            Print.m(team.group)
 //            guard team.group != nil else { return false }
 //            Print.m(team.group)
             if team.group?.count ?? 0 == 0 // nothing
