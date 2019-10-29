@@ -25,45 +25,47 @@ class RefereeEditMatchesLKPresenter: MvpPresenter<RefereeEditMatchesLKTableViewC
     
     func requestEditMatchReferee(token: String, editMatchReferees: EditMatchReferees) {
         self.cache = editMatchReferees
-        dataManager.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees, response_success: { soloMatch in
-            self.getView().onResponseEditMatchSuccess(soloMatch: soloMatch)
-//            success(soloMatch)
-        }, response_message: { message in
-            self.getView().onResponseEditMatchMessage(message: message)
-//            message_single(message)
-        }) { error in
-//            failure(error)
-            self.getView().onResponseEditMatchFailure(error: error)
+        dataManager.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees) { result in
+            switch result {
+            case .success(let match):
+                self.getView().onResponseEditMatchSuccess(soloMatch: match)
+            case .message(let message):
+                self.getView().onResponseEditMatchMessage(message: message)
+            case .failure(let error):
+                self.getView().onResponseEditMatchFailure(error: error)
+            }
         }
     }
     
     func fetch(refId: String) {
         Print.m("fetching")
         self.getView().setState(state: .loading)
-        dataManager.getActiveMatchesForView(get_success: { (activeMatches, referees, clubs) in
-            
-            var cellModels: [RefereeEditMatchesLKTableViewCell.CellModel] = []
-            let allTableModel = self.prepareTableData(activeMatches: activeMatches, referees: referees, clubs: clubs)
-            let refInside = allTableModel.filter({ cellModel -> Bool in
-                return cellModel.activeMatch.referees.contains(where: { referee -> Bool in
-                    return referee.person == refId
+        
+        dataManager.get_scheduleRefereeData { result in
+            switch result {
+            case .success(let tuple):
+                var cellModels: [RefereeEditMatchesLKTableViewCell.CellModel] = []
+                let allTableModel = self.prepareTableData(activeMatches: tuple.0, referees: tuple.1, clubs: tuple.2)
+                let refInside = allTableModel.filter({ cellModel -> Bool in
+                    return cellModel.activeMatch.referees.contains(where: { referee -> Bool in
+                        return referee.person == refId
+                    })
                 })
-            })
-            let matchWithoutRef = allTableModel.filter({ cellModel -> Bool in
-                return cellModel.activeMatch.referees.count == 0
-            })
-            
-            cellModels.append(contentsOf: refInside)
-            cellModels.append(contentsOf: matchWithoutRef)
-//            if cellModels.count == 0 {
-//                self.getView().setState(state: .empty)
-//            }
-            self.getView().onFetchModelSuccess(dataModel: cellModels)
-            
-        }, get_message: { message in
-            self.getView().onFetchModelMessage(message: message)
-        }) { (error) in
-            self.getView().onFetchModelFailure(error: error)
+                let matchWithoutRef = allTableModel.filter({ cellModel -> Bool in
+                    return cellModel.activeMatch.referees.count == 0
+                })
+                
+                cellModels.append(contentsOf: refInside)
+                cellModels.append(contentsOf: matchWithoutRef)
+                //            if cellModels.count == 0 {
+                //                self.getView().setState(state: .empty)
+                //            }
+                self.getView().onFetchModelSuccess(dataModel: cellModels)
+            case .message(let message):
+                self.getView().onFetchModelMessage(message: message)
+            case .failure(let error):
+                self.getView().onFetchModelFailure(error: error)
+            }
         }
     }
     
@@ -127,7 +129,7 @@ class RefereeEditMatchesLKPresenter: MvpPresenter<RefereeEditMatchesLKTableViewC
                 }).first
             }
             
-            let cell = RefereeEditMatchesLKTableViewCell.CellModel(activeMatch: element, clubTeamOne: teamOne!, clubTeamTwo: teamTwo!, referee1: ref1, referee2: ref2, referee3: ref3, timekeeper: timekeep)
+            let cell = RefereeEditMatchesLKTableViewCell.CellModel(activeMatch: element, clubTeamOne: teamOne, clubTeamTwo: teamTwo, referee1: ref1, referee2: ref2, referee3: ref3, timekeeper: timekeep)
             cellModels.append(cell)
             
         }

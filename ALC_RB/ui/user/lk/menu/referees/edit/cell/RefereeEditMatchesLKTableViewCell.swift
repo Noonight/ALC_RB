@@ -50,20 +50,26 @@ class RefereeEditMatchesLKTableViewCell: UITableViewCell {
         
         teamOneLabel.text = cellModel.activeMatch.teamOne.name
         teamTwoLabel.text = cellModel.activeMatch.teamTwo.name
-        if cellModel.clubTeamOne.logo?.count ?? 0 > 1 {
-            
-            teamOneImage.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.clubTeamOne.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true) { (response) in
-                self.teamOneImage.image = response.result.value?.af_imageRoundedIntoCircle()
+        if let clubOne = cellModel.clubTeamOne {
+            if clubOne.logo?.count ?? 0 > 1 {
+                
+                teamOneImage.af_setImage(withURL: ApiRoute.getImageURL(image: clubOne.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true) { (response) in
+                    self.teamOneImage.image = response.result.value?.af_imageRoundedIntoCircle()
+                }
+                
             }
-            
         }
-        if cellModel.clubTeamTwo.logo?.count ?? 0 > 1 {
-            
-            teamTwoImage.af_setImage(withURL: ApiRoute.getImageURL(image: cellModel.clubTeamTwo.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true) { (response) in
-                self.teamTwoImage.image = response.result.value?.af_imageRoundedIntoCircle()
+        
+        if let clubTwo = cellModel.clubTeamTwo {
+            if clubTwo.logo?.count ?? 0 > 1 {
+                
+                teamTwoImage.af_setImage(withURL: ApiRoute.getImageURL(image: clubTwo.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true) { (response) in
+                    self.teamTwoImage.image = response.result.value?.af_imageRoundedIntoCircle()
+                }
+                
             }
-            
         }
+        
         
         if cellModel.activeMatch.score == "" {
             scoreLabel.text = " - "
@@ -133,8 +139,8 @@ class RefereeEditMatchesLKTableViewCell: UITableViewCell {
     
     struct CellModel {
         var activeMatch: ActiveMatch
-        var clubTeamOne: Club
-        var clubTeamTwo: Club
+        var clubTeamOne: Club?
+        var clubTeamTwo: Club?
         var referee1: Person?
         var referee2: Person?
         var referee3: Person?
@@ -150,7 +156,7 @@ class RefereeEditMatchesLKTableViewCell: UITableViewCell {
             self.timekeeper = nil
         }
         
-        init(activeMatch: ActiveMatch, clubTeamOne: Club, clubTeamTwo: Club, referee1: Person?, referee2: Person?, referee3: Person?, timekeeper: Person?) {
+        init(activeMatch: ActiveMatch, clubTeamOne: Club?, clubTeamTwo: Club?, referee1: Person?, referee2: Person?, referee3: Person?, timekeeper: Person?) {
             self.activeMatch = activeMatch
             self.clubTeamOne = clubTeamOne
             self.clubTeamTwo = clubTeamTwo
