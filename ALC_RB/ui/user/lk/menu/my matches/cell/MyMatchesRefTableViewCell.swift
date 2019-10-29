@@ -53,7 +53,7 @@ class MyMatchesRefTableViewCell: UITableViewCell {
             return referee.getRefereeType() == Referee.RefereeType.referee3 && UserDefaultsHelper().getAuthorizedUser()?.person.id == referee.person
         }).first
         
-        if userRef3 != nil {
+        if userRef3 != nil && cellModel.participationMatch?.teamOne.count ?? 0 > 2 && cellModel.participationMatch?.teamTwo.count ?? 0 > 2 {
             accessoryType = .disclosureIndicator
         } else {
             accessoryType = .none

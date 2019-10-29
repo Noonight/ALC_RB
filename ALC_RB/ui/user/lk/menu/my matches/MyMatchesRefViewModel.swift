@@ -63,11 +63,16 @@ class MyMatchesRefViewModel {
         }
     }
     
-    func fetchLeagueInfo(id: String, success: @escaping (LILeagueInfo)->(), failure: @escaping (Error)->()) {
-        dataManager?.get_tournamentLeague(id: id, get_success: { leagueInfo in
-            success(leagueInfo)
-        }, get_error: { error in
-            failure(error)
+    func fetchLeagueInfo(id: String, success: @escaping (LILeagueInfo)->(), r_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error)->()) {
+        dataManager?.get_tournamentLeague(id: id, result: { result in
+            switch result {
+            case .success(let league):
+                success(league)
+            case .message(let message):
+                r_message(message)
+            case .failure(let error):
+                failure(error)
+            }
         })
     }
 }

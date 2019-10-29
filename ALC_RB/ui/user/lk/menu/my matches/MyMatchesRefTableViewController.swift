@@ -182,8 +182,12 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
                             self.refProtocol.preConfigureModelControllers()
                             
                             self.show(self.refProtocol, sender: self)
-                        },
-                        failure: { error in
+                        }, r_message: { message in
+                            cell?.accessoryView = nil
+                            cell?.accessoryType = .disclosureIndicator
+                            
+                            self.showAlert(message: message.message)
+                        }, failure: { error in
                             self.showAlert(message: error.localizedDescription)
                         }
                     )
