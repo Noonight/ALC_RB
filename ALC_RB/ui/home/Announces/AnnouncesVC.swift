@@ -45,6 +45,7 @@ final class AnnouncesVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.header_height.constant = 0
         announcesViewModel.fetch()
     }
     

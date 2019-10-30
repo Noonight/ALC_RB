@@ -182,9 +182,9 @@ extension HomeViewController: FloatingPanelControllerDelegate {
                        options: .allowUserInteraction,
                        animations: {
                         if targetPosition == .tip {
-                            self.announcesVC.announces_table.alpha = 0.0
+//                            self.announcesVC.announces_table.alpha = 0.0
                         } else {
-                            self.announcesVC.announces_table.alpha = 1.0
+//                            self.announcesVC.announces_table.alpha = 1.0
                         }
         }, completion: nil)
     }
