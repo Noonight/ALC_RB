@@ -108,7 +108,7 @@ extension ScheduleTableViewController {
             .asDriver(onErrorJustReturn: [])
             .drive(tableView.rx.items(cellIdentifier: ScheduleTableViewCell.ID, cellType: ScheduleTableViewCell.self)) { (index, match, cell) in
                 cell.matchScheduleModelItem = match
-                if cell.matchScheduleModelItem.teamOne == nil || cell.matchScheduleModelItem.teamTwo == nil {
+                if cell.matchScheduleModelItem.teamOne == nil || cell.matchScheduleModelItem.teamTwo == nil || cell.matchScheduleModelItem.match.events.count == 0 {
                     cell.accessoryType = .none
                 } else {
                     cell.accessoryType = .disclosureIndicator

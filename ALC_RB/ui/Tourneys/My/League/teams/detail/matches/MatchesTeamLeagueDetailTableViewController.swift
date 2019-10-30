@@ -53,11 +53,16 @@ extension MatchesTeamLeagueDetailTableViewController {
         cell.mTitleTeam2.text = getTeamTitle(league: league, match: match, team: .two)
         cell.mScore.text = match.score ?? "-"
         
-        presenter.getClubImage(id: getClubIdByTeamId(match.teamOne!, league: league)) { (image) in
-            cell.mImageTeam1.image = image.af_imageRoundedIntoCircle()
+        if let teamOne = match.teamOne {
+            presenter.getClubImage(id: getClubIdByTeamId(teamOne, league: league)) { (image) in
+                cell.mImageTeam1.image = image.af_imageRoundedIntoCircle()
+            }
         }
-        presenter.getClubImage(id: getClubIdByTeamId(match.teamTwo!, league: league)) { (image) in
-            cell.mImageTeam2.image = image.af_imageRoundedIntoCircle()
+        
+        if let teamTwo = match.teamTwo {
+            presenter.getClubImage(id: getClubIdByTeamId(teamTwo, league: league)) { (image) in
+                cell.mImageTeam2.image = image.af_imageRoundedIntoCircle()
+            }
         }
     }
     
