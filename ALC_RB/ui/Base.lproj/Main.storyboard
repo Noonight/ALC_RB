@@ -5062,7 +5062,7 @@
                                                     <constraint firstItem="2r1-I1-KoC" firstAttribute="top" secondItem="bAz-ah-Gm1" secondAttribute="top" id="xn2-k2-tvF"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lfv-Ce-OVC" userLabel="referees">
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lfv-Ce-OVC" userLabel="referees">
                                                 <rect key="frame" x="0.0" y="388" width="320" height="38"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ответственные лица" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SV1-IB-4A5">
@@ -5901,10 +5901,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="invitation_cell" id="FwP-wZ-vQd" customClass="InvitationTableViewCell" customModule="ALC_RB" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="320" height="223.5"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="224.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FwP-wZ-vQd" id="z3i-TU-JMv">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="223.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="224.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwE-LX-Ij1">

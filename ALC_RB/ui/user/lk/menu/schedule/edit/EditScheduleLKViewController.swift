@@ -105,10 +105,7 @@ class EditScheduleLKViewController: BaseStateViewController {
         {
             mainRefShowProtocol_btn.isEnabled = true
         }
-//        if viewModel?.comingCellModel.value.clubTeamOne == nil || viewModel?.comingCellModel.value.clubTeamTwo == nil {
-//            mainRefShowProtocol_btn.isEnabled = false
-//        }
-        if viewModel?.comingCellModel.value.activeMatch.teamOne == nil || viewModel?.comingCellModel.value.activeMatch.teamTwo == nil {
+        if viewModel?.comingCellModel.value.activeMatch.teamOne.name.count ?? 0 < 1 || viewModel?.comingCellModel.value.activeMatch.teamTwo.name.count ?? 0 < 1 {
             mainRefShowProtocol_btn.isEnabled = false
         }
     }
