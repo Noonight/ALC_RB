@@ -68,7 +68,8 @@ class ProtocolAllViewModel {
             }
             if event.getSystemEventType() == .autoGoal
             {
-                counterLeft -= 1
+//                counterLeft -= 1
+                counterRight += 1
             }
         }
         for event in teamTwoEvents
@@ -79,9 +80,40 @@ class ProtocolAllViewModel {
             }
             if event.getSystemEventType() == .autoGoal
             {
-                counterRight -= 1
+//                counterRight -= 1
+                counterLeft += 1
             }
         }
+        
+        /*
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "1 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db1c96b273866185c7a1a0c", time: "1 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db1c96b273866185c7a1a0c", time: "1 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "goal", player: "5db702e677792755b2c3c7a5", time: "1 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "penalty", player: "5db70dbe8744e156153ccbd8", time: "1 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "goal", player: "5db70dbe8744e156153ccbd8", time: "1 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "yellowCard", player: "5db70dbe8744e156153ccbd8", time: "2 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "goal", player: "5db7031377792755b2c3c7a6", time: "2 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "redCard", player: "5db6fde477792755b2c3c79c", time: "2 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "autoGoal", player: "5db1c96b273866185c7a1a0c", time: "2 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db1c96b273866185c7a1a0c", time: "2 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db1c96b273866185c7a1a0c", time: "2 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "2 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "2 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "2 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "2 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "2 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "2 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "goal", player: "5db70dbe8744e156153ccbd8", time: "2 half")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db1c96b273866185c7a1a0c", time: "extra time")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "extra time")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "penalty", player: "5db70d878744e156153ccbd7", time: "extra time")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "goal", player: "5db6fde477792755b2c3c79c", time: "extra time")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "autoGoal", player: "5db7028d77792755b2c3c79e", time: "extra time")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "goal", player: "5db70df28744e156153ccbd9", time: "extra time")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "penalty", player: "5db7015377792755b2c3c79d", time: "extra time")
+         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "penalty", player: "5db7015377792755b2c3c79d", time: "extra time")
+ */
         
         return "\(counterLeft) : \(counterRight)"
     }
@@ -89,7 +121,7 @@ class ProtocolAllViewModel {
     func preparePenaltyScore() -> String {
         if hasPenaltySeriesEvents() == true
         {
-            let penaltySeries = self.getEventsByTime("Серия пенальти")
+            let penaltySeries = self.getEventsByTime("penalty series")
             var counterLeft = 0
             var counterRight = 0
             
@@ -104,7 +136,8 @@ class ProtocolAllViewModel {
                 }
                 if event.getSystemEventType() == .autoGoal
                 {
-                    counterLeft -= 1
+//                    counterLeft -= 1
+                    counterRight += 1
                 }
             }
             
@@ -116,10 +149,12 @@ class ProtocolAllViewModel {
                 }
                 if event.getSystemEventType() == .autoGoal
                 {
-                    counterRight -= 1
+//                    counterRight -= 1
+                    counterLeft += 1
                 }
             }
             
+            print ("LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOL")
             return "\(counterLeft) : \(counterRight)"
         }
         else
@@ -130,7 +165,7 @@ class ProtocolAllViewModel {
     
     func hasPenaltySeriesEvents() -> Bool {
         if eventsController.events.contains(where: { event -> Bool in
-            return event.time == "Серия пенальти"
+            return event.time == "penalty series"
         }) == true
         {
             return true
@@ -139,7 +174,7 @@ class ProtocolAllViewModel {
     }
     
     func prepareFirstTimeScore() -> String {
-        let firstTimeEvents = self.getEventsByTime("1 тайм")
+        let firstTimeEvents = self.getEventsByTime("1 half")
         var counterLeft = 0
         var counterRight = 0
         
@@ -154,7 +189,8 @@ class ProtocolAllViewModel {
             }
             if event.getSystemEventType() == .autoGoal
             {
-                counterLeft -= 1
+//                counterLeft -= 1
+                counterRight += 1
             }
         }
         
@@ -166,19 +202,24 @@ class ProtocolAllViewModel {
             }
             if event.getSystemEventType() == .autoGoal
             {
-                counterRight -= 1
+//                counterRight -= 1
+                counterLeft += 1
             }
         }
-        
+        print ("TROLOLOLOLOLOLOLOOOOOOLOLOOOOLLLLOLOLOLOLLOOLOLOL")
         return "(\(counterLeft) : \(counterRight))"
     }
     
     func prepareMainTimeScore() -> String {
-        let firstTimeEvents = self.getEventsByTime("1 тайм")
-        let secondTimeEvents = self.getEventsByTime("2 тайм")
+        let firstTimeEvents = self.getEventsByTime("1 half")
+        let secondTimeEvents = self.getEventsByTime("2 half")
         var allEvents: [LIEvent] = []
         allEvents.append(contentsOf: firstTimeEvents)
         allEvents.append(contentsOf: secondTimeEvents)
+        
+        for e in allEvents {
+            print (e)
+        }
         
         var counterLeft = 0
         var counterRight = 0
@@ -194,7 +235,8 @@ class ProtocolAllViewModel {
             }
             if event.getSystemEventType() == .autoGoal
             {
-                counterLeft -= 1
+//                counterLeft -= 1
+                counterRight += 1
             }
         }
         for event in teamTwoEvents
@@ -205,7 +247,8 @@ class ProtocolAllViewModel {
             }
             if event.getSystemEventType() == .autoGoal
             {
-                counterRight -= 1
+                //counterRight -= 1
+                counterLeft += 1
             }
         }
         
@@ -385,12 +428,16 @@ class ProtocolAllViewModel {
     
     private func getEventsForTeam(team: TeamEnum, events: [LIEvent]) -> [LIEvent] {
         var resultArray: [LIEvent] = []
+        
         if team == .one
         {
+            var players: [String] = []
+            for p in teamOnePlayersController.getPlayingPlayers() {
+                players.append(p.playerId)
+            }
             for event in events
             {
-                if match.teamOne == event.player
-                {
+                if players.index(of: event.player) != nil {
                     resultArray.append(event)
                 }
             }
@@ -398,10 +445,13 @@ class ProtocolAllViewModel {
         
         if team == .two
         {
+            var players: [String] = []
+            for p in teamTwoPlayersController.getPlayingPlayers() {
+                players.append(p.playerId)
+            }
             for event in events
             {
-                if match.teamTwo == event.player
-                {
+                if players.index(of: event.player) != nil {
                     resultArray.append(event)
                 }
             }

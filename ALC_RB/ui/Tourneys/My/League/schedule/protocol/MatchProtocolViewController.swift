@@ -134,6 +134,7 @@ extension MatchProtocolViewController {
         }
         else
         {
+            
             self.score_in_main_time_label.text = self.viewModel.prepareMainTimeScore()
         }
         self.score_in_first_time_label.text = self.viewModel.prepareFirstTimeScore()

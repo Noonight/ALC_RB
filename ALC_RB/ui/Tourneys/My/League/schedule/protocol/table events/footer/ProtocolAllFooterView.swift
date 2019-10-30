@@ -22,16 +22,16 @@ class ProtocolAllFooterView: UIView {
     var leftFouls = 0 {
         didSet {
             left_foul_score_label.text = String(leftFouls)
-            updateUI()
+//            updateUI()
         }
     }
     var rightFouls = 0 {
         didSet {
             right_foul_score_label.text = String(rightFouls)
-            updateUI()
+//            updateUI()
         }
     }
-    
+
     private func updateUI() {
         if isVisible() == true
         {
