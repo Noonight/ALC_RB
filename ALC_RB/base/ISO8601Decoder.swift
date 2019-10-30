@@ -15,8 +15,9 @@ class ISO8601Decoder {
         
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+//        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.locale = Locale.current
+        formatter.timeZone = TimeZone.current
 
         decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
             let container = try decoder.singleValueContainer()
@@ -24,14 +25,15 @@ class ISO8601Decoder {
 
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
             if let date = formatter.date(from: dateStr) {
-                return date
+                return date + (3600 * 8)
             }
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
             if let date = formatter.date(from: dateStr) {
-                return date
+                return date + (3600 * 8)
             }
             throw DateError.invalidDate
         })
+//        decoder.dateDecodingStrategy = .iso8601
         
         return decoder
     }
