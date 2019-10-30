@@ -66,6 +66,7 @@ class LeagueDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
     
+        announce_height.constant = 0
         navigationController?.navigationBar.hideBorderLine()
     }
     
