@@ -245,7 +245,7 @@ extension EditMatchProtocolViewController {
             let controller = destination as! EditTeamProtocolTableViewController
             controller.playersController = teamOnePlayersController
             controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
-            controller.saveProtocol = self
+//            controller.saveProtocol = self
         case is EditRefereeTeamTableViewController:
             let controller = destination as! EditRefereeTeamTableViewController
             controller.refereesController = self.refereesController
@@ -279,9 +279,11 @@ extension EditMatchProtocolViewController {
             case .one:
                 controller.playersController = teamOnePlayersController
                 controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
+                controller.saveProtocol = self
             case .two:
                 controller.playersController = teamTwoPlayersController
                 controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .two)
+                controller.saveProtocol = self
             }
         default:
             break
