@@ -25,11 +25,11 @@ class ISO8601Decoder {
 
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
             if let date = formatter.date(from: dateStr) {
-                return date + (3600 * 8)
+                return date + TimeInterval(TimeZone.current.secondsFromGMT())
             }
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
             if let date = formatter.date(from: dateStr) {
-                return date + (3600 * 8)
+                return date + TimeInterval(TimeZone.current.secondsFromGMT())
             }
             throw DateError.invalidDate
         })
