@@ -16,17 +16,29 @@ enum _StageType: String, Codable {
 
 // MARK: - _Stage
 struct _Stage: Codable {
-    let groupStage: _GroupStage?
-    let id: String?
-    let stageType: _StageType?
-    let toNextStage: Int?
     let sheduleIsCreated: Bool?
+    let t: String?
+    let groups: [_Group]?
+    let id: String?
+    let teamsCount: Int?
+    let roundsCount: Int?
+    let league: String?
+    let toNextStage: Int?
+    let createdAt: Date?
+    let updatedAt: Date?
+    let v: Int?
 
     enum CodingKeys: String, CodingKey {
-        case groupStage = "groupStage"
-        case id = "_id"
-        case stageType = "stageType"
-        case toNextStage = "toNextStage"
         case sheduleIsCreated = "sheduleIsCreated"
+        case t = "__t"
+        case groups = "groups"
+        case id = "_id"
+        case teamsCount = "teamsCount"
+        case roundsCount = "roundsCount"
+        case league = "league"
+        case toNextStage = "toNextStage"
+        case createdAt = "createdAt"
+        case updatedAt = "updatedAt"
+        case v = "__v"
     }
 }

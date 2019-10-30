@@ -106,7 +106,9 @@ extension TeamsLeagueTableViewController {
     }
     
     func setupFilteredTableDataSource() {
-        self.filteredTeamsTable.initDataSource(teams: self.leagueDetailModel.leagueInfo.league.teams!)
+//        dump(self.leagueDetailModel.leagueInfo.league.stages)
+//        if
+        self.filteredTeamsTable.initDataSource(teams: self.leagueDetailModel.leagueInfo.league.teams!, groups: self.leagueDetailModel.leagueInfo.league.stages!.first!.groups!)
         self.tableView.reloadData()
     }
     
@@ -155,20 +157,27 @@ extension TeamsLeagueTableViewController {
         }
         else
         {
-            if allTeamsIsContainsGroup() == true
-            {
-                Print.m("all teams contains groups")
-                self.setupFilteredTableViews()
-                self.setupFilteredTableDataSource()
-                Print.m("setup data source of fitlered teams and reload table view data")
-            }
-            else
-            {
-                Print.m("some teams do not contains groups")
+//            if allTeamsIsContainsGroup() == true
+//            {
+//                Print.m("all teams contains groups")
+            if self.leagueDetailModel.leagueInfo.league.stages?.first?.groups?.isEmpty ?? true {
                 self.setupAllTableViews()
                 self.setupAllTableDataSource()
-                Print.m("setup data source of all teams and reload table view data")
+            } else {
+                self.setupFilteredTableViews()
+                self.setupFilteredTableDataSource()
             }
+//                self.setupFilteredTableViews()
+//                self.setupFilteredTableDataSource()
+                Print.m("setup data source of fitlered teams and reload table view data")
+//            }
+//            else
+//            {
+//                Print.m("some teams do not contains groups")
+//                self.setupAllTableViews()
+//                self.setupAllTableDataSource()
+//                Print.m("setup data source of all teams and reload table view data")
+//            }
             hideEmptyView()
             tableView.reloadData()
         }
@@ -247,14 +256,19 @@ extension TeamsLeagueTableViewController {
             let indexPath = tableView.indexPathForSelectedRow
         {
             var team: LITeam!
-            if self.allTeamsIsContainsGroup() == true
-            {
+//            if self.allTeamsIsContainsGroup() == true
+//            {
+            if self.leagueDetailModel.leagueInfo.league.stages?.first?.groups?.isEmpty ?? true {
+                team = self.allTeamsTable.dataSource[indexPath.row - AllTeamsLeagueTableView.HeaderCell.COUNT]
+            } else {
                 team = self.filteredTeamsTable.dataSource[indexPath.section].teams[indexPath.row - FilteredTeamsLeagueTableView.HeaderCell.COUNT]
             }
-            else
-            {
-                team = self.allTeamsTable.dataSource[indexPath.row - AllTeamsLeagueTableView.HeaderCell.COUNT]
-            }
+//                team = self.filteredTeamsTable.dataSource[indexPath.section].teams[indexPath.row - FilteredTeamsLeagueTableView.HeaderCell.COUNT]
+//            }
+//            else
+//            {
+//                team = self.allTeamsTable.dataSource[indexPath.row - AllTeamsLeagueTableView.HeaderCell.COUNT]
+//            }
             destination.teamModel = team
             let matches = leagueDetailModel.leagueInfo.league.matches?.filter { (match) -> Bool in
                 return match.teamOne == team.id || match.teamTwo == team.id

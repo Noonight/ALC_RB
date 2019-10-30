@@ -34,28 +34,44 @@ class FilterTeamsByGroupHelper {
         }
     }
     
-    static func filter(teams: [LITeam]) -> [GroupedLITeam] {
-        let uniqueGroups = findUniqueGroups(teams: teams)
-        var filteredTeams: [GroupedLITeam] = []
-        if uniqueGroups.count != 0
-        {
-            for i in 0...uniqueGroups.count - 1 // after index out of range
-            {
-                filteredTeams.append(FilterTeamsByGroupHelper.GroupedLITeam(name: uniqueGroups[i]))
-                //            filteredTeams[i].name = uniqueGroups[i]
-                if teams.count != 0
-                {
-                    for j in 0...teams.count - 1
-                    {
-                        if uniqueGroups[i] == teams[j].group
-                        {
-                            filteredTeams[i].add(team: teams[j])
-                        }
-                    }
+    static func filter(teams: [LITeam], groups: [_Group]) -> [GroupedLITeam] {
+        
+        var groupedTeams = [GroupedLITeam]()
+        
+        for group in groups {
+            var item = GroupedLITeam(name: group.name ?? "")
+            for team in group.teams ?? [] {
+                let mTeam = teams.filter { liTeam -> Bool in
+                    return liTeam.id == team
+                }.first
+                if mTeam != nil {
+                    item.teams.append(mTeam!)
                 }
             }
+            groupedTeams.append(item)
         }
-        return filteredTeams
+        return groupedTeams
+//        let uniqueGroups = findUniqueGroups(teams: teams)
+//        var filteredTeams: [GroupedLITeam] = []
+//        if uniqueGroups.count != 0
+//        {
+//            for i in 0...uniqueGroups.count - 1 // after index out of range
+//            {
+//                filteredTeams.append(FilterTeamsByGroupHelper.GroupedLITeam(name: uniqueGroups[i]))
+//                //            filteredTeams[i].name = uniqueGroups[i]
+//                if teams.count != 0
+//                {
+//                    for j in 0...teams.count - 1
+//                    {
+//                        if uniqueGroups[i] == teams[j].group
+//                        {
+//                            filteredTeams[i].add(team: teams[j])
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return filteredTeams
     }
     
     private static func findUniqueGroups(teams: [LITeam]) -> [String] {

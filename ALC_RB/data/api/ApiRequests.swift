@@ -1267,6 +1267,37 @@ class ApiRequests {
         
     }
     
+    func get_league(id: String, resultMy: @escaping (ResultMy<LILeagueInfo, Error>) -> ()) {
+        let parameters = [
+            "_id" : id,
+            "_populate" : "matches stages"
+        ]
+        Alamofire
+            .request(ApiRoute.getApiURL(.league), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+            .responseData { response in
+                let decoder = ISO8601Decoder.getDecoder()
+                do {
+                    if let leagues = try? decoder.decode([LILeague].self, from: response.data!) {
+                        if leagues.contains(where: { league -> Bool in
+                            return league.id == id
+                        }) {
+                            let leagueInfo = LILeagueInfo(league: leagues.first!)
+                            resultMy(.success(leagueInfo))
+                        } else {
+                            resultMy(.message(SingleLineMessage(message: "Лига не найдена")))
+                        }
+                    }
+                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+                        resultMy(.message(message))
+                    }
+                }
+                if response.result.isFailure {
+                    resultMy(.failure(response.error!))
+                }
+                
+        }
+    }
+    
     func get_getPerson(id: String, success: @escaping (GetPerson)->(), failure: @escaping (Error)->()) {
         Alamofire
             .request(ApiRoute.getApiURL(.soloUser, id: id))
@@ -1789,24 +1820,25 @@ class ApiRequests {
             self.get_leagues_by_single(tourney: tourneyModelItems[i].tourney) { result in
                 switch result {
                 case .success(let leagues):
-//                    Print.m(leagues)
+
                     tourneyModelItems[i].leagues = leagues
-                    group.leave()
+                    
                 case .message(let message):
-//                    Print.m(message.message)
+
                     mMessage = message
-                    group.leave()
+                    
                 case .failure(let error):
-//                    Print.m(error.localizedDescription)
+
                     mError = error
-                    group.leave()
+                    
                 }
+                group.leave()
             }
         }
         group.leave()
         
         group.notify(queue: .main) {
-//            Print.m("message is \(mMessage?.message), error is \(mError), items are \(tourneyModelItems)")
+
             if let message = mMessage {
                 get_result(.message(message))
             }
