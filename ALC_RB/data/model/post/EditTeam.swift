@@ -13,16 +13,19 @@ struct EditTeam : Codable {
     var _id = ""
     var teamId = ""
     var players = EditTeam.Players()
+//    var teamName = ""
     
     init(_id: String, teamId: String, players: EditTeam.Players) {
         self._id = _id
         self.teamId = teamId
+//        self.teamName = teamName
         self.players = players
     }
     
     enum CodingKeys: String, CodingKey {
         case _id = "_id"
         case teamId = "teamId"
+//        case teamName = "teamName"
         case players = "players"
     }
     

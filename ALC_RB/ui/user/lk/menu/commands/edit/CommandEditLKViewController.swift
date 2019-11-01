@@ -45,6 +45,7 @@ class CommandEditLKViewController: BaseStateViewController {
         
         self.setupPresenter()
         self.setupTableViews()
+        setupView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +56,11 @@ class CommandEditLKViewController: BaseStateViewController {
         
         presenter.getPersons()
     }
+}
+
+// MARK: - SETUP
+
+extension CommandEditLKViewController {
     
     func setupTableViews() {
         commandPlayers.dataSource = commandPlayersTableViewHelper
@@ -75,9 +81,12 @@ class CommandEditLKViewController: BaseStateViewController {
     func setupPresenter() {
         self.initPresenter()
     }
+    
+    func setupView() {
+        self.teamName_textField.text = self.team.name
+    }
+    
 }
-
-// MARK: Extensions
 
 // MARK: Actions
 

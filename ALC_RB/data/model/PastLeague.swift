@@ -14,12 +14,14 @@ struct PastLeague: Codable {
     var tourney: String
     var teamName: String
     var place: String
+    var leagueId: String
     
     enum CodingKeys: String, CodingKey {
         case name = "name"
         case tourney = "tourney"
         case teamName = "teamName"
         case place = "place"
+        case leagueId = "_id"
     }
     
     init() {
@@ -27,6 +29,7 @@ struct PastLeague: Codable {
         tourney = ""
         teamName = ""
         place = ""
+        leagueId = ""
     }
     
     init(name: String, tourney: String, teamName: String, place: String) {
@@ -34,6 +37,7 @@ struct PastLeague: Codable {
         self.tourney = tourney
         self.teamName = teamName
         self.place = place
+        self.leagueId = ""
     }
 
     init(data: Data) throws {

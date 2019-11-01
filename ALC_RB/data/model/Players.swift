@@ -35,7 +35,7 @@ struct Person: Codable {
     var lastname: String
     var birthdate: Date
     var photo: String?
-    var desc: String
+//    var desc: String
     var participationMatches: [ParticipationMatch]?
     var pastLeagues: [PastLeague]
     var id: String
@@ -49,6 +49,7 @@ struct Person: Codable {
     var v: Int
     var club: String?
     var region: String
+    var favoriteTourney: [String]
     
     enum TypeOfPerson: String {
         case player = "player"
@@ -63,7 +64,7 @@ struct Person: Codable {
         case lastname = "lastname"
         case birthdate = "birthdate"
         case photo = "photo"
-        case desc = "desc"
+//        case desc = "desc"
         case participationMatches = "participationMatches"
         case pastLeagues = "pastLeagues"
         case id = "_id"
@@ -77,6 +78,7 @@ struct Person: Codable {
         case v = "__v"
         case club = "club"
         case region = "region"
+        case favoriteTourney = "favoriteTourney"
     }
     
     init(from decoder: Decoder) throws {
@@ -86,7 +88,7 @@ struct Person: Codable {
         self.lastname = try container.decodeIfPresent(String.self, forKey: .lastname) ?? ""
         self.birthdate = try container.decodeIfPresent(Date.self, forKey: .birthdate) ?? Date()
         self.photo = try container.decodeIfPresent(String.self, forKey: .photo) ?? ""
-        self.desc = try container.decodeIfPresent(String.self, forKey: .desc) ?? ""
+//        self.desc = try container.decodeIfPresent(String.self, forKey: .desc) ?? ""
         self.participationMatches = try container.decodeIfPresent([ParticipationMatch].self, forKey: .participationMatches) ?? []
         self.pastLeagues = try container.decodeIfPresent([PastLeague].self, forKey: .pastLeagues) ?? []
         self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
@@ -100,6 +102,7 @@ struct Person: Codable {
         self.v = try container.decodeIfPresent(Int.self, forKey: .v) ?? -1
         self.club = try container.decodeIfPresent(String.self, forKey: .club) ?? ""
         self.region = try container.decodeIfPresent(String.self, forKey: .region) ?? ""
+        self.favoriteTourney = try container.decodeIfPresent([String].self, forKey: .favoriteTourney) ?? []
     }
     
     func compareFullName(with fullName: String) -> Bool {
@@ -252,7 +255,7 @@ extension Person {
         lastname = ""
         birthdate = Date()
         photo = ""
-        desc = ""
+//        desc = ""
         participationMatches = []
         pastLeagues = []
         id = ""
@@ -266,6 +269,7 @@ extension Person {
         v = -1
         club = ""
         region = ""
+        favoriteTourney = []
     }
     
     init(data: Data) throws {
@@ -289,7 +293,7 @@ extension Person {
         lastname: String? = nil,
         birthdate: Date? = nil,
         photo: String?? = nil,
-        desc: String? = nil,
+//        desc: String? = nil,
         participationMatches: [ParticipationMatch]? = nil,
         pastLeagues: [PastLeague]? = nil,
         id: String? = nil,
@@ -301,7 +305,8 @@ extension Person {
         createdAt: Date? = nil,
         updatedAt: Date? = nil,
         v: Int? = nil,
-        club: String?? = nil
+        club: String?? = nil,
+        favoriteTourney: [String]? = nil
         ) -> Person {
         var person = Person()
         person.surname = surname ?? self.surname
@@ -309,7 +314,7 @@ extension Person {
         person.lastname = lastname ?? self.lastname
         person.birthdate = birthdate ?? self.birthdate
         person.photo = photo ?? self.photo
-        person.desc = desc ?? self.desc
+//        person.desc = desc ?? self.desc
         person.participationMatches = participationMatches ?? self.participationMatches
         person.pastLeagues = pastLeagues ?? self.pastLeagues
         person.id = id ?? self.id
@@ -322,6 +327,7 @@ extension Person {
         person.updatedAt = updatedAt ?? self.updatedAt
         person.v = v ?? self.v
         person.club = club ?? self.club
+        person.favoriteTourney = favoriteTourney ?? self.favoriteTourney
         
         return person
     }
