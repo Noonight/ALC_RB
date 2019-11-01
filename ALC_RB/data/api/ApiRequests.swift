@@ -1333,6 +1333,24 @@ class ApiRequests {
         }
     }
     
+    func get_players(limit: Int = Constants.Values.LIMIT_ALL, offset: Int = 0, resultMy: @escaping (ResultMy<Players, Error>) -> ()) {
+        let parameters: Parameters = [
+            "type": "player",
+            "limit": limit,
+            "offset": offset
+        ]
+        
+        Alamofire
+            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+            .responseData { response in
+                let decoder = ISO8601Decoder.getDecoder()
+                do {
+                    if let players = 
+                }
+        }
+        
+    }
+    
     func get_players(limit: Int, offset: Int, get_success: @escaping (Players) -> (), get_failure: @escaping (Error) -> ()) {
         let parameters: Parameters = [
             "type": "player",

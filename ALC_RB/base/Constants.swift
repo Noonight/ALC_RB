@@ -36,6 +36,6 @@ struct Constants {
     }
     struct Values {
         static let LIMIT        = 30
-        static let LIMIT_ALL    = 10000
+        static let LIMIT_ALL    = 32575
     }
 }
