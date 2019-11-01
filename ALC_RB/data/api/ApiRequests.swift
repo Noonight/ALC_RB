@@ -1345,7 +1345,15 @@ class ApiRequests {
             .responseData { response in
                 let decoder = ISO8601Decoder.getDecoder()
                 do {
-                    if let players = 
+                    if let players = try? decoder.decode(Players.self, from: response.data!) {
+                        resultMy(.success(players))
+                    }
+                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+                        resultMy(.message(message))
+                    }
+                    if response.result.isFailure {
+                        resultMy(.failure(response.error!))
+                    }
                 }
         }
         

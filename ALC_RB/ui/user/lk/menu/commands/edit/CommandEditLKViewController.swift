@@ -13,6 +13,7 @@ class CommandEditLKViewController: BaseStateViewController {
         static let ADD_PLAYER = "segue_add_player_to_team"
     }
     
+    @IBOutlet weak var teamName_textField: UITextField!
     @IBOutlet weak var saveBtn: UIBarButtonItem!
     @IBOutlet weak var commandPlayers: IntrinsicTableView!
     @IBOutlet weak var commandInvitePlayers: IntrinsicTableView!
@@ -184,25 +185,27 @@ extension CommandEditLKViewController: OnCommandPlayerDeleteBtnPressedProtocol {
         for i in 0...mutablePlayers.count {
             if model.player?.id == mutablePlayers[i].id {
                 
-                if mutablePlayers[i].playerID == userDefaultHelper.getAuthorizedUser()?.person.id { // i can't delete teams' trainer
-                    showAlert(message: "Вы пытаетесь исключить тренера.")
-                } else {
-                    if let personName = model.person?.getFullName() {
-                        showAlertOkCancel(title: "Внимание", message: "Исключить игрока \(personName)?", ok: {
-                            self.mutablePlayers.remove(at: i)
-                            success()
-                        }) {
-                            Print.m("Отмена удаления игрока")
-                        }
-                    } else {
-                        showAlertOkCancel(title: "Внимание", message: "Исключить игрока?", ok: {
-                            self.mutablePlayers.remove(at: i)
-                            success()
-                        }) {
-                            Print.m("Отмена удаления игрока")
-                        }
-                    }
-                }
+//                if mutablePlayers[i].playerID == userDefaultHelper.getAuthorizedUser()?.person.id { // i can't delete teams' trainer
+//                    showAlert(message: "Вы пытаетесь исключить тренера.")
+//                } else {
+//                    if let personName = model.person?.getFullName() {
+//                        showAlertOkCancel(title: "Внимание", message: "Исключить игрока \(personName)?", ok: {
+//                            self.mutablePlayers.remove(at: i)
+//                            success()
+//                        }) {
+//                            Print.m("Отмена удаления игрока")
+//                        }
+//                    } else {
+//                        showAlertOkCancel(title: "Внимание", message: "Исключить игрока?", ok: {
+//                            self.mutablePlayers.remove(at: i)
+//                            success()
+//                        }) {
+//                            Print.m("Отмена удаления игрока")
+//                        }
+//                    }
+//                }
+                self.mutablePlayers.remove(at: i)
+                success()
                 break
             }
         }
@@ -214,22 +217,23 @@ extension CommandEditLKViewController: OnCommandInvitePlayerDeleteBtnPressedProt
     func onDeleteInvBtnPressed(index: IndexPath, model: CommandInvitePlayersTableViewCell.CellModel, success: @escaping () -> ()) {
         for i in 0...mutablePlayers.count/* - 1*/ {
             if model.player?.id == mutablePlayers[i].id {
-                if let personName = model.person?.getFullName() {
-                    showAlertOkCancel(title: "Внимание", message: "Отозвать приглашение для игрока \(personName)?", ok: {
-                        self.mutablePlayers.remove(at: i)
-                        success()
-                    }) {
-                        Print.m("cancel delete")
-                    }
-                } else {
-                    showAlertOkCancel(title: "Внимание", message: "Отозвать приглашение для игрока?", ok: {
-                        self.mutablePlayers.remove(at: i)
-                        success()
-                    }) {
-                        Print.m("cencel delete")
-                    }
-                }
-                
+//                if let personName = model.person?.getFullName() {
+//                    showAlertOkCancel(title: "Внимание", message: "Отозвать приглашение для игрока \(personName)?", ok: {
+//                        self.mutablePlayers.remove(at: i)
+//                        success()
+//                    }) {
+//                        Print.m("cancel delete")
+//                    }
+//                } else {
+//                    showAlertOkCancel(title: "Внимание", message: "Отозвать приглашение для игрока?", ok: {
+//                        self.mutablePlayers.remove(at: i)
+//                        success()
+//                    }) {
+//                        Print.m("cencel delete")
+//                    }
+//                }
+                self.mutablePlayers.remove(at: i)
+                success()
                 break
             }
         }
