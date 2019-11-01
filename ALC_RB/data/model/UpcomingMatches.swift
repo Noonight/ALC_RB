@@ -389,6 +389,7 @@ extension Team {
         creator = ""
         players = []
         club = ""
+        creatorPhone = ""
     }
     
     init(data: Data) throws {
