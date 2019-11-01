@@ -224,9 +224,20 @@ class CommandsLKTableViewController: BaseStateTableViewController {
     @IBAction func onAddCommandBtnPressed(_ sender: UIBarButtonItem) {  }
 }
 
-// MARK: Extensions
 // MARK: Helpers
+
 extension CommandsLKTableViewController {
+    
+    func showRemoveTeamAlert(teamName: String, delete: @escaping () -> (), cancel: @escaping () -> ()) {
+        let actionDelete = UIAlertAction(title: "Удалить", style: .destructive) { _ in
+            delete()
+        }
+        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel) { _ in
+            cancel()
+        }
+        showAlert(title: "Предупреждение!", message: "Удалить команду '\(teamName)'?", actions: [actionDelete, actionCancel])
+    }
+    
     func getOwnerParticipations(participation: [Participation], tournaments: Tournaments) -> [Participation] {
         var arr : [Participation] = []
         
@@ -360,6 +371,7 @@ extension CommandsLKTableViewController {
         
     }
 }
+
 // MARK: Table view
 extension CommandsLKTableViewController {
     // MARK: Data source
@@ -459,6 +471,34 @@ extension CommandsLKTableViewController {
     }
     
     // MARK: - Delegate
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            if indexPath.section == 0 {
+                showRemoveTeamAlert(teamName: tableModel.ownerTeams[indexPath.row].name, delete: {
+                    self.tableModel.ownerTeams.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .left)
+                    // TODO: do api request to delete team
+                }) {
+                    Print.m("cancel team delete")
+                }
+//                Print.m("delete cell at \(indexPath.row) -> \(tableModel.ownerTeams[indexPath.row])")
+            }
+            if indexPath.section == 1 {
+                showRemoveTeamAlert(teamName: tableModel.playerTeams[indexPath.row].name, delete: {
+                    self.tableModel.playerTeams.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .left)
+                }) {
+                    Print.m("cancel team delete")
+                }
+                
+//                Print.m("delete cell at \(indexPath.row) -> \(tableModel.fplayerTeams[indexPath.row])")
+            }
+            
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         if indexPath.section == 0 { // logic: only owner of team can edit it
             return indexPath
