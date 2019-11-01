@@ -19,15 +19,15 @@ struct UpcomingMatches: Codable {
 }
 
 struct Match: Codable {
-    var id, date: String
-    var stage: Int
+    var id: String
+    var date: Date
+    var stage: String
     var played: Bool
     var tour: String
-//    var playersList: [JSONAny] // mb String
     var playersList: [String]
-    var place: String
-//    var winner/*, score*/, fouls, autoGoals: JSONNull? // String without fouls
-    var winner, autoGoals: String
+    var place: String // stadium
+    var winner: String // teamOne, teamTwo, draw
+    var autoGoals: String
     var fouls: String
     
     var score: String
@@ -45,8 +45,8 @@ struct Match: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
-        self.date = try container.decodeIfPresent(String.self, forKey: .date) ?? ""
-        self.stage = try container.decodeIfPresent(Int.self, forKey: .stage) ?? -1
+        self.date = try container.decodeIfPresent(Date.self, forKey: .date) ?? Date()
+        self.stage = try container.decodeIfPresent(String.self, forKey: .stage) ?? ""
         self.played = try container.decodeIfPresent(Bool.self, forKey: .played) ?? false
         self.tour = try container.decodeIfPresent(String.self, forKey: .tour) ?? ""
 //        self.playersList = try container.decodeIfPresent([JSONAny].self, forKey: .playersList) ?? []
@@ -81,7 +81,7 @@ struct Match: Codable {
 }
 
 struct Team: Codable {
-    var status: String
+    var status: String // Pending Approved Rejected
     var place: Int
     var playoffPlace: Int?
     var madeToPlayoff: Bool
@@ -89,6 +89,7 @@ struct Team: Codable {
     var goals, goalsReceived, wins, losses: Int
     var draws, groupScore: Int
     var id, name, creator: String
+    var creatorPhone: String
     var players: [Player]
     var club: String?
     
@@ -118,6 +119,7 @@ struct Team: Codable {
         case status, place, playoffPlace, madeToPlayoff, group, goals, goalsReceived, wins, losses, draws, groupScore
         case id = "_id"
         case name, creator, players, club
+        case creatorPhone
     }
 }
 
@@ -238,8 +240,8 @@ extension Match {
     
     init() {
         id = ""
-        date = ""
-        stage = -1
+        date = Date()
+        stage = ""
         played = false
         tour = ""
         playersList = []
@@ -278,8 +280,8 @@ extension Match {
     
     func with(
         id: String? = nil,
-        date: String? = nil,
-        stage: Int? = nil,
+        date: Date? = nil,
+        stage: String? = nil,
         played: Bool? = nil,
         tour: String? = nil,
 //        playersList: [JSONAny]? = nil,

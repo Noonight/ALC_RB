@@ -24,18 +24,18 @@ class HomeScheduleHeaderView: UIView {
             place_label.text  = self.place
         }
     }
-    var played: Bool = false  {
-        didSet {
-            if played == true
-            {
-                place_label.textColor = .red 
-            }
-            else
-            {
-                place_label.textColor = .green
-            }
-        }
-    }
+//    var played: Bool = false  {
+//        didSet {
+//            if played == true
+//            {
+//                place_label.textColor = .red
+//            }
+//            else
+//            {
+//                place_label.textColor = .green
+//            }
+//        }
+//    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

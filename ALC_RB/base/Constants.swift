@@ -26,6 +26,8 @@ struct Constants {
         static let MESSAGE                  = "Сообщение"
         static let FILL_ALL_FIELDS          = "Заполните все поля"
         static let AUTHORIZATION            = "Авторизуемся..."
+        
+        static let TEAM_IS_NOT              = "Команда не указана"
     }
 //    struct Images {
 //        static let Q_INFO       = UIImage(named: "ic_info")

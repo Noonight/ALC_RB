@@ -166,12 +166,12 @@ extension HomeViewController: FloatingPanelControllerDelegate {
     }
     
     func floatingPanelDidMove(_ vc: FloatingPanelController) {
-        let y = vc.surfaceView.frame.origin.y
-        let tipY = vc.originYOfSurface(for: .tip)
-        if y > tipY - 44.0 {
-            let progress = max(0.0, min((tipY  - y) / 44.0, 1.0))
-            self.announcesVC.announces_table.alpha = progress
-        }
+//        let y = vc.surfaceView.frame.origin.y
+//        let tipY = vc.originYOfSurface(for: .tip)
+//        if y > tipY - 44.0 {
+//            let progress = max(0.0, min((tipY  - y) / 44.0, 1.0))
+//            self.announcesVC.announces_table.alpha = progress
+//        }
     }
     
     func floatingPanelWillBeginDragging(_ vc: FloatingPanelController) { }
@@ -204,7 +204,7 @@ public class MyPanelLayout: FloatingPanelLayout {
     
     public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
         switch position {
-        case .tip: return 70.0
+        case .tip: return 65.0
         case .full: return 16
         default: return nil
         }

@@ -26,9 +26,11 @@ final class HomeScheduleTable: NSObject {
 
 extension HomeScheduleTable: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if actions != nil
-        {
-            self.actions?.onCellSelected(model: dataSource[indexPath.row])
+        if dataSource[indexPath.row].played == true {
+            if actions != nil
+            {
+                self.actions?.onCellSelected(model: dataSource[indexPath.row])
+            }
         }
     }
 }

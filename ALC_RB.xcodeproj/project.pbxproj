@@ -26,6 +26,8 @@
 		04D01D42230689CB003AB74B /* AdverstingMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D01D41230689CB003AB74B /* AdverstingMaker.swift */; };
 		04DF5492220D6861001323A6 /* MatchProtocolPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5491220D6861001323A6 /* MatchProtocolPresenter.swift */; };
 		04DF5494220D6C25001323A6 /* ClubTeamHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5493220D6C25001323A6 /* ClubTeamHelper.swift */; };
+		04F710C3236C29D900C26469 /* ScheduleGroupedModelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F710C2236C29D900C26469 /* ScheduleGroupedModelItem.swift */; };
+		04F710C5236C2A1C00C26469 /* ScheduleModelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F710C4236C2A1C00C26469 /* ScheduleModelItem.swift */; };
 		1801B87F2271872300BE0F7C /* CommandAddPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1801B87E2271872300BE0F7C /* CommandAddPlayerPresenter.swift */; };
 		18076941229E7D4900A10996 /* AddPlayerToTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18076940229E7D4900A10996 /* AddPlayerToTeam.swift */; };
 		18076943229E81A000A10996 /* AddPlayerToTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18076942229E81A000A10996 /* AddPlayerToTeamResponse.swift */; };
@@ -391,6 +393,8 @@
 		04D01D41230689CB003AB74B /* AdverstingMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdverstingMaker.swift; sourceTree = "<group>"; };
 		04DF5491220D6861001323A6 /* MatchProtocolPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchProtocolPresenter.swift; sourceTree = "<group>"; };
 		04DF5493220D6C25001323A6 /* ClubTeamHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubTeamHelper.swift; sourceTree = "<group>"; };
+		04F710C2236C29D900C26469 /* ScheduleGroupedModelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleGroupedModelItem.swift; sourceTree = "<group>"; };
+		04F710C4236C2A1C00C26469 /* ScheduleModelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModelItem.swift; sourceTree = "<group>"; };
 		1801B87E2271872300BE0F7C /* CommandAddPlayerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerPresenter.swift; sourceTree = "<group>"; };
 		18063EDB2282C49B0072FACD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		18063EDC2282C49B0072FACD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -801,6 +805,7 @@
 		048CB340230BD724006CF2A9 /* Schedule Table */ = {
 			isa = PBXGroup;
 			children = (
+				04F710C1236C29C700C26469 /* Model */,
 				048CB348230BF15D006CF2A9 /* Header */,
 				048CB343230BD91C006CF2A9 /* Cell */,
 				048CB341230BD741006CF2A9 /* HomeScheduleTable.swift */,
@@ -859,6 +864,15 @@
 				04C024E72213E12C00A4A571 /* EventsProtocolTableViewCell.swift */,
 			);
 			path = cell;
+			sourceTree = "<group>";
+		};
+		04F710C1236C29C700C26469 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04F710C2236C29D900C26469 /* ScheduleGroupedModelItem.swift */,
+				04F710C4236C2A1C00C26469 /* ScheduleModelItem.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		1807709022F3EEB100D71EA9 /* as cell */ = {
@@ -2814,6 +2828,7 @@
 				18B9F80A2349A9E70095261F /* TournamentSearchVM.swift in Sources */,
 				DB97C3012339FB18001E205E /* AnnouncesVC.swift in Sources */,
 				1844D35C234C902600FB24D9 /* UIScrollView + Extensions.swift in Sources */,
+				04F710C3236C29D900C26469 /* ScheduleGroupedModelItem.swift in Sources */,
 				18076941229E7D4900A10996 /* AddPlayerToTeam.swift in Sources */,
 				DB4FCAF822EECC5B00A89BE7 /* EventMaker.swift in Sources */,
 				DBA69210221E74A000BEFB26 /* DrawerMenuTableViewCell.swift in Sources */,
@@ -3021,6 +3036,7 @@
 				DBA6921A221EB85900BEFB26 /* RegistrationViewController.swift in Sources */,
 				DBE0E7AA223C063200CC0EE2 /* OngoingLeagueTableViewCell.swift in Sources */,
 				DBA8B3C422F3649A0008A16E /* FilterTeamsByGroupHelper.swift in Sources */,
+				04F710C5236C2A1C00C26469 /* ScheduleModelItem.swift in Sources */,
 				DBBEE1BD22D5416800CFB17E /* ParticipationCommandsController.swift in Sources */,
 				DB0ABC8F2302FC4600FF6A8D /* PenaltySeriesTableViewCell.swift in Sources */,
 				DB52EAE52248E2E6004F7869 /* CommandCreateLKPresenter.swift in Sources */,
