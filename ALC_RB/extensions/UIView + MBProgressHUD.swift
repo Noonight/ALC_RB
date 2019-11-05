@@ -94,8 +94,8 @@ extension UIView {
         let image = #imageLiteral(resourceName: "ic_warning")
         let imageView = UIImageView(image: image)
         
-        imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: Constants.Values.ALERT_SIZE).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: Constants.Values.ALERT_SIZE).isActive = true
         
         let hud = showCustomViewHUD(cView: imageView, message: message, detailMessage: detailMessage)
         
@@ -117,8 +117,8 @@ extension UIView {
         let image = #imageLiteral(resourceName: "ic_empty")
         let imageView = UIImageView(image: image)
         
-        imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: Constants.Values.ALERT_SIZE).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: Constants.Values.ALERT_SIZE).isActive = true
         
         let hud = showCustomViewHUD(cView: imageView, to: addTo, message: message, detailMessage: detailMessage)
         

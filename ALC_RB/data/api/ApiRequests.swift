@@ -1021,8 +1021,17 @@ class ApiRequests {
         }
     }
     
-    func get_regions(get_result: @escaping (ResultMy<[RegionMy], Error>) -> ()) {
-        let alamofireInstance = Alamofire.request(ApiRoute.getApiURL(.region), method: .get, encoding: JSONEncoding.default)
+    func get_regions(query: String? = nil, get_result: @escaping (ResultMy<[RegionMy], Error>) -> ()) {
+        
+        var parameters: Parameters = [:]
+        
+        if query != nil {
+            parameters = [
+                "name" : query!
+            ]
+        }
+        
+        let alamofireInstance = Alamofire.request(ApiRoute.getApiURL(.region), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString))
         alamofireInstance
             .responseJSON { response in
                 let decoder = JSONDecoder()

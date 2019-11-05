@@ -37,7 +37,9 @@ struct Constants {
         static let NAV_BAR_ICON_SIZE = CGSize(width: 22, height: 22)
     }
     struct Values {
-        static let LIMIT        = 30
-        static let LIMIT_ALL    = 32575
+        static let LIMIT                    = 30
+        static let LIMIT_ALL                = 32575
+        static let ALERT_SIZE: CGFloat      = 75
+        static let defaultSearchThrottle    = 0.3
     }
 }

@@ -18,6 +18,11 @@
 		049B9ACF21F6F6E300CDD104 /* PlayersTeamLeagueDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B9ACE21F6F6E300CDD104 /* PlayersTeamLeagueDetailTableViewCell.swift */; };
 		049B9AD021F704EC00CDD104 /* ScheduleLeaguePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB62E1DD21E74D6800F11568 /* ScheduleLeaguePresenter.swift */; };
 		04A1D506230E6D240038D65C /* Result ++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1D505230E6D240038D65C /* Result ++.swift */; };
+		04B22E6823716B7700BA336C /* ChooseRegionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B22E6623716B7700BA336C /* ChooseRegionVC.swift */; };
+		04B22E6923716B7700BA336C /* ChooseRegionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B22E6723716B7700BA336C /* ChooseRegionVC.xib */; };
+		04B22E6B23716DA000BA336C /* ChooseRegionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B22E6A23716DA000BA336C /* ChooseRegionVM.swift */; };
+		04B22E6F237184CD00BA336C /* ChooseRegionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B22E6D237184CD00BA336C /* ChooseRegionCell.swift */; };
+		04B22E70237184CD00BA336C /* ChooseRegionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B22E6E237184CD00BA336C /* ChooseRegionCell.xib */; };
 		04C024E32213DE1E00A4A571 /* EventsMatchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C024E22213DE1E00A4A571 /* EventsMatchTableViewController.swift */; };
 		04C024E52213DE2D00A4A571 /* EventsMatchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C024E42213DE2D00A4A571 /* EventsMatchPresenter.swift */; };
 		04C024E82213E12C00A4A571 /* EventsProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C024E72213E12C00A4A571 /* EventsProtocolTableViewCell.swift */; };
@@ -385,6 +390,11 @@
 		048CB34B230BF18F006CF2A9 /* HomeScheduleHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeScheduleHeaderView.xib; sourceTree = "<group>"; };
 		049B9ACE21F6F6E300CDD104 /* PlayersTeamLeagueDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTeamLeagueDetailTableViewCell.swift; sourceTree = "<group>"; };
 		04A1D505230E6D240038D65C /* Result ++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result ++.swift"; sourceTree = "<group>"; };
+		04B22E6623716B7700BA336C /* ChooseRegionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRegionVC.swift; sourceTree = "<group>"; };
+		04B22E6723716B7700BA336C /* ChooseRegionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseRegionVC.xib; sourceTree = "<group>"; };
+		04B22E6A23716DA000BA336C /* ChooseRegionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRegionVM.swift; sourceTree = "<group>"; };
+		04B22E6D237184CD00BA336C /* ChooseRegionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRegionCell.swift; sourceTree = "<group>"; };
+		04B22E6E237184CD00BA336C /* ChooseRegionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseRegionCell.xib; sourceTree = "<group>"; };
 		04C024E22213DE1E00A4A571 /* EventsMatchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsMatchTableViewController.swift; sourceTree = "<group>"; };
 		04C024E42213DE2D00A4A571 /* EventsMatchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsMatchPresenter.swift; sourceTree = "<group>"; };
 		04C024E72213E12C00A4A571 /* EventsProtocolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsProtocolTableViewCell.swift; sourceTree = "<group>"; };
@@ -845,6 +855,26 @@
 				DB5FBF2622019A3B00C62291 /* MatchesTeamLeagueDetailTableViewCell.swift */,
 			);
 			path = cell;
+			sourceTree = "<group>";
+		};
+		04B22E6523716B5600BA336C /* Choose region */ = {
+			isa = PBXGroup;
+			children = (
+				04B22E6C237184B800BA336C /* Cell */,
+				04B22E6623716B7700BA336C /* ChooseRegionVC.swift */,
+				04B22E6723716B7700BA336C /* ChooseRegionVC.xib */,
+				04B22E6A23716DA000BA336C /* ChooseRegionVM.swift */,
+			);
+			path = "Choose region";
+			sourceTree = "<group>";
+		};
+		04B22E6C237184B800BA336C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				04B22E6D237184CD00BA336C /* ChooseRegionCell.swift */,
+				04B22E6E237184CD00BA336C /* ChooseRegionCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		04C024E12213DDB500A4A571 /* events */ = {
@@ -1931,6 +1961,7 @@
 		DB58E95721E8A44500AF265E /* xib_nib */ = {
 			isa = PBXGroup;
 			children = (
+				04B22E6523716B5600BA336C /* Choose region */,
 				DBDE79C0234FB0CE00E2F73B /* cell_type_view */,
 				18459867234744BE0066DE2A /* button + activity indicator */,
 				DB44F69F233C4B2600EAF293 /* loading_repeat */,
@@ -2681,6 +2712,7 @@
 				1807709422F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.xib in Resources */,
 				1894827B2356F018000C8A2A /* MyTourneyCell.xib in Resources */,
 				DB99BB6C224CB46700EE30D7 /* AdView.xib in Resources */,
+				04B22E6923716B7700BA336C /* ChooseRegionVC.xib in Resources */,
 				DB97C3022339FB18001E205E /* AnnouncesVC.xib in Resources */,
 				DB44F6A3233C4B7900EAF293 /* LoadingRepeatView.xib in Resources */,
 				184598612347142B0066DE2A /* TournamentSearchTableViewCell.xib in Resources */,
@@ -2693,6 +2725,7 @@
 				18606A3122D30B8200F5D2FE /* EventTypeView.xib in Resources */,
 				1890FBCA235DC33C00514E33 /* InsideTourneysVC.xib in Resources */,
 				189482722356EFA8000C8A2A /* MyTourneysTVC.xib in Resources */,
+				04B22E70237184CD00BA336C /* ChooseRegionCell.xib in Resources */,
 				DB966A7022EC832100064233 /* PlayerEventView.xib in Resources */,
 				DB986B5722FDB2FF0050AC8F /* EditFoulsView.xib in Resources */,
 				18EFFABE22F3175800B17947 /* TournamentTeamHeaderView.xib in Resources */,
@@ -2806,6 +2839,7 @@
 				DB1CA1082226BC38005E1FB9 /* RuntimeError.swift in Sources */,
 				18427960235A0B67006F2C4C /* _Match.swift in Sources */,
 				DBDE79C6234FB15C00E2F73B /* CellType.swift in Sources */,
+				04B22E6B23716DA000BA336C /* ChooseRegionVM.swift in Sources */,
 				DB966A6522EC811600064233 /* ProtocolTeamOnePlayers.swift in Sources */,
 				DBB208F2221316D90010B600 /* RefereeTeamPresenter.swift in Sources */,
 				DB4A789421C1084B0071BA8F /* TournamentsPresenter.swift in Sources */,
@@ -2817,6 +2851,7 @@
 				18B9F80C2349F4540095261F /* AlertType.swift in Sources */,
 				DBE0E7A7223BDE5800CC0EE2 /* BaseStateTableViewController.swift in Sources */,
 				DBC5C5F6221FDA8500B0A1B6 /* ImagePicker.swift in Sources */,
+				04B22E6F237184CD00BA336C /* ChooseRegionCell.swift in Sources */,
 				DB2A35D621CA203B00E9E2C5 /* PlayersTableViewController.swift in Sources */,
 				DB966A5D22EC589B00064233 /* MBProgressHud Extensions.swift in Sources */,
 				DB57C5D221F0BFD500BEA097 /* TeamLeagueDetailViewController.swift in Sources */,
@@ -3109,6 +3144,7 @@
 				1890FBCE235DC36900514E33 /* MyTourneysVC.swift in Sources */,
 				1845986B234745DF0066DE2A /* TournamentSearchPresenter.swift in Sources */,
 				DBA77C2A22D24A11000DCF02 /* AddEventsProtocolViewController.swift in Sources */,
+				04B22E6823716B7700BA336C /* ChooseRegionVC.swift in Sources */,
 				DB4B1A4C2240FD1300A9FB97 /* ClubEditLKPresenter.swift in Sources */,
 				188B53CD23586D9700149AD1 /* HUD TO STATIC.swift in Sources */,
 				DB5FBF2722019A3B00C62291 /* MatchesTeamLeagueDetailTableViewCell.swift in Sources */,
