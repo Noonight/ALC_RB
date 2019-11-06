@@ -66,6 +66,8 @@ extension AuthViewController {
                         login: self.loginTextField.text!,
                         password: self.passwordTextField.text!)
                     self.viewModel.authorization(userData: signIn)
+
+                    self.view.endEditing(false)
                 } else {
                     self.viewModel.message.onNext(SingleLineMessage(message: Constants.Texts.FILL_ALL_FIELDS))
                 }

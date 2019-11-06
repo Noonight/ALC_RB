@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12ca8836-b4f8-4f04-bd9b-95f2ce59baa9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ALC_RB/frameworks/SPFakeBar/SPFakeBarNavigationStyle.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ALC_RB/frameworks/SPFakeBar/SPFakeBarView.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/base/Constants.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/base/Constants.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/api/ApiRequests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/api/ApiRequests.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/HomeViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/HomeViewController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/xib_nib/Choose region/ChooseRegionVC.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/xib_nib/Choose region/ChooseRegionVC.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/xib_nib/Choose region/ChooseRegionVC.xib" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/xib_nib/Choose region/ChooseRegionVC.xib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/xib_nib/Choose region/ChooseRegionVM.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/xib_nib/Choose region/ChooseRegionVM.swift" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,19 +10,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos_" />
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>newJ</find>
-      <find>newJSONDecoder</find>
-      <find>newJSONEncoder</find>
-    </findStrings>
-    <replaceStrings>
-      <replace />
-      <replace>JSONDecoder</replace>
-      <replace>JSONEncoder</replace>
-    </replaceStrings>
-  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos_c9dd5ab2cc894e7584136b728eb6461b403f59c6" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -93,7 +72,7 @@
       <workItem from="1571112324532" duration="49000" />
       <workItem from="1571112449541" duration="31000" />
       <workItem from="1571112520850" duration="21000" />
-      <workItem from="1573025580781" duration="810000" />
+      <workItem from="1573025580781" duration="1766000" />
     </task>
     <servers />
   </component>

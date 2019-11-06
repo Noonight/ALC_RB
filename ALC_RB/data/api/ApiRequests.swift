@@ -681,6 +681,7 @@ class ApiRequests {
             
                 request
                     .responseData { response in
+                        dump(response)
                         let decoder = ISO8601Decoder.getDecoder()
                         do {
                             if let match = try? decoder.decode(SoloMatch.self, from: response.data!) {

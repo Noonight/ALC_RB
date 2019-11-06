@@ -97,10 +97,11 @@ class EditMatchProtocolViewController: UIViewController {
     
     func setupNavController() {
         navigationController?.navigationBar.topItem?.title = " "
-        title = "Редактировать протокол"
+        title = "Матч"
         if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 24)]
-            self.navigationController?.navigationBar.prefersLargeTitles = true
+//            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 24)]
+//            self.navigationController?.navigationBar.prefersLargeTitles = true
+//            self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         }
     }
     
