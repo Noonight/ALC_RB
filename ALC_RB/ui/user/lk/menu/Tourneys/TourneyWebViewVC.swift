@@ -16,6 +16,7 @@ final class TourneyWebViewVC: UIViewController {
     var webView: WKWebView!
     var refreshControll = UIRefreshControl()
     private let bag = DisposeBag()
+    private let userDefaults = UserDefaultsHelper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,13 +35,23 @@ final class TourneyWebViewVC: UIViewController {
 extension TourneyWebViewVC {
     
     func setupWebView() {
-        webView = WKWebView()
+        
+        let configuration = WKWebViewConfiguration()
+        let contentController = WKUserContentController()
+        let token = userDefaults.getToken()
+        let js = "javascript: localStorage.setItem('authToken', '\(token)')"
+        let userScript = WKUserScript(source: js, injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: false)
+        contentController.addUserScript(userScript)
+        configuration.userContentController = contentController
+        
+        webView = WKWebView(frame: self.view.bounds, configuration: configuration)
         webView.navigationDelegate = self
         view = webView
         webView.allowsBackForwardNavigationGestures = true
         
         let url = URL(string: "https://football.bwadm.ru")!
         webView.load(URLRequest(url: url))
+        
     }
     
     func setupPullToRefresh() {
