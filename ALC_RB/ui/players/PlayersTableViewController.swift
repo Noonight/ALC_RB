@@ -19,7 +19,15 @@ class PlayersTableViewController: BaseStateTableViewController {
         static let PLAYER = "segue_player"
     }
     
-    // MARK: Var & Let
+    // TODO: add region btn to header of table view
+    private var regionBtn: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Регион", for: .normal)
+        btn.backgroundColor = .black
+        btn.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 100)
+        
+        return btn
+    }()
     
     let presenter = PlayersPresenter()
     let disposeBag = DisposeBag()
