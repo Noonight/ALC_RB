@@ -12,8 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChooseRegionVC" customModule="ALC_RB" customModuleProvider="target">
             <connections>
-                <outlet property="searchTF" destination="p0W-iF-eb4" id="dUx-VP-OBO"/>
+                <outlet property="searchBar" destination="nsd-9n-xNv" id="NuA-Vt-cR9"/>
                 <outlet property="tableView" destination="uYl-OH-Ddo" id="y8w-16-Yht"/>
+                <outlet property="topConstraint" destination="UWa-hE-eeY" id="1Io-Yy-Rt2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,28 +23,27 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Начните вводить название региона..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="p0W-iF-eb4">
-                    <rect key="frame" x="8" y="28" width="304" height="30"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uYl-OH-Ddo">
-                    <rect key="frame" x="0.0" y="66" width="320" height="502"/>
+                    <rect key="frame" x="0.0" y="76" width="320" height="492"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Регион..." showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nsd-9n-xNv">
+                    <rect key="frame" x="0.0" y="20" width="320" height="56"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="p0W-iF-eb4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="1as-6X-OTc"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="p0W-iF-eb4" secondAttribute="trailing" constant="8" id="I3x-u5-T0M"/>
                 <constraint firstItem="uYl-OH-Ddo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="LpP-LN-6il"/>
+                <constraint firstItem="uYl-OH-Ddo" firstAttribute="top" secondItem="nsd-9n-xNv" secondAttribute="bottom" id="MrM-rq-SWY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="uYl-OH-Ddo" secondAttribute="bottom" id="S42-Hr-DIy"/>
+                <constraint firstItem="nsd-9n-xNv" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="UWa-hE-eeY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="uYl-OH-Ddo" secondAttribute="trailing" id="bjk-MV-5kR"/>
-                <constraint firstItem="p0W-iF-eb4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="giz-jD-noc"/>
-                <constraint firstItem="uYl-OH-Ddo" firstAttribute="top" secondItem="p0W-iF-eb4" secondAttribute="bottom" constant="8" id="nVr-pb-Pal"/>
+                <constraint firstItem="nsd-9n-xNv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eJu-eL-9Ml"/>
+                <constraint firstItem="nsd-9n-xNv" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="m0a-ew-wFi"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="48.75" y="54.929577464788736"/>
         </view>
     </objects>
 </document>

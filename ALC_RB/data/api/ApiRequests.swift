@@ -1030,6 +1030,7 @@ class ApiRequests {
                 "name" : query!
             ]
         }
+        Print.m(parameters)
         
         let alamofireInstance = Alamofire.request(ApiRoute.getApiURL(.region), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString))
         alamofireInstance

@@ -40,6 +40,6 @@ struct Constants {
         static let LIMIT                    = 30
         static let LIMIT_ALL                = 32575
         static let ALERT_SIZE: CGFloat      = 75
-        static let defaultSearchThrottle    = 0.3
+        static let searchThrottle           = 0.5
     }
 }

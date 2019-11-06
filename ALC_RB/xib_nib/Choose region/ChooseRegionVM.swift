@@ -15,7 +15,7 @@ final class ChooseRegionVM {
     let loading = PublishSubject<Bool>()
     let error = PublishSubject<Error?>()
     let message = PublishSubject<SingleLineMessage>()
-    let query = BehaviorRelay<String>(value: "")
+    let query = BehaviorRelay<String?>(value: nil)
     
     let findedRegions = PublishSubject<[RegionMy]>()
     

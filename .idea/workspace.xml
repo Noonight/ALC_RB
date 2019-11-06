@@ -2,19 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12ca8836-b4f8-4f04-bd9b-95f2ce59baa9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ALC_RB/frameworks/SPFakeBar/SPFakeBarNavigationStyle.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ALC_RB/frameworks/SPFakeBar/SPFakeBarView.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ALC_RB.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesViewModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesViewModel.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Table/Cell/HomeAnonunceTableViewCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Cell/HomeAnonunceTableViewCell.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Table/Cell/HomeAnonunceTableViewCell.xib" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Cell/HomeAnonunceTableViewCell.xib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/Table/HomeAnnouncesTable.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/View Model/AnnounceModelItem.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/Announces/View Model/AnnounceModelItem.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/base/Constants.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/base/Constants.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/api/ApiRequests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/api/ApiRequests.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/home/HomeViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/home/HomeViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/xib_nib/Choose region/ChooseRegionVC.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/xib_nib/Choose region/ChooseRegionVC.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/xib_nib/Choose region/ChooseRegionVC.xib" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/xib_nib/Choose region/ChooseRegionVC.xib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/xib_nib/Choose region/ChooseRegionVM.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/xib_nib/Choose region/ChooseRegionVM.swift" afterDir="false" />
     </list>
-    <ignored path="$USER_HOME$/Library/Developer/Xcode/DerivedData/ALC_RB-criteqptgmpqstfhosiglduwlnxs/" />
-    <ignored path="$USER_HOME$/Library/Caches/AppCode2019.1/DerivedData/ALC_RB-diruytnehxazfvekyfnaxzratfak/Build/Intermediates.noindex/" />
-    <ignored path="$USER_HOME$/Library/Caches/AppCode2019.1/DerivedData/ALC_RB-aozpwlojhyhfmmgubnddlpvdxbbj/Build/Intermediates.noindex/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,46 +20,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="iphoneos_" />
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/TournamentSearchVC.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3298">
-              <caret line="197" column="12" selection-start-line="197" selection-start-column="12" selection-end-line="197" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/model/TourneyModelItem.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ALC_RB/base/ISO8601Decoder.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="33" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ALC_RB/data/model/post/EditMatchReferees.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
-              <caret line="134" column="47" lean-forward="true" selection-start-line="134" selection-start-column="47" selection-end-line="134" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>newJ</find>
@@ -77,91 +35,15 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/ALC_RB/ui/home/news_and_announce/detail/NewsDetailViewController.swift" />
-        <option value="$PROJECT_DIR$/ALC_RB/ui/user/registration/RegistrationViewController.swift" />
-        <option value="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereeViewController.swift" />
-        <option value="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereePresenter.swift" />
-        <option value="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.swift" />
-        <option value="$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift" />
-        <option value="$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanelLayout.swift" />
-        <option value="$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanelSurfaceView.swift" />
-        <option value="$PROJECT_DIR$/ALC_RB/ui/tournaments/search/model/TournamentSearchVM.swift" />
-        <option value="$PROJECT_DIR$/ALC_RB/data/model/post/EditMatchReferees.swift" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1440" />
-    <option name="height" value="813" />
-  </component>
+  <component name="ProjectId" id="1TEW8AKS9Q1vhNrQgx4c0kBZMQB" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <autoscrollToSource ProjectPane="false" />
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
-              <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
-              <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
-              <item name="ui" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
-              <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
-              <item name="ui" type="fcab9f18:XcodeViewNode" />
-              <item name="tournaments" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
-              <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
-              <item name="ui" type="fcab9f18:XcodeViewNode" />
-              <item name="tournaments" type="fcab9f18:XcodeViewNode" />
-              <item name="search" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
-              <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
-              <item name="ui" type="fcab9f18:XcodeViewNode" />
-              <item name="tournaments" type="fcab9f18:XcodeViewNode" />
-              <item name="search" type="fcab9f18:XcodeViewNode" />
-              <item name="model" type="fcab9f18:XcodeViewNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="Cidr.FilesView" />
-    </panes>
-  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -211,169 +93,22 @@
       <workItem from="1571112324532" duration="49000" />
       <workItem from="1571112449541" duration="31000" />
       <workItem from="1571112520850" duration="21000" />
+      <workItem from="1573025580781" duration="810000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10245000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="813" extended-state="0" />
-    <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.46583852" visible="true" weight="0.3090129" />
-      <window_info id="Designer" order="1" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.26263738" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3299363" />
-      <window_info active="true" anchor="bottom" id="Messages" order="11" visible="true" weight="0.32967034" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="right" id="Palette&#9;" order="4" />
-      <window_info anchor="right" id="Structure" order="5" sideWeight="0.5341615" side_tool="true" visible="true" weight="0.16809729" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/UserViewController.swift" />
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/news_and_announce/detail/NewsDetailPresenter.swift" />
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/news_and_announce/NewsTableViewController.swift" />
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/news_and_announce/detail/NewsDetailViewController.swift" />
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/news_and_announce/cells/NewsTableViewCell.swift" />
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/registration/RegistrationPresenter.swift">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/registration/RegistrationViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Podfile">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/model/ProtocolRefereeModel.swift" />
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereePresenter.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/my matches/edit protocol/do match/DoMatchProtocolRefereeViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="57" column="63" lean-forward="true" selection-start-line="57" selection-start-column="63" selection-end-line="57" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/ru.lproj/Main.strings">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesPresenter.swift" />
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/All/Schedule Table/HomeScheduleTable.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="24" column="1" lean-forward="true" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanelController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="141" column="64" selection-start-line="141" selection-start-column="64" selection-end-line="141" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanelLayout.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="506" column="17" selection-start-line="506" selection-start-column="17" selection-end-line="506" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanelSurfaceView.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="157" column="66" selection-start-line="157" selection-start-column="66" selection-end-line="157" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pods/FloatingPanel/Framework/Sources/FloatingPanel.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="29" column="44" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/HomeViewController.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="102" column="50" selection-start-line="102" selection-start-column="50" selection-end-line="102" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/home/Announces/AnnouncesVC.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="80" selection-start-line="80" selection-end-line="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/AppDelegate.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="23" column="47" lean-forward="true" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/model/TournamentSearchVM.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="92" column="9" selection-start-line="92" selection-start-column="9" selection-end-line="92" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/TournamentSearchVC.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3298">
-          <caret line="197" column="12" selection-start-line="197" selection-start-column="12" selection-end-line="197" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/tournaments/search/model/TourneyModelItem.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/base/ISO8601Decoder.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="33" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/data/model/post/EditMatchReferees.swift">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="134" column="47" lean-forward="true" selection-start-line="134" selection-start-column="47" selection-end-line="134" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

@@ -23,6 +23,8 @@
 		04B22E6B23716DA000BA336C /* ChooseRegionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B22E6A23716DA000BA336C /* ChooseRegionVM.swift */; };
 		04B22E6F237184CD00BA336C /* ChooseRegionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B22E6D237184CD00BA336C /* ChooseRegionCell.swift */; };
 		04B22E70237184CD00BA336C /* ChooseRegionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B22E6E237184CD00BA336C /* ChooseRegionCell.xib */; };
+		04B6115223729B0C007724BF /* SPFakeBarNavigationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B6115023729B0C007724BF /* SPFakeBarNavigationStyle.swift */; };
+		04B6115323729B0C007724BF /* SPFakeBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B6115123729B0C007724BF /* SPFakeBarView.swift */; };
 		04C024E32213DE1E00A4A571 /* EventsMatchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C024E22213DE1E00A4A571 /* EventsMatchTableViewController.swift */; };
 		04C024E52213DE2D00A4A571 /* EventsMatchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C024E42213DE2D00A4A571 /* EventsMatchPresenter.swift */; };
 		04C024E82213E12C00A4A571 /* EventsProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C024E72213E12C00A4A571 /* EventsProtocolTableViewCell.swift */; };
@@ -395,6 +397,8 @@
 		04B22E6A23716DA000BA336C /* ChooseRegionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRegionVM.swift; sourceTree = "<group>"; };
 		04B22E6D237184CD00BA336C /* ChooseRegionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRegionCell.swift; sourceTree = "<group>"; };
 		04B22E6E237184CD00BA336C /* ChooseRegionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseRegionCell.xib; sourceTree = "<group>"; };
+		04B6115023729B0C007724BF /* SPFakeBarNavigationStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPFakeBarNavigationStyle.swift; sourceTree = "<group>"; };
+		04B6115123729B0C007724BF /* SPFakeBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SPFakeBarView.swift; sourceTree = "<group>"; };
 		04C024E22213DE1E00A4A571 /* EventsMatchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsMatchTableViewController.swift; sourceTree = "<group>"; };
 		04C024E42213DE2D00A4A571 /* EventsMatchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsMatchPresenter.swift; sourceTree = "<group>"; };
 		04C024E72213E12C00A4A571 /* EventsProtocolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsProtocolTableViewCell.swift; sourceTree = "<group>"; };
@@ -875,6 +879,23 @@
 				04B22E6E237184CD00BA336C /* ChooseRegionCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		04B6114E23729AB9007724BF /* frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				04B6114F23729B0C007724BF /* SPFakeBar */,
+			);
+			path = frameworks;
+			sourceTree = "<group>";
+		};
+		04B6114F23729B0C007724BF /* SPFakeBar */ = {
+			isa = PBXGroup;
+			children = (
+				04B6115023729B0C007724BF /* SPFakeBarNavigationStyle.swift */,
+				04B6115123729B0C007724BF /* SPFakeBarView.swift */,
+			);
+			path = SPFakeBar;
 			sourceTree = "<group>";
 		};
 		04C024E12213DDB500A4A571 /* events */ = {
@@ -1578,6 +1599,7 @@
 		CEA6EB9A21A53CFE008F874D /* ALC_RB */ = {
 			isa = PBXGroup;
 			children = (
+				04B6114E23729AB9007724BF /* frameworks */,
 				DB58E95721E8A44500AF265E /* xib_nib */,
 				CE77AC7921B0F1A200C0ED0D /* extensions */,
 				CEA6EBB421A53F15008F874D /* base */,
@@ -2891,6 +2913,7 @@
 				DB2A35DA21CA222B00E9E2C5 /* Players.swift in Sources */,
 				18427962235A0D3A006F2C4C /* _Event.swift in Sources */,
 				DBB208EA221192F90010B600 /* TeamProtocolPresenter.swift in Sources */,
+				04B6115323729B0C007724BF /* SPFakeBarView.swift in Sources */,
 				1869CA1D2354858900204697 /* AnnouncesViewModel.swift in Sources */,
 				DB1CA10B2226D71A005E1FB9 /* EditProfileViewController.swift in Sources */,
 				DBE0E7A4223BDE0000CC0EE2 /* OngoingLeaguesLKPresenter.swift in Sources */,
@@ -2925,6 +2948,7 @@
 				04C024E82213E12C00A4A571 /* EventsProtocolTableViewCell.swift in Sources */,
 				189482682356EC9D000C8A2A /* _Player.swift in Sources */,
 				1894827E2356F045000C8A2A /* TourneyModelItem.swift in Sources */,
+				04B6115223729B0C007724BF /* SPFakeBarNavigationStyle.swift in Sources */,
 				DBA77C2722CFA953000DCF02 /* EditRefereesProtocolViewModel.swift in Sources */,
 				DB6AA18121C295C3007D4693 /* ClubsPresenter.swift in Sources */,
 				18B0F8842302C5E700080196 /* UIAlertController + Extension.swift in Sources */,
