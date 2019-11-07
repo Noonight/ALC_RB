@@ -44,7 +44,7 @@ class PlayersLeagueDetailViewController: UIViewController {
     }
     var fetchedPersons: [Person] = []
     
-    let presenter = PlayersLeagueDetailPresenter()
+    let presenter = PlayersLeagueDetailPresenter(dataManager: ApiRequests())
     
     var filterArguments = [PlayersLeagueDetailViewController.FilterType.matches.rawValue,
                            PlayersLeagueDetailViewController.FilterType.goals.rawValue,

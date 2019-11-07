@@ -47,29 +47,31 @@ struct ApiRoute {
 }
 
 enum Routes: String {
-    case newsOld = "news"
+    case newsOld = "news" // deprecated
     case news = "crud/news"
     case announce = "crud/announce"
-    case ads = "ads"
+    case ads = "ads" // later
 //    case upcomingMatches = "matches/upcoming"
-    case clubs = "clubs"
-    case tournaments = "leagues/all"
-    case leagueInfo = "leagues/league"
-    case getusers = "getusers"
-    case soloUser = "getuser"
+    case clubs = "clubs" // later
+    case tournaments = "leagues/all" // deprecated
+    case leagueInfo = "leagues/league" // deprecated
+//    case getusers = "getusers" // deprecated
+//    case soloUser = "getuser" // deprecated
+    case person = "crud/person"
+    case personQuery = "crud/person/or" // dont works without params
     case activeMatches = "matches/active"
     case refreshUser = "refresh" // get user in header token of authorized user
     case region = "crud/region"
     case tourney = "crud/tourney"
-    case upcomingMatches = "upcoming/matches"
+    case upcomingMatches = "upcoming/matches" // later
     case league = "crud/league"
-    case leagueMatches = "matches/getbyleague"
+    case leagueMatches = "matches/getbyleague" // deprecated
     
     case post_auth = "signin"
     case post_reg = "signup"
-    case post_edit_profile = "editPlayerInfo"
+    case post_edit_profile = "editPlayerInfo" // later
     case post_team_acceptrequest = "team/acceptrequest"
-    case post_edit_club_info = "clubs/edit"
+    case post_edit_club_info = "clubs/edit" // later
     case post_create_team = "leagues/addrequest"
     case post_edit_team = "team/edit"
     case post_add_player_team = "team/addplayer"

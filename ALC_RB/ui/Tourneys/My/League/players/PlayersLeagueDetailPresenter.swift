@@ -13,6 +13,12 @@ import Kingfisher
 
 class PlayersLeagueDetailPresenter: MvpPresenter<PlayersLeagueDetailViewController> {
     
+    private let dataManager: ApiRequests
+    
+    init(dataManager: ApiRequests) {
+        self.dataManager = dataManager
+    }
+    
     func getUserPhotoByUploadImage(userImage image: String, get_image: @escaping (UIImage) -> ()) {
         Alamofire
             .request(ApiRoute.getImageURL(image: image))
@@ -32,19 +38,21 @@ class PlayersLeagueDetailPresenter: MvpPresenter<PlayersLeagueDetailViewControll
     }
     
     func getUser(user id: String, get_user: @escaping (SoloPerson) -> ()) {
-        Alamofire
-            .request(ApiRoute.getApiURL(.soloUser, id: id))
-            .validate()
-            .responseSoloPerson { (response) in
-                switch response.result {
-                case .success:
-                    if let user = response.result.value {
-                        get_user(user)
-                    }
-                case .failure:
-                    debugPrint("getting user failure")
-                }
-        }
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.soloUser, id: id))
+//            .validate()
+//            .responseSoloPerson { (response) in
+//                switch response.result {
+//                case .success:
+//                    if let user = response.result.value {
+//                        get_user(user)
+//                    }
+//                case .failure:
+//                    debugPrint("getting user failure")
+//                }
+//        }
+        // TODO: make person request
+        
     }
     
     func getUserPhotoName(user id: String, get_name: @escaping (String) -> (), get_photo: @escaping (UIImage) -> ()) {

@@ -18,6 +18,9 @@
 		049B9ACF21F6F6E300CDD104 /* PlayersTeamLeagueDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B9ACE21F6F6E300CDD104 /* PlayersTeamLeagueDetailTableViewCell.swift */; };
 		049B9AD021F704EC00CDD104 /* ScheduleLeaguePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB62E1DD21E74D6800F11568 /* ScheduleLeaguePresenter.swift */; };
 		04A1D506230E6D240038D65C /* Result ++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1D505230E6D240038D65C /* Result ++.swift */; };
+		04AE3D9F2373EB1400F3C6E9 /* PersonRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AE3D9E2373EB1400F3C6E9 /* PersonRequests.swift */; };
+		04AE3DA2237408C900F3C6E9 /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AE3DA1237408C900F3C6E9 /* RequestResult.swift */; };
+		04AE3DA423740F8800F3C6E9 /* IdRefObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AE3DA323740F8800F3C6E9 /* IdRefObject.swift */; };
 		04B22E6823716B7700BA336C /* ChooseRegionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B22E6623716B7700BA336C /* ChooseRegionVC.swift */; };
 		04B22E6923716B7700BA336C /* ChooseRegionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B22E6723716B7700BA336C /* ChooseRegionVC.xib */; };
 		04B22E6B23716DA000BA336C /* ChooseRegionVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B22E6A23716DA000BA336C /* ChooseRegionVM.swift */; };
@@ -392,6 +395,9 @@
 		048CB34B230BF18F006CF2A9 /* HomeScheduleHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeScheduleHeaderView.xib; sourceTree = "<group>"; };
 		049B9ACE21F6F6E300CDD104 /* PlayersTeamLeagueDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersTeamLeagueDetailTableViewCell.swift; sourceTree = "<group>"; };
 		04A1D505230E6D240038D65C /* Result ++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result ++.swift"; sourceTree = "<group>"; };
+		04AE3D9E2373EB1400F3C6E9 /* PersonRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRequests.swift; sourceTree = "<group>"; };
+		04AE3DA1237408C900F3C6E9 /* RequestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestResult.swift; sourceTree = "<group>"; };
+		04AE3DA323740F8800F3C6E9 /* IdRefObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdRefObject.swift; sourceTree = "<group>"; };
 		04B22E6623716B7700BA336C /* ChooseRegionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRegionVC.swift; sourceTree = "<group>"; };
 		04B22E6723716B7700BA336C /* ChooseRegionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseRegionVC.xib; sourceTree = "<group>"; };
 		04B22E6A23716DA000BA336C /* ChooseRegionVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseRegionVM.swift; sourceTree = "<group>"; };
@@ -859,6 +865,25 @@
 				DB5FBF2622019A3B00C62291 /* MatchesTeamLeagueDetailTableViewCell.swift */,
 			);
 			path = cell;
+			sourceTree = "<group>";
+		};
+		04AE3D9D2373EA9500F3C6E9 /* Person */ = {
+			isa = PBXGroup;
+			children = (
+				04AE3D9E2373EB1400F3C6E9 /* PersonRequests.swift */,
+			);
+			path = Person;
+			sourceTree = "<group>";
+		};
+		04AE3DA02374089500F3C6E9 /* server interaction */ = {
+			isa = PBXGroup;
+			children = (
+				04A1D505230E6D240038D65C /* Result ++.swift */,
+				18742EEA234B5B4200424DB3 /* ISO8601Decoder.swift */,
+				04AE3DA1237408C900F3C6E9 /* RequestResult.swift */,
+				04AE3DA323740F8800F3C6E9 /* IdRefObject.swift */,
+			);
+			path = "server interaction";
 			sourceTree = "<group>";
 		};
 		04B22E6523716B5600BA336C /* Choose region */ = {
@@ -1564,6 +1589,7 @@
 		CE77AC7C21B0FBB300C0ED0D /* api */ = {
 			isa = PBXGroup;
 			children = (
+				04AE3D9D2373EA9500F3C6E9 /* Person */,
 				CE916AAB21B4E1FC0025FECF /* ApiRoute.swift */,
 				DBCB1EBE2223FE3F005A6976 /* ApiRequests.swift */,
 			);
@@ -1631,6 +1657,7 @@
 		CEA6EBB421A53F15008F874D /* base */ = {
 			isa = PBXGroup;
 			children = (
+				04AE3DA02374089500F3C6E9 /* server interaction */,
 				182394BD23617E1A007D6954 /* view models */,
 				0432AB0323067A3700401E07 /* makers */,
 				1826378A22F085A50014C30A /* base views */,
@@ -1646,9 +1673,7 @@
 				DB1CA1072226BC38005E1FB9 /* RuntimeError.swift */,
 				DB641F87222BA63D004AC6CB /* Print.swift */,
 				DB966A6122EC61BE00064233 /* Constants.swift */,
-				04A1D505230E6D240038D65C /* Result ++.swift */,
 				18B9F80B2349F4540095261F /* AlertType.swift */,
-				18742EEA234B5B4200424DB3 /* ISO8601Decoder.swift */,
 				182394C52362B33B007D6954 /* Static functions.swift */,
 			);
 			path = base;
@@ -3031,6 +3056,7 @@
 				DB9FA4A522EC9B6200BA5A52 /* RefereeProtocolPlayerTeamOneTableViewCell.swift in Sources */,
 				CEA6EBB921A53FB9008F874D /* MvpView.swift in Sources */,
 				184EF51A235FE89000801FAE /* AuthViewModel.swift in Sources */,
+				04AE3DA2237408C900F3C6E9 /* RequestResult.swift in Sources */,
 				DB4A789121C0E7970071BA8F /* ViewCenter.swift in Sources */,
 				04C024E32213DE1E00A4A571 /* EventsMatchTableViewController.swift in Sources */,
 				DBB208E8221182870010B600 /* TeamProtocolTableViewCell.swift in Sources */,
@@ -3066,6 +3092,7 @@
 				189482642356EC5B000C8A2A /* _Group.swift in Sources */,
 				DBC6155622EE2DAD0078FAE3 /* Animator.swift in Sources */,
 				049B9ACF21F6F6E300CDD104 /* PlayersTeamLeagueDetailTableViewCell.swift in Sources */,
+				04AE3DA423740F8800F3C6E9 /* IdRefObject.swift in Sources */,
 				CE60234321AE6A9F00B428EE /* UpcomingGamesTableViewController.swift in Sources */,
 				1890FBD4235EDDB600514E33 /* ViewController + Rx.swift in Sources */,
 				DB5D9A8F233CB7CD0076E41D /* UICollectionView + Extensions.swift in Sources */,
@@ -3084,6 +3111,7 @@
 				DB98FAD52254B0BC002933D0 /* CommandInvitePlayersTableViewHelper.swift in Sources */,
 				18A7ED8723431AB00096D281 /* TournamentsTable.swift in Sources */,
 				DBDE79C2234FB10600E2F73B /* CellTypeView.swift in Sources */,
+				04AE3D9F2373EB1400F3C6E9 /* PersonRequests.swift in Sources */,
 				18870B3122C0DD0000126A87 /* ClubCreateViewController.swift in Sources */,
 				CE0AF81D21C7A27900F8F6A2 /* ClubDetailPresenter.swift in Sources */,
 				18F0C9DE235325A9004886AF /* HomeAllViewModel.swift in Sources */,

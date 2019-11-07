@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="12ca8836-b4f8-4f04-bd9b-95f2ce59baa9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/players/PlayersTableViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/players/PlayersTableViewController.swift" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +73,7 @@
       <workItem from="1571112324532" duration="49000" />
       <workItem from="1571112449541" duration="31000" />
       <workItem from="1571112520850" duration="21000" />
-      <workItem from="1573025580781" duration="1766000" />
+      <workItem from="1573025580781" duration="2324000" />
     </task>
     <servers />
   </component>

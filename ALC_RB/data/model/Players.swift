@@ -36,7 +36,8 @@ struct Person: Codable {
     var birthdate: Date
     var photo: String?
 //    var desc: String
-    var participationMatches: [ParticipationMatch]?
+//    var participationMatches: [ParticipationMatch]?
+    var participationMatches: [IdRefObject<ParticipationMatch>]?
     var pastLeagues: [PastLeague]
     var id: String
     var login: String
@@ -89,7 +90,8 @@ struct Person: Codable {
         self.birthdate = try container.decodeIfPresent(Date.self, forKey: .birthdate) ?? Date()
         self.photo = try container.decodeIfPresent(String.self, forKey: .photo) ?? ""
 //        self.desc = try container.decodeIfPresent(String.self, forKey: .desc) ?? ""
-        self.participationMatches = try container.decodeIfPresent([ParticipationMatch].self, forKey: .participationMatches) ?? []
+//        self.participationMatches = try container.decodeIfPresent([ParticipationMatch].self, forKey: .participationMatches) ?? []
+        self.participationMatches = try container.decodeIfPresent([IdRefObject<ParticipationMatch>].self, forKey: .participationMatches) ?? []
         self.pastLeagues = try container.decodeIfPresent([PastLeague].self, forKey: .pastLeagues) ?? []
         self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
         self.login = try container.decodeIfPresent(String.self, forKey: .login) ?? ""
@@ -294,7 +296,8 @@ extension Person {
         birthdate: Date? = nil,
         photo: String?? = nil,
 //        desc: String? = nil,
-        participationMatches: [ParticipationMatch]? = nil,
+//        participationMatches: [ParticipationMatch]? = nil,
+        participationMatches: [IdRefObject<ParticipationMatch>]? = nil,
         pastLeagues: [PastLeague]? = nil,
         id: String? = nil,
         login: String? = nil,
