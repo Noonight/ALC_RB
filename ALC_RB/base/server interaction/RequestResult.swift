@@ -11,11 +11,12 @@ import Alamofire
 
 extension DataRequest {
     
-    func requestResultMy<T: Decodable>
+    func responseResultMy<T: Decodable>
         (
+        _ type: T.Type,
         queue: DispatchQueue? = nil,
         resultMy: @escaping (ResultMy<T, Error>) -> ()
-        ) -> Self
+        )
     {
         responseData(queue: queue) { response in
             let decoder = ISO8601Decoder.getDecoder()

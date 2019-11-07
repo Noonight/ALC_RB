@@ -39,6 +39,18 @@ final class PersonApi : ApiRequests {
         }
         Alamofire
             .request(ApiRoute.getApiURL(.person), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+            .responseResultMy([Person].self) { result in
+                switch result {
+                case .success(let persons):
+                    dump(persons)
+                case .message(let message):
+                    dump(message)
+                case .failure(let error):
+                    dump(error)
+                }
+                
+            }
+        }
 //            .responseData(completionHandler: { response in
 //                let decoder = ISO8601Decoder.getDecoder()
 //                do {
@@ -52,8 +64,8 @@ final class PersonApi : ApiRequests {
 //                }
 //            })
         
-        }
-    }
+    
+    
     
     func get_personQuery
         (
@@ -81,6 +93,18 @@ final class PersonApi : ApiRequests {
             parameters["offset"] = mOffset
         }
         
+        Alamofire
+            .request(ApiRoute.getApiURL(.personQuery), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+            .responseResultMy([Person].self) { result in
+                switch result {
+                case .success(let persons):
+                    dump(persons)
+                case .message(let message):
+                    dump(message)
+                case .failure(let error):
+                    dump(error)
+                }
+                
+        }
     }
-    
 }

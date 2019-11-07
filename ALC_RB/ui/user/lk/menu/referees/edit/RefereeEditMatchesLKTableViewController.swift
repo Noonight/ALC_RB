@@ -185,8 +185,15 @@ extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
 //        Print.m(match)
         var user = userDefaults.getAuthorizedUser()
         
+        for i in 0..<user!.person.participationMatches!.count {
+            if user!.person.participationMatches![i] == .object {
+                
+            }
+        }
+        
         if user?.person.participationMatches!.contains(where: { pMatch -> Bool in
-            return pMatch.id == match.match?.id
+            return pMatch
+            return pMatch.id == match.match?.id
         }) ?? false {
 //            user?.person.participationMatches.filter({ pMatch -> Bool in
 //                return pMatch.id == match.match?.id
@@ -195,7 +202,7 @@ extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
                 return pMatch.id == match.match?.id
             })
             if match.match?.referees.count ?? 0 > 0 {
-                user?.person.participationMatches!.append(match.match!)
+                user?.person.participationMatches!.append(IdRefObject<ParticipationMatch>.object(match.match!))
             }
 //            for i in 0..<user!.person.participationMatches.count {
 //                if user?.person.participationMatches[i].id == match.match?.id {
