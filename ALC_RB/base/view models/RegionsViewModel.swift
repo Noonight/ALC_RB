@@ -20,7 +20,7 @@ final class RegionsViewModel {
     let choosedRegion = BehaviorRelay<RegionMy?>(value: nil)
     let dataManager: ApiRequests
     
-    init(dataManager: ApiRequests) {
+    init(dataManager: RegionApi) {
         self.dataManager = dataManager
     }
     

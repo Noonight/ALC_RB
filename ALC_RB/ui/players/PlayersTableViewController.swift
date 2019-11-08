@@ -99,7 +99,7 @@ extension PlayersTableViewController {
 // MARK: Presenter
 
 extension PlayersTableViewController: PlayersTableView {
-    func onFetchSuccess(players: Players) {
+    func onFetchSuccess(players: [Person]) {
         self.players = players
         // if pull to refresh used pages also update
         self.configureInfiniteScrollController()
@@ -112,7 +112,7 @@ extension PlayersTableViewController: PlayersTableView {
         self.endRefreshing()
     }
     
-    func onFetchScrollSuccess(players: Players) {
+    func onFetchScrollSuccess(players: [Person]) {
         Print.m("new players count is \(self.players.people.count + players.people.count)")
         // create new index paths
         let playersCount = self.players.people.count // current count of players
@@ -163,7 +163,7 @@ extension PlayersTableViewController: PlayersTableView {
         presenter.getPlayers()
     }
     
-    func onGetPlayersSuccess(_ players: Players) {
+    func onGetPlayersSuccess(_ players: [Person]) {
         self.players = players
     }
 }

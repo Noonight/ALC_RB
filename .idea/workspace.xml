@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12ca8836-b4f8-4f04-bd9b-95f2ce59baa9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/base/server interaction/RequestResult.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/base/server interaction/RequestResult.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/data/api/Person/PersonRequests.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/api/Person/PersonRequests.swift" afterDir="false" />
-    </list>
+    <list default="true" id="12ca8836-b4f8-4f04-bd9b-95f2ce59baa9" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +71,7 @@
       <workItem from="1571112449541" duration="31000" />
       <workItem from="1571112520850" duration="21000" />
       <workItem from="1573025580781" duration="2324000" />
-      <workItem from="1573121078892" duration="562000" />
+      <workItem from="1573121078892" duration="1161000" />
     </task>
     <servers />
   </component>

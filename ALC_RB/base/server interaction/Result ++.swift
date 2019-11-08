@@ -16,9 +16,11 @@ enum ResultMy<T, ErrorType> {
 
 enum RequestError: Error {
     // universal
-    case alamofire(Error)
+    //    case alamofire(Error)
     // server 500 ++
-    case server(Error)
+    //    case server(Error)
     // local 400 ++
-    case local(Error)
+    //    case local(Error)
+    case notExpectedData
+    case error(Error)
 }

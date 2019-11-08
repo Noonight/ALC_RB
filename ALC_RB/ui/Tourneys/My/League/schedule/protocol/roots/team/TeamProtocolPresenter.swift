@@ -11,20 +11,30 @@ import Alamofire
 
 class TeamProtocolPresenter: MvpPresenter<TeamProtocolTableViewController> {
     
-    func getPlayer(player id: String, get_player: @escaping (SoloPerson) -> (), get_error: @escaping (Error) -> ()) {
-        Alamofire
-            .request(ApiRoute.getApiURL(.soloUser, id: id))
-            .validate()
-            .responseSoloPerson { (response) in
-                switch response.result {
-                case .success:
-                    if let player = response.result.value {
-                        get_player(player)
-                    }
-                case .failure:
-                    get_error(response.result.error!)
-                }
-        }
+    private let dataManager: ApiRequests
+    
+    init(dataManager: ApiRequests) {
+        self.dataManager = dataManager
+    }
+    
+    func getPlayer(player id: String, resultMy: @escaping (ResultMy<[Person], RequestError>) -> ()) {
+        (dataManager as? PersonApi)?.get_person(id: id, resultMy: { result in
+            resultMy(result)
+        })
+//        Alamofire
+////            .request(ApiRoute.getApiURL(.soloUser, id: id))
+//            .request(ApiRoute.getApiURL(.person, id: id))
+//            .validate()
+//            .responseSoloPerson { (response) in
+//                switch response.result {
+//                case .success:
+//                    if let player = response.result.value {
+//                        get_player(player)
+//                    }
+//                case .failure:
+//                    get_error(response.result.error!)
+//                }
+//        }
     }
     
     func getPlayerImage(photo player: String?, get_image: @escaping (UIImage) -> ()) {

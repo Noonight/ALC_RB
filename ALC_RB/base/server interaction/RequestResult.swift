@@ -11,27 +11,24 @@ import Alamofire
 
 extension DataRequest {
     
-    func responseResultMy<T: Decodable>
-        (
-        _ type: T.Type,
-        queue: DispatchQueue? = nil,
-        resultMy: @escaping (ResultMy<T, Error>) -> ()
-        )
-    {
+    func responseResultMy<T: Decodable>(_ type: T.Type, queue: DispatchQueue? = nil, resultMy: @escaping (ResultMy<T, RequestError>) -> ()) {
         responseData(queue: queue) { response in
+            //            dump(response)
             let decoder = ISO8601Decoder.getDecoder()
             do {
+                //                if let id = try? dei
                 if let decoded = try? decoder.decode(T.self, from: response.data!) {
                     resultMy(.success(decoded))
-                }
-                if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+                } else if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
                     resultMy(.message(message))
+                } else {
+                    resultMy(.failure(.notExpectedData))
+                    //                    try! decoder.decode(T.self, from: response.data!)
                 }
             }
             if response.result.isFailure {
-                resultMy(.failure(response.error!))
+                resultMy(.failure(.error(response.error!)))
             }
         }
     }
-    
 }

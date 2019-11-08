@@ -14,7 +14,7 @@ class TeamProtocolTableViewController: UITableViewController {
     
     let cellId = "team_protocol_cell"
     
-    let presenter = TeamProtocolPresenter()
+    let presenter = TeamProtocolPresenter(dataManager: PersonApi())
     
     var players = [LIPlayer]()
     var fetchedPersons: [Person] = []
@@ -71,13 +71,26 @@ class TeamProtocolTableViewController: UITableViewController {
         }
         else
         {
-            presenter.getPlayer(player: model.playerId, get_player: { (player) in
-                //            cell.name_label.text = player.person.getFullName()
-                self.fetchedPersons.append(player.person)
-                setupCell(person: player.person)
-                
-            }) { (error) in
-                debugPrint("get person info error")
+//            presenter.getPlayer(player: model.playerId, get_player: { (player) in
+//                //            cell.name_label.text = player.person.getFullName()
+//                self.fetchedPersons.append(player.person)
+//                setupCell(person: player.person)
+//
+//            }) { (error) in
+//                debugPrint("get person info error")
+//            }
+            presenter.getPlayer(player: model.playerId) { result in
+                switch result {
+                case .success(let player):
+                    self.fetchedPersons.append(player.first!)
+                    setupCell(person: player.first!)
+                case .message(let message):
+                    self.showAlert(message: message.message)
+                case .failure(.error(let error)):
+                    Print.m(error)
+                case .failure(RequestError.notExpectedData):
+                    Print.m("See decoder")
+                }
             }
         }
         

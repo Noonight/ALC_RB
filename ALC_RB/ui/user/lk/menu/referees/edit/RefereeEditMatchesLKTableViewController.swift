@@ -185,21 +185,28 @@ extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
 //        Print.m(match)
         var user = userDefaults.getAuthorizedUser()
         
-        for i in 0..<user!.person.participationMatches!.count {
-            if user!.person.participationMatches![i] == .object {
-                
-            }
-        }
-        
         if user?.person.participationMatches!.contains(where: { pMatch -> Bool in
-            return pMatch
-            return pMatch.id == match.match?.id
+            switch pMatch {
+            case .id(let id):
+                return id == match.match?.id
+            case .object(let obj):
+                return obj.id == match.match?.id
+            }
         }) ?? false {
+//        if user?.person.participationMatches!.contains(where: { pMatch -> Bool in
+//            return pMatch.id == match.match?.id
+//        }) ?? false {
 //            user?.person.participationMatches.filter({ pMatch -> Bool in
 //                return pMatch.id == match.match?.id
 //            }).first
             user?.person.participationMatches!.removeAll(where: { pMatch -> Bool in
-                return pMatch.id == match.match?.id
+                switch pMatch {
+                case .id(let id):
+                    return id == match.match?.id
+                case .object(let obj):
+                    return obj.id == match.match?.id
+                }
+                //                return pMatch.id == match.match?.id
             })
             if match.match?.referees.count ?? 0 > 0 {
                 user?.person.participationMatches!.append(IdRefObject<ParticipationMatch>.object(match.match!))
@@ -210,7 +217,8 @@ extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
 //                }
 //            }
         } else {
-            user?.person.participationMatches!.append(match.match!)
+//            user?.person.participationMatches!.append(match.match!)
+            user?.person.participationMatches?.append(.object(match.match!))
         }
         userDefaults.setAuthorizedUser(user: user!)
     }
