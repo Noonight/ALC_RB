@@ -305,10 +305,11 @@ extension EditMatchProtocolViewController: EditMatchProtocolView {
     
     func requestEditProtocolSuccess(match: SoloMatch) {
         var user = userDefaults.getAuthorizedUser()
-        user?.person.participationMatches!.removeAll(where: { pMatch -> Bool in
-            return pMatch.id == match.match?.id
-        })
-        user?.person.participationMatches!.append(match.match!)
+        user?.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.match?.id }) })
+//        user?.person.participationMatches!.removeAll(where: { pMatch -> Bool in
+//            return pMatch.id == match.match?.id
+//        })
+        user?.person.participationMatches!.append(IdRefObjectWrapper(match.match!))
         self.userDefaults.setAuthorizedUser(user: user!)
         showAlert(title: "Протокол сохранен", message: "")
     }

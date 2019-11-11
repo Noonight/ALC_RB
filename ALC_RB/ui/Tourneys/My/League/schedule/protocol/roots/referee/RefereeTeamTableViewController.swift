@@ -193,10 +193,11 @@ class RefereeTeamTableViewController: UITableViewController {
 //
 //            }
             presenter.fetchGetPerson(person: model.referee_id, success: { getPerson in
-                guard let person = getPerson.person else {
-                    Print.m("Error getting person")
-                    return
-                }
+                let person = getPerson
+//                guard let person = getPerson.person else {
+//                    Print.m("Error getting person")
+//                    return
+//                }
                 cell.name_label.text = person.getFullName()
                 //                Print.m(referee.person)
                 if person.photo != nil {

@@ -34,6 +34,7 @@ protocol InvitationLKView: MvpView {
 class InvitationLKPresenter: MvpPresenter<InvitationLKTableViewController> {
     
     let apiService = ApiRequests()
+    let personApi = PersonApi()
     
     func acceptRequest(token: String, acceptInfo: AcceptRequest) {
         Print.m("requst \n token == \(token) \n acceptInfo == \(acceptInfo.toParams())")
@@ -79,11 +80,24 @@ class InvitationLKPresenter: MvpPresenter<InvitationLKTableViewController> {
 //    }
     
     func getPlayers() {
-        apiService.get_players(limit: 32575, offset: 0, get_success: { (players) in
-            self.getView().getPlayersSuccess(players: players)
-        }) { (error) in
-            self.getView().getPlayersFailure(error: error)
+        personApi.get_person(limit: Constants.Values.LIMIT_ALL) { result in
+            switch result {
+            case .success(let persons):
+                self.getView().getPlayersSuccess(players: Players(persons: persons, count: persons.count))
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+                self.getView().getPlayersFailure(error: error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
         }
+//        apiService.get_players(limit: 32575, offset: 0, get_success: { (players) in
+//            self.getView().getPlayersSuccess(players: players)
+//        }) { (error) in
+//            self.getView().getPlayersFailure(error: error)
+//        }
     }
     
     func getClubs() {

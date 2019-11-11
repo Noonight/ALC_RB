@@ -34,7 +34,7 @@ class EditScheduleLKViewController: BaseStateViewController {
     @IBOutlet weak var referee3_btn: UIButton!
     @IBOutlet weak var timekeeper_btn: UIButton!
     
-    var viewModel: EditScheduleViewModel? = EditScheduleViewModel(dataManager: ApiRequests())
+    var viewModel: EditScheduleViewModel? = EditScheduleViewModel(dataManager: ApiRequests(), personApi: PersonApi())
     private let disposeBag = DisposeBag()
     private let userDefaults = UserDefaultsHelper()
     
@@ -322,29 +322,11 @@ class EditScheduleLKViewController: BaseStateViewController {
     
     // edit match for userDefaults value at id match
     func setMatchValue(id: String, match: SoloMatch) {
-        var user = userDefaults.getAuthorizedUser()
         
-        if user?.person.participationMatches!.contains(where: { pMatch -> Bool in
-            return pMatch.id == match.match?.id
-        }) ?? false {
-            //            user?.person.participationMatches.filter({ pMatch -> Bool in
-            //                return pMatch.id == match.match?.id
-            //            }).first
-            user?.person.participationMatches!.removeAll(where: { pMatch -> Bool in
-                return pMatch.id == match.match?.id
-            })
-            if match.match?.referees.count ?? 0 > 0 {
-                user?.person.participationMatches!.append(match.match!)
-            }
-            //            for i in 0..<user!.person.participationMatches.count {
-            //                if user?.person.participationMatches[i].id == match.match?.id {
-            //                    user?.person.participationMatches[i] = match.match!
-            //                }
-            //            }
-        } else {
-            user?.person.participationMatches!.append(match.match!)
-        }
-        userDefaults.setAuthorizedUser(user: user!)
+        var user = userDefaults.getAuthorizedUser()!
+        user.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.match?.id }) })
+        user.person.participationMatches?.append(IdRefObjectWrapper(match.match!))
+        userDefaults.setAuthorizedUser(user: user)
     }
     
     func showRefereesPicker(sender: UIButton) {

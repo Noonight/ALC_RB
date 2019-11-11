@@ -35,7 +35,7 @@ class EditRefereesProtocolViewController: BaseStateViewController {
     
     @IBOutlet weak var save_btn: UIBarButtonItem!
     
-    var viewModel: EditRefereesProtocolViewModel? = EditRefereesProtocolViewModel(dataManager: ApiRequests())
+    var viewModel: EditRefereesProtocolViewModel? = EditRefereesProtocolViewModel(dataManager: ApiRequests(), personApi: PersonApi())
     private let disposeBag = DisposeBag()
     private let userDefaults = UserDefaultsHelper()
     
@@ -279,30 +279,32 @@ class EditRefereesProtocolViewController: BaseStateViewController {
         var user = userDefaults.getAuthorizedUser()
         
         if user?.person.participationMatches!.contains(where: { pMatch -> Bool in
-            switch pMatch {
-            case .id(let id):
-                return id == match.match?.id
-            case .object(let obj):
-                return obj.id == match.match?.id
-            }
+            return pMatch.isEqual({ $0.id == match.match?.id })
+//            switch pMatch {
+//            case .id(let id):
+//                return id == match.match?.id
+//            case .object(let obj):
+//                return obj.id == match.match?.id
+//            }
 //            return pMatch.id == match.match?.id
         }) ?? false {
             user?.person.participationMatches!.removeAll(where: { pMatch -> Bool in
-                switch pMatch {
-                case .id(let id):
-                    return id == match.match?.id
-                case .object(let obj):
-                    return obj.id == match.match?.id
-                }
+                return pMatch.isEqual({ $0.id == match.match?.id })
+//                switch pMatch {
+//                case .id(let id):
+//                    return id == match.match?.id
+//                case .object(let obj):
+//                    return obj.id == match.match?.id
+//                }
 //                return pMatch.id == match.match?.id
             })
             if match.match?.referees.count ?? 0 > 0 {
 //                user?.person.participationMatches!.append(match.match!)
-               user?.person.participationMatches?.append(.object(match.match!))
+               user?.person.participationMatches?.append(IdRefObjectWrapper(match.match!))
             }
         } else {
 //            user?.person.participationMatches!.append(match.match!)
-            user?.person.participationMatches?.append(.object(match.match!))
+            user?.person.participationMatches?.append(IdRefObjectWrapper(match.match!))
         }
         userDefaults.setAuthorizedUser(user: user!)
     }

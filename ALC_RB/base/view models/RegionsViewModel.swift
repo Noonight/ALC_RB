@@ -18,15 +18,15 @@ final class RegionsViewModel {
     let message = PublishSubject<SingleLineMessage>()
     
     let choosedRegion = BehaviorRelay<RegionMy?>(value: nil)
-    let dataManager: ApiRequests
+    let regionApi: RegionApi
     
-    init(dataManager: RegionApi) {
-        self.dataManager = dataManager
+    init(regionApi: RegionApi) {
+        self.regionApi = regionApi
     }
     
     func fetch() {
         self.loading.onNext(true)
-        dataManager.get_regions { result in
+        regionApi.get_regions { result in
             self.loading.onNext(false)
             switch result {
             case .success(let regions):

@@ -15,23 +15,40 @@ class RefereesViewModel {
     var refreshing: PublishSubject<Bool> = PublishSubject()
     
     private let dataManager: ApiRequests
+    private let personApi: PersonApi
     
-    init(dataManager: ApiRequests) {
+    init(dataManager: ApiRequests, personApi: PersonApi) {
         self.dataManager = dataManager
+        self.personApi = personApi
     }
     
     func fetch(closure: @escaping ()->()) {
         refreshing.onNext(true)
         
-        dataManager.get_referees(get_success: { (referees) in
-//            Print.m(referees)
+        personApi.get_person { result in
             self.refreshing.onNext(false)
-            self.referees.onNext(referees)
-            closure()
-        }) { (error) in
-            Print.m(error)
-            self.error.onNext(error)
+            switch result {
+            case .success(let persons):
+                self.referees.onNext(Players(persons: persons, count: persons.count))
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+                self.error.onNext(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
             closure()
         }
+//        dataManager.get_referees(get_success: { (referees) in
+////            Print.m(referees)
+//            self.refreshing.onNext(false)
+//            self.referees.onNext(referees)
+//            closure()
+//        }) { (error) in
+//            Print.m(error)
+//            self.error.onNext(error)
+//            closure()
+//        }
     }
 }

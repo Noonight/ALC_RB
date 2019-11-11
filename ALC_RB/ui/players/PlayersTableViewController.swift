@@ -96,11 +96,24 @@ extension PlayersTableViewController {
     }
 }
 
-// MARK: Presenter
+// 5
 
 extension PlayersTableViewController: PlayersTableView {
+    func onGetPlayersMessage(_ message: SingleLineMessage) {
+        self.showAlert(message: message.message)
+    }
+    
+    func onGetPlayersFailure(_ error: Error) {
+        self.showAlert(message: error.localizedDescription)
+    }
+    
+    func onRequestQueryPersonsSuccess(players: [Person]) {
+        filteredPlayers = Players(persons: players, count: players.count)
+        tableView.reloadData()
+    }
+    
     func onFetchSuccess(players: [Person]) {
-        self.players = players
+        self.players = Players(persons: players, count: players.count)
         // if pull to refresh used pages also update
         self.configureInfiniteScrollController()
         self.paginationHelper = PaginationHelper(totalCount: players.count, currentCount: self.players.people.count) // MARK: INIT PAGER
@@ -113,15 +126,15 @@ extension PlayersTableViewController: PlayersTableView {
     }
     
     func onFetchScrollSuccess(players: [Person]) {
-        Print.m("new players count is \(self.players.people.count + players.people.count)")
+//        Print.m("new players count is \(self.players.people.count + players.people)")
         // create new index paths
         let playersCount = self.players.people.count // current count of players
-        let responsePlayersCount = players.people.count + playersCount // current count of response players
+        let responsePlayersCount = players.count + playersCount // current count of response players
         let (start, end) = (playersCount, responsePlayersCount)
         let indexPaths = (start..<end).map { return IndexPath(row: $0, section: 0) }
         
         // update data source
-        self.players.people.append(contentsOf: players.people)
+        self.players.people.append(contentsOf: players)
         self.paginationHelper.setCurrentCount(newCount: self.players.people.count)
         self.paginationHelper.setTotalCount(newCount: players.count)
         
@@ -164,7 +177,7 @@ extension PlayersTableViewController: PlayersTableView {
     }
     
     func onGetPlayersSuccess(_ players: [Person]) {
-        self.players = players
+        self.players = Players(persons: players, count: players.count)
     }
 }
 

@@ -28,13 +28,23 @@ protocol CommandAddPlayerView: MvpView {
 
 class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewController> {
     let apiService = ApiRequests()
+    let personApi = PersonApi()
     
     func fetchPersons(limit: Int = 20, offset: Int) {
-        apiService.get_players(limit: limit, offset: offset, get_success: { (players) in
-            self.getView().onFetchPersonsSuccess(players: players)
-        }) { (error) in
-            self.getView().onFetchPersonsFailure(error: error)
+        personApi.get_person { result in
+            switch result {
+            case .success(let persons):
+                self.getView().onFetchPersonsSuccess(players: Players(persons: persons, count: persons.count))
+            case .failure(.error(let error)):
+                self.getView().onFetchPersonsFailure(error: error)
+            default: Print.m("not used")
+            }
         }
+//        apiService.get_players(limit: limit, offset: offset, get_success: { (players) in
+//            self.getView().onFetchPersonsSuccess(players: players)
+//        }) { (error) in
+//            self.getView().onFetchPersonsFailure(error: error)
+//        }
     }
     
     func addPlayerToTeamForLeague(token: String, addPlayerToTeam: AddPlayerToTeam) {
@@ -48,28 +58,55 @@ class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewControlle
     }
     
     func findPersons(query: String) {
-        apiService.get_playersWithQuery(query: query, get_success: { (players) in
-            self.getView().onFetchQueryPersonsSuccess(players: players)
-        }) { (error) in
-            self.getView().onFetchQueryPersonsFailure(error: error)
+        personApi.get_personQuery(name: query, surname: query, lastname: query) { result in
+            switch result {
+            case .success(let persons):
+                self.getView().onFetchPersonsSuccess(players: Players(persons: persons, count: persons.count))
+            case .failure(.error(let error)):
+                self.getView().onFetchPersonsFailure(error: error)
+            default: Print.m("not used")
+            }
         }
+//        apiService.get_playersWithQuery(query: query, get_success: { (players) in
+//            self.getView().onFetchQueryPersonsSuccess(players: players)
+//        }) { (error) in
+//            self.getView().onFetchQueryPersonsFailure(error: error)
+//        }
     }
     
     func fetchInfScroll(limit: Int = 20, offset: Int = 0) {
-        apiService.get_players(limit: limit, offset: offset, get_success: { players in
-//            self.getView().onFetchPersonsSuccess(players: players)
-            self.getView().onFetchScrollSuccessful(players: players)
-        }) { error in
-//            self.getView().onFetchFailure(error: error)
-            self.getView().onFetchScrollFailure(error: error)
+        personApi.get_personQuery(limit: limit, offset: offset) { result in
+            switch result {
+            case .success(let persons):
+                self.getView().onFetchScrollSuccessful(players: Players(persons: persons, count: persons.count))
+            case .failure(.error(let error)):
+                self.getView().onFetchScrollFailure(error: error)
+            default: Print.m("not used")
+            }
         }
+//        apiService.get_players(limit: limit, offset: offset, get_success: { players in
+////            self.getView().onFetchPersonsSuccess(players: players)
+//            self.getView().onFetchScrollSuccessful(players: players)
+//        }) { error in
+////            self.getView().onFetchFailure(error: error)
+//            self.getView().onFetchScrollFailure(error: error)
+//        }
     }
     // only first 20
     func fetch() {
-        apiService.get_players(limit: 20, offset: 0, get_success: { players in
-            self.getView().onFetchSuccessful(player: players)
-        }) { error in
-            self.getView().onFetchFailure(error: error)
+        personApi.get_person { result in
+            switch result {
+            case .success(let persons):
+                self.getView().onFetchSuccessful(player: Players(persons: persons, count: persons.count))
+            case .failure(.error(let error)):
+                self.getView().onFetchFailure(error: error)
+            default: Print.m("not used")
+            }
         }
+//        apiService.get_players(limit: 20, offset: 0, get_success: { players in
+//            self.getView().onFetchSuccessful(player: players)
+//        }) { error in
+//            self.getView().onFetchFailure(error: error)
+//        }
     }
 }

@@ -31,6 +31,7 @@ class ProtocolAllViewModel {
     }
     
     let dataManager = ApiRequests()
+    let personApi = PersonApi()
     
     init(match: LIMatch, leagueDetailModel: LeagueDetailModel) {
         self.match = match
@@ -698,10 +699,22 @@ class ProtocolAllViewModel {
 extension ProtocolAllViewModel {
     
     func fetchPerson(playerId: String, success: @escaping (SoloPerson) -> (), failure: @escaping (Error) -> ()) {
-        self.dataManager.get_soloPerson(playerId: playerId, success: { soloPerson in
-            success(soloPerson)
-        }) { error in
-            failure(error)
+//        self.dataManager.get_soloPerson(playerId: playerId, success: { soloPerson in
+//            success(soloPerson)
+//        }) { error in
+//            failure(error)
+//        }
+        self.personApi.get_person(id: playerId) { result in
+            switch result {
+            case .success(let person):
+                success(SoloPerson(person: person.first!))
+            case .message(let message):
+                Print.m("message \(message.message)")
+            case .failure(RequestError.notExpectedData):
+                Print.m("not expected data")
+            case .failure(.error(let error)):
+                Print.m(error)
+            }
         }
     }
     

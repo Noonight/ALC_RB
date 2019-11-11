@@ -36,7 +36,7 @@ class RefereesLKTableViewController: BaseStateTableViewController {
         
         setEmptyMessage(message: StaticParams.emptyMessage)
         
-        viewModel = RefereesViewModel(dataManager: ApiRequests())
+        viewModel = RefereesViewModel(dataManager: ApiRequests(), personApi: PersonApi())
         
         setupBindings()
         

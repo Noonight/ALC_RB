@@ -66,11 +66,11 @@ extension PlayersVC {
             .drive(self.tableView.rx.error)
             .disposed(by: bag)
         
-        self.viewModel
-            .message
-            .observeOn(MainScheduler.instance)
-            .bind(to: self.rx.message)
-            .disposed(by: bag)
+//        self.viewModel
+//            .message
+//            .asDriver(onErrorJustReturn: SingleLineMessage(message: "Driver fail"))
+//            .drive(self.tableView.rx.message)
+//            .disposed(by: bag)
     }
     
 }

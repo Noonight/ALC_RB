@@ -143,10 +143,11 @@ class EditRefereeTeamTableViewController: UITableViewController {
     func configureCell(cell: EditRefereeProtocolTableViewCell, model: TableStruct.CellStruct) {
         if model.referee_id.count > 2 {
             presenter.fetchGetPerson(person: model.referee_id, success: { getPerson in
-                guard let person = getPerson.person else {
-                    Print.m("Error getting person")
-                    return
-                }
+//                guard let person = getPerson.person else {
+//                    Print.m("Error getting person")
+//                    return
+//                }
+                let person = getPerson
                 cell.name_label.text = person.getFullName()
                 
                 if let imageUrl = person.photo {

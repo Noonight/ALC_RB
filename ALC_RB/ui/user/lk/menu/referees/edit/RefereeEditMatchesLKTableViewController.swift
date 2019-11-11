@@ -183,44 +183,10 @@ extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
     // edit match for userDefaults value at id match
     func setMatchValue(id: String, match: SoloMatch) {
 //        Print.m(match)
-        var user = userDefaults.getAuthorizedUser()
-        
-        if user?.person.participationMatches!.contains(where: { pMatch -> Bool in
-            switch pMatch {
-            case .id(let id):
-                return id == match.match?.id
-            case .object(let obj):
-                return obj.id == match.match?.id
-            }
-        }) ?? false {
-//        if user?.person.participationMatches!.contains(where: { pMatch -> Bool in
-//            return pMatch.id == match.match?.id
-//        }) ?? false {
-//            user?.person.participationMatches.filter({ pMatch -> Bool in
-//                return pMatch.id == match.match?.id
-//            }).first
-            user?.person.participationMatches!.removeAll(where: { pMatch -> Bool in
-                switch pMatch {
-                case .id(let id):
-                    return id == match.match?.id
-                case .object(let obj):
-                    return obj.id == match.match?.id
-                }
-                //                return pMatch.id == match.match?.id
-            })
-            if match.match?.referees.count ?? 0 > 0 {
-                user?.person.participationMatches!.append(IdRefObject<ParticipationMatch>.object(match.match!))
-            }
-//            for i in 0..<user!.person.participationMatches.count {
-//                if user?.person.participationMatches[i].id == match.match?.id {
-//                    user?.person.participationMatches[i] = match.match!
-//                }
-//            }
-        } else {
-//            user?.person.participationMatches!.append(match.match!)
-            user?.person.participationMatches?.append(.object(match.match!))
-        }
-        userDefaults.setAuthorizedUser(user: user!)
+        var user = userDefaults.getAuthorizedUser()!
+        user.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.match?.id }) })
+        user.person.participationMatches?.append(IdRefObjectWrapper(match.match!))
+        userDefaults.setAuthorizedUser(user: user)
     }
     
     func onFetchModelSuccess(dataModel: [RefereeEditMatchesLKTableViewCell.CellModel]) {

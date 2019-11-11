@@ -28,14 +28,23 @@ class CommandEditLKPresenter: MvpPresenter<CommandEditLKViewController> {
     var message = PublishSubject<SingleLineMessage>()
     
     let apiService = ApiRequests()
+    let personApi = PersonApi()
     
     func getPersons() {
-        
-        apiService.get_players(limit: 32575, offset: 0, get_success: { (players) in
-            self.getView().onGetPersonsComplete(players: players)
-        }, get_failure: { (error) in
-            self.getView().onGetPersonsFailure(error: error)
-        })
+        personApi.get_person(offset: Constants.Values.LIMIT_ALL) { result in
+            switch result {
+            case .success(let persons):
+                self.getView().onGetPersonsComplete(players: Players(persons: persons, count: persons.count))
+            case .failure(.error(let error)):
+                self.getView().onGetPersonsFailure(error: error)
+            default: Print.m("not used")
+            }
+        }
+//        apiService.get_players(limit: 32575, offset: 0, get_success: { (players) in
+//            self.getView().onGetPersonsComplete(players: players)
+//        }, get_failure: { (error) in
+//            self.getView().onGetPersonsFailure(error: error)
+//        })
     }
     
     func editCommand(token: String, editTeam: EditTeam) {

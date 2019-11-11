@@ -8,7 +8,80 @@
 
 import Foundation
 
-public enum IdRefObject<T>: Codable where T : Codable {
+class IdRefObjectWrapper<T>: Codable where T : Codable {
+    var value: IdRefObject<T>
+    
+    init(_ value: String) {
+        self.value = IdRefObject<T>.id(value)
+    }
+    
+    init(_ value: T) {
+        self.value = IdRefObject<T>.object(value)
+    }
+    
+    func setValue(with value: IdRefObject<T>) {
+        self.value = value
+    }
+    
+    func getValue() -> T? {
+        switch self.value {
+        case .id:
+            assertionFailure("can't get object of id")
+        case .object(let obj):
+            return obj
+        }
+        return nil
+    }
+    
+    func map(_ set: (T) -> (T)) {
+        switch self.value {
+        case .id:
+            assertionFailure("can't set object value with id")
+        case .object(let obj):
+            self.value = IdRefObject.object(set(obj))
+        }
+    }
+    
+    func isEqual(_ expression: (T) -> Bool) -> Bool {
+        switch self.value {
+        case .id:
+            assertionFailure("use neighbour method")
+        case .object(let obj):
+            return expression(obj)
+        }
+        return false
+    }
+    
+    func isEqual(_ expression: (String) -> Bool) -> Bool {
+        switch self.value {
+        case .id(let id):
+            return expression(id)
+        case .object:
+            assertionFailure("use neighbour method")
+        }
+        return false
+    }
+    
+    required public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        do {
+            self.value = try container.decode(IdRefObject<T>.self)
+        } catch {
+            throw DecodingError.typeMismatch(IdRefObjectWrapper.self, DecodingError.Context(codingPath: container.codingPath, debugDescription: "SEE CODE. Mb model has changed, or smth any"))
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        do {
+            try container.encode(self.value)
+        } catch {
+            throw EncodingError.invalidValue(IdRefObjectWrapper.self, EncodingError.Context(codingPath: [], debugDescription: "not supported yet"))
+        }
+    }
+}
+
+enum IdRefObject<T>: Codable where T : Codable {
     
     case id(String), object(T)
     

@@ -13,24 +13,45 @@ import AlamofireImage
 class RefereeTeamPresenter: MvpPresenter<RefereeTeamTableViewController> {
     
     let dataManager = ApiRequests()
+    let personApi = PersonApi()
     
-    func fetchGetPerson(person id: String, success: @escaping (GetPerson)->(), failure: @escaping (Error)->()) {
-        dataManager.get_getPerson(id: id, success: success, failure: failure)
+    func fetchGetPerson(person id: String, success: @escaping (Person)->(), failure: @escaping (Error)->()) {
+        personApi.get_person(id: id) { result in
+            switch result {
+            case .success(let persons):
+                success(persons.first!)
+            case .failure(.error(let error)):
+                failure(error)
+            default:
+                Print.m("not used response")
+            }
+        }
+//        dataManager.get_getPerson(id: id, success: success, failure: failure)
     }
     
     func getReferee(referee id: String, get_referee: @escaping (SoloPerson) -> (), get_error: @escaping (Error) -> ()) {
-        Alamofire
-            .request(ApiRoute.getApiURL(.soloUser, id: id))
-            .validate()
-            .responseSoloPerson { (response) in
-                switch response.result {
-                case .success:
-                    if let referee = response.result.value {
-                        get_referee(referee)
-                    }
-                case .failure:
-                    get_error(response.result.error!)
-                }
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.soloUser, id: id))
+//            .validate()
+//            .responseSoloPerson { (response) in
+//                switch response.result {
+//                case .success:
+//                    if let referee = response.result.value {
+//                        get_referee(referee)
+//                    }
+//                case .failure:
+//                    get_error(response.result.error!)
+//                }
+//        }
+        personApi.get_person(id: id) { result in
+            switch result {
+            case .success(let persons):
+                get_referee(SoloPerson(person:persons.first!))
+            case .failure(.error(let error)):
+                get_error(error)
+            default:
+                Print.m("not used response")
+            }
         }
     }
     

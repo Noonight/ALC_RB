@@ -28,9 +28,9 @@ final class EditProfileViewModel {
     let dataManager: ApiRequests
     let userDefaults = UserDefaultsHelper()
     
-    init(dataManager: ApiRequests) {
+    init(dataManager: ApiRequests, regionApi: RegionApi) {
         self.dataManager = dataManager
-        self.regionViewModel = RegionsViewModel(dataManager: dataManager)
+        self.regionViewModel = RegionsViewModel(regionApi: regionApi)
     }
     
     func fetch() {

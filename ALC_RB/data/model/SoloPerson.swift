@@ -16,6 +16,10 @@ import Alamofire
 struct SoloPerson: Codable {
     let person: Person
     
+    init(person: Person) {
+        self.person = person
+    }
+    
     enum CodingKeys: String, CodingKey {
         case person = "person"
     }

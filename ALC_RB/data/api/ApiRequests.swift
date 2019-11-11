@@ -1090,62 +1090,52 @@ class ApiRequests {
     {
         let alamoInstace = Alamofire
             .request(ApiRoute.getApiURL(.upcomingMatches))
-//        alamoInstace
-//            .responseMmUpcomingMatches { response in
-//                switch response.result
-//                {
-//                case .success(let value):
-//                    get_success(value)
-//                case .failure(let error):
-//                    alamoInstace.responseSingleLineMessage(completionHandler: { response in
-//                        switch response.result
-//                        {
-//                        case .success(let value):
-//                            case .failure(<#T##Error#>)
-//                        }
-//                    })
-//                    get_failure(error)
-//                }
-//        }
         
         alamoInstace
-            .validate()
-            .responseJSON { response  in
-                
-                let decoder = JSONDecoder()
-                
-                switch response.result
-                {
-                case .success:
-                    do
-                    {
-                        if let matches = try? decoder.decode(MmUpcomingMatches.self, from: response.data!)
-                        {
-                            get_result(.success(matches))
-                        }
-                        if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!)
-                        {
-                            get_result(.message(message))
-                        }
-                    }
-                case .failure(let error):
-                    let statusCode = response.response?.statusCode
-                    if (400..<500).contains(statusCode!)
-                    {
-                        get_result(.failure(.local(error )))
-                    }
-                    else
-                    if (500..<600).contains(statusCode!)
-                    {
-                        get_result(.failure(.server(error)))
-                    }
-                    else
-                    {
-                        get_result(.failure(.alamofire(error)))
-                    }
-                }
-                
-        }
+//            .validate()
+            .responseResultMy(MmUpcomingMatches.self, resultMy: { result in
+                get_result(result)
+            })
+//            .responseJSON { response  in
+//
+//                let decoder = JSONDecoder()
+//
+//                switch response.result
+//                {
+//                case .success:
+//                    do
+//                    {
+//                        if let matches = try decoder.decode(MmUpcomingMatches.self, from: response.data!)
+//                        {
+//                            get_result(.success(matches))
+//                        }
+//                        if let message = try decoder.decode(SingleLineMessage.self, from: response.data!)
+//                        {
+//                            get_result(.message(message))
+//                        }
+//                    } catch RequestError.notExpectedData {
+//                        get_result(.failure(.notExpectedData))
+//                    }
+//                case .failure(let error):
+//                    get_result(.failure(.error(error)))
+////                    let statusCode = response.response?.statusCode
+////                    if (400..<500).contains(statusCode!)
+////                    {
+////                        get_result(.failure(.local(error )))
+////                    }
+////                    else
+////                    if (500..<600).contains(statusCode!)
+////                    {
+////                        get_result(.failure(.server(error)))
+////                    }
+////                    else
+////                    {
+////                        get_result(.failure(.alamofire(error)))
+////                    }
+//                }
+//            }
+        
+        
     }
     
     func get_announces(get_result: @escaping (ResultMy<[Announce], Error>) -> ()) {
@@ -1309,109 +1299,109 @@ class ApiRequests {
         }
     }
     
-    func get_getPerson(id: String, success: @escaping (GetPerson)->(), failure: @escaping (Error)->()) {
-        Alamofire
-            .request(ApiRoute.getApiURL(.soloUser, id: id))
-            .responseGetPerson { (response) in
-                switch response.result {
-                case .success(let getPerson):
-                    success(getPerson)
-                case .failure(let error):
-                    failure(error)
-                }
-        }
-    }
-    
-    func get_referees(get_success: @escaping (Players) -> (), get_failure: @escaping (Error) -> ()) {
-        let parameters: Parameters = [
-            "type": "referee"//,
-//            "limit": 32575,
-//            "offset": 0
-        ]
-        
-        Alamofire
-            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
-            .responsePlayers { response in
-                Print.m(response.result)
-                switch response.result {
-                case .success:
-                    if let players = response.result.value {
-                        get_success(players)
-                    }
-                case .failure(let error):
-                    get_failure(error)
-                }
-        }
-    }
-    
-    func get_players(limit: Int = Constants.Values.LIMIT_ALL, offset: Int = 0, resultMy: @escaping (ResultMy<Players, Error>) -> ()) {
-        let parameters: Parameters = [
-            "type": "player",
-            "limit": limit,
-            "offset": offset
-        ]
-        
-        Alamofire
-            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
-            .responseData { response in
-                let decoder = ISO8601Decoder.getDecoder()
-                do {
-                    if let players = try? decoder.decode(Players.self, from: response.data!) {
-                        resultMy(.success(players))
-                    }
-                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
-                        resultMy(.message(message))
-                    }
-                    if response.result.isFailure {
-                        resultMy(.failure(response.error!))
-                    }
-                }
-        }
-        
-    }
-    
-    func get_players(limit: Int, offset: Int, get_success: @escaping (Players) -> (), get_failure: @escaping (Error) -> ()) {
-        let parameters: Parameters = [
-            "type": "player",
-            "limit": limit,
-            "offset": offset
-        ]
-        
-        Alamofire
-            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
-            .responsePlayers { response in
-                switch response.result {
-                case .success:
-                    if let players = response.result.value {
-                        get_success(players)
-                    }
-                case .failure(let error):
-                    get_failure(error)
-                }
-        }
-    }
-    
-    func get_playersWithQuery(query: String, get_success: @escaping (Players) -> (), get_failure: @escaping (Error) -> ()) {
-        let parameters: Parameters = [
-            "type": "player",
-            "search": query,
-            "limit": 999
-        ]
-        
-        Alamofire
-            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
-            .responsePlayers { response in
-                switch response.result {
-                case .success:
-                    if let players = response.result.value {
-                        get_success(players)
-                    }
-                case .failure(let error):
-                    get_failure(error)
-                }
-        }
-    }
-    
+//    func get_getPerson(id: String, success: @escaping (GetPerson)->(), failure: @escaping (Error)->()) {
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.soloUser, id: id))
+//            .responseGetPerson { (response) in
+//                switch response.result {
+//                case .success(let getPerson):
+//                    success(getPerson)
+//                case .failure(let error):
+//                    failure(error)
+//                }
+//        }
+//    }
+
+//    func get_referees(get_success: @escaping (Players) -> (), get_failure: @escaping (Error) -> ()) {
+//        let parameters: Parameters = [
+//            "type": "referee"//,
+////            "limit": 32575,
+////            "offset": 0
+//        ]
+//
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+//            .responsePlayers { response in
+//                Print.m(response.result)
+//                switch response.result {
+//                case .success:
+//                    if let players = response.result.value {
+//                        get_success(players)
+//                    }
+//                case .failure(let error):
+//                    get_failure(error)
+//                }
+//        }
+//    }
+
+//    func get_players(limit: Int = Constants.Values.LIMIT_ALL, offset: Int = 0, resultMy: @escaping (ResultMy<Players, Error>) -> ()) {
+//        let parameters: Parameters = [
+//            "type": "player",
+//            "limit": limit,
+//            "offset": offset
+//        ]
+//
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+//            .responseData { response in
+//                let decoder = ISO8601Decoder.getDecoder()
+//                do {
+//                    if let players = try? decoder.decode(Players.self, from: response.data!) {
+//                        resultMy(.success(players))
+//                    }
+//                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+//                        resultMy(.message(message))
+//                    }
+//                    if response.result.isFailure {
+//                        resultMy(.failure(response.error!))
+//                    }
+//                }
+//        }
+//
+//    }
+
+//    func get_players(limit: Int, offset: Int, get_success: @escaping (Players) -> (), get_failure: @escaping (Error) -> ()) {
+//        let parameters: Parameters = [
+//            "type": "player",
+//            "limit": limit,
+//            "offset": offset
+//        ]
+//
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+//            .responsePlayers { response in
+//                switch response.result {
+//                case .success:
+//                    if let players = response.result.value {
+//                        get_success(players)
+//                    }
+//                case .failure(let error):
+//                    get_failure(error)
+//                }
+//        }
+//    }
+
+//    func get_playersWithQuery(query: String, get_success: @escaping (Players) -> (), get_failure: @escaping (Error) -> ()) {
+//        let parameters: Parameters = [
+//            "type": "player",
+//            "search": query,
+//            "limit": 999
+//        ]
+//
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+//            .responsePlayers { response in
+//                switch response.result {
+//                case .success:
+//                    if let players = response.result.value {
+//                        get_success(players)
+//                    }
+//                case .failure(let error):
+//                    get_failure(error)
+//                }
+//        }
+//    }
+
     func get_clubs(get_success: @escaping (Clubs) -> (), get_failure: @escaping (Error) -> ()) {
         let parameters: Parameters = [
             "limit": 999
@@ -1504,15 +1494,15 @@ class ApiRequests {
             get_failure(error)
         }
         
-        group.enter()
-        get_referees(get_success: { (referees) in
-            fReferees = referees
-            
-            group.leave()
-            
-        }) { (error) in
-            get_failure(error)
-        }
+//        group.enter()
+//        get_referees(get_success: { (referees) in
+//            fReferees = referees
+//
+//            group.leave()
+//
+//        }) { (error) in
+//            get_failure(error)
+//        }
         
         group.notify(queue: .main) {
             get_success(fActiveMatches, fReferees, fClubs)
@@ -1818,19 +1808,20 @@ class ApiRequests {
         }
     }
     
-    func get_soloPerson(playerId: String, success: @escaping (SoloPerson) -> (), failure: @escaping (Error) -> ()) {
-        Alamofire
-            .request(ApiRoute.getApiURL(.soloUser, id: playerId))
-            .validate()
-            .responseSoloPerson { (response) in
-                switch response.result {
-                case .success(let value):
-                    success(value)
-                case .failure(let error):
-                    failure(error)
-                }
-        }
-    }
+//    func get_soloPerson(playerId: String, success: @escaping (SoloPerson) -> (), failure: @escaping (Error) -> ()) {
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.soloUser, id: playerId))
+////            .request
+////            .validate()
+//            .responseSoloPerson { (response) in
+//                switch response.result {
+//                case .success(let value):
+//                    success(value)
+//                case .failure(let error):
+//                    failure(error)
+//                }
+//        }
+//    }
     
     // MARK: TOURNEY MODEL ITEM
     func get_league(
@@ -1956,6 +1947,7 @@ class ApiRequests {
     
     func get_scheduleRefereeData(resultMy: @escaping (ResultMy<(ActiveMatches, Players, [SoloClub]), Error>) -> ()) {
         let group = DispatchGroup()
+        let personApi = PersonApi()
         
         var mMessage: SingleLineMessage?
         var mError: Error?
@@ -2014,17 +2006,30 @@ class ApiRequests {
             group.leave()
         }
         group.enter()
-        self.get_referees { result in
+        personApi.get_person(limit: Constants.Values.LIMIT_ALL) { result in
             switch result {
-            case .success(let referees):
-                mResult.1 = referees
+            case .success(let persons):
+                mResult.1 = Players(persons: persons, count: persons.count)
             case .message(let message):
                 mMessage = message
-            case .failure(let error):
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            case .failure(.error(let error)):
                 mError = error
             }
             group.leave()
         }
+//        self.get_referees { result in
+//            switch result {
+//            case .success(let referees):
+//                mResult.1 = referees
+//            case .message(let message):
+//                mMessage = message
+//            case .failure(let error):
+//                mError = error
+//            }
+//            group.leave()
+//        }
         
         group.notify(queue: .main) {
             if let error = mError {
@@ -2064,31 +2069,31 @@ class ApiRequests {
         }
     }
     
-    func get_referees(resultMy: @escaping (ResultMy<Players, Error>) -> ()) {
-        let parameters: Parameters = [
-            "type": "referee"//,
-            //            "limit": 32575,
-            //            "offset": 0
-        ]
-            
-        Alamofire
-            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
-            .responseData(completionHandler: { response in
-                let decoder = ISO8601Decoder.getDecoder()
-                do {
-                    if let referees = try? decoder.decode(Players.self, from: response.data!) {
-                        resultMy(.success(referees))
-                    }
-                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
-                        resultMy(.message(message))
-                    }
-                }
-                if response.result.isFailure {
-                    resultMy(.failure(response.error!))
-                }
-            })
-    }
-      
+//    func get_referees(resultMy: @escaping (ResultMy<Players, Error>) -> ()) {
+//        let parameters: Parameters = [
+//            "type": "referee"//,
+//            //            "limit": 32575,
+//            //            "offset": 0
+//        ]
+//
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.getusers), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+//            .responseData(completionHandler: { response in
+//                let decoder = ISO8601Decoder.getDecoder()
+//                do {
+//                    if let referees = try? decoder.decode(Players.self, from: response.data!) {
+//                        resultMy(.success(referees))
+//                    }
+//                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+//                        resultMy(.message(message))
+//                    }
+//                }
+//                if response.result.isFailure {
+//                    resultMy(.failure(response.error!))
+//                }
+//            })
+//    }
+    
 
     func get_club(id: String, resultMy: @escaping (ResultMy<SoloClub, Error>) -> ()) {
         Alamofire

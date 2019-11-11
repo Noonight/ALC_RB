@@ -50,8 +50,8 @@ class AddEventsProtocolViewController: BaseStateViewController {
     var teamOneController: ProtocolPlayersController!
     var teamTwoController: ProtocolPlayersController!
     
-    var fetchedTeamOnePlayers: [GetPerson.Person]?
-    var fetchedTeamTwoPlayers: [GetPerson.Person]?
+    var fetchedTeamOnePlayers: [Person]?
+    var fetchedTeamTwoPlayers: [Person]?
     
     // MARK: - model controllers
     var eventsController: ProtocolEventsController!
@@ -301,20 +301,20 @@ class AddEventsProtocolViewController: BaseStateViewController {
         }).first?.id
     }
     
-    func getFullNamePlayers(persons: [GetPerson.Person]) -> [String] {
+    func getFullNamePlayers(persons: [Person]) -> [String] {
         return persons.map({ getPerson -> String in
             return getPerson.getFullName()
         })
     }
     
-    func filterFullNamePlayers(persons: [GetPerson.Person]) -> [GetPerson.Person] {
+    func filterFullNamePlayers(persons: [Person]) -> [Person] {
         return persons.filter({ getPerson -> Bool in
             return getPerson.getFullName().count > 2
         })
     }
     
-    func connectTeamOneAndTeamTwoPlayers() -> [GetPerson.Person] {
-        return [fetchedTeamOnePlayers, fetchedTeamTwoPlayers].flatMap({ element -> [GetPerson.Person] in
+    func connectTeamOneAndTeamTwoPlayers() -> [Person] {
+        return [fetchedTeamOnePlayers, fetchedTeamTwoPlayers].flatMap({ element -> [Person] in
             return element!
         })
     }

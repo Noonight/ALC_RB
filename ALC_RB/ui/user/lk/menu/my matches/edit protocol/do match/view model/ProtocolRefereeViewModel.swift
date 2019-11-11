@@ -22,6 +22,7 @@ class ProtocolRefereeViewModel {
     var eventsController: ProtocolEventsController!
     
     let dataManager = ApiRequests()
+    let personApi = PersonApi()
     
     init(match: LIMatch, leagueDetailModel: LeagueDetailModel, teamOneModel: ProtocolPlayersController, teamTwoModel: ProtocolPlayersController,
          refereesModel: ProtocolRefereesController, eventsModel: ProtocolEventsController) {
@@ -484,10 +485,22 @@ class ProtocolRefereeViewModel {
 extension ProtocolRefereeViewModel {
     
     func fetchPerson(playerId: String, success: @escaping (SoloPerson) -> (), failure: @escaping (Error) -> ()) {
-        self.dataManager.get_soloPerson(playerId: playerId, success: { soloPerson in
-            success(soloPerson)
-        }) { error in
-            failure(error)
+//        self.dataManager.get_soloPerson(playerId: playerId, success: { soloPerson in
+//            success(soloPerson)
+//        }) { error in
+//            failure(error)
+//        }
+        self.personApi.get_person(id: playerId) { result in
+            switch result {
+            case .success(let person):
+                success(SoloPerson(person: person.first!))
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(RequestError.notExpectedData):
+                Print.m("notExpectedData")
+            case .failure(.error(let error)):
+                Print.m(error)
+            }
         }
     }
     

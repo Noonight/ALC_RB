@@ -12,20 +12,32 @@ import AlamofireImage
 
 class EventsMatchPresenter: MvpPresenter<EventsMatchTableViewController> {
     
+    private let apiPerson = PersonApi()
+    
     func getPlayer(player id: String, get_player: @escaping (SoloPerson) -> (), get_error: @escaping (Error) -> ()) {
-        Alamofire
-            .request(ApiRoute.getApiURL(.soloUser, id: id))
-            .validate()
-            .responseSoloPerson { (response) in
-                switch response.result {
-                case .success:
-                    if let player = response.result.value {
-                        get_player(player)
-                    }
-                case .failure:
-                    get_error(response.error!)
-                }
+        apiPerson.get_person() { result in
+            switch result {
+            case .success(let person):
+                get_player(SoloPerson(person: person.first!))
+            case .failure(.error(let error)):
+                get_error(error)
+            default:
+                Print.m("not used response")
+            }
         }
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.soloUser, id: id))
+//            .validate()
+//            .responseSoloPerson { (response) in
+//                switch response.result {
+//                case .success:
+//                    if let player = response.result.value {
+//                        get_player(player)
+//                    }
+//                case .failure:
+//                    get_error(response.error!)
+//                }
+//        }
     }
     
     func getPlayerImage(player_photo: String, get_image: @escaping (UIImage) -> ()) {

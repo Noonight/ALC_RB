@@ -24,7 +24,7 @@ class EditProfileViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    let viewModel = EditProfileViewModel(dataManager: ApiRequests())
+    let viewModel = EditProfileViewModel(dataManager: ApiRequests(), regionApi: RegionApi())
     var imagePicker: ImagePicker?
     private let bag = DisposeBag()
     

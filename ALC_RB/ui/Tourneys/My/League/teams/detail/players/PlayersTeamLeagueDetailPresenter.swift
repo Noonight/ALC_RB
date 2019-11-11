@@ -16,6 +16,8 @@ import AlamofireImage
 
 class PlayersTeamLeagueDetailPresenter: MvpPresenter<PlayersTeamLeagueDetailViewController> {
     
+    private lazy var personApi = PersonApi()
+    
     func getClub(club id: String, get_it: @escaping (SoloClub) -> ()) {
         Alamofire
             .request(ApiRoute.getApiURL(.clubs, id: id))
@@ -66,31 +68,35 @@ class PlayersTeamLeagueDetailPresenter: MvpPresenter<PlayersTeamLeagueDetailView
         }
     }
     
-    func getTeamCreatorName(creator id: String, get_name: @escaping (String) -> ()) {
-        Alamofire
-            .request(ApiRoute.getApiURL(.soloUser, id: id))
-            .validate()
-            .responseSoloPerson { (response) in
-//                debugPrint(response.result.description)
-//                debugPrint(response.result.value)
-//                debugPrint(response.data)
-//                debugPrint(response)
-                if let name = response.result.value {
-                    //debugPrint("\(id) --- \(response.result.value)")
-                    get_name(name.person.surname)
-                }
-        }
+    func getPerson(id: String, result: @escaping (ResultMy<[Person], RequestError>) -> ()) {
+        personApi.get_person(resultMy: result)
     }
     
-    func getPlayer(player id: String, get_player: @escaping (SoloPerson) -> ()) {
-        Alamofire
-            .request(ApiRoute.getApiURL(.soloUser, id: id))
-            .validate()
-            .responseSoloPerson { (response) in
-                if let person = response.result.value {
-                    get_player(person)
-                }
-        }
-    }
+//    func getTeamCreatorName(creator id: String, get_name: @escaping (String) -> ()) {
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.soloUser, id: id))
+//            .validate()
+//            .responseSoloPerson { (response) in
+////                debugPrint(response.result.description)
+////                debugPrint(response.result.value)
+////                debugPrint(response.data)
+////                debugPrint(response)
+//                if let name = response.result.value {
+//                    //debugPrint("\(id) --- \(response.result.value)")
+//                    get_name(name.person.surname)
+//                }
+//        }
+//    }
+//
+//    func getPlayer(player id: String, get_player: @escaping (SoloPerson) -> ()) {
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.soloUser, id: id))
+//            .validate()
+//            .responseSoloPerson { (response) in
+//                if let person = response.result.value {
+//                    get_player(person)
+//                }
+//        }
+//    }
     
 }

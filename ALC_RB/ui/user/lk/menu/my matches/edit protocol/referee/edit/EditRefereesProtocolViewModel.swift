@@ -21,27 +21,42 @@ class EditRefereesProtocolViewModel {
     var comingMatch: LIMatch!
     
     private let dataManager: ApiRequests
+    private let apiPerson: PersonApi
     
     var cache: EditMatchReferees?
     
-    init(dataManager: ApiRequests) {
+    init(dataManager: ApiRequests, personApi: PersonApi) {
         self.dataManager = dataManager
+        self.apiPerson = personApi
     }
     
     func fetchReferees(closure: @escaping () -> ()) {
         self.refreshing.onNext(true)
-        dataManager.get_referees { result in
-            self.refreshing.onNext(false)
+        apiPerson.get_person(limit: Constants.Values.LIMIT_ALL) { result in
             switch result {
-            case .success(let referees):
-                self.referees.value = referees
+            case .success(let persons):
+                self.referees.value = Players(persons: persons, count: persons.count)
             case .message(let message):
                 self.message.onNext(message)
-            case .failure(let error):
+            case .failure(.notExpectedData):
+                self.message.onNext(SingleLineMessage(message: "Not expected data. Can't parse data"))
+            case .failure(.error(let error)):
                 self.error.onNext(error)
             }
             closure()
         }
+//        dataManager.get_referees { result in
+//            self.refreshing.onNext(false)
+//            switch result {
+//            case .success(let referees):
+//                self.referees.value = referees
+//            case .message(let message):
+//                self.message.onNext(message)
+//            case .failure(let error):
+//                self.error.onNext(error)
+//            }
+//            closure()
+//        }
     }
     
     func editMatchReferees(token: String, editMatchReferees: EditMatchReferees, success: @escaping (SoloMatch)->(), message_single: @escaping (SingleLineMessage)->(), failure: @escaping (Error)->()) {

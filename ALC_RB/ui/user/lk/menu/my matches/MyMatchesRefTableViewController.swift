@@ -70,33 +70,57 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
     }
     
     func fetch() {
-        viewModel.participationMatches.value = (userDefaults.getAuthorizedUser()?.person.participationMatches)!.filter({ pMatch -> Bool in
-            return pMatch.referees.contains(where: { referee -> Bool in
-                return referee.person == userDefaults.getAuthorizedUser()?.person.id
+//        viewModel.participationMatches.value = userDefaults.getAuthorizedUser()?.person.participationMatches!.filter({ match in
+//            switch match {
+//            case .id(let id):
+//
+//            case .object(let obj):
+//
+//            }
+//        })
+         let matches = userDefaults.getAuthorizedUser()?.person.participationMatches?.filter({ match -> Bool in
+            return match.isEqual({ mMatch -> Bool in
+                return mMatch.referees.contains(where: { referee -> Bool in
+                    return referee.person == userDefaults.getAuthorizedUser()!.person.id
+                })
             })
+        }).map({ object -> ParticipationMatch in
+            return object.getValue()!
         })
+        viewModel.participationMatches.value = matches ?? []
+//        viewModel.participationMatches.value = (userDefaults.getAuthorizedUser()?.person.participationMatches)!.filter({ pMatch -> Bool in
+////            return pMatch.isEqual({ m in
+////                    m.referees.contains
+////                })
+////            return pMatch.referees.contains(where: { referee -> Bool in
+////                return referee.person == userDefaults.getAuthorizedUser()?.person.id
+////            })
+//        })
         viewModel.fetch() {
             self.tableView.es.stopPullToRefresh()
         }
     }
     
     func setupUser() {
-        do {
-            viewModel.participationMatches.value = (userDefaults.getAuthorizedUser()?.person.participationMatches)!.filter({ pMatch -> Bool in
-                return pMatch.referees.contains(where: { referee -> Bool in
-                    return referee.person == UserDefaultsHelper().getAuthorizedUser()?.person.id
-                })
-            })
-        } catch {
-            showAlert(title: AlertLets.alertTitle, message: AlertLets.alertMessage, actions:
-                [
-                    UIAlertAction(title: AlertLets.okBtn, style: .default, handler: nil),
-                    UIAlertAction(title: AlertLets.refreshBtn, style: .default, handler: { alertAction in
-                        self.setupUser()
-                    })
-                ]
-            )
-        }
+//        do {
+//            viewModel.participationMatches.value = (userDefaults.getAuthorizedUser()?.person.participationMatches)!.filter({ pMatch -> Bool in
+//                return pMatch.referees.contains(where: { referee -> Bool in
+//                    return referee.person == UserDefaultsHelper().getAuthorizedUser()?.person.id
+//                })
+//            })
+            //
+            var person = userDefaults.getAuthorizedUser()?.person
+            viewModel.participationMatches.value = person?.participationMatches?.filter({ $0.isEqual({ $0.referees.contains(where: { $0.person == person?.id }) }) }).map({ $0.getValue()! }) ?? []
+//        } catch {
+//            showAlert(title: AlertLets.alertTitle, message: AlertLets.alertMessage, actions:
+//                [
+//                    UIAlertAction(title: AlertLets.okBtn, style: .default, handler: nil),
+//                    UIAlertAction(title: AlertLets.refreshBtn, style: .default, handler: { alertAction in
+//                        self.setupUser()
+//                    })
+//                ]
+//            )
+//        }
     }
     
     // MARK: - Binds

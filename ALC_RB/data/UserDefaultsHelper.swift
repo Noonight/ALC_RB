@@ -52,11 +52,21 @@ class UserDefaultsHelper {
         guard var user = self.getAuthorizedUser() else { return false }
         
         for i in 0...user.person.participationMatches!.count {
-            if user.person.participationMatches![i].id == id {
-                user.person.participationMatches![i].played = true
+            if user.person.participationMatches![i].isEqual({ $0.id == id }) {
+                user.person.participationMatches![i].map { match -> ParticipationMatch in
+                    var mMatch = match
+                    mMatch.played = true
+                    return mMatch
+                }
                 self.setAuthorizedUser(user: user)
                 return true
             }
+//        for i in 0...user.person.participationMatches!.count {
+//            if user.person.participationMatches![i].id == id {
+//                user.person.participationMatches![i].played = true
+//                self.setAuthorizedUser(user: user)
+//                return true
+//            }
         }
         return false
     }
@@ -65,25 +75,11 @@ class UserDefaultsHelper {
         return (self.getAuthorizedUser()?.token)!
     }
     
-    func setMatch(match: ParticipationMatch) -> Bool {
+    func setMatch(match: ParticipationMatch) {
         var user = getAuthorizedUser()
-        if user?.person.participationMatches?.contains(where: { parMatch -> Bool in
-            return parMatch.id == match.id
-        }) ?? false
-        {
-            user?.person.participationMatches?.removeAll(where: { parMatch -> Bool in
-                return parMatch.id == match.id
-            })
-            user?.person.participationMatches?.append(match)
-            
-            setAuthorizedUser(user: user!)
-            
-            return true
-        }
-        else
-        {
-            return false
-        }
+        user?.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.id }) })
+        user?.person.participationMatches?.append(IdRefObjectWrapper<ParticipationMatch>(match))
+        setAuthorizedUser(user: user!)
     }
     
 }

@@ -50,9 +50,17 @@ class PlayersTeamLeagueDetailViewController: UIViewController {
 //        }) {
 //            // noting but if something went wrong make it
 //        }
-        presenter.getTeamCreatorName(creator: team.creator!) { (name) in
-            self.name_trainer_label.text = name
+        presenter.getPerson(id: team.creator!) { result in
+            switch result {
+            case .success(let person):
+                self.name_trainer_label.text = person.first?.getFullName()
+            default:
+                Print.m("some fail")
+            }
         }
+//        presenter.getTeamCreatorName(creator: team.creator!) { (name) in
+//            self.name_trainer_label.text = name
+//        }
         
         table_view.dataSource = self
         table_view.delegate = self
@@ -118,13 +126,22 @@ extension PlayersTeamLeagueDetailViewController: UITableViewDataSource {
             setupCell(person: fetchedPerson)
         } else {
             let hud = cell.showLoadingViewHUD()
-            presenter.getPlayer(player: model.playerId)
-            { (person) in
-                self.fetchedPersons.append(person.person)
-                setupCell(person: person.person)
-                hud.hide(animated: true)
-//                hud.hideAfter(seconds: 10)
+            presenter.getPerson(id: model.playerId) { result in
+                switch result {
+                case .success(let person):
+                    self.fetchedPersons.append(person.first!)
+                    setupCell(person: person.first!)
+                    hud.hide(animated: true)
+                default: Print.m("default")
+                }
             }
+//            presenter.getPlayer(player: model.playerId)
+//            { (person) in
+//                self.fetchedPersons.append(person.person)
+//                setupCell(person: person.person)
+//                hud.hide(animated: true)
+////                hud.hideAfter(seconds: 10)
+//            }
         }
     }
     

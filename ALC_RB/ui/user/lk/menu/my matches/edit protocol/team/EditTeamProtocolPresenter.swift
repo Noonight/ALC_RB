@@ -11,20 +11,35 @@ import Alamofire
 
 class EditTeamProtocolPresenter: MvpPresenter<EditTeamProtocolTableViewController> {
     
+    let personApi = PersonApi()
+    
     func getPlayer(player id: String, get_player: @escaping (SoloPerson) -> (), get_error: @escaping (Error) -> ()) {
-        Alamofire
-            .request(ApiRoute.getApiURL(.soloUser, id: id))
-            .validate()
-            .responseSoloPerson { (response) in
-                switch response.result {
-                case .success:
-                    if let player = response.result.value {
-                        get_player(player)
-                    }
-                case .failure:
-                    get_error(response.result.error!)
-                }
+        personApi.get_person(id: id) { result in
+            switch result {
+            case .success(let persons):
+                get_player(SoloPerson(person: persons.first!))
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+                get_error(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
         }
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.soloUser, id: id))
+//            .validate()
+//            .responseSoloPerson { (response) in
+//                switch response.result {
+//                case .success:
+//                    if let player = response.result.value {
+//                        get_player(player)
+//                    }
+//                case .failure:
+//                    get_error(response.result.error!)
+//                }
+//        }
     }
     
     func getPlayerImage(photo player: String?, get_image: @escaping (UIImage) -> ()) {

@@ -17,6 +17,11 @@ struct Players: Codable {
     var people: [Person]
     let count: Int
     
+    init(persons: [Person], count: Int) {
+        self.people = persons
+        self.count = count
+    }
+    
     enum CodingKeys: String, CodingKey {
         case people = "people"
         case count = "count"
@@ -37,7 +42,7 @@ struct Person: Codable {
     var photo: String?
 //    var desc: String
 //    var participationMatches: [ParticipationMatch]?
-    var participationMatches: [IdRefObject<ParticipationMatch>]?
+    var participationMatches: [IdRefObjectWrapper<ParticipationMatch>]?
     var pastLeagues: [PastLeague]
     var id: String
     var login: String
@@ -91,7 +96,7 @@ struct Person: Codable {
         self.photo = try container.decodeIfPresent(String.self, forKey: .photo) ?? ""
 //        self.desc = try container.decodeIfPresent(String.self, forKey: .desc) ?? ""
 //        self.participationMatches = try container.decodeIfPresent([ParticipationMatch].self, forKey: .participationMatches) ?? []
-        self.participationMatches = try container.decodeIfPresent([IdRefObject<ParticipationMatch>].self, forKey: .participationMatches) ?? []
+        self.participationMatches = try container.decodeIfPresent([IdRefObjectWrapper<ParticipationMatch>].self, forKey: .participationMatches) ?? []
         self.pastLeagues = try container.decodeIfPresent([PastLeague].self, forKey: .pastLeagues) ?? []
         self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
         self.login = try container.decodeIfPresent(String.self, forKey: .login) ?? ""
@@ -235,7 +240,7 @@ extension Players {
         count: Int? = nil
         ) -> Players {
         return Players(
-            people: people ?? self.people,
+            persons: people ?? self.people,
             count: count ?? self.count
         )
     }
@@ -297,7 +302,7 @@ extension Person {
         photo: String?? = nil,
 //        desc: String? = nil,
 //        participationMatches: [ParticipationMatch]? = nil,
-        participationMatches: [IdRefObject<ParticipationMatch>]? = nil,
+        participationMatches: [IdRefObjectWrapper<ParticipationMatch>]? = nil,
         pastLeagues: [PastLeague]? = nil,
         id: String? = nil,
         login: String? = nil,

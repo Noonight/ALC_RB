@@ -11,7 +11,7 @@ import Alamofire
 
 final class RegionApi: ApiRequests {
     
-    func get_regions(query: String? = nil, get_result: @escaping (ResultMy<[RegionMy], Error>) -> ()) {
+    override func get_regions(query: String? = nil, get_result: @escaping (ResultMy<[RegionMy], Error>) -> ()) {
         
         var parameters: Parameters = [:]
         

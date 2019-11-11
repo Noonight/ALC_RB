@@ -46,21 +46,30 @@ class EditScheduleViewModel {
     var editedMatch = Variable<SoloMatch?>(nil)
     
     private let dataManager: ApiRequests
+    private let personApi: PersonApi
     
     var cache: EditMatchReferees?
     
-    init(dataManager: ApiRequests) {
+    init(dataManager: ApiRequests, personApi: PersonApi) {
         self.dataManager = dataManager
+        self.personApi = personApi
     }
     
     func fetchReferees() {
         self.refreshing.onNext(true)
-        dataManager.get_referees(get_success: { (referees) in
-            
+        personApi.get_person { result in
+            switch result {
+            case .success(let persons):
+                self.comingReferees.value = Players(persons: persons, count: persons.count)
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+                self.error.onNext(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
             self.refreshing.onNext(false)
-
-        }) { (error) in
-            self.error.onNext(error)
         }
     }
     

@@ -25,6 +25,7 @@ final class CommandAddPlayerViewModel {
     var offset = 0
     
     let apiClient = ApiRequests()
+    let personApi = PersonApi()
     
     init(delegate: CommandAddPlayerViewModelDelegate) {
         self.delegate = delegate
@@ -49,36 +50,59 @@ final class CommandAddPlayerViewModel {
         
         isFetchInProgress = true
         
-        apiClient.get_players(limit: limit, offset: offset, get_success: { (players) in
-//            DispatchQueue.main.async {
+        personApi.get_person() { result in
+            switch result {
+            case .success(let persons):
                 self.isFetchInProgress = false
-            
                 
-                self.total = players.count
+                self.total = persons.count
                 
-//                if players.people.first?.id != self.persons.last?.id {
-//                    self.persons.append(contentsOf: players.people)
-//
-//                    let indexPathsToReload = self.calculateIndexPathToReload(from: players.people)
-//                    self.delegate?.onFetchPersonsCompleted(with: indexPathsToReload)
-//                } else {
-//                    self.delegate?.onFetchPersonsCompleted(with: .none)
-//                }
-            
-            self.persons.append(contentsOf: players.people)
-            
-            let indexPathsToReload = self.calculateIndexPathToReload(from: players.people)
-            
-            self.delegate?.onFetchPersonsCompleted(with: indexPathsToReload)
+                self.persons.append(contentsOf: persons)
                 
-//                if players
-//            }
-        }) { (error) in
-//            DispatchQueue.main.async {
+                let indexPathsToReload = self.calculateIndexPathToReload(from: persons)
+                
+                self.delegate?.onFetchPersonsCompleted(with: indexPathsToReload)
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
                 self.isFetchInProgress = false
                 self.delegate?.onFetchPersonsFailed(with: error)
-//            }
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
         }
+        
+//        apiClient.get_players(limit: limit, offset: offset, get_success: { (players) in
+////            DispatchQueue.main.async {
+//                self.isFetchInProgress = false
+//
+//
+//                self.total = players.count
+//
+////                if players.people.first?.id != self.persons.last?.id {
+////                    self.persons.append(contentsOf: players.people)
+////
+////                    let indexPathsToReload = self.calculateIndexPathToReload(from: players.people)
+////                    self.delegate?.onFetchPersonsCompleted(with: indexPathsToReload)
+////                } else {
+////                    self.delegate?.onFetchPersonsCompleted(with: .none)
+////                }
+//
+//            self.persons.append(contentsOf: players.people)
+//
+//            let indexPathsToReload = self.calculateIndexPathToReload(from: players.people)
+//
+//            self.delegate?.onFetchPersonsCompleted(with: indexPathsToReload)
+//
+////                if players
+////            }
+//        }) { (error) in
+////            DispatchQueue.main.async {
+//                self.isFetchInProgress = false
+//                self.delegate?.onFetchPersonsFailed(with: error)
+////            }
+//        }
     }
     
     func calculateIndexPathToReload(from newPersons: [Person]) -> [IndexPath] {
