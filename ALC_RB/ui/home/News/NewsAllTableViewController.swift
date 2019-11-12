@@ -16,6 +16,8 @@ class NewsAllTableViewController: UITableViewController {
     private var homeNewsViewModel: HomeNewsViewModel!
     private let disposeBag = DisposeBag()
     
+    var announcesReloadCallBack: AnnouncesReloadCallBack?
+    
 //    private var hud: MBProgressHUD?
     
     override func viewDidLoad() {
@@ -55,6 +57,7 @@ extension NewsAllTableViewController {
             .filter { $0 == false }
             .subscribe({ event in
                 self.homeNewsViewModel.fetch()
+                self.announcesReloadCallBack?.reload()
             }).disposed(by: disposeBag)
         
         refreshController.rx.controlEvent(.valueChanged)

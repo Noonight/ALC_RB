@@ -17,6 +17,8 @@ final class HomeAllVC: UIViewController {
     @IBOutlet weak var news_collection: UICollectionView!
     @IBOutlet weak var matches_table: IntrinsicTableView!
     
+    var announcesReloadCallBack: AnnouncesReloadCallBack?
+    
     private var news_hud: MBProgressHUD?
     
     private var homeAllViewModel: HomeAllViewModel!
@@ -56,6 +58,7 @@ extension HomeAllVC {
             .filter { $0 == false }
             .subscribe({ event in
                 self.homeAllViewModel.fetch()
+                self.announcesReloadCallBack?.reload()
             }).disposed(by: disposeBag)
         
         refreshController.rx.controlEvent(.valueChanged)

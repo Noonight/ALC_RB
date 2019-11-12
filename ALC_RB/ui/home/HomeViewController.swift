@@ -11,11 +11,18 @@ import FloatingPanel
 
 class HomeViewController: UIViewController {
     
-    private lazy var all : HomeAllVC = HomeAllVC()
+    private lazy var all : HomeAllVC = {
+        let vc = HomeAllVC()
+        vc.announcesReloadCallBack = announcesVC
+        
+        return vc
+    }()
     private lazy var newsTable: NewsAllTableViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "NewsAllTableViewController") as! NewsAllTableViewController
+        
+        viewController.announcesReloadCallBack = announcesVC
         
         return viewController
     }()

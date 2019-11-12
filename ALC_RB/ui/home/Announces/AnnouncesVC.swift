@@ -12,6 +12,12 @@ import MBProgressHUD
 import RxSwift
 import RxCocoa
 
+protocol AnnouncesReloadCallBack {
+    
+    func reload()
+    
+}
+
 final class AnnouncesVC: UIViewController {
 
     struct Text {
@@ -159,6 +165,16 @@ extension AnnouncesVC {
                 self.showTourneyPicker()
             })
         }
+    }
+    
+}
+
+// MARK: - RELOAD CALLBACK
+
+extension AnnouncesVC: AnnouncesReloadCallBack {
+    
+    func reload() {
+        self.announcesViewModel.fetch()
     }
     
 }
