@@ -52,6 +52,22 @@ class HomeViewController: UIViewController {
         self.setupSegmentHelper()
         self.setupFPC()
         firstInit()
+        
+//        let  matchApi = MatchApi()
+//        matchApi.get_upcomingMatches(resultMy: { result in
+//            switch result {
+//            case .success(let matches):
+//                Print.m(matches)
+//            case .message(let message):
+//                Print.m(message.message)
+//
+//            case .failure(.error(let error)):
+//                Print.m(error)
+//
+//            case .failure(.notExpectedData):
+//                Print.m("not expected data")
+//            }
+//        })
     }
     
     override func viewWillAppear(_ animated: Bool) {

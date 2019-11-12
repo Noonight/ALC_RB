@@ -10,6 +10,9 @@
 		040EB37F23756F0100D25F50 /* PlayersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040EB37E23756F0100D25F50 /* PlayersVC.swift */; };
 		040EB3812375715700D25F50 /* PlayersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040EB3802375715700D25F50 /* PlayersViewModel.swift */; };
 		040EB38423757AE100D25F50 /* RegionApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040EB38323757AE100D25F50 /* RegionApi.swift */; };
+		046F64B7237A7ECE007188BC /* MatchApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F64B6237A7ECE007188BC /* MatchApi.swift */; };
+		046F64B9237A88A6007188BC /* ParamBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F64B8237A88A6007188BC /* ParamBuilder.swift */; };
+		046F64BD237A9892007188BC /* StringBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F64BC237A9892007188BC /* StringBuilder.swift */; };
 		048CB331230BC959006CF2A9 /* HomeNewsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048CB330230BC959006CF2A9 /* HomeNewsCollection.swift */; };
 		048CB33C230BD258006CF2A9 /* HomeAnonunceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048CB33A230BD258006CF2A9 /* HomeAnonunceTableViewCell.swift */; };
 		048CB33D230BD258006CF2A9 /* HomeAnonunceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048CB33B230BD258006CF2A9 /* HomeAnonunceTableViewCell.xib */; };
@@ -391,6 +394,9 @@
 		040EB37E23756F0100D25F50 /* PlayersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersVC.swift; sourceTree = "<group>"; };
 		040EB3802375715700D25F50 /* PlayersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewModel.swift; sourceTree = "<group>"; };
 		040EB38323757AE100D25F50 /* RegionApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionApi.swift; sourceTree = "<group>"; };
+		046F64B6237A7ECE007188BC /* MatchApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchApi.swift; sourceTree = "<group>"; };
+		046F64B8237A88A6007188BC /* ParamBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParamBuilder.swift; sourceTree = "<group>"; };
+		046F64BC237A9892007188BC /* StringBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringBuilder.swift; sourceTree = "<group>"; };
 		048CB330230BC959006CF2A9 /* HomeNewsCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewsCollection.swift; sourceTree = "<group>"; };
 		048CB33A230BD258006CF2A9 /* HomeAnonunceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAnonunceTableViewCell.swift; sourceTree = "<group>"; };
 		048CB33B230BD258006CF2A9 /* HomeAnonunceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeAnonunceTableViewCell.xib; sourceTree = "<group>"; };
@@ -803,6 +809,31 @@
 			path = makers;
 			sourceTree = "<group>";
 		};
+		046F64B5237A7EC1007188BC /* Match */ = {
+			isa = PBXGroup;
+			children = (
+				046F64B6237A7ECE007188BC /* MatchApi.swift */,
+			);
+			path = Match;
+			sourceTree = "<group>";
+		};
+		046F64BA237A9863007188BC /* ParamBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				046F64BB237A9871007188BC /* StringBuilder */,
+				046F64B8237A88A6007188BC /* ParamBuilder.swift */,
+			);
+			path = ParamBuilder;
+			sourceTree = "<group>";
+		};
+		046F64BB237A9871007188BC /* StringBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				046F64BC237A9892007188BC /* StringBuilder.swift */,
+			);
+			path = StringBuilder;
+			sourceTree = "<group>";
+		};
 		048CB32F230BC93C006CF2A9 /* News */ = {
 			isa = PBXGroup;
 			children = (
@@ -892,6 +923,7 @@
 		04AE3DA02374089500F3C6E9 /* server interaction */ = {
 			isa = PBXGroup;
 			children = (
+				046F64BA237A9863007188BC /* ParamBuilder */,
 				04A1D505230E6D240038D65C /* Result ++.swift */,
 				18742EEA234B5B4200424DB3 /* ISO8601Decoder.swift */,
 				04AE3DA1237408C900F3C6E9 /* RequestResult.swift */,
@@ -1603,6 +1635,7 @@
 		CE77AC7C21B0FBB300C0ED0D /* api */ = {
 			isa = PBXGroup;
 			children = (
+				046F64B5237A7EC1007188BC /* Match */,
 				040EB38223757ACF00D25F50 /* Region */,
 				04AE3D9D2373EA9500F3C6E9 /* Person */,
 				CE916AAB21B4E1FC0025FECF /* ApiRoute.swift */,
@@ -2988,6 +3021,7 @@
 				DB51CD9522155D8B00A8D08E /* ScoreMatchTableViewController.swift in Sources */,
 				CE61551321AF929E008C4463 /* NewsTableViewCell.swift in Sources */,
 				DB2A35D821CA20C200E9E2C5 /* PlayersPresenter.swift in Sources */,
+				046F64B9237A88A6007188BC /* ParamBuilder.swift in Sources */,
 				04C024E82213E12C00A4A571 /* EventsProtocolTableViewCell.swift in Sources */,
 				189482682356EC9D000C8A2A /* _Player.swift in Sources */,
 				1894827E2356F045000C8A2A /* TourneyModelItem.swift in Sources */,
@@ -3102,6 +3136,7 @@
 				18A68010235866BD00AE8F87 /* ScheduleTableViewModel.swift in Sources */,
 				180C084D22C1F74A00ADC90D /* CreateClub.swift in Sources */,
 				DB2E1F7822EC11E800CDA5CD /* ProtocolRefereeViewModel.swift in Sources */,
+				046F64B7237A7ECE007188BC /* MatchApi.swift in Sources */,
 				DB87FE812243D9E2001EBA7C /* EmptyViewNew.swift in Sources */,
 				1894827A2356F018000C8A2A /* MyTourneyCell.swift in Sources */,
 				185AF41C235339F200EC1F0A /* NewsModelItem.swift in Sources */,
@@ -3159,6 +3194,7 @@
 				DBB208E5221180850010B600 /* TeamProtocolTableViewController.swift in Sources */,
 				18076943229E81A000A10996 /* AddPlayerToTeamResponse.swift in Sources */,
 				DBA77C2C22D24A3A000DCF02 /* AddEventsProtocolPresenter.swift in Sources */,
+				046F64BD237A9892007188BC /* StringBuilder.swift in Sources */,
 				DB1CA0FD22254FD4005E1FB9 /* AuthUser.swift in Sources */,
 				18EFFAC022F3189800B17947 /* TournamentTeamHeaderView.swift in Sources */,
 				DB8A68A3224E583F00D3972A /* CreateTeamInfo.swift in Sources */,

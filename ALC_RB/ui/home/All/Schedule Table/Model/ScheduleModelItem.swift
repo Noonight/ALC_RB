@@ -27,7 +27,7 @@ final class ScheduleModelItem {
     }
     
     var played: Bool {
-        return match.played
+        return match.played ?? false
     }
     
     var teamOneName: String {
@@ -47,11 +47,11 @@ final class ScheduleModelItem {
     }
     
     var date: String? {
-        return match.date.toFormat(DateFormats.local.rawValue)
+        return match.date?.toFormat(DateFormats.local.rawValue)
     }
     
     var time: String? {
-        return match.date.toFormat(DateFormats.localTime.rawValue)
+        return match.date?.toFormat(DateFormats.localTime.rawValue)
     }
     
 }

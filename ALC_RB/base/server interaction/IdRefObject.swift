@@ -88,12 +88,16 @@ enum IdRefObject<T>: Codable where T : Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let id = try? container.decode(String.self) {
-            print("try decode id")
+            print("decode id")
+            Print.m("id = \(id)")
             self = .id(id)
         } else if let object = try? container.decode(T.self) {
-            print("try decode object")
+            print("decode object")
+            Print.m("object = \(object)")
             self = .object(object)
         } else {
+            // TEST: test wrapper object here
+//            try! container.decode(T.self)
             throw DecodingError.typeMismatch(IdRefObject.self, DecodingError.Context(codingPath: container.codingPath, debugDescription: "Not a JSON"))
         }
     }

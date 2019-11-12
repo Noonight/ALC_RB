@@ -22,6 +22,8 @@ extension DataRequest {
                 } else if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
                     resultMy(.message(message))
                 } else {
+                    // TEST: here test decode
+//                    try! decoder.decode(T.self, from: response.data!)
                     resultMy(.failure(.notExpectedData))
                     //                    try! decoder.decode(T.self, from: response.data!)
                 }
