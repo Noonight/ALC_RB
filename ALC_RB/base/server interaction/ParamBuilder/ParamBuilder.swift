@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class ParamBuilder {
+final class ParamBuilder<T> where T: CodingKey {
     
     enum CRUDParamKeys: String {
         case limit = "_limit"
@@ -24,66 +24,115 @@ final class ParamBuilder {
     
     private var params = [String:Any]()
     
-    func limit(_ value: Int = Constants.Values.LIMIT) -> Self {
-        params[CRUDParamKeys.limit.str()] = String(value)
+    
+    init() { }
+    
+    func limit(_ value: Int? = Constants.Values.LIMIT) -> Self {
+        if value != nil {
+            params[CRUDParamKeys.limit.str()] = String(value!)
+        }
         return self
     }
     
-    func offset(_ value: Int = 0) -> Self {
-        params[CRUDParamKeys.offset.str()] = String(value)
+    func offset(_ value: Int? = 0) -> Self {
+        if value != nil {
+            params[CRUDParamKeys.offset.str()] = String(value!)
+        }
         return self
     }
     
     // MARK: - SELECT
     
-    func select(_ value: String) -> Self {
-        params[CRUDParamKeys.select.str()] = String(value)
+    func select(_ value: String?) -> Self {
+        if value != nil {
+            params[CRUDParamKeys.select.str()] = String(value!)
+        }
         return self
     }
     
-    func select(_ builder: StringBuilder) -> Self {
+    func select(_ builder: StrBuilder<T>) -> Self {
         params[CRUDParamKeys.select.str()] = String(builder.getStr())
         return self
     }
     
     // MARK: - POPULATE
     
-    func populate(_ value: String) -> Self {
-        params[CRUDParamKeys.populate.str()] = String(value)
+    func populate(_ value: String?) -> Self {
+        if value != nil {
+            params[CRUDParamKeys.populate.str()] = String(value!)
+        }
         return self
     }
     
-    func populate(_ builder: StringBuilder) -> Self {
+    func populate(_ builder: StrBuilder<T>) -> Self {
         params[CRUDParamKeys.populate.str()] = String(builder.getStr())
         return self
     }
     
     // MARK: - SORT
     
-    func sort(_ value: String) -> Self {
-        params[CRUDParamKeys.sort.str()] = String(value)
+    func sort(_ value: String?) -> Self {
+        if value != nil {
+            params[CRUDParamKeys.sort.str()] = String(value!)
+        }
         return self
     }
     
-    func sort(_ builder: StringBuilder) -> Self {
+    func sort(_ builder: StrBuilder<T>) -> Self {
         params[CRUDParamKeys.sort.str()] = String(builder.getStr())
         return self
     }
     
     // MARK: - CUSTOM
     
-    func add(key: String, value builder: StringBuilder) -> Self {
-        params[key] = builder.getStr()
+    func add(key: String, value builder: StrBuilder<T>) -> Self {
+        if builder.getStr().isEmpty == false {
+            params[key] = builder.getStr()
+        }
         return self
     }
     
-    func add<T>(key: T, value builder: StringBuilder) -> Self where T : CodingKey {
-        params[key.stringValue] = builder.getStr()
+    func add<U>(_ type: U.Type, key: String, value builder: StrBuilder<U>) -> Self where U : CodingKey {
+        if builder.getStr().isEmpty == false {
+            params[key] = builder.getStr()
+        }
+    }
+    
+    func add<U>(_ type: U.Type, key: U, value: String?) -> Self where U : CodingKey {
+        if value != nil {
+            params[key.stringValue] = value!
+        }
+    }
+    
+    func add<U>(_ type: U.Type, key: U, value: U?) -> Self where U : CodingKey {
+        if value != nil {
+            params[key.stringValue] = value!.stringValue
+        }
+    }
+    
+    func add(key: T, value builder: StrBuilder<T>) -> Self {
+        if builder.getStr().isEmpty == false {
+            params[key.stringValue] = builder.getStr()
+        }
         return self
     }
     
-    func add(key: String, value: String) -> Self {
-        params[key] = value
+    func add(key: T, value: String?) -> Self {
+        if value != nil {
+            params[key.stringValue] = value!
+        }
+        return self
+    }
+    
+//    func add<U>(key: U, value builder: StringBuilder<U>) -> Self where U : CodingKey {
+//        params[key.stringValue] = builder.getStr()
+//        return self
+//    }
+    
+    func add(key: String, value: String?) -> Self {
+        if value != nil {
+            params[key] = value!
+        }
         return self
     }
     
