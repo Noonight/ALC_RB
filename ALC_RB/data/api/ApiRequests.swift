@@ -1086,58 +1086,6 @@ class ApiRequests {
         }
     }
     
-    func get_upcomingMatches(get_result: @escaping (ResultMy<MmUpcomingMatches, RequestError>) -> ())
-    {
-        let alamoInstace = Alamofire
-            .request(ApiRoute.getApiURL(.upcomingMatches))
-        
-        alamoInstace
-//            .validate()
-            .responseResultMy(MmUpcomingMatches.self, resultMy: { result in
-                get_result(result)
-            })
-//            .responseJSON { response  in
-//
-//                let decoder = JSONDecoder()
-//
-//                switch response.result
-//                {
-//                case .success:
-//                    do
-//                    {
-//                        if let matches = try decoder.decode(MmUpcomingMatches.self, from: response.data!)
-//                        {
-//                            get_result(.success(matches))
-//                        }
-//                        if let message = try decoder.decode(SingleLineMessage.self, from: response.data!)
-//                        {
-//                            get_result(.message(message))
-//                        }
-//                    } catch RequestError.notExpectedData {
-//                        get_result(.failure(.notExpectedData))
-//                    }
-//                case .failure(let error):
-//                    get_result(.failure(.error(error)))
-////                    let statusCode = response.response?.statusCode
-////                    if (400..<500).contains(statusCode!)
-////                    {
-////                        get_result(.failure(.local(error )))
-////                    }
-////                    else
-////                    if (500..<600).contains(statusCode!)
-////                    {
-////                        get_result(.failure(.server(error)))
-////                    }
-////                    else
-////                    {
-////                        get_result(.failure(.alamofire(error)))
-////                    }
-//                }
-//            }
-        
-        
-    }
-    
     func get_announces(get_result: @escaping (ResultMy<[Announce], Error>) -> ()) {
         let alamo = Alamofire.request(ApiRoute.getApiURL(.announce))
         alamo

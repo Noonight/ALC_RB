@@ -107,6 +107,7 @@ class StrBuilder<T> where T: CodingKey {
                 }
             }
         }
+        return self
     }
     
     func add<U>(_ type: U.Type,_ cks: [U]?) -> Self where U: CodingKey {
@@ -122,6 +123,7 @@ class StrBuilder<T> where T: CodingKey {
                 }
             }
         }
+        return self
     }
     
     func add<U>(_ type: U.Type,_ value: U) -> Self where U: CodingKey {
@@ -159,6 +161,7 @@ class StrBuilder<T> where T: CodingKey {
                 }
             }
         }
+        return self
     }
     
     func add(_ separator: Separator) -> Self {

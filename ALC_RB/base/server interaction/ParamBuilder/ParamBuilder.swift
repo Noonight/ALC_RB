@@ -85,6 +85,20 @@ final class ParamBuilder<T> where T: CodingKey {
     
     // MARK: - CUSTOM
     
+    func add(key: T, value: Bool?) -> Self {
+        if value != nil {
+            params[key.stringValue] = String(value!)
+        }
+        return self
+    }
+    
+    func add(key: String, value: Bool?) -> Self {
+        if value != nil {
+            params[key] = String(value!)
+        }
+        return self
+    }
+    
     func add(key: String, value builder: StrBuilder<T>) -> Self {
         if builder.getStr().isEmpty == false {
             params[key] = builder.getStr()
@@ -96,18 +110,21 @@ final class ParamBuilder<T> where T: CodingKey {
         if builder.getStr().isEmpty == false {
             params[key] = builder.getStr()
         }
+        return self
     }
     
     func add<U>(_ type: U.Type, key: U, value: String?) -> Self where U : CodingKey {
         if value != nil {
             params[key.stringValue] = value!
         }
+        return self
     }
     
     func add<U>(_ type: U.Type, key: U, value: U?) -> Self where U : CodingKey {
         if value != nil {
             params[key.stringValue] = value!.stringValue
         }
+        return self
     }
     
     func add(key: T, value builder: StrBuilder<T>) -> Self {

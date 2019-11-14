@@ -19,7 +19,7 @@ struct League: Codable {
         case finished = "finished"
     }
     
-    var id: String?
+    var id: String
     
     var creator: IdRefObjectWrapper<Person>?
     var tourney: String? // TODO: IdRefObjectWrapper<Tourney>?
@@ -79,7 +79,7 @@ struct League: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? nil
+        self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? "nil"
         
         self.status = try container.decodeIfPresent(Status.self, forKey: .status) ?? .pending
         self.tourney = try container.decodeIfPresent(String.self, forKey: .tourney) ?? nil
@@ -176,7 +176,7 @@ extension League {
     func with(
         status: Status? = nil,
         matches: [Match]? = nil,
-        id: String? = nil,
+        id: String = "nil",
         tourney: String? = nil,
         name: String? = nil,
         beginDate: String? = nil,

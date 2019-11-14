@@ -172,7 +172,8 @@ class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegat
     
     func filterPendingTournaments(tournaments: Tournaments) -> [League] {
         return tournaments.leagues.filter({ league -> Bool in
-            return league.getStatus() == League.Statuses.pending
+            return league.status == League.Status.pending
+//            return league.getStatus() == League.Statuses.pending
         })
     }
     

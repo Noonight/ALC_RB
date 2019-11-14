@@ -45,19 +45,27 @@ struct LILeague: Codable {
     var ageAllowedMin: Int?
     var ageAllowedMax: Int?
     
-    func convertToLeague() -> League {
-        func getMatchArray() -> [String] {
-            return (self.matches?.map({ liMatch -> String in
-                return liMatch.id
-            }))!
-        }
-        func getTeamArray() -> [Team] {
-            return (self.teams?.map({ team -> Team in
-                return team.convertToTeam()
-            }))!
-        }
-        return League().with(status: status, matches: getMatchArray(), id: id, tourney: tourney, name: name, beginDate: beginDate, endDate: endDate, transferBegin: transferBegin, transferEnd: transferEnd, playersMin: playersMin, playersMax: playersMax, playersCapacity: playersCapacity, yellowCardsToDisqual: yellowCardsToDisqual, ageAllowedMin: ageAllowedMin, ageAllowedMax: ageAllowedMax, maxTeams: maxTeams, teams: getTeamArray())
-    }
+//    func convertToLeague() -> League {
+//        func getMatchArray() -> [String] {
+//            return (self.matches?.map({ liMatch -> String in
+//                return liMatch.id
+//            }))!
+//        }
+//        func getMatches() -> [Match] {
+//            return self.matches?.map({ match -> [Match] in
+//                return Match()
+//            })
+//        }
+//        func getTeamArray() -> [Team] {
+//            return (self.teams?.map({ team -> Team in
+//                return team.convertToTeam()
+//            }))!
+//        }
+//        
+//        var mStatus = League.Status(rawValue: status ?? "")
+//        
+//        return League().with(status: mStatus, matches: getMatchArray(), id: id, tourney: tourney, name: name, beginDate: beginDate, endDate: endDate, transferBegin: transferBegin, transferEnd: transferEnd, playersMin: playersMin, playersMax: playersMax, playersCapacity: playersCapacity, yellowCardsToDisqual: yellowCardsToDisqual, ageAllowedMin: ageAllowedMin, ageAllowedMax: ageAllowedMax, maxTeams: maxTeams, teams: getTeamArray())
+//    }
     
     enum CodingKeys: String, CodingKey {
         case status = "status"
