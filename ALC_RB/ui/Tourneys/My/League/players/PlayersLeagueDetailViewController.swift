@@ -44,7 +44,7 @@ class PlayersLeagueDetailViewController: UIViewController {
     }
     var fetchedPersons: [Person] = []
     
-    let presenter = PlayersLeagueDetailPresenter(dataManager: ApiRequests())
+    let presenter = PlayersLeagueDetailPresenter(dataManager: ApiRequests(), personApi: PersonApi())
     
     var filterArguments = [PlayersLeagueDetailViewController.FilterType.matches.rawValue,
                            PlayersLeagueDetailViewController.FilterType.goals.rawValue,
@@ -285,11 +285,30 @@ extension PlayersLeagueDetailViewController: UITableViewDataSource {
             setupCell(person: person)
         } else {
             let hud = cell.showLoadingViewHUD()
-            presenter.getUser(user: player.playerId) { (person) in
-                self.fetchedPersons.append(person.person)
-                setupCell(person: person.person)
-                hud.hide(animated: true)
+            presenter.getUser(id: player.playerId) { result in
+                switch result {
+                case .success(let persons):
+                    if let firstPerson = persons.first {
+                        self.fetchedPersons.append(firstPerson)
+                        setupCell(person: firstPerson)
+                        hud.hide(animated: true)
+                    }
+                    
+                case .message(let message):
+                    Print.m(message.message)
+                    
+                case .failure(.error(let error)):
+                    Print.m(error)
+                    
+                case .failure(.notExpectedData):
+                    Print.m("not expected data")
+                }
             }
+//            presenter.getUser(user: player.playerId) { (person) in
+//                self.fetchedPersons.append(person.person)
+//                setupCell(person: person.person)
+//                hud.hide(animated: true)
+//            }
         }
         
     }

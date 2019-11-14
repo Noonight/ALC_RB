@@ -12,9 +12,9 @@ extension LeagueModelItem: CellModel {}
 
 final class LeagueModelItem {
     
-    let league: _League
+    let league: League
     
-    init(league: _League) {
+    init(league: League) {
         self.league = league
     }
     

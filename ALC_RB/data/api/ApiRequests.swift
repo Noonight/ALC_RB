@@ -1844,7 +1844,7 @@ class ApiRequests {
                 let decoder = ISO8601Decoder.getDecoder()
 //                Print.m("\(response.result)) || tourney  <= \(mTourney.id!)")
                 do {
-                    if let leagues = try? decoder.decode([_League].self, from: response.data!) {
+                    if let leagues = try? decoder.decode([League].self, from: response.data!) {
 //                        Print.m("leagues => \(leaguees)")
                         get_result(.success(leagues.map({ league -> LeagueModelItem in
                             return LeagueModelItem(league: league)
@@ -1852,7 +1852,7 @@ class ApiRequests {
 //                        Print.m("it is not decoding")
                     } else {
 //                        dump(response)
-//                        Print.m(try! decoder.decode([_League].self, from: response.data!))
+//                        Print.m(try! decoder.decode([League].self, from: response.data!))
                         get_result(.success([]))
                     }
                     if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
@@ -1869,7 +1869,7 @@ class ApiRequests {
     
     // MARK: END
     
-    func get_leagueMatches(leagueId: String, result: @escaping (ResultMy<[_Match], Error>) -> () ) {
+    func get_leagueMatches(leagueId: String, result: @escaping (ResultMy<[Match], Error>) -> () ) {
         Alamofire
             .request(ApiRoute.getApiURL(.leagueMatches, id: leagueId))
             .responseJSON { response in
@@ -1877,7 +1877,7 @@ class ApiRequests {
                 let decoder = ISO8601Decoder.getDecoder()
                 
                 do {
-                    if let matches = try? decoder.decode([_Match].self, from: response.data!) { // MARK: TODO - league matches reques not ok see request
+                    if let matches = try? decoder.decode([Match].self, from: response.data!) { // MARK: TODO - league matches reques not ok see request
                         result(.success(matches))
                     }
                     if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {

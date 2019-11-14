@@ -69,7 +69,7 @@ class PlayersTeamLeagueDetailPresenter: MvpPresenter<PlayersTeamLeagueDetailView
     }
     
     func getPerson(id: String, result: @escaping (ResultMy<[Person], RequestError>) -> ()) {
-        personApi.get_person(resultMy: result)
+        personApi.get_person(id: id, resultMy: result)
     }
     
 //    func getTeamCreatorName(creator id: String, get_name: @escaping (String) -> ()) {

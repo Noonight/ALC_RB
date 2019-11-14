@@ -53,6 +53,7 @@
 		04FF6F8D237D262C0045D82E /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FF6F8C237D262C0045D82E /* Match.swift */; };
 		04FF6F90237D27680045D82E /* Stadium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FF6F8F237D27680045D82E /* Stadium.swift */; };
 		04FF6F92237D28880045D82E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FF6F91237D28880045D82E /* Event.swift */; };
+		04FF6F96237D6EDE0045D82E /* Date ++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FF6F95237D6EDE0045D82E /* Date ++.swift */; };
 		1801B87F2271872300BE0F7C /* CommandAddPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1801B87E2271872300BE0F7C /* CommandAddPlayerPresenter.swift */; };
 		18076941229E7D4900A10996 /* AddPlayerToTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18076940229E7D4900A10996 /* AddPlayerToTeam.swift */; };
 		18076943229E81A000A10996 /* AddPlayerToTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18076942229E81A000A10996 /* AddPlayerToTeamResponse.swift */; };
@@ -445,6 +446,7 @@
 		04FF6F8C237D262C0045D82E /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		04FF6F8F237D27680045D82E /* Stadium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stadium.swift; sourceTree = "<group>"; };
 		04FF6F91237D28880045D82E /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		04FF6F95237D6EDE0045D82E /* Date ++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date ++.swift"; sourceTree = "<group>"; };
 		1801B87E2271872300BE0F7C /* CommandAddPlayerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandAddPlayerPresenter.swift; sourceTree = "<group>"; };
 		18063EDB2282C49B0072FACD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		18063EDC2282C49B0072FACD /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -1702,6 +1704,7 @@
 				1869CA1823545EDA00204697 /* Reactive ++ Binder.swift */,
 				188B53CC23586D9700149AD1 /* HUD TO STATIC.swift */,
 				182394C32361BA1C007D6954 /* UIView + MBProgressHUD.swift */,
+				04FF6F95237D6EDE0045D82E /* Date ++.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -3088,6 +3091,7 @@
 				CE61552521AFEB54008C4463 /* UserLKViewController.swift in Sources */,
 				DB2E1F7322EAFAE800CDA5CD /* DoMatchProtocolRefereeViewController.swift in Sources */,
 				04FF6F90237D27680045D82E /* Stadium.swift in Sources */,
+				04FF6F96237D6EDE0045D82E /* Date ++.swift in Sources */,
 				04A1D506230E6D240038D65C /* Result ++.swift in Sources */,
 				DB48BE7622002B42008B007D /* SoloClub.swift in Sources */,
 				187F2E0122CB19440049EA77 /* EditScoreMatchPresenter.swift in Sources */,

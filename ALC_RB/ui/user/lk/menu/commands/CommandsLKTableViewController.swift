@@ -424,9 +424,9 @@ extension CommandsLKTableViewController {
                 cell.tournamentTitle_label.text = "\(tourney). \(name)"
             }
             
-            cell.tournamentDate_label.text = "\(tournament.beginDate!.convertDate(from: .leagueDate, to: .local)) - \(tournament.endDate!.convertDate(from: .leagueDate, to: .local))"
+            cell.tournamentDate_label.text = "\(tournament.beginDate!.toFormat(DateFormats.local.ck)) - \(tournament.endDate!.toFormat(DateFormats.local.ck))"
             
-            cell.tournamentTransfer_label.text = "\(tournament.transferBegin!.convertDate(from: .leagueDate, to: .local)) - \(tournament.transferEnd!.convertDate(from: .leagueDate, to: .local))"
+            cell.tournamentTransfer_label.text = "\(tournament.transferBegin!.toFormat(DateFormats.local.ck)) - \(tournament.transferEnd!.toFormat(DateFormats.local.ck))"
             
             if tournament.betweenBeginEndDate() {
                 cell.tournamentTitle_label.textColor = .red

@@ -168,7 +168,7 @@ extension OngoingLeaguesLKTableViewController {
             if let league = league {
                 
                 cell.userTournamentTitle_label.text = "\(league.name). \(league.tourney)"
-                cell.userTournamentDate_label.text = "\(league.beginDate!.convertDate(from: .leagueDate, to: .local)) - \(league.endDate!.convertDate(from: .leagueDate, to: .local))"
+                cell.userTournamentDate_label.text = "\(league.beginDate!.toFormat(DateFormats.local.ck)) - \(league.endDate!.toFormat(DateFormats.local.ck))"
             }
             
             if let team = team {

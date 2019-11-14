@@ -69,7 +69,7 @@ final class MyTourneyHeaderView: UIView {
     
     var deleteAction : ((TourneyModelItem) -> ())? {
         didSet {
-            Print.m("delete action")
+//            Print.m("delete action")
         }
     }
     // MARK: -

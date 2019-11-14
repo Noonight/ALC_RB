@@ -11,12 +11,12 @@ import RxSwift
 import RxCocoa
 import MBProgressHUD
 struct LeagueDetailModel {
-    var league: _League!
+    var league: League!
     var leagueInfo = LILeagueInfo()
 
     init() { }
     
-    init (_ league: _League) {
+    init (_ league: League) {
         self.league = league
     }
 }

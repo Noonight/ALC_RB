@@ -25,10 +25,10 @@ struct League: Codable {
     var tourney: String? // TODO: IdRefObjectWrapper<Tourney>?
     var name: String?
     
-    var transferBegin: String? // TODO: Date?
-    var transferEnd: String? // TODO: Date?
-    var beginDate: String? // TODO: Date?
-    var endDate: String? // TODO: Date?
+    var transferBegin: Date? // TODO: Date?
+    var transferEnd: Date? // TODO: Date?
+    var beginDate: Date? // TODO: Date?
+    var endDate: Date? // TODO: Date?
     var drawDateTime: Date?
     
     var mainReferee: IdRefObjectWrapper<Person>?
@@ -52,8 +52,8 @@ struct League: Codable {
     func betweenBeginEndDate() -> Bool {
         //        let firstDate = beginDate?.toDateCustom(type: .leagueDate)!
         //        let lastDate = endDate?.toDateCustom(type: .leagueDate)!
-        guard let firstDate = beginDate?.toDate()?.date else { return false }//.toFormat(DateFormats.leagueDate.rawValue) else { return false }
-        guard let lastDate = endDate?.toDate()?.date else { return false }//.toFormat(DateFormats.leagueDate.rawValue) else { return false }
+        guard let firstDate = beginDate?.date else { return false }//.toFormat(DateFormats.leagueDate.rawValue) else { return false }
+        guard let lastDate = endDate?.date else { return false }//.toFormat(DateFormats.leagueDate.rawValue) else { return false }
         return Date().isBetween(firstDate, and: lastDate)
     }
     
@@ -81,13 +81,13 @@ struct League: Codable {
         
         self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? "nil"
         
-        self.status = try container.decodeIfPresent(Status.self, forKey: .status) ?? .pending
+        self.status = try container.decodeIfPresent(Status.self, forKey: .status) ?? nil
         self.tourney = try container.decodeIfPresent(String.self, forKey: .tourney) ?? nil
         self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? nil
-        self.beginDate = try container.decodeIfPresent(String.self, forKey: .beginDate) ?? nil
-        self.endDate = try container.decodeIfPresent(String.self, forKey: .endDate) ?? nil
-        self.transferBegin = try container.decodeIfPresent(String.self, forKey: .transferBegin) ?? nil
-        self.transferEnd = try container.decodeIfPresent(String.self, forKey: .transferEnd) ?? nil
+        self.beginDate = try container.decodeIfPresent(Date.self, forKey: .beginDate) ?? nil
+        self.endDate = try container.decodeIfPresent(Date.self, forKey: .endDate) ?? nil
+        self.transferBegin = try container.decodeIfPresent(Date.self, forKey: .transferBegin) ?? nil
+        self.transferEnd = try container.decodeIfPresent(Date.self, forKey: .transferEnd) ?? nil
         self.playersMin = try container.decodeIfPresent(Int.self, forKey: .playersMin) ?? nil
         self.playersMax = try container.decodeIfPresent(Int.self, forKey: .playersMax) ?? nil
         //        self.playersCapacity = try container.decodeIfPresent(Int.self, forKey: .playersCapacity) ?? 0
@@ -172,48 +172,48 @@ extension League {
         try self.init(data: try Data(contentsOf: url))
     }
     
-    func with(
-        status: Status? = nil,
-        matches: [Match]? = nil,
-        id: String = "nil",
-        tourney: String? = nil,
-        name: String? = nil,
-        beginDate: String? = nil,
-        endDate: String? = nil,
-        transferBegin: String? = nil,
-        transferEnd: String? = nil,
-        playersMin: Int? = nil,
-        playersMax: Int? = nil,
-        playersCapacity: Int? = nil,
-        yellowCardsToDisqual: Int?? = nil,
-        ageAllowedMin: Int? = nil,
-        ageAllowedMax: Int? = nil,
-        maxTeams: Int? = nil,
-        teams: [Team]? = nil,
-        stages: [Stage]? = nil
-        ) -> League {
-        var league = League()
-        league.status = status ?? self.status
-        league.matches = matches ?? self.matches
-        league.id = id ?? self.id
-        league.tourney = tourney ?? self.tourney
-        league.name = name ?? self.name
-        league.beginDate = beginDate ?? self.beginDate
-        league.endDate = endDate ?? self.endDate
-        league.transferBegin = transferBegin ?? self.transferBegin
-        league.transferEnd = transferEnd ?? self.transferEnd
-        league.playersMin = playersMin ?? self.playersMin
-        league.playersMax = playersMax ?? self.playersMax
-        //        league.playersCapacity = playersCapacity ?? self.playersCapacity
-        league.yellowCardsToDisqual = yellowCardsToDisqual ?? self.yellowCardsToDisqual
-        league.ageAllowedMin = ageAllowedMin ?? self.ageAllowedMin
-        league.ageAllowedMax = ageAllowedMax ?? self.ageAllowedMax
-        league.maxTeams = maxTeams ?? self.maxTeams
-        league.teams = teams ?? self.teams
-        league.stages = stages ?? self.stages
-        
-        return league
-    }
+//    func with(
+//        status: Status? = nil,
+//        matches: [Match]? = nil,
+//        id: String = "nil",
+//        tourney: String? = nil,
+//        name: String? = nil,
+//        beginDate: Date? = nil,
+//        endDate: Date? = nil,
+//        transferBegin: Date? = nil,
+//        transferEnd: Date? = nil,
+//        playersMin: Int? = nil,
+//        playersMax: Int? = nil,
+//        playersCapacity: Int? = nil,
+//        yellowCardsToDisqual: Int?? = nil,
+//        ageAllowedMin: Int? = nil,
+//        ageAllowedMax: Int? = nil,
+//        maxTeams: Int? = nil,
+//        teams: [Team]? = nil,
+//        stages: [Stage]? = nil
+//        ) -> League {
+//        var league = League()
+//        league.status = status ?? self.status
+//        league.matches = matches ?? self.matches
+//        league.id = id ?? self.id
+//        league.tourney = tourney ?? self.tourney
+//        league.name = name ?? self.name
+//        league.beginDate = beginDate ?? self.beginDate
+//        league.endDate = endDate ?? self.endDate
+//        league.transferBegin = transferBegin ?? self.transferBegin
+//        league.transferEnd = transferEnd ?? self.transferEnd
+//        league.playersMin = playersMin ?? self.playersMin
+//        league.playersMax = playersMax ?? self.playersMax
+//        //        league.playersCapacity = playersCapacity ?? self.playersCapacity
+//        league.yellowCardsToDisqual = yellowCardsToDisqual ?? self.yellowCardsToDisqual
+//        league.ageAllowedMin = ageAllowedMin ?? self.ageAllowedMin
+//        league.ageAllowedMax = ageAllowedMax ?? self.ageAllowedMax
+//        league.maxTeams = maxTeams ?? self.maxTeams
+//        league.teams = teams ?? self.teams
+//        league.stages = stages ?? self.stages
+//
+//        return league
+//    }
     
     func jsonData() throws -> Data {
         return try JSONEncoder().encode(self)

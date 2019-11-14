@@ -195,7 +195,7 @@ extension MyTourneysTVC {
         
         var leagueModel = LeagueDetailModel(leagueModelItem.league)
         
-        self.viewModel.fetchLeagueInfo(leagueId: leagueModelItem.league.id!, success: { leagueInfo in
+        self.viewModel.fetchLeagueInfo(leagueId: leagueModelItem.league.id, success: { leagueInfo in
             leagueModel.leagueInfo = leagueInfo
             
             newViewController.viewModel.leagueDetailModel = BehaviorRelay<LeagueDetailModel>(value: leagueModel)

@@ -14,9 +14,11 @@ import Kingfisher
 class PlayersLeagueDetailPresenter: MvpPresenter<PlayersLeagueDetailViewController> {
     
     private let dataManager: ApiRequests
+    private let personApi: PersonApi
     
-    init(dataManager: ApiRequests) {
+    init(dataManager: ApiRequests, personApi: PersonApi) {
         self.dataManager = dataManager
+        self.personApi = personApi
     }
     
     func getUserPhotoByUploadImage(userImage image: String, get_image: @escaping (UIImage) -> ()) {
@@ -35,6 +37,10 @@ class PlayersLeagueDetailPresenter: MvpPresenter<PlayersLeagueDetailViewControll
                     debugPrint(ApiRoute.getImageURL(image: image))
                 }
         }
+    }
+    
+    func getUser(id: String, result: @escaping (ResultMy<[Person], RequestError>) -> ()) {
+        personApi.get_person(id: id, resultMy: result)
     }
     
     func getUser(user id: String, get_user: @escaping (SoloPerson) -> ()) {
