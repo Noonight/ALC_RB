@@ -47,7 +47,16 @@ struct ParticipationMatch: Codable {
         match.teamTwo = teamTwo
         match.events = events
         match.referees = referees.map({ referee -> LIReferee in
-            return LIReferee(id: referee.id, person: referee.person, type: referee.type)
+            var mId = String()
+            if let person = referee.person {
+                switch person.value {
+                case .id(let id):
+                    mId = id
+                case .object(let obj):
+                    mId = obj.id
+                }
+            }
+            return LIReferee(id: referee.id, person: mId, type: referee.type!.rawValue)
         })
         match.createdAt = createdAt
         match.updatedAt = updatedAt

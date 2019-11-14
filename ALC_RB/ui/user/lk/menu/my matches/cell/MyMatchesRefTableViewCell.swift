@@ -49,8 +49,10 @@ class MyMatchesRefTableViewCell: UITableViewCell {
     func configure(with cellModel: CellModel) {
         self.cellModel = cellModel
         
-        var userRef3 = cellModel.participationMatch?.referees.filter({ referee -> Bool in
-            return referee.getRefereeType() == Referee.RefereeType.referee3 && UserDefaultsHelper().getAuthorizedUser()?.person.id == referee.person
+        let personId = UserDefaultsHelper().getAuthorizedUser()!.person.id
+        let userRef3 = cellModel.participationMatch?.referees.filter({ referee -> Bool in
+            return referee.type == Referee.rType.thirdReferee && referee.person!.orEqual(personId, { $0.id == personId })
+//            return referee.getRefereeType() == Referee.RefereeType.referee3 && UserDefaultsHelper().getAuthorizedUser()?.person.id == referee.person
         }).first
         
         if userRef3 != nil && cellModel.participationMatch?.teamOne.count ?? 0 > 2 && cellModel.participationMatch?.teamTwo.count ?? 0 > 2 {

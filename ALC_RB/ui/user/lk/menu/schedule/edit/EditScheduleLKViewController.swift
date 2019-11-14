@@ -113,27 +113,37 @@ class EditScheduleLKViewController: BaseStateViewController {
     func setupReferee() {
         for ref in viewModel!.comingCellModel.value.activeMatch.referees {
             let refPerson = viewModel?.comingReferees.value.people.filter({ person -> Bool in
-                return person.id == ref.person
+//                return ref.person?.isEqual({ rId -> Bool in
+//                    return rId == person.id
+//                }) ?? ref.person?.isEqual({ rPerson -> Bool in
+//                    return rPerson.id == person.id
+//                }) ?? false
+                switch ref.person!.value {
+                case .id(let id):
+                    if id == person.id {
+                        return true
+                    }
+                case .object(let obj):
+                    if obj.id == person.id {
+                        return true
+                    }
+                }
+                return false
             }).first
-            switch ref.getRefereeType() {
-            case .inspector:
-                Print.m("inspector tmp")
-            case .referee1:
+            
+            switch ref.type! {
+            case .firstReferee:
                 self.referee1_btn.setTitle(refPerson?.getFullName(), for: .normal)
                 self.referee1_btn.setTitleColor(Colors.YES_REF, for: .normal)
-            case .referee2:
+            case .secondReferee:
                 self.referee2_btn.setTitle(refPerson?.getFullName(), for: .normal)
                 self.referee2_btn.setTitleColor(Colors.YES_REF, for: .normal)
-            case .referee3:
+            case .thirdReferee:
                 self.referee3_btn.setTitle(refPerson?.getFullName(), for: .normal)
                 self.referee3_btn.setTitleColor(Colors.YES_REF, for: .normal)
             case .timekeeper:
                 self.timekeeper_btn.setTitle(refPerson?.getFullName(), for: .normal)
                 self.timekeeper_btn.setTitleColor(Colors.YES_REF, for: .normal)
-            case .invalid:
-                showRepeatAlert(message: "Не удалось настроить интерфейс") {
-                    self.setupUI()
-                }
             }
         }
     }
@@ -253,16 +263,16 @@ class EditScheduleLKViewController: BaseStateViewController {
         var resultArray: [EditMatchReferee] = []
         
         if isCorrectTitle(btn: referee1_btn) {
-            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(referee1_btn.title(for: .normal)!)!))
+            resultArray.append(EditMatchReferee(type: Referee.rType.firstReferee.rawValue, person: getPersonId(referee1_btn.title(for: .normal)!)!))
         }
         if isCorrectTitle(btn: referee2_btn) {
-            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee2.rawValue, person: getPersonId(referee2_btn.title(for: .normal)!)!))
+            resultArray.append(EditMatchReferee(type: Referee.rType.secondReferee.rawValue, person: getPersonId(referee2_btn.title(for: .normal)!)!))
         }
         if isCorrectTitle(btn: referee3_btn) {
-            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee3.rawValue, person: getPersonId(referee3_btn.title(for: .normal)!)!))
+            resultArray.append(EditMatchReferee(type: Referee.rType.thirdReferee.rawValue, person: getPersonId(referee3_btn.title(for: .normal)!)!))
         }
         if isCorrectTitle(btn: timekeeper_btn) {
-            resultArray.append(EditMatchReferee(type: Referee.RefereeType.timekeeper.rawValue, person: getPersonId(timekeeper_btn.title(for: .normal)!)!))
+            resultArray.append(EditMatchReferee(type: Referee.rType.timekeeper.rawValue, person: getPersonId(timekeeper_btn.title(for: .normal)!)!))
         }
         return resultArray
     }

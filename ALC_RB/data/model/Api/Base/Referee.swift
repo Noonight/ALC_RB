@@ -10,11 +10,14 @@ import Foundation
 import Alamofire
 
 struct Referee: Codable {
-    var id: String
-    var type: String // type of ref: 1 судья, 2 судья, 3 судья, Хронометрист
-    var person: String // person id
     
-    init(id: String, person: String, type: String) {
+    var id: String
+    
+    var type: rType? // type of ref: 1 судья, 2 судья, 3 судья, Хронометрист
+    
+    var person: IdRefObjectWrapper<Person>? // person id
+    
+    init(id: String, person: IdRefObjectWrapper<Person>?, type: rType?) {
         self.id = id
         self.person = person
         self.type = type
@@ -22,45 +25,23 @@ struct Referee: Codable {
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case type = "type"
-        case person = "person"
+        case type
+        case person
     }
     
-    enum RefereeType: String {
-        case inspector = "Инспектор"
-        case referee1 = "1 судья"
-        case referee2 = "2 судья"
-        case referee3 = "3 судья"
-        case timekeeper = "Хронометрист"
-        
-        case invalid = "Не валидный тип судьи"
-    }
-    
-    func getRefereeType() -> RefereeType {
-        if type == RefereeType.inspector.rawValue {
-            return RefereeType.inspector
-        }
-        if type == RefereeType.referee1.rawValue {
-            return RefereeType.referee1
-        }
-        if type == RefereeType.referee2.rawValue {
-            return RefereeType.referee2
-        }
-        if type == RefereeType.referee3.rawValue {
-            return RefereeType.referee3
-        }
-        if type == RefereeType.timekeeper.rawValue {
-            return RefereeType.timekeeper
-        }
-        return RefereeType.invalid
+    enum rType: String, Codable {
+        case firstReferee
+        case secondReferee
+        case thirdReferee
+        case timekeeper
     }
 }
 
 extension Referee {
     init() {
         id = ""
-        type = ""
-        person = ""
+        type = nil
+        person = nil
     }
     
     init(data: Data) throws {
@@ -80,8 +61,8 @@ extension Referee {
     
     func with(
         id: String? = nil,
-        type: String? = nil,
-        person: String? = nil
+        type: rType? = nil,
+        person: IdRefObjectWrapper<Person>? = nil
         ) -> Referee {
         return Referee(
             id: id ?? self.id,

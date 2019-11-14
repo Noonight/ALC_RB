@@ -363,7 +363,7 @@ struct LIReferee: Codable {
     }
     
     func convertToReferee() -> Referee {
-        return Referee(id: id, person: person, type: type)
+        return Referee(id: id, person: IdRefObjectWrapper<Person>(person), type: Referee.rType(rawValue: type))
     }
     
     enum CodingKeys: String, CodingKey {

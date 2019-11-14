@@ -79,11 +79,21 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
 //            }
 //        })
          let matches = userDefaults.getAuthorizedUser()?.person.participationMatches?.filter({ match -> Bool in
-            return match.isEqual({ mMatch -> Bool in
-                return mMatch.referees.contains(where: { referee -> Bool in
-                    return referee.person == userDefaults.getAuthorizedUser()!.person.id
+            return match.isEqual(
+                { $0.referees.contains(where:
+                    { $0.person!.orEqual(
+                                        userDefaults.getAuthorizedUser()!.person.id,
+                                        { $0.id == userDefaults.getAuthorizedUser()!.person.id }
+                        )
+                        
+                    })
+                    
                 })
-            })
+//            return match.isEqual({ mMatch -> Bool in
+//                return mMatch.referees.contains(where: { referee -> Bool in
+//                    return referee.person == userDefaults.getAuthorizedUser()!.person.id
+//                })
+//            })
         }).map({ object -> ParticipationMatch in
             return object.getValue()!
         })
@@ -109,8 +119,9 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
 //                })
 //            })
             //
-            var person = userDefaults.getAuthorizedUser()?.person
-            viewModel.participationMatches.value = person?.participationMatches?.filter({ $0.isEqual({ $0.referees.contains(where: { $0.person == person?.id }) }) }).map({ $0.getValue()! }) ?? []
+            let person = userDefaults.getAuthorizedUser()?.person
+        viewModel.participationMatches.value = person?.participationMatches?.filter({ $0.isEqual({ $0.referees.contains(where: { $0.person!.orEqual(person!.id, { $0.id == person?.id }) }) }) }).map({ $0.getValue()! }) ?? []
+//        viewModel.participationMatches.value = person?.participationMatches?.filter({ $0.isEqual({ $0.refe }) })
 //        } catch {
 //            showAlert(title: AlertLets.alertTitle, message: AlertLets.alertMessage, actions:
 //                [

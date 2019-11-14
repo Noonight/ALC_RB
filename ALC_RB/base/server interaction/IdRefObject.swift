@@ -81,6 +81,52 @@ class IdRefObjectWrapper<T>: Codable where T : Codable {
     }
 }
 
+extension IdRefObjectWrapper {
+    
+    func orEqual(_ fId: (String) -> (Bool), _ fObj: (T) -> Bool) -> Bool {
+        var _id = false
+        var _obj = false
+        switch value {
+        case .id(let id):
+            _id = fId(id)
+        case .object(let obj):
+            _obj = fObj(obj)
+        }
+        if _id == true || _obj == true {
+            return true
+        }
+//        if _id == false && _obj == false {
+//            return false
+//        }
+        return false
+    }
+    
+    func orEqual(_ fId: String, _ fObj: (T) -> Bool) -> Bool {
+        var _id = false
+        var _obj = false
+        switch value {
+        case .id(let id):
+            if id == fId {
+                _id = true
+            }
+        case .object(let obj):
+            _obj = fObj(obj)
+        }
+        if _id == true || _obj == true {
+            return true
+        }
+        //        if _id == false && _obj == false {
+        //            return false
+        //        }
+        return false
+    }
+    
+    func areEqual<T>(left: IdRefObjectWrapper<T>, right: IdRefObjectWrapper<T>, expression: (IdRefObjectWrapper<T>, IdRefObjectWrapper<T>) -> (Bool)) -> Bool {
+        return expression(left, right)
+    }
+    
+}
+
 enum IdRefObject<T>: Codable where T : Codable {
     
     case id(String), object(T)

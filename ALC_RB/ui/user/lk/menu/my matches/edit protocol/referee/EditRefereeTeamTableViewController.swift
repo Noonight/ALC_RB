@@ -81,7 +81,7 @@ class EditRefereeTeamTableViewController: UITableViewController {
         prepareTableModel(destinationData: refereesController.referees)
         
         if match.referees.contains(where: { liRef -> Bool in
-            return liRef.person == userDefaults.getAuthorizedUser()?.person.id && liRef.convertToReferee().getRefereeType() == Referee.RefereeType.referee3 && userDefaults.getAuthorizedUser()?.person.getUserType() == Person.TypeOfPerson.mainReferee
+            return liRef.person == userDefaults.getAuthorizedUser()?.person.id && liRef.convertToReferee().type == .thirdReferee && userDefaults.getAuthorizedUser()?.person.getUserType() == Person.TypeOfPerson.mainReferee
         }) {
             editRefBarBtn.isEnabled = true
         } else {

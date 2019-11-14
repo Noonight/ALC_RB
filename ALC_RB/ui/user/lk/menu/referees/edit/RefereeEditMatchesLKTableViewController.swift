@@ -121,33 +121,33 @@ class RefereeEditMatchesLKTableViewController: BaseStateTableViewController {
         
         if isCorrectTitleOrSwitchIsOn(labelSwitch: cell.refereeOneSwitch) {
             if cell.refereeOneSwitch.isAppointed {
-                resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: (comingPerson?.id)!))
+                resultArray.append(EditMatchReferee(type: Referee.rType.firstReferee.rawValue, person: (comingPerson?.id)!))
             } else {
-                resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(cell.refereeOneSwitch.name!)!))
+                resultArray.append(EditMatchReferee(type: Referee.rType.firstReferee.rawValue, person: getPersonId(cell.refereeOneSwitch.name!)!))
             }
 //            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(cell.refereeOneSwitch.name!)!))
         }
         if isCorrectTitleOrSwitchIsOn(labelSwitch: cell.refereeTwoSwitch) {
             if cell.refereeTwoSwitch.isAppointed {
-                resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee2.rawValue, person: (comingPerson?.id)!))
+                resultArray.append(EditMatchReferee(type: Referee.rType.secondReferee.rawValue, person: (comingPerson?.id)!))
             } else {
-                resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee2.rawValue, person: getPersonId(cell.refereeTwoSwitch.name!)!))
+                resultArray.append(EditMatchReferee(type: Referee.rType.secondReferee.rawValue, person: getPersonId(cell.refereeTwoSwitch.name!)!))
             }
 //            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee2.rawValue, person: getPersonId(cell.refereeTwoSwitch.name!)!))
         }
         if isCorrectTitleOrSwitchIsOn(labelSwitch: cell.refereeThreeSwitch) {
             if cell.refereeThreeSwitch.isAppointed {
-                resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee3.rawValue, person: (comingPerson?.id)!))
+                resultArray.append(EditMatchReferee(type: Referee.rType.thirdReferee.rawValue, person: (comingPerson?.id)!))
             } else {
-                resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee3.rawValue, person: getPersonId(cell.refereeThreeSwitch.name!)!))
+                resultArray.append(EditMatchReferee(type: Referee.rType.thirdReferee.rawValue, person: getPersonId(cell.refereeThreeSwitch.name!)!))
             }
 //            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee3.rawValue, person: getPersonId(cell.refereeThreeSwitch.name!)!))
         }
         if isCorrectTitleOrSwitchIsOn(labelSwitch: cell.timeKeeperSwitch) {
             if cell.timeKeeperSwitch.isAppointed {
-                resultArray.append(EditMatchReferee(type: Referee.RefereeType.timekeeper.rawValue, person: (comingPerson?.id)!))
+                resultArray.append(EditMatchReferee(type: Referee.rType.timekeeper.rawValue, person: (comingPerson?.id)!))
             } else {
-                resultArray.append(EditMatchReferee(type: Referee.RefereeType.timekeeper.rawValue, person: getPersonId(cell.timeKeeperSwitch.name!)!))
+                resultArray.append(EditMatchReferee(type: Referee.rType.timekeeper.rawValue, person: getPersonId(cell.timeKeeperSwitch.name!)!))
             }
 //            resultArray.append(EditMatchReferee(type: Referee.RefereeType.timekeeper.rawValue, person: getPersonId(cell.timeKeeperSwitch.name!)!))
         }

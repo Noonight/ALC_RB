@@ -127,43 +127,47 @@ class ScheduleRefTableViewController: BaseStateTableViewController {
                     }).first?.club ?? nil
                     
                     let referee1 = element.referees.filter({ (referee) -> Bool in
-                        return referee.getRefereeType() == Referee.RefereeType.referee1
+                        return referee.type == .firstReferee
+//                        return referee.getRefereeType() == Referee.RefereeType.referee1
                     }).first
                     
                     var ref1: Person?
                     if referee1 != nil {
                         ref1 = dataModel.referees.people.filter({ (person) -> Bool in
-                            return referee1?.person == person.id
+                            return referee1!.person!.orEqual(person.id, { $0.id == person.id })
                         }).first
                     }
                     
                     let referee2 = element.referees.filter({ (referee) -> Bool in
-                        return referee.getRefereeType() == Referee.RefereeType.referee2
+                        return referee.type == .secondReferee
+//                        return referee.getRefereeType() == Referee.RefereeType.referee2
                     }).first
                     var ref2: Person?
                     if referee2 != nil {
                         ref2 = dataModel.referees.people.filter({ (person) -> Bool in
-                            return referee2?.person == person.id
+                            return referee2!.person!.orEqual(person.id, { $0.id == person.id })
                         }).first
                     }
                     
                     let referee3 = element.referees.filter({ (referee) -> Bool in
-                        return referee.getRefereeType() == Referee.RefereeType.referee3
+                        return referee.type == .thirdReferee
+//                        return referee.getRefereeType() == Referee.RefereeType.referee3
                     }).first
                     var ref3: Person?
                     if referee3 != nil {
                         ref3 = dataModel.referees.people.filter({ (person) -> Bool in
-                            return referee3?.person == person.id
+                            return referee3!.person!.orEqual(person.id, { $0.id == person.id })
                         }).first
                     }
                     
                     let timekeeper = element.referees.filter({ (referee) -> Bool in
-                        return referee.getRefereeType() == Referee.RefereeType.timekeeper
+                        return referee.type == .timekeeper
+//                        return referee.getRefereeType() == Referee.RefereeType.timekeeper
                     }).first
                     var timekeep: Person?
                     if timekeeper != nil {
                         timekeep = dataModel.referees.people.filter({ (person) -> Bool in
-                            return timekeeper?.person == person.id
+                            return timekeeper!.person!.orEqual(person.id, { $0.id == person.id })
                         }).first
                     }
                     

@@ -113,29 +113,39 @@ class EditRefereesProtocolViewController: BaseStateViewController {
             let refPerson = viewModel?.referees.value.people.filter({ person -> Bool in
                 return person.id == ref.person
             }).first
-            switch ref.convertToReferee().getRefereeType() {
-            case .inspector:
-                self.inspector_btn.setTitle(refPerson?.getFullName(), for: .normal)
-                self.inspector_btn.setTitleColor(Colors.YES_REF, for: .normal)
-            case .referee1:
+            switch ref.convertToReferee().type! {
+            case .firstReferee:
                 self.referee1_btn.setTitle(refPerson?.getFullName(), for: .normal)
                 self.referee1_btn.setTitleColor(Colors.YES_REF, for: .normal)
-            case .referee2:
+            case .secondReferee:
                 self.referee2_btn.setTitle(refPerson?.getFullName(), for: .normal)
                 self.referee2_btn.setTitleColor(Colors.YES_REF, for: .normal)
-            // ### referee 3 tmp
-            case .referee3:
-//                Print.m("referee3 \(refPerson)")
+            case .thirdReferee:
                 referee3Label.text = refPerson?.getFullName()
-//                referee3Label.textColor =
             case .timekeeper:
                 self.timekeeper_btn.setTitle(refPerson?.getFullName(), for: .normal)
                 self.timekeeper_btn.setTitleColor(Colors.YES_REF, for: .normal)
-            case .invalid:
-                showRepeatAlert(message: "Не удалось настроить интерфейс") {
-                    self.setupUI()
-                }
             }
+//            switch ref.convertToReferee().getRefereeType() {
+//            case .inspector:
+//                self.inspector_btn.setTitle(refPerson?.getFullName(), for: .normal)
+//                self.inspector_btn.setTitleColor(Colors.YES_REF, for: .normal)
+//            case .referee1:
+//
+//            case .referee2:
+//
+//            // ### referee 3 tmp
+//            case .referee3:
+////                Print.m("referee3 \(refPerson)")
+//
+////                referee3Label.textColor =
+//            case .timekeeper:
+//
+//            case .invalid:
+//                showRepeatAlert(message: "Не удалось настроить интерфейс") {
+//                    self.setupUI()
+//                }
+//            }
         }
     }
     
@@ -190,23 +200,23 @@ class EditRefereesProtocolViewController: BaseStateViewController {
         var resultArray: [EditMatchReferee] = []
         
         if isCorrectTitle(btn: inspector_btn) {
-            resultArray.append(EditMatchReferee(type: Referee.RefereeType.inspector.rawValue, person: getPersonId(inspector_btn.title(for: .normal)!)!))
+//            resultArray.append(EditMatchReferee(type: Referee.rType.inspector.rawValue, person: getPersonId(inspector_btn.title(for: .normal)!)!))
         }
         if isCorrectTitle(btn: referee1_btn) {
-            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee1.rawValue, person: getPersonId(referee1_btn.title(for: .normal)!)!))
+            resultArray.append(EditMatchReferee(type: Referee.rType.firstReferee.rawValue, person: getPersonId(referee1_btn.title(for: .normal)!)!))
         }
         if isCorrectTitle(btn: referee2_btn) {
-            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee2.rawValue, person: getPersonId(referee2_btn.title(for: .normal)!)!))
+            resultArray.append(EditMatchReferee(type: Referee.rType.secondReferee.rawValue, person: getPersonId(referee2_btn.title(for: .normal)!)!))
         }
 //        if isCorrectTitle(btn: referee3_btn) {
 //            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee3.rawValue, person: getPersonId(referee3_btn.title(for: .normal)!)!))
 //        }
         if isCorrectTitle(btn: timekeeper_btn) {
-            resultArray.append(EditMatchReferee(type: Referee.RefereeType.timekeeper.rawValue, person: getPersonId(timekeeper_btn.title(for: .normal)!)!))
+            resultArray.append(EditMatchReferee(type: Referee.rType.timekeeper.rawValue, person: getPersonId(timekeeper_btn.title(for: .normal)!)!))
         }
         
         // add referee - 3 { by default }
-        resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee3.rawValue, person: (userDefaults.getAuthorizedUser()?.person.id)!))
+        resultArray.append(EditMatchReferee(type: Referee.rType.thirdReferee.rawValue, person: (userDefaults.getAuthorizedUser()?.person.id)!))
         
         return resultArray
     }
@@ -243,7 +253,14 @@ class EditRefereesProtocolViewController: BaseStateViewController {
             match: soloMatch
         )
         self.refereesController.referees = (soloMatch.match?.referees.map({ referee -> LIReferee in
-            return LIReferee(id: referee.id, person: referee.person, type: referee.type)
+            var personId = String()
+            switch referee.person!.value {
+            case .id(let id):
+                personId = id
+            case .object(let obj):
+                personId = obj.id
+            }
+            return LIReferee(id: referee.id, person: personId, type: referee.type!.rawValue)
         }))!
         //        showAlert(title: Texts.EDITED_SAVED, message: "", escaping: )
         showAlert(title: Texts.EDITED_SAVED, message: "") {

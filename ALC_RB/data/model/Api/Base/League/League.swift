@@ -136,25 +136,24 @@ extension League {
     
     init() {
         id = ""
+        tourney = nil
+        name = nil
+        beginDate = nil
+        endDate = nil
+        transferBegin = nil
+        transferEnd = nil
+        playersMin = nil
+        playersMax = nil
+        yellowCardsToDisqual = nil
+        ageAllowedMin = nil
+        ageAllowedMax = nil
+        maxTeams = nil
+        teams = nil
         
-        tourney = ""
-        name = ""
-        beginDate = ""
-        endDate = ""
-        transferBegin = ""
-        transferEnd = ""
-        playersMin = -1
-        playersMax = -1
-        yellowCardsToDisqual = -1
-        ageAllowedMin = -1
-        ageAllowedMax = -1
-        maxTeams = -1
-        teams = []
+        status = nil
         
-        status = .pending
-        
-        matches = []
-        stages = []
+        matches = nil
+        stages = nil
         
     }
     

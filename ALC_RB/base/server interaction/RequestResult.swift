@@ -13,7 +13,7 @@ extension DataRequest {
     
     func responseResultMy<T: Decodable>(_ type: T.Type, queue: DispatchQueue? = nil, resultMy: @escaping (ResultMy<T, RequestError>) -> ()) {
         responseData(queue: queue) { response in
-            //            dump(response)
+            //            dump(response) // dont forgot to make tests: do responseJSON request
             let decoder = ISO8601Decoder.getDecoder()
             do {
                 //                if let id = try? dei
