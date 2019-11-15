@@ -37,7 +37,7 @@ class PlayersLeagueDetailViewController: UIViewController {
     
     let backgroundView = UIView()
     
-    var playersArray: [LIPlayer] = [LIPlayer]() {
+    var playersArray: [Player] = [Player]() {
         didSet {
             updateUI()
         }

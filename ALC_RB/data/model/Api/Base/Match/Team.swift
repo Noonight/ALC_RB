@@ -9,6 +9,14 @@
 import Foundation
 
 struct Team: Codable {
+    
+//    var id: String
+//
+//    var creator: IdRefObjectWrapper<Person>?
+//    var trainer: IdRefObjectWrapper<Person>?
+//
+//    var creatorPhone: String?
+    
     var status: String // Pending Approved Rejected
     var place: Int
     var playoffPlace: Int?

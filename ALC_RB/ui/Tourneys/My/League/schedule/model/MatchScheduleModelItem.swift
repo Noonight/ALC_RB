@@ -10,11 +10,11 @@ import Foundation
  
 final class MatchScheduleModelItem {
     
-    let match: LIMatch
-    var teamOne: LITeam?
-    var teamTwo: LITeam?
+    let match: Match
+    var teamOne: Team?
+    var teamTwo: Team?
     
-    init(match: LIMatch, teamOne: LITeam?, teamTwo: LITeam?) {
+    init(match: Match, teamOne: Team?, teamTwo: Team?) {
         self.match = match
         self.teamOne = teamOne
         self.teamTwo = teamTwo

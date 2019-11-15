@@ -77,6 +77,7 @@
 		1823DC2722952762000A1055 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1823DC2522952762000A1055 /* LoadingCell.xib */; };
 		1824601322C5CC6F0061E877 /* Button Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824601222C5CC6F0061E877 /* Button Extensions.swift */; };
 		1826378C22F085BF0014C30A /* IntrinsicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1826378B22F085BF0014C30A /* IntrinsicTableView.swift */; };
+		182D4A91237E861D000C1053 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182D4A90237E861D000C1053 /* Match.swift */; };
 		18337422235C81E00022D831 /* _LeagueDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18337421235C81E00022D831 /* _LeagueDetailModel.swift */; };
 		18375E2F234A239E00E77809 /* Tourney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18375E2E234A239D00E77809 /* Tourney.swift */; };
 		18375E31234A34C300E77809 /* SearchTourneyModelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18375E30234A34C300E77809 /* SearchTourneyModelItem.swift */; };
@@ -472,6 +473,7 @@
 		1823DC2522952762000A1055 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		1824601222C5CC6F0061E877 /* Button Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button Extensions.swift"; sourceTree = "<group>"; };
 		1826378B22F085BF0014C30A /* IntrinsicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicTableView.swift; sourceTree = "<group>"; };
+		182D4A90237E861D000C1053 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		18337421235C81E00022D831 /* _LeagueDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _LeagueDetailModel.swift; sourceTree = "<group>"; };
 		18375E2E234A239D00E77809 /* Tourney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tourney.swift; sourceTree = "<group>"; };
 		18375E30234A34C300E77809 /* SearchTourneyModelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchTourneyModelItem.swift; path = ../Search/model/SearchTourneyModelItem.swift; sourceTree = "<group>"; };
@@ -894,7 +896,6 @@
 				DB8D30BF22537328006355A7 /* SingleLineMessage.swift */,
 				DB98FAC9225462AB002933D0 /* ErrorMessage.swift */,
 				DB495B7A22AFC4BF00FCC6F5 /* ActiveMatches.swift */,
-				04713EB7237BD5B6003783C2 /* Team.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -905,6 +906,7 @@
 				04713EB1237BD283003783C2 /* Stage.swift */,
 				04713EAF237BD1EA003783C2 /* League.swift */,
 				04713EB5237BD472003783C2 /* Group.swift */,
+				182D4A90237E861D000C1053 /* Match.swift */,
 			);
 			path = League;
 			sourceTree = "<group>";
@@ -1084,6 +1086,7 @@
 		04FF6F8B237D261B0045D82E /* Match */ = {
 			isa = PBXGroup;
 			children = (
+				04713EB7237BD5B6003783C2 /* Team.swift */,
 				DB98E36722B11B190035DC78 /* Referee.swift */,
 				04FF6F8C237D262C0045D82E /* Match.swift */,
 				04FF6F91237D28880045D82E /* Event.swift */,
@@ -3253,6 +3256,7 @@
 				04AE3D9F2373EB1400F3C6E9 /* PersonApi.swift in Sources */,
 				18870B3122C0DD0000126A87 /* ClubCreateViewController.swift in Sources */,
 				CE0AF81D21C7A27900F8F6A2 /* ClubDetailPresenter.swift in Sources */,
+				182D4A91237E861D000C1053 /* Match.swift in Sources */,
 				18F0C9DE235325A9004886AF /* HomeAllViewModel.swift in Sources */,
 				DBA69213221E759600BEFB26 /* MenuOptions.swift in Sources */,
 				187BFB2922A540DC00E19A3B /* RefereesLKTableViewController.swift in Sources */,

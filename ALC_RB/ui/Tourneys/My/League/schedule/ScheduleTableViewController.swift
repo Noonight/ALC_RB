@@ -79,6 +79,7 @@ extension ScheduleTableViewController {
         
         viewModel
             .leagueDetailModel
+            .map({ $0.league.matches.orEqual() })
             .map({ $0.leagueInfo.league.matches ?? [] })
             .map({ $0.map({ match in
                 return MatchScheduleModelItem(
