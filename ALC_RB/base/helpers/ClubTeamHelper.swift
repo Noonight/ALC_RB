@@ -14,13 +14,13 @@ enum TeamEnum: Int {
 }
 
 class ClubTeamHelper {
-    static func getClubIdByTeamId(_ teamId: String, league: LILeague) -> String {
+    static func getClubIdByTeamId(_ teamId: String, league: League) -> String {
         return league.teams?.filter({ (team) -> Bool in
             return team.id == teamId
         }).first?.id ?? "club id \n not found"
     }
     
-    static func getTeamTitle(league: LILeague, match: LIMatch, team: TeamEnum) -> String {
+    static func getTeamTitle(league: League, match: Match, team: TeamEnum) -> String {
         switch team {
         case .one:
             return league.teams?.filter({ (team) -> Bool in
@@ -39,7 +39,7 @@ class ClubTeamHelper {
 //        }).first?.id ?? "club id \n not found"
 //    }
 //
-//    static func getTeamTitle(league: LILeague, match: LIMatch, team: TeamEnum) -> String {
+//    static func getTeamTitle(league: League, match: Match, team: TeamEnum) -> String {
 //        switch team {
 //        case .one:
 //            return league.teams?.filter({ (team) -> Bool in

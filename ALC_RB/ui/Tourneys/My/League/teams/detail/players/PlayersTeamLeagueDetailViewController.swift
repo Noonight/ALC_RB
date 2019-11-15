@@ -20,8 +20,8 @@ class PlayersTeamLeagueDetailViewController: UIViewController {
     let cellId = "player_team_cell"
     
     //var leagueDetailModel: LeagueDetailModel = LeagueDetailModel()
-    var _team: LITeam = LITeam()
-    var team: LITeam {
+    var _team: Team = Team()
+    var team: Team {
         get {
             return self._team
         }
@@ -110,7 +110,7 @@ extension PlayersTeamLeagueDetailViewController: UITableViewDataSource {
         return cell
     }
     
-    func configureCell(cell: PlayersTeamLeagueDetailTableViewCell, model: LIPlayer) {
+    func configureCell(cell: PlayersTeamLeagueDetailTableViewCell, model: Player) {
         
         func setupCell(person: Person) {
             cell.name.text = person.getSurnameNP()

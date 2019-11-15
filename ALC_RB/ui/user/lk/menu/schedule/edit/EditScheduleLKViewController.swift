@@ -34,7 +34,7 @@ class EditScheduleLKViewController: BaseStateViewController {
     @IBOutlet weak var referee3_btn: UIButton!
     @IBOutlet weak var timekeeper_btn: UIButton!
     
-    var viewModel: EditScheduleViewModel? = EditScheduleViewModel(dataManager: ApiRequests(), personApi: PersonApi())
+    var viewModel: EditScheduleViewModel? = EditScheduleViewModel(dataManager: ApiRequests(), personApi: PersonApi(), leagueApi: LeagueApi())
     private let disposeBag = DisposeBag()
     private let userDefaults = UserDefaultsHelper()
     
@@ -201,31 +201,23 @@ class EditScheduleLKViewController: BaseStateViewController {
         let activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator.hidesWhenStopped = true
         
-//        if cell?.accessoryType == .disclosureIndicator
-//        {
         let defaultView = sender.customView
         sender.customView = activityIndicator
-//        cell?.accessoryView = activityIndicator
         
         activityIndicator.startAnimating()
         
-////        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-////            sender.customView = defaultView
-////        }
-
-//        Print.m(viewModel?.comingCellModel.value.activeMatch.id)
         guard let leagueId = viewModel?.comingCellModel.value.activeMatch.leagueID else {
             Print.m("cell league is nil")
             return
         }
-        self.viewModel?.fetchLeagueInfo(
-            id: leagueId,
-            success: { leagueInfo in
-
+        
+        self.viewModel?.fetchLeague(id: leagueId, resultMy: { result in
+            switch result {
+            case .success(let leagues):
                 sender.customView = defaultView
 
-                self.refProtocol.leagueDetailModel.leagueInfo = leagueInfo
-                guard let match = leagueInfo.league.matches?.filter({ match -> Bool in
+                self.refProtocol.leagueDetailModel.league = leagues.first!
+                guard let match = leagues.first!.matches?.filter({ match -> Bool in
                     return match.id == self.viewModel?.comingCellModel.value.activeMatch.id
                 }).first else {
                     Print.m("not found match in incoming league matches")
@@ -238,17 +230,17 @@ class EditScheduleLKViewController: BaseStateViewController {
                 self.refProtocol.preConfigureModelControllers()
 
                 self.show(self.refProtocol, sender: self)
-        }, r_message: { message in
-            sender.customView = defaultView
-            
-            self.showAlert(message: message.message)
-            
-        }, failure: { error in
+            case .message(let message):
+                sender.customView = defaultView
+                
+                self.showAlert(message: message.message)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            case .failure(.error(let error)):
                 self.showAlert(message: error.localizedDescription)
                 Print.m(error)
+            }
         })
-        
-//        }
     }
     
     // dictionary {person, type} of referee
@@ -297,7 +289,7 @@ class EditScheduleLKViewController: BaseStateViewController {
     }
     
     // MARK: - Edit Match Response
-    func onResponseSuccess(soloMatch: SoloMatch) {
+    func onResponseSuccess(soloMatch: Match) {
         self.setMatchValue(
             id: soloMatch.match!.id,
             match: soloMatch
@@ -331,7 +323,7 @@ class EditScheduleLKViewController: BaseStateViewController {
     }
     
     // edit match for userDefaults value at id match
-    func setMatchValue(id: String, match: SoloMatch) {
+    func setMatchValue(id: String, match: Match) {
         
         var user = userDefaults.getAuthorizedUser()!
         user.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.match?.id }) })

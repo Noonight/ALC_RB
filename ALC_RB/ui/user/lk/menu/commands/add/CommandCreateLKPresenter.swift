@@ -14,7 +14,7 @@ protocol CommandCreateLKView : MvpView {
     func onGetTournamentsSuccess(tournaments: Tournaments)
     func onGetTournamentsFailure(error: Error)
     
-    func onGetClubsSuccess(clubs: Clubs)
+    func onGetClubsSuccess(clubs: [Club])
     func onGetClubsFailure(error: Error)
     
     func onCreateTeamSuccess(team: SoloTeam)

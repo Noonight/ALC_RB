@@ -13,7 +13,7 @@ class ProtocolRefereeViewModel {
     // current time using for make event
     var currentTime: EventTime = .oneHalf
     
-    var match: LIMatch!
+    var match: Match!
     var leagueDetailModel: LeagueDetailModel!
     
     var teamOnePlayersController: ProtocolPlayersController!
@@ -24,7 +24,7 @@ class ProtocolRefereeViewModel {
     let dataManager = ApiRequests()
     let personApi = PersonApi()
     
-    init(match: LIMatch, leagueDetailModel: LeagueDetailModel, teamOneModel: ProtocolPlayersController, teamTwoModel: ProtocolPlayersController,
+    init(match: Match, leagueDetailModel: LeagueDetailModel, teamOneModel: ProtocolPlayersController, teamTwoModel: ProtocolPlayersController,
          refereesModel: ProtocolRefereesController, eventsModel: ProtocolEventsController) {
         self.match = match
         self.leagueDetailModel = leagueDetailModel
@@ -252,7 +252,7 @@ class ProtocolRefereeViewModel {
         self.eventsController.restoreLastDeleted()
     }
     
-    func updateMatch(match: LIMatch) {
+    func updateMatch(match: Match) {
         self.match = match
         self.eventsController.updateEvents(events: match.events)
     }

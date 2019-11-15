@@ -715,7 +715,7 @@ extension DoMatchProtocolRefereeViewController: DismissModalPenaltySeriesVC {
 // MARK: PRESENTER
 
 extension DoMatchProtocolRefereeViewController: DoMatchProtocolRefereeView {
-    func onSaveProtocolSuccess(match: SoloMatch) {
+    func onSaveProtocolSuccess(match: Match) {
         print()
     }
     

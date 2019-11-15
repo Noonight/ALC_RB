@@ -34,8 +34,8 @@ class PlayersTableViewController: BaseStateTableViewController {
     let searchController = UISearchController(searchResultsController: nil)
     var paginationHelper: PaginationHelper!
     
-    var players = Players()
-    var filteredPlayers = Players()
+    var players = [Person]()
+    var filteredPlayers = [Person]()
     
     // MARK: Life cycle
     
@@ -280,7 +280,7 @@ extension PlayersTableViewController: UISearchResultsUpdating {
     
     func filterContentForQuery(_ query: String, scope: String = "All") {
 //        if searchBarIsEmpty() {
-//            self.filteredPlayers = Players()
+//            self.filteredPlayers = [Person]()
 //        }
         self.presenter.searchPlayers(query: query)
 //        if query.count >= 2 {

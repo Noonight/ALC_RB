@@ -157,7 +157,7 @@ class RefereeEditMatchesLKTableViewController: BaseStateTableViewController {
 }
 
 extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
-    func onResponseEditMatchSuccess(soloMatch: SoloMatch) {
+    func onResponseEditMatchSuccess(soloMatch: Match) {
         self.setMatchValue(
             id: soloMatch.match!.id,
             match: soloMatch
@@ -181,7 +181,7 @@ extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
     }
     
     // edit match for userDefaults value at id match
-    func setMatchValue(id: String, match: SoloMatch) {
+    func setMatchValue(id: String, match: Match) {
 //        Print.m(match)
         var user = userDefaults.getAuthorizedUser()!
         user.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.match?.id }) })

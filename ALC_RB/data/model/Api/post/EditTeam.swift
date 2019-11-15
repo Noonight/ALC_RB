@@ -12,7 +12,7 @@ struct EditTeam : Codable {
     
     var _id = ""
     var teamId = ""
-    var players = EditTeam.Players()
+    var players = EditTeam.[Person]()
 //    var teamName = ""
     
     init(_id: String, teamId: String, players: EditTeam.Players) {

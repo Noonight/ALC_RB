@@ -9,9 +9,9 @@
 import Foundation
 
 class ProtocolRefereesController {
-    var referees: [LIReferee] = []
+    var referees: [Referee] = []
     
-    init(referees: [LIReferee]) {
+    init(referees: [Referee]) {
         self.referees = referees
     }
 }

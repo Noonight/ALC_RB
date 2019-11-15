@@ -28,7 +28,7 @@ class CommandEditLKViewController: BaseStateViewController {
     var participation: Participation?
     
     var team = Team()
-    var players = Players()
+    var players = [Person]()
     var leagueController: LeagueController!
     var mutablePlayers: [Player] = []
 

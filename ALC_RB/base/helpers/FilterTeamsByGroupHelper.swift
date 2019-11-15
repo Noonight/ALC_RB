@@ -12,8 +12,8 @@ class FilterTeamsByGroupHelper {
     
     struct GroupedLITeam {
         var name = ""
-        var _teams: [LITeam] = []
-        var teams: [LITeam] {
+        var _teams: [Team] = []
+        var teams: [Team] {
             get {
                 return self._teams
             }
@@ -25,7 +25,7 @@ class FilterTeamsByGroupHelper {
             }
         }
         
-        mutating func add(team: LITeam) {
+        mutating func add(team: Team) {
             self.teams.append(team)
         }
         
@@ -34,7 +34,7 @@ class FilterTeamsByGroupHelper {
         }
     }
     
-    static func filter(teams: [LITeam], groups: [_Group]) -> [GroupedLITeam] {
+    static func filter(teams: [Team], groups: [_Group]) -> [GroupedLITeam] {
         
         var groupedTeams = [GroupedLITeam]()
         
@@ -74,7 +74,7 @@ class FilterTeamsByGroupHelper {
 //        return filteredTeams
     }
     
-    private static func findUniqueGroups(teams: [LITeam]) -> [String] {
+    private static func findUniqueGroups(teams: [Team]) -> [String] {
         var uniqueGroups: [String] = []
         for team in teams
         {

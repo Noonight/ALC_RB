@@ -12,7 +12,7 @@ struct Event: Codable {
     
     var id: String
 
-    var eventType: eType?
+    var type: eType?
 
     var player: String? // there is can be played id or team id
 
@@ -28,6 +28,29 @@ struct Event: Codable {
         case foul = "foul"
         case penaltySeriesSuccess = "penaltySeriesSuccess"
         case penaltySeriesFailure = "penaltySeriesFailure"
+        
+        func getTitle() -> String {
+            switch self {
+            case .goal:
+                return "Гол"
+            case .redCard:
+                return "Красная карта"
+            case .yellowCard:
+                return "Желтая карта"
+            case .penalty:
+                return "Пенальти"
+            case .penaltyFailure:
+                return "Пенальти - "
+            case .autoGoal:
+                return "Автогол"
+            case .foul:
+                return "Фол"
+            case .penaltySeriesSuccess:
+                return "Серия пенальти"
+            case .penaltySeriesFailure:
+                return "Серия пенальти - "
+            }
+        }
     }
     
     enum Time: String, Codable {

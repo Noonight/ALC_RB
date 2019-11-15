@@ -20,7 +20,7 @@ class ClubsTableViewController: BaseStateTableViewController {
     // MARK: Var & Let
     
     let presenter = ClubsPresenter()
-    var clubs = Clubs()
+    var clubs = [Club]()
 //    let imageCache = NSCache<NSString, UIImage>()
     
     // MARK: Life cycle
@@ -75,7 +75,7 @@ extension ClubsTableViewController: ClubsTableView {
         }
     }
     
-    func onGetClubsSuccess(_ clubs: Clubs) {
+    func onGetClubsSuccess(_ clubs: [Club]) {
         self.clubs = clubs
         endRefreshing()
     }

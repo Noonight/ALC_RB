@@ -255,7 +255,7 @@ extension TeamsLeagueTableViewController {
             let destination = segue.destination as? TeamLeagueDetailViewController,
             let indexPath = tableView.indexPathForSelectedRow
         {
-            var team: LITeam!
+            var team: Team!
 //            if self.allTeamsIsContainsGroup() == true
 //            {
             if self.leagueDetailModel.leagueInfo.league.stages?.first?.groups?.isEmpty ?? true {

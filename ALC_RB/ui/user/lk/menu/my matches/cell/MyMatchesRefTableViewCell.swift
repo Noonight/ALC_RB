@@ -26,12 +26,12 @@ class MyMatchesRefTableViewCell: UITableViewCell {
     @IBOutlet weak var team2Image: UIImageView!
     
     struct CellModel {
-        var participationMatch: ParticipationMatch?
+        var participationMatch: Match?
         var club1: Club?
         var club2: Club?
         var team1Name, team2Name: String?
         
-        init(participationMatch: ParticipationMatch, club1: Club?, club2: Club?, team1Name: String?, team2Name: String?) {
+        init(participationMatch: Match, club1: Club?, club2: Club?, team1Name: String?, team2Name: String?) {
             self.participationMatch = participationMatch
             self.club1 = club1
             self.club2 = club2
@@ -39,7 +39,7 @@ class MyMatchesRefTableViewCell: UITableViewCell {
             self.team2Name = team2Name
         }
         
-        init(participationMatch: ParticipationMatch) {
+        init(participationMatch: Match) {
             self.participationMatch = participationMatch
         }
     }

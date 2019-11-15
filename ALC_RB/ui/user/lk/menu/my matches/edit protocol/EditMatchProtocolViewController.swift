@@ -37,7 +37,7 @@ class EditMatchProtocolViewController: UIViewController {
     // MARK: Var & Let
     
     var leagueDetailModel = LeagueDetailModel()
-    var match = LIMatch()
+    var match = Match()
     var model: MyMatchesRefTableViewCell.CellModel!
     
     let presenter = EditMatchProtocolPresenter()
@@ -303,7 +303,7 @@ extension EditMatchProtocolViewController: EditMatchProtocolView {
         showAlert(message: error.localizedDescription)
     }
     
-    func requestEditProtocolSuccess(match: SoloMatch) {
+    func requestEditProtocolSuccess(match: Match) {
         var user = userDefaults.getAuthorizedUser()
         user?.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.match?.id }) })
 //        user?.person.participationMatches!.removeAll(where: { pMatch -> Bool in

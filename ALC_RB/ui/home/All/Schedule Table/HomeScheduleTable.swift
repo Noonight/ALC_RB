@@ -8,13 +8,13 @@
 
 import UIKit
 
-extension MmMatch : CellModel {}
+extension Match : CellModel {}
 
 final class HomeScheduleTable: NSObject {
     
     let cellNib = UINib(nibName: "HomeScheduleTableViewCell", bundle: Bundle.main)
     
-    var dataSource: [MmMatch] = []
+    var dataSource: [Match] = []
     var helperDataSource: [Club] = []
     var actions: TableActions?
     

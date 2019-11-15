@@ -11,7 +11,7 @@ import UIKit
 
 protocol ClubLKView: MvpView {
     
-    func getClubsSuccess(clubs: Clubs)
+    func getClubsSuccess(clubs: [Club])
     func getClubsFailure(error: Error)
     
     func getClubImageSuccess(image: UIImage)

@@ -234,7 +234,7 @@ extension CommandCreateLKViewController : CommandCreateLKView {
         Print.m(error)
     }
     
-    func onGetClubsSuccess(clubs: Clubs) {
+    func onGetClubsSuccess(clubs: [Club]) {
 //        viewModel.clubs = clubs
     }
     

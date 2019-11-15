@@ -13,7 +13,7 @@ protocol RefereeEditMatchesView: MvpView {
     func onFetchModelMessage(message: SingleLineMessage)
     func onFetchModelFailure(error: Error)
     
-    func onResponseEditMatchSuccess(soloMatch: SoloMatch)
+    func onResponseEditMatchSuccess(soloMatch: Match)
     func onResponseEditMatchMessage(message: SingleLineMessage)
     func onResponseEditMatchFailure(error: Error)
 }

@@ -10,21 +10,21 @@ import Foundation
 
 class ProtocolEventsController {
     
-    var events: [LIEvent] = []
-    var lastAddedEvent: LIEvent?
-    var lastDeletedEvent: LIEvent?
+    var events: [Event] = []
+    var lastAddedEvent: Event?
+    var lastDeletedEvent: Event?
     
-    init(events: [LIEvent]) {
+    init(events: [Event]) {
         self.events = events
     }
     
     func deletePenaltySeriesEvents() {
         self.events.removeAll { event -> Bool in
-            return event.getEventTime() == .penaltySeries
+            return event.time == .penaltySeries
         }
     }
     
-    func addPenaltySeriesEvents(penaltySeriesEvents: [LIEvent]) {
+    func addPenaltySeriesEvents(penaltySeriesEvents: [Event]) {
         self.events.append(contentsOf: penaltySeriesEvents)
     }
     
@@ -32,20 +32,21 @@ class ProtocolEventsController {
         let oldCount = events.count
         
         var counter = 0
-        var forDeleteEvents: [LIEvent] = []
+        var forDeleteEvents: [Event] = []
         
         if oldCount < count
         {
             for event in events
             {
-                if event.getEventType() == .team(.foul)
+//                if event.type == .foul
+                if event.type == .foul
                 {
                     counter += 1
                     Print.m(counter)
                     if counter > oldCount && counter <= count
                     {
                         Print.m(counter)
-                        Print.m(event.getEventType().getTitle())
+                        Print.m(event.type?.getTitle())
                         forDeleteEvents.append(event)
                     }
                 }
@@ -57,55 +58,53 @@ class ProtocolEventsController {
     
     // for view model, protocol for all users
     func getLastTime() -> String {
-        if events.contains(where: { event -> Bool in
-            return event.time == "Дополнительное время"
-        }) == true
-        {
+        if events.contains(where: { $0.time == .extraTime }) == true {
             return "в дополнительное время"
-        }
-        else
-        {
+        } else if events.contains(where: { $0.time == .penaltySeries }) == true {
+            return "во время серии пенальти"
+        } else {
             return "в основное время"
         }
     }
     
-    func preparePlayerEvents() -> [LIEvent] {
+    func preparePlayerEvents() -> [Event] {
         return events.filter({ event -> Bool in
-            return event.getEventType() == .player(.goal) || event.getEventType() == .player(.penalty) || event.getEventType() == .player(.penaltyFailure) || event.getEventType() == .player(.redCard) || event.getEventType() == .player(.yellowCard)
+            return event.type == .goal || event.type == .penalty || event.type == .penaltyFailure || event.type == .redCard || event.type == .yellowCard
         })
     }
     
-    func preparePlayerEventsInTime(time: EventTime) -> [LIEvent] {
+    func preparePlayerEventsInTime(time: Event.Time) -> [Event] {
         return events.filter({ event -> Bool in
-            return (event.getEventType() == .player(.goal) || event.getEventType() == .player(.penalty) || event.getEventType() == .player(.penaltyFailure) || event.getEventType() == .player(.redCard) || event.getEventType() == .player(.yellowCard)) && event.getEventTime() == time
+            return (event.type == .goal || event.type == .penalty || event.type == .penaltyFailure || event.type == .redCard || event.type == .yellowCard) && event.time == time
         })
     }
     
-    func prepareTeamEvents() -> [LIEvent] {
+    // TODO: Team events are not right
+    func prepareTeamEvents() -> [Event] {
         return events.filter({ event -> Bool in
-            return event.getEventType() == .team(.autoGoal) || event.getEventType() == .team(.foul) || event.getEventType() == .team(.penaltySeriesSuccess) || event.getEventType() == .team(.penaltySeriesFailure)
+            return event.type == .autoGoal || event.type == .foul || event.type == .penaltySeriesSuccess || event.type == .penaltySeriesFailure
         })
     }
     
-    func prepareTeamEventsInTime(time: EventTime) -> [LIEvent] {
-        var resultArray: [LIEvent] = []
+    func prepareTeamEventsInTime(time: Event.Time) -> [Event] {
+        var resultArray: [Event] = []
         for event in events
         {
-            if event.getEventTime() == time
+            if event.time == time
             {
-                if event.getEventType() == .team(.autoGoal)
+                if event.type == .autoGoal
                 {
                     resultArray.append(event)
                 }
-                if event.getEventType() == .team(.foul)
+                if event.type == .foul
                 {
                     resultArray.append(event)
                 }
-                if event.getEventType() == .team(.penaltySeriesSuccess)
+                if event.type == .penaltySeriesSuccess
                 {
                     resultArray.append(event)
                 }
-                if event.getEventType() == .team(.penaltySeriesFailure)
+                if event.type == .penaltySeriesFailure
                 {
                     resultArray.append(event)
                 }
@@ -114,25 +113,28 @@ class ProtocolEventsController {
         return resultArray
     }
     
-    func prepareNotAutoGoalFoulEvents() -> [LIEvent] {
-        return events.filter({ event -> Bool in
-            return event.getSystemEventType() != .autoGoal || event.getSystemEventType() != .foul
-        })
+    func prepareNotAutoGoalFoulEvents() -> [Event] {
+        return events.filter { $0.type != .autoGoal || $0.type != .foul }
+//        return events.filter({ event -> Bool in
+//            return event.getSystemEventType() != .autoGoal || event.getSystemEventType() != .foul
+//        })
     }
     
-    func prepareAutoGoalEvents() -> [LIEvent] {
-        return events.filter({ event -> Bool in
-            return event.getSystemEventType() == .autoGoal
-        })
+    func prepareAutoGoalEvents() -> [Event] {
+        return events.filter { $0.type == .autoGoal }
+//        return events.filter({ event -> Bool in
+//            return event.getSystemEventType() == .autoGoal
+//        })
     }
     
-    func prepareFoulEvents() -> [LIEvent] {
-        return events.filter({ event -> Bool in
-            return event.getSystemEventType() == .foul
-        })
+    func prepareFoulEvents() -> [Event] {
+        return events.filter { $0.type == .foul }
+//        return events.filter({ event -> Bool in
+//            return event.getSystemEventType() == .foul
+//        })
     }
     
-    func add(_ event: LIEvent) {
+    func add(_ event: Event) {
         events.append(event)
         lastAddedEvent = event
     }
@@ -140,8 +142,7 @@ class ProtocolEventsController {
     func removeFirstWith(event: EventMaker.DeleteEvent) -> Bool {
         for i in 0...events.count - 1
         {
-            if events[i].player == event.playerId && events[i].getEventType() == event.eventType
-            {
+            if events[i].player == event.playerId && events[i].type == event.eventType {
                 events.remove(at: i)
                 return true
             }
@@ -165,24 +166,24 @@ class ProtocolEventsController {
         }
     }
     
-    func removeFirst(_ event: LIEvent) {
+    func removeFirst(_ event: Event) {
         let index = events.index(of: event)!
         events.remove(at: index)
     }
     
-    func updateEvents(events: [LIEvent]) {
+    func updateEvents(events: [Event]) {
         self.events.removeAll()
         self.events.append(contentsOf: events)
     }
 }
 
-extension LIEvent: Equatable {
-    static func ==(lhs: LIEvent, rhs: LIEvent) -> Bool {
-        return lhs.id == rhs.id && lhs.eventType == rhs.eventType && lhs.player == rhs.player && lhs.time == rhs.time
+extension Event: Equatable {
+    static func ==(lhs: Event, rhs: Event) -> Bool {
+        return lhs.id == rhs.id && lhs.type == rhs.type && lhs.player == rhs.player && lhs.time == rhs.time
     }
-    static func !=(lhs: LIEvent, rhs: LIEvent) -> Bool {
+    static func !=(lhs: Event, rhs: Event) -> Bool {
         return lhs.id != rhs.id
-                || lhs.eventType != rhs.eventType
+                || lhs.type != rhs.type
                 || lhs.player != rhs.player
                 || lhs.time != rhs.time
     }

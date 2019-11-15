@@ -30,7 +30,7 @@ class ScoreMatchTableViewController: UITableViewController {
     let presenter = ScoreMatchPresenter()
     
     var leagueDetailModel = LeagueDetailModel()
-    var match = LIMatch()
+    var match = Match()
     
     var tableStruct: TableStruct = TableStruct()
     
@@ -67,7 +67,7 @@ class ScoreMatchTableViewController: UITableViewController {
 
     // MARK: - Configure footer
     
-    func configureFooter(league: LILeague, match: LIMatch) {
+    func configureFooter(league: League, match: Match) {
         let titleTeamOne = ClubTeamHelper.getTeamTitle(league: league, match: match, team: .one)
         footer_team_one_label.text = titleTeamOne
         //scheduleCell.mTitleTeam1 = titleTeamOne
@@ -109,7 +109,7 @@ class ScoreMatchTableViewController: UITableViewController {
         return allEventTypes
     }
     
-    func prepareTableStruct(leagueModel: LeagueDetailModel, match: LIMatch) {
+    func prepareTableStruct(leagueModel: LeagueDetailModel, match: Match) {
         let events = match.events
         let uniqueEventTypes = findUniqueHeader(destination: events)
         for uniqEvent in uniqueEventTypes {
@@ -142,7 +142,7 @@ class ScoreMatchTableViewController: UITableViewController {
         return cell
     }
     
-    func configureCell(cell: ScoreMatchTableViewCell, league: LILeague, match: LIMatch, event: LIEvent) {
+    func configureCell(cell: ScoreMatchTableViewCell, league: League, match: Match, event: LIEvent) {
         
         let playerId = event.player
 //        print ("playerId =  \(playerId)")
@@ -179,7 +179,7 @@ class ScoreMatchTableViewController: UITableViewController {
         return "\(teamOne) : \(teamTwo)"
     }
     
-    func getTeamIdByPlayerId(league: LILeague, match: LIMatch, player id: String) -> String {
+    func getTeamIdByPlayerId(league: League, match: Match, player id: String) -> String {
         let playerId = id
         let teamOne = match.teamOne
         let teamTwo = match.teamTwo

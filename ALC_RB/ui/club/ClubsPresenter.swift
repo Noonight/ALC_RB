@@ -12,7 +12,7 @@ import AlamofireImage
 
 protocol ClubsTableView: MvpView {
     
-    func onGetClubsSuccess(_ club: Clubs)
+    func onGetClubsSuccess(_ club: [Club])
     func onGetClubsFailure(_ error: Error)
     
 }

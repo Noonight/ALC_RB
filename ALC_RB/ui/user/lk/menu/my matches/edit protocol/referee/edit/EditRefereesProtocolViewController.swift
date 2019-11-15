@@ -247,12 +247,12 @@ class EditRefereesProtocolViewController: BaseStateViewController {
     }
     
     // MARK: - Edit Match Response
-    func onResponseSuccess(soloMatch: SoloMatch) {
+    func onResponseSuccess(soloMatch: Match) {
         self.setMatchValue(
             id: soloMatch.match!.id,
             match: soloMatch
         )
-        self.refereesController.referees = (soloMatch.match?.referees.map({ referee -> LIReferee in
+        self.refereesController.referees = (soloMatch.match?.referees.map({ referee -> Referee in
             var personId = String()
             switch referee.person!.value {
             case .id(let id):
@@ -292,7 +292,7 @@ class EditRefereesProtocolViewController: BaseStateViewController {
     }
     
     // edit match for userDefaults value at id match
-    func setMatchValue(id: String, match: SoloMatch) {
+    func setMatchValue(id: String, match: Match) {
         var user = userDefaults.getAuthorizedUser()
         
         if user?.person.participationMatches!.contains(where: { pMatch -> Bool in

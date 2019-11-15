@@ -20,33 +20,33 @@ class ScheduleTableViewController: UITableViewController {
         return viewController
     }
     
-//    var _leagueDetailModel = LeagueDetailModel()
-//    var leagueDetailModel: LeagueDetailModel
-//    {
-//        get {
-//            return _leagueDetailModel
-//        }
-//        set {
-//            if newValue.leagueInfo.league.matches?.count != 0
-//            {
-//                var newVal = newValue
-//                let hud = self.tableView.showLoadingViewHUD(with: "Сортируем...")
-//                if let curMatches = newVal.leagueInfo.league.matches {
-//
-//                    let sortedMatches = SortMatchesByDateHelper.sort(type: .lowToHigh, matches: curMatches) // sorting matches by date
-//                    newVal.leagueInfo.league.matches = sortedMatches
-//                }
-//                _leagueDetailModel = newVal
-//                hud.hide(animated: false)
-//                hud.showSuccessAfterAndHideAfter(withMessage: "Готово")
-//                self.updateUI()
-//            }
-//            else
-//            {
-//                self.updateUI()
-//            }
-//        }
-//    }
+    //    var _leagueDetailModel = LeagueDetailModel()
+    //    var leagueDetailModel: LeagueDetailModel
+    //    {
+    //        get {
+    //            return _leagueDetailModel
+    //        }
+    //        set {
+    //            if newValue.leagueInfo.league.matches?.count != 0
+    //            {
+    //                var newVal = newValue
+    //                let hud = self.tableView.showLoadingViewHUD(with: "Сортируем...")
+    //                if let curMatches = newVal.leagueInfo.league.matches {
+    //
+    //                    let sortedMatches = SortMatchesByDateHelper.sort(type: .lowToHigh, matches: curMatches) // sorting matches by date
+    //                    newVal.leagueInfo.league.matches = sortedMatches
+    //                }
+    //                _leagueDetailModel = newVal
+    //                hud.hide(animated: false)
+    //                hud.showSuccessAfterAndHideAfter(withMessage: "Готово")
+    //                self.updateUI()
+    //            }
+    //            else
+    //            {
+    //                self.updateUI()
+    //            }
+    //        }
+    //    }
     
     var viewModel = ScheduleTableViewModel(dataManager: ApiRequests())
     private let disposeBag = DisposeBag()
@@ -69,28 +69,30 @@ extension ScheduleTableViewController {
         tableView.delegate = nil
         tableView.dataSource = nil
         
-//        viewModel
-//            .items
-//            .observeOn(MainScheduler.instance)
-//            .bind(to: tableView.rx.items(cellIdentifier: ScheduleTableViewCell.ID, cellType: ScheduleTableViewCell.self)) { (index, match, cell) in
-//                cell.matchScheduleModelItem = match
-//            }
-//            .disposed(by: disposeBag)
+        //        viewModel
+        //            .items
+        //            .observeOn(MainScheduler.instance)
+        //            .bind(to: tableView.rx.items(cellIdentifier: ScheduleTableViewCell.ID, cellType: ScheduleTableViewCell.self)) { (index, match, cell) in
+        //                cell.matchScheduleModelItem = match
+        //            }
+        //            .disposed(by: disposeBag)
         
         viewModel
             .leagueDetailModel
-            .map({ $0.league.matches.orEqual() })
-            .map({ $0.leagueInfo.league.matches ?? [] })
-            .map({ $0.map({ match in
-                return MatchScheduleModelItem(
-                match: match,
-                teamOne: self.viewModel.leagueDetailModel.value.leagueInfo.league.teams?.filter({ team in
-                    return team.id == match.teamOne
-                    }).first,
-                teamTwo: self.viewModel.leagueDetailModel.value.leagueInfo.league.teams?.filter({ team in
-                    return team.id == match.teamTwo
-                    }).first
-                )
+            .map({ leagueDM -> [Match] in
+                let matches = leagueDM.league.matches ?? []
+                return matches
+            })
+            .map({ matches in
+                matches.map({ match in
+                    return MatchScheduleModelItem(
+                        match: match,
+                        teamOne:
+                        match.teamOne?.getValue()
+                        ,
+                        teamTwo:
+                        match.teamTwo?.getValue()
+                    )
                 })
             })
             .map({ matches -> [MatchScheduleModelItem] in
@@ -99,36 +101,30 @@ extension ScheduleTableViewController {
                 }
                 return mMatches
             })
-//            .map({ matches -> [MatchScheduleModelItem] in
-//                var mMatches = matches
-//                mMatches.sort { left, right -> Bool in
-//                    return left.match.date?.date < right.match.date?.date
-//                }
-//                return mMatches
-//            })
+            //            .map({ matches -> [MatchScheduleModelItem] in
+            //                var mMatches = matches
+            //                mMatches.sort { left, right -> Bool in
+            //                    return left.match.date?.date < right.match.date?.date
+            //                }
+            //                return mMatches
+            //            })
             .asDriver(onErrorJustReturn: [])
             .drive(tableView.rx.items(cellIdentifier: ScheduleTableViewCell.ID, cellType: ScheduleTableViewCell.self)) { (index, match, cell) in
                 cell.matchScheduleModelItem = match
-                if cell.matchScheduleModelItem.teamOne == nil || cell.matchScheduleModelItem.teamTwo == nil || cell.matchScheduleModelItem.match.events.count == 0 {
+                if cell.matchScheduleModelItem.teamOne == nil || cell.matchScheduleModelItem.teamTwo == nil || cell.matchScheduleModelItem.match.events?.count ?? 0 == 0 {
                     cell.accessoryType = .none
                 } else {
                     cell.accessoryType = .disclosureIndicator
                 }
-            }
+        }
         .disposed(by: disposeBag)
         
         viewModel
             .leagueDetailModel
-            .map({ $0.leagueInfo.league.matches ?? [] })
+            .map({ $0.league.matches ?? [] })
             .map({ $0.count == 0 })
             .bind(to: self.rx.empty)
             .disposed(by: disposeBag)
-        
-//        viewModel
-//            .items
-//            .map({ $0.count == 0})
-//            .bind(to: self.rx.empty)
-//            .disposed(by: disposeBag)
         
         tableView
             .rx
@@ -167,7 +163,7 @@ extension ScheduleTableViewController {
 
 extension ScheduleTableViewController {
     
-    func showProtocol(match: LIMatch) {
+    func showProtocol(match: Match) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         var viewController = storyboard.instantiateViewController(withIdentifier: "MatchProtocolViewController") as! MatchProtocolViewController
         
@@ -202,11 +198,11 @@ extension Reactive where Base: ScheduleTableViewController {
             guard let mError = error else { return }
             if vc.hud != nil {
                 vc.hud?.setToFailureView(detailMessage: mError.localizedDescription, tap: {
-//                    vc.viewModel.fetch()
+                    //                    vc.viewModel.fetch()
                 })
             } else {
                 vc.hud = vc.showFailureViewHUD(detailMessage: mError.localizedDescription, tap: {
-//                    vc.viewModel.fetch()
+                    //                    vc.viewModel.fetch()
                 })
             }
         }

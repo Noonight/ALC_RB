@@ -32,7 +32,7 @@ class EditScoreMatchTableViewController: UITableViewController {
     var viewModel: RefereeScoreModel!
     
 //    var leagueDetailModel = LeagueDetailModel()
-//    var match = LIMatch()
+//    var match = Match()
     
     var tableStruct: TableStruct = TableStruct()
     
@@ -64,7 +64,7 @@ class EditScoreMatchTableViewController: UITableViewController {
 
     // MARK: - Configure footer
     
-    func configureFooter(league: LILeague, match: LIMatch) {
+    func configureFooter(league: League, match: Match) {
 //        let titleTeamOne = ClubTeamHelper.getTeamTitle(league: league, match: match, team: .one)
 //        footer_team_one_label.text = titleTeamOne
         
@@ -99,7 +99,7 @@ class EditScoreMatchTableViewController: UITableViewController {
         return allEventTypes
     }
     
-    func prepareTableStruct(leagueModel: LeagueDetailModel, match: LIMatch) {
+    func prepareTableStruct(leagueModel: LeagueDetailModel, match: Match) {
         tableStruct.events = []
         let events = match.events
         let uniqueEventTypes = findUniqueHeader(destination: events)
@@ -141,7 +141,7 @@ class EditScoreMatchTableViewController: UITableViewController {
         return cell
     }
     
-    func configureCell(cell: EditScoreMatchTableViewCell, league: LILeague, match: LIMatch, event: LIEvent) {
+    func configureCell(cell: EditScoreMatchTableViewCell, league: League, match: Match, event: LIEvent) {
         
         let playerId = event.player
 //        print ("playerId =  \(playerId)")
@@ -178,7 +178,7 @@ class EditScoreMatchTableViewController: UITableViewController {
         return "\(teamOne) : \(teamTwo)"
     }
     
-    func getTeamIdByPlayerId(league: LILeague, match: LIMatch, player id: String) -> String {
+    func getTeamIdByPlayerId(league: League, match: Match, player id: String) -> String {
         let playerId = id
         let teamOne = match.teamOne
         let teamTwo = match.teamTwo

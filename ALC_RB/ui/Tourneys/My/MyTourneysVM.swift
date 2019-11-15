@@ -56,7 +56,7 @@ final class MyTourneysVM {
         }
     }
     
-    func fetchLeagueInfo(leagueId: String, success: @escaping (LILeagueInfo) -> ()) {
+    func fetchLeagueInfo(leagueId: String, success: @escaping ([League]) -> ()) {
         self.loading.onNext(true)
 //        dataManager
 //            .get_tournamentLeague(id: leagueId) { result in

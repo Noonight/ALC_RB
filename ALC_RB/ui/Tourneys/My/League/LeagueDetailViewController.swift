@@ -12,7 +12,7 @@ import RxCocoa
 import MBProgressHUD
 struct LeagueDetailModel {
     var league: League!
-//    var leagueInfo = LILeagueInfo()
+//    var leagueInfo = [League]()
 
     init() { }
     

@@ -11,7 +11,7 @@ import Alamofire
 import AlamofireImage
 
 protocol EditMatchProtocolView : MvpView {
-    func requestEditProtocolSuccess(match: SoloMatch)
+    func requestEditProtocolSuccess(match: Match)
     func requestEditProtocolMessage(message: SingleLineMessage)
     func requestEditProtocolFailure(error: Error)
     
@@ -23,7 +23,7 @@ class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> 
     
     let dataManager = ApiRequests()
     
-    func getClubs(id: String, getting: @escaping (Clubs) -> ()) {
+    func getClubs(id: String, getting: @escaping ([Club]) -> ()) {
         Alamofire
             .request(ApiRoute.getApiURL(.clubs))
             .validate()

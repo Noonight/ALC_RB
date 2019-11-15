@@ -13,7 +13,7 @@ class RefereeScoreModel {
     {
         struct Event
         {
-            var event: LIEvent
+            var event: Event
             var curScore: Int
         }
         var eventsTeamOne: [Event] = []
@@ -21,13 +21,13 @@ class RefereeScoreModel {
     }
     
     var leagueDetailModel: LeagueDetailModel!
-    var match: LIMatch!
+    var match: Match!
     
     var teamOnePlayers: ProtocolPlayersController!
     var teamTwoPlayers: ProtocolPlayersController!
     var events: ProtocolEventsController!
     
-    init(match: LIMatch, leagueDetailModel: LeagueDetailModel, teamOnePlayers: ProtocolPlayersController, teamTwoPlayers: ProtocolPlayersController, events: ProtocolEventsController) {
+    init(match: Match, leagueDetailModel: LeagueDetailModel, teamOnePlayers: ProtocolPlayersController, teamTwoPlayers: ProtocolPlayersController, events: ProtocolEventsController) {
         self.match = match
         self.leagueDetailModel = leagueDetailModel
         self.teamOnePlayers = teamOnePlayers

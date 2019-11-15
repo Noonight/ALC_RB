@@ -56,7 +56,7 @@ class MatchProtocolViewController: UIViewController {
     // MARK: VAR & LET
     
 //    var leagueDetailModel = LeagueDetailModel()
-//    var match = LIMatch()
+//    var match = Match()
 
     var viewModel: ProtocolAllViewModel!
     var eventsTable: ProtocolTableEvents = ProtocolTableEvents()

@@ -18,8 +18,8 @@ class AllTeamsLeagueTableView : NSObject {
     }
     
     let tableHeaderViewCellNib = UINib(nibName: "TournamentTeamHeaderCellTableViewCell", bundle: nil)
-    var _dataSource: [LITeam] = []
-    var dataSource: [LITeam] {
+    var _dataSource: [Team] = []
+    var dataSource: [Team] {
         get {
             return self._dataSource
         }
@@ -32,7 +32,7 @@ class AllTeamsLeagueTableView : NSObject {
         }
     }
     
-    init(dataSource: [LITeam]) {
+    init(dataSource: [Team]) {
         super.init()
         self.initDataSource(teams: dataSource)
     }
@@ -45,7 +45,7 @@ class AllTeamsLeagueTableView : NSObject {
 // MARK: INIT
 
 extension AllTeamsLeagueTableView {
-    func initDataSource(teams: [LITeam]) {
+    func initDataSource(teams: [Team]) {
         self.dataSource = teams
     }
 }

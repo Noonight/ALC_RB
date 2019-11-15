@@ -12,16 +12,16 @@ class OngoingLeaguesLKTableViewController: BaseStateTableViewController {
 
     struct TableModel {
         var tournaments: Tournaments!
-        var clubs: Clubs!
+        var clubs: [Club]!
         
-        init(tournaments: Tournaments, clubs: Clubs) {
+        init(tournaments: Tournaments, clubs: [Club]) {
             self.tournaments = tournaments
             self.clubs = clubs
         }
         
         init () {
             self.tournaments = Tournaments()
-            self.clubs = Clubs()
+            self.clubs = [Club]()
         }
         
         func isEmpty() -> Bool {
@@ -110,7 +110,7 @@ extension OngoingLeaguesLKTableViewController: OngoingLeaguesLKView {
     }
     
     
-    func getClubsSuccess(clubs: Clubs) {
+    func getClubsSuccess(clubs: [Club]) {
         tableModel.clubs = clubs
     }
     

@@ -13,9 +13,9 @@ class MatchesTeamLeagueDetailTableViewController: UITableViewController {
     let cellId = "cell_team_match"
     
     //var leagueDetailModel: LeagueDetailModel = LeagueDetailModel()
-    var team = LITeam()
-    var matches = [LIMatch]()
-    var league = LILeague()
+    var team = Team()
+    var matches = [Match]()
+    var league = League()
     
     let presenter = MatchesTeamLeagueDetailPresenter()
     
@@ -43,7 +43,7 @@ extension MatchesTeamLeagueDetailTableViewController {
         return cell
     }
     
-    func configureCell(cell: MatchesTeamLeagueDetailTableViewCell, match: LIMatch, league: LILeague) {
+    func configureCell(cell: MatchesTeamLeagueDetailTableViewCell, match: Match, league: League) {
         cell.mDate.text = match.date?.toFormat(DateFormats.local.rawValue)//.convertDate(from: .utc, to: .local)
         cell.mTime.text = match.date?.toFormat(DateFormats.localTime.rawValue)//.convertDate(from: .utcTime, to: .localTime)
         cell.mTour.text = match.tour
@@ -66,13 +66,13 @@ extension MatchesTeamLeagueDetailTableViewController {
         }
     }
     
-    func getClubIdByTeamId(_ teamId: String, league: LILeague) -> String {
+    func getClubIdByTeamId(_ teamId: String, league: League) -> String {
         return league.teams?.filter({ (team) -> Bool in
             return team.id == teamId
         }).first?.id ?? "club id \n not found"
     }
     
-    func getTeamTitle(league: LILeague, match: LIMatch, team: TeamEnum) -> String {
+    func getTeamTitle(league: League, match: Match, team: TeamEnum) -> String {
         switch team {
         case .one:
             return league.teams?.filter({ (team) -> Bool in

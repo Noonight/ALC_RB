@@ -26,7 +26,7 @@ class ClubLKViewController: BaseStateViewController {
     let userDefaults = UserDefaultsHelper()
     
     var club: Club?
-    var clubs: Clubs?
+    var clubs: [Club]?
     
     // MARK: - Life cycle
     
@@ -106,7 +106,7 @@ extension ClubLKViewController: ClubLKView {
         Print.d(error: error)
     }
     
-    func getClubsSuccess(clubs: Clubs) {
+    func getClubsSuccess(clubs: [Club]) {
         self.clubs = clubs
         let club = clubs.clubs.filter { (club) -> Bool in
             return club.id == userDefaults.getAuthorizedUser()?.person.club

@@ -12,7 +12,7 @@ import RxSwift
 class ScheduleRefViewModel {
     struct DataModel {
         var activeMatches = ActiveMatches()
-        var referees = Players()
+        var referees = [Person]()
         var clubs: [SoloClub] = []
         
         init(activeMatches: ActiveMatches, referees: Players, clubs: [SoloClub]) {

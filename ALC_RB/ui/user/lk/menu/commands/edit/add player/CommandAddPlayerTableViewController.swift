@@ -22,7 +22,7 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     }
     
     struct TableModel {
-        var players = Players()
+        var players = [Person]()
         
         init() {}
         
@@ -39,7 +39,7 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     let searchController = UISearchController(searchResultsController: nil)
     
     var tableModel = TableModel()
-    var filteredPlayers = Players()
+    var filteredPlayers = [Person]()
     
     let presenter = CommandAddPlayerPresenter()
     

@@ -32,7 +32,7 @@ class TeamLeagueTableViewCell: UITableViewCell {
         }
     }
     
-    func configure(team: LITeam?) {
+    func configure(team: Team?) {
         if let curTeam = team {
             team_btn.setTitle(curTeam.name, for: .normal)
             games_label.text = String(curTeam.wins! + curTeam.losses!)

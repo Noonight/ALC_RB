@@ -58,7 +58,7 @@ class EditRefereeTeamTableViewController: UITableViewController {
     
     var tableModel = TableStruct()
     
-    var match: LIMatch!
+    var match: Match!
     
     // MARK: - model controllers
     

@@ -27,11 +27,11 @@ class ModalPenaltySeriesVM {
     var teamOneData: [GroupPenaltyState] = []
     var teamTwoData: [GroupPenaltyState] = []
     var currentTurn: PenaltyTurn = .none
-    var match: LIMatch!
+    var match: Match!
     
     // MARK: INIT
     
-    public func initData(teamOneTitle: String, teamTwoTitle: String, events: [LIEvent], match: LIMatch) {
+    public func initData(teamOneTitle: String, teamTwoTitle: String, events: [LIEvent], match: Match) {
         self.teamOneTitle = teamOneTitle
         self.teamTwoTitle = teamTwoTitle
         self.events = events

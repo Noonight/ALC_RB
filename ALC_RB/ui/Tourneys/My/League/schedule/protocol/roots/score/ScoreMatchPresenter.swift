@@ -12,7 +12,7 @@ import AlamofireImage
 
 class ScoreMatchPresenter: MvpPresenter<ScoreMatchTableViewController> {
     
-    func getClubs(id: String, getting: @escaping (Clubs) -> ()) {
+    func getClubs(id: String, getting: @escaping ([Club]) -> ()) {
         //debugPrint("presenter : getClubs called")
         Alamofire
             .request(ApiRoute.getApiURL(.clubs))

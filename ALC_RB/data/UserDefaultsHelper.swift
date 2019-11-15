@@ -53,7 +53,7 @@ class UserDefaultsHelper {
         
         for i in 0...user.person.participationMatches!.count {
             if user.person.participationMatches![i].isEqual({ $0.id == id }) {
-                user.person.participationMatches![i].map { match -> ParticipationMatch in
+                user.person.participationMatches![i].map { match -> Match in
                     var mMatch = match
                     mMatch.played = true
                     return mMatch
@@ -75,10 +75,10 @@ class UserDefaultsHelper {
         return (self.getAuthorizedUser()?.token)!
     }
     
-    func setMatch(match: ParticipationMatch) {
+    func setMatch(match: Match) {
         var user = getAuthorizedUser()
         user?.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.id }) })
-        user?.person.participationMatches?.append(IdRefObjectWrapper<ParticipationMatch>(match))
+        user?.person.participationMatches?.append(IdRefObjectWrapper<Match>(match))
         setAuthorizedUser(user: user!)
     }
     

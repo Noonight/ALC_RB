@@ -22,7 +22,7 @@ class EditScheduleViewModel {
         
         init() {
             defaultValues = []
-            allReferees = Players()
+            allReferees = [Person]()
         }
         
 //        func setReferee(oldRefId: String, newRefId: String) {
@@ -39,20 +39,22 @@ class EditScheduleViewModel {
 //    var referees: PublishSubject<Players> = PublishSubject()
     
     var comingCellModel: Variable<ScheduleRefTableViewCell.CellModel> = Variable<ScheduleRefTableViewCell.CellModel>(ScheduleRefTableViewCell.CellModel())
-    var comingReferees: Variable<Players> = Variable<Players>(Players())
+    var comingReferees: Variable<Players> = Variable<Players>([Person]())
     
     var sliderData: PublishSubject<SlidersData> = PublishSubject()
     
-    var editedMatch = Variable<SoloMatch?>(nil)
+    var editedMatch = Variable<Match?>(nil)
     
     private let dataManager: ApiRequests
     private let personApi: PersonApi
+    private let leagueApi: LeagueApi
     
     var cache: EditMatchReferees?
     
-    init(dataManager: ApiRequests, personApi: PersonApi) {
+    init(dataManager: ApiRequests, personApi: PersonApi, leagueApi: LeagueApi) {
         self.dataManager = dataManager
         self.personApi = personApi
+        self.leagueApi = leagueApi
     }
     
     func fetchReferees() {
@@ -73,26 +75,30 @@ class EditScheduleViewModel {
         }
     }
     
-    func fetchLeagueInfo(id: String, success: @escaping (LILeagueInfo)->(), r_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error)->()) {
-//        dataManager.get_tournamentLeague(id: id, get_success: { leagueInfo in
-//            success(leagueInfo)
-//        }, get_error: { error in
-//            failure(error)
-////            Print.m(error)
-//        })
-        dataManager.get_tournamentLeague(id: id) { result in
-            switch result {
-            case .success(let league):
-                success(league)
-            case .message(let message):
-                r_message(message)
-            case .failure(let error):
-                failure(error)
-            }
-        }
+    func fetchLeague(id: String, resultMy: @escaping (ResultMy<[League], RequestError>) -> ()) {
+        leagueApi.get_league(id: id, resultMy: resultMy)
     }
     
-    func editMatchReferees(token: String, editMatchReferees: EditMatchReferees, success: @escaping (SoloMatch)->(), message_single: @escaping (SingleLineMessage)->(), failure: @escaping (Error)->()) {
+//    func fetchLeagueInfo(id: String, success: @escaping (League)->(), r_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error)->()) {
+////        dataManager.get_tournamentLeague(id: id, get_success: { leagueInfo in
+////            success(leagueInfo)
+////        }, get_error: { error in
+////            failure(error)
+//////            Print.m(error)
+////        })
+//        dataManager.get_tournamentLeague(id: id) { result in
+//            switch result {
+//            case .success(let league):
+//                success(league)
+//            case .message(let message):
+//                r_message(message)
+//            case .failure(let error):
+//                failure(error)
+//            }
+//        }
+//    }
+    
+    func editMatchReferees(token: String, editMatchReferees: EditMatchReferees, success: @escaping (Match)->(), message_single: @escaping (SingleLineMessage)->(), failure: @escaping (Error)->()) {
         self.cache = editMatchReferees
 //        dataManager.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees, response_success: { soloMatch in
 //                success(soloMatch)

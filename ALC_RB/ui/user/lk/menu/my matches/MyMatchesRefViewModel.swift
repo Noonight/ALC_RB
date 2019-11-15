@@ -14,7 +14,7 @@ class MyMatchesRefViewModel {
     var message = PublishSubject<SingleLineMessage>()
     var refreshing: PublishSubject<Bool> = PublishSubject()
     var error: PublishSubject<Error> = PublishSubject()
-    var participationMatches: Variable<[ParticipationMatch]> = Variable<[ParticipationMatch]>([])
+    var participationMatches: Variable<[Match]> = Variable<[Match]>([])
     var tableModel: PublishSubject<[MyMatchesRefTableViewCell.CellModel]> = PublishSubject()
 //    var firstInit: Variable<Bool> = Variable<Bool>(true)
     
@@ -63,7 +63,7 @@ class MyMatchesRefViewModel {
         }
     }
     
-    func fetchLeagueInfo(id: String, success: @escaping (LILeagueInfo)->(), r_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error)->()) {
+    func fetchLeagueInfo(id: String, success: @escaping ([League])->(), r_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error)->()) {
         dataManager?.get_tournamentLeague(id: id, result: { result in
             switch result {
             case .success(let league):

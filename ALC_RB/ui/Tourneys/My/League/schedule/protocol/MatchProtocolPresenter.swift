@@ -12,7 +12,7 @@ import AlamofireImage
 
 class MatchProtocolPresenter: MvpPresenter<MatchProtocolViewController> {
     
-    func getClubs(id: String, getting: @escaping (Clubs) -> ()) {
+    func getClubs(id: String, getting: @escaping ([Club]) -> ()) {
         Alamofire
             .request(ApiRoute.getApiURL(.clubs))
             .validate()

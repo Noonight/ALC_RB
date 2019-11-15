@@ -94,7 +94,7 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
 //                    return referee.person == userDefaults.getAuthorizedUser()!.person.id
 //                })
 //            })
-        }).map({ object -> ParticipationMatch in
+        }).map({ object -> Match in
             return object.getValue()!
         })
         viewModel.participationMatches.value = matches ?? []

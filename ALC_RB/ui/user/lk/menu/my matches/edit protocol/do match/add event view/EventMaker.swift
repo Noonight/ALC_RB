@@ -13,21 +13,22 @@ class EventMaker: NSObject {
     static let BACKGROUND_COLOR = UIColor(white: 0, alpha: 0.1)
     
     let eventView = AddEventView(frame: SIZE)
-    var onHideAddTriggered: ((LIEvent) -> ())
+    var onHideAddTriggered: ((Event) -> ())
     var onHideDeleteTriggered: ((DeleteEvent) -> ())
     var backgroundView = UIView()
     var curMatchId: String!
     var curPlayerId: String!
-    var curTime: String!
+//    var curTime: String!
+    var curTime: Event.Time!
     
-    init(addEventBack: @escaping (LIEvent) -> (), deleteEventBack: @escaping (DeleteEvent) -> ()) {
+    init(addEventBack: @escaping (Event) -> (), deleteEventBack: @escaping (DeleteEvent) -> ()) {
         self.onHideAddTriggered = addEventBack
         self.onHideDeleteTriggered = deleteEventBack
     }
     
     // MARK: WORK WORK VIEW CONTROLLER
     
-    public func showWith(matchId: String, playerId: String, time: String) { // TODO modify time
+    public func showWith(matchId: String, playerId: String, time: Event.Time) { // TODO modify time
         self.curMatchId = matchId
         self.curPlayerId = playerId
         self.curTime = time
@@ -64,17 +65,18 @@ class EventMaker: NSObject {
         }
     }
     
-    public func hideAdd(eventType: EventPlayerType) -> LIEvent {
+    public func hideAdd(eventType: Event.eType) -> Event {
         self.hideBackgroundView()
-        return LIEvent().with(
-            id: self.curMatchId,
-            eventType: eventType.rawValue,
-            player: self.curPlayerId,
-            time: self.curTime
-        )
+//        return Event().with(
+//            id: self.curMatchId,
+//            eventType: eventType.rawValue,
+//            player: self.curPlayerId,
+//            time: self.curTime
+//        )
+        return Event(id: self.curMatchId, type: eventType, player: self.curPlayerId, time: self.curTime)
     }
     
-    public func hideDelete(eventType: EventPlayerType) -> DeleteEvent {
+    public func hideDelete(eventType: Event.eType) -> DeleteEvent {
         self.hideBackgroundView()
         return DeleteEvent(
             playerId: self.curPlayerId,
@@ -82,7 +84,7 @@ class EventMaker: NSObject {
         )
     }
     
-    func hide(eventType: EventPlayerType) {
+    func hide(eventType: Event.eType) {
         if self.eventView.stateMinusActive == true
         {
             onHideDeleteTriggered(hideDelete(eventType: eventType))
@@ -133,7 +135,7 @@ extension EventMaker {
     
     struct DeleteEvent {
         var playerId: String
-        var eventType: EventPlayerType
+        var eventType: Event.eType
     }
 
 }

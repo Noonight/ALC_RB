@@ -15,10 +15,10 @@ class EditRefereesProtocolViewModel {
     var error: PublishSubject<Error> = PublishSubject()
     var message = PublishSubject<SingleLineMessage>()
     
-//    var comingReferees: Variable<Players> = Variable<Players>(Players())
+//    var comingReferees: Variable<Players> = Variable<Players>([Person]())
     
-    var referees: Variable<Players> = Variable<Players>(Players())
-    var comingMatch: LIMatch!
+    var referees: Variable<Players> = Variable<Players>([Person]())
+    var comingMatch: Match!
     
     private let dataManager: ApiRequests
     private let apiPerson: PersonApi
@@ -59,7 +59,7 @@ class EditRefereesProtocolViewModel {
 //        }
     }
     
-    func editMatchReferees(token: String, editMatchReferees: EditMatchReferees, success: @escaping (SoloMatch)->(), message_single: @escaping (SingleLineMessage)->(), failure: @escaping (Error)->()) {
+    func editMatchReferees(token: String, editMatchReferees: EditMatchReferees, success: @escaping (Match)->(), message_single: @escaping (SingleLineMessage)->(), failure: @escaping (Error)->()) {
         self.cache = editMatchReferees
         self.refreshing.onNext(true)
         dataManager.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees) { result in

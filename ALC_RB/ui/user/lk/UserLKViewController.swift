@@ -262,7 +262,7 @@ class UserLKViewController: UIViewController {
             segmentHelper?.remove(commands)
             segmentHelper?.add(ongoingLeagues)
             navigationItem.title = ongoingLeagues.title
-        case .Clubs:
+        case .[Club]:
             segmentHelper?.remove(invitation)
             segmentHelper?.remove(ongoingLeagues)
             segmentHelper?.remove(commands)

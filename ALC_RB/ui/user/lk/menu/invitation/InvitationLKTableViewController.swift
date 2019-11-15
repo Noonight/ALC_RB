@@ -16,10 +16,10 @@ class InvitationLKTableViewController: UITableViewController {
     
     struct TableModel {
         var tournaments: Tournaments?
-        var clubs: Clubs?
+        var clubs: [Club]?
         var players: Players?
         
-        init (tournaments: Tournaments, clubs: Clubs, players: Players) {
+        init (tournaments: Tournaments, clubs: [Club], players: Players) {
             self.tournaments = tournaments
             self.clubs = clubs
             self.players = players
@@ -301,7 +301,7 @@ extension InvitationLKTableViewController: InvitationLKView {
         Print.d(error: error)
     }
     
-    func getTournamentLeagueSuccess(liLeagueInfo: LILeagueInfo) {
+    func getTournamentLeagueSuccess(liLeagueInfo: [League]) {
     }
     
     func getTournamentLeagueFailure(error: Error) {
@@ -316,7 +316,7 @@ extension InvitationLKTableViewController: InvitationLKView {
         Print.d(error: error)
     }
     
-    func getClubsSuccess(clubs: Clubs) {
+    func getClubsSuccess(clubs: [Club]) {
         tableModel.clubs = clubs
     }
     

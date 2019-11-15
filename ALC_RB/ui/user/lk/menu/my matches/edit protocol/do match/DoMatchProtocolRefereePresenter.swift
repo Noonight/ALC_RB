@@ -10,7 +10,7 @@ import Foundation
 
 protocol DoMatchProtocolRefereeView: MvpView {
 
-    func onSaveProtocolSuccess(match: SoloMatch)
+    func onSaveProtocolSuccess(match: Match)
     func onSaveProtocolFailure(error: Error)
 
     func onAcceptProtocolSuccess(message: SingleLineMessage)
@@ -22,7 +22,7 @@ class DoMatchProtocolRefereePresenter: MvpPresenter<DoMatchProtocolRefereeViewCo
     
     let dataManager = ApiRequests()
     
-    func saveProtocol(token: String, editedProtocol: EditProtocol, ok: @escaping (SoloMatch) -> (), r_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
+    func saveProtocol(token: String, editedProtocol: EditProtocol, ok: @escaping (Match) -> (), r_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
         dataManager.post_changeProtocol(token: token, newProtocol: editedProtocol) { result in
             switch result {
             case .success(let match):
@@ -43,7 +43,7 @@ class DoMatchProtocolRefereePresenter: MvpPresenter<DoMatchProtocolRefereeViewCo
 //        }
 //    }
     
-    func acceptProtocol(token: String, matchId: String, ok: @escaping (SoloMatch) -> (), response_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
+    func acceptProtocol(token: String, matchId: String, ok: @escaping (Match) -> (), response_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
         dataManager.post_acceptProtocol(token: token, id: matchId) { result in
             switch result {
             case .success(let match):

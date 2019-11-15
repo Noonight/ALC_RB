@@ -11,9 +11,9 @@ import SwiftDate
 
 class SortMatchesByDateHelper {
     
-    static func sort(type: TypeSort, matches: [LIMatch]) -> [LIMatch]
+    static func sort(type: TypeSort, matches: [Match]) -> [Match]
     {
-        var sortedArray: [LIMatch] = []
+        var sortedArray: [Match] = []
         if type == .lowToHigh
         {
             let matchesWithDate = getMatchesWithDate(matches: matches).sorted { lMatch, rMatch -> Bool in
@@ -42,9 +42,9 @@ class SortMatchesByDateHelper {
         return sortedArray
     }
     
-    private static func getMatchesWithoutDate(matches: [LIMatch]) -> [LIMatch]
+    private static func getMatchesWithoutDate(matches: [Match]) -> [Match]
     {
-        var matchesWithoutDate: [LIMatch] = []
+        var matchesWithoutDate: [Match] = []
         
         for match in matches
         {
@@ -58,9 +58,9 @@ class SortMatchesByDateHelper {
         return matchesWithoutDate
     }
     
-    private static func getMatchesWithDate(matches: [LIMatch]) -> [LIMatch]
+    private static func getMatchesWithDate(matches: [Match]) -> [Match]
     {
-        var matchesWithDate: [LIMatch] = []
+        var matchesWithDate: [Match] = []
         
         for match in matches
         {

@@ -15,7 +15,7 @@ enum EndOfMatch: String {
 
 class ProtocolAllViewModel {
     
-    var match: LIMatch!
+    var match: Match!
     var leagueDetailModel: LeagueDetailModel!
     
     var teamOnePlayersController: ProtocolPlayersController!
@@ -33,14 +33,14 @@ class ProtocolAllViewModel {
     let dataManager = ApiRequests()
     let personApi = PersonApi()
     
-    init(match: LIMatch, leagueDetailModel: LeagueDetailModel) {
+    init(match: Match, leagueDetailModel: LeagueDetailModel) {
         self.match = match
         self.leagueDetailModel = leagueDetailModel
         
         self.preConfigureModelControllers()
     }
     
-    init(match: LIMatch, leagueDetailModel: LeagueDetailModel, teamOneModel: ProtocolPlayersController, teamTwoModel: ProtocolPlayersController,
+    init(match: Match, leagueDetailModel: LeagueDetailModel, teamOneModel: ProtocolPlayersController, teamTwoModel: ProtocolPlayersController,
          refereesModel: ProtocolRefereesController, eventsModel: ProtocolEventsController) {
         self.match = match
         self.leagueDetailModel = leagueDetailModel
@@ -69,7 +69,6 @@ class ProtocolAllViewModel {
             }
             if event.getSystemEventType() == .autoGoal
             {
-//                counterLeft -= 1
                 counterRight += 1
             }
         }
@@ -81,40 +80,9 @@ class ProtocolAllViewModel {
             }
             if event.getSystemEventType() == .autoGoal
             {
-//                counterRight -= 1
                 counterLeft += 1
             }
         }
-        
-        /*
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "1 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db1c96b273866185c7a1a0c", time: "1 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db1c96b273866185c7a1a0c", time: "1 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "goal", player: "5db702e677792755b2c3c7a5", time: "1 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "penalty", player: "5db70dbe8744e156153ccbd8", time: "1 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "goal", player: "5db70dbe8744e156153ccbd8", time: "1 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "yellowCard", player: "5db70dbe8744e156153ccbd8", time: "2 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "goal", player: "5db7031377792755b2c3c7a6", time: "2 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "redCard", player: "5db6fde477792755b2c3c79c", time: "2 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "autoGoal", player: "5db1c96b273866185c7a1a0c", time: "2 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db1c96b273866185c7a1a0c", time: "2 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db1c96b273866185c7a1a0c", time: "2 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "2 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "2 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "2 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "2 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "2 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "2 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "goal", player: "5db70dbe8744e156153ccbd8", time: "2 half")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db1c96b273866185c7a1a0c", time: "extra time")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "foul", player: "5db7028d77792755b2c3c79e", time: "extra time")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "penalty", player: "5db70d878744e156153ccbd7", time: "extra time")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "goal", player: "5db6fde477792755b2c3c79c", time: "extra time")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "autoGoal", player: "5db7028d77792755b2c3c79e", time: "extra time")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "goal", player: "5db70df28744e156153ccbd9", time: "extra time")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "penalty", player: "5db7015377792755b2c3c79d", time: "extra time")
-         LIEvent(id: "5db819b9cf18dc6643770020", eventType: "penalty", player: "5db7015377792755b2c3c79d", time: "extra time")
- */
         
         return "\(counterLeft) : \(counterRight)"
     }

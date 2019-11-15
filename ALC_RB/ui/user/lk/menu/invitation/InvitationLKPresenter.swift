@@ -18,13 +18,13 @@ protocol InvitationLKView: MvpView {
     func getTournamentsSuccess(tournaments: Tournaments)
     func getTournamentsFailure(error: Error)
     
-    func getTournamentLeagueSuccess(liLeagueInfo: LILeagueInfo)
+    func getTournamentLeagueSuccess(liLeagueInfo: [League])
     func getTournamentLeagueFailure(error: Error)
     
     func getPlayersSuccess(players: Players)
     func getPlayersFailure(error: Error)
     
-    func getClubsSuccess(clubs: Clubs)
+    func getClubsSuccess(clubs: [Club])
     func getClubsFailure(error: Error)
     
     func onRefreshUserSuccess(authUser: AuthUser)

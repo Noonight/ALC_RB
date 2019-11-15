@@ -11,7 +11,7 @@
 //import AlamofireImage
 //
 //protocol ScheduleLeagueView: MvpView {
-//    func onGetClubSuccess (club: Clubs)
+//    func onGetClubSuccess (club: [Club])
 //}
 //
 //class ScheduleLeaguePresenter: MvpPresenter<ScheduleTableViewController> {
@@ -28,7 +28,7 @@
 ////
 ////    }
 //
-////    func getClubs(id: String, gett: @escaping (Clubs) -> ()) {
+////    func getClubs(id: String, gett: @escaping ([Club]) -> ()) {
 ////        Alamofire.request(ApiRoute.getApiURL(.clubs))
 ////            .validate()
 ////            .responseClubs { response in
@@ -43,7 +43,7 @@
 ////        }
 ////    }
 //
-//    func getClubs(id: String, getting: @escaping (Clubs) -> ()) {
+//    func getClubs(id: String, getting: @escaping ([Club]) -> ()) {
 //        //debugPrint("presenter : getClubs called")
 //        Alamofire
 //            .request(ApiRoute.getApiURL(.clubs))

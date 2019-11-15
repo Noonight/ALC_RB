@@ -20,7 +20,7 @@ class HomeScheduleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var score_date_label: UILabel!
     
-    func configure(_ item: MmMatch, clubOne: Club?, clubTwo: Club?) {
+    func configure(_ item: Match, clubOne: Club?, clubTwo: Club?) {
         self.team_one_label.text = item.teamOne?.name
         self.team_two_label.text = item.teamTwo?.name
         

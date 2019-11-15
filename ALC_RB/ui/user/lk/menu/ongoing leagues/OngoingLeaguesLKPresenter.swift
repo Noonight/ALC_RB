@@ -13,7 +13,7 @@ protocol OngoingLeaguesLKView: MvpView {
     func getTournamentsSuccess(tournaments: Tournaments)
     func getTournamentsFailure(error: Error)
     
-    func getClubsSuccess(clubs: Clubs)
+    func getClubsSuccess(clubs: [Club])
     func getClubsFailure(error: Error)
     
     func onFetchSuccess()
