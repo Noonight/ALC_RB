@@ -12,14 +12,15 @@ import UIKit
 extension UINavigationBar {
     
     func showBorderLine() {
-        findBorderLine().isHidden = false
+        findBorderLine()?.isHidden = false
     }
     
     func hideBorderLine() {
-        findBorderLine().isHidden = true
+        
+        findBorderLine()?.isHidden = true
     }
     
-    private func findBorderLine() -> UIImageView! {
+    private func findBorderLine() -> UIImageView? {
         return self.subviews
             .flatMap { $0.subviews }
             .compactMap { $0 as? UIImageView }

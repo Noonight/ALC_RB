@@ -49,6 +49,12 @@ final class PersonApi : ApiRequests {
         }
     }
     
+    func get_person(params: [String: Any], resultMy: @escaping (ResultMy<[Person], RequestError>) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.person), method: .get, parameters: params)
+            .responseResultMy([Person].self, resultMy: resultMy)
+    }
+
     func get_personQuery(id: String? = nil, name: String? = nil, surname: String? = nil, lastname: String? = nil, region: RegionMy? = nil, limit: Int? = 20, offset: Int? = 0, populate: [String]? = nil, resultMy: @escaping (ResultMy<[Person], RequestError>) -> ()) {
         var parameters: Parameters = [:]
         if let mId = id {
@@ -85,5 +91,11 @@ final class PersonApi : ApiRequests {
             .responseResultMy([Person].self) { result in
                 resultMy(result)
         }
+    }
+
+    func get_personQuery(params: [String: Any], resultMy: @escaping (ResultMy<[Person], RequestError>) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.personQuery), method: .get, parameters: params)
+            .responseResultMy([Person].self, resultMy: resultMy)
     }
 }
