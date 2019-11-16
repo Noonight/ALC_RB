@@ -23,7 +23,7 @@ class EditScheduleViewModel {
         
         init() {
             defaultValues = []
-//            allReferees = [Person]()
+            allReferees = []
         }
         
 //        func setReferee(oldRefId: String, newRefId: String) {

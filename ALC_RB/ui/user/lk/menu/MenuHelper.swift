@@ -14,7 +14,7 @@ class MenuHelper: NSObject, UITableViewDelegate, UITableViewDataSource {
         static let cellId = "drawer_menu_cell"
     }
     
-    var userType: Person.TypeOfPerson?
+//    var userType: Person?
     var playerMenuOptionActions: ((PlayerMenuOption) -> ())?
     var refereeMenuOptionActions: ((RefereeMenuOption) -> ())?
     var mainRefereeMenuOptionActions: ((MainRefereeMenuOption) -> ())?
@@ -25,15 +25,15 @@ class MenuHelper: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if userType == Person.TypeOfPerson.player {
-            return 5
-        }
-        if userType == Person.TypeOfPerson.referee {
-            return 2
-        }
-        if userType == Person.TypeOfPerson.mainReferee {
-            return 4
-        }
+//        if userType == Person.TypeOfPerson.player {
+//            return 5
+//        }
+//        if userType == Person.TypeOfPerson.referee {
+//            return 2
+//        }
+//        if userType == Person.TypeOfPerson.mainReferee {
+//            return 4
+//        }
         return 0
     }
     
@@ -43,38 +43,38 @@ class MenuHelper: NSObject, UITableViewDelegate, UITableViewDataSource {
         cell.image_view.image = nil
         cell.image_view.image = #imageLiteral(resourceName: "ic_logo_full")
         
-        if userType == Person.TypeOfPerson.player {
-            let menuOption = PlayerMenuOption(rawValue: indexPath.row)
-            cell.image_view.image = menuOption?.image
-            cell.name_label.text = menuOption?.description
-        } else if userType == Person.TypeOfPerson.referee {
-            let menuOption = RefereeMenuOption(rawValue: indexPath.row)
-            cell.image_view.image = menuOption?.image
-            cell.name_label.text = menuOption?.description
-        } else if userType == Person.TypeOfPerson.mainReferee {
-            let menuOption = MainRefereeMenuOption(rawValue: indexPath.row)
-            cell.image_view.image = menuOption?.image
-            cell.name_label.text = menuOption?.description
-        } else {
-            cell.name_label.text = "Ошибка в создании меню"
-        }
+//        if userType == Person.TypeOfPerson.player {
+//            let menuOption = PlayerMenuOption(rawValue: indexPath.row)
+//            cell.image_view.image = menuOption?.image
+//            cell.name_label.text = menuOption?.description
+//        } else if userType == Person.TypeOfPerson.referee {
+//            let menuOption = RefereeMenuOption(rawValue: indexPath.row)
+//            cell.image_view.image = menuOption?.image
+//            cell.name_label.text = menuOption?.description
+//        } else if userType == Person.TypeOfPerson.mainReferee {
+//            let menuOption = MainRefereeMenuOption(rawValue: indexPath.row)
+//            cell.image_view.image = menuOption?.image
+//            cell.name_label.text = menuOption?.description
+//        } else {
+//            cell.name_label.text = "Ошибка в создании меню"
+//        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if userType == Person.TypeOfPerson.player {
-            let menuOption = PlayerMenuOption(rawValue: indexPath.row)
-            playerMenuOptionActions!(menuOption!)
-        }
-        if userType == Person.TypeOfPerson.referee {
-            let menuOption = RefereeMenuOption(rawValue: indexPath.row)
-            refereeMenuOptionActions!(menuOption!)
-        }
-        if userType == Person.TypeOfPerson.mainReferee {
-            let menuOption = MainRefereeMenuOption(rawValue: indexPath.row)
-            mainRefereeMenuOptionActions!(menuOption!)
-        }
+//        if userType == Person.TypeOfPerson.player {
+//            let menuOption = PlayerMenuOption(rawValue: indexPath.row)
+//            playerMenuOptionActions!(menuOption!)
+//        }
+//        if userType == Person.TypeOfPerson.referee {
+//            let menuOption = RefereeMenuOption(rawValue: indexPath.row)
+//            refereeMenuOptionActions!(menuOption!)
+//        }
+//        if userType == Person.TypeOfPerson.mainReferee {
+//            let menuOption = MainRefereeMenuOption(rawValue: indexPath.row)
+//            mainRefereeMenuOptionActions!(menuOption!)
+//        }
 //        let menuOption = PlayerMenuOption(rawValue: indexPath.row)
 //        didSelectMenuOption(menuOption: menuOption!)
         //        tableView.deselectRow(at: indexPath, animated: true)

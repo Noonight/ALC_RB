@@ -17,9 +17,9 @@ class InvitationLKTableViewController: UITableViewController {
     struct TableModel {
         var tournaments: [Tourney]?
         var clubs: [Club]?
-        var players: Players?
+        var players:[Person]?
         
-        init (tournaments: [Tourney], clubs: [Club], players: Players) {
+        init (tournaments: [Tourney], clubs: [Club], players:[Person]) {
             self.tournaments = tournaments
             self.clubs = clubs
             self.players = players
@@ -79,16 +79,16 @@ class InvitationLKTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        if userDefault.getAuthorizedUser()?.person.pendingTeamInvites.count ?? 0 > 0 {
-            hideEmptyView()
-            if tableModel.isEmpty() {
-                showLoading()
-            } else {
-                hideLoading()
-            }
-        } else {
-            showEmptyView()
-        }
+//        if userDefault.getAuthorizedUser()?.person.pendingTeamInvites.count ?? 0 > 0 {
+//            hideEmptyView()
+//            if tableModel.isEmpty() {
+//                showLoading()
+//            } else {
+//                hideLoading()
+//            }
+//        } else {
+//            showEmptyView()
+//        }
     }
     
     func fetch() {
@@ -108,16 +108,17 @@ class InvitationLKTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userDefault.getAuthorizedUser()?.person.pendingTeamInvites.count ?? 0
+//        return userDefault.getAuthorizedUser()?.person.pendingTeamInvites.count ?? 0
+        return 0
     }
 
     // MARK: - Table view delegate
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! InvitationTableViewCell
-        let model = userDefault.getAuthorizedUser()?.person.pendingTeamInvites[indexPath.row]
+//        let model = userDefault.getAuthorizedUser()?.person.pendingTeamInvites[indexPath.row]
         
-        configureCell(model: model!, cell: cell, tag: indexPath.row)
+//        configureCell(model: model!, cell: cell, tag: indexPath.row)
         
         return cell
     }
@@ -125,35 +126,35 @@ class InvitationLKTableViewController: UITableViewController {
     func configureCell(model: PendingTeamInvite, cell: InvitationTableViewCell, tag: Int) {
         
         if !tableModel.isEmpty() {
-            let league = tableModel.tournaments?.leagues.filter({ (league) -> Bool in
-                return league.id == model.league
-            }).first
-            let team = league?.teams!.filter({ (team) -> Bool in
-                return team.id == model.team
-            }).first
-            let teamCreator = tableModel.players?.people.filter({ (person) -> Bool in
-                return person.id == team?.creator
-            }).first
-            let club = tableModel.clubs?.clubs.filter({ (club) -> Bool in
-                return club.id == team?.club
-            }).first
+//            let league = tableModel.tournaments?.leagues.filter({ (league) -> Bool in
+//                return league.id == model.league
+//            }).first
+//            let team = league?.teams!.filter({ (team) -> Bool in
+//                return team.id == model.team
+//            }).first
+//            let teamCreator = tableModel.players?.people.filter({ (person) -> Bool in
+//                return person.id == team?.creator
+//            }).first
+//            let club = tableModel.clubs?.clubs.filter({ (club) -> Bool in
+//                return club.id == team?.club
+//            }).first
             
-            if let mLeague = league {
-                guard let tourney = mLeague.tourney else { return }
-                guard let name = mLeague.name else { return }
-                cell.titleLabel.text = "\(tourney). \(name)"
-//                cell.dateLabel.text = "\(mLeague.beginDate?.convertDate(from: .leagueDate, to: .local)) - \(mLeague.endDate?.convertDate(from: .leagueDate, to: .local))"
-                cell.dateLabel.text = "\(mLeague.beginDate?.toFormat(DateFormats.local.ck)) - \(mLeague.endDate?.toFormat(DateFormats.localTime.ck))"
-            }
-            cell.teamName.text = team?.name
-            
-            cell.teamTrainer.text = teamCreator?.getFullName()
-            
-            presenter.getTournamentImage(photoUrl: club?.logo ?? "", get_image_success: { (image) in
-                cell.tournamentImage.image = image.af_imageRoundedIntoCircle()
-            }) { (error) in
-                Print.d(error: error)
-            }
+//            if let mLeague = league {
+//                guard let tourney = mLeague.tourney else { return }
+//                guard let name = mLeague.name else { return }
+//                cell.titleLabel.text = "\(tourney). \(name)"
+////                cell.dateLabel.text = "\(mLeague.beginDate?.convertDate(from: .leagueDate, to: .local)) - \(mLeague.endDate?.convertDate(from: .leagueDate, to: .local))"
+//                cell.dateLabel.text = "\(mLeague.beginDate?.toFormat(DateFormats.local.ck)) - \(mLeague.endDate?.toFormat(DateFormats.localTime.ck))"
+//            }
+//            cell.teamName.text = team?.name
+//
+//            cell.teamTrainer.text = teamCreator?.getFullName()
+//
+//            presenter.getTournamentImage(photoUrl: club?.logo ?? "", get_image_success: { (image) in
+//                cell.tournamentImage.image = image.af_imageRoundedIntoCircle()
+//            }) { (error) in
+//                Print.d(error: error)
+//            }
         }
         
         cell.cancelBtn.addTarget(self, action: #selector(cancelBtnPressed), for: .touchUpInside)
@@ -167,21 +168,21 @@ class InvitationLKTableViewController: UITableViewController {
         Print.d(message: "\(sender.tag)  cancel")
         showAlertOkCancel(title: "Отменить приглашение?", message: "", ok: {
             let user = self.userDefault.getAuthorizedUser()
-            guard let league = user?.person.pendingTeamInvites[sender.tag].league else {
-                self.showAlert(message: "Лига не найдена")
-                return
-            }
-            guard let team = user?.person.pendingTeamInvites[sender.tag].team else {
-                self.showAlert(message: "Команда не найдена")
-                return
-            }
-            self.presenter.acceptRequest(
-                token: (user?.token)!,
-                acceptInfo: AcceptRequest(
-                    idLeague: league,
-                    idTeam: team,
-                    status: .rejected)
-            )
+//            guard let league = user?.person.pendingTeamInvites[sender.tag].league else {
+//                self.showAlert(message: "Лига не найдена")
+//                return
+//            }
+//            guard let team = user?.person.pendingTeamInvites[sender.tag].team else {
+//                self.showAlert(message: "Команда не найдена")
+//                return
+//            }
+//            self.presenter.acceptRequest(
+//                token: (user?.token)!,
+//                acceptInfo: AcceptRequest(
+//                    idLeague: league,
+//                    idTeam: team,
+//                    status: .rejected)
+//            )
         }) {
             Print.m("cancel cancel")
         }
@@ -190,21 +191,22 @@ class InvitationLKTableViewController: UITableViewController {
     @objc func okBtnPressed(sender: UIButton) {
         showAlertOkCancel(title: "Принять приглашение?", message: "", ok: {
             let user = self.userDefault.getAuthorizedUser()
-            guard let league = user?.person.pendingTeamInvites[sender.tag].league else {
-                self.showAlert(message: "Лига не найдена")
-                return
-            }
-            guard let team = user?.person.pendingTeamInvites[sender.tag].team else {
-                self.showAlert(message: "Команда не найдена")
-                return
-            }
-            self.presenter.acceptRequest(
-                token: (user?.token)!,
-                acceptInfo: AcceptRequest(
-                    idLeague: league,
-                    idTeam: team,
-                    status: .accpeted)
-            )
+            // DEPRECATED: person does not contain invites
+//            guard let league = user?.person.pendingTeamInvites[sender.tag].league else {
+//                self.showAlert(message: "Лига не найдена")
+//                return
+//            }
+//            guard let team = user?.person.pendingTeamInvites[sender.tag].team else {
+//                self.showAlert(message: "Команда не найдена")
+//                return
+//            }
+//            self.presenter.acceptRequest(
+//                token: (user?.token)!,
+//                acceptInfo: AcceptRequest(
+//                    idLeague: league,
+//                    idTeam: team,
+//                    status: .accpeted)
+//            )
         }) {
             Print.m("tap cancel invite")
         }
@@ -308,7 +310,7 @@ extension InvitationLKTableViewController: InvitationLKView {
         Print.d(error: error)
     }
     
-    func getPlayersSuccess(players: Players) {
+    func getPlayersSuccess(players:[Person]) {
         tableModel.players = players
     }
     

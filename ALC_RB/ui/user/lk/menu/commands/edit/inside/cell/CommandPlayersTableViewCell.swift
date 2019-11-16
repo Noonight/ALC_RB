@@ -12,19 +12,17 @@ import Alamofire
 class CommandPlayersTableViewCell: UITableViewCell {
 
     struct CellModel {
-        var player: DEPRECATED?
+//        var player: Person?
         var person: Person?
         var playerImagePath: String?
         var number: Int = 0
         
-        init(player: DEPRECATED, playerImagePath: String, person: Person) {
-            self.player = player
+        init(playerImagePath: String, person: Person) {
             self.playerImagePath = playerImagePath
             self.person = person
         }
         
         init() {
-            player = DEPRECATED()
             person = Person()
             playerImagePath = ""
         }
@@ -53,13 +51,13 @@ class CommandPlayersTableViewCell: UITableViewCell {
         playerImage.image = playerImage.image?.af_imageRoundedIntoCircle()
 //        playerImage.image = cellModel?.playerImage?.af_imageRoundedIntoCircle()
         playerNameLabel.text = cellModel?.person?.getFullName()
-        playerNumberTextField.text = cellModel?.player?.number
+//        playerNumberTextField.text = cellModel?.player?.number
         let strNumber: String = String(cellModel!.number)
         playerCommandNumLabel.text = strNumber
     }
-    
+    // DEPRECATED: SHEET EHERE
     @IBAction func onPlayerNumberTextEditComplete(_ sender: UITextField) {
-        cellModel?.player?.number = sender.text ?? "-1"// Something went wrong
+//        cellModel?.player?.number = sender.text ?? "-1"// Something went wrong
         playerNumberTextDidEndProtocol?.onEditNumberComplete(model: cellModel!)
     }
     

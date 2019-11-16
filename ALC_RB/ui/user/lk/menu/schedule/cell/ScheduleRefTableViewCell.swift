@@ -36,7 +36,7 @@ class ScheduleRefTableViewCell: UITableViewCell {
     let redColor = #colorLiteral(red: 1, green: 0.231372549, blue: 0.1882352941, alpha: 1)
     
     struct CellModel {
-        var activeMatch: ActiveMatch
+        var activeMatch: Match
         var clubTeamOne: Club?
         var clubTeamTwo: Club?
         var referee1: Person?
@@ -45,7 +45,7 @@ class ScheduleRefTableViewCell: UITableViewCell {
         var timekeeper: Person?
         
         init() {
-            self.activeMatch = ActiveMatch()
+            self.activeMatch = Match()
             self.clubTeamOne = Club()
             self.clubTeamTwo = Club()
             self.referee1 = nil
@@ -54,7 +54,7 @@ class ScheduleRefTableViewCell: UITableViewCell {
             self.timekeeper = nil
         }
         
-        init(activeMatch: ActiveMatch, clubTeamOne: Club?, clubTeamTwo: Club?, referee1: Person?, referee2: Person?, referee3: Person?, timekeeper: Person?) {
+        init(activeMatch: Match, clubTeamOne: Club?, clubTeamTwo: Club?, referee1: Person?, referee2: Person?, referee3: Person?, timekeeper: Person?) {
             self.activeMatch = activeMatch
             self.clubTeamOne = clubTeamOne
             self.clubTeamTwo = clubTeamTwo
@@ -65,7 +65,7 @@ class ScheduleRefTableViewCell: UITableViewCell {
         }
         
         func convertToMyMatchesRefTableViewCellCellModle() -> MyMatchesRefTableViewCell.CellModel {
-            return MyMatchesRefTableViewCell.CellModel(participationMatch: activeMatch.convertToParticipationMatch(), club1: clubTeamOne, club2: clubTeamTwo, team1Name: clubTeamOne?.name, team2Name: clubTeamTwo?.name)
+            return MyMatchesRefTableViewCell.CellModel(participationMatch: activeMatch, club1: clubTeamOne, club2: clubTeamTwo, team1Name: clubTeamOne?.name, team2Name: clubTeamTwo?.name)
         }
     }
     
@@ -75,13 +75,13 @@ class ScheduleRefTableViewCell: UITableViewCell {
         self.cellModel = cellModel
         reset()
         
-        date_label.text = cellModel.activeMatch.date.toFormat(DateFormats.local.rawValue)//convertDate(from: .utcTime, to: .local)
-        time_label.text = cellModel.activeMatch.date.toFormat(DateFormats.localTime.rawValue)//convertDate(from: .utcTime, to: .localTime)
+        date_label.text = cellModel.activeMatch.date!.toFormat(DateFormats.local.rawValue)//convertDate(from: .utcTime, to: .local)
+        time_label.text = cellModel.activeMatch.date!.toFormat(DateFormats.localTime.rawValue)//convertDate(from: .utcTime, to: .localTime)
         league_label.text = cellModel.activeMatch.tour
-        stadium_label.text = cellModel.activeMatch.place
+        stadium_label.text = cellModel.activeMatch.place?.getValue()?.name
         
-        teamNameOne_label.text = cellModel.activeMatch.teamOne.name
-        teamNameTwo_label.text = cellModel.activeMatch.teamTwo.name
+        teamNameOne_label.text = cellModel.activeMatch.teamOne?.getValue()?.name
+        teamNameTwo_label.text = cellModel.activeMatch.teamTwo?.getValue()?.name
 //        if cellModel.clubTeamOne.logo?.count ?? 0 > 1 {
         
         if let clubOne = cellModel.clubTeamOne {

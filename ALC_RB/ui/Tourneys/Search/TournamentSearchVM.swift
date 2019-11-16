@@ -206,9 +206,10 @@ extension TournamentSearchVM {
 //        }
 //    }
     
-    func getParticipationTourneys() -> [Participation] {
-        return userDefaultsHelper.getAuthorizedUser()?.person.participation ?? []
-    }
+    // DEPRECATED: Participation no
+//    func getParticipationTourneys() -> [Participation] {
+//        return userDefaultsHelper.getAuthorizedUser()?.person.participation ?? []
+//    }
     
     func getSelectedTourneysAndNot(tourneys: [Tourney]) -> [SearchTourneyModelItem] {
         let alreadyChoosedTourneys = self.localTourneys.getLocalTourneys()

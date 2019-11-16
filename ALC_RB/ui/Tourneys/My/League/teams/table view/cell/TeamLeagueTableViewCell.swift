@@ -35,16 +35,16 @@ class TeamLeagueTableViewCell: UITableViewCell {
     func configure(team: Team?) {
         if let curTeam = team {
             team_btn.setTitle(curTeam.name, for: .normal)
-            games_label.text = String(curTeam.wins! + curTeam.losses!)
-            rm_label.text = String(curTeam.goals! - curTeam.goalsReceived!)
-            score_label.text = String(curTeam.groupScore!)
-            wins_label.text = String(curTeam.wins!)
-            
+//            games_label.text = String(curTeam.wins! + curTeam.losses!)
+//            rm_label.text = String(curTeam.goals! - curTeam.goalsReceived!)
+//            score_label.text = String(curTeam.groupScore!)
+//            wins_label.text = String(curTeam.wins!)
+//
             // self.isContainsPlayersWithActiveDisquals = team?.isContainsPlayersWithActiveDisquals() ?? false
             // red card do not need for teams
             
-            guard let curPlace = curTeam.place else { return }
-            preparePosition(place: curPlace)
+//            guard let curPlace = curTeam.place else { return }
+//            preparePosition(place: curPlace)
             
             return
         }

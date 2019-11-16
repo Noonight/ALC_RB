@@ -100,7 +100,7 @@ extension RegistrationViewController {
             .subscribe({ event in
                 if !self.fieldsIsEmpty() {
                     let birthdate = self.birthdayPicker.date
-                    let region = self.viewModel.choosedRegion.value!._id
+                    let region = self.viewModel.choosedRegion.value!.id
                     let regData = Registration(
                         type: "player",
                         name: self.nameTextField.getTextOrEmptyString(),

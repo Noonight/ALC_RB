@@ -11,10 +11,10 @@ import UIKit
 struct ProtocolAllEventsCellModel {
     var left_name: String
     var right_name: String
-    var left_event: Event.SystemEventType
-    var right_event: Event.SystemEventType
+    var left_event: Event.eType?
+    var right_event: Event.eType?
     
-    init(left_name: String, right_name: String, left_event: Event.SystemEventType, right_event: Event.SystemEventType) {
+    init(left_name: String, right_name: String, left_event: Event.eType, right_event: Event.eType) {
         self.left_name = left_name
         self.right_name = right_name
         self.left_event = left_event
@@ -24,8 +24,8 @@ struct ProtocolAllEventsCellModel {
     init() {
         self.left_name = ""
         self.right_name = ""
-        self.left_event = .non
-        self.right_event = .non
+        self.left_event = nil
+        self.right_event = nil
     }
     // one of side can be empty
 }

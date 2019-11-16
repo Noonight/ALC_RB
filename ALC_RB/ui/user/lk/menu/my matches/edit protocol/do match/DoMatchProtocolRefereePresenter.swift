@@ -23,16 +23,16 @@ class DoMatchProtocolRefereePresenter: MvpPresenter<DoMatchProtocolRefereeViewCo
     let dataManager = ApiRequests()
     
     func saveProtocol(token: String, editedProtocol: EditProtocol, ok: @escaping (Match) -> (), r_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
-        dataManager.post_changeProtocol(token: token, newProtocol: editedProtocol) { result in
-            switch result {
-            case .success(let match):
-                ok(match)
-            case .message(let message):
-                r_message(message)
-            case .failure(let error):
-                failure(error)
-            }
-        }
+//        dataManager.post_changeProtocol(token: token, newProtocol: editedProtocol) { result in
+//            switch result {
+//            case .success(let match):
+//                ok(match)
+//            case .message(let message):
+//                r_message(message)
+//            case .failure(let error):
+//                failure(error)
+//            }
+//        }
     }
     
 //    func acceptProtocol(token: String, matchId: String) {

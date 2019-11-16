@@ -18,12 +18,14 @@ final class MyTourneysVM {
     let loading: PublishSubject<Bool> = PublishSubject()
     
     private let dataManager: ApiRequests
+    private let leagueApi: LeagueApi
     private let localTourney = LocalTourneys()
     private let disposeBag = DisposeBag()
     private var firstLoad = true
     
-    init(dataManager: ApiRequests) {
+    init(dataManager: ApiRequests, leagueApi: LeagueApi) {
         self.dataManager = dataManager
+        self.leagueApi = leagueApi
         items
             .observeOn(MainScheduler.instance)
             .subscribe({
@@ -70,17 +72,17 @@ final class MyTourneysVM {
 //                    self.error.onNext(error)
 //                }
 //        }
-        dataManager
-            .get_league(id: leagueId) { result in
-                self.loading.onNext(false)
-                switch result {
-                case .success(let leagueInfo):
-                    success(leagueInfo)
-                case .message(let message):
-                    self.message.onNext(message)
-                case .failure(let error):
-                    self.error.onNext(error)
-                }
+        leagueApi.get_league(id: leagueId) { result in
+            switch result {
+            case .success(let leagues):
+                success(leagues)
+            case .message(let msg):
+                Print.m(msg.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
         }
     }
     

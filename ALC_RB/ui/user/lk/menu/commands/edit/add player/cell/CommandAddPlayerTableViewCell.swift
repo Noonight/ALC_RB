@@ -26,7 +26,7 @@ class CommandAddPlayerTableViewCell: UITableViewCell {
     
     @IBOutlet weak var cell_add_player_btn: UIButton!
     
-    var usedPlayers: [DEPRECATED] = []
+    var usedPlayers: [Person] = []
     
     var person: Person?
     var status: Status?
@@ -101,6 +101,6 @@ class CommandAddPlayerTableViewCell: UITableViewCell {
     }
     
     func setupPlayerDateOfBirth(player: Person) {
-        self.player_date_of_birth.text = player.birthdate.toFormat(DateFormats.local.rawValue)
+        self.player_date_of_birth.text = player.birthdate!.toFormat(DateFormats.local.rawValue)
     }
 }

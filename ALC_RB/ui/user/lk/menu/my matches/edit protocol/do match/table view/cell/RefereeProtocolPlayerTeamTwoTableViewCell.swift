@@ -21,7 +21,7 @@ class RefereeProtocolPlayerTeamTwoTableViewCell: UITableViewCell {
         
         guard let model = cellModel else { return }
         
-        self.playerNumber_label.text = model.player?.number
+//        self.playerNumber_label.text = model.player?.number
         self.playerName_label.text = model.person?.getSurnameNP()
         self.playerEvents_view.viewModel = cellModel?.eventsModel
     }

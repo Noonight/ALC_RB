@@ -20,18 +20,18 @@ class ClubTeamHelper {
         }).first?.id ?? "club id \n not found"
     }
     
-    static func getTeamTitle(league: League, match: Match, team: TeamEnum) -> String {
-        switch team {
-        case .one:
-            return league.teams?.filter({ (team) -> Bool in
-                return team.id == match.teamOne
-            }).first?.name ?? "Team name \n one not found"
-        case .two:
-            return league.teams?.filter({ (team) -> Bool in
-                return team.id == match.teamTwo
-            }).first?.name ?? "Team name \n two not found"
-        }
-    }
+//    static func getTeamTitle(league: League, match: Match, team: TeamEnum) -> String {
+//        switch team {
+//        case .one:
+//            return league.teams?.filter({ (team) -> Bool in
+//                return team.id == match.teamOne?.getId() ?? match.teamOne?.getValue()?.id ?? ""
+//            }).first?.name ?? "Team name \n one not found"
+//        case .two:
+//            return league.teams?.filter({ (team) -> Bool in
+//                return team.id == match.teamTwo ?? match.teamTwo?.getValue()?.id ?? ""
+//            }).first?.name ?? "Team name \n two not found"
+//        }
+//    }
     
 //    static func getClubIdByTeamId(_ teamId: String, league: League) -> String {
 //        return league.teams?.filter({ (team) -> Bool in

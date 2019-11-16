@@ -26,9 +26,9 @@ class AllTeamsLeagueTableView : NSObject {
         }
         set {
             var newVal = newValue
-            newVal = newVal.sorted { lTeam, rTeam -> Bool in
-//                return lTeam.groupScore ?? 0 > rTeam.groupScore ?? 0 // sort from high to low
-            }
+//            newVal = newVal.sorted { lTeam, rTeam -> Bool in
+////                return lTeam.groupScore ?? 0 > rTeam.groupScore ?? 0 // sort from high to low
+//            }
             self._dataSource = newVal
         }
     }

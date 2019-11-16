@@ -31,13 +31,13 @@ struct EditProtocol: Codable {
         return try JSONEncoder().encode(self)
     }
     
-    func toParams() -> [String: Any] {
-        return [
-            Fields.id.value() : self.id,
-            Fields.events.value() : self.events.getArrayOfEventsInDictionary(),
-            Fields.playersList.value() : self.playersList
-        ]
-    }
+//    func toParams() -> [String: Any] {
+//        return [
+//            Fields.id.value() : self.id,
+//            Fields.events.value() : self.events.getArrayOfEventsInDictionary(),
+//            Fields.playersList.value() : self.playersList
+//        ]
+//    }
     
     enum Fields: String {
         case id = "_id"
@@ -64,20 +64,20 @@ struct EditProtocol: Codable {
             case events = "events"
         }
         
-        func toDictionary() -> [String: Any] {
-            var events: [Any] = []
-            for event in self.events {
-                events.append(event.toDictionary())
-            }
-            return [CodingKeys.events.rawValue : events]
-        }
+//        func toDictionary() -> [String: Any] {
+//            var events: [Any] = []
+//            for event in self.events {
+//                events.append(event.toDictionary())
+//            }
+//            return [CodingKeys.events.rawValue : events]
+//        }
         
-        func getArrayOfEventsInDictionary() -> [Any] {
-            var events: [Any] = []
-            for event in self.events {
-                events.append(event.toDictionary())
-            }
-            return events
-        }
+//        func getArrayOfEventsInDictionary() -> [Any] {
+//            var events: [Any] = []
+//            for event in self.events {
+//                events.append(event.toDictionary())
+//            }
+//            return events
+//        }
     }
 }

@@ -91,13 +91,13 @@ class ClubEditLKViewController: BaseStateViewController, UITextFieldDelegate {
     
     @IBAction func saveBarBtnPressed(_ sender: UIBarButtonItem) {
         //        Print.m("save btn pressed yeah!!")
-        presenter.editClubInfo(
-            token: (userDefaults.getAuthorizedUser()?.token)!,
-            clubInfo: EditClubInfo(
-                name: clubTitle_label.text!,
-                _id: (userDefaults.getAuthorizedUser()?.person.club!)!,
-                info: clubDescription_textView.text!),
-            image: self.choosedImage)
+//        presenter.editClubInfo(
+//            token: (userDefaults.getAuthorizedUser()?.token)!,
+//            clubInfo: EditClubInfo(
+//                name: clubTitle_label.text!,
+//                _id: (userDefaults.getAuthorizedUser()?.person.club!)!,
+//                info: clubDescription_textView.text!),
+//            image: self.choosedImage)
     }
     
     @IBAction func onImageAreaPressed(_ sender: UITapGestureRecognizer) {
@@ -114,34 +114,34 @@ class ClubEditLKViewController: BaseStateViewController, UITextFieldDelegate {
 
 extension ClubEditLKViewController : ClubEditLKView {
     func editClubInfoSuccess(soloClub: Club) {
-        self.club = soloClub.club
-        updateUI()
-        showToast(message: "Изменение клуба прошло успешно")
-        navigationController?.popViewController(animated: true)
-        dismiss(animated: true) {
-            Print.m("Dismiss view controller")
-        }
+//        self.club = soloClub.club
+//        updateUI()
+//        showToast(message: "Изменение клуба прошло успешно")
+//        navigationController?.popViewController(animated: true)
+//        dismiss(animated: true) {
+//            Print.m("Dismiss view controller")
+//        }
     }
     
     func editClubInfoFailure(error: Error) {
         Print.m(error)
-        showRepeatAlert(message: error.localizedDescription) {
-            if let cache = self.presenter.editClubInfoCache {
-                self.presenter.editClubInfo(
-                    token: (self.userDefaults.getAuthorizedUser()?.token)!,
-                    clubInfo: cache.editClubInfo,
-                    image: cache.image
-                )
-            } else {
-                self.presenter.editClubInfo(
-                    token: (self.userDefaults.getAuthorizedUser()?.token)!,
-                    clubInfo: EditClubInfo(
-                        name: self.clubTitle_label.text!,
-                        _id: (self.userDefaults.getAuthorizedUser()?.person.club!)!,
-                        info: self.clubDescription_textView.text!),
-                    image: self.clubImage.image!)
-            }
-        }
+//        showRepeatAlert(message: error.localizedDescription) {
+//            if let cache = self.presenter.editClubInfoCache {
+//                self.presenter.editClubInfo(
+//                    token: (self.userDefaults.getAuthorizedUser()?.token)!,
+//                    clubInfo: cache.editClubInfo,
+//                    image: cache.image
+//                )
+//            } else {
+//                self.presenter.editClubInfo(
+//                    token: (self.userDefaults.getAuthorizedUser()?.token)!,
+//                    clubInfo: EditClubInfo(
+//                        name: self.clubTitle_label.text!,
+//                        _id: (self.userDefaults.getAuthorizedUser()?.person.club!)!,
+//                        info: self.clubDescription_textView.text!),
+//                    image: self.clubImage.image!)
+//            }
+//        }
     }
     
     func getClubLogoSuccess(image: UIImage) {

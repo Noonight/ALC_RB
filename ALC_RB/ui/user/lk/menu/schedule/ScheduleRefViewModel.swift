@@ -11,17 +11,17 @@ import RxSwift
 
 class ScheduleRefViewModel {
     struct DataModel {
-        var activeMatches = ActiveMatches()
+        var activeMatches = [Match]()
         var referees = [Person]()
         var clubs: [Club] = []
         
-        init(activeMatches: ActiveMatches, referees: Players, clubs: [Club]) {
+        init(activeMatches: [Match], referees: [Person], clubs: [Club]) {
             self.activeMatches = activeMatches
             self.referees = referees
             self.clubs = clubs
         }
         
-        init(tuple: (ActiveMatches, Players, [Club])) {
+        init(tuple: ([Match], [Person], [Club])) {
             self.activeMatches = tuple.0
             self.referees = tuple.1
             self.clubs = tuple.2
@@ -43,21 +43,22 @@ class ScheduleRefViewModel {
     func fetch(closure: @escaping () -> ()) {
         refreshing.onNext(true)
         
-        dataManager.get_scheduleRefereeData { result in
-            self.refreshing.onNext(false)
-            switch result {
-            case .success(let tuple):
-                Print.m(tuple)
-                self.dataModel.onNext(DataModel(tuple: tuple))
-            case .message(let message):
-                self.message.onNext(message)
-            case .failure(let error):
-                self.error.onNext(error)
-            }
-            closure()
-        }
+        // DEPRECATED: schedule changed
+//        dataManager.get_scheduleRefereeData { result in
+//            self.refreshing.onNext(false)
+//            switch result {
+//            case .success(let tuple):
+//                Print.m(tuple)
+//                self.dataModel.onNext(DataModel(tuple: tuple))
+//            case .message(let message):
+//                self.message.onNext(message)
+//            case .failure(let error):
+//                self.error.onNext(error)
+//            }
+//            closure()
+//        }
         
-//        dataManager.getActiveMatchesForView(get_success: { (activeMatches, referees, clubs) in
+//        dataManager.get[Match]ForView(get_success: { (activeMatches, referees, clubs) in
 //
 //            self.refreshing.onNext(false)
 //            self.dataModel.onNext(ScheduleRefViewModel.DataModel(

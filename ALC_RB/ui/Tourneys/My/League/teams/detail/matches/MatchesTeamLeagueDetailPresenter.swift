@@ -31,7 +31,7 @@ class MatchesTeamLeagueDetailPresenter: MvpPresenter<MatchesTeamLeagueDetailTabl
     
     func getClubImage(id club: String, getting: @escaping (UIImage) -> ()) {
         getClubs(id: club) { (clubs) in
-            guard let firstClubLogo = clubs.clubs.first?.logo else { return }
+            guard let firstClubLogo = clubs.first?.logo else { return }
             Alamofire
                 .request(ApiRoute.getImageURL(image: firstClubLogo))
                 .responseImage(completionHandler: { response in

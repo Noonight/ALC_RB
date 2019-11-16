@@ -73,17 +73,17 @@ class RefereeTeamTableViewController: UITableViewController {
     
     func prepareTableModel(destinationData: [Referee]) {
         for ref in destinationData {
-            switch ref.getType() {
-            case .inspector:
-                tableModel.tableModel[0].referee_id = ref.person
-            case .first:
-                tableModel.tableModel[1].referee_id = ref.person
-            case .second:
-                tableModel.tableModel[2].referee_id = ref.person
-            case .third:
-                tableModel.tableModel[3].referee_id = ref.person
-            case .chrono:
-                tableModel.tableModel[4].referee_id = ref.person
+            switch ref.type! {
+//            case Referee.rType.timekeeper:
+//                tableModel.tableModel[0].referee_id = ref.person?.getId() ?? ref.person?.getValue()?.id ?? ""
+            case Referee.rType.firstReferee:
+                tableModel.tableModel[1].referee_id = ref.person?.getId() ?? ref.person?.getValue()?.id ?? ""
+            case .secondReferee:
+                tableModel.tableModel[2].referee_id = ref.person?.getId() ?? ref.person?.getValue()?.id ?? ""
+            case .thirdReferee:
+                tableModel.tableModel[3].referee_id = ref.person?.getId() ?? ref.person?.getValue()?.id ?? ""
+            case Referee.rType.timekeeper:
+                tableModel.tableModel[4].referee_id = ref.person?.getId() ?? ref.person?.getValue()?.id ?? ""
             }
         }
     }

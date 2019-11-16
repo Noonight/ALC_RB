@@ -37,11 +37,11 @@ class ClubEditLKPresenter : MvpPresenter<ClubEditLKViewController> {
     
     func editClubInfo(token: String, clubInfo: EditClubInfo, image: UIImage?) {
         editClubInfoCache = EditClubInfoCache(clubInfo: clubInfo, image: image)
-        apiService.post_editClubInfo(token: token, clubInfo: clubInfo, clubImage: image, response_success: { (soloClub) in
-            self.getView().editClubInfoSuccess(soloClub: soloClub)
-        }) { (error) in
-            self.getView().editClubInfoFailure(error: error)
-        }
+//        apiService.post_editClubInfo(token: token, clubInfo: clubInfo, clubImage: image, response_success: { (soloClub) in
+//            self.getView().editClubInfoSuccess(soloClub: soloClub)
+//        }) { (error) in
+//            self.getView().editClubInfoFailure(error: error)
+//        }
     }
     
     func getClubLogo(byPath image: String) {

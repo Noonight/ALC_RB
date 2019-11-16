@@ -9,20 +9,20 @@
 import Foundation
 
 protocol CommandAddPlayerView: MvpView {
-    func onFetchPersonsSuccess(players: Players)
+    func onFetchPersonsSuccess(players: [Person])
     func onFetchPersonsFailure(error: Error)
     
     func onRequestAddPlayerToTeamSuccess(soloLeague: SoloLeague)
     func onRequestAddPlayerToTeamMessage(singleLineMessage: SingleLineMessage)
     func onRequestAddPlayerToTeamError(error: Error)
     
-    func onFetchQueryPersonsSuccess(players: Players)
+    func onFetchQueryPersonsSuccess(players: [Person])
     func onFetchQueryPersonsFailure(error: Error)
     
-    func onFetchSuccessful(player: Players)
+    func onFetchSuccessful(player: [Person])
     func onFetchFailure(error: Error)
     
-    func onFetchScrollSuccessful(players: Players)
+    func onFetchScrollSuccessful(players: [Person])
     func onFetchScrollFailure(error: Error)
 }
 
@@ -34,7 +34,7 @@ class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewControlle
         personApi.get_person { result in
             switch result {
             case .success(let persons):
-                self.getView().onFetchPersonsSuccess(players: Players(persons: persons, count: persons.count))
+                self.getView().onFetchPersonsSuccess(players: persons)
             case .failure(.error(let error)):
                 self.getView().onFetchPersonsFailure(error: error)
             default: Print.m("not used")
@@ -61,7 +61,7 @@ class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewControlle
         personApi.get_personQuery(name: query, surname: query, lastname: query) { result in
             switch result {
             case .success(let persons):
-                self.getView().onFetchPersonsSuccess(players: Players(persons: persons, count: persons.count))
+                self.getView().onFetchPersonsSuccess(players: persons)
             case .failure(.error(let error)):
                 self.getView().onFetchPersonsFailure(error: error)
             default: Print.m("not used")
@@ -78,7 +78,7 @@ class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewControlle
         personApi.get_personQuery(limit: limit, offset: offset) { result in
             switch result {
             case .success(let persons):
-                self.getView().onFetchScrollSuccessful(players: Players(persons: persons, count: persons.count))
+                self.getView().onFetchScrollSuccessful(players: persons)
             case .failure(.error(let error)):
                 self.getView().onFetchScrollFailure(error: error)
             default: Print.m("not used")
@@ -97,7 +97,7 @@ class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewControlle
         personApi.get_person { result in
             switch result {
             case .success(let persons):
-                self.getView().onFetchSuccessful(player: Players(persons: persons, count: persons.count))
+                self.getView().onFetchSuccessful(player: persons)
             case .failure(.error(let error)):
                 self.getView().onFetchFailure(error: error)
             default: Print.m("not used")

@@ -15,7 +15,7 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
     
     @IBOutlet var empty_view: UIView!
     
-    var tableData = MmUpcomingMatches()
+    var tableData = [Match]()
     
     private let presenter = UpcomingGamesPresenter()
     
@@ -107,7 +107,7 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
         tableView.separatorStyle = .singleLine
     }
     
-    func onGetUpcomingMatchesSuccesful(data: MmUpcomingMatches) {
+    func onGetUpcomingMatchesSuccesful(data: [Match]) {
         tableData = data
         //try! print(tableData.jsonString())
         updateUI()
@@ -131,7 +131,7 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.matches?.count ?? 0
+        return tableData.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -141,30 +141,30 @@ class UpcomingGamesTableViewController: UITableViewController, MvpView {
         //cell?.data = tableData.matches[indexPath.row]
         
 //        let model = tableData.matches![indexPath.row]
-        if let model = tableData.matches?[indexPath.row] {
+        let model = tableData[indexPath.row]
             if let date =  model.date {
-                cell.mDate.text = date.convertDate(from: .utcTime, to: .local)
-
+                cell.mDate.text = date.toFormat(.local)
+                cell.mTime.text = model.date!.toFormat(.localTime)
             }
-            cell.mTime.text = model.date!.convertDate(from: .utcTime, to: .localTime)
+        
             cell.mTour.text = model.tour
-            cell.mPlace.text = model.place
-            cell.mTitleTeam1.text = model.teamOne?.name
-            cell.mTitleTeam2.text = model.teamTwo?.name
+            cell.mPlace.text = model.place?.getValue()?.name
+            cell.mTitleTeam1.text = model.teamOne?.getValue()?.name
+            cell.mTitleTeam2.text = model.teamTwo?.getValue()?.name
             cell.mScore.text = model.score ?? " - "
             
-            presenter.findClub(clubId: (model.teamOne?.club)!) { (club) in
-                cell.mImageTeam1.af_setImage(withURL: ApiRoute.getImageURL(image: club!.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true, completion: { (response) in
-                    cell.mImageTeam1.image = response.result.value?.af_imageRoundedIntoCircle()
-                })
-            }
-            
-            presenter.findClub(clubId: (model.teamTwo?.club)!) { (club) in
-                cell.mImageTeam2.af_setImage(withURL: ApiRoute.getImageURL(image: club!.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true, completion: { (response) in
-                    cell.mImageTeam2.image = response.result.value?.af_imageRoundedIntoCircle()
-                })
-            }
-        }
+//            presenter.findClub(clubId: (model.teamOne?.club)!) { (club) in
+//                cell.mImageTeam1.af_setImage(withURL: ApiRoute.getImageURL(image: club!.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true, completion: { (response) in
+//                    cell.mImageTeam1.image = response.result.value?.af_imageRoundedIntoCircle()
+//                })
+//            }
+//            
+//            presenter.findClub(clubId: (model.teamTwo?.club)!) { (club) in
+//                cell.mImageTeam2.af_setImage(withURL: ApiRoute.getImageURL(image: club!.logo ?? ""), placeholderImage: #imageLiteral(resourceName: "ic_logo"), imageTransition: UIImageView.ImageTransition.crossDissolve(0.5), runImageTransitionIfCached: true, completion: { (response) in
+//                    cell.mImageTeam2.image = response.result.value?.af_imageRoundedIntoCircle()
+//                })
+//            }
+        
         
         return cell
     }

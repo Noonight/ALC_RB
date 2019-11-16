@@ -80,13 +80,13 @@ class EditRefereeTeamTableViewController: UITableViewController {
         
         prepareTableModel(destinationData: refereesController.referees)
         
-        if match.referees.contains(where: { liRef -> Bool in
-            return liRef.person == userDefaults.getAuthorizedUser()?.person.id && liRef.convertToReferee().type == .thirdReferee && userDefaults.getAuthorizedUser()?.person.getUserType() == Person.TypeOfPerson.mainReferee
-        }) {
-            editRefBarBtn.isEnabled = true
-        } else {
-            editRefBarBtn.isEnabled = false
-        }
+//        if match.referees.contains(where: { liRef -> Bool in
+//            return liRef.person == userDefaults.getAuthorizedUser()?.person.id && liRef.convertToReferee().type == .thirdReferee && userDefaults.getAuthorizedUser()?.person.getUserType() == Person.TypeOfPerson.mainReferee
+//        }) {
+//            editRefBarBtn.isEnabled = true
+//        } else {
+//            editRefBarBtn.isEnabled = false
+//        }
     }
     
     // MARK: - Prepare tableModel
@@ -102,17 +102,17 @@ class EditRefereeTeamTableViewController: UITableViewController {
         clear()
         for ref in destinationData {
             Print.m(ref)
-            switch ref.getType() {
-            case .inspector:
-                tableModel.tableModel[0].referee_id = ref.person
-            case .first:
-                tableModel.tableModel[1].referee_id = ref.person
-            case .second:
-                tableModel.tableModel[2].referee_id = ref.person
-            case .third:
-                tableModel.tableModel[3].referee_id = ref.person
-            case .chrono:
-                tableModel.tableModel[4].referee_id = ref.person
+            switch ref.type! {
+//            case .inspector:
+//                tableModel.tableModel[0].referee_id = ref.person
+            case .firstReferee:
+                tableModel.tableModel[1].referee_id = ref.person?.getId() ?? ref.person?.getValue()?.id ?? ""
+            case .secondReferee:
+                tableModel.tableModel[2].referee_id = ref.person?.getId() ?? ref.person?.getValue()?.id ?? ""
+            case .thirdReferee:
+                tableModel.tableModel[3].referee_id = ref.person?.getId() ?? ref.person?.getValue()?.id ?? ""
+            case .timekeeper:
+                tableModel.tableModel[4].referee_id = ref.person?.getId() ?? ref.person?.getValue()?.id ?? ""
             }
         }
         tableView.reloadData()

@@ -31,13 +31,13 @@ class CommandEditLKViewController: BaseStateViewController {
     var team = Team()
     var players = [Person]()
     var leagueController: LeagueController!
-    var mutablePlayers: [DEPRECATED] = []
+    var mutablePlayers: [Person] = []
 
     let userDefaultHelper = UserDefaultsHelper()
     
     // MARK: - model controllers
     var teamController: TeamCommandsController!
-    var participationController: ParticipationCommandsController!
+//    var participationController: ParticipationCommandsController!
     
     // MARK: Life cycle
     
@@ -155,7 +155,7 @@ extension CommandEditLKViewController: CommandEditLKView {
 //        self.team.players = editTeamResponse.players
         // DEPRECATED team does not contain players
 //        self.teamController.setPlayersByTeamId(id: self.team.id, players: editTeamResponse.players)
-        self.leagueController.editTeamPlayersById(teamId: self.team.id, players: editTeamResponse.players)
+//        self.leagueController.editTeamPlayersById(teamId: self.team.id, players: editTeamResponse.players)
         presenter.getPersons()
         showAlert(title: "Изменения успешно сохранены", message: "")
     }
@@ -197,8 +197,9 @@ extension CommandEditLKViewController: OnCommandPlayerDeleteBtnPressedProtocol {
     
     func onDeleteBtnPressed(index: IndexPath, model: CommandPlayersTableViewCell.CellModel, success: @escaping () -> ()) {
         for i in 0...mutablePlayers.count {
-            if model.player?.id == mutablePlayers[i].id {
-                
+            // DEPRECATED: player
+//            if model.player?.id == mutablePlayers[i].id {
+            
 //                if mutablePlayers[i].playerID == userDefaultHelper.getAuthorizedUser()?.person.id { // i can't delete teams' trainer
 //                    showAlert(message: "Вы пытаетесь исключить тренера.")
 //                } else {
@@ -218,10 +219,10 @@ extension CommandEditLKViewController: OnCommandPlayerDeleteBtnPressedProtocol {
 //                        }
 //                    }
 //                }
-                self.mutablePlayers.remove(at: i)
-                success()
-                break
-            }
+//                self.mutablePlayers.remove(at: i)
+//                success()
+//                break
+//            }
         }
     }
 }
@@ -230,7 +231,7 @@ extension CommandEditLKViewController: OnCommandInvitePlayerDeleteBtnPressedProt
     
     func onDeleteInvBtnPressed(index: IndexPath, model: CommandInvitePlayersTableViewCell.CellModel, success: @escaping () -> ()) {
         for i in 0...mutablePlayers.count/* - 1*/ {
-            if model.player?.id == mutablePlayers[i].id {
+//            if model.player?.id == mutablePlayers[i].id {
 //                if let personName = model.person?.getFullName() {
 //                    showAlertOkCancel(title: "Внимание", message: "Отозвать приглашение для игрока \(personName)?", ok: {
 //                        self.mutablePlayers.remove(at: i)
@@ -246,10 +247,10 @@ extension CommandEditLKViewController: OnCommandInvitePlayerDeleteBtnPressedProt
 //                        Print.m("cencel delete")
 //                    }
 //                }
-                self.mutablePlayers.remove(at: i)
-                success()
-                break
-            }
+//                self.mutablePlayers.remove(at: i)
+//                success()
+//                break
+//            }
         }
     }
 }
@@ -257,10 +258,11 @@ extension CommandEditLKViewController: OnCommandInvitePlayerDeleteBtnPressedProt
 extension CommandEditLKViewController: OnCommandPlayerEditNumberCompleteProtocol {
     func onEditNumberComplete(model: CommandPlayersTableViewCell.CellModel) {
         for i in 0...mutablePlayers.count {
-            if model.player?.id == mutablePlayers[i].id {
-                mutablePlayers[i].number = model.player!.number
-                break
-            }
+            // DEPRECATED
+//            if model.player?.id == mutablePlayers[i].id {
+//                mutablePlayers[i].number = model.player!.number
+//                break
+//            }
         }
     }
 }

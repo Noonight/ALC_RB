@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 class RefereesViewModel {
-    var referees: PublishSubject<Players> = PublishSubject()
+    var referees: PublishSubject<[Person]> = PublishSubject()
     var error: PublishSubject<Error?> = PublishSubject()
     var refreshing: PublishSubject<Bool> = PublishSubject()
     
@@ -29,7 +29,7 @@ class RefereesViewModel {
             self.refreshing.onNext(false)
             switch result {
             case .success(let persons):
-                self.referees.onNext(Players(persons: persons, count: persons.count))
+                self.referees.onNext(persons)
             case .message(let message):
                 Print.m(message.message)
             case .failure(.error(let error)):

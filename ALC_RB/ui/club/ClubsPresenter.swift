@@ -20,13 +20,22 @@ protocol ClubsTableView: MvpView {
 class ClubsPresenter: MvpPresenter<ClubsTableViewController> {
     
     let dataManager = ApiRequests()
+    let clubApi = ClubApi()
     
     func getClubs() {
         
-        dataManager.get_clubs(get_success: { clubs in
-            self.getView().onGetClubsSuccess(clubs)
-        }) { error in
-            self.getView().onGetClubsFailure(error)
+        clubApi.get_club { result in
+            switch result {
+            case .success(let clubs):
+                self.getView().onGetClubsSuccess(clubs)
+            case .message(let msg):
+                Print.m(msg.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+                self.getView().onGetClubsFailure(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
         }
     }
     

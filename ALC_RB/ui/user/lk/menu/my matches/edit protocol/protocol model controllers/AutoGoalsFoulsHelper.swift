@@ -38,10 +38,10 @@ class AutoGoalsFoulsHelper {
         
         for event in eventsController.events
         {
-            if playersController.getPlayerByIdOfPlayingPlayers(event.player) != nil
-            {
-                events.append(event)
-            }
+//            if playersController.getPlayerByIdOfPlayingPlayers(event.player) != nil
+//            {
+//                events.append(event)
+//            }
         }
         
         return events
@@ -53,10 +53,10 @@ class AutoGoalsFoulsHelper {
         
         for event in eventsController.prepareAutoGoalEvents()
         {
-            if playersController.getPlayerByIdOfPlayingPlayers(event.player) != nil
-            {
-                events.append(event)
-            }
+//            if playersController.getPlayerByIdOfPlayingPlayers(event.player) != nil
+//            {
+//                events.append(event)
+//            }
         }
         
         return events
@@ -68,10 +68,10 @@ class AutoGoalsFoulsHelper {
         
         for event in eventsController.prepareFoulEvents()
         {
-            if playersController.getPlayerByIdOfPlayingPlayers(event.player) != nil
-            {
-                events.append(event)
-            }
+//            if playersController.getPlayerByIdOfPlayingPlayers(event.player) != nil
+//            {
+//                events.append(event)
+//            }
         }
         
         return events

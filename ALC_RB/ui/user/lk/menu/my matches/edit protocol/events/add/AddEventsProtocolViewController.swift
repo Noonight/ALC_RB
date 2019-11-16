@@ -83,7 +83,7 @@ class AddEventsProtocolViewController: BaseStateViewController {
         if fieldsIsEmpty() {
             showAlert(title: "Выберите тип события, тайм, игрока", message: "")
         } else {
-            eventsController.add(Event(id: model.participationMatch!.id, eventType: getSystemEventType().rawValue, player: getPlayerId()!, time: getTime()!))
+//            eventsController.add(Event(id: model.participationMatch!.id, eventType: getSystemEventType().rawValue, player: getPlayerId()!, time: getTime()!))
 //            Print.m("### --- ###")
 //            Print.m(UserDefaultsHelper().getAuthorizedUser()?.token)
 //            Print.m("### --- ###")
@@ -132,9 +132,9 @@ class AddEventsProtocolViewController: BaseStateViewController {
     }
     
     func fieldsIsEmpty() -> Bool {
-        if getSystemEventType() == .non {
-            return true
-        }
+//        if getSystemEventType() == .non {
+//            return true
+//        }
         if timeTextField.text?.isEmpty ?? true {
             return true
         }
@@ -146,24 +146,24 @@ class AddEventsProtocolViewController: BaseStateViewController {
     
     func fetchTeamOnePersons() {
         self.setState(state: .loading)
-        presenter.fetchPersons(persons: teamOneController.players.map({ liPlayer -> String in
-            return liPlayer.playerId
-        }), closure: { persons in
-            self.fetchedTeamOnePlayers = persons
-        }, failure: { error in
-            Print.m(error)
-        })
+//        presenter.fetchPersons(persons: teamOneController.players.map({ liPlayer -> String in
+//            return liPlayer.playerId
+//        }), closure: { persons in
+//            self.fetchedTeamOnePlayers = persons
+//        }, failure: { error in
+//            Print.m(error)
+//        })
     }
     
     func fetchTeamTwoPersons() {
         self.setState(state: .loading)
-        presenter.fetchPersons(persons: teamTwoController.players.map({ liPlayer -> String in
-            return liPlayer.playerId
-        }), closure: { persons in
-            self.fetchedTeamTwoPlayers = persons
-        }, failure: { error in
-            Print.m(error)
-        })
+//        presenter.fetchPersons(persons: teamTwoController.players.map({ liPlayer -> String in
+//            return liPlayer.playerId
+//        }), closure: { persons in
+//            self.fetchedTeamTwoPlayers = persons
+//        }, failure: { error in
+//            Print.m(error)
+//        })
     }
     
     func setEvent(_ sender: EventTypeView) {
@@ -224,30 +224,30 @@ class AddEventsProtocolViewController: BaseStateViewController {
 //        return Event.EventType.non
 //    }
     
-    func getSystemEventType() -> Event.SystemEventType {
-        func eventState(view: EventTypeView) -> Bool {
-            return view.getState()
-        }
-        if eventState(view: eventGol) {
-            return Event.SystemEventType.goal
-        }
-        if eventState(view: eventYellowCard) {
-            return Event.SystemEventType.yellowCard
-        }
-        if eventState(view: eventRedCard) {
-            return Event.SystemEventType.redCard
-        }
-        if eventState(view: eventFol) {
-            return Event.SystemEventType.foul
-        }
-        if eventState(view: eventAutoGoal) {
-            return Event.SystemEventType.autoGoal
-        }
-        if eventState(view: eventPenalty) {
-            return Event.SystemEventType.penalty
-        }
-        return Event.SystemEventType.non
-    }
+//    func getSystemEventType() -> Event.SystemEventType {
+//        func eventState(view: EventTypeView) -> Bool {
+//            return view.getState()
+//        }
+//        if eventState(view: eventGol) {
+//            return Event.SystemEventType.goal
+//        }
+//        if eventState(view: eventYellowCard) {
+//            return Event.SystemEventType.yellowCard
+//        }
+//        if eventState(view: eventRedCard) {
+//            return Event.SystemEventType.redCard
+//        }
+//        if eventState(view: eventFol) {
+//            return Event.SystemEventType.foul
+//        }
+//        if eventState(view: eventAutoGoal) {
+//            return Event.SystemEventType.autoGoal
+//        }
+//        if eventState(view: eventPenalty) {
+//            return Event.SystemEventType.penalty
+//        }
+//        return Event.SystemEventType.non
+//    }
     
     func showTeamPicker(sender: UIButton) {
         let acp = ActionSheetStringPicker(title: "", rows: [model.team1Name!, model.team2Name!], initialSelection: 0, doneBlock: { (picker, index, value) in

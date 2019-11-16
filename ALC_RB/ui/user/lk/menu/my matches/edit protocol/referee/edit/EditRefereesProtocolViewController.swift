@@ -84,7 +84,7 @@ class EditRefereesProtocolViewController: BaseStateViewController {
     // MARK: - Helpers
     
     func configureFilteredReferees() {
-        filteredRefereesWithFullName = viewModel?.referees.value.people.filter({ person -> Bool in
+        filteredRefereesWithFullName = viewModel?.referees.value.filter({ person -> Bool in
             return person.getFullName().count > 2
         }).map({ person -> String in
             return person.getFullName()
@@ -110,8 +110,8 @@ class EditRefereesProtocolViewController: BaseStateViewController {
 //        for ref in viewModel!.comingMatch.referees {
         for ref in refereesController.referees {
 //            let refPerson = viewModel?.comingReferees.value.people.filter({ person -> Bool in
-            let refPerson = viewModel?.referees.value.people.filter({ person -> Bool in
-                return person.id == ref.person
+            let refPerson = viewModel?.referees.value.filter({ person -> Bool in
+                return person.id == ref.person?.getId() ?? ref.person?.getValue()?.id ?? ""
             }).first
             switch ref.type! {
             case .firstReferee:
@@ -190,7 +190,7 @@ class EditRefereesProtocolViewController: BaseStateViewController {
     // dictionary {person, type} of referee
     func getRefereesArray() -> [EditMatchReferee] {
         func getPersonId(_ fullName: String) -> String? {
-            return self.viewModel?.referees.value.findPersonBy(fullName: fullName)?.id
+            return self.viewModel?.referees.value.filter { $0.getFullName() == fullName || $0.getSurnameNP() == fullName }.first?.id
 //            return self.viewModel?.comingReferees.value.findPersonBy(fullName: fullName)?.id
         }
         func isCorrectTitle(btn: UIButton) -> Bool {
@@ -323,7 +323,7 @@ class EditRefereesProtocolViewController: BaseStateViewController {
         
         let acp = ActionSheetStringPicker(title: "", rows: filteredRefereesWithFullName, initialSelection: 0, doneBlock: { (picker, index, value) in
 //            sender.setTitleAndColorWith(title: (self.viewModel?.comingReferees.value.findPersonBy(fullName: value as! String)?.getFullName())!, color: Colors.YES_REF)
-            sender.setTitleAndColorWith(title: (self.viewModel?.referees.value.findPersonBy(fullName: value as! String)?.getFullName())!, color: Colors.YES_REF)
+            sender.setTitleAndColorWith(title: (self.viewModel?.referees.value.filter { $0.getFullName() == (value as! String) || $0.getSurnameNP() == (value as! String) }.first!.getFullName())!, color: Colors.YES_REF)
         }, cancel: { (picker) in
             
         }, origin: sender)

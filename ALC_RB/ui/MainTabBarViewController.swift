@@ -28,12 +28,11 @@ class MainTabBarViewController: UITabBarController {
     
     func setupTabBar() {
         let homeVC = self.createNavController(rootViewController: HomeViewController.storyboardInstance(), image: #imageLiteral(resourceName: "tab_home"))
-        let tournamentVC = self.createNavController(rootViewController: TournamentsTableViewController.storyboardInstance(), image: #imageLiteral(resourceName: "tab_cup"))
         let clubsVC = self.createNavController(rootViewController: ClubsTableViewController.storyboardInstance(), image: #imageLiteral(resourceName: "tab_club"))
         let playersVC = self.createNavController(rootViewController: PlayersTableViewController.storyboardInstance(), image: #imageLiteral(resourceName: "tab_players"))
         let lkVC  = self.createNavController(rootViewController: AuthViewController.storyboardInstance(), image: #imageLiteral(resourceName: "tab_user"))
         
-        viewControllers = [homeVC, tournamentVC, clubsVC, playersVC, lkVC]
+        viewControllers = [homeVC, clubsVC, playersVC, lkVC]
         
         guard let items = self.tabBar.items else { return }
         for item in items {

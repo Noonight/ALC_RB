@@ -27,12 +27,13 @@ class PlayersTeamLeagueDetailViewController: UIViewController {
         }
         set (newValue) {
             var newVal = newValue
-            let filteredPlayers = newVal.players?.filter({ liPLayer -> Bool in
-                return liPLayer.getInviteStatus() == .accepted || liPLayer.getInviteStatus() == .approved
-            })
-            if let teamPlayers = filteredPlayers {
-                newVal.players = teamPlayers
-            }
+            // DEPRECATED: played do not have invite status
+//            let filteredPlayers = newVal.players?.filter({ liPLayer -> Bool in
+//                return liPLayer.getInviteStatus() == .accepted || liPLayer.getInviteStatus() == .approved
+//            })
+//            if let teamPlayers = filteredPlayers {
+//                newVal.players = teamPlayers
+//            }
             _team = newVal
         }
     }
@@ -50,7 +51,7 @@ class PlayersTeamLeagueDetailViewController: UIViewController {
 //        }) {
 //            // noting but if something went wrong make it
 //        }
-        presenter.getPerson(id: team.creator!) { result in
+        presenter.getPerson(id: team.creator?.getId() ?? team.creator!.getValue()!.id) { result in
             switch result {
             case .success(let person):
                 self.name_trainer_label.text = person.first?.getFullName()
@@ -110,23 +111,23 @@ extension PlayersTeamLeagueDetailViewController: UITableViewDataSource {
         return cell
     }
     
-    func configureCell(cell: PlayersTeamLeagueDetailTableViewCell, model: DEPRECATED) {
+    func configureCell(cell: PlayersTeamLeagueDetailTableViewCell, model: TeamPlayersStatus) {
         
         func setupCell(person: Person) {
             cell.name.text = person.getSurnameNP()
-            cell.games.text = String(model.matches)
-            cell.goals.text = String(model.goals)
-            cell.yellow_cards.text = String(model.yellowCards)
-            cell.disqualifications.text = String(model.disquals)
+//            cell.games.text = String(model.matches)
+//            cell.goals.text = String(model.)
+            cell.yellow_cards.text = String(model.activeYellowCards ?? 0)
+            cell.disqualifications.text = String(model.activeDisquals ?? 0)
         }
         
         if let fetchedPerson = fetchedPersons.filter({ person -> Bool in
-            return person.id == model.playerId
+            return person.id == model.person?.getId() ?? model.person?.getValue()?.id ?? ""
         }).first {
             setupCell(person: fetchedPerson)
         } else {
             let hud = cell.showLoadingViewHUD()
-            presenter.getPerson(id: model.playerId) { result in
+            presenter.getPerson(id: model.person?.getId() ?? model.person?.getValue()?.id ?? "") { result in
                 switch result {
                 case .success(let person):
                     self.fetchedPersons.append(person.first!)

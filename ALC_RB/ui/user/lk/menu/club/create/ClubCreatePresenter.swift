@@ -38,18 +38,17 @@ class ClubCreatePresenter: MvpPresenter<ClubCreateViewController> {
     }
     
     func create(token: String, createClub: CreateClub, image: UIImage?) {
-        if createClub.fieldsIsEmpty() {
-            self.getView().fieldsIsEmpty()
-        } else {
-            self.createClubCache = CreateClubCache(createClub: createClub, image: image)
-            dataManage
-            dataManager?.post_createClub(token: token, createClub: createClub, image: image, response_success: { soloClub in
-                self.getView().responseCreateClubSuccessful(soloClub: soloClub)
-            }, response_message: { message in
-                self.getView().responseCreateClubMessageSuccessful(message: message)
-            }, response_failure: { error in
-                self.getView().responseCreateClubFailure(error: error)
-            })
-        }
+//        if createClub.fieldsIsEmpty() {
+//            self.getView().fieldsIsEmpty()
+//        } else {
+//            self.createClubCache = CreateClubCache(createClub: createClub, image: image)
+//            dataManager?.post_createClub(token: token, createClub: createClub, image: image, response_success: { soloClub in
+//                self.getView().responseCreateClubSuccessful(soloClub: soloClub)
+//            }, response_message: { message in
+//                self.getView().responseCreateClubMessageSuccessful(message: message)
+//            }, response_failure: { error in
+//                self.getView().responseCreateClubFailure(error: error)
+//            })
+//        }
     }
 }

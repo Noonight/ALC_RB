@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 struct SoloMatch: Codable {
-    let match: ParticipationMatch?
+    let match: Match?
     
     enum CodingKeys: String, CodingKey {
         case match = "match"
@@ -34,7 +34,7 @@ extension SoloMatch {
     }
     
     func with(
-        match: ParticipationMatch?? = nil
+        match: Match?? = nil
         ) -> SoloMatch {
         return SoloMatch(
             match: match ?? self.match
@@ -59,7 +59,7 @@ extension DataRequest {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
             
-            return Result { try JSONDecoder().decode(T.self, from: data) }
+            return Result { try ISO8601Decoder.getDecoder().decode(T.self, from: data) }
         }
     }
     

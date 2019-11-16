@@ -37,7 +37,7 @@ class PlayersLeagueDetailViewController: UIViewController {
     
     let backgroundView = UIView()
     
-    var playersArray: [DEPRECATED] = [DEPRECATED]() {
+    var playersArray: [Person] = [Person]() {
         didSet {
             updateUI()
         }
@@ -54,17 +54,17 @@ class PlayersLeagueDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initPresenter()
-        
-        for i in leagueDetailModel.league.teams! {
-            let filteredPlayers = i.players?.filter({ liPlayer -> Bool in
-                return liPlayer.getInviteStatus() == .accepted || liPlayer.getInviteStatus() == .approved
-            })
-            if let filterPlayerArray = filteredPlayers {
-                playersArray += filterPlayerArray
-            }
-            
-            //print("\(i.players)")
-        }
+        // DEPRECATED
+//        for i in leagueDetailModel.league.teams! {
+//            let filteredPlayers = i.players?.filter({ liPlayer -> Bool in
+//                return liPlayer.getInviteStatus() == .accepted || liPlayer.getInviteStatus() == .approved
+//            })
+//            if let filterPlayerArray = filteredPlayers {
+//                playersArray += filterPlayerArray
+//            }
+//
+//            //print("\(i.players)")
+//        }
         
         table_view.tableFooterView = UIView()
         
@@ -174,27 +174,27 @@ extension PlayersLeagueDetailViewController: UIPickerViewDataSource, UIPickerVie
 // MARK: - filters
 extension PlayersLeagueDetailViewController {
     func filterByCompletedMatches() {
-        playersArray.sort { (player1, player2) -> Bool in
-            return player1.matches > player2.matches
-        }
+//        playersArray.sort { (player1, player2) -> Bool in
+//            return player1.matches > player2.matches
+//        }
     }
     
     func filterByGoals() {
-        playersArray.sort { (player1, player2) -> Bool in
-            return player1.goals > player2.goals
-        }
+//        playersArray.sort { (player1, player2) -> Bool in
+//            return player1.goals > player2.goals
+//        }
     }
     
     func filterByYellowCards() {
-        playersArray.sort { (player1, player2) -> Bool in
-            player1.yellowCards > player2.yellowCards
-        }
+//        playersArray.sort { (player1, player2) -> Bool in
+//            player1.yellowCards > player2.yellowCards
+//        }
     }
     
     func filterByRedCards() {
-        playersArray.sort { (player1, player2) -> Bool in
-            player1.redCards > player2.redCards
-        }
+//        playersArray.sort { (player1, player2) -> Bool in
+//            player1.redCards > player2.redCards
+//        }
     }
     
     func filterTable(type: FilterType) {
@@ -265,7 +265,7 @@ extension PlayersLeagueDetailViewController: UITableViewDataSource {
         return cell
     }
     
-    func configureCell(cell: PlayersLeagueTableViewCell, leagueDetailModel: LeagueDetailModel, player: DEPRECATED) {
+    func configureCell(cell: PlayersLeagueTableViewCell, leagueDetailModel: LeagueDetailModel, player: Person) {
         func setupCell(person: Person)
         {
             cell.name_label.text = person.getSurnameNP()
@@ -274,42 +274,42 @@ extension PlayersLeagueDetailViewController: UITableViewDataSource {
 //                cell.photo_img.image = img.af_imageRoundedIntoCircle()
 //            }
             
-            cell.games_label.text = String(player.matches)
-            cell.goals_label.text = String(player.goals)
-            cell.yellow_cards_label.text = String(player.activeYellowCards)
-            cell.red_cards_label.text = String(player.redCards)
+//            cell.games_label.text = String(player.matches)
+//            cell.goals_label.text = String(player.goals)
+//            cell.yellow_cards_label.text = String(player.activeYellowCards)
+//            cell.red_cards_label.text = String(player.redCards)
         }
-        if let person = fetchedPersons.filter({ person -> Bool in
-            return person.id == player.playerId
-        }).first {
-            setupCell(person: person)
-        } else {
-            let hud = cell.showLoadingViewHUD()
-            presenter.getUser(id: player.playerId) { result in
-                switch result {
-                case .success(let persons):
-                    if let firstPerson = persons.first {
-                        self.fetchedPersons.append(firstPerson)
-                        setupCell(person: firstPerson)
-                        hud.hide(animated: true)
-                    }
-                    
-                case .message(let message):
-                    Print.m(message.message)
-                    
-                case .failure(.error(let error)):
-                    Print.m(error)
-                    
-                case .failure(.notExpectedData):
-                    Print.m("not expected data")
-                }
-            }
+//        if let person = fetchedPersons.filter({ person -> Bool in
+//            return person.id == player.playerId
+//        }).first {
+//            setupCell(person: person)
+//        } else {
+//            let hud = cell.showLoadingViewHUD()
+//            presenter.getUser(id: player.playerId) { result in
+//                switch result {
+//                case .success(let persons):
+//                    if let firstPerson = persons.first {
+//                        self.fetchedPersons.append(firstPerson)
+//                        setupCell(person: firstPerson)
+//                        hud.hide(animated: true)
+//                    }
+//
+//                case .message(let message):
+//                    Print.m(message.message)
+//
+//                case .failure(.error(let error)):
+//                    Print.m(error)
+//
+//                case .failure(.notExpectedData):
+//                    Print.m("not expected data")
+//                }
+//            }
 //            presenter.getUser(user: player.playerId) { (person) in
 //                self.fetchedPersons.append(person.person)
 //                setupCell(person: person.person)
 //                hud.hide(animated: true)
 //            }
-        }
+//        }
         
     }
     

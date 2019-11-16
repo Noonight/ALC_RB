@@ -108,15 +108,15 @@ extension MatchProtocolViewController {
         
         let hud = showLoadingViewHUD(with: "Настройка...")
         
-        self.team_one_label.text = self.viewModel.prepareTeamTitle(team: .one)
-        self.team_two_label.text = self.viewModel.prepareTeamTitle(team: .two)
+        self.team_one_label.text = self.viewModel.match.teamOne?.getValue()?.name
+        self.team_two_label.text = self.viewModel.match.teamTwo?.getValue()?.name
         
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamOne!, league: self.viewModel.leagueDetailModel.league)) { (image) in
-            self.team_one_image.image = image.af_imageRoundedIntoCircle()
-        }
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamTwo!, league: self.viewModel.leagueDetailModel.league)) { (image) in
-            self.team_two_image.image = image.af_imageRoundedIntoCircle()
-        }
+//        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamOne!, league: self.viewModel.leagueDetailModel.league)) { (image) in
+//            self.team_one_image.image = image.af_imageRoundedIntoCircle()
+//        }
+//        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamTwo!, league: self.viewModel.leagueDetailModel.league)) { (image) in
+//            self.team_two_image.image = image.af_imageRoundedIntoCircle()
+//        }
         
         self.tournament_name_label.text = self.viewModel.prepareTournamentTitle()
         self.date_label.text = self.viewModel.prepareDate()
@@ -150,15 +150,15 @@ extension MatchProtocolViewController {
         }
         
         
-        self.teamOneTitle.text = self.viewModel.prepareTeamTitle(team: .one)
-        self.teamTwoTitle.text = self.viewModel.prepareTeamTitle(team: .two)
+        self.teamOneTitle.text = self.viewModel.match.teamOne?.getValue()?.name
+        self.teamTwoTitle.text = self.viewModel.match.teamTwo?.getValue()?.name
         
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamOne!, league: self.viewModel.leagueDetailModel.league)) { (image) in
-            self.teamOneLogo.image = image.af_imageRoundedIntoCircle()
-        }
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamTwo!, league: self.viewModel.leagueDetailModel.league)) { (image) in
-            self.teamTwoLogo.image = image.af_imageRoundedIntoCircle()
-        }
+//        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamOne!, league: self.viewModel.leagueDetailModel.league)) { (image) in
+//            self.teamOneLogo.image = image.af_imageRoundedIntoCircle()
+//        }
+//        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamTwo!, league: self.viewModel.leagueDetailModel.league)) { (image) in
+//            self.teamTwoLogo.image = image.af_imageRoundedIntoCircle()
+//        }
         
         hud.hide(animated: false)
     }
@@ -218,11 +218,11 @@ extension MatchProtocolViewController {
 // MARK: HELPERS
 
 extension MatchProtocolViewController {
-    func getPlayersTeam(team id: String) -> [DEPRECATED] {
-        return (self.viewModel.leagueDetailModel.league.teams?.filter({ (team) -> Bool in
-            return team.id == id
-        }).first?.players)!
-    }
+//    func getPlayersTeam(team id: String) -> [DEPRECATED] {
+//        return (self.viewModel.leagueDetailModel.league.teams?.filter({ (team) -> Bool in
+//            return team.id == id
+//        }).first?.players)!
+//    }
 }
 
 // MARK: PRESENTER
@@ -258,14 +258,14 @@ extension MatchProtocolViewController {
         switch destination {
         case is TeamProtocolTableViewController:
             let controller = destination as! TeamProtocolTableViewController
-            controller.players = getPlayersTeam(team: self.viewModel.match.teamOne!)
-            controller.title = ClubTeamHelper.getTeamTitle(league: self.viewModel.leagueDetailModel.league, match: self.viewModel.match, team: .one)
+//            controller.players = getPlayersTeam(team: self.viewModel.match.teamOne!)
+//            controller.title = ClubTeamHelper.getTeamTitle(league: self.viewModel.leagueDetailModel.league, match: self.viewModel.match, team: .one)
         case is RefereeTeamTableViewController:
             let controller = destination as! RefereeTeamTableViewController
-            controller.destinationData = self.viewModel.match.referees
+            controller.destinationData = self.viewModel.match.referees!
         case is EventsMatchTableViewController:
             let controller = destination as! EventsMatchTableViewController
-            controller.destinationModel = self.viewModel.match.events
+            controller.destinationModel = self.viewModel.match.events!
         case is ScoreMatchTableViewController:
             let controller = destination as! ScoreMatchTableViewController
             controller.leagueDetailModel = self.viewModel.leagueDetailModel
@@ -281,11 +281,11 @@ extension MatchProtocolViewController {
             let controller = destination as! TeamProtocolTableViewController
             switch team {
             case .one:
-                controller.players = getPlayersTeam(team: self.viewModel.match.teamOne!)
-                controller.title = ClubTeamHelper.getTeamTitle(league: self.viewModel.leagueDetailModel.league, match: self.viewModel.match, team: .one)
+//                controller.players = getPlayersTeam(team: self.viewModel.match.teamOne!)
+                controller.title = self.viewModel.match.teamOne?.getValue()?.name
             case .two:
-                controller.players = getPlayersTeam(team: self.viewModel.match.teamTwo!)
-                controller.title = ClubTeamHelper.getTeamTitle(league: self.viewModel.leagueDetailModel.league, match: self.viewModel.match, team: .two)
+//                controller.players = getPlayersTeam(team: self.viewModel.match.teamTwo!)
+                controller.title = self.viewModel.match.teamTwo?.getValue()?.name
             }
         default:
             break

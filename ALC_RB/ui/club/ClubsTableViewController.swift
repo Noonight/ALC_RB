@@ -57,7 +57,7 @@ extension ClubsTableViewController {
 // MARK: Refresh controller
 extension ClubsTableViewController {
     override func hasContent() -> Bool {
-        if clubs.clubs.count != 0 {
+        if clubs.count != 0 {
             return true
         } else {
             return false
@@ -94,13 +94,13 @@ extension ClubsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return clubs.clubs.count
+        return clubs.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.CLUB, for: indexPath) as! ClubTableViewCell
 
-        let model = clubs.clubs[indexPath.row]
+        let model = clubs[indexPath.row]
         
         cell.mTitle.text = model.name
 //        cell.mImage.image = #imageLiteral(resourceName: "ic_con")
@@ -157,7 +157,7 @@ extension ClubsTableViewController {
         {
             let cacheImage = ImageCache.default
             
-            if let imageUrl = clubs.clubs[cellIndex].logo
+            if let imageUrl = clubs[cellIndex].logo
             {
                 cacheImage.retrieveImage(forKey: ApiRoute.getAbsoluteImageRoute(imageUrl))
                 { result in
@@ -168,25 +168,25 @@ extension ClubsTableViewController {
                         {
                             destination.content = ClubDetailContent(
                                 image: image,
-                                title: self.clubs.clubs[cellIndex].name ?? "",
-                                owner: self.clubs.clubs[cellIndex].owner?.surname ?? "",
-                                text: self.clubs.clubs[cellIndex].info ?? "")
+                                title: self.clubs[cellIndex].name ?? "",
+                                owner: (self.clubs[cellIndex].owner?.getValue()?.surname!)!,
+                                text: self.clubs[cellIndex].info ?? "")
                         }
                         else
                         {
                             destination.content = ClubDetailContent(
                                 image: nil,
-                                title: self.clubs.clubs[cellIndex].name ?? "",
-                                owner: self.clubs.clubs[cellIndex].owner?.surname ?? "",
-                                text: self.clubs.clubs[cellIndex].info ?? "")
+                                title: self.clubs[cellIndex].name ?? "",
+                                owner: (self.clubs[cellIndex].owner?.getValue()?.surname!)!,
+                                text: self.clubs[cellIndex].info ?? "")
                         }
                     case .failure(let error):
                         print(error)
                         destination.content = ClubDetailContent(
                             image: nil,
-                            title: self.clubs.clubs[cellIndex].name ?? "",
-                            owner: self.clubs.clubs[cellIndex].owner?.surname ?? "",
-                            text: self.clubs.clubs[cellIndex].info ?? "")
+                            title: self.clubs[cellIndex].name ?? "",
+                            owner: (self.clubs[cellIndex].owner?.getValue()?.surname!)!,
+                            text: self.clubs[cellIndex].info ?? "")
                     }
                 }
             }
@@ -194,9 +194,9 @@ extension ClubsTableViewController {
             {
                 destination.content = ClubDetailContent(
                     image: nil,
-                    title: self.clubs.clubs[cellIndex].name ?? "",
-                    owner: self.clubs.clubs[cellIndex].owner?.surname ?? "",
-                    text: self.clubs.clubs[cellIndex].info ?? "")
+                    title: self.clubs[cellIndex].name ?? "",
+                    owner: (self.clubs[cellIndex].owner?.getValue()?.surname!)!,
+                    text: self.clubs[cellIndex].info ?? "")
             }
             
         }

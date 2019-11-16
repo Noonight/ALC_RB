@@ -30,7 +30,7 @@ final class MatchScheduleModelItem {
         return match.score
     }
     var place: String? {
-        return match.place
+        return match.place?.getValue()?.name
     }
     var tour: String? {
         return match.tour
@@ -39,7 +39,7 @@ final class MatchScheduleModelItem {
         return match.winner
     }
     var isPlayed: Bool {
-        return match.played
+        return match.played ?? false
     }
     var teamOneName: String? {
         return self.teamOne?.name

@@ -41,7 +41,7 @@ class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> 
     
     func getClubImage(id club: String, getting: @escaping (UIImage) -> ()) {
         getClubs(id: club) { (clubs) in
-            if let mClub = clubs.clubs.first {
+            if let mClub = clubs.first {
                 if let logo = mClub.logo {
                     Alamofire
                         .request(ApiRoute.getImageURL(image: logo))
@@ -58,15 +58,15 @@ class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> 
     
     func requestEditProtocol(token: String, editProtocol: EditProtocol) {
 
-        dataManager.post_changeProtocol(token: token, newProtocol: editProtocol) { result in
-            switch result {
-            case .success(let match):
-                self.getView().requestEditProtocolSuccess(match: match)
-            case .message(let message):
-                self.getView().requestEditProtocolMessage(message: message)
-            case .failure(let error):
-                self.getView().requestEditProtocolFailure(error: error)
-            }
-        }
+//        dataManager.post_changeProtocol(token: token, newProtocol: editProtocol) { result in
+//            switch result {
+//            case .success(let match):
+//                self.getView().requestEditProtocolSuccess(match: match)
+//            case .message(let message):
+//                self.getView().requestEditProtocolMessage(message: message)
+//            case .failure(let error):
+//                self.getView().requestEditProtocolFailure(error: error)
+//            }
+//        }
     }
 }

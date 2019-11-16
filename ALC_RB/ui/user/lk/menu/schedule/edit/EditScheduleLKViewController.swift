@@ -105,14 +105,14 @@ class EditScheduleLKViewController: BaseStateViewController {
         {
             mainRefShowProtocol_btn.isEnabled = true
         }
-        if viewModel?.comingCellModel.value.activeMatch.teamOne.name.count ?? 0 < 1 || viewModel?.comingCellModel.value.activeMatch.teamTwo.name.count ?? 0 < 1 {
+        if viewModel?.comingCellModel.value.activeMatch.teamOne?.getValue()?.name != nil || viewModel?.comingCellModel.value.activeMatch.teamTwo?.getValue()?.name != nil {
             mainRefShowProtocol_btn.isEnabled = false
         }
     }
     
     func setupReferee() {
-        for ref in viewModel!.comingCellModel.value.activeMatch.referees {
-            let refPerson = viewModel?.comingReferees.value.people.filter({ person -> Bool in
+        for ref in viewModel!.comingCellModel.value.activeMatch.referees! {
+            let refPerson = viewModel?.comingReferees.value.filter({ person -> Bool in
 //                return ref.person?.isEqual({ rId -> Bool in
 //                    return rId == person.id
 //                }) ?? ref.person?.isEqual({ rPerson -> Bool in
@@ -206,7 +206,7 @@ class EditScheduleLKViewController: BaseStateViewController {
         
         activityIndicator.startAnimating()
         
-        guard let leagueId = viewModel?.comingCellModel.value.activeMatch.leagueID else {
+        guard let leagueId = viewModel?.comingCellModel.value.activeMatch.league?.getId() ?? viewModel?.comingCellModel.value.activeMatch.league?.getValue()?.id else {
             Print.m("cell league is nil")
             return
         }

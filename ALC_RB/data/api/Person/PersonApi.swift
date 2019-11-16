@@ -25,7 +25,7 @@ final class PersonApi : ApiRequests {
         if let mLastname = lastname {
             parameters["lastname"] = mLastname
         }
-        if let mRegion = region?._id {
+        if let mRegion = region?.id {
             parameters["region"] = mRegion
         }
         if let mLimit = limit {
@@ -69,7 +69,7 @@ final class PersonApi : ApiRequests {
         if let mLastname = lastname {
             parameters["lastname"] = mLastname
         }
-        if let mRegion = region?._id {
+        if let mRegion = region?.id {
             parameters["region"] = mRegion
         }
         if let mLimit = limit {

@@ -130,7 +130,7 @@ class UserLKViewController: UIViewController {
         self.presenter.refreshUser(token: userDefaultsHelper.getAuthorizedUser()!.token)
         
         
-        menuHelper?.userType = authUser?.person.getUserType()
+//        menuHelper?.userType = authUser?.person.getUserType()
         
         barMenuBtn.image = barMenuBtn.image?.af_imageAspectScaled(toFit: CGSize(width: 24, height: 24))
 //        showFirstItem()

@@ -44,7 +44,7 @@ class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegat
     
     // MARK: - model controllers
     var teamController: TeamCommandsController!
-    var participationController: ParticipationCommandsController!
+//    var participationController: ParticipationCommandsController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -170,19 +170,21 @@ class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegat
         return true
     }
     
-    func filterPendingTournaments(tournaments: [Tourney]) -> [League] {
-        return tournaments.leagues.filter({ league -> Bool in
-            return league.status == League.Status.pending
-//            return league.getStatus() == League.Statuses.pending
-        })
-    }
+    // DEPRECATED: tourney do not contain leagues
+//    func filterPendingTournaments(tournaments: [Tourney]) -> [League] {
+//
+////        return tournaments.leagues.filter({ league -> Bool in
+////            return league.status == League.Status.pending
+//////            return league.getStatus() == League.Statuses.pending
+////        })
+//    }
     
 }
 
 extension CommandCreateLKViewController : SelectRowTournamentPickerHelper {
     func onSelectRow(row: Int, element: League) {
         tournamentItem = element
-        tmpTournamentTitle = "\(tournamentItem?.tourney ?? "") \(tournamentItem?.name ?? "")"
+        tmpTournamentTitle = "\(tournamentItem?.tourney?.getValue()?.name) \(tournamentItem?.name ?? "")"
 //        tournamentBtn.setTitle(element.name, for: .normal)
     }
 }
@@ -195,7 +197,7 @@ extension CommandCreateLKViewController : SelectRowClubPickerHelper {
 }
 
 extension CommandCreateLKViewController : CommandCreateLKView {
-    func onCreateTeamSuccess(team: SoloTeam) {
+    func onCreateTeamSuccess(team: SingleTeam) {
         self.teamController.teams.append(team.team)
         
         if let tournamentTitle = self.tmpTournamentTitle {
@@ -225,7 +227,8 @@ extension CommandCreateLKViewController : CommandCreateLKView {
     
     func onGetTournamentsSuccess(tournaments: [Tourney]) {
 //        viewModel.tournaments = tournaments
-        viewModel.tournaments = filterPendingTournaments(tournaments: tournaments)
+        // DEPRECATED tournaments
+//        viewModel.tournaments = filterPendingTournaments(tournaments: tournaments)
 //        setState(state: .normal)
         updateUI()
     }

@@ -88,7 +88,7 @@ class PlayersTableViewController: BaseStateTableViewController {
 
 extension PlayersTableViewController {
     override func hasContent() -> Bool {
-        if self.players.people.count == 0 {
+        if self.players.count == 0 {
             return false
         } else {
             return true
@@ -108,15 +108,15 @@ extension PlayersTableViewController: PlayersTableView {
     }
     
     func onRequestQueryPersonsSuccess(players: [Person]) {
-        filteredPlayers = Players(persons: players, count: players.count)
+        filteredPlayers = players
         tableView.reloadData()
     }
     
     func onFetchSuccess(players: [Person]) {
-        self.players = Players(persons: players, count: players.count)
+        self.players = players
         // if pull to refresh used pages also update
         self.configureInfiniteScrollController()
-        self.paginationHelper = PaginationHelper(totalCount: players.count, currentCount: self.players.people.count) // MARK: INIT PAGER
+        self.paginationHelper = PaginationHelper(totalCount: players.count, currentCount: self.players.count) // MARK: INIT PAGER
         self.endRefreshing()
     }
     
@@ -128,14 +128,14 @@ extension PlayersTableViewController: PlayersTableView {
     func onFetchScrollSuccess(players: [Person]) {
 //        Print.m("new players count is \(self.players.people.count + players.people)")
         // create new index paths
-        let playersCount = self.players.people.count // current count of players
+        let playersCount = self.players.count // current count of players
         let responsePlayersCount = players.count + playersCount // current count of response players
         let (start, end) = (playersCount, responsePlayersCount)
         let indexPaths = (start..<end).map { return IndexPath(row: $0, section: 0) }
         
         // update data source
-        self.players.people.append(contentsOf: players)
-        self.paginationHelper.setCurrentCount(newCount: self.players.people.count)
+        self.players.append(contentsOf: players)
+        self.paginationHelper.setCurrentCount(newCount: self.players.count)
         self.paginationHelper.setTotalCount(newCount: players.count)
         
         // update table view
@@ -155,10 +155,10 @@ extension PlayersTableViewController: PlayersTableView {
         showAlert(message: error.localizedDescription)
     }
     
-    func onRequestQueryPersonsSuccess(players: Players) {
-        filteredPlayers = players
-        tableView.reloadData()
-    }
+//    func onRequestQueryPersonsSuccess(players: [Person]) {
+//        filteredPlayers = players
+//        tableView.reloadData()
+//    }
     
     func onRequestQueryPersonsFailure(error: Error) {
         // some
@@ -177,7 +177,7 @@ extension PlayersTableViewController: PlayersTableView {
     }
     
     func onGetPlayersSuccess(_ players: [Person]) {
-        self.players = Players(persons: players, count: players.count)
+        self.players = players
     }
 }
 
@@ -190,9 +190,9 @@ extension PlayersTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (isFiltering()) {
-            return filteredPlayers.people.count
+            return filteredPlayers.count
         }
-        return players.people.count
+        return players.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -200,9 +200,9 @@ extension PlayersTableViewController {
         
         let player: Person
         if (isFiltering()) {
-            player = filteredPlayers.people[indexPath.row]
+            player = filteredPlayers[indexPath.row]
         } else {
-            player = players.people[indexPath.row]
+            player = players[indexPath.row]
         }
         
         configureCell(cell, player)
@@ -220,7 +220,7 @@ extension PlayersTableViewController {
 //        }
         cell.mName.text = player.getSurnameNP()
         
-        cell.mBirthDate.text = player.birthdate.toFormat(DateFormats.local.rawValue)
+        cell.mBirthDate.text = player.birthdate?.toFormat(DateFormats.local.rawValue)
         
         if player.photo?.count ?? 0 != 0 {
             let url = ApiRoute.getImageURL(image: player.photo!)
@@ -259,7 +259,7 @@ extension PlayersTableViewController: UISearchResultsUpdating {
             if searchController.searchBar.text?.count ?? 0 > 2 {
                 filterContentForQuery(searchController.searchBar.text!)
             } else {
-                filteredPlayers.people = []
+                filteredPlayers = []
                 tableView.reloadData()
             }
             Print.m("search controller is active")
@@ -304,15 +304,15 @@ extension PlayersTableViewController {
         {
             let person: Person
             if isFiltering() {
-                person = filteredPlayers.people[cellIndex]
+                person = filteredPlayers[cellIndex]
             } else {
-                person = players.people[cellIndex]
+                person = players[cellIndex]
             }
             
             let cacheImage = ImageCache.default
 //            var cachedOriginalSizeImage: UIImage?
 
-            if let imageUrl = players.people[cellIndex].photo {
+            if let imageUrl = players[cellIndex].photo {
 //                cell.showLoading()
                 cacheImage.retrieveImage(forKey: ApiRoute.getAbsoluteImageRoute(imageUrl)) { result in
                     switch result {

@@ -40,16 +40,16 @@ class RefereeEditMatchesLKTableViewCell: UITableViewCell {
 //        Print.m(comingTargetPerson)
         reset()
         
-        dateLabel.text = cellModel.activeMatch.date.toFormat(DateFormats.local.rawValue)//convertDate(from: .utcTime, to: .local)
-        timeLabel.text = cellModel.activeMatch.date.toFormat(DateFormats.localTime.rawValue)//convertDate(from: .utcTime, to: .localTime)
+        dateLabel.text = cellModel.activeMatch.date!.toFormat(DateFormats.local.rawValue)//convertDate(from: .utcTime, to: .local)
+        timeLabel.text = cellModel.activeMatch.date!.toFormat(DateFormats.localTime.rawValue)//convertDate(from: .utcTime, to: .localTime)
         leagueLabel.text = cellModel.activeMatch.tour
-        placeLabel.text = cellModel.activeMatch.place
+        placeLabel.text = cellModel.activeMatch.place?.getValue()?.name
         
 //        Print.m(cellModel.activeMatch.teamOne.name)
 //        Print.m(cellModel.activeMatch.teamTwo.name)
         
-        teamOneLabel.text = cellModel.activeMatch.teamOne.name
-        teamTwoLabel.text = cellModel.activeMatch.teamTwo.name
+        teamOneLabel.text = cellModel.activeMatch.teamOne?.getValue()?.name
+        teamTwoLabel.text = cellModel.activeMatch.teamTwo?.getValue()?.name
         if let clubOne = cellModel.clubTeamOne {
             if clubOne.logo?.count ?? 0 > 1 {
                 
@@ -138,7 +138,7 @@ class RefereeEditMatchesLKTableViewCell: UITableViewCell {
     }
     
     struct CellModel {
-        var activeMatch: ActiveMatch
+        var activeMatch: Match
         var clubTeamOne: Club?
         var clubTeamTwo: Club?
         var referee1: Person?
@@ -147,7 +147,7 @@ class RefereeEditMatchesLKTableViewCell: UITableViewCell {
         var timekeeper: Person?
         
         init() {
-            self.activeMatch = ActiveMatch()
+            self.activeMatch = Match()
             self.clubTeamOne = Club()
             self.clubTeamTwo = Club()
             self.referee1 = nil
@@ -156,7 +156,7 @@ class RefereeEditMatchesLKTableViewCell: UITableViewCell {
             self.timekeeper = nil
         }
         
-        init(activeMatch: ActiveMatch, clubTeamOne: Club?, clubTeamTwo: Club?, referee1: Person?, referee2: Person?, referee3: Person?, timekeeper: Person?) {
+        init(activeMatch: Match, clubTeamOne: Club?, clubTeamTwo: Club?, referee1: Person?, referee2: Person?, referee3: Person?, timekeeper: Person?) {
             self.activeMatch = activeMatch
             self.clubTeamOne = clubTeamOne
             self.clubTeamTwo = clubTeamTwo

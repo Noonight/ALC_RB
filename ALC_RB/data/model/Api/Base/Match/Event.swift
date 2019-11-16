@@ -12,12 +12,20 @@ struct Event: Codable {
     
     var id: String
 
-    var type: eType?
+    var type: eType? = nil
 
-    var player: IdRefObjectWrapper<Person>? // there is can be played id or team id
-    var team: IdRefObjectWrapper<Team>?
+    var player: IdRefObjectWrapper<Person>? = nil // there is can be played id or team id
+    var team: IdRefObjectWrapper<Team>? = nil
     
-    var time: Time?
+    var time: Time? = nil
+    
+    init(id: String, type: eType, player: IdRefObjectWrapper<Person>?, team: IdRefObjectWrapper<Team>?, time: Time) {
+        self.id = id
+        self.type = type
+        self.player = player
+        self.team = team
+        self.time = time
+    }
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"

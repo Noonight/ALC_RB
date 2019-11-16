@@ -195,13 +195,13 @@ extension DoMatchProtocolRefereeViewController {
     
     func setupFoulsMaker() {
         self.foulsMaker = FoulsMaker(completeBack: { value, teamId in
-            self.foulsMakerCompleteWork(value: value, teamId: teamId)
+            self.foulsMakerCompleteWork(value: value, teamId: IdRefObjectWrapper<Team>(teamId))
         })
     }
     
     func setupAutoGoalsMaker() {
         self.autoGoalsMaker = AutoGoalsMaker(completeBack: { value, teamId in
-            self.autoGoalsMakerCompleteWork(value: value, teamId: teamId)
+            self.autoGoalsMakerCompleteWork(value: value, teamId: IdRefObjectWrapper<Team>(teamId))
         })
     }
     
@@ -243,8 +243,10 @@ extension DoMatchProtocolRefereeViewController {
     }
     
     func setupStaticView() {
-        self.titleTeamOne_label.text = self.viewModel.prepareTeamTitleFor(team: .one)
-        self.titleTeamTwo_label.text = self.viewModel.prepareTeamTitleFor(team: .two)
+        self.titleTeamOne_label.text = self.viewModel.match.teamOne?.getValue()?.name
+        self.titleTeamOne_label.text = self.viewModel.match.teamTwo?.getValue()?.name
+//        self.titleTeamOne_label.text = self.viewModel.prepareTeamTitleFor(team: .one)
+//        self.titleTeamTwo_label.text = self.viewModel.prepareTeamTitleFor(team: .two)
     }
     
     func setupTableViews() {
@@ -272,7 +274,7 @@ extension DoMatchProtocolRefereeViewController {
                 matchId: self.viewModel.match.id,
                 teamId: teamId.getId() ?? teamId.getValue()!.id,
                 time: self.viewModel.currentTime.rawValue,
-                teamTitle: self.viewModel.prepareTeamTitleFor(team: .one),
+                teamTitle: teamId.getValue()?.name ?? "",
                 defValue: self.viewModel.prepareFoulsCountInCurrentTime(team: .one)
             )
         }
@@ -286,7 +288,7 @@ extension DoMatchProtocolRefereeViewController {
                 matchId: self.viewModel.match.id,
                 teamId: teamId.getId() ?? teamId.getValue()!.id,
                 time: self.viewModel.currentTime.rawValue,
-                teamTitle: self.viewModel.prepareTeamTitleFor(team: .two),
+                teamTitle: teamId.getValue()?.name ?? "",
                 defValue: self.viewModel.prepareFoulsCountInCurrentTime(team: .two)
             )
         }
@@ -300,7 +302,7 @@ extension DoMatchProtocolRefereeViewController {
                 matchId: self.viewModel.match.id,
                 teamId: teamId.getId() ?? teamId.getValue()!.id,
                 time: self.viewModel.currentTime.rawValue,
-                teamTitle: self.viewModel.prepareTeamTitleFor(team: .one),
+                teamTitle: teamId.getValue()?.name ?? "",
                 defValue: self.viewModel.prepareAutogoalsCountInCurrentTime(team: .one)
             )
         }
@@ -314,7 +316,7 @@ extension DoMatchProtocolRefereeViewController {
                 matchId: self.viewModel.match.id,
                 teamId: teamId.getId() ?? teamId.getValue()!.id,
                 time: self.viewModel.currentTime.rawValue,
-                teamTitle: self.viewModel.prepareTeamTitleFor(team: .two),
+                teamTitle: teamId.getValue()?.name ?? "",
                 defValue: self.viewModel.prepareAutogoalsCountInCurrentTime(team: .two)
             )
         }
@@ -344,7 +346,7 @@ extension DoMatchProtocolRefereeViewController {
         self.addEventSaveProtocol()
     }
     
-    func foulsMakerCompleteWork(value: Int, teamId: String) {
+    func foulsMakerCompleteWork(value: Int, teamId: IdRefObjectWrapper<Team>) {
         Print.m("new value is \(value)")
         
         self.viewModel.updateFouls(newCount: value, teamId: teamId)
@@ -352,7 +354,7 @@ extension DoMatchProtocolRefereeViewController {
         self.addEventSaveProtocol()
     }
     
-    func autoGoalsMakerCompleteWork(value: Int, teamId: String) {
+    func autoGoalsMakerCompleteWork(value: Int, teamId: IdRefObjectWrapper<Team>) {
         Print.m("new value of auto goals is \(value) and id is \(teamId)")
         
         self.viewModel.updateAutoGoals(newCount: value, teamId: teamId)
@@ -559,14 +561,14 @@ extension DoMatchProtocolRefereeViewController {
     }
     
     @IBAction func onFirstTimeBtnPressed(_ sender: UIButton) {
-        self.viewModel.updateTime(time: .oneHalf)
+        self.viewModel.updateTime(time: Event.Time.firstHalf)
         
         self.setupDynamicView()
     }
     
     @IBAction func onSecondTimeBtnPressed(_ sender: UIButton) {
 //        self.viewModel.currentTime = .secondTime
-        self.viewModel.updateTime(time: .twoHalf)
+        self.viewModel.updateTime(time: .secondHalf)
         
         self.setupDynamicView()
     }
@@ -598,7 +600,7 @@ extension DoMatchProtocolRefereeViewController: TableActions {
         let curModel = model as! RefereeProtocolPlayerTeamCellModel
         self.eventMaker!.showWith(
             matchId: self.viewModel.match.id,
-            playerId: (curModel.player?.playerID)!,
+            playerId: (curModel.person?.id)!,
             time: self.viewModel.currentTime
         )
     }
@@ -614,8 +616,8 @@ extension DoMatchProtocolRefereeViewController {
         guard let teamOneId = self.viewModel.match.teamOne else { return }
         guard let teamTwoId = self.viewModel.match.teamTwo else { return }
         modalVC.viewModel.initData(
-            teamOneTitle: self.viewModel.prepareTeamTitleFor(team: .one),
-            teamTwoTitle: self.viewModel.prepareTeamTitleFor(team: .two),
+            teamOneTitle: teamOneId.getValue()?.name ?? "",
+            teamTwoTitle: teamTwoId.getValue()?.name ?? "",
             events: self.viewModel.preparePenaltySeriesEvents(),
             match: self.viewModel.match
         )

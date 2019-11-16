@@ -244,7 +244,7 @@ class ApiRequests {
                 switch result {
                 case .success(let upload, _, _):
                     
-                    upload..responseResultMy(SinglePerson.self) { resultMy in
+                    upload.responseResultMy(SinglePerson.self) { resultMy in
                         switch resultMy {
                         case .success(let person):
                             Print.m("TODO: value is \(person)")
@@ -488,150 +488,147 @@ class ApiRequests {
                     }
         }
     
-    func post_matchSetReferee(token: String, editMatchReferees: EditMatchReferees, response_success: @escaping (Match) -> (), response_message: @escaping (SingleLineMessage) -> (), response_failure: @escaping (Error) -> ()) {
-        
-        let header: HTTPHeaders = [
-            "Content-Type" : "application/json",
-            "auth" : "\(token)"
-        ]
-        
-        let request = Alamofire
-            .request(ApiRoute.getApiURL(.post_edit_match_referee), method: .post, parameters: editMatchReferees.toParams(), encoding: JSONEncoding.default, headers: header)
-        
-            request
-            .validate()
-            .responseSoloMatch(completionHandler: { response in
-                switch response.result {
-                case .success:
-                    if let soloMatch = response.result.value {
-                        response_success(soloMatch)
-                    }
-                case .failure(let error):
-                    responseMessage(success: { message in
-                        response_message(message)
-                    }, failure: { error in
-                        response_failure(error)
-                    })
-                }
-            })
-        
-        func responseMessage(success: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
-            request.responseSingleLineMessage { response in
-                switch response.result {
-                case .success:
-                    if let message = response.result.value {
-                        success(message)
-                    }
-                case .failure(let error):
-                    failure(error)
-                }
-            }
-        }
-    }
+//    func post_matchSetReferee(token: String, editMatchReferees: EditMatchReferees, response_success: @escaping (Match) -> (), response_message: @escaping (SingleLineMessage) -> (), response_failure: @escaping (Error) -> ()) {
+//
+//        let header: HTTPHeaders = [
+//            "Content-Type" : "application/json",
+//            "auth" : "\(token)"
+//        ]
+//
+//        let request = Alamofire
+//            .request(ApiRoute.getApiURL(.post_edit_match_referee), method: .post, parameters: editMatchReferees.toParams(), encoding: JSONEncoding.default, headers: header)
+//            .responseSoloMatch(completionHandler: { response in
+//                switch response.result {
+//                case .success:
+//                    if let soloMatch = response.result.value {
+//                        response_success(soloMatch)
+//                    }
+//                case .failure(let error):
+//                    responseMessage(success: { message in
+//                        response_message(message)
+//                    }, failure: { error in
+//                        response_failure(error)
+//                    })
+//                }
+//            })
+//
+//        func responseMessage(success: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
+//            request.responseSingleLineMessage { response in
+//                switch response.result {
+//                case .success:
+//                    if let message = response.result.value {
+//                        success(message)
+//                    }
+//                case .failure(let error):
+//                    failure(error)
+//                }
+//            }
+//        }
+//    }
     
-    func post_changeProtocol(token: String, newProtocol: EditProtocol, resultMy: @escaping (ResultMy<Match, Error>) -> ()) {
-        let header: HTTPHeaders = [
-            "Content-Type" : "application/json",
-            "auth" : "\(token)"
-        ]
-        
-        let instance = Alamofire
-            .request(ApiRoute.getApiURL(.post_edit_protcol), method: .post, parameters: newProtocol.toParams(), encoding: JSONEncoding.default, headers: header)
-        instance
-            .responseData(completionHandler: { response in
-                let decoder = ISO8601Decoder.getDecoder()
-                do {
-                    if let match = try? decoder.decode(Match.self, from: response.data!) {
-                        resultMy(.success(match))
-                    }
-                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
-                        resultMy(.message(message))
-                    }
-                }
-                if response.result.isFailure {
-                    resultMy(.failure(response.error!))
-                }
-            })
-            
-        
-    }
+//    func post_changeProtocol(token: String, newProtocol: EditProtocol, resultMy: @escaping (ResultMy<Match, Error>) -> ()) {
+//        let header: HTTPHeaders = [
+//            "Content-Type" : "application/json",
+//            "auth" : "\(token)"
+//        ]
+//        
+//        let instance = Alamofire
+//            .request(ApiRoute.getApiURL(.post_edit_protcol), method: .post, parameters: newProtocol.toParams(), encoding: JSONEncoding.default, headers: header)
+//        instance
+//            .responseData(completionHandler: { response in
+//                let decoder = ISO8601Decoder.getDecoder()
+//                do {
+//                    if let match = try? decoder.decode(Match.self, from: response.data!) {
+//                        resultMy(.success(match))
+//                    }
+//                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+//                        resultMy(.message(message))
+//                    }
+//                }
+//                if response.result.isFailure {
+//                    resultMy(.failure(response.error!))
+//                }
+//            })
+//            
+//        
+//    }
     
-    func post_changeProtocol(token: String, newProtocol: EditProtocol, success: @escaping (Match)->(), message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error)->()) {
-        let header: HTTPHeaders = [
-            "Content-Type" : "application/json",
-            "auth" : "\(token)"
-        ]
-        
-        let instance = Alamofire
-            .request(ApiRoute.getApiURL(.post_edit_protcol), method: .post, parameters: newProtocol.toParams(), encoding: JSONEncoding.default, headers: header)
-        instance
-            .responseSoloMatch(completionHandler: { response in
-                if response.response?.statusCode == 500
-                {
-                    instance
-                        .responseSingleLineMessage(completionHandler: { response in
-                            switch response.result {
-                            case .success(let value):
-                                message(value)
-                            case .failure(let error):
-                                failure(error)
-                            }
-                        })
-                }
-                else
-                {
-                    switch response.result {
-                    case .success(let value):
-                        success(value)
-                    case .failure(let error):
-                        failure(error)
-                    }
-                }
-            
-        })
-    }
+//    func post_changeProtocol(token: String, newProtocol: EditProtocol, success: @escaping (Match)->(), message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error)->()) {
+//        let header: HTTPHeaders = [
+//            "Content-Type" : "application/json",
+//            "auth" : "\(token)"
+//        ]
+//
+//        let instance = Alamofire
+//            .request(ApiRoute.getApiURL(.post_edit_protcol), method: .post, parameters: newProtocol.toParams(), encoding: JSONEncoding.default, headers: header)
+//        instance
+//            .responseSoloMatch(completionHandler: { response in
+//                if response.response?.statusCode == 500
+//                {
+//                    instance
+//                        .responseSingleLineMessage(completionHandler: { response in
+//                            switch response.result {
+//                            case .success(let value):
+//                                message(value)
+//                            case .failure(let error):
+//                                failure(error)
+//                            }
+//                        })
+//                }
+//                else
+//                {
+//                    switch response.result {
+//                    case .success(let value):
+//                        success(value)
+//                    case .failure(let error):
+//                        failure(error)
+//                    }
+//                }
+//
+//        })
+//    }
     
-    func post_acceptProtocol(token: String, id: String, success: @escaping (Match) -> (), message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
-        
-        Alamofire
-            .upload(multipartFormData: { (multipartFormData) in
-                
-                multipartFormData.append(id.data(using: String.Encoding.utf8)!, withName: "_id")
-                
-            },
-                    usingThreshold: UInt64(),
-                    to: ApiRoute.getApiURL(.post_accept_protocol),
-                    method: .post,
-                    headers: ["auth" : token])
-            { (result) in
-                switch result {
-                case .success(let upload, _, _):
-                    
-                    upload.responseJSON(completionHandler: { response in
-//                        dump(response.result)
-                    })
-                    
-                    upload.responseSoloMatch(completionHandler: { response in
-                        switch response.result {
-                        case .success(let value):
-                            success(value)
-                        case .failure(let error):
-                            upload.responseSingleLineMessage(completionHandler: { response in
-                                switch response.result {
-                                case .success(let value):
-                                    message(value)
-                                case .failure(let error):
-                                    failure(error)
-                                }
-                            })
-                        }
-                    })
-                    
-                case .failure(let error):
-                    failure(error)
-                }
-        }
-    }
+//    func post_acceptProtocol(token: String, id: String, success: @escaping (Match) -> (), message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
+//
+//        Alamofire
+//            .upload(multipartFormData: { (multipartFormData) in
+//
+//                multipartFormData.append(id.data(using: String.Encoding.utf8)!, withName: "_id")
+//
+//            },
+//                    usingThreshold: UInt64(),
+//                    to: ApiRoute.getApiURL(.post_accept_protocol),
+//                    method: .post,
+//                    headers: ["auth" : token])
+//            { (result) in
+//                switch result {
+//                case .success(let upload, _, _):
+//
+//                    upload.responseJSON(completionHandler: { response in
+////                        dump(response.result)
+//                    })
+//
+//                    upload.responseSoloMatch(completionHandler: { response in
+//                        switch response.result {
+//                        case .success(let value):
+//                            success(value)
+//                        case .failure(let error):
+//                            upload.responseSingleLineMessage(completionHandler: { response in
+//                                switch response.result {
+//                                case .success(let value):
+//                                    message(value)
+//                                case .failure(let error):
+//                                    failure(error)
+//                                }
+//                            })
+//                        }
+//                    })
+//
+//                case .failure(let error):
+//                    failure(error)
+//                }
+//        }
+//    }
     
     func post_acceptProtocol(token: String, id: String, resultMy: @escaping (ResultMy<Match, Error>) -> ()) {
             
@@ -680,7 +677,7 @@ class ApiRequests {
                     "_limit": String(limit!),
                     "_offset": String(offset!),
                     "name": newName,
-                    "region": newRegion._id
+                    "region": newRegion.id
 //                    "name": "{" + newName + "}",
 //                    "region": "{" + newRegion._id + "}"
                 ]
@@ -705,7 +702,7 @@ class ApiRequests {
 //                    "offset": "{" + String(offset!) + "}",
                     "_limit": String(limit!),
                     "_offset": String(offset!),
-                    "region": newRegion._id
+                    "region": newRegion.id
 //                    "region": "{" + newRegion._id + "}"
                 ]
             }
@@ -827,35 +824,6 @@ class ApiRequests {
         }
     }
     
-    func get_activeMatches(limit: Int = 30, offset: Int = 0, played: String = "false", get_success: @escaping (ActiveMatches) -> (), get_message: @escaping (SingleLineMessage) -> (), get_failure: @escaping (Error) -> ()) {
-        let parameters: Parameters = [
-            "limit": limit,
-            "offset": offset,
-            "played": played
-        ]
-        
-        let instance =
-            Alamofire
-            .request(ApiRoute.getApiURL(.activeMatches), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
-            
-        instance.responseActiveMatches { (response) in
-//            dump(response)
-                switch response.result {
-                case .success(let value):
-                    get_success(value)
-                case .failure(let error):
-                    instance.responseSingleLineMessage(completionHandler: { response in
-                        switch response.result {
-                        case .success(let value):
-                            get_message(value)
-                        case .failure(let error):
-                            get_failure(error)
-                        }
-                    })
-                }
-        }
-    }
-    
     func get_image(imagePath: String, get_success: @escaping (UIImage) -> (), get_failure: @escaping (Error) -> ()) {
         Alamofire
             .request(ApiRoute.getImageURL(image: imagePath))
@@ -966,137 +934,137 @@ class ApiRequests {
 //        }
 //    }
     
-    func get_forMyMatches(participationMatches: [Match], get_success: @escaping ([MyMatchesRefTableViewCell.CellModel]) -> (), get_failure: @escaping (Error) -> ()) {
-        var fParticipationMatches: [Match] = []
-//        Print.m(participationMatches)
-        var fClubs: [Club] = []
-        
-        var models: [MyMatchesRefTableViewCell.CellModel] = []
-        
-        var tmpTournaments = [Tourney]()
-        
-        let dispatchGroup = DispatchGroup()
-        
-        fParticipationMatches = participationMatches
-//        Print.m(fParticipationMatches)
-        
-        if fParticipationMatches.count > 0 {
-            dispatchGroup.enter()
-            get_tournamets(get_success: { (tournaments) in
-                tmpTournaments = tournaments
-            
-                for parMatch in fParticipationMatches {
-                    
-                    if parMatch.league.count > 1
-                    {
-//                        Print.m("Par match league > 1")
-                        dispatchGroup.enter()
-                        let tmpTeams = tmpTournaments.leagues.filter({ (league) -> Bool in
-                            return league.id == parMatch.league
-                        }).first?.teams
-//                        Print.m(tmpTeams)
-                        var tmpClub1: Club?
-                        
-                        Print.m(" team one = \(parMatch.teamOne). team two = \(parMatch.teamTwo)")
-                        if parMatch.teamOne.count > 1
-                        {
-                            dispatchGroup.enter()
-                            let tmpTeam1 = tmpTeams?.filter({ (team) -> Bool in
-                                return parMatch.teamOne == team.id
-                            }).first
-                            let tmpClubId = tmpTeam1?.club
-//                            Print.m(tmpClubId)
-                            dispatchGroup.leave()
-//                            Print.m(tmpClubId)
-                            if tmpClubId?.count ?? 0 > 1
-                            {
-//                                Print.m(tmpClubId!)
-                                dispatchGroup.enter()
-                                self.get_clubById(id: tmpClubId!, get_success: { (soloClub) in
-                                    fClubs.append(soloClub.club)
-                                    tmpClub1 = soloClub.club
-                                    dispatchGroup.leave()
-                                    
-                                    var tmpClub2: Club?
-                                    
-                                    if parMatch.teamTwo.count > 1
-                                    {
-                                        dispatchGroup.enter()
-                                        let tmpTeam2 = tmpTeams?.filter({ (team) -> Bool in
-                                            return parMatch.teamTwo == team.id
-                                        }).first
-                                        let tmpClubId = tmpTeam2?.club
-                                        dispatchGroup.leave()
-                                        
-                                        if tmpClubId?.count ?? 0 > 1 {
-                                            dispatchGroup.enter()
-                                            self.get_clubById(id: tmpClubId!, get_success: { (soloClub) in
-                                                fClubs.append(soloClub.club)
-                                                tmpClub2 = soloClub.club
-                                                
-                                                
-                                                models.append(MyMatchesRefTableViewCell.CellModel(
-                                                    participationMatch: parMatch,
-                                                    club1: tmpClub1!,
-                                                    club2: tmpClub2!,
-                                                    team1Name: tmpTeam1!.name,
-                                                    team2Name: tmpTeam2!.name)
-                                                )
-                                                get_success(models)
-                                                
-                                                dispatchGroup.leave()
-                                            }, get_failure: { (error) in
-                                                get_failure(error)
-                                            })
-                                        }
-                                    }
-                                    
-                                }, get_failure: { (error) in
-                                    get_failure(error)
-                                })
-                            }
-                        }
-                        else
-                        {
-                            var tmpTeam1 = String()
-                            var tmpTeam2 = String()
-                            for i in 0..<tmpTournaments.leagues.count {
-                                for j in 0..<tmpTournaments.leagues[i].teams!.count {
-                                    if tmpTournaments.leagues[i].teams![j].id == parMatch.teamOne {
-                                        tmpTeam1 = tmpTournaments.leagues[i].teams![j].name
-                                    }
-                                    if tmpTournaments.leagues[i].teams![j].id == parMatch.teamTwo {
-                                        tmpTeam2 = tmpTournaments.leagues[i].teams![j].name
-                                    }
-                                }
-                            }
-                            
-                            models.append(MyMatchesRefTableViewCell.CellModel(
-                                participationMatch: parMatch,
-                                club1: nil,
-                                club2: nil,
-                                team1Name: tmpTeam1,
-                                team2Name: tmpTeam2
-                            ))
-                        }
-
-                        dispatchGroup.leave()
-                    }
-                }
-                
-                dispatchGroup.leave()
-                
-            }) { (error) in
-                get_failure(error)
-            }
-            
-            dispatchGroup.notify(queue: .main) {
-                get_success(models)
-            }
-        }
-        
-    }
-    
+//    func get_forMyMatches(participationMatches: [Match], get_success: @escaping ([MyMatchesRefTableViewCell.CellModel]) -> (), get_failure: @escaping (Error) -> ()) {
+//        var fParticipationMatches: [Match] = []
+////        Print.m(participationMatches)
+//        var fClubs: [Club] = []
+//
+//        var models: [MyMatchesRefTableViewCell.CellModel] = []
+//
+//        var tmpTournaments = [Tourney]()
+//
+//        let dispatchGroup = DispatchGroup()
+//
+//        fParticipationMatches = participationMatches
+////        Print.m(fParticipationMatches)
+//
+//        if fParticipationMatches.count > 0 {
+//            dispatchGroup.enter()
+//            get_tournamets(get_success: { (tournaments) in
+//                tmpTournaments = tournaments
+//
+//                for parMatch in fParticipationMatches {
+//
+//                    if parMatch.league.count > 1
+//                    {
+////                        Print.m("Par match league > 1")
+//                        dispatchGroup.enter()
+//                        let tmpTeams = tmpTournaments.leagues.filter({ (league) -> Bool in
+//                            return league.id == parMatch.league
+//                        }).first?.teams
+////                        Print.m(tmpTeams)
+//                        var tmpClub1: Club?
+//
+//                        Print.m(" team one = \(parMatch.teamOne). team two = \(parMatch.teamTwo)")
+//                        if parMatch.teamOne.count > 1
+//                        {
+//                            dispatchGroup.enter()
+//                            let tmpTeam1 = tmpTeams?.filter({ (team) -> Bool in
+//                                return parMatch.teamOne == team.id
+//                            }).first
+//                            let tmpClubId = tmpTeam1?.club
+////                            Print.m(tmpClubId)
+//                            dispatchGroup.leave()
+////                            Print.m(tmpClubId)
+//                            if tmpClubId?.count ?? 0 > 1
+//                            {
+////                                Print.m(tmpClubId!)
+//                                dispatchGroup.enter()
+//                                self.get_clubById(id: tmpClubId!, get_success: { (soloClub) in
+//                                    fClubs.append(soloClub.club)
+//                                    tmpClub1 = soloClub.club
+//                                    dispatchGroup.leave()
+//
+//                                    var tmpClub2: Club?
+//
+//                                    if parMatch.teamTwo.count > 1
+//                                    {
+//                                        dispatchGroup.enter()
+//                                        let tmpTeam2 = tmpTeams?.filter({ (team) -> Bool in
+//                                            return parMatch.teamTwo == team.id
+//                                        }).first
+//                                        let tmpClubId = tmpTeam2?.club
+//                                        dispatchGroup.leave()
+//
+//                                        if tmpClubId?.count ?? 0 > 1 {
+//                                            dispatchGroup.enter()
+//                                            self.get_clubById(id: tmpClubId!, get_success: { (soloClub) in
+//                                                fClubs.append(soloClub.club)
+//                                                tmpClub2 = soloClub.club
+//
+//
+//                                                models.append(MyMatchesRefTableViewCell.CellModel(
+//                                                    participationMatch: parMatch,
+//                                                    club1: tmpClub1!,
+//                                                    club2: tmpClub2!,
+//                                                    team1Name: tmpTeam1!.name,
+//                                                    team2Name: tmpTeam2!.name)
+//                                                )
+//                                                get_success(models)
+//
+//                                                dispatchGroup.leave()
+//                                            }, get_failure: { (error) in
+//                                                get_failure(error)
+//                                            })
+//                                        }
+//                                    }
+//
+//                                }, get_failure: { (error) in
+//                                    get_failure(error)
+//                                })
+//                            }
+//                        }
+//                        else
+//                        {
+//                            var tmpTeam1 = String()
+//                            var tmpTeam2 = String()
+//                            for i in 0..<tmpTournaments.leagues.count {
+//                                for j in 0..<tmpTournaments.leagues[i].teams!.count {
+//                                    if tmpTournaments.leagues[i].teams![j].id == parMatch.teamOne {
+//                                        tmpTeam1 = tmpTournaments.leagues[i].teams![j].name
+//                                    }
+//                                    if tmpTournaments.leagues[i].teams![j].id == parMatch.teamTwo {
+//                                        tmpTeam2 = tmpTournaments.leagues[i].teams![j].name
+//                                    }
+//                                }
+//                            }
+//
+//                            models.append(MyMatchesRefTableViewCell.CellModel(
+//                                participationMatch: parMatch,
+//                                club1: nil,
+//                                club2: nil,
+//                                team1Name: tmpTeam1,
+//                                team2Name: tmpTeam2
+//                            ))
+//                        }
+//
+//                        dispatchGroup.leave()
+//                    }
+//                }
+//
+//                dispatchGroup.leave()
+//
+//            }) { (error) in
+//                get_failure(error)
+//            }
+//
+//            dispatchGroup.notify(queue: .main) {
+//                get_success(models)
+//            }
+//        }
+//
+//    }
+//
     // MARK: - MY MATCHES
     
     func get_myMatchesCellModels(participationMatches: [Match], resultMy: @escaping (ResultMy<[MyMatchesRefTableViewCell.CellModel], Error>) -> ()) {
@@ -1109,18 +1077,19 @@ class ApiRequests {
         
         for match in participationMatches {
             
-            group.enter()
-            getMyMatchesCell(parMatch: match) { result in
-                switch result {
-                case .success(let cell):
-                    mResult.append(cell)
-                case .message(let message):
-                    mMessage = message
-                case .failure(let error):
-                    mError = error
-                }
-                group.leave()
-            }
+            // DEPRECATED: chto to tam
+//            group.enter()
+//            getMyMatchesCell(parMatch: match) { result in
+//                switch result {
+//                case .success(let cell):
+//                    mResult.append(cell)
+//                case .message(let message):
+//                    mMessage = message
+//                case .failure(let error):
+//                    mError = error
+//                }
+//                group.leave()
+//            }
         }
         
         group.notify(queue: .main) {
@@ -1134,77 +1103,77 @@ class ApiRequests {
         }
     }
     
-    func getMyMatchesCell(parMatch: Match, resultMy: @escaping (ResultMy<MyMatchesRefTableViewCell.CellModel, Error>) -> ()) {
-        
-        var mMessage: SingleLineMessage?
-        var mError: Error?
-        
-        let group = DispatchGroup()
-        var model = MyMatchesRefTableViewCell.CellModel(participationMatch: parMatch)
-        
-        group.enter()
-        get_tournamentLeague(id: parMatch.league) { result in
-            switch result {
-            case .success(let league):
-                if let team1 = league.league.teams?.filter({ team -> Bool in
-                    return team.id == parMatch.teamOne
-                }).first {
-                    model.team1Name = team1.name
-                    
-                    if team1.club?.count ?? 0 > 1 {
-                        group.enter()
-                        self.get_club(id: team1.club!) { cResult in
-                            switch cResult {
-                            case .success(let club):
-                                model.club1 = club.club
-                            case .message(let message):
-                                mMessage = message
-                            case .failure(let error):
-                                mError = error
-                            }
-                            group.leave()
-                        }
-                    }
-                }
-                if let team2 = league.league.teams?.filter({ team -> Bool in
-                    return team.id == parMatch.teamTwo
-                }).first {
-                    model.team2Name = team2.name
-                    
-                    if team2.club?.count ?? 0 > 1 {
-                        group.enter()
-                        self.get_club(id: team2.club!) { cResult in
-                            switch cResult {
-                            case .success(let club):
-                                model.club2 = club.club
-                            case .message(let message):
-                                mMessage = message
-                            case .failure(let error):
-                                mError = error
-                            }
-                            group.leave()
-                        }
-                    }
-                }
-            case .message(let message):
-                mMessage = message
-            case .failure(let error):
-                mError = error
-            }
-            group.leave()
-        }
-        
-        group.notify(queue: .main) {
-            if let error = mError {
-                resultMy(.failure(error))
-            }
-            if let message = mMessage {
-                resultMy(.message(message))
-            }
-            resultMy(.success(model))
-        }
-    }
-    
+//    func getMyMatchesCell(parMatch: Match, resultMy: @escaping (ResultMy<MyMatchesRefTableViewCell.CellModel, Error>) -> ()) {
+//        
+//        var mMessage: SingleLineMessage?
+//        var mError: Error?
+//
+//        let group = DispatchGroup()
+//        var model = MyMatchesRefTableViewCell.CellModel(participationMatch: parMatch)
+//
+//        group.enter()
+//        get_tournamentLeague(id: parMatch.league) { result in
+//            switch result {
+//            case .success(let league):
+//                if let team1 = league.league.teams?.filter({ team -> Bool in
+//                    return team.id == parMatch.teamOne
+//                }).first {
+//                    model.team1Name = team1.name
+//
+//                    if team1.club?.count ?? 0 > 1 {
+//                        group.enter()
+//                        self.get_club(id: team1.club!) { cResult in
+//                            switch cResult {
+//                            case .success(let club):
+//                                model.club1 = club.club
+//                            case .message(let message):
+//                                mMessage = message
+//                            case .failure(let error):
+//                                mError = error
+//                            }
+//                            group.leave()
+//                        }
+//                    }
+//                }
+//                if let team2 = league.league.teams?.filter({ team -> Bool in
+//                    return team.id == parMatch.teamTwo
+//                }).first {
+//                    model.team2Name = team2.name
+//
+//                    if team2.club?.count ?? 0 > 1 {
+//                        group.enter()
+//                        self.get_club(id: team2.club!) { cResult in
+//                            switch cResult {
+//                            case .success(let club):
+//                                model.club2 = club.club
+//                            case .message(let message):
+//                                mMessage = message
+//                            case .failure(let error):
+//                                mError = error
+//                            }
+//                            group.leave()
+//                        }
+//                    }
+//                }
+//            case .message(let message):
+//                mMessage = message
+//            case .failure(let error):
+//                mError = error
+//            }
+//            group.leave()
+//        }
+//
+//        group.notify(queue: .main) {
+//            if let error = mError {
+//                resultMy(.failure(error))
+//            }
+//            if let message = mMessage {
+//                resultMy(.message(message))
+//            }
+//            resultMy(.success(model))
+//        }
+//    }
+//
     // MARK: - END
     
     func get_news(tourney: String? = nil, limit: Int? = Constants.Values.LIMIT, offset: Int? = 0 , get_result: @escaping (ResultMy<[News], Error>) -> ()) {
@@ -1402,84 +1371,59 @@ class ApiRequests {
     
     // MARK: - ACTIVE MATCHES
     
-    func get_scheduleRefereeData(resultMy: @escaping (ResultMy<(ActiveMatches, Players, [Club]), Error>) -> ()) {
-        let group = DispatchGroup()
-        let personApi = PersonApi()
-        
-        var mMessage: SingleLineMessage?
-        var mError: Error?
-        var mResult = (ActiveMatches(), [Person](), [Club]())
-        
-        group.enter()
-        self.get_activeMatches { result in
-            switch result {
-            case .success(let activeMatches):
-                mResult.0 = activeMatches
-                
-                for match in activeMatches.matches {
-                    
-                    if let clubOne = match.teamOne.club {
-                        if clubOne.count > 2 {
-                            group.enter()
-                            self.get_club(id: clubOne) { result in
-                                switch result {
-                                case .success(let club):
-                                    mResult.2.append(club)
-                                case .message(let message):
-                                    mMessage = message
-                                case .failure(let error):
-                                    mError = error
-                                }
-                                group.leave()
-                            }
-                        }
-                        
-                    }
-                    
-                    if let clubTwo = match.teamTwo.club {
-                        if clubTwo.count > 2 {
-                            group.enter()
-                            self.get_club(id: clubTwo) { result in
-                                switch result {
-                                case .success(let club):
-                                    mResult.2.append(club)
-                                case .message(let message):
-                                    mMessage = message
-                                case .failure(let error):
-                                    mError = error
-                                }
-                                group.leave()
-                            }
-                        }
-                        
-                    }
-                }
-                
-            case .message(let message):
-                mMessage = message
-            case .failure(let error):
-                mError = error
-            }
-            group.leave()
-        }
-        group.enter()
-        personApi.get_person(limit: Constants.Values.LIMIT_ALL) { result in
-            switch result {
-            case .success(let persons):
-                mResult.1 = Players(persons: persons, count: persons.count)
-            case .message(let message):
-                mMessage = message
-            case .failure(.notExpectedData):
-                Print.m("not expected data")
-            case .failure(.error(let error)):
-                mError = error
-            }
-            group.leave()
-        }
-//        self.get_referees { result in
+//    func get_scheduleRefereeData(resultMy: @escaping (ResultMy<(ActiveMatches, Players, [Club]), Error>) -> ()) {
+//        let group = DispatchGroup()
+//        let personApi = PersonApi()
+//
+//        var mMessage: SingleLineMessage?
+//        var mError: Error?
+//        var mResult = (ActiveMatches(), [Person](), [Club]())
+//
+//        group.enter()
+//        self.get_activeMatches { result in
 //            switch result {
-//            case .success(let referees):
-//                mResult.1 = referees
+//            case .success(let activeMatches):
+//                mResult.0 = activeMatches
+//
+//                for match in activeMatches.matches {
+//
+//                    if let clubOne = match.teamOne.club {
+//                        if clubOne.count > 2 {
+//                            group.enter()
+//                            self.get_club(id: clubOne) { result in
+//                                switch result {
+//                                case .success(let club):
+//                                    mResult.2.append(club)
+//                                case .message(let message):
+//                                    mMessage = message
+//                                case .failure(let error):
+//                                    mError = error
+//                                }
+//                                group.leave()
+//                            }
+//                        }
+//
+//                    }
+//
+//                    if let clubTwo = match.teamTwo.club {
+//                        if clubTwo.count > 2 {
+//                            group.enter()
+//                            self.get_club(id: clubTwo) { result in
+//                                switch result {
+//                                case .success(let club):
+//                                    mResult.2.append(club)
+//                                case .message(let message):
+//                                    mMessage = message
+//                                case .failure(let error):
+//                                    mError = error
+//                                }
+//                                group.leave()
+//                            }
+//                        }
+//
+//                    }
+//                }
+//
 //            case .message(let message):
 //                mMessage = message
 //            case .failure(let error):
@@ -1487,44 +1431,69 @@ class ApiRequests {
 //            }
 //            group.leave()
 //        }
-        
-        group.notify(queue: .main) {
-            if let error = mError {
-                resultMy(.failure(error))
-            }
-            if let message = mMessage {
-                resultMy(.message(message))
-            }
-            
-            resultMy(.success(mResult))
-            
-        }
-        
-    }
-    
-    func get_activeMatches(resultMy: @escaping (ResultMy<ActiveMatches, Error>) -> ()) {
-        let parameters: Parameters = [
-//            "type": "referee"//,
-                        "limit": 32575,
-                        "offset": 0
-        ]
-        Alamofire
-            .request(ApiRoute.getApiURL(.activeMatches), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString))
-            .responseData { response in
-                let decoder = ISO8601Decoder.getDecoder()
-                do {
-                    if let activeMatches = try? decoder.decode(ActiveMatches.self, from: response.data!) {
-                        resultMy(.success(activeMatches))
-                    }
-                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
-                        resultMy(.message(message))
-                    }
-                }
-                if response.result.isFailure {
-                    resultMy(.failure(response.error!))
-                }
-        }
-    }
+//        group.enter()
+//        personApi.get_person(limit: Constants.Values.LIMIT_ALL) { result in
+//            switch result {
+//            case .success(let persons):
+//                mResult.1 = Players(persons: persons, count: persons.count)
+//            case .message(let message):
+//                mMessage = message
+//            case .failure(.notExpectedData):
+//                Print.m("not expected data")
+//            case .failure(.error(let error)):
+//                mError = error
+//            }
+//            group.leave()
+//        }
+////        self.get_referees { result in
+////            switch result {
+////            case .success(let referees):
+////                mResult.1 = referees
+////            case .message(let message):
+////                mMessage = message
+////            case .failure(let error):
+////                mError = error
+////            }
+////            group.leave()
+////        }
+//
+//        group.notify(queue: .main) {
+//            if let error = mError {
+//                resultMy(.failure(error))
+//            }
+//            if let message = mMessage {
+//                resultMy(.message(message))
+//            }
+//
+//            resultMy(.success(mResult))
+//
+//        }
+//
+//    }
+//
+//    func get_activeMatches(resultMy: @escaping (ResultMy<ActiveMatches, Error>) -> ()) {
+//        let parameters: Parameters = [
+////            "type": "referee"//,
+//                        "limit": 32575,
+//                        "offset": 0
+//        ]
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.activeMatches), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString))
+//            .responseData { response in
+//                let decoder = ISO8601Decoder.getDecoder()
+//                do {
+//                    if let activeMatches = try? decoder.decode(ActiveMatches.self, from: response.data!) {
+//                        resultMy(.success(activeMatches))
+//                    }
+//                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
+//                        resultMy(.message(message))
+//                    }
+//                }
+//                if response.result.isFailure {
+//                    resultMy(.failure(response.error!))
+//                }
+//        }
+//    }
     
 //    func get_referees(resultMy: @escaping (ResultMy<Players, Error>) -> ()) {
 //        let parameters: Parameters = [

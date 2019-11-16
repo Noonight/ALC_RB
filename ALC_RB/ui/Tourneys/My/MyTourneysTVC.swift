@@ -43,7 +43,7 @@ class MyTourneysTVC: UITableViewController {
 extension MyTourneysTVC {
     
     func setupViewModel() {
-        self.viewModel = MyTourneysVM(dataManager: ApiRequests())
+        self.viewModel = MyTourneysVM(dataManager: ApiRequests(), leagueApi: LeagueApi())
     }
     
     func setupTourneyTable() {
@@ -195,13 +195,13 @@ extension MyTourneysTVC {
         
         var leagueModel = LeagueDetailModel(leagueModelItem.league)
         
-        self.viewModel.fetchLeagueInfo(leagueId: leagueModelItem.league.id, success: { leagueInfo in
-            leagueModel.leagueInfo = leagueInfo
-            
-            newViewController.viewModel.leagueDetailModel = BehaviorRelay<LeagueDetailModel>(value: leagueModel)
-            
-            self.navigationController?.show(newViewController, sender: self)
-        })
+//        self.viewModel.fetchLeagueInfo(leagueId: leagueModelItem.league.id, success: { leagueInfo in
+//            leagueModel.leagueInfo = leagueInfo
+//
+//            newViewController.viewModel.leagueDetailModel = BehaviorRelay<LeagueDetailModel>(value: leagueModel)
+//
+//            self.navigationController?.show(newViewController, sender: self)
+//        })
     }
     
     func showTourneyPicker() {

@@ -21,7 +21,7 @@ protocol InvitationLKView: MvpView {
     func getTournamentLeagueSuccess(liLeagueInfo: [League])
     func getTournamentLeagueFailure(error: Error)
     
-    func getPlayersSuccess(players: Players)
+    func getPlayersSuccess(players: [Person])
     func getPlayersFailure(error: Error)
     
     func getClubsSuccess(clubs: [Club])
@@ -48,19 +48,19 @@ class InvitationLKPresenter: MvpPresenter<InvitationLKTableViewController> {
     }
     
     func getTournaments() {
-        apiService.get_tournamets(get_success: { (tournaments) in
-            self.getView().getTournamentsSuccess(tournaments: tournaments)
-        }) { (error) in
-            self.getView().getTournamentsFailure(error: error)
-        }
+//        apiService.get_tournamets(get_success: { (tournaments) in
+//            self.getView().getTournamentsSuccess(tournaments: tournaments)
+//        }) { (error) in
+//            self.getView().getTournamentsFailure(error: error)
+//        }
     }
     
     func getTournamentLeague(id: String) {
-        apiService.get_tournamentLeague(id: id, get_success: { (liLeagueInfo) in
-            self.getView().getTournamentLeagueSuccess(liLeagueInfo: liLeagueInfo)
-        }) { (error) in
-            self.getView().getTournamentsFailure(error: error)
-        }
+//        apiService.get_tournamentLeague(id: id, get_success: { (liLeagueInfo) in
+//            self.getView().getTournamentLeagueSuccess(liLeagueInfo: liLeagueInfo)
+//        }) { (error) in
+//            self.getView().getTournamentsFailure(error: error)
+//        }
     }
     
     func refreshUser(token: String) {
@@ -83,7 +83,7 @@ class InvitationLKPresenter: MvpPresenter<InvitationLKTableViewController> {
         personApi.get_person(limit: Constants.Values.LIMIT_ALL) { result in
             switch result {
             case .success(let persons):
-                self.getView().getPlayersSuccess(players: Players(persons: persons, count: persons.count))
+                self.getView().getPlayersSuccess(players: persons)
             case .message(let message):
                 Print.m(message.message)
             case .failure(.error(let error)):
@@ -101,11 +101,11 @@ class InvitationLKPresenter: MvpPresenter<InvitationLKTableViewController> {
     }
     
     func getClubs() {
-        apiService.get_clubs(get_success: { (clubs) in
-            self.getView().getClubsSuccess(clubs: clubs)
-        }) { (error) in
-            self.getView().getClubsFailure(error: error)
-        }
+//        apiService.get_clubs(get_success: { (clubs) in
+//            self.getView().getClubsSuccess(clubs: clubs)
+//        }) { (error) in
+//            self.getView().getClubsFailure(error: error)
+//        }
     }
     
     func getTournamentImage(photoUrl: String, get_image_success: @escaping (UIImage) -> (), get_image_failure: @escaping (Error) -> ()) {

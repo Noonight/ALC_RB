@@ -50,21 +50,21 @@ class MyMatchesRefTableViewCell: UITableViewCell {
         self.cellModel = cellModel
         
         let personId = UserDefaultsHelper().getAuthorizedUser()!.person.id
-        let userRef3 = cellModel.participationMatch?.referees.filter({ referee -> Bool in
+        let userRef3 = cellModel.participationMatch?.referees!.filter({ referee -> Bool in
             return referee.type == Referee.rType.thirdReferee && referee.person!.orEqual(personId, { $0.id == personId })
 //            return referee.getRefereeType() == Referee.RefereeType.referee3 && UserDefaultsHelper().getAuthorizedUser()?.person.id == referee.person
         }).first
         
-        if userRef3 != nil && cellModel.participationMatch?.teamOne.count ?? 0 > 2 && cellModel.participationMatch?.teamTwo.count ?? 0 > 2 {
+        if userRef3 != nil && cellModel.participationMatch?.teamOne?.getId() != nil && cellModel.participationMatch?.teamTwo?.getId() != nil {
             accessoryType = .disclosureIndicator
         } else {
             accessoryType = .none
         }
         
-        dateLabel.text = cellModel.participationMatch?.date.toFormat(DateFormats.local.rawValue)//convertDate(from: .utcTime, to: .local)
-        timeLabel.text = cellModel.participationMatch?.date.toFormat(DateFormats.localTime.rawValue)//convertDate(from: .utcTime, to: .localTime)
+        dateLabel.text = cellModel.participationMatch!.date!.toFormat(DateFormats.local.rawValue)//convertDate(from: .utcTime, to: .local)
+        timeLabel.text = cellModel.participationMatch!.date!.toFormat(DateFormats.localTime.rawValue)//convertDate(from: .utcTime, to: .localTime)
         tourLabel.text = cellModel.participationMatch?.tour
-        placeLabel.text = cellModel.participationMatch?.place
+        placeLabel.text = cellModel.participationMatch?.place?.getValue()?.name
         
         team1NameLabel.text = cellModel.team1Name
         
@@ -111,11 +111,12 @@ class MyMatchesRefTableViewCell: UITableViewCell {
             self.team2Image.image = #imageLiteral(resourceName: "ic_logo")
         }
         
-        if cellModel.participationMatch?.score.count ?? 0 > 1 {
-            scoreLabel.text = cellModel.participationMatch?.score
-        } else {
-            scoreLabel.text = " - "
-        }
+        // DEPRECATED: participation match no
+//        if cellModel.participationMatch?.score.count ?? 0 > 1 {
+//            scoreLabel.text = cellModel.participationMatch?.score
+//        } else {
+//            scoreLabel.text = " - "
+//        }
     }
     
     func reset() {

@@ -78,26 +78,26 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
 //
 //            }
 //        })
-         let matches = userDefaults.getAuthorizedUser()?.person.participationMatches?.filter({ match -> Bool in
-            return match.isEqual(
-                { $0.referees.contains(where:
-                    { $0.person!.orEqual(
-                                        userDefaults.getAuthorizedUser()!.person.id,
-                                        { $0.id == userDefaults.getAuthorizedUser()!.person.id }
-                        )
-                        
-                    })
-                    
-                })
-//            return match.isEqual({ mMatch -> Bool in
-//                return mMatch.referees.contains(where: { referee -> Bool in
-//                    return referee.person == userDefaults.getAuthorizedUser()!.person.id
+//         let matches = userDefaults.getAuthorizedUser()?.person.participationMatches?.filter({ match -> Bool in
+//            return match.isEqual(
+//                { $0.referees.contains(where:
+//                    { $0.person!.orEqual(
+//                                        userDefaults.getAuthorizedUser()!.person.id,
+//                                        { $0.id == userDefaults.getAuthorizedUser()!.person.id }
+//                        )
+//
+//                    })
+//
 //                })
-//            })
-        }).map({ object -> Match in
-            return object.getValue()!
-        })
-        viewModel.participationMatches.value = matches ?? []
+////            return match.isEqual({ mMatch -> Bool in
+////                return mMatch.referees.contains(where: { referee -> Bool in
+////                    return referee.person == userDefaults.getAuthorizedUser()!.person.id
+////                })
+////            })
+//        }).map({ object -> Match in
+//            return object.getValue()!
+//        })
+//        viewModel.participationMatches.value = matches ?? []
 //        viewModel.participationMatches.value = (userDefaults.getAuthorizedUser()?.person.participationMatches)!.filter({ pMatch -> Bool in
 ////            return pMatch.isEqual({ m in
 ////                    m.referees.contains
@@ -120,7 +120,7 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
 //            })
             //
             let person = userDefaults.getAuthorizedUser()?.person
-        viewModel.participationMatches.value = person?.participationMatches?.filter({ $0.isEqual({ $0.referees.contains(where: { $0.person!.orEqual(person!.id, { $0.id == person?.id }) }) }) }).map({ $0.getValue()! }) ?? []
+//        viewModel.participationMatches.value = person?.participationMatches?.filter({ $0.isEqual({ $0.referees.contains(where: { $0.person!.orEqual(person!.id, { $0.id == person?.id }) }) }) }).map({ $0.getValue()! }) ?? []
 //        viewModel.participationMatches.value = person?.participationMatches?.filter({ $0.isEqual({ $0.refe }) })
 //        } catch {
 //            showAlert(title: AlertLets.alertTitle, message: AlertLets.alertMessage, actions:
@@ -154,17 +154,17 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
             }
             .disposed(by: disposeBag)
         
-        viewModel.tableModel
-            .map({ (cellModel) -> [MyMatchesRefTableViewCell.CellModel] in
-                return cellModel.sorted(by: { (lModel, rModel) -> Bool in
-                    return lModel.participationMatch!.date < rModel.participationMatch!.date
-                })
-            })
-            .bind(to: tableView.rx.items(cellIdentifier: CellIdentifiers.cell, cellType: MyMatchesRefTableViewCell.self)) {  (row, model, cell) in
-                Print.m(model)
-                cell.configure(with: model)
-            }
-            .disposed(by: disposeBag)
+//        viewModel.tableModel
+//            .map({ (cellModel) -> [MyMatchesRefTableViewCell.CellModel] in
+//                return cellModel.sorted(by: { (lModel, rModel) -> Bool in
+//                    return lModel.participationMatch!.date < rModel.participationMatch!.date
+//                })
+//            })
+//            .bind(to: tableView.rx.items(cellIdentifier: CellIdentifiers.cell, cellType: MyMatchesRefTableViewCell.self)) {  (row, model, cell) in
+//                Print.m(model)
+//                cell.configure(with: model)
+//            }
+//            .disposed(by: disposeBag)
         
         viewModel.tableModel
             .subscribe { (tableModel) in
@@ -194,38 +194,38 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
                         return
                     }
 //                    guard let leagueId = cell?.cellModel?.participationMatch
-                    self.viewModel.fetchLeagueInfo(
-                        id: leagueId,
-                        success: { leagueInfo in
-                            activityIndicator.stopAnimating()
-                            cell?.accessoryView = nil
-
-                            cell?.accessoryType = .detailDisclosureButton
-                            cell?.accessoryType = .disclosureIndicator
-
-                            self.refProtocol.leagueDetailModel.leagueInfo = leagueInfo
-                            guard let match = leagueInfo.league.matches?.filter({ match -> Bool in
-                                return match.id == cell?.cellModel?.participationMatch?.id
-                            }).first else {
-                                Print.m("not found match in incoming league matches")
-                                return
-                            }
-                            self.refProtocol.match = match
-                            
-                            self.refProtocol.model = cell?.cellModel
-                            
-                            self.refProtocol.preConfigureModelControllers()
-                            
-                            self.show(self.refProtocol, sender: self)
-                        }, r_message: { message in
-                            cell?.accessoryView = nil
-                            cell?.accessoryType = .disclosureIndicator
-                            
-                            self.showAlert(message: message.message)
-                        }, failure: { error in
-                            self.showAlert(message: error.localizedDescription)
-                        }
-                    )
+//                    self.viewModel.fetchLeagueInfo(
+//                        id: leagueId,
+//                        success: { leagueInfo in
+//                            activityIndicator.stopAnimating()
+//                            cell?.accessoryView = nil
+//
+//                            cell?.accessoryType = .detailDisclosureButton
+//                            cell?.accessoryType = .disclosureIndicator
+//
+//                            self.refProtocol.leagueDetailModel.leagueInfo = leagueInfo
+//                            guard let match = leagueInfo.league.matches?.filter({ match -> Bool in
+//                                return match.id == cell?.cellModel?.participationMatch?.id
+//                            }).first else {
+//                                Print.m("not found match in incoming league matches")
+//                                return
+//                            }
+//                            self.refProtocol.match = match
+//
+//                            self.refProtocol.model = cell?.cellModel
+//
+//                            self.refProtocol.preConfigureModelControllers()
+//
+//                            self.show(self.refProtocol, sender: self)
+//                        }, r_message: { message in
+//                            cell?.accessoryView = nil
+//                            cell?.accessoryType = .disclosureIndicator
+//
+//                            self.showAlert(message: message.message)
+//                        }, failure: { error in
+//                            self.showAlert(message: error.localizedDescription)
+//                        }
+//                    )
                     
                 }
                 // for feature, if referee is not 3-rd referee type then show protocol only for watching
@@ -244,7 +244,7 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
             let cellIndex = tableView.indexPathForSelectedRow
         {
 //            destination.leagueDetailModel =
-            let cell = (tableView.cellForRow(at: cellIndex) as? MyMatchesRefTableViewCell)?.cellModel!.participationMatch!.leagueID
+//            let cell = (tableView.cellForRow(at: cellIndex) as? MyMatchesRefTableViewCell)?.cellModel!.participationMatch!.leagueID
 //            destination.leagueDetailModel = self.leagueDetailModel
 //            destination.match = self.leagueDetailModel.league.matches![cellIndex]
             //destination.scheduleCell = self.scheduleCell

@@ -13,56 +13,56 @@ class LeagueController {
     init(league: League) {
         self.league = league
     }
-    func addPlayerToTeamById(id: String, player: DEPRECATED) {
-        for i in 0...self.league.teams!.count {
-            if self.league.teams![i].id == id {
-                self.league.teams![i].players.append(player)
-            }
-        }
-    }
-    func editTeamPlayersById(teamId: String, players: [DEPRECATED]) {
-        for i in 0...self.league.teams!.count - 1 {
-            Print.m("index i = \(i) || count of players = \(self.league.teams!.count) \n team id is \(self.league.teams![i].id) == param team id is \(teamId)")
-            if self.league.teams![i].id == teamId {
-                self.league.teams![i].players = players
-            }
-        }
-    }
-    func setTeamPlayersById(teamId: String, players: [DEPRECATED]) {
-        guard let teams = league.teams else { return }
-        for i in 0..<teams.count {
-            if teams[i].id == teamId {
-                league.teams![i].players = players
-            }
-        }
-    }
-    func setTeamPlayerById(playerId: String, player: DEPRECATED) {
-        guard let teams = league.teams else { return }
-        for i in 0..<teams.count {
-            for j in 0..<teams[i].players.count {
-                if playerId == teams[i].players[j].playerID {
-                    league.teams![i].players[j] = player
-                }
-            }
-        }
-    }
-    
-    func getPlayerById(_ id: String) -> DEPRECATED? {
-        let team = league.teams!.filter { team -> Bool in
-            return team.players.contains(where: { player -> Bool in
-                return player.playerID == id
-            })
-        }.first
-        return team?.players.filter({ player -> Bool in
-            return player.playerID == id
-        }).first
-    }
-    
-    func getTeamByPlayerId(_ id: String) -> Team? {
-        return league.teams!.filter({ team -> Bool in
-            return team.players.contains(where: { player -> Bool in
-                return player.playerID == id
-            })
-        }).first
-    }
+//    func addPlayerToTeamById(id: String, player: Person) {
+//        for i in 0...self.league.teams!.count {
+//            if self.league.teams![i].id == id {
+//                self.league.teams![i].players.append(player)
+//            }
+//        }
+//    }
+//    func editTeamPlayersById(teamId: String, players: [Person]) {
+//        for i in 0...self.league.teams!.count - 1 {
+//            Print.m("index i = \(i) || count of players = \(self.league.teams!.count) \n team id is \(self.league.teams![i].id) == param team id is \(teamId)")
+//            if self.league.teams![i].id == teamId {
+//                self.league.teams![i].players = players
+//            }
+//        }
+//    }
+//    func setTeamPlayersById(teamId: String, players: [Person]) {
+//        guard let teams = league.teams else { return }
+//        for i in 0..<teams.count {
+//            if teams[i].id == teamId {
+//                league.teams![i].players = players
+//            }
+//        }
+//    }
+//    func setTeamPlayerById(playerId: String, player: Person) {
+//        guard let teams = league.teams else { return }
+//        for i in 0..<teams.count {
+//            for j in 0..<teams[i].players.count {
+//                if playerId == teams[i].players[j].playerID {
+//                    league.teams![i].players[j] = player
+//                }
+//            }
+//        }
+//    }
+//
+//    func getPlayerById(_ id: String) -> Person? {
+//        let team = league.teams!.filter { team -> Bool in
+//            return team.players.contains(where: { player -> Bool in
+//                return player.playerID == id
+//            })
+//        }.first
+//        return team?.players.filter({ player -> Bool in
+//            return player.playerID == id
+//        }).first
+//    }
+//
+//    func getTeamByPlayerId(_ id: String) -> Team? {
+//        return league.teams!.filter({ team -> Bool in
+//            return team.players.contains(where: { player -> Bool in
+//                return player.playerID == id
+//            })
+//        }).first
+//    }
 }

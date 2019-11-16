@@ -14,91 +14,49 @@ import Foundation
 import Alamofire
 
 struct Club: Codable {
-    var info, addLogo, addInfo, id: String?
-    var name: String?
-    var owner: Owner?
-    var v: Int?
-    var logo: String?
-
     
-    init(info: String, addLogo: String, addInfo:String, id: String, name: String, owner: Owner, v: Int, logo: String) {
-        self.info = info
-        self.addLogo = addLogo
-        self.addInfo = addInfo
-        self.id = id
-        self.name = name
-        self.owner = owner
-        self.v = v
-        self.logo = logo
+    var id: String
+    
+    var region: IdRefObjectWrapper<RegionMy>? = nil
+    
+    var name: String? = nil
+    var logo: String? = nil
+    var info: String? = nil
+    
+    var owner: IdRefObjectWrapper<Person>? = nil
+    
+    var addLogo: String? = nil
+    var addInfo: String? = nil
+
+    var v: String? = nil
+    
+    init() {
+        id = ""
+        region = nil
+        name = nil
+        logo = nil
+        info = nil
+        owner = nil
+        addLogo = nil
+        addInfo = nil
+        v = nil
     }
     
     enum CodingKeys: String, CodingKey {
-        case info, addLogo, addInfo
         case id = "_id"
-        case name, owner
-        case v = "__v"
+        
+        case region
+        
+        case name
         case logo
-    }
-}
-
-// MARK: Convenience initializers and mutators
-
-extension Club {
-    
-    init() {
-        info = ""
-        addLogo = ""
-        addInfo = ""
-        id = ""
-        name = ""
-        owner = Owner()
-        v = -1
-        logo = ""
-    }
-    
-    init(data: Data) throws {
-        self = try JSONDecoder().decode(Club.self, from: data)
-    }
-    
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-    
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-    
-    func with(
-        info: String? = nil,
-        addLogo: String? = nil,
-        addInfo: String? = nil,
-        id: String? = nil,
-        name: String? = nil,
-        owner: Owner? = nil,
-        v: Int? = nil,
-        logo: String? = nil
-        ) -> Club {
-        var club = Club()
-        club.info = info ?? self.info
-        club.addLogo = addLogo ?? self.addLogo
-        club.addInfo = addInfo ?? self.addInfo
-        club.id = id ?? self.id
-        club.name = name ?? self.name
-        club.owner = owner ?? self.owner
-        club.v = v ?? self.v
-        club.logo = logo ?? self.logo
-        return club
-    }
-    
-    func jsonData() throws -> Data {
-        return try JSONEncoder().encode(self)
-    }
-    
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        case info
+        
+        case owner
+        
+        case addLogo
+        case addInfo
+        
+        case v = "__v"
     }
 }
 
@@ -113,7 +71,7 @@ extension DataRequest {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
             
-            return Result { try JSONDecoder().decode(T.self, from: data) }
+            return Result { try ISO8601Decoder.getDecoder().decode(T.self, from: data) }
         }
     }
     

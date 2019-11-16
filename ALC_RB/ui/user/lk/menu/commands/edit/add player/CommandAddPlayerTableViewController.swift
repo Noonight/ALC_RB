@@ -338,39 +338,40 @@ extension CommandAddPlayerTableViewController {
     
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.list, for: indexPath) as! CommandAddPlayerTableViewCell
         
-        func setupStatus(person: Person) {
-            if leagueController.league.teams!.contains(where:  { team -> Bool in
-                return team.id == self.team.id
-            }) {
-                if self.team.players!.contains(where: { player -> Bool in
-                    return player.person?.getId() ?? player.person?.getValue()?.id ?? "" == person.id
-                }) {
-                    let player = leagueController.getPlayerById(person.id)
-                    if player?.inviteStatus == InviteStatus.accepted.rawValue {
-                        cell.configure(with: person, status: .plyedIn(Texts.IN_YOUR_TEAM))
-                    }
-                    if player?.inviteStatus == InviteStatus.pending.rawValue {
-                        cell.configure(with: person, status: .invitedIn(Texts.INVITED_INTO_YOUR_TEAM))
-                    }
-                } else {
-                    Print.m("user is \(person.getFullName()) not used ")
-                    cell.configure(with: person, status: .notUsed)
-                }
-            }
-        }
+        // DEPRECATED: invite status is deprecated
+//        func setupStatus(person: Person) {
+//            if leagueController.league.teams!.contains(where:  { team -> Bool in
+//                return team.id == self.team.id
+//            }) {
+//                if self.team.players!.contains(where: { player -> Bool in
+//                    return player.person?.getId() ?? player.person?.getValue()?.id ?? "" == person.id
+//                }) {
+//                    let player = leagueController.getPlayerById(person.id)
+//                    if player?.inviteStatus == InviteStatus.accepted.rawValue {
+//                        cell.configure(with: person, status: .plyedIn(Texts.IN_YOUR_TEAM))
+//                    }
+//                    if player?.inviteStatus == InviteStatus.pending.rawValue {
+//                        cell.configure(with: person, status: .invitedIn(Texts.INVITED_INTO_YOUR_TEAM))
+//                    }
+//                } else {
+//                    Print.m("user is \(person.getFullName()) not used ")
+//                    cell.configure(with: person, status: .notUsed)
+//                }
+//            }
+//        }
         
         let player: Person
         if isFiltering() {
             player = filteredPlayers[indexPath.row]
             
-            setupStatus(person: player)
+//            setupStatus(person: player)
             
             cell.cell_add_player_btn.tag = indexPath.row
             cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
         } else {
             player = tableModel.players[indexPath.row]
             
-            setupStatus(person: player)
+//            setupStatus(person: player)
             
             cell.cell_add_player_btn.tag = indexPath.row
             cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)

@@ -63,22 +63,22 @@ class ProtocolAllViewModel {
         
         for event in teamOneEvents
         {
-            if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+            if event.type == .goal || event.type == .penalty
             {
                 counterLeft += 1
             }
-            if event.getSystemEventType() == .autoGoal
+            if event.type == .autoGoal
             {
                 counterRight += 1
             }
         }
         for event in teamTwoEvents
         {
-            if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+            if event.type == .goal || event.type == .penalty
             {
                 counterRight += 1
             }
-            if event.getSystemEventType() == .autoGoal
+            if event.type == .autoGoal
             {
                 counterLeft += 1
             }
@@ -90,7 +90,7 @@ class ProtocolAllViewModel {
     func preparePenaltyScore() -> String {
         if hasPenaltySeriesEvents() == true
         {
-            let penaltySeries = self.getEventsByTime("penalty series")
+            let penaltySeries = self.getEventsByTime(.penaltySeries)
             var counterLeft = 0
             var counterRight = 0
             
@@ -99,11 +99,11 @@ class ProtocolAllViewModel {
             
             for event in teamOneEvents
             {
-                if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+                if event.type == .goal || event.type == .penalty
                 {
                     counterLeft += 1
                 }
-                if event.getSystemEventType() == .autoGoal
+                if event.type == .autoGoal
                 {
 //                    counterLeft -= 1
                     counterRight += 1
@@ -112,11 +112,11 @@ class ProtocolAllViewModel {
             
             for event in teamTwoEvents
             {
-                if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+                if event.type == .goal || event.type == .penalty
                 {
                     counterRight += 1
                 }
-                if event.getSystemEventType() == .autoGoal
+                if event.type == .autoGoal
                 {
 //                    counterRight -= 1
                     counterLeft += 1
@@ -134,7 +134,7 @@ class ProtocolAllViewModel {
     
     func hasPenaltySeriesEvents() -> Bool {
         if eventsController.events.contains(where: { event -> Bool in
-            return event.time == "penalty series"
+            return event.time == Event.Time.penaltySeries
         }) == true
         {
             return true
@@ -143,7 +143,7 @@ class ProtocolAllViewModel {
     }
     
     func prepareFirstTimeScore() -> String {
-        let firstTimeEvents = self.getEventsByTime("1 half")
+        let firstTimeEvents = self.getEventsByTime(.firstHalf)
         var counterLeft = 0
         var counterRight = 0
         
@@ -152,11 +152,11 @@ class ProtocolAllViewModel {
         
         for event in teamOneEvents
         {
-            if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+            if event.type == .goal || event.type == .penalty
             {
                 counterLeft += 1
             }
-            if event.getSystemEventType() == .autoGoal
+            if event.type == .autoGoal
             {
 //                counterLeft -= 1
                 counterRight += 1
@@ -165,11 +165,11 @@ class ProtocolAllViewModel {
         
         for event in teamTwoEvents
         {
-            if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+            if event.type == .goal || event.type == .penalty
             {
                 counterRight += 1
             }
-            if event.getSystemEventType() == .autoGoal
+            if event.type == .autoGoal
             {
 //                counterRight -= 1
                 counterLeft += 1
@@ -180,8 +180,8 @@ class ProtocolAllViewModel {
     }
     
     func prepareMainTimeScore() -> String {
-        let firstTimeEvents = self.getEventsByTime("1 half")
-        let secondTimeEvents = self.getEventsByTime("2 half")
+        let firstTimeEvents = self.getEventsByTime(.firstHalf)
+        let secondTimeEvents = self.getEventsByTime(.secondHalf)
         var allEvents: [Event] = []
         allEvents.append(contentsOf: firstTimeEvents)
         allEvents.append(contentsOf: secondTimeEvents)
@@ -198,11 +198,11 @@ class ProtocolAllViewModel {
         
         for event in teamOneEvents
         {
-            if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+            if event.type == .goal || event.type == .penalty
             {
                 counterLeft += 1
             }
-            if event.getSystemEventType() == .autoGoal
+            if event.type == .autoGoal
             {
 //                counterLeft -= 1
                 counterRight += 1
@@ -210,11 +210,11 @@ class ProtocolAllViewModel {
         }
         for event in teamTwoEvents
         {
-            if event.getSystemEventType() == .goal || event.getSystemEventType() == .penalty
+            if event.type == .goal || event.type == .penalty
             {
                 counterRight += 1
             }
-            if event.getSystemEventType() == .autoGoal
+            if event.type == .autoGoal
             {
                 //counterRight -= 1
                 counterLeft += 1
@@ -236,7 +236,7 @@ class ProtocolAllViewModel {
     }
     
     func preparePlace() -> String {
-        guard let place = self.match.place else { return "Не указано" }
+        guard let place = self.match.place?.getValue()?.name else { return "Не указано" }
         return place
     }
     
@@ -278,14 +278,14 @@ class ProtocolAllViewModel {
         return ""
     }
     
-    func prepareTeamTitle(team: TeamEnum) -> String {
-        switch team {
-        case .one:
-            return ClubTeamHelper.getTeamTitle(league: self.leagueDetailModel.league, match: match, team: .one)
-        case .two:
-            return ClubTeamHelper.getTeamTitle(league: self.leagueDetailModel.league, match: match, team: .two)
-        }
-    }
+//    func prepareTeamTitle(team: TeamEnum) -> String {
+//        switch team {
+//        case .one:
+//            return ClubTeamHelper.getTeamTitle(league: self.leagueDetailModel.league, match: match, team: .one)
+//        case .two:
+//            return ClubTeamHelper.getTeamTitle(league: self.leagueDetailModel.league, match: match, team: .two)
+//        }
+//    }
     
     func prepareTableViewCells(team: TeamEnum, completed: @escaping ([RefereeProtocolPlayerTeamCellModel]) -> ()) {
         var returnedArray: [RefereeProtocolPlayerTeamCellModel] = []
@@ -297,12 +297,11 @@ class ProtocolAllViewModel {
             for item in teamOnePlayersController.getPlayingPlayers()
             {
                 group.enter()
-                self.fetchPerson(playerId: item.playerId, success:
+                self.fetchPerson(playerId: item.id, success:
                     { person in
                         returnedArray.append(RefereeProtocolPlayerTeamCellModel(
-                            player: item.convertToPlayer(),
                             person: person.person,
-                            eventsModel: self.getPlayerEventsBy(playerId: item.playerId))
+                            eventsModel: self.getPlayerEventsBy(playerId: item.id))
                         )
                         group.leave()
                 }) { error in
@@ -315,12 +314,11 @@ class ProtocolAllViewModel {
             for item in teamTwoPlayersController.getPlayingPlayers()
             {
                 group.enter()
-                self.fetchPerson(playerId: item.playerId, success:
+                self.fetchPerson(playerId: item.id, success:
                     { person in
                         returnedArray.append(RefereeProtocolPlayerTeamCellModel(
-                            player: item.convertToPlayer(),
                             person: person.person,
-                            eventsModel: self.getPlayerEventsBy(playerId: item.playerId))
+                            eventsModel: self.getPlayerEventsBy(playerId: item.id))
                         )
                         group.leave()
                 }) { error in
@@ -368,14 +366,14 @@ class ProtocolAllViewModel {
     
     // MARK: Helpers
     
-    private func getFoulsByTimeForTeam(time: String, team: TeamEnum, events: [Event]) -> Int {
+    private func getFoulsByTimeForTeam(time: Event.Time, team: TeamEnum, events: [Event]) -> Int {
         var count = 0
         
         if team == .one
         {
             for event in getEventsForTeam(team: .one, events: events)
             {
-                if event.time == time && event.getSystemEventType() == .foul
+                if event.time == time && event.type == .foul
                 {
                     count += 1
                 }
@@ -386,7 +384,7 @@ class ProtocolAllViewModel {
         {
             for event in getEventsForTeam(team: .two, events: events)
             {
-                if event.time == time && event.getSystemEventType() == .foul
+                if event.time == time && event.type == .foul
                 {
                     count += 1
                 }
@@ -402,11 +400,11 @@ class ProtocolAllViewModel {
         {
             var players: [String] = []
             for p in teamOnePlayersController.getPlayingPlayers() {
-                players.append(p.playerId)
+                players.append(p.id)
             }
             for event in events
             {
-                if players.index(of: event.player) != nil {
+                if players.index(of: event.player?.getId() ?? event.player?.getValue()?.id ?? "") != nil {
                     resultArray.append(event)
                 }
             }
@@ -416,11 +414,11 @@ class ProtocolAllViewModel {
         {
             var players: [String] = []
             for p in teamTwoPlayersController.getPlayingPlayers() {
-                players.append(p.playerId)
+                players.append(p.id)
             }
             for event in events
             {
-                if players.index(of: event.player) != nil {
+                if players.index(of: event.player?.getId() ?? event.player!.getValue()!.id) != nil {
                     resultArray.append(event)
                 }
             }
@@ -429,7 +427,7 @@ class ProtocolAllViewModel {
         return resultArray
     }
     
-    private func getCellsByTime(time: String, completed: @escaping([ProtocolAllEventsCellModel]) -> ()) {
+    private func getCellsByTime(time: Event.Time, completed: @escaping([ProtocolAllEventsCellModel]) -> ()) {
 
         let group = DispatchGroup()
         
@@ -438,22 +436,22 @@ class ProtocolAllViewModel {
         var teamOneEventsPlayers: [EventPLayer] = []
         
         group.enter()
-        self.getEventsAndPlayerByPlayerIdForTeam(team: .one, events: getEventsByTime(time)) { eventsPlayers in
-            teamOneEventsPlayers.removeAll()
-            teamOneEventsPlayers.append(contentsOf: eventsPlayers)
-            
-            group.leave()
-        }
+//        self.getEventsAndPlayerByPlayerIdForTeam(team: .one, events: getEventsByTime(time)) { eventsPlayers in
+//            teamOneEventsPlayers.removeAll()
+//            teamOneEventsPlayers.append(contentsOf: eventsPlayers)
+//
+//            group.leave()
+//        }
         
         var teamTwoEventsPlayers: [EventPLayer] = []
         
-        group.enter()
-        self.getEventsAndPlayerByPlayerIdForTeam(team: .two, events: getEventsByTime(time)) { eventsPlayers in
-            teamTwoEventsPlayers.removeAll()
-            teamTwoEventsPlayers.append(contentsOf: eventsPlayers)
-            
-            group.leave()
-        }
+//        group.enter()
+//        self.getEventsAndPlayerByPlayerIdForTeam(team: .two, events: getEventsByTime(time)) { eventsPlayers in
+//            teamTwoEventsPlayers.removeAll()
+//            teamTwoEventsPlayers.append(contentsOf: eventsPlayers)
+//
+//            group.leave()
+//        }
         
         group.notify(queue: .main) {
             let maxOf = max(teamOneEventsPlayers.count, teamTwoEventsPlayers.count)
@@ -465,12 +463,12 @@ class ProtocolAllViewModel {
                     if i <= teamOneEventsPlayers.count - 1
                     {
                         cellModel.left_name = teamOneEventsPlayers[i].person.getSurnameNP()
-                        cellModel.left_event = teamOneEventsPlayers[i].event.getSystemEventType()
+                        cellModel.left_event = teamOneEventsPlayers[i].event.type!
                     }
                     if i <= teamTwoEventsPlayers.count - 1
                     {
                         cellModel.right_name = teamTwoEventsPlayers[i].person.getSurnameNP()
-                        cellModel.right_event = teamTwoEventsPlayers[i].event.getSystemEventType()
+                        cellModel.right_event = teamTwoEventsPlayers[i].event.type!
                     }
                     resultCells.append(cellModel)
                 }
@@ -484,12 +482,12 @@ class ProtocolAllViewModel {
                     if i <= teamOneEventsPlayers.count - 1
                     {
                         cellModel.left_name = teamOneEventsPlayers[i].person.getSurnameNP()
-                        cellModel.left_event = teamOneEventsPlayers[i].event.getSystemEventType()
+                        cellModel.left_event = teamOneEventsPlayers[i].event.type!
                     }
                     if i <= teamTwoEventsPlayers.count - 1
                     {
                         cellModel.right_name = teamTwoEventsPlayers[i].person.getSurnameNP()
-                        cellModel.right_event = teamTwoEventsPlayers[i].event.getSystemEventType()
+                        cellModel.right_event = teamTwoEventsPlayers[i].event.type!
                     }
                     resultCells.append(cellModel)
                 }
@@ -502,81 +500,81 @@ class ProtocolAllViewModel {
     
     struct EventPLayer {
         var event: Event
-        var player: DEPRECATED
+        // DEPRECATED: Player
         var person: Person
     }
+    // DEPRECATED
+//    private func getEventsAndPlayerByPlayerIdForTeam(team: TeamEnum, events: [Event], complete: @escaping ([EventPLayer]) -> ()) {
+//
+//        var resultArray: [EventPLayer] = []
+//
+//        let group = DispatchGroup()
+//
+//        if team == .one
+//        {
+//            for event in events
+//            {
+//                if teamOnePlayersController.players.contains(where: { liPLayer -> Bool in
+//                    return liPLayer.playerId == event.player
+//                }) == true
+//                {
+//                    group.enter()
+//                    self.fetchPerson(playerId: event.player, success: { person in
+//                        resultArray.append(ProtocolAllViewModel.EventPLayer(
+//                            event: event,
+//                            player: self.teamOnePlayersController.getPlayerById(event.player)!,
+//                            person: person.person))
+//                        group.leave()
+//                    }) { error in
+//                        Print.m("player not found ->> \(error)")
+//                    }
+//                }
+//            }
+//
+//        }
+//
+//        if team == .two
+//        {
+//            for event in events
+//            {
+//                if teamTwoPlayersController.players.contains(where: { liPLayer -> Bool in
+//                    return liPLayer.id == event.player?.getId() ?? event.player?.getValue().id ?? ""
+//                }) == true
+//                {
+//                    group.enter()
+//                    self.fetchPerson(playerId: event.player?.getId() ?? event.player?.getValue()?.id ?? "", success: { person in
+//                        resultArray.append(ProtocolAllViewModel.EventPLayer(
+//                            event: event,
+//                            player: self.teamTwoPlayersController.getPlayerById(event.player?.getId() ?? event.player!.getValue()!.id),
+//                            person: person.person))
+//                        group.leave()
+//                    }) { error in
+//                        Print.m("player not found ->> \(error)")
+//                    }
+//                }
+//            }
+//        }
+//
+//        group.notify(queue: .main) {
+//            complete(resultArray)
+//        }
+//    }
     
-    private func getEventsAndPlayerByPlayerIdForTeam(team: TeamEnum, events: [Event], complete: @escaping ([EventPLayer]) -> ()) {
-        
-        var resultArray: [EventPLayer] = []
-        
-        let group = DispatchGroup()
-        
-        if team == .one
-        {
-            for event in events
-            {
-                if teamOnePlayersController.players.contains(where: { liPLayer -> Bool in
-                    return liPLayer.playerId == event.player
-                }) == true
-                {
-                    group.enter()
-                    self.fetchPerson(playerId: event.player, success: { person in
-                        resultArray.append(ProtocolAllViewModel.EventPLayer(
-                            event: event,
-                            player: self.teamOnePlayersController.getPlayerById(event.player)!,
-                            person: person.person))
-                        group.leave()
-                    }) { error in
-                        Print.m("player not found ->> \(error)")
-                    }
-                }
-            }
-            
-        }
-        
-        if team == .two
-        {
-            for event in events
-            {
-                if teamTwoPlayersController.players.contains(where: { liPLayer -> Bool in
-                    return liPLayer.playerId == event.player
-                }) == true
-                {
-                    group.enter()
-                    self.fetchPerson(playerId: event.player, success: { person in
-                        resultArray.append(ProtocolAllViewModel.EventPLayer(
-                            event: event,
-                            player: self.teamTwoPlayersController.getPlayerById(event.player)!,
-                            person: person.person))
-                        group.leave()
-                    }) { error in
-                        Print.m("player not found ->> \(error)")
-                    }
-                }
-            }
-        }
-        
-        group.notify(queue: .main) {
-            complete(resultArray)
-        }
-    }
-    
-    private func getUniqueTimes() -> [String] {
-        var resultArray: [String] = []
+    private func getUniqueTimes() -> [Event.Time] {
+        var resultArray: [Event.Time] = []
         
         for event in eventsController.events
         {
-            if resultArray.contains(event.time) == false
+            if resultArray.contains(event.time!) == false
             {
-                resultArray.append(event.time)
+                resultArray.append(event.time!)
             }
         }
         
         return resultArray
     }
     
-    private func getEventsByTime(_ time: String) -> [Event] {
+    private func getEventsByTime(_ time: Event.Time) -> [Event] {
         var resultArray: [Event] = []
         
         for event in eventsController.events
@@ -589,18 +587,18 @@ class ProtocolAllViewModel {
         
         return resultArray
     }
-    
-    fileprivate func getPlayersId() -> [String] {
-        return connectPlayersOfTeamOneAndTwo().map({ liPlayer -> String in
-            return liPlayer.playerId
-        })
-    }
-    
-    fileprivate func connectPlayersOfTeamOneAndTwo() -> [DEPRECATED] {
-        return [teamOnePlayersController.getPlayingPlayers(), teamTwoPlayersController.getPlayingPlayers()].flatMap({ liPlayer -> [DEPRECATED] in
-            return liPlayer
-        })
-    }
+    // DEPRECATED: players are deprecated
+//    fileprivate func getPlayersId() -> [String] {
+//        return connectPlayersOfTeamOneAndTwo().map({ liPlayer -> String in
+//            return liPlayer.playerId
+//        })
+//    }
+//
+//    fileprivate func connectPlayersOfTeamOneAndTwo() -> [DEPRECATED] {
+//        return [teamOnePlayersController.getPlayingPlayers(), teamTwoPlayersController.getPlayingPlayers()].flatMap({ liPlayer -> [DEPRECATED] in
+//            return liPlayer
+//        })
+//    }
     
     fileprivate func getPlayerEventsBy(playerId: String) -> RefereeProtocolPlayerEventsModel
     {
@@ -608,7 +606,7 @@ class ProtocolAllViewModel {
         var returnedModel = RefereeProtocolPlayerEventsModel()
         for item in eventsController.events
         {
-            if item.player == playerId
+            if item.player?.getId() ?? item.player?.getValue()?.id ?? "" == playerId
             {
                 playerEvents.append(item)
             }
@@ -618,23 +616,23 @@ class ProtocolAllViewModel {
             returnedModel = RefereeProtocolPlayerEventsModel()
             for event in playerEvents
             {
-                if event.getEventType() == .player(.goal)
+                if event.type == .goal
                 {
                     returnedModel.goals = returnedModel.goals + 1
                 }
-                if event.getEventType() == .player(.penalty)
+                if event.type == .penalty
                 {
                     returnedModel.successfulPenaltyGoals = returnedModel.successfulPenaltyGoals + 1
                 }
-                if event.getEventType() == .player(.penaltyFailure)
+                if event.type == .penaltyFailure
                 {
                     returnedModel.failurePenaltyGoals = returnedModel.failurePenaltyGoals + 1
                 }
-                if event.getEventType() == .player(.yellowCard)
+                if event.type == .yellowCard
                 {
                     returnedModel.yellowCards = returnedModel.yellowCards + 1
                 }
-                if event.getEventType() == .player(.redCard)
+                if event.type == .redCard
                 {
                     returnedModel.redCard = true
                 }
@@ -647,19 +645,20 @@ class ProtocolAllViewModel {
     func preConfigureModelControllers() {
         teamOnePlayersController = nil
         teamTwoPlayersController = nil// MARK: TODO team can be empty
-        teamOnePlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamOne!))
-        teamTwoPlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamTwo!))
-        refereesController = nil
-        refereesController = ProtocolRefereesController(referees: match.referees)
-        eventsController = nil
-        eventsController = ProtocolEventsController(events: match.events)
+        // DEPRECATED: players are deprecated
+//        teamOnePlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamOne!))
+//        teamTwoPlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamTwo!))
+//        refereesController = nil
+//        refereesController = ProtocolRefereesController(referees: match.referees)
+//        eventsController = nil
+//        eventsController = ProtocolEventsController(events: match.events)
     }
     
-    func getPlayersTeam(team id: String) -> [DEPRECATED] {
-        return (leagueDetailModel.league.teams?.filter({ (team) -> Bool in
-            return team.id == id
-        }).first?.players)!
-    }
+//    func getPlayersTeam(team id: String) -> [DEPRECATED] {
+//        return (leagueDetailModel.league.teams?.filter({ (team) -> Bool in
+//            return team.id == id
+//        }).first?.players)!
+//    }
 }
 
 // MARK: API REQUESTS

@@ -24,7 +24,7 @@ class RefereesLKTableViewController: BaseStateTableViewController {
     private var viewModel: RefereesViewModel!
     private let disposeBag = DisposeBag()
     
-    private var tmpReferees: Players?
+    private var tmpReferees: [Person]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,24 +69,24 @@ class RefereesLKTableViewController: BaseStateTableViewController {
             }
             .disposed(by: disposeBag)
         
-        viewModel.referees
-            .subscribe { (players) in
-                self.tmpReferees = players.element
-                if players.element?.people.count == 0 {
-                    self.setState(state: .empty)
-                }
-            }
-            .disposed(by: disposeBag)
+//        viewModel.referees
+//            .subscribe { (players) in
+//                self.tmpReferees = players.element
+////                if players.element?.people.count == 0 {
+////                    self.setState(state: .empty)
+////                }
+//            }
+//            .disposed(by: disposeBag)
         
-        viewModel.referees
-            .map { (players) -> [Person] in
-                return players.people
-            }
-            .bind(to: tableView.rx.items(cellIdentifier: CellIdentifiers.cell, cellType: RefereeLKTableViewCell.self)) {  (row,referee,cell) in
-//                Print.m(referee)
-                cell.configure(with: referee)
-            }
-            .disposed(by: disposeBag)
+//        viewModel.referees
+//            .map { (players) -> [Person] in
+//                return players.people
+//            }
+//            .bind(to: tableView.rx.items(cellIdentifier: CellIdentifiers.cell, cellType: RefereeLKTableViewCell.self)) {  (row,referee,cell) in
+////                Print.m(referee)
+//                cell.configure(with: referee)
+//            }
+//            .disposed(by: disposeBag)
         
         tableView.rx.itemSelected
             .subscribe { (indexPath) in

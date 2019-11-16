@@ -68,11 +68,11 @@ class EventsMatchTableViewController: BaseStateTableViewController {
     
     // MARK: - Prepare tableModel
     
-    func findUniqueHeader(destination: [Event]) -> [String] {
-        var allEventTypes: [String] = []
+    func findUniqueHeader(destination: [Event]) -> [Event.eType] {
+        var allEventTypes: [Event.eType] = []
         for event in destination {
-            if !allEventTypes.contains(event.eventType) {
-                allEventTypes.append(event.eventType)
+            if !allEventTypes.contains(event.type!) {
+                allEventTypes.append(event.type!)
             }
         }
         return allEventTypes
@@ -85,7 +85,7 @@ class EventsMatchTableViewController: BaseStateTableViewController {
             let uniqueEventTypes = findUniqueHeader(destination: events)
             for uniqEvent in uniqueEventTypes {
                 var arrEvents: [Event] = events.filter { (event) -> Bool in
-                    return event.eventType == uniqEvent
+                    return event.type == uniqEvent
                 }
                 tableModel.table.append(arrEvents)
             }
@@ -105,7 +105,7 @@ class EventsMatchTableViewController: BaseStateTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return tableModel.table[section][0].time
+        return tableModel.table[section][0].time?.rawValue
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -117,10 +117,10 @@ class EventsMatchTableViewController: BaseStateTableViewController {
     }
     
     func configureCell(cell: EventsProtocolTableViewCell, model: Event) {
-        presenter.getPlayer(player: model.player, get_player: { (person) in
+        presenter.getPlayer(player: model.player?.getId() ?? model.player!.getValue()!.id, get_player: { (person) in
 //            cell.name_label.text = person.person.getFullName()
             cell.name_label.text = person.person.getSurnameNP()
-            cell.type_label.text = model.getEventType().getAbbreviation()
+            cell.type_label.text = model.type?.rawValue
             if person.person.photo != nil {
                 self.presenter.getPlayerImage(player_photo: person.person.photo ?? " ", get_image: { (image) in
                     cell.photo_image.image = image

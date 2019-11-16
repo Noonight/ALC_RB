@@ -46,17 +46,19 @@ class ProtocolRefereeViewModel {
         case .one:
             guard let teamId = self.match.teamOne else { return }
             self.eventsController.add(Event(
-                matchID: self.match.id,
-                eventType: .foul,
-                playerID: teamId,
+                id: self.match.id,
+                type: .foul,
+                player: nil,
+                team: teamId,
                 time: self.currentTime)
             )
         case .two:
             guard let teamId = self.match.teamTwo else { return }
             self.eventsController.add(Event(
-                matchID: self.match.id,
-                eventType: .foul,
-                playerID: teamId,
+                id: self.match.id,
+                type: .foul,
+                player: nil,
+                team: teamId,
                 time: self.currentTime)
             )
         }
@@ -67,23 +69,25 @@ class ProtocolRefereeViewModel {
         case .one:
             guard let teamId = self.match.teamOne else { return } // CHECK
             self.eventsController.add(Event(
-                matchID: self.match.id,
-                eventType: .autoGoal,
-                playerID: teamId,
+                id: self.match.id,
+                type: .autoGoal,
+                player: nil,
+                team: teamId,
                 time: self.currentTime)
             )
         case .two:
             guard let teamId = self.match.teamTwo else { return } // CHECK
             self.eventsController.add(Event(
-                matchID: self.match.id,
-                eventType: .autoGoal,
-                playerID: teamId,
+                id: self.match.id,
+                type: .autoGoal,
+                player: nil,
+                team: teamId,
                 time: self.currentTime)
             )
         }
     }
     
-    func updateTime(time: EventTime) {
+    func updateTime(time: Event.Time) {
         if self.currentTime != time
         {
             self.currentTime = time
@@ -102,8 +106,8 @@ class ProtocolRefereeViewModel {
         }
     }
     
-    func updateFouls(newCount: Int, teamId: String) {
-        if teamId == self.match.teamOne
+    func updateFouls(newCount: Int, teamId: IdRefObjectWrapper<Team>) {
+        if teamId.getId() ?? teamId.getValue()!.id ?? "-1" == self.match.teamOne?.getId() ?? self.match.teamOne?.getValue()?.id ?? ""
         {
             let oldCountForTime = self.prepareFoulsCountInCurrentTime(team: .one)
             if oldCountForTime < newCount // add new elements
@@ -111,9 +115,10 @@ class ProtocolRefereeViewModel {
                 for _ in 0...(newCount - oldCountForTime) - 1
                 {
                     eventsController.add(Event(
-                        matchID: self.match.id,
-                        eventType: .foul,
-                        playerID: teamId,
+                        id: self.match.id,
+                        type: .foul,
+                        player: nil,
+                        team: teamId,
                         time: self.currentTime)
                     )
                 }
@@ -126,9 +131,9 @@ class ProtocolRefereeViewModel {
                     let event = self.eventsController.events[i]
                     if counter < (oldCountForTime - newCount)
                     {
-                        if event.getEventType() == .team(.foul)
-                            && event.getEventTime() == currentTime
-                            && event.player == teamId
+                        if event.type == .foul
+                            && event.time == currentTime
+                            && event.player!.getId() ?? event.player!.getValue()!.id ?? "-1" == teamId.getId() ?? teamId.getValue()!.id ?? ""
                         {
                             counter += 1
                             self.eventsController.events.remove(at: i)
@@ -137,7 +142,7 @@ class ProtocolRefereeViewModel {
                 }
             }
         }
-        if teamId == self.match.teamTwo
+        if teamId.getId() ?? teamId.getValue()!.id ?? "-1" == self.match.teamTwo?.getId() ?? self.match.teamTwo?.getValue()?.id ?? ""
         {
             let oldCountForTime = self.prepareFoulsCountInCurrentTime(team: .two)
             if oldCountForTime < newCount // add new elements
@@ -145,9 +150,10 @@ class ProtocolRefereeViewModel {
                 for _ in 0...(newCount - oldCountForTime) - 1
                 {
                     eventsController.add(Event(
-                        matchID: self.match.id,
-                        eventType: .foul,
-                        playerID: teamId,
+                        id: self.match.id,
+                        type: .foul,
+                        player: nil,
+                        team: teamId,
                         time: self.currentTime)
                     )
                 }
@@ -160,9 +166,9 @@ class ProtocolRefereeViewModel {
                     let event = self.eventsController.events[i]
                     if counter < (oldCountForTime - newCount)
                     {
-                        if event.getEventType() == .team(.foul)
-                            && event.getEventTime() == currentTime
-                            && event.player == teamId
+                        if event.type == .foul
+                            && event.time == currentTime
+                            && event.player!.getId() ?? event.player!.getValue()!.id ?? "-1" == teamId.getId() ?? teamId.getValue()!.id ?? ""
                         {
                             counter += 1
                             self.eventsController.events.remove(at: i)
@@ -173,8 +179,8 @@ class ProtocolRefereeViewModel {
         }
     }
     
-    func updateAutoGoals(newCount: Int, teamId: String) {
-        if teamId == self.match.teamOne
+    func updateAutoGoals(newCount: Int, teamId: IdRefObjectWrapper<Team>) {
+        if teamId.getId() ?? teamId.getValue()!.id ?? "-1" == self.match.teamOne?.getId() ?? self.match.teamOne?.getValue()?.id ?? ""
         {
             let oldCountForTime = self.prepareAutogoalsCountInCurrentTime(team: .one)
             if oldCountForTime < newCount // add new elements
@@ -182,9 +188,10 @@ class ProtocolRefereeViewModel {
                 for _ in 0...(newCount - oldCountForTime) - 1
                 {
                     eventsController.add(Event(
-                        matchID: self.match.id,
-                        eventType: .autoGoal,
-                        playerID: teamId,
+                        id: self.match.id,
+                        type: .autoGoal,
+                        player: nil,
+                        team: teamId,
                         time: self.currentTime)
                     )
                 }
@@ -197,9 +204,9 @@ class ProtocolRefereeViewModel {
                     let event = self.eventsController.events[i]
                     if counter < (oldCountForTime - newCount)
                     {
-                        if event.getEventType() == .team(.autoGoal)
-                            && event.getEventTime() == currentTime
-                            && event.player == teamId
+                        if event.type == .autoGoal
+                            && event.time == currentTime
+                            && event.player!.getId() ?? event.player!.getValue()!.id ?? "-1" == teamId.getId() ?? teamId.getValue()!.id ?? ""
                         {
                             counter += 1
                             self.eventsController.events.remove(at: i)
@@ -208,7 +215,7 @@ class ProtocolRefereeViewModel {
                 }
             }
         }
-        if teamId == self.match.teamTwo
+        if teamId.getId() ?? teamId.getValue()!.id ?? "-1" == self.match.teamTwo?.getId() ?? self.match.teamTwo?.getValue()?.id
         {
             let oldCountForTime = self.prepareAutogoalsCountInCurrentTime(team: .two)
             if oldCountForTime < newCount // add new elements
@@ -216,9 +223,10 @@ class ProtocolRefereeViewModel {
                 for _ in 0...(newCount - oldCountForTime) - 1
                 {
                     eventsController.add(Event(
-                        matchID: self.match.id,
-                        eventType: .autoGoal,
-                        playerID: teamId,
+                        id: self.match.id,
+                        type: .autoGoal,
+                        player: nil,
+                        team: teamId,
                         time: self.currentTime)
                     )
                 }
@@ -231,9 +239,9 @@ class ProtocolRefereeViewModel {
                     let event = self.eventsController.events[i]
                     if counter < (oldCountForTime - newCount)
                     {
-                        if event.getEventType() == .team(.autoGoal)
-                            && event.getEventTime() == currentTime
-                            && event.player == teamId
+                        if event.type == .autoGoal
+                            && event.time == currentTime
+                            && event.player!.getId() ?? event.player!.getValue()!.id ?? "-1" == teamId.getId() ?? teamId.getValue()!.id ?? ""
                         {
                             counter += 1
                             self.eventsController.events.remove(at: i)
@@ -254,7 +262,7 @@ class ProtocolRefereeViewModel {
     
     func updateMatch(match: Match) {
         self.match = match
-        self.eventsController.updateEvents(events: match.events)
+        self.eventsController.updateEvents(events: match.events!)
     }
     
     // MARK: WORK WITH VARIABLES
@@ -273,24 +281,24 @@ class ProtocolRefereeViewModel {
         return self.eventsController.prepareTeamEventsInTime(time: .penaltySeries)
     }
     
-    func prepareTeamTitleFor(team: TeamEnum) -> String {
-        if team == .one
-        {
-            return ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .one)
-        }
-        if team == .two
-        {
-            return ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .two)
-        }
-        return ""
-        
-    }
+//    func prepareTeamTitleFor(team: TeamEnum) -> String {
+//        if team == .one
+//        {
+////            return ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .one)
+//        }
+//        if team == .two
+//        {
+//            return ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .two)
+//        }
+//        return ""
+//        
+//    }
     
     func prepareAutogoalsCountInCurrentTime(team: TeamEnum) -> Int { // OK
         let teamEvents = self.eventsController.prepareTeamEventsInTime(time: self.currentTime)
         
         return getEventsForTeam(team: team, events: teamEvents).filter({ event -> Bool in
-            return event.getEventType() == .team(.autoGoal)
+            return event.type == .autoGoal
         }).count
     }
     
@@ -298,12 +306,13 @@ class ProtocolRefereeViewModel {
         let teamEvents = self.eventsController.prepareTeamEventsInTime(time: self.currentTime)
         
         return getEventsForTeam(team: team, events: teamEvents).filter({ event -> Bool in
-            return event.getEventType() == .team(.foul)
+            return event.type == .foul
         }).count
     }
     
     func prepareCurrentTime() -> String {
-        return self.currentTime.getTitle()
+        return self.currentTime.rawValue
+//        return self.currentTime.getTitle()
     }
     
     func prepareMatchId() -> String {
@@ -328,12 +337,12 @@ class ProtocolRefereeViewModel {
             for item in teamOnePlayersController.getPlayingPlayers()
             {
                 group.enter()
-                self.fetchPerson(playerId: item.playerId, success:
+                self.fetchPerson(playerId: item.id, success:
                 { person in
                     returnedArray.append(RefereeProtocolPlayerTeamCellModel(
-                        player: item.convertToPlayer(),
+//                        player: item,
                         person: person.person,
-                        eventsModel: self.getPlayerEventsBy(playerId: item.playerId))
+                        eventsModel: self.getPlayerEventsBy(playerId: item.id))
                     )
                     group.leave()
                 }) { error in
@@ -346,12 +355,12 @@ class ProtocolRefereeViewModel {
             for item in teamTwoPlayersController.getPlayingPlayers()
             {
                 group.enter()
-                self.fetchPerson(playerId: item.playerId, success:
+                self.fetchPerson(playerId: item.id, success:
                 { person in
                     returnedArray.append(RefereeProtocolPlayerTeamCellModel(
-                        player: item.convertToPlayer(),
+//                        player: item.convertToPlayer(),
                         person: person.person,
-                        eventsModel: self.getPlayerEventsBy(playerId: item.playerId))
+                        eventsModel: self.getPlayerEventsBy(playerId: item.id))
                     )
                     group.leave()
                 }) { error in
@@ -377,7 +386,7 @@ class ProtocolRefereeViewModel {
         {
             for event in events
             {
-                if match.teamOne == event.player
+                if match.teamOne?.getId() ?? match.teamOne!.getValue()!.id == event.team?.getId() ?? event.team!.getValue()!.id
                 {
                     resultArray.append(event)
                 }
@@ -388,7 +397,7 @@ class ProtocolRefereeViewModel {
         {
             for event in events
             {
-                if match.teamTwo == event.player
+                if match.teamTwo?.getId() ?? match.teamTwo!.getValue()!.id == event.player?.getId() ?? event.player!.getValue()!.id
                 {
                     resultArray.append(event)
                 }
@@ -398,14 +407,14 @@ class ProtocolRefereeViewModel {
         return resultArray
     }
     
-    private func getFoulsByTimeForTeam(time: String, team: TeamEnum, events: [Event]) -> Int {
+    private func getFoulsByTimeForTeam(time: Event.Time, team: TeamEnum, events: [Event]) -> Int {
         var count = 0
         
         if team == .one
         {
             for event in getEventsForTeam(team: .one, events: events)
             {
-                if event.time == time && event.getSystemEventType() == .foul
+                if event.time == time && event.type == .foul
                 {
                     count += 1
                 }
@@ -416,7 +425,7 @@ class ProtocolRefereeViewModel {
         {
             for event in getEventsForTeam(team: .two, events: events)
             {
-                if event.time == time && event.getSystemEventType() == .foul
+                if event.time == time && event.type == .foul
                 {
                     count += 1
                 }
@@ -427,12 +436,12 @@ class ProtocolRefereeViewModel {
     
     fileprivate func getPlayersId() -> [String] {
         return connectPlayersOfTeamOneAndTwo().map({ liPlayer -> String in
-            return liPlayer.playerId
+            return liPlayer.id
         })
     }
     
-    fileprivate func connectPlayersOfTeamOneAndTwo() -> [DEPRECATED] {
-        return [teamOnePlayersController.getPlayingPlayers(), teamTwoPlayersController.getPlayingPlayers()].flatMap({ liPlayer -> [DEPRECATED] in
+    fileprivate func connectPlayersOfTeamOneAndTwo() -> [Person] {
+        return [teamOnePlayersController.getPlayingPlayers(), teamTwoPlayersController.getPlayingPlayers()].flatMap({ liPlayer -> [Person] in
             return liPlayer
         })
     }
@@ -443,7 +452,7 @@ class ProtocolRefereeViewModel {
         var returnedModel = RefereeProtocolPlayerEventsModel()
         for item in eventsController.events
         {
-            if item.player == playerId
+            if item.player?.getId() ?? item.player!.getValue()!.id == playerId
             {
                 playerEvents.append(item)
             }
@@ -453,23 +462,23 @@ class ProtocolRefereeViewModel {
             returnedModel = RefereeProtocolPlayerEventsModel()
             for event in playerEvents
             {
-                if event.getEventType() == .player(.goal)
+                if event.type == .goal
                 {
                     returnedModel.goals = returnedModel.goals + 1
                 }
-                if event.getEventType() == .player(.penalty)
+                if event.type == .penalty
                 {
                     returnedModel.successfulPenaltyGoals = returnedModel.successfulPenaltyGoals + 1
                 }
-                if event.getEventType() == .player(.penaltyFailure)
+                if event.type == .penaltyFailure
                 {
                     returnedModel.failurePenaltyGoals = returnedModel.failurePenaltyGoals + 1
                 }
-                if event.getEventType() == .player(.yellowCard)
+                if event.type == .yellowCard
                 {
                     returnedModel.yellowCards = returnedModel.yellowCards + 1
                 }
-                if event.getEventType() == .player(.redCard)
+                if event.type == .redCard
                 {
                     returnedModel.redCard = true
                 }

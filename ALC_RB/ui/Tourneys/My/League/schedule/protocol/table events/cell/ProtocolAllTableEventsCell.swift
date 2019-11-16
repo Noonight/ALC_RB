@@ -28,28 +28,28 @@ class ProtocolAllTableEventsCell: UITableViewCell {
         {
             left_name_label.isHidden = true
         }
-        if cellModel?.left_event == .non
-        {
-            left_event_image.isHidden = true
-        }
+//        if cellModel?.left_event == .non
+//        {
+//            left_event_image.isHidden = true
+//        }
         if cellModel?.right_name == ""
         {
             right_name_label.isHidden = true
         }
-        if cellModel?.right_event == .non
-        {
-            right_event_image.isHidden = true
-        }
+//        if cellModel?.right_event == .non
+//        {
+//            right_event_image.isHidden = true
+//        }
         
         setupUI()
     }
     
     private func setupUI() {
         left_name_label.text = cellModel?.left_name
-        left_event_image.image = cellModel?.left_event.getImage()
+//        left_event_image.image = cellModel?.left_event.getImage()
         
         right_name_label.text = cellModel?.right_name
-        right_event_image.image = cellModel?.right_event.getImage()
+//        right_event_image.image = cellModel?.right_event.getImage()
     }
     
     private func resetUI() {

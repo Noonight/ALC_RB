@@ -25,7 +25,7 @@ class OngoingLeaguesLKTableViewController: BaseStateTableViewController {
         }
         
         func isEmpty() -> Bool {
-            return tournaments.leagues.count != 0 && clubs.clubs.count != 0
+            return tournaments.count != 0 && clubs.count != 0
         }
     }
     
@@ -97,8 +97,9 @@ extension OngoingLeaguesLKTableViewController {
 
 extension OngoingLeaguesLKTableViewController {
     override func hasContent() -> Bool {
-        Print.m(userDefaults.getAuthorizedUser()?.person.participation)
-        return /*!self.tableModel.isEmpty() && */ userDefaults.getAuthorizedUser()?.person.participation.count != 0
+//        Print.m(userDefaults.getAuthorizedUser()?.person.participation)
+//        return /*!self.tableModel.isEmpty() && */ userDefaults.getAuthorizedUser()?.person.participation.count != 0
+        return true
     }
 }
 
@@ -140,51 +141,52 @@ extension OngoingLeaguesLKTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userDefaults.getAuthorizedUser()?.person.participation.count ?? 0
+//        return userDefaults.getAuthorizedUser()?.person.participation.count ?? 0
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! OngoingLeagueTableViewCell
-        let model = userDefaults.getAuthorizedUser()?.person.participation[indexPath.row]
+//        let model = userDefaults.getAuthorizedUser()?.person.participation[indexPath.row]
         
-        configureCell(model: model!, cell: cell)
+//        configureCell(model: model!, cell: cell)
         
         return cell
     }
     
-    func configureCell(model: Participation, cell: OngoingLeagueTableViewCell) {
-        
-        if !tableModel.isEmpty() {
-            let league = tableModel.tournaments?.leagues.filter({ (league) -> Bool in
-                return league.id == model.league
-            }).first
-            let team = league?.teams!.filter({ (team) -> Bool in
-                return team.id == model.team
-            }).first
-            let club = tableModel.clubs?.clubs.filter({ (club) -> Bool in
-                return club.id == team?.club
-            }).first
-            
-            if let league = league {
-                
-                cell.userTournamentTitle_label.text = "\(league.name). \(league.tourney)"
-                cell.userTournamentDate_label.text = "\(league.beginDate!.toFormat(DateFormats.local.ck)) - \(league.endDate!.toFormat(DateFormats.local.ck))"
-            }
-            
-            if let team = team {
-                cell.userTournamentCommandTitle_label.text = team.name
-            }
-            
-            if let club = club {
-                presenter.getClubImage(imagePath: club.logo ?? "", get_success: { (image) in
-                    cell.userTournamentLogo_image.image = image.af_imageRoundedIntoCircle()
-                }) { (error) in
-                    Print.m(error)
-                }
-            }
-        }
-        
-    }
+//    func configureCell(model: Participation, cell: OngoingLeagueTableViewCell) {
+//
+//        if !tableModel.isEmpty() {
+//            let league = tableModel.tournaments?.leagues.filter({ (league) -> Bool in
+//                return league.id == model.league
+//            }).first
+//            let team = league?.teams!.filter({ (team) -> Bool in
+//                return team.id == model.team
+//            }).first
+//            let club = tableModel.clubs?.clubs.filter({ (club) -> Bool in
+//                return club.id == team?.club
+//            }).first
+//
+//            if let league = league {
+//
+//                cell.userTournamentTitle_label.text = "\(league.name). \(league.tourney)"
+//                cell.userTournamentDate_label.text = "\(league.beginDate!.toFormat(DateFormats.local.ck)) - \(league.endDate!.toFormat(DateFormats.local.ck))"
+//            }
+//
+//            if let team = team {
+//                cell.userTournamentCommandTitle_label.text = team.name
+//            }
+//
+//            if let club = club {
+//                presenter.getClubImage(imagePath: club.logo ?? "", get_success: { (image) in
+//                    cell.userTournamentLogo_image.image = image.af_imageRoundedIntoCircle()
+//                }) { (error) in
+//                    Print.m(error)
+//                }
+//            }
+//        }
+//
+//    }
     
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

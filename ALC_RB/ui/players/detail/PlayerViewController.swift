@@ -67,18 +67,20 @@ class PlayerViewController: UIViewController {
     }
     func reloadUI() {
         
-        if content.person.pastLeagues.count == 0 {
-            showEmptyView()
-        } else {
-            hideEmptyView()
-        }
+        // DEPRECATED: person does not have past leagues
+        
+//        if content.person.pastLeagues.count == 0 {
+//            showEmptyView()
+//        } else {
+//            hideEmptyView()
+//        }
         
         pastLeaguesTable.reloadData()
         mPhoto.image = content.photo.af_imageRoundedIntoCircle()
 //        mName.text = content?.person.name
         mName.text = content.person.getFullName()
 //        Print.d(message: "\(content?.person.birthdate)")
-        mBirthDate.text = content.person.birthdate.toFormat(DateFormats.local.rawValue)
+        mBirthDate.text = content.person.birthdate!.toFormat(DateFormats.local.rawValue)
     }
     
     func prepareTableView() {
@@ -148,13 +150,14 @@ extension PlayerViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.content.person.pastLeagues.count
+//        return self.content.person.pastLeagues.count
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! PlayerPastLeaguesTableViewCell
         
-        configureCell(cell: cell, model: (content.person.pastLeagues[indexPath.row]))
+//        configureCell(cell: cell, model: (content.person.pastLeagues[indexPath.row]))
         
         return cell
     }

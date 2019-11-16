@@ -10,12 +10,12 @@ import Foundation
 
 class RefereeProtocolPlayerTeamCellModel {
     
-    var player: DEPRECATED?
+    // DEPRECATED: player is deprecated
+//    var player: DEPRECATED?
     var person: Person?
     var eventsModel: RefereeProtocolPlayerEventsModel?
     
-    init(player: DEPRECATED, person: Person, eventsModel: RefereeProtocolPlayerEventsModel) {
-        self.player = player
+    init(person: Person, eventsModel: RefereeProtocolPlayerEventsModel) {
         self.person = person
         self.eventsModel = eventsModel
     }

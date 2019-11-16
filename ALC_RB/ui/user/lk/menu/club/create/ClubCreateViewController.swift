@@ -21,7 +21,7 @@ class ClubCreateViewController: BaseStateViewController
     
     private var imagePicker: ImagePicker?
     private let userDefaults = UserDefaultsHelper()
-    private var presenter = ClubCreatePresenter(dataManager: ApiRequests())
+    private var presenter = ClubCreatePresenter(dataManager: ApiRequests(), clubApi: ClubApi())
     
     // image holder, hidden
     private var tmpImage: UIImage?
@@ -75,8 +75,10 @@ extension ClubCreateViewController: ClubCreateProtocol {
     }
     
     func responseCreateClubSuccessful(soloClub: Club) {
+        assertionFailure("club person deprecated")
         var user = userDefaults.getAuthorizedUser()
-        user?.person.club = soloClub.club.id
+        // DEPRECATED: person club
+//        user?.person.club = soloClub.club.id
         userDefaults.setAuthorizedUser(user: user!)
 //        showToast(message: Variables.successfulMessage)
         self.showAlert(title: Variables.successfulMessage, message: "")

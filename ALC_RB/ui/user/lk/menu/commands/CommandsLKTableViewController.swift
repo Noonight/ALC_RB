@@ -90,7 +90,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
     // MARK: - model controllers
     var teamOwnerController: TeamCommandsController!
     var teamPlayerController: TeamCommandsController!
-    var participationController: ParticipationCommandsController!
+//    var participationController: ParticipationCommandsController!
     
     // MARK: - Life cycle
     

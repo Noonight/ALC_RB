@@ -73,7 +73,7 @@ class EventMaker: NSObject {
 //            player: self.curPlayerId,
 //            time: self.curTime
 //        )
-        return Event(id: self.curMatchId, type: eventType, player: self.curPlayerId, time: self.curTime)
+        return Event(id: self.curMatchId!, type: eventType, player: IdRefObjectWrapper<Person>(self.curPlayerId), team: nil, time: self.curTime)
     }
     
     public func hideDelete(eventType: Event.eType) -> DeleteEvent {

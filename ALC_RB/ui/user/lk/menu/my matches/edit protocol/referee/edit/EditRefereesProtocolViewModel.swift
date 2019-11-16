@@ -17,7 +17,7 @@ class EditRefereesProtocolViewModel {
     
 //    var comingReferees: Variable<Players> = Variable<Players>([Person]())
     
-    var referees: Variable<Players> = Variable<Players>([Person]())
+    var referees: Variable<[Person]> = Variable<[Person]>([Person]())
     var comingMatch: Match!
     
     private let dataManager: ApiRequests
@@ -35,7 +35,7 @@ class EditRefereesProtocolViewModel {
         apiPerson.get_person(limit: Constants.Values.LIMIT_ALL) { result in
             switch result {
             case .success(let persons):
-                self.referees.value = Players(persons: persons, count: persons.count)
+                self.referees.value = persons
             case .message(let message):
                 self.message.onNext(message)
             case .failure(.notExpectedData):

@@ -30,16 +30,16 @@ class MyMatchesRefViewModel {
         if participationMatches.value.count > 0 {
             refreshing.onNext(true)
             
-            self.dataManager?.get_forMyMatches(participationMatches: participationMatches.value, get_success: { (cellModels) in
-                Print.m("request for my matches complete with success code")
-                dump(cellModels)
-                self.tableModel.onNext(cellModels)
-                self.refreshing.onNext(false)
-                closure()
-//                Print.m(cellModels)
-            }, get_failure: { (error) in
-                self.error.onNext(error)
-            })
+//            self.dataManager?.get_forMyMatches(participationMatches: participationMatches.value, get_success: { (cellModels) in
+//                Print.m("request for my matches complete with success code")
+//                dump(cellModels)
+//                self.tableModel.onNext(cellModels)
+//                self.refreshing.onNext(false)
+//                closure()
+////                Print.m(cellModels)
+//            }, get_failure: { (error) in
+//                self.error.onNext(error)
+//            })
         } else {
             self.tableModel.onNext([])
             closure()
@@ -64,15 +64,15 @@ class MyMatchesRefViewModel {
     }
     
     func fetchLeagueInfo(id: String, success: @escaping ([League])->(), r_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error)->()) {
-        dataManager?.get_tournamentLeague(id: id, result: { result in
-            switch result {
-            case .success(let league):
-                success(league)
-            case .message(let message):
-                r_message(message)
-            case .failure(let error):
-                failure(error)
-            }
-        })
+//        dataManager?.get_tournamentLeague(id: id, result: { result in
+//            switch result {
+//            case .success(let league):
+//                success(league)
+//            case .message(let message):
+//                r_message(message)
+//            case .failure(let error):
+//                failure(error)
+//            }
+//        })
     }
 }
