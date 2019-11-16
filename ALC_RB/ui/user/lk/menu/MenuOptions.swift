@@ -11,7 +11,7 @@ import UIKit
 enum PlayerMenuOption: Int, CustomStringConvertible {
     
     case Invites
-    case Tournaments
+    case Tourneys
     case Clubs
     case Teams
     //    case Referees
@@ -20,7 +20,7 @@ enum PlayerMenuOption: Int, CustomStringConvertible {
     var description: String {
         switch self {
         case .Invites: return "Приглашения"
-        case .Tournaments: return "Мой турнир"
+        case .Tourneys: return "Мой турнир"
         case .Clubs: return "Клубы"
         case .Teams: return "Команды"
         //        case .Referees: return "Судьи"
@@ -31,7 +31,7 @@ enum PlayerMenuOption: Int, CustomStringConvertible {
     var image: UIImage {
         switch self {
         case .Invites: return UIImage(named: "ic_inv") ?? UIImage()
-        case .Tournaments: return UIImage(named: "ic_trophy") ?? UIImage()
+        case .Tourneys: return UIImage(named: "ic_trophy") ?? UIImage()
         case .Clubs: return UIImage(named: "ic_cl") ?? UIImage()
         case .Teams: return UIImage(named: "ic_commands") ?? UIImage()
         //        case .Referees: return #imageLiteral(resourceName: "ic_referee")

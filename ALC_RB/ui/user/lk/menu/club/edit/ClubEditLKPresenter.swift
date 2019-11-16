@@ -14,7 +14,7 @@ protocol ClubEditLKView : MvpView {
     func getClubLogoSuccess(image: UIImage)
     func getClubLogoFailure(error: Error)
     
-    func editClubInfoSuccess(soloClub: SoloClub)
+    func editClubInfoSuccess(soloClub: Club)
     func editClubInfoFailure(error: Error)
     
 }

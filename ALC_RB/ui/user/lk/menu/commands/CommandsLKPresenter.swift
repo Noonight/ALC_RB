@@ -11,7 +11,7 @@ import UIKit
 
 protocol CommandsLKView : MvpView {
     
-    func getTournamentsSuccess(tournaments: Tournaments)
+    func getTournamentsSuccess(tournaments: [Tourney])
     func getTournamentsFailure(error: Error)
     
     func getRefreshUserSuccessful(authUser: AuthUser)
@@ -24,14 +24,28 @@ protocol CommandsLKView : MvpView {
 class CommandsLKPresenter : MvpPresenter<CommandsLKTableViewController> {
     
     let apiService = ApiRequests()
+    let tourneyApi = TourneyApi()
     
     func getTournaments(closure: @escaping () -> ()) {
-        apiService.get_tournamets(get_success: { (tournaments) in
-            self.getView().getTournamentsSuccess(tournaments: tournaments)
-            closure()
-        }) { (error) in
-            self.getView().getTournamentsFailure(error: error)
+        tourneyApi.get_tourney { result in
+            switch result {
+            case .success(let tourneys):
+                self.getView().getTournamentsSuccess(tournaments: tourneys)
+            case .message(let msg):
+                Print.m(msg.message)
+            case .failure(.error(let error)):
+                self.getView().getTournamentsFailure(error: error)
+                Print.m(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
         }
+//        apiService.get_tournamets(get_success: { (tournaments) in
+//            self.getView().getTournamentsSuccess(tournaments: tournaments)
+//            closure()
+//        }) { (error) in
+//            self.getView().getTournamentsFailure(error: error)
+//        }
     }
     
     func refreshUser(token: String, closure: @escaping ()->()) {

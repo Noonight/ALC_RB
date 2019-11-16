@@ -110,7 +110,7 @@ extension PlayersTeamLeagueDetailViewController: UITableViewDataSource {
         return cell
     }
     
-    func configureCell(cell: PlayersTeamLeagueDetailTableViewCell, model: Player) {
+    func configureCell(cell: PlayersTeamLeagueDetailTableViewCell, model: DEPRECATED) {
         
         func setupCell(person: Person) {
             cell.name.text = person.getSurnameNP()

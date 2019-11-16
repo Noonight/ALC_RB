@@ -11,10 +11,10 @@ import UIKit
 struct ProtocolAllEventsCellModel {
     var left_name: String
     var right_name: String
-    var left_event: LIEvent.SystemEventType
-    var right_event: LIEvent.SystemEventType
+    var left_event: Event.SystemEventType
+    var right_event: Event.SystemEventType
     
-    init(left_name: String, right_name: String, left_event: LIEvent.SystemEventType, right_event: LIEvent.SystemEventType) {
+    init(left_name: String, right_name: String, left_event: Event.SystemEventType, right_event: Event.SystemEventType) {
         self.left_name = left_name
         self.right_name = right_name
         self.left_event = left_event

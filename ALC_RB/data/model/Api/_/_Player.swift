@@ -1,5 +1,5 @@
 //
-//  Player.swift
+//  DEPRECATED.swift
 //  ALC_RB
 //
 //  Created by Ayur Arkhipov on 16.10.2019.

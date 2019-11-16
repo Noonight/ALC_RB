@@ -106,14 +106,14 @@ extension TeamsLeagueTableViewController {
     }
     
     func setupFilteredTableDataSource() {
-//        dump(self.leagueDetailModel.leagueInfo.league.stages)
+//        dump(self.leagueDetailModel.league.stages)
 //        if
-        self.filteredTeamsTable.initDataSource(teams: self.leagueDetailModel.leagueInfo.league.teams!, groups: self.leagueDetailModel.leagueInfo.league.stages!.first!.groups!)
+        self.filteredTeamsTable.initDataSource(teams: self.leagueDetailModel.league.teams!, groups: self.leagueDetailModel.league.stages!.first!.groups!)
         self.tableView.reloadData()
     }
     
     func setupAllTableDataSource() {
-        self.allTeamsTable.initDataSource(teams: self.leagueDetailModel.leagueInfo.league.teams!)
+        self.allTeamsTable.initDataSource(teams: self.leagueDetailModel.league.teams!)
         self.tableView.reloadData()
     }
     
@@ -160,7 +160,7 @@ extension TeamsLeagueTableViewController {
 //            if allTeamsIsContainsGroup() == true
 //            {
 //                Print.m("all teams contains groups")
-            if self.leagueDetailModel.leagueInfo.league.stages?.first?.groups?.isEmpty ?? true {
+            if self.leagueDetailModel.league.stages?.first?.groups?.isEmpty ?? true {
                 self.setupAllTableViews()
                 self.setupAllTableDataSource()
             } else {
@@ -189,16 +189,17 @@ extension TeamsLeagueTableViewController {
     }
     
     func allTeamsIsContainsGroup() -> Bool {
-        guard let teams = leagueDetailModel.leagueInfo.league.teams else { return false }
+        guard let teams = leagueDetailModel.league.teams else { return false }
         for team in teams
         {
-            Print.m(team.group)
-//            guard team.group != nil else { return false }
+                // DEPRECATED: group deprecated
 //            Print.m(team.group)
-            if team.group?.count ?? 0 == 0 // nothing
-            {
-                return false
-            }
+////            guard team.group != nil else { return false }
+////            Print.m(team.group)
+//            if team.group?.count ?? 0 == 0 // nothing
+//            {
+//                return false
+//            }
         }
         return true
     }
@@ -258,7 +259,7 @@ extension TeamsLeagueTableViewController {
             var team: Team!
 //            if self.allTeamsIsContainsGroup() == true
 //            {
-            if self.leagueDetailModel.leagueInfo.league.stages?.first?.groups?.isEmpty ?? true {
+            if self.leagueDetailModel.league.stages?.first?.groups?.isEmpty ?? true {
                 team = self.allTeamsTable.dataSource[indexPath.row - AllTeamsLeagueTableView.HeaderCell.COUNT]
             } else {
                 team = self.filteredTeamsTable.dataSource[indexPath.section].teams[indexPath.row - FilteredTeamsLeagueTableView.HeaderCell.COUNT]
@@ -270,11 +271,11 @@ extension TeamsLeagueTableViewController {
 //                team = self.allTeamsTable.dataSource[indexPath.row - AllTeamsLeagueTableView.HeaderCell.COUNT]
 //            }
             destination.teamModel = team
-            let matches = leagueDetailModel.leagueInfo.league.matches?.filter { (match) -> Bool in
-                return match.teamOne == team.id || match.teamTwo == team.id
+            let matches = leagueDetailModel.league.matches?.filter { (match) -> Bool in
+                return match.teamOne?.getId() ?? match.teamOne?.getValue()!.id == team.id || match.teamTwo?.getId() ?? match.teamTwo?.getValue()!.id == team.id
             }
             destination.teamMatches = matches!
-            destination.league = leagueDetailModel.leagueInfo.league
+            destination.league = leagueDetailModel.league
         }
     }
 }

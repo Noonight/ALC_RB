@@ -43,7 +43,7 @@ extension HomeScheduleTable: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HomeScheduleTableViewCell.ID, for: indexPath) as! HomeScheduleTableViewCell
         
-        cell.configure(dataSource[indexPath.row], clubOne: findClub(id: (dataSource[indexPath.row].teamOne?.club)!), clubTwo: findClub(id: (dataSource[indexPath.row ].teamTwo?.club)!))
+//        cell.configure(dataSource[indexPath.row], clubOne: findClub(id: (dataSource[indexPath.row].teamOne?.club)!), clubTwo: findClub(id: (dataSource[indexPath.row ].teamTwo?.club)!))
         
         return cell
     }

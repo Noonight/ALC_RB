@@ -22,7 +22,7 @@ class CommandsLKTableViewController: BaseStateTableViewController {
     
     // MARK: Table model
     struct TableModel {
-        var tournaments = Tournaments()
+        var tournaments = [Tourney]()
 //        var personOwnCommands: [Participation] = [] // user is owner of team
 //        var personInsideCommands: [Participation] = [] // user is player of team
         
@@ -33,14 +33,15 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         let headerPlayerSection = "Команды"
         
         init () { }
-        
-        func getLeagueOfTeam(inTeam: Team) -> League? {
-            return tournaments.leagues.filter({ league -> Bool in
-                return (league.teams!.filter({ team -> Bool in
-                    return team.id == inTeam.id
-                }).first != nil)
-            }).first
-        }
+
+        // DEPRECATED: tourey does not contain leagues
+//        func getLeagueOfTeam(inTeam: Team) -> League? {
+//            return tournaments.leagues.filter({ league -> Bool in
+//                return (league.teams!.filter({ team -> Bool in
+//                    return team.id == inTeam.id
+//                }).first != nil)
+//            }).first
+//        }
         
         func countOfSections () -> Int {
             if ownerTeams.count > 0 && playerTeams.count > 0 {
@@ -139,78 +140,79 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         }
         let tournaments = tableModel.tournaments
         
-        participationController = ParticipationCommandsController(participation: (userDefaults.getAuthorizedUser()?.person.participation)!)
+        // DEPRECATED
+//        participationController = ParticipationCommandsController(participation: (userDefaults.getAuthorizedUser()?.person.participation)!)
+//
+//        let ownerParticipations = getOwnerParticipations(participation: participationController.participation, tournaments: tournaments)
+//
+//        func getOwnerTeam(participation: Participation, tournaments: [Tourney]) -> Team? {
+//            var returnedTeam: Team?
+//            for league in tournaments.leagues {
+//                if participation.league == league.id {
+//                    for team in league.teams! {
+//                        if team.id == participation.team {
+//                            if team.creator == userDefaults.getAuthorizedUser()?.person.id {
+//                                returnedTeam = team
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            return returnedTeam
+//        }
         
-        let ownerParticipations = getOwnerParticipations(participation: participationController.participation, tournaments: tournaments)
+//        func getOwnerTeams() -> [Team] {
+//            var teams: [Team] = []
+//            for participation in ownerParticipations {
+//                let team = getOwnerTeam(participation: participation, tournaments: tournaments)
+//                if team != nil {
+//                    teams.append(team!)
+//                }
+//            }
+//            return teams
+//        }
+//
+//        let playerParticipations = getPlayerParticipations(participation: (userDefaults.getAuthorizedUser()?.person.participation)!, tournaments: tournaments)
+//
+//        func getPlayerTeam(participation: Participation, tournaments: [Tourney]) -> Team? {
+//            var returnedTeam: Team?
+//            for league in tournaments.leagues {
+//                if participation.league == league.id {
+//                    for team in league.teams! {
+//                        if team.id == participation.team {
+//                            if team.creator != userDefaults.getAuthorizedUser()?.person.id {
+//                                returnedTeam = team
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            return returnedTeam
+//        }
+//
+//        func getPlayerTeams() -> [Team] {
+//            var teams: [Team] = []
+//            for participation in playerParticipations {
+//                let team = getPlayerTeam(participation: participation, tournaments: tournaments)
+//                if team != nil {
+//                    teams.append(team!)
+//                }
+//            }
+//            return teams
+//        }
         
-        func getOwnerTeam(participation: Participation, tournaments: Tournaments) -> Team? {
-            var returnedTeam: Team?
-            for league in tournaments.leagues {
-                if participation.league == league.id {
-                    for team in league.teams! {
-                        if team.id == participation.team {
-                            if team.creator == userDefaults.getAuthorizedUser()?.person.id {
-                                returnedTeam = team
-                            }
-                        }
-                    }
-                }
-            }
-            return returnedTeam
-        }
-        
-        func getOwnerTeams() -> [Team] {
-            var teams: [Team] = []
-            for participation in ownerParticipations {
-                let team = getOwnerTeam(participation: participation, tournaments: tournaments)
-                if team != nil {
-                    teams.append(team!)
-                }
-            }
-            return teams
-        }
-        
-        let playerParticipations = getPlayerParticipations(participation: (userDefaults.getAuthorizedUser()?.person.participation)!, tournaments: tournaments)
-        
-        func getPlayerTeam(participation: Participation, tournaments: Tournaments) -> Team? {
-            var returnedTeam: Team?
-            for league in tournaments.leagues {
-                if participation.league == league.id {
-                    for team in league.teams! {
-                        if team.id == participation.team {
-                            if team.creator != userDefaults.getAuthorizedUser()?.person.id {
-                                returnedTeam = team
-                            }
-                        }
-                    }
-                }
-            }
-            return returnedTeam
-        }
-        
-        func getPlayerTeams() -> [Team] {
-            var teams: [Team] = []
-            for participation in playerParticipations {
-                let team = getPlayerTeam(participation: participation, tournaments: tournaments)
-                if team != nil {
-                    teams.append(team!)
-                }
-            }
-            return teams
-        }
-        
-        teamOwnerController = TeamCommandsController(teams: getOwnerTeams())
-        teamPlayerController = TeamCommandsController(teams: getPlayerTeams())
-        
-        tableModel.ownerTeams = teamOwnerController.teams
-        tableModel.playerTeams = teamPlayerController.teams
+//        teamOwnerController = TeamCommandsController(teams: getOwnerTeams())
+//        teamPlayerController = TeamCommandsController(teams: getPlayerTeams())
+//
+//        tableModel.ownerTeams = teamOwnerController.teams
+//        tableModel.playerTeams = teamPlayerController.teams
     }
     func prepareCreateCommandBtn() {
-        if userDefaults.getAuthorizedUser()?.person.club?.count == 0 {
-            createNewCommandBtn.isEnabled = false
-        } else {
-            createNewCommandBtn.isEnabled = true
-        }
+//        if userDefaults.getAuthorizedUser()?.person.club?.count == 0 {
+//            createNewCommandBtn.isEnabled = false
+//        } else {
+//            createNewCommandBtn.isEnabled = true
+//        }
     }
     
     // MARK: Update
@@ -238,46 +240,46 @@ extension CommandsLKTableViewController {
         showAlert(title: "Предупреждение!", message: "Удалить команду '\(teamName)'?", actions: [actionDelete, actionCancel])
     }
     
-    func getOwnerParticipations(participation: [Participation], tournaments: Tournaments) -> [Participation] {
-        var arr : [Participation] = []
-        
-        for par in participation {
-            for league in tournaments.leagues {
-                if league.id == par.league {
-                    for team in league.teams! {
-                        if team.id == par.team {
-                            if team.creator == userDefaults.getAuthorizedUser()?.person.id {
-                                arr.append(par)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        return arr
-    }
+//    func getOwnerParticipations(participation: [Participation], tournaments: [Tourney]) -> [Participation] {
+//        var arr : [Participation] = []
+//
+//        for par in participation {
+//            for league in tournaments.leagues {
+//                if league.id == par.league {
+//                    for team in league.teams! {
+//                        if team.id == par.team {
+//                            if team.creator == userDefaults.getAuthorizedUser()?.person.id {
+//                                arr.append(par)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        return arr
+//    }
     
-    func getPlayerParticipations(participation: [Participation], tournaments: Tournaments) -> [Participation] {
-        
-        var arr : [Participation] = []
-        
-        for par in participation {
-            for league in tournaments.leagues {
-                if league.id == par.league {
-                    for team in league.teams! {
-                        if team.id == par.team {
-                            if team.creator != userDefaults.getAuthorizedUser()?.person.id {
-                                arr.append(par)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        return arr
-    }
+//    func getPlayerParticipations(participation: [Participation], tournaments: [Tourney]) -> [Participation] {
+//
+//        var arr : [Participation] = []
+//
+//        for par in participation {
+//            for league in tournaments.leagues {
+//                if league.id == par.league {
+//                    for team in league.teams! {
+//                        if team.id == par.team {
+//                            if team.creator != userDefaults.getAuthorizedUser()?.person.id {
+//                                arr.append(par)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        return arr
+//    }
 }
 // MARK: Presenter
 extension CommandsLKTableViewController : CommandsLKView {
@@ -306,9 +308,9 @@ extension CommandsLKTableViewController : CommandsLKView {
         Print.m(error)
     }
     
-    func getTournamentsSuccess(tournaments: Tournaments) {
+    func getTournamentsSuccess(tournaments: [Tourney]) {
 //        Print.m("get tournament success")
-//        tableModel.tournaments = Tournaments()
+//        tableModel.tournaments = [Tourney]()
         tableModel.tournaments = tournaments
 //        prepareModelController(tournaments: tournaments)
     }
@@ -342,9 +344,12 @@ extension CommandsLKTableViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == SegueIdentifiers.EDIT {
             return true
-        } else if identifier == SegueIdentifiers.ADD && userDefaults.getAuthorizedUser()?.person.club != nil {
-            return true
-        } else {
+        }
+            // TODO: check logic of club later
+            //else if identifier == SegueIdentifiers.ADD && userDefaults.getAuthorizedUser()?.person.club != nil {
+            //return true
+    //    }
+    else {
             showAlert(message: "Необходимо создать клуб.")
             return false
         }
@@ -355,18 +360,19 @@ extension CommandsLKTableViewController {
             let destination = segue.destination as? CommandEditLKViewController,
             let indexPath = tableView.indexPathForSelectedRow
         {
-            destination.team = tableModel.ownerTeams[indexPath.row]
-            destination.participation = participationController.getByTeamId(tableModel.ownerTeams[indexPath.row].id)
-            destination.teamController = self.teamOwnerController
-            destination.participationController = self.participationController
-            destination.leagueController = LeagueController(league: self.tableModel.getLeagueOfTeam(inTeam: tableModel.ownerTeams[indexPath.row])!)
+            assertionFailure("deprecated participation")
+//            destination.team = tableModel.ownerTeams[indexPath.row]
+//            destination.participation = participationController.getByTeamId(tableModel.ownerTeams[indexPath.row].id)
+//            destination.teamController = self.teamOwnerController
+//            destination.participationController = self.participationController
+//            destination.leagueController = LeagueController(league: self.tableModel.getLeagueOfTeam(inTeam: tableModel.ownerTeams[indexPath.row])!)
         }
         
         if segue.identifier == SegueIdentifiers.ADD,
             let destination = segue.destination as? CommandCreateLKViewController
         {
-            destination.teamController = self.teamOwnerController
-            destination.participationController = self.participationController
+//            destination.teamController = self.teamOwnerController
+//            destination.participationController = self.participationController
         }
         
     }
@@ -410,63 +416,63 @@ extension CommandsLKTableViewController {
     }
     
     func configureCell (cell: CommandsLKTableViewCell, model: Team) {
-        let tournament = tableModel.tournaments.leagues.filter({ (league) -> Bool in
-            return league.teams!.contains(where: { team -> Bool in
-                return team.id == model.id
-            })
-        }).first
-        if let tournament = tournament {
-            guard let tourney = tournament.tourney else { return }
-            guard let name = tournament.name else { return }
-            if tourney.contains(".") {
-                cell.tournamentTitle_label.text = "\(tourney) \(name)"
-            } else {
-                cell.tournamentTitle_label.text = "\(tourney). \(name)"
-            }
-            
-            cell.tournamentDate_label.text = "\(tournament.beginDate!.toFormat(DateFormats.local.ck)) - \(tournament.endDate!.toFormat(DateFormats.local.ck))"
-            
-            cell.tournamentTransfer_label.text = "\(tournament.transferBegin!.toFormat(DateFormats.local.ck)) - \(tournament.transferEnd!.toFormat(DateFormats.local.ck))"
-            
-            if tournament.betweenBeginEndDate() {
-                cell.tournamentTitle_label.textColor = .red
-                cell.tournamentTransfer_label.textColor = .red
-            } else {
-                cell.tournamentTitle_label.textColor = .black
-                cell.tournamentTransfer_label.textColor = .black
-            }
-        }
-        cell.commandTitle_label.text = model.name
-        
-        var playerList: [Player] = []
-        
-        for player in model.players {
-            if player.getInviteStatus() == InviteStatus.accepted || player.getInviteStatus() == InviteStatus.approved {
-                playerList.append(player)
-            }
-        }
-        cell.countOfPlayers_label.text = "\(playerList.count)"
-        
-        switch model.getTeamStatus() {
-        case .approved:
-            cell.status_label.text = "Утверждена"
-            if #available(iOS 11.0, *) {
-                cell.status_label.textColor = UIColor(named: "colorPrimary")
-            } else {
-                // Fallback on earlier versions
-            }
-        case .rejected:
-            cell.status_label.text = "Отклонена"
-            if #available(iOS 11.0, *) {
-                cell.status_label.textColor = UIColor(named: "colorBadge")
-            } else {
-                // Fallback on earlier versions
-            }
-        case .pending:
-            cell.status_label.text = "Ожидание"
-        case .fail:
-            Print.m("default break off")
-        }
+//        let tournament = tableModel.tournaments.leagues.filter({ (league) -> Bool in
+//            return league.teams!.contains(where: { team -> Bool in
+//                return team.id == model.id
+//            })
+//        }).first
+//        if let tournament = tournament {
+//            guard let tourney = tournament.tourney else { return }
+//            guard let name = tournament.name else { return }
+//            if tourney.contains(".") {
+//                cell.tournamentTitle_label.text = "\(tourney) \(name)"
+//            } else {
+//                cell.tournamentTitle_label.text = "\(tourney). \(name)"
+//            }
+//
+//            cell.tournamentDate_label.text = "\(tournament.beginDate!.toFormat(DateFormats.local.ck)) - \(tournament.endDate!.toFormat(DateFormats.local.ck))"
+//
+//            cell.tournamentTransfer_label.text = "\(tournament.transferBegin!.toFormat(DateFormats.local.ck)) - \(tournament.transferEnd!.toFormat(DateFormats.local.ck))"
+//
+//            if tournament.betweenBeginEndDate() {
+//                cell.tournamentTitle_label.textColor = .red
+//                cell.tournamentTransfer_label.textColor = .red
+//            } else {
+//                cell.tournamentTitle_label.textColor = .black
+//                cell.tournamentTransfer_label.textColor = .black
+//            }
+//        }
+//        cell.commandTitle_label.text = model.name
+//
+//        var playerList: [DEPRECATED] = []
+//
+//        for player in model.players {
+//            if player.getInviteStatus() == InviteStatus.accepted || player.getInviteStatus() == InviteStatus.approved {
+//                playerList.append(player)
+//            }
+//        }
+//        cell.countOfPlayers_label.text = "\(playerList.count)"
+//
+//        switch model.getTeamStatus() {
+//        case .approved:
+//            cell.status_label.text = "Утверждена"
+//            if #available(iOS 11.0, *) {
+//                cell.status_label.textColor = UIColor(named: "colorPrimary")
+//            } else {
+//                // Fallback on earlier versions
+//            }
+//        case .rejected:
+//            cell.status_label.text = "Отклонена"
+//            if #available(iOS 11.0, *) {
+//                cell.status_label.textColor = UIColor(named: "colorBadge")
+//            } else {
+//                // Fallback on earlier versions
+//            }
+//        case .pending:
+//            cell.status_label.text = "Ожидание"
+//        case .fail:
+//            Print.m("default break off")  0
+//        }
         
     }
     
@@ -476,7 +482,7 @@ extension CommandsLKTableViewController {
         if editingStyle == .delete {
             
             if indexPath.section == 0 {
-                showRemoveTeamAlert(teamName: tableModel.ownerTeams[indexPath.row].name, delete: {
+                showRemoveTeamAlert(teamName: tableModel.ownerTeams[indexPath.row].name!, delete: {
                     self.tableModel.ownerTeams.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .left)
                     // TODO: do api request to delete team
@@ -486,7 +492,7 @@ extension CommandsLKTableViewController {
 //                Print.m("delete cell at \(indexPath.row) -> \(tableModel.ownerTeams[indexPath.row])")
             }
             if indexPath.section == 1 {
-                showRemoveTeamAlert(teamName: tableModel.playerTeams[indexPath.row].name, delete: {
+                showRemoveTeamAlert(teamName: tableModel.playerTeams[indexPath.row].name!, delete: {
                     self.tableModel.playerTeams.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .left)
                 }) {

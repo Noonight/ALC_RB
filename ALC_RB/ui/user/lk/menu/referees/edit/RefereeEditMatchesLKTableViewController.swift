@@ -21,7 +21,8 @@ class RefereeEditMatchesLKTableViewController: BaseStateTableViewController {
     let presenter = RefereeEditMatchesLKPresenter()
     
     var comingPerson: Person?
-    var comingReferees: Players?
+    // DEPRECATED: players
+    var comingReferees: [Person]?
     var tableModel: [RefereeEditMatchesLKTableViewCell.CellModel] = []
     let userDefaults = UserDefaultsHelper()
 
@@ -102,7 +103,11 @@ class RefereeEditMatchesLKTableViewController: BaseStateTableViewController {
     func getRefereesArray(tag: Int) -> [EditMatchReferee] {
 //        Print.m(tag)
         func getPersonId(_ fullName: String) -> String? {
-            return self.comingReferees!.findPersonBy(fullName: fullName)?.id
+            return self.comingReferees?
+                .filter { $0.getFullName() == fullName }
+                .first?
+                .id
+//            return self.comingReferees!.findPersonBy(fullName: fullName)?.id
         }
         func isCorrectTitleOrSwitchIsOn(labelSwitch: LabelSwitchView) -> Bool {
 //            Print.m("\(labelSwitch.name) \(labelSwitch.name?.count ?? 0 > 2 ? true : false)")
@@ -159,7 +164,7 @@ class RefereeEditMatchesLKTableViewController: BaseStateTableViewController {
 extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
     func onResponseEditMatchSuccess(soloMatch: Match) {
         self.setMatchValue(
-            id: soloMatch.match!.id,
+            id: soloMatch.id,
             match: soloMatch
         )
         showAlert(title: Texts.EDITED_SAVED, message: "") {
@@ -184,8 +189,9 @@ extension RefereeEditMatchesLKTableViewController: RefereeEditMatchesView {
     func setMatchValue(id: String, match: Match) {
 //        Print.m(match)
         var user = userDefaults.getAuthorizedUser()!
-        user.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.match?.id }) })
-        user.person.participationMatches?.append(IdRefObjectWrapper(match.match!))
+        // DEPRECATED: participation matches
+//        user.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.match?.id }) })
+//        user.person.participationMatches?.append(IdRefObjectWrapper(match.match!))
         userDefaults.setAuthorizedUser(user: user)
     }
     

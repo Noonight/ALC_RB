@@ -50,7 +50,7 @@ class RefereeTeamTableViewController: UITableViewController {
     
     var tableModel = TableStruct()
     
-    var destinationData: [LIReferee] = []
+    var destinationData: [Referee] = []
     
     // MARK: - Life cycle
     
@@ -71,7 +71,7 @@ class RefereeTeamTableViewController: UITableViewController {
     
     // MARK: - Prepare tableModel
     
-    func prepareTableModel(destinationData: [LIReferee]) {
+    func prepareTableModel(destinationData: [Referee]) {
         for ref in destinationData {
             switch ref.getType() {
             case .inspector:
@@ -111,7 +111,7 @@ class RefereeTeamTableViewController: UITableViewController {
         return cell
     }
     
-//    func configureCell(cell: RefereeProtocolTableViewCell, model: LIReferee) {
+//    func configureCell(cell: RefereeProtocolTableViewCell, model: Referee) {
 //        switch  model.getType() {
 //        case .inspector:
 //            presenter.getReferee(referee: model.person, get_referee: { (referee) in

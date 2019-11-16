@@ -83,7 +83,7 @@ class AddEventsProtocolViewController: BaseStateViewController {
         if fieldsIsEmpty() {
             showAlert(title: "Выберите тип события, тайм, игрока", message: "")
         } else {
-            eventsController.add(LIEvent(id: model.participationMatch!.id, eventType: getSystemEventType().rawValue, player: getPlayerId()!, time: getTime()!))
+            eventsController.add(Event(id: model.participationMatch!.id, eventType: getSystemEventType().rawValue, player: getPlayerId()!, time: getTime()!))
 //            Print.m("### --- ###")
 //            Print.m(UserDefaultsHelper().getAuthorizedUser()?.token)
 //            Print.m("### --- ###")
@@ -199,54 +199,54 @@ class AddEventsProtocolViewController: BaseStateViewController {
         }
     }
     
-//    func getEventType() -> LIEvent.EventType {
+//    func getEventType() -> Event.EventType {
 //        func eventState(view: EventTypeView) -> Bool {
 //            return view.getState()
 //        }
 //        if eventState(view: eventGol) {
-//            return LIEvent.EventType.goal
+//            return Event.EventType.goal
 //        }
 //        if eventState(view: eventYellowCard) {
-//            return LIEvent.EventType.yellowCard
+//            return Event.EventType.yellowCard
 //        }
 //        if eventState(view: eventRedCard) {
-//            return LIEvent.EventType.redCard
+//            return Event.EventType.redCard
 //        }
 //        if eventState(view: eventFol) {
-//            return LIEvent.EventType.foul
+//            return Event.EventType.foul
 //        }
 //        if eventState(view: eventAutoGoal) {
-//            return LIEvent.EventType.autoGoal
+//            return Event.EventType.autoGoal
 //        }
 //        if eventState(view: eventPenalty) {
-//            return LIEvent.EventType.penalty
+//            return Event.EventType.penalty
 //        }
-//        return LIEvent.EventType.non
+//        return Event.EventType.non
 //    }
     
-    func getSystemEventType() -> LIEvent.SystemEventType {
+    func getSystemEventType() -> Event.SystemEventType {
         func eventState(view: EventTypeView) -> Bool {
             return view.getState()
         }
         if eventState(view: eventGol) {
-            return LIEvent.SystemEventType.goal
+            return Event.SystemEventType.goal
         }
         if eventState(view: eventYellowCard) {
-            return LIEvent.SystemEventType.yellowCard
+            return Event.SystemEventType.yellowCard
         }
         if eventState(view: eventRedCard) {
-            return LIEvent.SystemEventType.redCard
+            return Event.SystemEventType.redCard
         }
         if eventState(view: eventFol) {
-            return LIEvent.SystemEventType.foul
+            return Event.SystemEventType.foul
         }
         if eventState(view: eventAutoGoal) {
-            return LIEvent.SystemEventType.autoGoal
+            return Event.SystemEventType.autoGoal
         }
         if eventState(view: eventPenalty) {
-            return LIEvent.SystemEventType.penalty
+            return Event.SystemEventType.penalty
         }
-        return LIEvent.SystemEventType.non
+        return Event.SystemEventType.non
     }
     
     func showTeamPicker(sender: UIButton) {

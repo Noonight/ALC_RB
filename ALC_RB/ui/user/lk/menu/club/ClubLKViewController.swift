@@ -107,42 +107,46 @@ extension ClubLKViewController: ClubLKView {
     }
     
     func getClubsSuccess(clubs: [Club]) {
-        self.clubs = clubs
-        let club = clubs.clubs.filter { (club) -> Bool in
-            return club.id == userDefaults.getAuthorizedUser()?.person.club
-        }.first
-        if let club = club {
-            self.club = club
-            self.setState(state: .normal)
-            updateNavBar()
-            
-            presenter.getImage(imagePath: club.logo ?? "")
-//            if let image = club.logo {
-//                let url = ApiRoute.getImageURL(image: image)
-//                let processor = CroppingImageProcessorCustom(size: self.commandLogo_image.frame.size)
-//                    .append(another: RoundCornerImageProcessor(cornerRadius: self.commandLogo_image.getHalfWidthHeight()))
-//
-//                self.commandLogo_image.kf.indicatorType = .activity
-//                self.commandLogo_image.kf.setImage(
-//                    with: url,
-//                    placeholder: UIImage(named: "ic_con"),
-//                    options: [
-//                        .processor(processor),
-//                        .scaleFactor(UIScreen.main.scale),
-//                        .transition(.fade(1)),
-//                        .cacheOriginalImage
-//                    ])
-//            }
-            commandTitle_label.text = club.name
-            commandDescription_label.text = club.info
-            
-//            self.updateNavBar()
-        } else {
-            self.setState(state: .empty)
-            updateNavBar()
-        }
-        
+        Print.m("TODO") // TODO:
     }
+    
+//    func getClubsSuccess(clubs: [Club]) {
+//        self.clubs = clubs
+//        let club = clubs.filter { club -> Bool in
+//            return club.id == userDefaults.getAuthorizedUser()?.person
+//        }.first
+//        if let club = club {
+//            self.club = club
+//            self.setState(state: .normal)
+//            updateNavBar()
+//
+//            presenter.getImage(imagePath: club.logo ?? "")
+////            if let image = club.logo {
+////                let url = ApiRoute.getImageURL(image: image)
+////                let processor = CroppingImageProcessorCustom(size: self.commandLogo_image.frame.size)
+////                    .append(another: RoundCornerImageProcessor(cornerRadius: self.commandLogo_image.getHalfWidthHeight()))
+////
+////                self.commandLogo_image.kf.indicatorType = .activity
+////                self.commandLogo_image.kf.setImage(
+////                    with: url,
+////                    placeholder: UIImage(named: "ic_con"),
+////                    options: [
+////                        .processor(processor),
+////                        .scaleFactor(UIScreen.main.scale),
+////                        .transition(.fade(1)),
+////                        .cacheOriginalImage
+////                    ])
+////            }
+//            commandTitle_label.text = club.name
+//            commandDescription_label.text = club.info
+//
+////            self.updateNavBar()
+//        } else {
+//            self.setState(state: .empty)
+//            updateNavBar()
+//        }
+//
+//    }
     
     func getClubsFailure(error: Error) {
         Print.d(error: error)

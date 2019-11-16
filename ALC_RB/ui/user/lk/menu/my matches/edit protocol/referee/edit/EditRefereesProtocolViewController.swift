@@ -113,7 +113,7 @@ class EditRefereesProtocolViewController: BaseStateViewController {
             let refPerson = viewModel?.referees.value.people.filter({ person -> Bool in
                 return person.id == ref.person
             }).first
-            switch ref.convertToReferee().type! {
+            switch ref.type! {
             case .firstReferee:
                 self.referee1_btn.setTitle(refPerson?.getFullName(), for: .normal)
                 self.referee1_btn.setTitleColor(Colors.YES_REF, for: .normal)
@@ -249,19 +249,11 @@ class EditRefereesProtocolViewController: BaseStateViewController {
     // MARK: - Edit Match Response
     func onResponseSuccess(soloMatch: Match) {
         self.setMatchValue(
-            id: soloMatch.match!.id,
+            id: soloMatch.id,
             match: soloMatch
         )
-        self.refereesController.referees = (soloMatch.match?.referees.map({ referee -> Referee in
-            var personId = String()
-            switch referee.person!.value {
-            case .id(let id):
-                personId = id
-            case .object(let obj):
-                personId = obj.id
-            }
-            return LIReferee(id: referee.id, person: personId, type: referee.type!.rawValue)
-        }))!
+        
+        self.refereesController.referees = soloMatch.referees ?? []
         //        showAlert(title: Texts.EDITED_SAVED, message: "", escaping: )
         showAlert(title: Texts.EDITED_SAVED, message: "") {
             self.navigationController?.popViewController(animated: true)
@@ -293,36 +285,37 @@ class EditRefereesProtocolViewController: BaseStateViewController {
     
     // edit match for userDefaults value at id match
     func setMatchValue(id: String, match: Match) {
-        var user = userDefaults.getAuthorizedUser()
+        let user = userDefaults.getAuthorizedUser()
         
-        if user?.person.participationMatches!.contains(where: { pMatch -> Bool in
-            return pMatch.isEqual({ $0.id == match.match?.id })
-//            switch pMatch {
-//            case .id(let id):
-//                return id == match.match?.id
-//            case .object(let obj):
-//                return obj.id == match.match?.id
+        // DEPRECATED: person participation match
+//        if user?.person.participationMatches!.contains(where: { pMatch -> Bool in
+//            return pMatch.isEqual({ $0.id == match.match?.id })
+////            switch pMatch {
+////            case .id(let id):
+////                return id == match.match?.id
+////            case .object(let obj):
+////                return obj.id == match.match?.id
+////            }
+////            return pMatch.id == match.match?.id
+//        }) ?? false {
+//            user?.person.participationMatches!.removeAll(where: { pMatch -> Bool in
+//                return pMatch.isEqual({ $0.id == match.match?.id })
+////                switch pMatch {
+////                case .id(let id):
+////                    return id == match.match?.id
+////                case .object(let obj):
+////                    return obj.id == match.match?.id
+////                }
+////                return pMatch.id == match.match?.id
+//            })
+//            if match.match?.referees.count ?? 0 > 0 {
+////                user?.person.participationMatches!.append(match.match!)
+//               user?.person.participationMatches?.append(IdRefObjectWrapper(match.match!))
 //            }
-//            return pMatch.id == match.match?.id
-        }) ?? false {
-            user?.person.participationMatches!.removeAll(where: { pMatch -> Bool in
-                return pMatch.isEqual({ $0.id == match.match?.id })
-//                switch pMatch {
-//                case .id(let id):
-//                    return id == match.match?.id
-//                case .object(let obj):
-//                    return obj.id == match.match?.id
-//                }
-//                return pMatch.id == match.match?.id
-            })
-            if match.match?.referees.count ?? 0 > 0 {
-//                user?.person.participationMatches!.append(match.match!)
-               user?.person.participationMatches?.append(IdRefObjectWrapper(match.match!))
-            }
-        } else {
-//            user?.person.participationMatches!.append(match.match!)
-            user?.person.participationMatches?.append(IdRefObjectWrapper(match.match!))
-        }
+//        } else {
+////            user?.person.participationMatches!.append(match.match!)
+//            user?.person.participationMatches?.append(IdRefObjectWrapper(match.match!))
+//        }
         userDefaults.setAuthorizedUser(user: user!)
     }
     

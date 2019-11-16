@@ -14,9 +14,21 @@ struct Event: Codable {
 
     var type: eType?
 
-    var player: String? // there is can be played id or team id
-
+    var player: IdRefObjectWrapper<Person>? // there is can be played id or team id
+    var team: IdRefObjectWrapper<Team>?
+    
     var time: Time?
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        
+        case type
+        
+        case player
+        case team
+        
+        case time
+    }
     
     enum eType: String, Codable {
         case goal = "goal"

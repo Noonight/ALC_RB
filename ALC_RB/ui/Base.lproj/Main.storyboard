@@ -147,10 +147,10 @@
             </objects>
             <point key="canvasLocation" x="-699" y="-2792"/>
         </scene>
-        <!--Tournaments TVC-->
+        <!--[Tourney] TVC-->
         <scene sceneID="F4z-rm-5HM">
             <objects>
-                <tableViewController storyboardIdentifier="TournamentsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7Kj-7O-f2M" userLabel="Tournaments TVC" customClass="TournamentsTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TournamentsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7Kj-7O-f2M" userLabel="[Tourney] TVC" customClass="TournamentsTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hqs-i8-t4z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2750,13 +2750,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="ФИО ФИО ФИО ФИО ФИО ФИОФИО ФИОФИОФИОФИОФОИФОИОФИОФИОФОИО" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ON3-tb-27e">
-                                                    <rect key="frame" x="64" y="8.5" width="187" height="25.5"/>
+                                                    <rect key="frame" x="64" y="8.5" width="219" height="25.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="20.10.1990" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="01J-eo-nBH">
-                                                    <rect key="frame" x="64" y="38" width="187" height="14.5"/>
+                                                    <rect key="frame" x="64" y="38" width="219" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.04767975956" green="0.46900761130000002" blue="0.74720400570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -2830,10 +2830,10 @@
             </objects>
             <point key="canvasLocation" x="-1151.25" y="-1275"/>
         </scene>
-        <!--Player VC-->
+        <!--DEPRECATED VC-->
         <scene sceneID="egi-Mw-4dL">
             <objects>
-                <viewController id="qUi-Cc-iLw" userLabel="Player VC" customClass="PlayerViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qUi-Cc-iLw" userLabel="DEPRECATED VC" customClass="PlayerViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7aj-gP-bVl"/>
                         <viewControllerLayoutGuide type="bottom" id="N2L-JF-OZt"/>
@@ -6144,10 +6144,10 @@
             </objects>
             <point key="canvasLocation" x="1477.5" y="-540.84507042253517"/>
         </scene>
-        <!--Tournaments NC-->
+        <!--[Tourney] NC-->
         <scene sceneID="Pml-zE-jre">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="427-kr-52D" userLabel="Tournaments NC" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="427-kr-52D" userLabel="[Tourney] NC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="tab_cup" id="5a4-aj-G08">
                         <inset key="imageInsets" minX="0.0" minY="3.5" maxX="0.0" maxY="-3.5"/>
                     </tabBarItem>

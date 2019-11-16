@@ -13,7 +13,7 @@ class EventsMatchTableViewController: BaseStateTableViewController {
     // MARK: - TableStruct
     
     struct TableStruct {
-        var table: [[LIEvent]] = []
+        var table: [[Event]] = []
     }
     
     // MARK: - Variables
@@ -21,7 +21,7 @@ class EventsMatchTableViewController: BaseStateTableViewController {
     let cellId = "event_protocol_cell"
     
     var tableModel = TableStruct()
-    var destinationModel = [LIEvent]()
+    var destinationModel = [Event]()
     
     let presenter = EventsMatchPresenter()
     let menuLauncher = MenuLauncher()
@@ -68,7 +68,7 @@ class EventsMatchTableViewController: BaseStateTableViewController {
     
     // MARK: - Prepare tableModel
     
-    func findUniqueHeader(destination: [LIEvent]) -> [String] {
+    func findUniqueHeader(destination: [Event]) -> [String] {
         var allEventTypes: [String] = []
         for event in destination {
             if !allEventTypes.contains(event.eventType) {
@@ -78,13 +78,13 @@ class EventsMatchTableViewController: BaseStateTableViewController {
         return allEventTypes
     }
     
-    func prepareTableModel(destination: [LIEvent]) {
+    func prepareTableModel(destination: [Event]) {
         if destination.count > 0 {
             setState(state: .normal)
             let events = destination
             let uniqueEventTypes = findUniqueHeader(destination: events)
             for uniqEvent in uniqueEventTypes {
-                var arrEvents: [LIEvent] = events.filter { (event) -> Bool in
+                var arrEvents: [Event] = events.filter { (event) -> Bool in
                     return event.eventType == uniqEvent
                 }
                 tableModel.table.append(arrEvents)
@@ -116,7 +116,7 @@ class EventsMatchTableViewController: BaseStateTableViewController {
         return cell
     }
     
-    func configureCell(cell: EventsProtocolTableViewCell, model: LIEvent) {
+    func configureCell(cell: EventsProtocolTableViewCell, model: Event) {
         presenter.getPlayer(player: model.player, get_player: { (person) in
 //            cell.name_label.text = person.person.getFullName()
             cell.name_label.text = person.person.getSurnameNP()

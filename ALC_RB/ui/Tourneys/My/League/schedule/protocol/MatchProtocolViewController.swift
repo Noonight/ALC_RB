@@ -111,10 +111,10 @@ extension MatchProtocolViewController {
         self.team_one_label.text = self.viewModel.prepareTeamTitle(team: .one)
         self.team_two_label.text = self.viewModel.prepareTeamTitle(team: .two)
         
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamOne!, league: self.viewModel.leagueDetailModel.leagueInfo.league)) { (image) in
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamOne!, league: self.viewModel.leagueDetailModel.league)) { (image) in
             self.team_one_image.image = image.af_imageRoundedIntoCircle()
         }
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamTwo!, league: self.viewModel.leagueDetailModel.leagueInfo.league)) { (image) in
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamTwo!, league: self.viewModel.leagueDetailModel.league)) { (image) in
             self.team_two_image.image = image.af_imageRoundedIntoCircle()
         }
         
@@ -153,10 +153,10 @@ extension MatchProtocolViewController {
         self.teamOneTitle.text = self.viewModel.prepareTeamTitle(team: .one)
         self.teamTwoTitle.text = self.viewModel.prepareTeamTitle(team: .two)
         
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamOne!, league: self.viewModel.leagueDetailModel.leagueInfo.league)) { (image) in
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamOne!, league: self.viewModel.leagueDetailModel.league)) { (image) in
             self.teamOneLogo.image = image.af_imageRoundedIntoCircle()
         }
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamTwo!, league: self.viewModel.leagueDetailModel.leagueInfo.league)) { (image) in
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(self.viewModel.match.teamTwo!, league: self.viewModel.leagueDetailModel.league)) { (image) in
             self.teamTwoLogo.image = image.af_imageRoundedIntoCircle()
         }
         
@@ -218,8 +218,8 @@ extension MatchProtocolViewController {
 // MARK: HELPERS
 
 extension MatchProtocolViewController {
-    func getPlayersTeam(team id: String) -> [LIPlayer] {
-        return (self.viewModel.leagueDetailModel.leagueInfo.league.teams?.filter({ (team) -> Bool in
+    func getPlayersTeam(team id: String) -> [DEPRECATED] {
+        return (self.viewModel.leagueDetailModel.league.teams?.filter({ (team) -> Bool in
             return team.id == id
         }).first?.players)!
     }
@@ -259,7 +259,7 @@ extension MatchProtocolViewController {
         case is TeamProtocolTableViewController:
             let controller = destination as! TeamProtocolTableViewController
             controller.players = getPlayersTeam(team: self.viewModel.match.teamOne!)
-            controller.title = ClubTeamHelper.getTeamTitle(league: self.viewModel.leagueDetailModel.leagueInfo.league, match: self.viewModel.match, team: .one)
+            controller.title = ClubTeamHelper.getTeamTitle(league: self.viewModel.leagueDetailModel.league, match: self.viewModel.match, team: .one)
         case is RefereeTeamTableViewController:
             let controller = destination as! RefereeTeamTableViewController
             controller.destinationData = self.viewModel.match.referees
@@ -282,10 +282,10 @@ extension MatchProtocolViewController {
             switch team {
             case .one:
                 controller.players = getPlayersTeam(team: self.viewModel.match.teamOne!)
-                controller.title = ClubTeamHelper.getTeamTitle(league: self.viewModel.leagueDetailModel.leagueInfo.league, match: self.viewModel.match, team: .one)
+                controller.title = ClubTeamHelper.getTeamTitle(league: self.viewModel.leagueDetailModel.league, match: self.viewModel.match, team: .one)
             case .two:
                 controller.players = getPlayersTeam(team: self.viewModel.match.teamTwo!)
-                controller.title = ClubTeamHelper.getTeamTitle(league: self.viewModel.leagueDetailModel.leagueInfo.league, match: self.viewModel.match, team: .two)
+                controller.title = ClubTeamHelper.getTeamTitle(league: self.viewModel.leagueDetailModel.league, match: self.viewModel.match, team: .two)
             }
         default:
             break

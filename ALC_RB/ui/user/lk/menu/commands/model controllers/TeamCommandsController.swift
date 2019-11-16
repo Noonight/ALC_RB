@@ -13,23 +13,24 @@ class TeamCommandsController {
     init(teams: [Team]) {
         self.teams = teams
     }
-    func setPlayersByTeamId(id: String, players: [Player]) {
-        for i in 0..<teams.count {
-            if teams[i].id == id {
-                teams[i].players = players
-            }
-        }
-    }
-    func getTeamById(id: String) -> Team? {
-        return teams.filter({ team -> Bool in
-            return team.id == id
-        }).first
-    }
-    func addPlayerById(id: String, player: Player) {
-        for i in 0..<teams.count {
-            if teams[i].id == id {
-                teams[i].players.append(player)
-            }
-        }
-    }
+    // DEPRECATED team does not contains players
+//    func setPlayersByTeamId(id: String, players: [Person]) {
+//        for i in 0..<teams.count {
+//            if teams[i].id == id {
+//                teams[i].players = players
+//            }
+//        }
+//    }
+//    func getTeamById(id: String) -> Team? {
+//        return teams.filter({ team -> Bool in
+//            return team.id == id
+//        }).first
+//    }
+//    func addPlayerById(id: String, player: Person) {
+//        for i in 0..<teams.count {
+//            if teams[i].id == id {
+//                teams[i].players.append(Person)
+//            }
+//        }
+//    }
 }

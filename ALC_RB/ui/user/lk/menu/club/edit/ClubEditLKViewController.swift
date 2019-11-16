@@ -113,7 +113,7 @@ class ClubEditLKViewController: BaseStateViewController, UITextFieldDelegate {
 }
 
 extension ClubEditLKViewController : ClubEditLKView {
-    func editClubInfoSuccess(soloClub: SoloClub) {
+    func editClubInfoSuccess(soloClub: Club) {
         self.club = soloClub.club
         updateUI()
         showToast(message: "Изменение клуба прошло успешно")

@@ -23,10 +23,19 @@ class IdRefObjectWrapper<T>: Codable where T : Codable {
         self.value = value
     }
     
+    func getId() -> String? {
+        switch self.value {
+        case .id(let id):
+            return id
+        case .object:
+            return nil
+        }
+    }
+    
     func getValue() -> T? {
         switch self.value {
         case .id:
-            assertionFailure("can't get object of id")
+            return nil
         case .object(let obj):
             return obj
         }

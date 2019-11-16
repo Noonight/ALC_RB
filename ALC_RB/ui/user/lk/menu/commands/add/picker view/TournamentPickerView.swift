@@ -91,16 +91,16 @@ class TournamentPickerHelper : NSObject, UIPickerViewDelegate, UIPickerViewDataS
 //            return rows[row].name
             if let tourney = rows[row].tourney
             {
-                if tourney.contains(".")
+                if tourney.getValue()?.name?.contains(".") ?? false
                 {
                     if let name = rows[row].name {
-                        return "\(tourney) \(name)"
+                        return "\(tourney.getValue()?.name) \(name)"
                     }
                 }
                 else
                 {
                     if let name = rows[row].name {
-                        return "\(tourney). \(name)"
+                        return "\(tourney.getValue()?.name). \(name)"
                     }
                 }
             }

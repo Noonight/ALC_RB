@@ -25,12 +25,13 @@ class CommandEditLKViewController: BaseStateViewController {
     let commandPlayersTableViewHelper = CommandPlayersTableViewHelper()
     let commandInvPlayersTableViewHelper = CommandInvitePlayersTableViewHelper()
     
-    var participation: Participation?
+    // DEPRECATED: participation
+//    var participation: Participation?
     
     var team = Team()
     var players = [Person]()
     var leagueController: LeagueController!
-    var mutablePlayers: [Player] = []
+    var mutablePlayers: [DEPRECATED] = []
 
     let userDefaultHelper = UserDefaultsHelper()
     
@@ -51,8 +52,9 @@ class CommandEditLKViewController: BaseStateViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        team.players = (teamController.getTeamById(id: team.id)?.players)!
-        mutablePlayers = team.players
+        // DEPRECATED: team does not contain players
+//        team = (teamController.getTeamById(id: team.id)?.players)!
+//        mutablePlayers = team.players
         
         presenter.getPersons()
     }
@@ -95,52 +97,53 @@ extension CommandEditLKViewController {
     @IBAction func onAddPlayerBtnPressed(_ sender: UIButton) { }
     
     @IBAction func onNavBarSaveBtnPressed(_ sender: UIBarButtonItem) {
-        presenter.editCommand(
-            token: (userDefaultHelper.getAuthorizedUser()?.token)!,
-            editTeam: EditTeam(
-                _id: (participation?.league)!,
-                teamId: (participation?.team)!,
-                players: EditTeam.Players(players: mutablePlayers))
-        )
+// DEPRECATED: participation
+        //        presenter.editCommand(
+//            token: (userDefaultHelper.getAuthorizedUser()?.token)!,
+//            editTeam: EditTeam(
+//                _id: (participation?.league)!,
+//                teamId: (participation?.team)!,
+//                players: EditTeam.Players(players: mutablePlayers))
+//        )
     }
 }
 
 // MARK: Presenter
 
 extension CommandEditLKViewController: CommandEditLKView {
-    func onGetPersonsComplete(players: Players) {
+    func onGetPersonsComplete(players: [Person]) {
         
-        let teamPlayers = team.players
-        var array : [CommandPlayersTableViewCell.CellModel] = []
+//        let teamPlayers = team.players
+//        var array : [CommandPlayersTableViewCell.CellModel] = []
+//
+//        var arrayInv: [CommandInvitePlayersTableViewCell.CellModel] = []
+//
+//        for player in teamPlayers {
+//            for person in players.people {
+//                if player.playerID == person.id {
+//
+//                    if player.getInviteStatus() == .accepted || player.getInviteStatus() == .approved {
+//                        array.append(CommandPlayersTableViewCell.CellModel(
+//                            player: player,
+//                            playerImagePath: person.photo ?? "",
+//                            person: person)
+//                        )
+//                    } else if player.getInviteStatus() == .pending /*|| randNum > 2 */{
+//                    arrayInv.append(CommandInvitePlayersTableViewCell.CellModel(
+//                        player: player,
+//                        person: person,
+//                        playerImagePath: person.photo ?? "")
+//                        )
+//                    }
+//                }
+//            }
+//        }
         
-        var arrayInv: [CommandInvitePlayersTableViewCell.CellModel] = []
-        
-        for player in teamPlayers {
-            for person in players.people {
-                if player.playerID == person.id {
-                    
-                    if player.getInviteStatus() == .accepted || player.getInviteStatus() == .approved {
-                        array.append(CommandPlayersTableViewCell.CellModel(
-                            player: player,
-                            playerImagePath: person.photo ?? "",
-                            person: person)
-                        )
-                    } else if player.getInviteStatus() == .pending /*|| randNum > 2 */{
-                    arrayInv.append(CommandInvitePlayersTableViewCell.CellModel(
-                        player: player,
-                        person: person,
-                        playerImagePath: person.photo ?? "")
-                        )
-                    }
-                }
-            }
-        }
-        
-        commandPlayersTableViewHelper.setTableData(tableData: array)
-        commandPlayers.reloadData()
-        
-        commandInvPlayersTableViewHelper.setTableData(tableData: arrayInv)
-        commandInvitePlayers.reloadData()
+//        commandPlayersTableViewHelper.setTableData(tableData: array)
+//        commandPlayers.reloadData()
+//
+//        commandInvPlayersTableViewHelper.setTableData(tableData: arrayInv)
+//        commandInvitePlayers.reloadData()
     }
     
     func onGetPersonsFailure(error: Error) {
@@ -149,8 +152,9 @@ extension CommandEditLKViewController: CommandEditLKView {
     }
     
     func onEditCommandSuccess(editTeamResponse: EditTeamResponse) {
-        self.team.players = editTeamResponse.players
-        self.teamController.setPlayersByTeamId(id: self.team.id, players: editTeamResponse.players)
+//        self.team.players = editTeamResponse.players
+        // DEPRECATED team does not contain players
+//        self.teamController.setPlayersByTeamId(id: self.team.id, players: editTeamResponse.players)
         self.leagueController.editTeamPlayersById(teamId: self.team.id, players: editTeamResponse.players)
         presenter.getPersons()
         showAlert(title: "Изменения успешно сохранены", message: "")
@@ -179,7 +183,8 @@ extension CommandEditLKViewController {
         {
             destination.tableModel = CommandAddPlayerTableViewController.TableModel()
             destination.team = self.team
-            destination.leagueId = self.participation?.league
+            destination.leagueId = leagueController.league.id
+//            destination.leagueId = self.participation?.league
             destination.teamController = self.teamController
             destination.leagueController = self.leagueController
         }

@@ -12,7 +12,7 @@ import RxCocoa
 
 protocol CommandEditLKView: MvpView {
     
-    func onGetPersonsComplete(players: Players)
+    func onGetPersonsComplete(players: [Person])
     func onGetPersonsFailure(error: Error)
     
     func onEditCommandSuccess(editTeamResponse: EditTeamResponse)
@@ -34,7 +34,7 @@ class CommandEditLKPresenter: MvpPresenter<CommandEditLKViewController> {
         personApi.get_person(offset: Constants.Values.LIMIT_ALL) { result in
             switch result {
             case .success(let persons):
-                self.getView().onGetPersonsComplete(players: Players(persons: persons, count: persons.count))
+                self.getView().onGetPersonsComplete(players: persons)
             case .failure(.error(let error)):
                 self.getView().onGetPersonsFailure(error: error)
             default: Print.m("not used")

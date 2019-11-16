@@ -43,7 +43,7 @@ class PlayersLeagueDetailPresenter: MvpPresenter<PlayersLeagueDetailViewControll
         personApi.get_person(id: id, resultMy: result)
     }
     
-    func getUser(user id: String, get_user: @escaping (SoloPerson) -> ()) {
+    func getUser(user id: String, get_user: @escaping (SinglePerson) -> ()) {
 //        Alamofire
 //            .request(ApiRoute.getApiURL(.soloUser, id: id))
 //            .validate()
@@ -70,57 +70,57 @@ class PlayersLeagueDetailPresenter: MvpPresenter<PlayersLeagueDetailViewControll
         }
     }
     
-    func getClubImageByClubId(user id: String, get_club_image: @escaping (UIImage) -> ()) {
-        Alamofire
-            .request(ApiRoute.getApiURL(.clubs, id: id))
-            .validate()
-            .responseSoloClub { (response) in
-                switch response.result {
-                case .success(let value):
-                    
-                    if let urlPhoto = value.club.logo {
-                        let url = ApiRoute.getImageURL(image: urlPhoto)
-                        let downloader = KingfisherManager.shared
-                        let cellImageSize = CGSize(width: 22, height: 22)
-                        let processor = DownsamplingImageProcessor(size: cellImageSize)
-                            .append(another: CroppingImageProcessorCustom(size: cellImageSize))
-                            .append(another: RoundCornerImageProcessor(cornerRadius: cellImageSize.getHalfWidthHeight()))
-                        downloader.downloader.downloadImage(
-                            with: url,
-                            options: [
-                                .processor(processor),
-                                .scaleFactor(UIScreen.main.scale),
-                                .transition(.fade(1)),
-                                .cacheOriginalImage
-                        ]) {
-                            result in
-                            switch result {
-                            case .success(let value):
-                                
-                                get_club_image(value.image)
-                                
-                            case .failure(let error):
-                                get_club_image(#imageLiteral(resourceName: "ic_logo"))
-                            }
-                        }
-                    }
-                    else
-                    {
-                        get_club_image(#imageLiteral(resourceName: "ic_logo"))
-                    }
-                    
-//                    if let club = response.result.value {
-//                        Alamofire
-//                            .request(ApiRoute.getImageURL(image: club.club.addLogo ?? ""))
-//                            .responseImage(completionHandler: { (reseponseImage) in
-//                                if let img = reseponseImage.result.value {
-//                                    get_club_image(img)
-//                                }
-//                            })
+//    func getClubImageByClubId(user id: String, get_club_image: @escaping (UIImage) -> ()) {
+//        Alamofire
+//            .request(ApiRoute.getApiURL(.clubs, id: id))
+////            .validate()
+//            .responseSoloClub { (response) in
+//                switch response.result {
+//                case .success(let value):
+//
+//                    if let urlPhoto = value.club.logo {
+//                        let url = ApiRoute.getImageURL(image: urlPhoto)
+//                        let downloader = KingfisherManager.shared
+//                        let cellImageSize = CGSize(width: 22, height: 22)
+//                        let processor = DownsamplingImageProcessor(size: cellImageSize)
+//                            .append(another: CroppingImageProcessorCustom(size: cellImageSize))
+//                            .append(another: RoundCornerImageProcessor(cornerRadius: cellImageSize.getHalfWidthHeight()))
+//                        downloader.downloader.downloadImage(
+//                            with: url,
+//                            options: [
+//                                .processor(processor),
+//                                .scaleFactor(UIScreen.main.scale),
+//                                .transition(.fade(1)),
+//                                .cacheOriginalImage
+//                        ]) {
+//                            result in
+//                            switch result {
+//                            case .success(let value):
+//
+//                                get_club_image(value.image)
+//
+//                            case .failure(let error):
+//                                get_club_image(#imageLiteral(resourceName: "ic_logo"))
+//                            }
+//                        }
 //                    }
-                case .failure:
-                    debugPrint("get club failure \(String(describing: response.request?.url))")
-        }
-        }
-    }
+//                    else
+//                    {
+//                        get_club_image(#imageLiteral(resourceName: "ic_logo"))
+//                    }
+//
+////                    if let club = response.result.value {
+////                        Alamofire
+////                            .request(ApiRoute.getImageURL(image: club.club.addLogo ?? ""))
+////                            .responseImage(completionHandler: { (reseponseImage) in
+////                                if let img = reseponseImage.result.value {
+////                                    get_club_image(img)
+////                                }
+////                            })
+////                    }
+//                case .failure:
+//                    debugPrint("get club failure \(String(describing: response.request?.url))")
+//        }
+//        }
+//    }
 }

@@ -19,7 +19,7 @@ struct SingleMatch: Codable {
 
 extension SingleMatch {
     init(data: Data) throws {
-        self = try JSONDecoder().decode(SingleMatch.self, from: data)
+        self = try ISO8601Decoder.getDecoder().decode(SingleMatch.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {

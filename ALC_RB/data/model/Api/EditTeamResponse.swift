@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 struct EditTeamResponse: Codable {
-    var players: [Player]
+    var players: [DEPRECATED]
     
     enum CodingKeys: String, CodingKey {
         case players = "players"
@@ -39,7 +39,7 @@ extension EditTeamResponse {
     }
     
     func with(
-        players: [Player]? = nil
+        players: [DEPRECATED]? = nil
         ) -> EditTeamResponse {
         return EditTeamResponse(
             players: players ?? self.players

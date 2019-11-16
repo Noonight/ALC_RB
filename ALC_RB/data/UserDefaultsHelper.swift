@@ -48,38 +48,40 @@ class UserDefaultsHelper {
         userDefaults.removeObject(forKey: userKey)
     }
     
-    func setParticipationMatchPlayedBy(id: String) -> Bool {
-        guard var user = self.getAuthorizedUser() else { return false }
-        
-        for i in 0...user.person.participationMatches!.count {
-            if user.person.participationMatches![i].isEqual({ $0.id == id }) {
-                user.person.participationMatches![i].map { match -> Match in
-                    var mMatch = match
-                    mMatch.played = true
-                    return mMatch
-                }
-                self.setAuthorizedUser(user: user)
-                return true
-            }
+    // DEPRECATED person does not contain participation matches
+//    func setParticipationMatchPlayedBy(id: String) -> Bool {
+//        guard var user = self.getAuthorizedUser() else { return false }
+//
+//
 //        for i in 0...user.person.participationMatches!.count {
-//            if user.person.participationMatches![i].id == id {
-//                user.person.participationMatches![i].played = true
+//            if user.person.participationMatches![i].isEqual({ $0.id == id }) {
+//                user.person.participationMatches![i].map { match -> Match in
+//                    var mMatch = match
+//                    mMatch.played = true
+//                    return mMatch
+//                }
 //                self.setAuthorizedUser(user: user)
 //                return true
 //            }
-        }
-        return false
-    }
+////        for i in 0...user.person.participationMatches!.count {
+////            if user.person.participationMatches![i].id == id {
+////                user.person.participationMatches![i].played = true
+////                self.setAuthorizedUser(user: user)
+////                return true
+////            }
+//        }
+//        return false
+//    }
     
     func getToken() -> String {
         return (self.getAuthorizedUser()?.token)!
     }
     
-    func setMatch(match: Match) {
-        var user = getAuthorizedUser()
-        user?.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.id }) })
-        user?.person.participationMatches?.append(IdRefObjectWrapper<Match>(match))
-        setAuthorizedUser(user: user!)
-    }
+//    func setMatch(match: Match) {
+//        var user = getAuthorizedUser()
+//        user?.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.id }) })
+//        user?.person.participationMatches?.append(IdRefObjectWrapper<Match>(match))
+//        setAuthorizedUser(user: user!)
+//    }
     
 }

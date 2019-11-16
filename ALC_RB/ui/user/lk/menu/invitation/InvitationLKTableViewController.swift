@@ -15,11 +15,11 @@ class InvitationLKTableViewController: UITableViewController {
     // MARK: - Struct
     
     struct TableModel {
-        var tournaments: Tournaments?
+        var tournaments: [Tourney]?
         var clubs: [Club]?
         var players: Players?
         
-        init (tournaments: Tournaments, clubs: [Club], players: Players) {
+        init (tournaments: [Tourney], clubs: [Club], players: Players) {
             self.tournaments = tournaments
             self.clubs = clubs
             self.players = players
@@ -275,7 +275,7 @@ extension InvitationLKTableViewController: InvitationLKView {
         self.tableView.es.stopPullToRefresh()
     }
     
-    func acceptRequestSuccess(soloPerson: SoloPerson) {
+    func acceptRequestSuccess(soloPerson: SinglePerson) {
         defer {
             tableView.reloadData()
         }
@@ -293,7 +293,7 @@ extension InvitationLKTableViewController: InvitationLKView {
         Print.d(error: error)
     }
     
-    func getTournamentsSuccess(tournaments: Tournaments) {
+    func getTournamentsSuccess(tournaments: [Tourney]) {
         tableModel.tournaments = tournaments
     }
     

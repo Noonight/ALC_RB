@@ -17,13 +17,13 @@ class EditEventsMatchTableViewController: UITableViewController {
     // MARK: - TableStruct
     
     struct TableStruct {
-        var table: [[LIEvent]] = []
+        var table: [[Event]] = []
         
-        var teamOneFouls: [LIEvent] = []
-        var teamTwoFouls: [LIEvent] = []
+        var teamOneFouls: [Event] = []
+        var teamTwoFouls: [Event] = []
         
-        var teamOneAutoGoals: [LIEvent] = []
-        var teamTwoAutoGoals: [LIEvent] = []
+        var teamOneAutoGoals: [Event] = []
+        var teamTwoAutoGoals: [Event] = []
         mutating func reset() {
             table = []
         }
@@ -37,7 +37,7 @@ class EditEventsMatchTableViewController: UITableViewController {
     let cellId = "event_protocol_cell"
     
     var tableModel = TableStruct()
-//    var destinationModel = [LIEvent]()
+//    var destinationModel = [Event]()
     var fetchedPersons: [Person] = []
     
     var model: MyMatchesRefTableViewCell.CellModel!
@@ -88,28 +88,28 @@ class EditEventsMatchTableViewController: UITableViewController {
     
     // MARK: - Prepare tableModel
     
-    func findUniqueTime(events: [LIEvent]) -> [String] {
-        var allEventTimes: [String] = []
+    func findUniqueTime(events: [Event]) -> [Event.Time] {
+        var allEventTimes: [Event.Time] = []
         for event in events {
-            if !allEventTimes.contains(event.time) {
-                allEventTimes.append(event.time)
-            }
+//            if !allEventTimes.contains(event.time!) {
+                allEventTimes.append(event.time!)
+//            }
         }
         return allEventTimes
     }
     
-    func findUniqueEvent(destination: [LIEvent]) -> [String] {
-        var allEventTypes: [String] = []
+    func findUniqueEvent(destination: [Event]) -> [Event.eType] {
+        var allEventTypes: [Event.eType] = []
         for event in destination {
-            if !allEventTypes.contains(event.eventType) {
-                allEventTypes.append(event.eventType)
-            }
+//            if !allEventTypes.contains(event.type!) {
+                allEventTypes.append(event.type!)
+//            }
         }
         return allEventTypes
     }
     
-    func findTimeEvents(at time: String) -> [LIEvent] {
-        var timeEvents: [LIEvent] = []
+    func findTimeEvents(at time: Event.Time) -> [Event] {
+        var timeEvents: [Event] = []
         for event in eventsController.events {
             if event.time == time {
                 timeEvents.append(event)
@@ -118,7 +118,7 @@ class EditEventsMatchTableViewController: UITableViewController {
         return timeEvents
     }
     
-    func prepareTableModel(destination: [LIEvent]) {
+    func prepareTableModel(destination: [Event]) {
         tableModel.reset()
         defer {
             tableView.reloadData()
@@ -142,7 +142,7 @@ class EditEventsMatchTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if tableModel.table[section].count > 0 {
-            return tableModel.table[section][0].time
+            return tableModel.table[section][0].time.map { $0.rawValue }
         } else {
             return "***"
         }
@@ -156,11 +156,12 @@ class EditEventsMatchTableViewController: UITableViewController {
         return cell
     }
     
-    func configureCell(cell: EditEventsProtocolTableViewCell, model: LIEvent) {
+    func configureCell(cell: EditEventsProtocolTableViewCell, model: Event) {
         
         func setupCell(person: Person) {
             cell.name_label.text = person.getSurnameNP()
-            cell.event_type_image.image = model.getSystemEventImage()
+            // DEPRECATED: person does not contain system event image
+//            cell.event_type_image.image = model.getSystemEventImage()
             
             if let url = person.photo {
                 let url = ApiRoute.getImageURL(image: url)
@@ -184,12 +185,12 @@ class EditEventsMatchTableViewController: UITableViewController {
         }
         
         if let person = fetchedPersons.filter({ person -> Bool in
-            return person.id == model.player
+            return person.id == model.player?.getId() ?? model.player?.getValue()?.id ?? ""
         }).first {
             setupCell(person: person)
         } else {
             let hud = cell.showLoadingViewHUD()
-            presenter.getPlayer(player: model.player, get_player:
+            presenter.getPlayer(player: model.player?.getId() ?? model.player?.getValue()?.id ?? "", get_player:
             { (person) in
                 self.fetchedPersons.append(person.person)
                 setupCell(person: person.person)

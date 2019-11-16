@@ -200,16 +200,17 @@ class UserLKViewController: UIViewController {
     // MARK: - Drawer menu
     
     func showFirstItem() {
-        if authUser?.person.getUserType() == Person.TypeOfPerson.player {
-            segmentHelper?.add(invitation)
-            navigationItem.title = invitation.title
-        } else if authUser?.person.getUserType() == Person.TypeOfPerson.referee {
-            segmentHelper?.add(myMatches)
-            navigationItem.title = myMatches.title
-        } else if authUser?.person.getUserType() == Person.TypeOfPerson.mainReferee {
-            segmentHelper?.add(schedule)
-            navigationItem.title = schedule.title
-        }
+        // MARK: TODO: user type is deprecated
+//        if authUser?.person.getUserType() == Person.TypeOfPerson.player {
+//            segmentHelper?.add(invitation)
+//            navigationItem.title = invitation.title
+//        } else if authUser?.person.getUserType() == Person.TypeOfPerson.referee {
+//            segmentHelper?.add(myMatches)
+//            navigationItem.title = myMatches.title
+//        } else if authUser?.person.getUserType() == Person.TypeOfPerson.mainReferee {
+//            segmentHelper?.add(schedule)
+//            navigationItem.title = schedule.title
+//        }
         // set pointer of choose at first item that equal first item in person's menu
         tableView.selectRow(at: IndexPath.init(row: 0, section: 0), animated: true, scrollPosition: UITableView.ScrollPosition.top)
     }
@@ -256,13 +257,13 @@ class UserLKViewController: UIViewController {
             segmentHelper?.remove(commands)
             segmentHelper?.add(invitation)
             navigationItem.title = invitation.title
-        case .Tournaments:
+        case .Tourneys:
             segmentHelper?.remove(invitation)
             segmentHelper?.remove(club)
             segmentHelper?.remove(commands)
             segmentHelper?.add(ongoingLeagues)
             navigationItem.title = ongoingLeagues.title
-        case .[Club]:
+        case .Clubs:
             segmentHelper?.remove(invitation)
             segmentHelper?.remove(ongoingLeagues)
             segmentHelper?.remove(commands)

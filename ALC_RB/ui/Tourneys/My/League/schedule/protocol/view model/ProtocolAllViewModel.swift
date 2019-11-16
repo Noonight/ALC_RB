@@ -182,7 +182,7 @@ class ProtocolAllViewModel {
     func prepareMainTimeScore() -> String {
         let firstTimeEvents = self.getEventsByTime("1 half")
         let secondTimeEvents = self.getEventsByTime("2 half")
-        var allEvents: [LIEvent] = []
+        var allEvents: [Event] = []
         allEvents.append(contentsOf: firstTimeEvents)
         allEvents.append(contentsOf: secondTimeEvents)
         
@@ -262,11 +262,11 @@ class ProtocolAllViewModel {
     
     func prepareTournamentTitle() -> String {
 //        var curName = ""
-//        if let name = self.leagueDetailModel.leagueInfo.league.name {
+//        if let name = self.leagueDetailModel.league.name {
 //            curName = name
 //        }
         var curTourney = ""
-        if let tourney = self.leagueDetailModel.leagueInfo.league.name {
+        if let tourney = self.leagueDetailModel.league.name {
             curTourney = tourney
         }
 //        return "\(curName). \(curTourney)"
@@ -274,16 +274,16 @@ class ProtocolAllViewModel {
     }
     
     func prepareTour() -> String {
-//        return self.leagueDetailModel.leagueInfo.league.tourney ?? ""
+//        return self.leagueDetailModel.league.tourney ?? ""
         return ""
     }
     
     func prepareTeamTitle(team: TeamEnum) -> String {
         switch team {
         case .one:
-            return ClubTeamHelper.getTeamTitle(league: self.leagueDetailModel.leagueInfo.league, match: match, team: .one)
+            return ClubTeamHelper.getTeamTitle(league: self.leagueDetailModel.league, match: match, team: .one)
         case .two:
-            return ClubTeamHelper.getTeamTitle(league: self.leagueDetailModel.leagueInfo.league, match: match, team: .two)
+            return ClubTeamHelper.getTeamTitle(league: self.leagueDetailModel.league, match: match, team: .two)
         }
     }
     
@@ -306,7 +306,7 @@ class ProtocolAllViewModel {
                         )
                         group.leave()
                 }) { error in
-                    Print.m("Player not found m.b. ->> \(error)")
+                    Print.m("DEPRECATED not found m.b. ->> \(error)")
                 }
             }
         }
@@ -324,7 +324,7 @@ class ProtocolAllViewModel {
                         )
                         group.leave()
                 }) { error in
-                    Print.m("Player not found m.b. ->> \(error)")
+                    Print.m("DEPRECATED not found m.b. ->> \(error)")
                 }
             }
         }
@@ -368,7 +368,7 @@ class ProtocolAllViewModel {
     
     // MARK: Helpers
     
-    private func getFoulsByTimeForTeam(time: String, team: TeamEnum, events: [LIEvent]) -> Int {
+    private func getFoulsByTimeForTeam(time: String, team: TeamEnum, events: [Event]) -> Int {
         var count = 0
         
         if team == .one
@@ -395,8 +395,8 @@ class ProtocolAllViewModel {
         return count
     }
     
-    private func getEventsForTeam(team: TeamEnum, events: [LIEvent]) -> [LIEvent] {
-        var resultArray: [LIEvent] = []
+    private func getEventsForTeam(team: TeamEnum, events: [Event]) -> [Event] {
+        var resultArray: [Event] = []
         
         if team == .one
         {
@@ -501,12 +501,12 @@ class ProtocolAllViewModel {
     }
     
     struct EventPLayer {
-        var event: LIEvent
-        var player: LIPlayer
+        var event: Event
+        var player: DEPRECATED
         var person: Person
     }
     
-    private func getEventsAndPlayerByPlayerIdForTeam(team: TeamEnum, events: [LIEvent], complete: @escaping ([EventPLayer]) -> ()) {
+    private func getEventsAndPlayerByPlayerIdForTeam(team: TeamEnum, events: [Event], complete: @escaping ([EventPLayer]) -> ()) {
         
         var resultArray: [EventPLayer] = []
         
@@ -576,8 +576,8 @@ class ProtocolAllViewModel {
         return resultArray
     }
     
-    private func getEventsByTime(_ time: String) -> [LIEvent] {
-        var resultArray: [LIEvent] = []
+    private func getEventsByTime(_ time: String) -> [Event] {
+        var resultArray: [Event] = []
         
         for event in eventsController.events
         {
@@ -596,15 +596,15 @@ class ProtocolAllViewModel {
         })
     }
     
-    fileprivate func connectPlayersOfTeamOneAndTwo() -> [LIPlayer] {
-        return [teamOnePlayersController.getPlayingPlayers(), teamTwoPlayersController.getPlayingPlayers()].flatMap({ liPlayer -> [LIPlayer] in
+    fileprivate func connectPlayersOfTeamOneAndTwo() -> [DEPRECATED] {
+        return [teamOnePlayersController.getPlayingPlayers(), teamTwoPlayersController.getPlayingPlayers()].flatMap({ liPlayer -> [DEPRECATED] in
             return liPlayer
         })
     }
     
     fileprivate func getPlayerEventsBy(playerId: String) -> RefereeProtocolPlayerEventsModel
     {
-        var playerEvents: [LIEvent] = []
+        var playerEvents: [Event] = []
         var returnedModel = RefereeProtocolPlayerEventsModel()
         for item in eventsController.events
         {
@@ -655,8 +655,8 @@ class ProtocolAllViewModel {
         eventsController = ProtocolEventsController(events: match.events)
     }
     
-    func getPlayersTeam(team id: String) -> [LIPlayer] {
-        return (leagueDetailModel.leagueInfo.league.teams?.filter({ (team) -> Bool in
+    func getPlayersTeam(team id: String) -> [DEPRECATED] {
+        return (leagueDetailModel.league.teams?.filter({ (team) -> Bool in
             return team.id == id
         }).first?.players)!
     }
@@ -666,7 +666,7 @@ class ProtocolAllViewModel {
 
 extension ProtocolAllViewModel {
     
-    func fetchPerson(playerId: String, success: @escaping (SoloPerson) -> (), failure: @escaping (Error) -> ()) {
+    func fetchPerson(playerId: String, success: @escaping (SinglePerson) -> (), failure: @escaping (Error) -> ()) {
 //        self.dataManager.get_soloPerson(playerId: playerId, success: { soloPerson in
 //            success(soloPerson)
 //        }) { error in
@@ -675,7 +675,7 @@ extension ProtocolAllViewModel {
         self.personApi.get_person(id: playerId) { result in
             switch result {
             case .success(let person):
-                success(SoloPerson(person: person.first!))
+                success(SinglePerson(person: person.first!))
             case .message(let message):
                 Print.m("message \(message.message)")
             case .failure(RequestError.notExpectedData):

@@ -11,7 +11,7 @@ import UIKit
 
 protocol CommandCreateLKView : MvpView {
     
-    func onGetTournamentsSuccess(tournaments: Tournaments)
+    func onGetTournamentsSuccess(tournaments: [Tourney])
     func onGetTournamentsFailure(error: Error)
     
     func onGetClubsSuccess(clubs: [Club])

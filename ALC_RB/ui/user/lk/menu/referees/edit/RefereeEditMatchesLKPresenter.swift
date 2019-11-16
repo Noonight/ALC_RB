@@ -75,7 +75,7 @@ class RefereeEditMatchesLKPresenter: MvpPresenter<RefereeEditMatchesLKTableViewC
         }
     }
     
-    private func prepareTableData(activeMatches: ActiveMatches, referees: Players, clubs: [SoloClub]) -> [RefereeEditMatchesLKTableViewCell.CellModel] {
+    private func prepareTableData(activeMatches: ActiveMatches, referees: Players, clubs: [Club]) -> [RefereeEditMatchesLKTableViewCell.CellModel] {
         var cellModels: [RefereeEditMatchesLKTableViewCell.CellModel] = []
         
         let activeMatches = activeMatches

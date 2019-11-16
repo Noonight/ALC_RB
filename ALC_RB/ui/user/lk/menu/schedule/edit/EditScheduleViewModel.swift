@@ -13,16 +13,17 @@ import RxSwift
 class EditScheduleViewModel {
     struct SlidersData {
         var defaultValues: [Referee]
-        var allReferees: Players
+        // DEPRECATED: [Person]
+        var allReferees: [Person]
         
-        init(defaultValues: [Referee], allReferees: Players) {
+        init(defaultValues: [Referee], allReferees: [Person]) {
             self.defaultValues = defaultValues
             self.allReferees = allReferees
         }
         
         init() {
             defaultValues = []
-            allReferees = [Person]()
+//            allReferees = [Person]()
         }
         
 //        func setReferee(oldRefId: String, newRefId: String) {
@@ -36,10 +37,10 @@ class EditScheduleViewModel {
     var error: PublishSubject<Error> = PublishSubject()
     var message = PublishSubject<SingleLineMessage>()
 //    var activeMatch: PublishSubject<ActiveMatch> = PublishSubject()
-//    var referees: PublishSubject<Players> = PublishSubject()
+//    var referees: PublishSubject<[Person]> = PublishSubject()
     
     var comingCellModel: Variable<ScheduleRefTableViewCell.CellModel> = Variable<ScheduleRefTableViewCell.CellModel>(ScheduleRefTableViewCell.CellModel())
-    var comingReferees: Variable<Players> = Variable<Players>([Person]())
+    var comingReferees: Variable<[Person]> = Variable<[Person]>([])
     
     var sliderData: PublishSubject<SlidersData> = PublishSubject()
     
@@ -62,7 +63,8 @@ class EditScheduleViewModel {
         personApi.get_person { result in
             switch result {
             case .success(let persons):
-                self.comingReferees.value = Players(persons: persons, count: persons.count)
+                self.comingReferees.value = persons
+//                self.comingReferees.value = [Person](persons: persons, count: persons.count)
             case .message(let message):
                 Print.m(message.message)
             case .failure(.error(let error)):

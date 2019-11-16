@@ -18,28 +18,28 @@ class ProtocolPlayersController {
         }
     }
     
-    var players: [LIPlayer] = []
+    var players: [Person] = []
     var playersSwitch: [PlayersSwitch] = []
-    var matchPlayers: [LIPlayer] = []
+    var matchPlayers: [Person] = []
     
-    init(teamPlayers: [LIPlayer], matchPlayers: [LIPlayer]) {
+    init(teamPlayers: [Person], matchPlayers: [Person]) {
         players = teamPlayers
         self.matchPlayers = matchPlayers
         for i in 0..<players.count {
             if matchPlayers.contains(where: { player -> Bool in
-                return player.playerId == players[i].playerId
+                return player.id == players[i].id
             }) {
-                playersSwitch.append(PlayersSwitch(key: players[i].playerId, value: true))
+                playersSwitch.append(PlayersSwitch(key: players[i].id, value: true))
             } else {
-                playersSwitch.append(PlayersSwitch(key: players[i].playerId, value: false))
+                playersSwitch.append(PlayersSwitch(key: players[i].id, value: false))
             }
         }
     }
     
-    init(players: [LIPlayer]) {
+    init(players: [Person]) {
         self.players = players
         for i in 0..<players.count {
-            playersSwitch.append(PlayersSwitch(key: players[i].playerId, value: true))
+            playersSwitch.append(PlayersSwitch(key: players[i].id, value: true))
         }
     }
     
@@ -48,18 +48,18 @@ class ProtocolPlayersController {
         self.playersSwitch = []
     }
     
-    init(players: [LIPlayer], playersSwitch: [PlayersSwitch]) {
+    init(players: [Person], playersSwitch: [PlayersSwitch]) {
         self.players = players
         self.playersSwitch = playersSwitch
     }
     
-    func add(_ player: LIPlayer) {
+    func add(_ player: Person) {
         self.players.append(player)
     }
     
-    func getPlayerById(_ playerId: String) -> LIPlayer? {
+    func getPlayerById(_ playerId: String) -> Person? {
         return self.players.filter({ liPlayer -> Bool in
-            return liPlayer.playerId == playerId
+            return liPlayer.id == playerId
         }).first
     }
     
@@ -109,10 +109,10 @@ class ProtocolPlayersController {
 //                    }.first?.key)!)
 //            }
             if self.playersSwitch.contains(where: { switcher -> Bool in
-                return switcher.key == item.playerId && switcher.value
+                return switcher.key == item.id && switcher.value
             }) {
                 resultArray.append((playersSwitch.filter({ switcher -> Bool in
-                    return switcher.key == item.playerId && switcher.value
+                    return switcher.key == item.id && switcher.value
                 }).first?.key)!)
             }
         }
@@ -124,12 +124,12 @@ class ProtocolPlayersController {
         self.playersSwitch = playersSwitch
     }
     
-    func getPlayingPlayers() -> [LIPlayer] {
-        var resultArray: [LIPlayer] = []
+    func getPlayingPlayers() -> [Person] {
+        var resultArray: [Person] = []
         for item in players
         {
             if self.playersSwitch.contains(where: { switcher -> Bool in
-                return switcher.key == item.playerId && switcher.value
+                return switcher.key == item.id && switcher.value
             }) {
                 resultArray.append(item)
             }
@@ -140,9 +140,9 @@ class ProtocolPlayersController {
     
     
     
-    func getPlayerByIdOfPlayingPlayers(_ id: String) -> LIPlayer? {
+    func getPlayerByIdOfPlayingPlayers(_ id: String) -> Person? {
         return self.getPlayingPlayers().filter({ player -> Bool in
-            return player.playerId == id
+            return player.id == id
         }).first
     }
 }

@@ -91,7 +91,7 @@ class EditRefereeTeamTableViewController: UITableViewController {
     
     // MARK: - Prepare tableModel
     
-    func prepareTableModel(destinationData: [LIReferee]) {
+    func prepareTableModel(destinationData: [Referee]) {
         func clear() {
             tableModel.tableModel[0].referee_id = ""
             tableModel.tableModel[1].referee_id = ""

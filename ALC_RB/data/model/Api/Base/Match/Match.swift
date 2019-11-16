@@ -12,68 +12,34 @@ struct Match: Codable {
     
     var id: String
     
-    var league: IdRefObjectWrapper<League>?
-    var teamOne: IdRefObjectWrapper<Team>?
-    var teamTwo: IdRefObjectWrapper<Team>?
+    var league: IdRefObjectWrapper<League>? = nil
+    var teamOne: IdRefObjectWrapper<Team>? = nil
+    var teamTwo: IdRefObjectWrapper<Team>? = nil
     
-    var date: Date?
+    var date: Date? = nil
     
-    var stage: IdRefObjectWrapper<Stage>?
+    var stage: IdRefObjectWrapper<Stage>? = nil
     
-    var round: String?
-    var tour: String?
-    var group: String?
+    var round: String? = nil
+    var tour: String? = nil
+    var group: String? = nil
     
-    var place: IdRefObjectWrapper<Stadium>?
+    var place: IdRefObjectWrapper<Stadium>? = nil
     
-    var events: [Event]?
-    var playersList: [IdRefObjectWrapper<Person>]?
-    var referees: [Referee]?
+    var events: [Event]? = nil
+    var playersList: [IdRefObjectWrapper<Person>]? = nil
+    var referees: [Referee]? = nil
     
-    var played: Bool?
-    var winner: String? // teamOne, teamTwo, draw
-    var score: String?
-    var fouls: String?
-    var autoGoals: String?
+    var played: Bool? = nil
+    var winner: String? = nil // teamOne, teamTwo, draw
+    var score: String? = nil
+    var fouls: String? = nil
+    var autoGoals: String? = nil
     
-    var createdAt: Date?
-    var updatedAt: Date?
-    var v: Int?
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        self.id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
-        
-        self.league = try container.decodeIfPresent(IdRefObjectWrapper<League>.self, forKey: .league) ?? nil
-        self.teamOne = try container.decodeIfPresent(IdRefObjectWrapper<Team>.self, forKey: .teamOne) ?? nil
-        self.teamTwo = try container.decodeIfPresent(IdRefObjectWrapper<Team>.self, forKey: .teamTwo) ?? nil
-        
-        self.date = try container.decodeIfPresent(Date.self, forKey: .date) ?? nil
-        
-        self.stage = try container.decodeIfPresent(IdRefObjectWrapper<Stage>.self, forKey: .stage) ?? nil
-        
-        self.round = try container.decodeIfPresent(String.self, forKey: .round) ?? nil
-        self.tour = try container.decodeIfPresent(String.self, forKey: .tour) ?? nil
-        self.group = try container.decodeIfPresent(String.self, forKey: .group) ?? nil
-        
-        self.place = try container.decodeIfPresent(IdRefObjectWrapper<Stadium>.self, forKey: .place) ?? nil
-        
-        self.events = try container.decodeIfPresent([Event].self, forKey: .events) ?? nil
-        self.playersList = try container.decodeIfPresent([IdRefObjectWrapper<Person>].self, forKey: .playersList) ?? nil
-        self.referees = try container.decodeIfPresent([Referee].self, forKey: .referees) ?? []
-        
-        self.played = try container.decodeIfPresent(Bool.self, forKey: .played) ?? nil
-        self.winner = try container.decodeIfPresent(String.self, forKey: .winner) ?? nil
-        self.score = try container.decodeIfPresent(String.self, forKey: .score) ?? nil
-        self.fouls = try container.decodeIfPresent(String.self, forKey: .fouls) ?? nil
-        self.autoGoals = try container.decodeIfPresent(String.self, forKey: .autoGoals) ?? nil
-        
-        self.createdAt = try container.decodeIfPresent(Date.self, forKey: .createdAt) ?? nil
-        self.updatedAt = try container.decodeIfPresent(Date.self, forKey: .updatedAt) ?? nil
-        self.v = try container.decodeIfPresent(Int.self, forKey: .v) ?? nil
-    }
-    
+    var createdAt: Date? = nil
+    var updatedAt: Date? = nil
+    var v: Int? = nil
+
     enum CodingKeys: String, CodingKey {
         
         case id = "_id"
@@ -140,111 +106,5 @@ extension Match {
         createdAt = nil
         updatedAt = nil
         v = nil
-    }
-    
-    init(data: Data) throws {
-        self = try JSONDecoder().decode(Match.self, from: data)
-    }
-    
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-    
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-    
-//    func with(
-//        id: String? = nil,
-//        date: Date? = nil,
-//        stage: String? = nil,
-//        played: Bool? = nil,
-//        tour: String? = nil,
-//        //        playersList: [JSONAny]? = nil,
-//        playersList: [String]? = nil,
-//
-//        place: String? = nil,
-//        //        winner: JSONNull?? = nil,
-//        winner: String? = nil,
-//
-//        //score: JSONNull?? = nil,
-//        score: String? = "",
-//        fouls: String? = "",
-//        //        autoGoals: JSONNull?? = nil,
-//        autoGoals: String? = nil,
-//
-//        league: String? = nil,
-//        //        teamOne: Team? = nil,
-//        //        teamTwo: Team? = nil,
-//        teamOne: Team? = nil,
-//        teamTwo: Team? = nil,
-//
-//        //        events: [JSONAny]? = nil,
-//        //        referees: [JSONAny]? = nil,
-//        events: [LIEvent]? = nil,
-//        referees: [Referee]? = nil,
-//
-//        createdAt: String? = nil,
-//        updatedAt: String? = nil,
-//        v: Int? = nil,
-//        leagueID: String? = nil
-//        ) -> Match {
-//
-//        var match = Match()
-//        match.id = id ?? self.id
-//        match.date = date ?? self.date
-//        match.stage = stage ?? self.stage
-//        match.played = played ?? self.played
-//        match.tour = tour ?? self.tour
-//        match.playersList = playersList ?? self.playersList
-//        match.place = place ?? self.place
-//        match.winner = winner ?? self.winner
-//        match.score = score ?? self.score
-//        match.fouls = fouls ?? self.fouls
-//        match.autoGoals = autoGoals ?? self.autoGoals
-//        match.league = league ?? self.league
-//        match.teamOne = teamOne ?? self.teamOne
-//        match.teamTwo = teamTwo ?? self.teamTwo
-//        match.events = events ?? self.events
-//        match.referees = referees ?? self.referees
-//        match.createdAt = createdAt ?? self.createdAt
-//        match.updatedAt = updatedAt ?? self.updatedAt
-//        match.v = v ?? self.v
-//        match.leagueID = leagueID ?? self.leagueID
-//
-//        //        return Match(
-//        //            id: id ?? self.id,
-//        //            date: date ?? self.date,
-//        //            stage: stage ?? self.stage,
-//        //            played: played ?? self.played,
-//        //            tour: tour ?? self.tour,
-//        //            playersList: playersList ?? self.playersList,
-//        //            place: place ?? self.place,
-//        //            winner: winner ?? self.winner,
-//        //            score: score ?? self.score,
-//        //            fouls: fouls ?? self.fouls,
-//        //            autoGoals: autoGoals ?? self.autoGoals,
-//        //            league: league ?? self.league,
-//        //            teamOne: teamOne ?? self.teamOne,
-//        //            teamTwo: teamTwo ?? self.teamTwo,
-//        //            events: events ?? self.events,
-//        //            referees: referees ?? self.referees,
-//        //            createdAt: createdAt ?? self.createdAt,
-//        //            updatedAt: updatedAt ?? self.updatedAt,
-//        //            v: v ?? self.v,
-//        //            leagueID: leagueID ?? self.leagueID
-//        //        )
-//        return match
-//    }
-    
-    func jsonData() throws -> Data {
-        return try JSONEncoder().encode(self)
-    }
-    
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
     }
 }

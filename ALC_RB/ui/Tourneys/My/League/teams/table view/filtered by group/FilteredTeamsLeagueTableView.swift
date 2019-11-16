@@ -29,7 +29,7 @@ class FilteredTeamsLeagueTableView : NSObject {
         }
     }
     
-    init(dataSource: [Team], groups: [_Group]) {
+    init(dataSource: [Team], groups: [Group]) {
         super.init()
         self.initDataSource(teams: dataSource, groups: groups)
     }
@@ -42,7 +42,7 @@ class FilteredTeamsLeagueTableView : NSObject {
 // MARK: INIT
 
 extension FilteredTeamsLeagueTableView {
-    func initDataSource(teams: [Team], groups: [_Group]) {
+    func initDataSource(teams: [Team], groups: [Group]) {
         self.dataSource = FilterTeamsByGroupHelper.filter(teams: teams, groups: groups)
     }
 }

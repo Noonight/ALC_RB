@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol ClubCreateProtocol: MvpView {
-    func responseCreateClubSuccessful(soloClub: SoloClub)
+    func responseCreateClubSuccessful(soloClub: Club)
     func responseCreateClubMessageSuccessful(message: SingleLineMessage)
     func responseCreateClubFailure(error: Error)
     
@@ -29,10 +29,12 @@ class ClubCreatePresenter: MvpPresenter<ClubCreateViewController> {
     }
     
     private var dataManager: ApiRequests?
+    private var clubApi: ClubApi?
     var createClubCache: CreateClubCache?
     
-    init(dataManager: ApiRequests) {
+    init(dataManager: ApiRequests, clubApi: ClubApi) {
         self.dataManager = dataManager
+        self.clubApi = clubApi
     }
     
     func create(token: String, createClub: CreateClub, image: UIImage?) {
@@ -40,6 +42,7 @@ class ClubCreatePresenter: MvpPresenter<ClubCreateViewController> {
             self.getView().fieldsIsEmpty()
         } else {
             self.createClubCache = CreateClubCache(createClub: createClub, image: image)
+            dataManage
             dataManager?.post_createClub(token: token, createClub: createClub, image: image, response_success: { soloClub in
                 self.getView().responseCreateClubSuccessful(soloClub: soloClub)
             }, response_message: { message in

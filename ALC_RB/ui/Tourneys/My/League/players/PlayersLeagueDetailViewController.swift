@@ -37,7 +37,7 @@ class PlayersLeagueDetailViewController: UIViewController {
     
     let backgroundView = UIView()
     
-    var playersArray: [Player] = [Player]() {
+    var playersArray: [DEPRECATED] = [DEPRECATED]() {
         didSet {
             updateUI()
         }
@@ -55,7 +55,7 @@ class PlayersLeagueDetailViewController: UIViewController {
         super.viewDidLoad()
         initPresenter()
         
-        for i in leagueDetailModel.leagueInfo.league.teams! {
+        for i in leagueDetailModel.league.teams! {
             let filteredPlayers = i.players?.filter({ liPlayer -> Bool in
                 return liPlayer.getInviteStatus() == .accepted || liPlayer.getInviteStatus() == .approved
             })
@@ -265,7 +265,7 @@ extension PlayersLeagueDetailViewController: UITableViewDataSource {
         return cell
     }
     
-    func configureCell(cell: PlayersLeagueTableViewCell, leagueDetailModel: LeagueDetailModel, player: LIPlayer) {
+    func configureCell(cell: PlayersLeagueTableViewCell, leagueDetailModel: LeagueDetailModel, player: DEPRECATED) {
         func setupCell(person: Person)
         {
             cell.name_label.text = person.getSurnameNP()
@@ -314,7 +314,7 @@ extension PlayersLeagueDetailViewController: UITableViewDataSource {
     }
     
 //    func getClubByUserId(user id: String) -> String {
-//        let teams = leagueDetailModel.leagueInfo.league.teams
+//        let teams = leagueDetailModel.league.teams
 //        for i in teams! {
 //            for j in i.players! {
 //                if j.playerId == id {

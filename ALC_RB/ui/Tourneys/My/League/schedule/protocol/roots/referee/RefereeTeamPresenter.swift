@@ -29,7 +29,7 @@ class RefereeTeamPresenter: MvpPresenter<RefereeTeamTableViewController> {
 //        dataManager.get_getPerson(id: id, success: success, failure: failure)
     }
     
-    func getReferee(referee id: String, get_referee: @escaping (SoloPerson) -> (), get_error: @escaping (Error) -> ()) {
+    func getReferee(referee id: String, get_referee: @escaping (SinglePerson) -> (), get_error: @escaping (Error) -> ()) {
 //        Alamofire
 //            .request(ApiRoute.getApiURL(.soloUser, id: id))
 //            .validate()
@@ -46,7 +46,7 @@ class RefereeTeamPresenter: MvpPresenter<RefereeTeamTableViewController> {
         personApi.get_person(id: id) { result in
             switch result {
             case .success(let persons):
-                get_referee(SoloPerson(person:persons.first!))
+                get_referee(SinglePerson(person:persons.first!))
             case .failure(.error(let error)):
                 get_error(error)
             default:

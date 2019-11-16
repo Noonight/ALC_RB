@@ -18,7 +18,7 @@ final class EditProfileViewModel {
     
     let regionViewModel: RegionsViewModel
     let choosedImage = BehaviorRelay<UIImage?>(value: nil)
-    let editedPerson = PublishSubject<SoloPerson>()
+    let editedPerson = PublishSubject<SinglePerson>()
     var authorizedUser: AuthUser? {
         get {
             return userDefaults.getAuthorizedUser()

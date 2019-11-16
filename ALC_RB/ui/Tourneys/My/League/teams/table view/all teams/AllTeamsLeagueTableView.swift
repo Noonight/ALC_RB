@@ -19,6 +19,7 @@ class AllTeamsLeagueTableView : NSObject {
     
     let tableHeaderViewCellNib = UINib(nibName: "TournamentTeamHeaderCellTableViewCell", bundle: nil)
     var _dataSource: [Team] = []
+    // TODO: team have been changed
     var dataSource: [Team] {
         get {
             return self._dataSource
@@ -26,8 +27,8 @@ class AllTeamsLeagueTableView : NSObject {
         set {
             var newVal = newValue
             newVal = newVal.sorted { lTeam, rTeam -> Bool in
-                return lTeam.groupScore ?? 0 > rTeam.groupScore ?? 0 // sort from high to low
-            }// MARK: TODO with correct status
+//                return lTeam.groupScore ?? 0 > rTeam.groupScore ?? 0 // sort from high to low
+            }
             self._dataSource = newVal
         }
     }

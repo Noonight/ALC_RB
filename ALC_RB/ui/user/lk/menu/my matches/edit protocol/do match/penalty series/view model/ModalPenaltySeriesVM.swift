@@ -19,7 +19,7 @@ class ModalPenaltySeriesVM {
     var teamTwoTitle = ""
     
     // penalty series team events 
-    var events: [LIEvent] = []
+    var events: [Event] = []
     var teamOneCountOfPenalties = 0
     var teamTwoCountOfPenalties = 0
     var teamOneScore = 0
@@ -31,7 +31,7 @@ class ModalPenaltySeriesVM {
     
     // MARK: INIT
     
-    public func initData(teamOneTitle: String, teamTwoTitle: String, events: [LIEvent], match: Match) {
+    public func initData(teamOneTitle: String, teamTwoTitle: String, events: [Event], match: Match) {
         self.teamOneTitle = teamOneTitle
         self.teamTwoTitle = teamTwoTitle
         self.events = events
@@ -47,9 +47,7 @@ class ModalPenaltySeriesVM {
         {
             for i in (0...events.count - 1).reversed()
             {
-                if events[i].getEventType() == .team(.penaltySeriesSuccess)
-                    || events[i].getEventType() == .team(.penaltySeriesFailure)
-                {
+                if events[i].type! == .penaltySeriesSuccess || events[i].type! == .penaltySeriesFailure {
                     events.remove(at: i)
                     return
                 }
@@ -107,7 +105,7 @@ class ModalPenaltySeriesVM {
         return self.getGroupPenaltyModelFor(team: team)
     }
     
-    func prepareTeamPenalties(team: TeamEnum) -> [LIEvent] {
+    func prepareTeamPenalties(team: TeamEnum) -> [Event] {
         return getPenalties(events: getEventsWith(team: team, events: self.events))
     }
     
@@ -123,22 +121,24 @@ extension ModalPenaltySeriesVM {
             if currentTurn == .one
             {
                 guard let teamId = self.match.teamOne else { return }
-                self.events.append(LIEvent(
-                    matchID: self.match.id,
-                    eventType: .penaltySeriesSuccess,
-                    playerID: teamId,
-                    time: .penaltySeries)
-                )
+//                self.events.append(Event(
+//                    matchID: self.match.id,
+//                    eventType: .penaltySeriesSuccess,
+//                    playerID: teamId,
+//                    time: .penaltySeries)
+//                )
+                self.events.append(Event(id: self.match.id, type: Event.eType.penaltySeriesSuccess, player: nil, team: teamId, time: Event.Time.penaltySeries))
             }
             if currentTurn == .two
             {
                 guard let teamId = self.match.teamTwo else { return }
-                self.events.append(LIEvent(
-                    matchID: self.match.id,
-                    eventType: .penaltySeriesSuccess,
-                    playerID: teamId,
-                    time: .penaltySeries)
-                )
+//                self.events.append(Event(
+//                    matchID: self.match.id,
+//                    eventType: .penaltySeriesSuccess,
+//                    playerID: teamId,
+//                    time: .penaltySeries)
+//                )
+                self.events.append(Event(id: self.match.id, type: .penaltySeriesSuccess, player: nil, team: teamId, time: Event.Time.penaltySeries))
             }
         }
         if penaltyState == .failure
@@ -146,20 +146,22 @@ extension ModalPenaltySeriesVM {
             if currentTurn == .one
             {
                 guard let teamId = self.match.teamOne else { return }
-                self.events.append(LIEvent(
-                    matchID: self.match.id,
-                    eventType: .penaltySeriesFailure,
-                    playerID: teamId,
+                self.events.append(Event(
+                    id: self.match.id,
+                    type: .penaltySeriesFailure,
+                    player: nil,
+                    team: teamId,
                     time: .penaltySeries)
                 )
             }
             if currentTurn == .two
             {
                 guard let teamId = self.match.teamTwo else { return }
-                self.events.append(LIEvent(
-                    matchID: self.match.id,
-                    eventType: .penaltySeriesFailure,
-                    playerID: teamId,
+                self.events.append(Event(
+                    id: self.match.id,
+                    type: .penaltySeriesFailure,
+                    player: nil,
+                    team: teamId,
                     time: .penaltySeries)
                 )
             }
@@ -168,7 +170,7 @@ extension ModalPenaltySeriesVM {
     
     private func getGroupPenaltyModelFor(team: TeamEnum) -> [GroupPenaltyState] {
         var resultArray: [GroupPenaltyState] = []
-        var teamPenalties: [LIEvent] = []
+        var teamPenalties: [Event] = []
         var localCounter = 0
         if team == .one
         {
@@ -176,11 +178,11 @@ extension ModalPenaltySeriesVM {
             var penaltyStateElement = GroupPenaltyState(first: .none, second: .none, third: .none)
             for event in teamPenalties
             {
-                if event.getEventType() == .team(.penaltySeriesSuccess)
+                if event.type == .penaltySeriesSuccess
                 {
                     penaltyStateElement.addState(.success)
                 }
-                if event.getEventType() == .team(.penaltySeriesFailure)
+                if event.type == .penaltySeriesFailure
                 {
                     penaltyStateElement.addState(.failure)
                 }
@@ -201,11 +203,11 @@ extension ModalPenaltySeriesVM {
             var penaltyStateElement = GroupPenaltyState(first: .none, second: .none, third: .none)
             for event in teamPenalties
             {
-                if event.getEventType() == .team(.penaltySeriesSuccess)
+                if event.type == .penaltySeriesSuccess
                 {
                     penaltyStateElement.addState(.success)
                 }
-                if event.getEventType() == .team(.penaltySeriesFailure)
+                if event.type == .penaltySeriesFailure
                 {
                     penaltyStateElement.addState(.failure)
                 }
@@ -227,29 +229,31 @@ extension ModalPenaltySeriesVM {
         return resultArray
     }
     
-    private func getSuccessPenalties(events: [LIEvent]) -> [LIEvent] {
+    private func getSuccessPenalties(events: [Event]) -> [Event] {
         return events.filter({ event -> Bool in
-            return event.getEventType() == .team(.penaltySeriesSuccess)
+            return event.type == .penaltySeriesSuccess
         })
     }
     
-    private func getPenalties(events: [LIEvent]) -> [LIEvent] {
+    private func getPenalties(events: [Event]) -> [Event] {
         return events.filter({ event -> Bool in
-            return event.getEventType() == .team(.penaltySeriesSuccess) || event.getEventType() == .team(.penaltySeriesFailure)
+            return event.type == .penaltySeriesSuccess || event.type == .penaltySeriesFailure
         })
     }
     
-    private func getEventsWith(team: TeamEnum, events: [LIEvent]) -> [LIEvent] {
+    private func getEventsWith(team: TeamEnum, events: [Event]) -> [Event] {
         if team == .one
         {
             return events.filter({ event -> Bool in
-                return event.player == self.match.teamOne
+                return event.team?.orEqual(self.match.teamOne?.getId() ?? "", { $0.id == self.match.teamOne?.getValue()?.id ?? "" }) ?? false
+//                return event.player == self.match.teamOne
             })
         }
         if team == .two
         {
             return events.filter({ event -> Bool in
-                return event.player == self.match.teamTwo
+                return event.team?.orEqual(self.match.teamTwo?.getId() ?? "", { $0.id == self.match.teamTwo?.getValue()?.id ?? "" }) ?? false
+//                return event.player == self.match.teamTwo
             })
         }
         return []

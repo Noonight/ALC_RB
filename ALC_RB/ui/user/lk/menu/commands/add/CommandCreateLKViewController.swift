@@ -170,7 +170,7 @@ class CommandCreateLKViewController: BaseStateViewController, UITextFieldDelegat
         return true
     }
     
-    func filterPendingTournaments(tournaments: Tournaments) -> [League] {
+    func filterPendingTournaments(tournaments: [Tourney]) -> [League] {
         return tournaments.leagues.filter({ league -> Bool in
             return league.status == League.Status.pending
 //            return league.getStatus() == League.Statuses.pending
@@ -223,7 +223,7 @@ extension CommandCreateLKViewController : CommandCreateLKView {
 //        showToast(message: message.message, seconds: 5)
     }
     
-    func onGetTournamentsSuccess(tournaments: Tournaments) {
+    func onGetTournamentsSuccess(tournaments: [Tourney]) {
 //        viewModel.tournaments = tournaments
         viewModel.tournaments = filterPendingTournaments(tournaments: tournaments)
 //        setState(state: .normal)

@@ -11,16 +11,16 @@ import UIKit
 class OngoingLeaguesLKTableViewController: BaseStateTableViewController {
 
     struct TableModel {
-        var tournaments: Tournaments!
+        var tournaments: [Tourney]!
         var clubs: [Club]!
         
-        init(tournaments: Tournaments, clubs: [Club]) {
+        init(tournaments: [Tourney], clubs: [Club]) {
             self.tournaments = tournaments
             self.clubs = clubs
         }
         
         init () {
-            self.tournaments = Tournaments()
+            self.tournaments = [Tourney]()
             self.clubs = [Club]()
         }
         
@@ -118,7 +118,7 @@ extension OngoingLeaguesLKTableViewController: OngoingLeaguesLKView {
         Print.d(error: error)
     }
     
-    func getTournamentsSuccess(tournaments: Tournaments) {
+    func getTournamentsSuccess(tournaments: [Tourney]) {
         tableModel.tournaments = tournaments
     }
     

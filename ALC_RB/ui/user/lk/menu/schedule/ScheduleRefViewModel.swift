@@ -13,15 +13,15 @@ class ScheduleRefViewModel {
     struct DataModel {
         var activeMatches = ActiveMatches()
         var referees = [Person]()
-        var clubs: [SoloClub] = []
+        var clubs: [Club] = []
         
-        init(activeMatches: ActiveMatches, referees: Players, clubs: [SoloClub]) {
+        init(activeMatches: ActiveMatches, referees: Players, clubs: [Club]) {
             self.activeMatches = activeMatches
             self.referees = referees
             self.clubs = clubs
         }
         
-        init(tuple: (ActiveMatches, Players, [SoloClub])) {
+        init(tuple: (ActiveMatches, Players, [Club])) {
             self.activeMatches = tuple.0
             self.referees = tuple.1
             self.clubs = tuple.2

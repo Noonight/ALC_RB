@@ -25,11 +25,12 @@ class ClubLKPresenter: MvpPresenter<ClubLKViewController> {
     
     func getClubs() {
         self.getView().setState(state: .loading)
-        apiService.get_clubs(get_success: { (clubs) in
-            self.getView().getClubsSuccess(clubs: clubs)
-        }) { (error) in
-            self.getView().getClubsFailure(error: error)
-        }
+        // DEPRECATED: clubs
+//        apiService.get_clubs(get_success: { (clubs) in
+//            self.getView().getClubsSuccess(clubs: clubs)
+//        }) { (error) in
+//            self.getView().getClubsFailure(error: error)
+//        }
     }
     
     func getImage(imagePath: String) {

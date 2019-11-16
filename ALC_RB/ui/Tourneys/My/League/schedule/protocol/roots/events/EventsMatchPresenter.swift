@@ -14,11 +14,11 @@ class EventsMatchPresenter: MvpPresenter<EventsMatchTableViewController> {
     
     private let apiPerson = PersonApi()
     
-    func getPlayer(player id: String, get_player: @escaping (SoloPerson) -> (), get_error: @escaping (Error) -> ()) {
+    func getPlayer(player id: String, get_player: @escaping (SinglePerson) -> (), get_error: @escaping (Error) -> ()) {
         apiPerson.get_person() { result in
             switch result {
             case .success(let person):
-                get_player(SoloPerson(person: person.first!))
+                get_player(SinglePerson(person: person.first!))
             case .failure(.error(let error)):
                 get_error(error)
             default:

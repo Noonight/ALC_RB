@@ -273,14 +273,14 @@ extension TournamentSearchVC {
     
     func showACP(sender: UIButton) {
         self.acp = ActionSheetStringPicker(title: "", rows: self.viewModel?.prepareRegions().map { regionMy -> String in
-            return regionMy.name
+            return regionMy.name!
             }, initialSelection: 0, doneBlock: { (picker, index, value) in
             
             if let choosedRegion = self.viewModel?.findRegionByName(name: value as! String) {
                 
                 self.viewModel?.updateChoosenRegion(newRegion: choosedRegion)
                 
-                sender.setTitle(self.makeButtonTitle(regionName: choosedRegion.name), for: .normal)
+                sender.setTitle(self.makeButtonTitle(regionName: choosedRegion.name!), for: .normal)
                 
                 self.refreshData()
             }

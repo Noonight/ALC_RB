@@ -83,14 +83,14 @@ class EditMatchProtocolViewController: UIViewController {
     
     func setupView() {
         
-        teamOneTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
+        teamOneTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .one)
         
-        teamTwoTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .two)
+        teamTwoTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .two)
         
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamOne!, league: leagueDetailModel.leagueInfo.league)) { (image) in
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamOne!, league: leagueDetailModel.league)) { (image) in
             self.teamOneLogo.image = image.af_imageRoundedIntoCircle()
         }
-        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamTwo!, league: leagueDetailModel.leagueInfo.league)) { (image) in
+        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamTwo!, league: leagueDetailModel.league)) { (image) in
             self.teamTwoLogo.image = image.af_imageRoundedIntoCircle()
         }
     }
@@ -135,23 +135,23 @@ class EditMatchProtocolViewController: UIViewController {
 
 extension EditMatchProtocolViewController {
     
-    func connectPlayersOfTeamOneAndTwo() -> [LIPlayer] {
-        return [teamOnePlayersController.getPlayingPlayers(), teamTwoPlayersController.getPlayingPlayers()].flatMap({ liPlayer -> [LIPlayer] in
+    func connectPlayersOfTeamOneAndTwo() -> [DEPRECATED] {
+        return [teamOnePlayersController.getPlayingPlayers(), teamTwoPlayersController.getPlayingPlayers()].flatMap({ liPlayer -> [DEPRECATED] in
             return liPlayer
         })
     }
     
-    func getPlayersTeam(team id: String) -> [LIPlayer] {
-        return (leagueDetailModel.leagueInfo.league.teams?.filter({ (team) -> Bool in
+    func getPlayersTeam(team id: String) -> [DEPRECATED] {
+        return (leagueDetailModel.league.teams?.filter({ (team) -> Bool in
             return team.id == id
         }).first?.players)!
     }
     
-    func getMatchPlayers(team id: String) -> [LIPlayer] {
-        let teamPlayers = (leagueDetailModel.leagueInfo.league.teams?.filter({ team -> Bool in
+    func getMatchPlayers(team id: String) -> [DEPRECATED] {
+        let teamPlayers = (leagueDetailModel.league.teams?.filter({ team -> Bool in
             return team.id == id
         }).first?.players!)!
-        var players = [LIPlayer]()
+        var players = [DEPRECATED]()
         for teamPlayer in teamPlayers {
             for playerId in match.playersList {
                 if teamPlayer.playerId == playerId {
@@ -245,7 +245,7 @@ extension EditMatchProtocolViewController {
         case is EditTeamProtocolTableViewController:
             let controller = destination as! EditTeamProtocolTableViewController
             controller.playersController = teamOnePlayersController
-            controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
+            controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .one)
 //            controller.saveProtocol = self
         case is EditRefereeTeamTableViewController:
             let controller = destination as! EditRefereeTeamTableViewController
@@ -279,11 +279,11 @@ extension EditMatchProtocolViewController {
             switch team{
             case .one:
                 controller.playersController = teamOnePlayersController
-                controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .one)
+                controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .one)
                 controller.saveProtocol = self
             case .two:
                 controller.playersController = teamTwoPlayersController
-                controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.leagueInfo.league, match: match, team: .two)
+                controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .two)
                 controller.saveProtocol = self
             }
         default:

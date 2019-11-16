@@ -1,5 +1,5 @@
 //
-//  Player.swift
+//  DEPRECATED.swift
 //  ALC_RB
 //
 //  Created by Ayur Arkhipov on 15.11.2019.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Player: Codable {
+struct DEPRECATED: Codable {
     var inviteStatus: String
     var number: String
     var activeYellowCards, yellowCards, redCards, activeDisquals: Int
@@ -79,9 +79,9 @@ enum InviteStatus: String, Codable {
 }
 
 
-extension Player {
+extension DEPRECATED {
     init(data: Data) throws {
-        self = try JSONDecoder().decode(Player.self, from: data)
+        self = try JSONDecoder().decode(DEPRECATED.self, from: data)
     }
     
     init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -107,8 +107,8 @@ extension Player {
         goals: Int? = nil,
         id: String? = nil,
         playerID: String? = nil
-        ) -> Player {
-        var player = Player()
+        ) -> DEPRECATED {
+        var player = DEPRECATED()
         player.inviteStatus = inviteStatus ?? self.inviteStatus
         player.number = number ?? self.number
         player.activeYellowCards = activeYellowCards ?? self.activeYellowCards

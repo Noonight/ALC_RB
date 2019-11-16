@@ -26,7 +26,7 @@ class CommandAddPlayerTableViewCell: UITableViewCell {
     
     @IBOutlet weak var cell_add_player_btn: UIButton!
     
-    var usedPlayers: [Player] = []
+    var usedPlayers: [DEPRECATED] = []
     
     var person: Person?
     var status: Status?

@@ -74,7 +74,7 @@ extension ClubCreateViewController: ClubCreateProtocol {
         showAlert(message: "Заполните все поля")
     }
     
-    func responseCreateClubSuccessful(soloClub: SoloClub) {
+    func responseCreateClubSuccessful(soloClub: Club) {
         var user = userDefaults.getAuthorizedUser()
         user?.person.club = soloClub.club.id
         userDefaults.setAuthorizedUser(user: user!)

@@ -104,12 +104,13 @@ class EditTeamProtocolTableViewController: UITableViewController {
         // remove if found
         if sender.isOn
         {
+            // DEPRECATED: players
 //            if removedPlayers.contains(playersController.players[sender.tag].playerId)
-            if removedPlayers.contains(tmpPlayersController.players[sender.tag].playerId)
+            if removedPlayers.contains(tmpPlayersController.players[sender.tag].id)
             {
                 removedPlayers.removeAll { str -> Bool in
 //                    return str == playersController.players[sender.tag].playerId
-                    return str == tmpPlayersController.players[sender.tag].playerId
+                    return str == tmpPlayersController.players[sender.tag].id
                 }
             }
         }
@@ -118,14 +119,14 @@ class EditTeamProtocolTableViewController: UITableViewController {
         if !sender.isOn
         {
 //            if !removedPlayers.contains(playersController.players[sender.tag].playerId)
-            if !removedPlayers.contains(tmpPlayersController.players[sender.tag].playerId)
+            if !removedPlayers.contains(tmpPlayersController.players[sender.tag].id)
             {
 //                removedPlayers.append(playersController.players[sender.tag].playerId)
-                removedPlayers.append(tmpPlayersController.players[sender.tag].playerId)
+                removedPlayers.append(tmpPlayersController.players[sender.tag].id)
             }
         }
         // modified
-        tmpPlayersController.setPlayerValue(playerId: tmpPlayersController.players[sender.tag].playerId, value: sender.isOn)
+        tmpPlayersController.setPlayerValue(playerId: tmpPlayersController.players[sender.tag].id, value: sender.isOn)
         // ########
     }
     
@@ -153,15 +154,15 @@ class EditTeamProtocolTableViewController: UITableViewController {
     
     // MARK: - Configure cell
     
-    func configureCell(cell: EditTeamProtocolTableViewCell, model: LIPlayer) {
+    func configureCell(cell: EditTeamProtocolTableViewCell, model: Person) {
         
         cell.switcher.addTarget(self, action: #selector(onSwitchChange(_:)), for: UIControl.Event.valueChanged)
         
 //        Print.m(playersController.getValueByKey(playerId: model.playerId))
 //        cell.switcher.isOn = playersController.getValueByKey(playerId: model.playerId) ?? true
-        cell.switcher.isOn = tmpPlayersController.getValueByKey(playerId: model.playerId) ?? true
+        cell.switcher.isOn = tmpPlayersController.getValueByKey(playerId: model.id) ?? true
         
-        presenter.getPlayer(player: model.playerId, get_player: { (player) in
+        presenter.getPlayer(player: model.id, get_player: { (player) in
             cell.name_label.text = player.person.getFullName()
             if player.person.photo != nil {
                 cell.photo_image.af_setImage(withURL: ApiRoute.getImageURL(image: player.person.photo!))
@@ -172,7 +173,8 @@ class EditTeamProtocolTableViewController: UITableViewController {
         }) { (error) in
             debugPrint("get person info error")
         }
-        cell.position_label.text = model.number
+        // DEPRECATED person does not contains number
+//        cell.position_label.text = model.number
     }
 
     // MARK: - Table view delegate

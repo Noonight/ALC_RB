@@ -15,7 +15,7 @@ class AutoGoalsFoulsHelper {
         return self.getPlayersAutoGoalEvents(playersController: playersController, eventsController: eventsController).count
     }
     
-    static func autoGoals(for team: TeamEnum, playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> [LIEvent]
+    static func autoGoals(for team: TeamEnum, playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> [Event]
     {
         return self.getPlayersAutoGoalEvents(playersController: playersController, eventsController: eventsController)
     }
@@ -25,16 +25,16 @@ class AutoGoalsFoulsHelper {
         return self.getPlayersFoulsEvents(playersController: playersController, eventsController: eventsController).count
     }
     
-    static func fouls(for team: TeamEnum, playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> [LIEvent]
+    static func fouls(for team: TeamEnum, playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> [Event]
     {
         return self.getPlayersFoulsEvents(playersController: playersController, eventsController: eventsController)
     }
     
     // MARK: HELPERS
     
-    static func getPlayersEvents(playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> [LIEvent]
+    static func getPlayersEvents(playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> [Event]
     {
-        var events: [LIEvent] = []
+        var events: [Event] = []
         
         for event in eventsController.events
         {
@@ -47,9 +47,9 @@ class AutoGoalsFoulsHelper {
         return events
     }
     
-    static func getPlayersAutoGoalEvents(playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> [LIEvent]
+    static func getPlayersAutoGoalEvents(playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> [Event]
     {
-        var events: [LIEvent] = []
+        var events: [Event] = []
         
         for event in eventsController.prepareAutoGoalEvents()
         {
@@ -62,9 +62,9 @@ class AutoGoalsFoulsHelper {
         return events
     }
     
-    static func getPlayersFoulsEvents(playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> [LIEvent]
+    static func getPlayersFoulsEvents(playersController: ProtocolPlayersController, eventsController: ProtocolEventsController) -> [Event]
     {
-        var events: [LIEvent] = []
+        var events: [Event] = []
         
         for event in eventsController.prepareFoulEvents()
         {

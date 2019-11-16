@@ -84,7 +84,7 @@ extension EditProfileViewController {
                 var index = 0
                 var region: RegionMy?
                 for i in 0..<regions.count {
-                    if regions[i]._id == self.viewModel.authorizedUser?.person.region {
+                    if regions[i].id == self.viewModel.authorizedUser?.person.region?.getId() ?? self.viewModel.authorizedUser?.person.region?.getValue()?.id {
                         index = i
                         region = regions[i]
                     }
@@ -112,7 +112,7 @@ extension EditProfileViewController {
             .subscribe({ _ in
                 if self.fieldsIsEmpty() == false {
                     let birthdate = self.datePicker.date
-                    let region = self.viewModel.regionViewModel.choosedRegion.value!._id
+                    let region = self.viewModel.regionViewModel.choosedRegion.value!.id
                     let profile = EditProfile(
                         name: self.nameTF.getTextOrEmptyString(),
                         surname: self.familyTF.getTextOrEmptyString(),
@@ -210,7 +210,7 @@ extension EditProfileViewController {
             patronymicTF.text = authUser.person.lastname
             loginTF.text = authUser.person.login
             
-            datePicker.date = authUser.person.birthdate
+            datePicker.date = authUser.person.birthdate ?? Date()
             
             if let imagePath = authUser.person.photo {
                 kfLoadImage(imagePath: imagePath) { result in

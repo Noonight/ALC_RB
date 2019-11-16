@@ -12,7 +12,7 @@ struct EditTeam : Codable {
     
     var _id = ""
     var teamId = ""
-    var players = EditTeam.[Person]()
+    var players = EditTeam.Players()
 //    var teamName = ""
     
     init(_id: String, teamId: String, players: EditTeam.Players) {
@@ -52,7 +52,7 @@ struct EditTeam : Codable {
     }
     
     struct Players: Codable {
-        var players: [Player]
+        var players: [Person]
         
         enum CodingKeys: String, CodingKey {
             case players = "players"
@@ -61,7 +61,7 @@ struct EditTeam : Codable {
         func toDictionary() -> [String: Any] {
             var players: [Any] = []
             for player in self.players {
-                players.append(player.toDictionary())
+                players.append(player.getDicitionary())
             }
             return [
                 CodingKeys.players.rawValue : players
@@ -71,7 +71,7 @@ struct EditTeam : Codable {
         func getArrayOfPlayersInDictionary() -> [Any] {
             var players: [Any] = []
             for player in self.players {
-                players.append(player.toDictionary())
+                players.append(player.getDicitionary())
             }
             return players
         }
@@ -82,26 +82,12 @@ extension EditTeam.Players {
     init() {
         players = []
     }
-    init(data: Data) throws {
-        self =  try JSONDecoder().decode(EditTeam.Players.self, from: data)
-    }
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
     
     func with(
-        players: [Player]? = nil
+        players: [Person]? = nil
         ) -> EditTeam.Players {
         return EditTeam.Players(
             players: players ?? self.players
         )
-    }
-    
-    func jsonData() throws -> Data {
-        return try JSONEncoder().encode(self)
-    }
-    
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
     }
 }

@@ -16,7 +16,7 @@ class TeamProtocolTableViewController: UITableViewController {
     
     let presenter = TeamProtocolPresenter(dataManager: PersonApi())
     
-    var players = [LIPlayer]()
+    var players = [DEPRECATED]()
     var fetchedPersons: [Person] = []
     
     // MARK: - Lyfe cycle
@@ -53,7 +53,7 @@ class TeamProtocolTableViewController: UITableViewController {
     
     // MARK: - Configure cell
     
-    func configureCell(cell: TeamProtocolTableViewCell, model: LIPlayer) {
+    func configureCell(cell: TeamProtocolTableViewCell, model: DEPRECATED) {
         func setupCell(person: Person) {
             cell.name_label.text = person.getSurnameNP()
             if person.photo != nil {

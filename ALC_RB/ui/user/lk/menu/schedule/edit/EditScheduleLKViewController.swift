@@ -61,7 +61,7 @@ class EditScheduleLKViewController: BaseStateViewController {
         
         setupUI()
         
-        filteredRefereesWithFullName = viewModel?.comingReferees.value.people.filter({ person -> Bool in
+        filteredRefereesWithFullName = viewModel?.comingReferees.value.filter({ person -> Bool in
             return person.getFullName().count > 2
         }).map({ person -> String in
             return person.getFullName()
@@ -246,7 +246,8 @@ class EditScheduleLKViewController: BaseStateViewController {
     // dictionary {person, type} of referee
     func getRefereesArray() -> [EditMatchReferee] {
         func getPersonId(_ fullName: String) -> String? {
-            return self.viewModel?.comingReferees.value.findPersonBy(fullName: fullName)?.id
+            return self.viewModel?.comingReferees.value.filter { $0.getFullName() == fullName || $0.getSurnameNP() == fullName }.first?.id
+//            return self.viewModel?.comingReferees.value.findPersonBy(fullName: fullName)?.id
         }
         func isCorrectTitle(btn: UIButton) -> Bool {
             return btn.title(for: .normal) != Texts.NO_REF ? true : false
@@ -291,7 +292,7 @@ class EditScheduleLKViewController: BaseStateViewController {
     // MARK: - Edit Match Response
     func onResponseSuccess(soloMatch: Match) {
         self.setMatchValue(
-            id: soloMatch.match!.id,
+            id: soloMatch.id,
             match: soloMatch
         )
 //        showAlert(title: Texts.EDITED_SAVED, message: "", escaping: )
@@ -324,17 +325,21 @@ class EditScheduleLKViewController: BaseStateViewController {
     
     // edit match for userDefaults value at id match
     func setMatchValue(id: String, match: Match) {
+
+        //DEPRECATED
+        assertionFailure("participation matches deprecated")
         
-        var user = userDefaults.getAuthorizedUser()!
-        user.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.match?.id }) })
-        user.person.participationMatches?.append(IdRefObjectWrapper(match.match!))
-        userDefaults.setAuthorizedUser(user: user)
+//        var user = userDefaults.getAuthorizedUser()!
+//        user.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.match?.id }) })
+//        user.person.participationMatches?.append(IdRefObjectWrapper(match.match!))
+//        userDefaults.setAuthorizedUser(user: user)
     }
     
     func showRefereesPicker(sender: UIButton) {
         
         let acp = ActionSheetStringPicker(title: "", rows: filteredRefereesWithFullName, initialSelection: 0, doneBlock: { (picker, index, value) in
-            sender.setTitleAndColorWith(title: (self.viewModel?.comingReferees.value.findPersonBy(fullName: value as! String)?.getFullName())!, color: Colors.YES_REF)
+//            sender.setTitleAndColorWith(title: (self.viewModel?.comingReferees.value.findPersonBy(fullName: value as! String)?.getFullName())!, color: Colors.YES_REF)
+            sender.setTitleAndColorWith(title: self.viewModel?.comingReferees.value.filter { $0.getFullName() == (value as! String) }.first?.getFullName() ?? "", color: Colors.YES_REF)
         }, cancel: { (picker) in
             
         }, origin: sender)
@@ -358,7 +363,7 @@ class EditScheduleLKViewController: BaseStateViewController {
 //            //            destination.leagueDetailModel =
 ////            let cell = (tableView.cellForRow(at: cellIndex) as? MyMatchesRefTableViewCell)?.cellModel!.participationMatch!.leagueID
 //            //            destination.leagueDetailModel = self.leagueDetailModel
-//            //            destination.match = self.leagueDetailModel.leagueInfo.league.matches![cellIndex]
+//            //            destination.match = self.leagueDetailModel.league.matches![cellIndex]
 //            //destination.scheduleCell = self.scheduleCell
 //        }
 //    }

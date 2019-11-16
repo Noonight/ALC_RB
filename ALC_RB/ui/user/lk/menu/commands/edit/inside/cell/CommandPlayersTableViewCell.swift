@@ -12,19 +12,19 @@ import Alamofire
 class CommandPlayersTableViewCell: UITableViewCell {
 
     struct CellModel {
-        var player: Player?
+        var player: DEPRECATED?
         var person: Person?
         var playerImagePath: String?
         var number: Int = 0
         
-        init(player: Player, playerImagePath: String, person: Person) {
+        init(player: DEPRECATED, playerImagePath: String, person: Person) {
             self.player = player
             self.playerImagePath = playerImagePath
             self.person = person
         }
         
         init() {
-            player = Player()
+            player = DEPRECATED()
             person = Person()
             playerImagePath = ""
         }

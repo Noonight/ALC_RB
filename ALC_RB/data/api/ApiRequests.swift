@@ -185,7 +185,7 @@ class ApiRequests {
             }
         }
     
-    func post_edit_profile(token: String, profileInfo: EditProfile, profileImage: UIImage?, resultMy: @escaping (ResultMy<SoloPerson, Error>) -> ()) {
+    func post_edit_profile(token: String, profileInfo: EditProfile, profileImage: UIImage?, resultMy: @escaping (ResultMy<SinglePerson, Error>) -> ()) {
             Alamofire
                 .upload(multipartFormData: { (multipartFormData) in
                     if let image = profileImage {
@@ -208,7 +208,7 @@ class ApiRequests {
                         upload.responseData { response in
                             let decoder = ISO8601Decoder.getDecoder()
                             do {
-                                if let soloPerson = try? decoder.decode(SoloPerson.self, from: response.data!) {
+                                if let soloPerson = try? decoder.decode(SinglePerson.self, from: response.data!) {
                                     resultMy(.success(soloPerson))
                                 }
                                 if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
@@ -226,163 +226,9 @@ class ApiRequests {
                 }
         }
     
-    func post_edit_profile(token: String, profileInfo: EditProfile, profileImage: UIImage?, response_success: @escaping (SoloPerson) -> (), response_failure: @escaping (Error) -> () ) {
-        Alamofire
-            .upload(multipartFormData: { (multipartFormData) in
-                if let image = profileImage {
-                    multipartFormData.append(image.jpegData(compressionQuality: 1.0)!, withName: "photo", fileName: "jpg", mimeType: "image/jpg")
-                }
-                
-                for (key, value) in profileInfo.toParams() {
-                    let strValue = value as! String
-                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
-                }
-            },
-                    usingThreshold: UInt64(),
-                    to: ApiRoute.getApiURL(.post_edit_profile),
-                    method: .post,
-                    headers: ["auth" : token])
-            { (result) in
-                switch result {
-                case .success(let upload, _, _):
-//                    upload.uploadProgress(closure: { (progress) in
-//                    })
-
-                    upload.responseSoloPerson(completionHandler: { (response) in
-                        switch response.result {
-                        case .success:
-                            if let editedPerson = response.result.value {
-                                response_success(editedPerson)
-                            }
-                        case .failure(let error):
-                            response_failure(error)
-                        }
-                    })
-                    
-                case .failure(let error):
-                    response_failure(error)
-                }
-            }
-    }
-    
-    func post_editClubInfo(token: String, clubInfo: EditClubInfo, clubImage: UIImage?, response_success: @escaping (SoloClub) -> (), response_failure: @escaping (Error) -> ()) {
-        
-//        Print.m("token - >> \(token)")
-//        Print.m("club - >> \(clubInfo)")
-        
-        Alamofire
-            .upload(multipartFormData: { (multipartFormData) in
-                if let image = clubImage {
-                    multipartFormData.append(image.jpegData(compressionQuality: 1.0)!, withName: "logo", fileName: "jpg", mimeType: "image/jpg")
-                }
-                for (key, value) in clubInfo.toParams() {
-                    let strValue = value as! String
-                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
-                }
-            },
-                    usingThreshold: UInt64(),
-                    to: ApiRoute.getApiURL(.post_edit_club_info),
-                    method: .post,
-                    headers: ["auth" : token])
-            { (result) in
-                switch result {
-                case .success(let upload, _, _):
-            
-                    upload.responseSoloClub(completionHandler: { (response) in
-                        
-//                        Print.m(response)
-                        
-                        switch response.result {
-                        case .success:
-                            if let soloClub = response.result.value {
-                                response_success(soloClub)
-                            }
-                        case .failure(let error):
-                            response_failure(error)
-                        }
-                    })
-                    
-                case .failure(let error):
-                    response_failure(error)
-                }
-        }
-    }
-    
-    
-    
-//    func rx_post_createClub(token: String, createClub: CreateClub, image: UIImage?) -> Observable<SoloClub> {
-//        
-//        return Observable.create { observer -> Disposable in
-//            self.post_createClub(token: token, createClub: createClub, image: image, response_success: { soloClub in
-//                observer.onNext(soloClub)
-//            }, response_message: { message in
-////                observer.onError(<#T##error: Error##Error#>)
-////                observer.onError(message)
-//            }, response_failure: { error in
-//                observer.onError(error)
-//            })
-//        }
-//        return Observable.create({ observer -> Disposable in
-//            post_createClub(token: token, createClub: createClub, image: image, response_success: { soloClub in
-//                observer.onNext(soloClub)
-//            }, response_message: { message in
-//                //                observer.onError(<#T##error: Error##Error#>)
-//                //                observer.onError(message)
-//            }, response_failure: { error in
-//                observer.onError(error)
-//            })
-//        })
-//        return Disposables.create() as! Observable<SoloClub>
-//        
-//    }
-    
-    func post_createClub(token: String, createClub: CreateClub, image: UIImage?, response_success: @escaping (SoloClub) -> (), response_message: @escaping (SingleLineMessage) -> (), response_failure: @escaping (Error) -> ()) {
-        Alamofire
-            .upload(multipartFormData: { (multipartFormData) in
-                if let mImage = image {
-                    multipartFormData.append(mImage.jpegData(compressionQuality: 1.0)!, withName: "logo", fileName: "jpg", mimeType: "image/jpg")
-                }
-                for (key, value) in createClub.toParams() {
-                    let strValue = value as! String
-                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
-                }
-            },
-                    usingThreshold: UInt64(),
-                    to: ApiRoute.getApiURL(.post_create_club),
-                    method: .post,
-                    headers: ["auth" : token])
-            { (result) in
-                switch result {
-                case .success(let upload, _, _):
-                    
-                    upload.responseSoloClub(completionHandler: { (response) in
-                        switch response.result {
-                        case .success:
-                            if let club = response.result.value {
-                                response_success(club)
-                            }
-                        case .failure(let error):
-                            upload.responseSingleLineMessage(completionHandler: { (response) in
-                                switch response.result {
-                                case .success:
-                                    if let message = response.result.value {
-                                        response_message(message)
-                                    }
-                                case .failure(let error):
-                                    Print.m(error)
-                                    response_failure(error)
-                                }
-                            })
-                        }
-                    })
-                    
-                case .failure(let error):
-                    response_failure(error)
-                }
-        }
-    }
-    
-    func post_teamAcceptRequest(token: String, acceptInfo: AcceptRequest, response_success: @escaping (SoloPerson) -> (), response_message: @escaping (SingleLineMessage)->(), response_failure: @escaping (Error) -> ()) {
+    // TODO: delete it
+    // deprecated
+    func post_teamAcceptRequest(token: String, acceptInfo: AcceptRequest, response_success: @escaping (SinglePerson) -> (), response_message: @escaping (SingleLineMessage)->(), response_failure: @escaping (Error) -> ()) {
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in
                 for (key, value) in acceptInfo.toParams() {
@@ -398,29 +244,19 @@ class ApiRequests {
                 switch result {
                 case .success(let upload, _, _):
                     
-//                    upload.responseJSON(completionHandler: { response in
-//                    })
-                    
-                    upload.responseSoloPerson(completionHandler: { response in
-//                        dump(response)
-                        switch response.result {
-                        case .success:
-                            if let user = response.result.value {
-                                response_success(user)
-                            }
-                        case .failure(let error):
-                            upload.responseSingleLineMessage(completionHandler: { response in
-                                switch response.result {
-                                case .success(let value):
-                                    response_message(value)
-                                case .failure(let error):
-                                    response_failure(error)
-                                }
-                            })
-//                            response_failure(error)
+                    upload..responseResultMy(SinglePerson.self) { resultMy in
+                        switch resultMy {
+                        case .success(let person):
+                            Print.m("TODO: value is \(person)")
+                        case .message(let msg):
+                            Print.m(msg.message)
+                        case .failure(.error(let error)):
+                            Print.m(error)
+                        case .failure(.notExpectedData):
+                            Print.m("not expectedData")
                         }
-                    })
-
+                    }
+                    
                 case .failure(let error):
                     response_failure(error)
                 }
@@ -522,52 +358,7 @@ class ApiRequests {
 //        }
     }
     
-    func post_createTeam(token: String, teamInfo: CreateTeamInfo, response_success: @escaping (SoloTeam) -> (), response_failure: @escaping (Error) -> (), response_failure_message: @escaping (SingleLineMessage) -> ()) {
-        Alamofire
-            .upload(multipartFormData: { (multipartFormData) in
-                for (key, value) in teamInfo.toParams() {
-                    let strValue = value as! String
-                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
-                }
-            },
-                    usingThreshold: UInt64(),
-                    to: ApiRoute.getApiURL(.post_create_team),
-                    method: .post,
-                    headers: ["auth" : token])
-            { (result) in
-                switch result {
-                case .success(let upload, _, _):
-                    
-                    upload.responseSoloTeam(completionHandler: { (response) in
-                        
-//                        dump(response)
-                        switch response.result {
-                        case .success:
-                            if let soloTeam = response.result.value {
-                                response_success(soloTeam)
-                            }
-                        case .failure(let _):
-                            upload.responseSingleLineMessage(completionHandler: { (response) in
-                                switch response.result {
-                                case .success:
-                                    if let singleLineMessage = response.result.value {
-                                        response_failure_message(singleLineMessage)
-                                    }
-                                case .failure(let error):
-                                    response_failure(error)
-                                }
-                            })
-//                            response_failure(error)
-                        }
-                    })
-                    
-                    
-                    
-                case .failure(let error):
-                    response_failure(error)
-                }
-        }
-    }
+    
     
     func post_addPlayerToTeam(token: String, addPlayerToTeam: AddPlayerToTeam, response_success: @escaping (SoloLeague) -> (), response_failure: @escaping (Error) -> (), response_single_line_message: @escaping (SingleLineMessage) -> ()) {
         
@@ -1103,11 +894,11 @@ class ApiRequests {
     
     
     
-//    func getActiveMatchesForView(get_success: @escaping (ActiveMatches, Players, [SoloClub]) -> (), get_message: @escaping (SingleLineMessage) -> (), get_failure: @escaping (Error) -> ()) {
+//    func getActiveMatchesForView(get_success: @escaping (ActiveMatches, Players, [Club]) -> (), get_message: @escaping (SingleLineMessage) -> (), get_failure: @escaping (Error) -> ()) {
 //
 //        var fActiveMatches = ActiveMatches()
 //        var fReferees = [Person]()
-//        var fClubs: [SoloClub] = []
+//        var fClubs: [Club] = []
 //
 //        let group = DispatchGroup()
 //
@@ -1182,7 +973,7 @@ class ApiRequests {
         
         var models: [MyMatchesRefTableViewCell.CellModel] = []
         
-        var tmpTournaments = Tournaments()
+        var tmpTournaments = [Tourney]()
         
         let dispatchGroup = DispatchGroup()
         
@@ -1474,7 +1265,7 @@ class ApiRequests {
         }
     }
     
-//    func get_soloPerson(playerId: String, success: @escaping (SoloPerson) -> (), failure: @escaping (Error) -> ()) {
+//    func get_soloPerson(playerId: String, success: @escaping (SinglePerson) -> (), failure: @escaping (Error) -> ()) {
 //        Alamofire
 //            .request(ApiRoute.getApiURL(.soloUser, id: playerId))
 ////            .request
@@ -1611,13 +1402,13 @@ class ApiRequests {
     
     // MARK: - ACTIVE MATCHES
     
-    func get_scheduleRefereeData(resultMy: @escaping (ResultMy<(ActiveMatches, Players, [SoloClub]), Error>) -> ()) {
+    func get_scheduleRefereeData(resultMy: @escaping (ResultMy<(ActiveMatches, Players, [Club]), Error>) -> ()) {
         let group = DispatchGroup()
         let personApi = PersonApi()
         
         var mMessage: SingleLineMessage?
         var mError: Error?
-        var mResult = (ActiveMatches(), [Person](), [SoloClub]())
+        var mResult = (ActiveMatches(), [Person](), [Club]())
         
         group.enter()
         self.get_activeMatches { result in
@@ -1761,13 +1552,13 @@ class ApiRequests {
 //    }
     
 
-    func get_club(id: String, resultMy: @escaping (ResultMy<SoloClub, Error>) -> ()) {
+    func get_club(id: String, resultMy: @escaping (ResultMy<Club, Error>) -> ()) {
         Alamofire
             .request(ApiRoute.getApiURL(.clubs, id: id))
             .responseData(completionHandler: { response in
                 let decoder = ISO8601Decoder.getDecoder()
                 do {
-                    if let club = try? decoder.decode(SoloClub.self, from: response.data!) {
+                    if let club = try? decoder.decode(Club.self, from: response.data!) {
                         resultMy(.success(club))
                     }
                     if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {

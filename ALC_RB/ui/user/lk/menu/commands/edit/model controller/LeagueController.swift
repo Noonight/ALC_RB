@@ -13,14 +13,14 @@ class LeagueController {
     init(league: League) {
         self.league = league
     }
-    func addPlayerToTeamById(id: String, player: Player) {
+    func addPlayerToTeamById(id: String, player: DEPRECATED) {
         for i in 0...self.league.teams!.count {
             if self.league.teams![i].id == id {
                 self.league.teams![i].players.append(player)
             }
         }
     }
-    func editTeamPlayersById(teamId: String, players: [Player]) {
+    func editTeamPlayersById(teamId: String, players: [DEPRECATED]) {
         for i in 0...self.league.teams!.count - 1 {
             Print.m("index i = \(i) || count of players = \(self.league.teams!.count) \n team id is \(self.league.teams![i].id) == param team id is \(teamId)")
             if self.league.teams![i].id == teamId {
@@ -28,7 +28,7 @@ class LeagueController {
             }
         }
     }
-    func setTeamPlayersById(teamId: String, players: [Player]) {
+    func setTeamPlayersById(teamId: String, players: [DEPRECATED]) {
         guard let teams = league.teams else { return }
         for i in 0..<teams.count {
             if teams[i].id == teamId {
@@ -36,7 +36,7 @@ class LeagueController {
             }
         }
     }
-    func setTeamPlayerById(playerId: String, player: Player) {
+    func setTeamPlayerById(playerId: String, player: DEPRECATED) {
         guard let teams = league.teams else { return }
         for i in 0..<teams.count {
             for j in 0..<teams[i].players.count {
@@ -47,7 +47,7 @@ class LeagueController {
         }
     }
     
-    func getPlayerById(_ id: String) -> Player? {
+    func getPlayerById(_ id: String) -> DEPRECATED? {
         let team = league.teams!.filter { team -> Bool in
             return team.players.contains(where: { player -> Bool in
                 return player.playerID == id

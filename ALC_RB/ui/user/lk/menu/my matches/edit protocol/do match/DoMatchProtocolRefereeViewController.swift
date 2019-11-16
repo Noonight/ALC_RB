@@ -270,7 +270,7 @@ extension DoMatchProtocolRefereeViewController {
             guard let teamId = self.viewModel.match.teamOne else { return }
             foulsMaker?.showWith(
                 matchId: self.viewModel.match.id,
-                teamId: teamId,
+                teamId: teamId.getId() ?? teamId.getValue()!.id,
                 time: self.viewModel.currentTime.rawValue,
                 teamTitle: self.viewModel.prepareTeamTitleFor(team: .one),
                 defValue: self.viewModel.prepareFoulsCountInCurrentTime(team: .one)
@@ -284,7 +284,7 @@ extension DoMatchProtocolRefereeViewController {
             guard let teamId = self.viewModel.match.teamTwo else { return }
             foulsMaker?.showWith(
                 matchId: self.viewModel.match.id,
-                teamId: teamId,
+                teamId: teamId.getId() ?? teamId.getValue()!.id,
                 time: self.viewModel.currentTime.rawValue,
                 teamTitle: self.viewModel.prepareTeamTitleFor(team: .two),
                 defValue: self.viewModel.prepareFoulsCountInCurrentTime(team: .two)
@@ -298,7 +298,7 @@ extension DoMatchProtocolRefereeViewController {
             guard let teamId = self.viewModel.match.teamOne else { return }
             autoGoalsMaker?.showWith(
                 matchId: self.viewModel.match.id,
-                teamId: teamId,
+                teamId: teamId.getId() ?? teamId.getValue()!.id,
                 time: self.viewModel.currentTime.rawValue,
                 teamTitle: self.viewModel.prepareTeamTitleFor(team: .one),
                 defValue: self.viewModel.prepareAutogoalsCountInCurrentTime(team: .one)
@@ -312,7 +312,7 @@ extension DoMatchProtocolRefereeViewController {
             guard let teamId = self.viewModel.match.teamTwo else { return }
             autoGoalsMaker?.showWith(
                 matchId: self.viewModel.match.id,
-                teamId: teamId,
+                teamId: teamId.getId() ?? teamId.getValue()!.id,
                 time: self.viewModel.currentTime.rawValue,
                 teamTitle: self.viewModel.prepareTeamTitleFor(team: .two),
                 defValue: self.viewModel.prepareAutogoalsCountInCurrentTime(team: .two)
@@ -360,7 +360,7 @@ extension DoMatchProtocolRefereeViewController {
         self.addEventSaveProtocol()
     }
     
-    func eventMakerCompleteWork_ADD(event: LIEvent) { // TODO : need work with data base or smth
+    func eventMakerCompleteWork_ADD(event: Event) { // TODO : need work with data base or smth
         self.viewModel.appendEvent(event: event)
         
         let hud = self.showLoadingViewHUD(with: Texts.PROGRESS_ADD_EVENT)
@@ -369,7 +369,7 @@ extension DoMatchProtocolRefereeViewController {
             token: self.userDefaults.getToken(),
             editedProtocol: self.viewModel.prepareEditProtocol(),
         ok: { match in
-                self.viewModel.updateMatch(match: match.match!.convertToLIMatch())
+                self.viewModel.updateMatch(match: match)
 //                hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_ADD_EVENT_COMPLETE)
                 hud.hide(animated: true)
             
@@ -412,7 +412,7 @@ extension DoMatchProtocolRefereeViewController {
                 token: userDefaults.getToken(),
                 editedProtocol: self.viewModel.prepareEditProtocol(),
                 ok: { match in
-                    self.viewModel.updateMatch(match: match.match!.convertToLIMatch())
+                    self.viewModel.updateMatch(match: match)
 //                    hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_DELETE_EVENT_COMPLETE)
                     hud.hide(animated: true)
                     
@@ -476,12 +476,9 @@ extension DoMatchProtocolRefereeViewController {
                 ok: { match in
                     hud.setDetailMessage(with: Texts.PROGRESS_2_PROTOCOL_ACCEPTED)
                     // do some staff for saving status of accepted match
-                    guard let newMatch = match.match else {
-                        hud.showSuccessAfterAndHideAfter()
-                        return
-                    }
                     
-                    self.userDefaults.setMatch(match: newMatch)
+                    // DEPRECATED: person does not contain match
+//                    self.userDefaults.setMatch(match: match)
                     hud.showSuccessAfterAndHideAfter()
                 },
                 response_message: { message in
@@ -550,14 +547,15 @@ extension DoMatchProtocolRefereeViewController {
             Print.m("cancel pressed")
         }
         
-        if userDefaults.getAuthorizedUser()?.person.getUserType() == Person.TypeOfPerson.mainReferee // main ref here
-        {
-            showAlert(title: Texts.Q_ACCEPT_MATCH, message: Texts.D_ACCEPT_MATCH_MAIN_REF, actions: [acceptProtocol, saveProtocol, cancel])
-        }
-        else
-        {
+        // TODO: type of person is deprecated
+//        if userDefaults.getAuthorizedUser()?.person.getUserType() == Person.TypeOfPerson.mainReferee // main ref here
+//        {
+//            showAlert(title: Texts.Q_ACCEPT_MATCH, message: Texts.D_ACCEPT_MATCH_MAIN_REF, actions: [acceptProtocol, saveProtocol, cancel])
+//        }
+//        else
+//        {
             showAlert(title: Texts.Q_ACCEPT_MATCH, message: Texts.D_ACCEPT_MATCH_NOT_MAIN_REF, actions: [saveProtocol, cancel])
-        }
+//        }
     }
     
     @IBAction func onFirstTimeBtnPressed(_ sender: UIButton) {
@@ -601,7 +599,7 @@ extension DoMatchProtocolRefereeViewController: TableActions {
         self.eventMaker!.showWith(
             matchId: self.viewModel.match.id,
             playerId: (curModel.player?.playerID)!,
-            time: self.viewModel.currentTime.rawValue
+            time: self.viewModel.currentTime
         )
     }
 }
@@ -645,7 +643,7 @@ extension DoMatchProtocolRefereeViewController {
             editedProtocol: self.viewModel.prepareEditProtocol(),
             ok: { match in
                 Print.m(match)
-                self.viewModel.updateMatch(match: match.match!.convertToLIMatch())
+                self.viewModel.updateMatch(match: match)
                 //                hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_ADD_EVENT_COMPLETE)
                 hud.hide(animated: true)
                 

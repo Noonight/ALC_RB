@@ -50,13 +50,13 @@ struct EditProtocol: Codable {
     }
     
     struct Events: Codable {
-        var events: [LIEvent]
+        var events: [Event]
         
         init() {
             events = []
         }
         
-        init(events: [LIEvent]) {
+        init(events: [Event]) {
             self.events = events
         }
         

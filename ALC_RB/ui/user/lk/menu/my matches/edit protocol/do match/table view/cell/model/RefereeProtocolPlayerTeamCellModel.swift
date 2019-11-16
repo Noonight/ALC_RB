@@ -10,11 +10,11 @@ import Foundation
 
 class RefereeProtocolPlayerTeamCellModel {
     
-    var player: Player?
+    var player: DEPRECATED?
     var person: Person?
     var eventsModel: RefereeProtocolPlayerEventsModel?
     
-    init(player: Player, person: Person, eventsModel: RefereeProtocolPlayerEventsModel) {
+    init(player: DEPRECATED, person: Person, eventsModel: RefereeProtocolPlayerEventsModel) {
         self.player = player
         self.person = person
         self.eventsModel = eventsModel

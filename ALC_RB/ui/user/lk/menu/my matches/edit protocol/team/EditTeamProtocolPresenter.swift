@@ -13,11 +13,11 @@ class EditTeamProtocolPresenter: MvpPresenter<EditTeamProtocolTableViewControlle
     
     let personApi = PersonApi()
     
-    func getPlayer(player id: String, get_player: @escaping (SoloPerson) -> (), get_error: @escaping (Error) -> ()) {
+    func getPlayer(player id: String, get_player: @escaping (SinglePerson) -> (), get_error: @escaping (Error) -> ()) {
         personApi.get_person(id: id) { result in
             switch result {
             case .success(let persons):
-                get_player(SoloPerson(person: persons.first!))
+                get_player(SinglePerson(person: persons.first!))
             case .message(let message):
                 Print.m(message.message)
             case .failure(.error(let error)):

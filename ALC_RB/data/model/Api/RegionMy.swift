@@ -9,15 +9,17 @@
 import Foundation
 
 struct RegionMy: Codable {
-    var _id: String
-    var name: String
-    var __v: Int
+    var id: String
     
-//    enum CodingKeys: String, CodingKey {
-//        case id = "_id"
-//        case name = "name"
-//        case v = "__v"
-//    }
+    var name: String?
+    
+    var v: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case name = "name"
+        case v = "__v"
+    }
 }
 
 extension RegionMy: CellModel { }

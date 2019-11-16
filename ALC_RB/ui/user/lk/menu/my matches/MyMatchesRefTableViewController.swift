@@ -246,7 +246,7 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
 //            destination.leagueDetailModel =
             let cell = (tableView.cellForRow(at: cellIndex) as? MyMatchesRefTableViewCell)?.cellModel!.participationMatch!.leagueID
 //            destination.leagueDetailModel = self.leagueDetailModel
-//            destination.match = self.leagueDetailModel.leagueInfo.league.matches![cellIndex]
+//            destination.match = self.leagueDetailModel.league.matches![cellIndex]
             //destination.scheduleCell = self.scheduleCell
         }
     }

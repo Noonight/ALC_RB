@@ -17,10 +17,11 @@ class FilterTeamsByGroupHelper {
             get {
                 return self._teams
             }
-            set {
-                let newVal = newValue.sorted(by: { lTeam, rTeam -> Bool in
-                    return lTeam.groupScore ?? 0 > rTeam.groupScore ?? 0
-                })
+            set(newVal) {
+                // TODO: score deprecated
+//                let newVal = newValue.sorted(by: { lTeam, rTeam -> Bool in
+//                    return lTeam.groupScore ?? 0 > rTeam.groupScore ?? 0
+//                })
                 self._teams = newVal
             }
         }
@@ -34,7 +35,7 @@ class FilterTeamsByGroupHelper {
         }
     }
     
-    static func filter(teams: [Team], groups: [_Group]) -> [GroupedLITeam] {
+    static func filter(teams: [Team], groups: [Group]) -> [GroupedLITeam] {
         
         var groupedTeams = [GroupedLITeam]()
         
@@ -42,7 +43,7 @@ class FilterTeamsByGroupHelper {
             var item = GroupedLITeam(name: group.name ?? "")
             for team in group.teams ?? [] {
                 let mTeam = teams.filter { liTeam -> Bool in
-                    return liTeam.id == team
+                    return liTeam.id == team?.getId() ?? team?.getValue()!.id
                 }.first
                 if mTeam != nil {
                     item.teams.append(mTeam!)
@@ -78,13 +79,14 @@ class FilterTeamsByGroupHelper {
         var uniqueGroups: [String] = []
         for team in teams
         {
-            if let group = team.group
-            {
-                if uniqueGroups.contains(group) == false
-                {
-                    uniqueGroups.append(group)
-                }
-            }
+            // DEPRACATED
+//            if let group = team.group
+//            {
+//                if uniqueGroups.contains(group) == false
+//                {
+//                    uniqueGroups.append(group)
+//                }
+//            }
         }
         return uniqueGroups
     }

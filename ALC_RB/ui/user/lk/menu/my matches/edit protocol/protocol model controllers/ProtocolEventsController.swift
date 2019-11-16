@@ -142,7 +142,7 @@ class ProtocolEventsController {
     func removeFirstWith(event: EventMaker.DeleteEvent) -> Bool {
         for i in 0...events.count - 1
         {
-            if events[i].player == event.playerId && events[i].type == event.eventType {
+            if events[i].player?.getId() ?? events[i].player?.getValue()!.id == event.playerId && events[i].type == event.eventType {
                 events.remove(at: i)
                 return true
             }
@@ -179,12 +179,12 @@ class ProtocolEventsController {
 
 extension Event: Equatable {
     static func ==(lhs: Event, rhs: Event) -> Bool {
-        return lhs.id == rhs.id && lhs.type == rhs.type && lhs.player == rhs.player && lhs.time == rhs.time
+        return lhs.id == rhs.id && lhs.type == rhs.type && lhs.player?.getId() ?? lhs.player?.getValue()!.id == rhs.player?.getId() ?? rhs.player?.getValue()!.id && lhs.time == rhs.time
     }
     static func !=(lhs: Event, rhs: Event) -> Bool {
         return lhs.id != rhs.id
                 || lhs.type != rhs.type
-                || lhs.player != rhs.player
+                || lhs.player?.getId() ?? lhs.player?.getValue()!.id != rhs.player?.getId() ?? rhs.player?.getValue()!.id
                 || lhs.time != rhs.time
     }
 }

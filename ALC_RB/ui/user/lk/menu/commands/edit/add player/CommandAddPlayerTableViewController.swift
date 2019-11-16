@@ -26,7 +26,7 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
         
         init() {}
         
-        init(players: Players) {
+        init(players: [Person]) {
             self.players = players
         }
     }
@@ -100,7 +100,7 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
 // MARK: Refresh controller
 extension CommandAddPlayerTableViewController {
     override func hasContent() -> Bool {
-        if tableModel.players.people.count != 0 {
+        if tableModel.players.count != 0 {
             return true
         } else {
             return false
@@ -117,7 +117,7 @@ extension CommandAddPlayerTableViewController: UISearchResultsUpdating {
             if searchController.searchBar.text?.count ?? 0 > 2 {
                 filterContentForQuery(searchController.searchBar.text!)
             } else {
-                filteredPlayers.people = []
+                filteredPlayers = []
                 tableView.reloadData()
             }
             Print.m("search controller is active")
@@ -159,12 +159,12 @@ extension CommandAddPlayerTableViewController {
         Print.m("add player btn pressed. Tag of button is \(sender.tag)")
         var personId: String!
         if isFiltering() {
-            Print.m("person id on \(sender.tag) is \(filteredPlayers.people[sender.tag].id)")
-            personId = filteredPlayers.people[sender.tag].id
-            Print.m("tag of button is \(sender.tag). item on this tag is \(filteredPlayers.people[sender.tag])")
+            Print.m("person id on \(sender.tag) is \(filteredPlayers[sender.tag].id)")
+            personId = filteredPlayers[sender.tag].id
+            Print.m("tag of button is \(sender.tag). item on this tag is \(filteredPlayers[sender.tag])")
         } else {
-            personId = tableModel.players.people[sender.tag].id
-            Print.m("tag of button is \(sender.tag). item on this tag is \(tableModel.players.people[sender.tag])")
+            personId = tableModel.players[sender.tag].id
+            Print.m("tag of button is \(sender.tag). item on this tag is \(tableModel.players[sender.tag])")
         }
         let addPlayer = AddPlayerToTeam(
             _id: leagueId,
@@ -192,7 +192,7 @@ extension CommandAddPlayerTableViewController {
 // MARK: Helper delete
 private extension CommandAddPlayerTableViewController {
     func isLoadingCell (for indexPath: IndexPath) -> Bool {
-        return indexPath.row == tableModel.players.people.count
+        return indexPath.row == tableModel.players.count
     }
     
     func totalCount() -> Int {
@@ -200,25 +200,25 @@ private extension CommandAddPlayerTableViewController {
     }
     
     func currentCount() -> Int {
-        return tableModel.players.people.count
+        return tableModel.players.count
     }
 }
 
 // MARK: Presenter
 extension CommandAddPlayerTableViewController : CommandAddPlayerView {
-    func onFetchScrollSuccessful(players: Players) {
-        Print.m("new players count is \(self.tableModel.players.people.count + players.people.count)")
+    func onFetchScrollSuccessful(players: [Person]) {
+        Print.m("new players count is \(self.tableModel.players.count + players.count)")
         // create new index paths
-        let playersCount = self.tableModel.players.people.count // current count of players
-        let responsePlayersCount = players.people.count + playersCount // current count of response players
+        let playersCount = self.tableModel.players.count // current count of players
+        let responsePlayersCount = players.count + playersCount // current count of response players
         let (start, end) = (playersCount, responsePlayersCount)
         let indexPaths = (start..<end).map { return IndexPath(row: $0, section: 0) }
         
         // update data source
-        self.tableModel.players.people.append(contentsOf: players.people)
+        self.tableModel.players.append(contentsOf: players)
 //        self.numPages = response.nbPages
 //        self.currentPage += 1
-        self.paginationHelper.setCurrentCount(newCount: self.tableModel.players.people.count)
+        self.paginationHelper.setCurrentCount(newCount: self.tableModel.players.count)
         self.paginationHelper.setTotalCount(newCount: players.count)
         
         // update table view
@@ -238,11 +238,11 @@ extension CommandAddPlayerTableViewController : CommandAddPlayerView {
         showAlert(message: error.localizedDescription)
     }
     
-    func onFetchSuccessful(player: Players) {
+    func onFetchSuccessful(player: [Person]) {
         self.tableModel.players = player
         // if pull to refresh used pages also update
         self.prepareInfiniteScrollController()
-        self.paginationHelper = PaginationHelper(totalCount: player.count, currentCount: self.tableModel.players.people.count) // MARK: INIT PAGER
+        self.paginationHelper = PaginationHelper(totalCount: player.count, currentCount: self.tableModel.players.count) // MARK: INIT PAGER
         self.endRefreshing()
     }
     
@@ -257,13 +257,14 @@ extension CommandAddPlayerTableViewController : CommandAddPlayerView {
         if let team = soloLeague.league.teams!.filter({ liTeam -> Bool in
             return liTeam.id == team.id
         }).first {
-            Print.m(team.players.map({ "player id = \($0.playerID). \($0.inviteStatus) " }))
-            var convertedPlayers: [Player] = []
-            for i in 0..<team.players.count {
-                convertedPlayers.append(team.players[i]/*.convertToPlayer()*/)
-            }
-            teamController.setPlayersByTeamId(id: team.id, players: convertedPlayers)
-            leagueController.setTeamPlayersById(teamId: team.id, players: convertedPlayers)
+//            Print.m(team.players.map({ "player id = \($0.first?.person?.getId()). \($0.inviteStatus) " }))
+            var convertedPlayers: [Person] = []
+            // DEPRECATED: team players do not contains
+//            for i in 0..<team.players.count ?? 0 {
+//                convertedPlayers.append(team.players[i]/*.convertToPlayer()*/)
+//            }
+//            teamController.setPlayersByTeamId(id: team.id, players: convertedPlayers)
+//            leagueController.setTeamPlayersById(teamId: team.id, players: convertedPlayers)
             
             self.team = team
         }
@@ -275,7 +276,7 @@ extension CommandAddPlayerTableViewController : CommandAddPlayerView {
         self.tableView.endUpdates()
     }
     
-    func onFetchQueryPersonsSuccess(players: Players) {
+    func onFetchQueryPersonsSuccess(players: [Person]) {
         // asd
 //        Print.m(players)
         filteredPlayers = players
@@ -301,12 +302,12 @@ extension CommandAddPlayerTableViewController : CommandAddPlayerView {
         // something
     }
     
-    func onFetchPersonsSuccess(players: Players) {
+    func onFetchPersonsSuccess(players: [Person]) {
         self.setState(state: .normal)
         if tableModel.players.count == 0 {
             tableModel.players = players
         } else {
-            tableModel.players.people.append(contentsOf: players.people)
+            tableModel.players.append(contentsOf: players)
         }
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -327,10 +328,10 @@ extension CommandAddPlayerTableViewController {
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering() {
-            Print.m("is filtering - \(self.isFiltering()) && \(filteredPlayers.people.count)")
-            return filteredPlayers.people.count
+            Print.m("is filtering - \(self.isFiltering()) && \(filteredPlayers.count)")
+            return filteredPlayers.count
         }
-        return tableModel.players.people.count// + 1
+        return tableModel.players.count// + 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -341,8 +342,8 @@ extension CommandAddPlayerTableViewController {
             if leagueController.league.teams!.contains(where:  { team -> Bool in
                 return team.id == self.team.id
             }) {
-                if self.team.players.contains(where: { player -> Bool in
-                    return player.playerID == person.id
+                if self.team.players!.contains(where: { player -> Bool in
+                    return player.person?.getId() ?? player.person?.getValue()?.id ?? "" == person.id
                 }) {
                     let player = leagueController.getPlayerById(person.id)
                     if player?.inviteStatus == InviteStatus.accepted.rawValue {
@@ -360,14 +361,14 @@ extension CommandAddPlayerTableViewController {
         
         let player: Person
         if isFiltering() {
-            player = filteredPlayers.people[indexPath.row]
+            player = filteredPlayers[indexPath.row]
             
             setupStatus(person: player)
             
             cell.cell_add_player_btn.tag = indexPath.row
             cell.cell_add_player_btn.addTarget(self, action: #selector(onAddPlayerBtnPressed), for: .touchUpInside)
         } else {
-            player = tableModel.players.people[indexPath.row]
+            player = tableModel.players[indexPath.row]
             
             setupStatus(person: player)
             

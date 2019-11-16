@@ -46,7 +46,7 @@ import Foundation
 //        match.teamOne = teamOne
 //        match.teamTwo = teamTwo
 //        match.events = events
-//        match.referees = referees.map({ referee -> LIReferee in
+//        match.referees = referees.map({ referee -> Referee in
 //            var mId = String()
 //            if let person = referee.person {
 //                switch person.value {
@@ -56,15 +56,15 @@ import Foundation
 //                    mId = obj.id
 //                }
 //            }
-//            return LIReferee(id: referee.id, person: mId, type: referee.type!.rawValue)
+//            return Referee(id: referee.id, person: mId, type: referee.type!.rawValue)
 //        })
 //        match.createdAt = createdAt
 //        match.updatedAt = updatedAt
 //        match.v = v
 //
 //        return match
-////        return Match(date: date, stage: stage, played: played, tour: tour, playersList: playersList, place: place, winner: winner, score: score, fouls: fouls, autoGoals: autoGoals, id: id, league: league, teamOne: teamOne, teamTwo: teamTwo, events: events, referees: referees.map({ referee -> LIReferee in
-////            return LIReferee(id: referee.id, person: referee.person, type: referee.type)
+////        return Match(date: date, stage: stage, played: played, tour: tour, playersList: playersList, place: place, winner: winner, score: score, fouls: fouls, autoGoals: autoGoals, id: id, league: league, teamOne: teamOne, teamTwo: teamTwo, events: events, referees: referees.map({ referee -> Referee in
+////            return referee(id: referee.id, person: referee.person, type: referee.type)
 ////        }), createdAt: createdAt, updatedAt: updatedAt, v: v)
 //    }
 //
@@ -86,7 +86,7 @@ import Foundation
 //        self.league = try container.decodeIfPresent(String.self, forKey: .league) ?? ""
 //        self.teamOne = try container.decodeIfPresent(String.self, forKey: .teamOne) ?? ""
 //        self.teamTwo = try container.decodeIfPresent(String.self, forKey: .teamTwo) ?? ""
-//        self.events = try container.decodeIfPresent([LIEvent].self, forKey: .events) ?? []
+//        self.events = try container.decodeIfPresent([Event].self, forKey: .events) ?? []
 //        self.referees = try container.decodeIfPresent([Referee].self, forKey: .referees) ?? []
 //        self.createdAt = try container.decodeIfPresent(Date.self, forKey: .createdAt) ?? Date()
 //        self.updatedAt = try container.decodeIfPresent(Date.self, forKey: .updatedAt) ?? Date()
@@ -156,7 +156,7 @@ import Foundation
 //        league: String? = nil,
 //        teamOne: String? = nil,
 //        teamTwo: String? = nil,
-//        events: [LIEvent]? = nil,
+//        events: [Event]? = nil,
 //        referees: [Referee]? = nil,
 //        createdAt: Date? = nil,
 //        updatedAt: Date? = nil,

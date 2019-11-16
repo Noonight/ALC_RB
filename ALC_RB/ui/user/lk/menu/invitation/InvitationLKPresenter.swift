@@ -11,11 +11,11 @@ import UIKit
 
 protocol InvitationLKView: MvpView {
     
-    func acceptRequestSuccess(soloPerson: SoloPerson)
+    func acceptRequestSuccess(soloPerson: SinglePerson)
     func acceptRequestFailureMessage(message: SingleLineMessage)
     func acceptRequestFailure(error: Error)
     
-    func getTournamentsSuccess(tournaments: Tournaments)
+    func getTournamentsSuccess(tournaments: [Tourney])
     func getTournamentsFailure(error: Error)
     
     func getTournamentLeagueSuccess(liLeagueInfo: [League])
