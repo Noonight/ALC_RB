@@ -11,38 +11,20 @@ import Alamofire
 
 final class RegionApi: ApiRequests {
     
-    override func get_regions(query: String? = nil, get_result: @escaping (ResultMy<[RegionMy], Error>) -> ()) {
-        
-        var parameters: Parameters = [:]
-        
-        if query != nil {
-            parameters = [
-                "name" : query!
-            ]
-        }
-        Print.m(parameters)
-        
-        let alamofireInstance = Alamofire.request(ApiRoute.getApiURL(.region), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString))
-        alamofireInstance
-            .responseJSON { response in
-                let decoder = JSONDecoder()
-                
-                do
-                {
-                    if let myRegions = try? decoder.decode([RegionMy].self, from: response.data!)
-                    {
-                        get_result(.success(myRegions))
-                    }
-                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!)
-                    {
-                        get_result(.message(message))
-                    }
-                }
-                
-                if response.result.isFailure {
-                    get_result(.failure(response.result.error!))
-                }
-        }
+    func get_region(id: String? = nil, name: String? = nil, limit: Int? = nil, offset: Int? = nil, resultMy: @escaping (ResultMy<[RegionMy], RequestError>) -> ()) {
+        let params = ParamBuilder<RegionMy.CodingKeys>()
+            .add(key: .id, value: id)
+            .add(key: .name, value: name)
+            .limit(limit)
+            .offset(offset)
+            .get()
+        get_region(params: params, resultMy: resultMy)
+    }
+    
+    func get_region(params: [String : Any], resultMy: @escaping (ResultMy<[RegionMy], RequestError>) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.region), method: .get, parameters: params, encoding: URLEncoding(destination: .queryString))
+            .responseResultMy([RegionMy].self, resultMy: resultMy)
     }
     
 }
