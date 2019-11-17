@@ -70,7 +70,7 @@ extension RegistrationViewController {
         viewModel
             .regions
             .bind(to: regionPicker.rx.itemTitles) { _, item in
-                return "\(item.name)"
+                return "\(item.name!)"
             }
             .disposed(by: bag)
         

@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //
 //        let rootViewController = MainTabBarViewController()
 //        self.window?.rootViewController = rootViewController
-        
         return true
     } // for xcode 10+
     

@@ -38,7 +38,8 @@ class UserDefaultsHelper {
     
     func setAuthorizedUser(user: AuthUser) {
         do {
-            try userDefaults.set(object: user, forKey: userKey)
+//            try userDefaults.set(object: user, forKey: userKey)
+            userDefaults.setValue(user, forKey: userKey)
         } catch {
             print("Somer error with setting user in UserDefaults")
         }
