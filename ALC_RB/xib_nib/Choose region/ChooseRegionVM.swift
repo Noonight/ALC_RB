@@ -19,15 +19,15 @@ final class ChooseRegionVM {
     
     let findedRegions = PublishSubject<[RegionMy]>()
     
-    let dataManager: ApiRequests
+    let regionApi: RegionApi
     
-    init(dataManager: ApiRequests) {
-        self.dataManager = dataManager
+    init(regionApi: RegionApi) {
+        self.regionApi = regionApi
     }
     
     func fetch() {
         loading.onNext(true)
-        dataManager.get_regions(query: query.value) { result in
+        regionApi.get_region(name: query.value) { result in
             self.loading.onNext(false)
             switch result {
             case .success(let regions):

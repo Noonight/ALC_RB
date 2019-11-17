@@ -33,12 +33,12 @@ protocol InvitationLKView: MvpView {
 
 class InvitationLKPresenter: MvpPresenter<InvitationLKTableViewController> {
     
-    let apiService = ApiRequests()
+    let teamAPi = TeamApi()
     let personApi = PersonApi()
     
     func acceptRequest(token: String, acceptInfo: AcceptRequest) {
         Print.m("requst \n token == \(token) \n acceptInfo == \(acceptInfo.toParams())")
-        apiService.post_teamAcceptRequest(token: token, acceptInfo: acceptInfo, response_success: { soloPerson in
+        teamAPi.post_teamAcceptRequest(token: token, acceptInfo: acceptInfo, response_success: { soloPerson in
             self.getView().acceptRequestSuccess(soloPerson: soloPerson)
         }, response_message: { message in
             self.getView().acceptRequestFailureMessage(message: message)
@@ -64,7 +64,7 @@ class InvitationLKPresenter: MvpPresenter<InvitationLKTableViewController> {
     }
     
     func refreshUser(token: String) {
-        apiService.get_refreshAuthUser(token: token, success: { authUser in
+        personApi.get_refreshAuthUser(token: token, success: { authUser in
             self.getView().onRefreshUserSuccess(authUser: authUser)
         }) { error in
             self.getView().onRefreshUserFailure(error: error)
@@ -109,11 +109,12 @@ class InvitationLKPresenter: MvpPresenter<InvitationLKTableViewController> {
     }
     
     func getTournamentImage(photoUrl: String, get_image_success: @escaping (UIImage) -> (), get_image_failure: @escaping (Error) -> ()) {
-        apiService.get_image(imagePath: photoUrl, get_success: { (image) in
-            get_image_success(image)
-        }) { (error) in
-            get_image_failure(error)
-        }
+        // DEPRECATED: use  kingfisher
+//        apiService.get_image(imagePath: photoUrl, get_success: { (image) in
+//            get_image_success(image)
+//        }) { (error) in
+//            get_image_failure(error)
+//        }
     }
     
 }

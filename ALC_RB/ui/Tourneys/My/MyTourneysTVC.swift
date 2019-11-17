@@ -43,7 +43,7 @@ class MyTourneysTVC: UITableViewController {
 extension MyTourneysTVC {
     
     func setupViewModel() {
-        self.viewModel = MyTourneysVM(dataManager: ApiRequests(), leagueApi: LeagueApi())
+        self.viewModel = MyTourneysVM(tourneyApi: TourneyApi(), leagueApi: LeagueApi())
     }
     
     func setupTourneyTable() {

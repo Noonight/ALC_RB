@@ -26,11 +26,13 @@ final class EditProfileViewModel {
     }
     
     let dataManager: ApiRequests
+    let personApi: PersonApi
     let userDefaults = UserDefaultsHelper()
     
-    init(dataManager: ApiRequests, regionApi: RegionApi) {
+    init(dataManager: ApiRequests, regionApi: RegionApi, personApi: PersonApi) {
         self.dataManager = dataManager
         self.regionViewModel = RegionsViewModel(regionApi: regionApi)
+        self.personApi = personApi
     }
     
     func fetch() {
@@ -39,7 +41,7 @@ final class EditProfileViewModel {
     
     func editProfile(profileInfo: EditProfile) {
         loading.onNext(true)
-        dataManager.post_edit_profile(token: authorizedUser!.token, profileInfo: profileInfo, profileImage: choosedImage.value) { result in
+        personApi.post_edit_profile(token: authorizedUser!.token, profileInfo: profileInfo, profileImage: choosedImage.value) { result in
             self.loading.onNext(false)
             switch result {
             case .success(let person):

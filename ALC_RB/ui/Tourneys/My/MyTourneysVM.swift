@@ -17,14 +17,14 @@ final class MyTourneysVM {
     let message: PublishSubject<SingleLineMessage?> = PublishSubject()
     let loading: PublishSubject<Bool> = PublishSubject()
     
-    private let dataManager: ApiRequests
+    private let tourneyApi: TourneyApi
     private let leagueApi: LeagueApi
     private let localTourney = LocalTourneys()
     private let disposeBag = DisposeBag()
     private var firstLoad = true
     
-    init(dataManager: ApiRequests, leagueApi: LeagueApi) {
-        self.dataManager = dataManager
+    init(tourneyApi: TourneyApi, leagueApi: LeagueApi) {
+        self.tourneyApi = tourneyApi
         self.leagueApi = leagueApi
         items
             .observeOn(MainScheduler.instance)
@@ -44,8 +44,9 @@ final class MyTourneysVM {
         if firstLoad == true {
             self.loading.onNext(true)
         }
-        dataManager
-            .get_league(tourneys: localTourney.getLocalTourneys()) { result in
+        
+        tourneyApi
+            .get_tourneyModelItems(tourneys: localTourney.getLocalTourneys(), resultMy: { result in
                 self.loading.onNext(false)
                 switch result {
                 case .success(let modelItems):
@@ -55,7 +56,8 @@ final class MyTourneysVM {
                 case .failure(let error):
                     self.error.onNext(error)
                 }
-        }
+            })
+        
     }
     
     func fetchLeagueInfo(leagueId: String, success: @escaping ([League]) -> ()) {

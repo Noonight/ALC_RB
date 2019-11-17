@@ -18,10 +18,10 @@ class MyMatchesRefViewModel {
     var tableModel: PublishSubject<[MyMatchesRefTableViewCell.CellModel]> = PublishSubject()
 //    var firstInit: Variable<Bool> = Variable<Bool>(true)
     
-    var dataManager: ApiRequests?
+    var matchApi: MatchApi?
     
-    init(dataManager: ApiRequests) {
-        self.dataManager = dataManager
+    init(matchApi: MatchApi) {
+        self.matchApi = matchApi
     }
     
     func fetch(closure: @escaping () -> ())
@@ -48,7 +48,7 @@ class MyMatchesRefViewModel {
         
         if participationMatches.value.count > 0 {
             refreshing.onNext(true)
-            dataManager?.get_myMatchesCellModels(participationMatches: participationMatches.value, resultMy: { result in
+            matchApi?.get_myMatchesCellModels(participationMatches: participationMatches.value, resultMy: { result in
                 self.refreshing.onNext(false)
                 switch result {
                 case .success(let cells):

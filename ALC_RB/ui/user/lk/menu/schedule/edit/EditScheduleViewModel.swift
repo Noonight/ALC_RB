@@ -46,14 +46,14 @@ class EditScheduleViewModel {
     
     var editedMatch = Variable<Match?>(nil)
     
-    private let dataManager: ApiRequests
+    private let matchApi: MatchApi
     private let personApi: PersonApi
     private let leagueApi: LeagueApi
     
     var cache: EditMatchReferees?
     
-    init(dataManager: ApiRequests, personApi: PersonApi, leagueApi: LeagueApi) {
-        self.dataManager = dataManager
+    init(matchApi: MatchApi, personApi: PersonApi, leagueApi: LeagueApi) {
+        self.matchApi = matchApi
         self.personApi = personApi
         self.leagueApi = leagueApi
     }
@@ -110,7 +110,7 @@ class EditScheduleViewModel {
 //                failure(error)
 //            }
         self.refreshing.onNext(true)
-        dataManager.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees) { result in
+        matchApi.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees) { result in
             self.refreshing.onNext(false)
             switch result {
             case .success(let match):

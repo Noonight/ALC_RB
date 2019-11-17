@@ -99,7 +99,7 @@ private extension AnnouncesVC {
 //    }
     
     func setupAnnouncesViewModel() {
-        self.announcesViewModel = AnnouncesViewModel(newDataManager: ApiRequests())
+        self.announcesViewModel = AnnouncesViewModel(announceApi: AnnounceApi())
     }
     
     func setupAnnouncesTable() {

@@ -68,11 +68,12 @@ class OngoingLeaguesLKPresenter: MvpPresenter<OngoingLeaguesLKTableViewControlle
 //    }
     
     func getClubImage(imagePath: String, get_success: @escaping (UIImage) -> (), get_failure: @escaping (Error) -> ()) {
-        apiService.get_image(imagePath: imagePath, get_success: { (image) in
-            get_success(image)
-        }) { (error) in
-            get_failure(error)
-        }
+        // DEPRECATED: fetch image with kingfisher
+//        apiService.get_image(imagePath: imagePath, get_success: { (image) in
+//            get_success(image)
+//        }) { (error) in
+//            get_failure(error)
+//        }
     }
     
 }

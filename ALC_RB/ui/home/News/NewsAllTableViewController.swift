@@ -70,7 +70,7 @@ extension NewsAllTableViewController {
     }
     
     func setupNewsViewModel() {
-        homeNewsViewModel = HomeNewsViewModel(newDataManager: ApiRequests())
+        homeNewsViewModel = HomeNewsViewModel(newsApi: NewsApi())
     }
     
     func setupBinds() {

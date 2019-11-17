@@ -18,19 +18,20 @@ class AnnouncesViewModel {
     let message: PublishSubject<SingleLineMessage?> = PublishSubject()
     let loading: PublishSubject<Bool> = PublishSubject()
     
-    private let dataManager: ApiRequests
+    private let announceApi: AnnounceApi
     private let localTourney = LocalTourneys()
     private let disposeBag = DisposeBag()
     
-    init(newDataManager: ApiRequests) {
-        self.dataManager = newDataManager
+    init(announceApi: AnnounceApi) {
+        self.announceApi = announceApi
         
         announces
             .map ({ mAnnounces -> [Announce] in
                 let mTourneys = self.localTourney.getLocalTourneys()
                 return mAnnounces.filter { mmAnnounce -> Bool in
                     return mTourneys.contains { tourney -> Bool in
-                        return mmAnnounce.tourney == tourney.id
+                        return mmAnnounce.tourney?.orEqual(tourney.id) { $0.id == tourney.id } ?? false
+//                        return mmAnnounce.tourney == tourney.id
                     }
                 }
             })
@@ -39,7 +40,8 @@ class AnnouncesViewModel {
                 let mAnnounceModelItems = mAnnounces.map { mAnnounce -> AnnounceModelItem in
                     let announceModelItem = AnnounceModelItem(newAnnounce: mAnnounce, tourney: nil)
                     announceModelItem.tourney = mTourneys.filter({ mTourney -> Bool in
-                        return mTourney.id == mAnnounce.tourney
+                        return mAnnounce.tourney?.orEqual(mTourney.id) { $0.id == mTourney.id } ?? false
+//                        return mTourney.id == mAnnounce.tourney
                     }).first
                     return announceModelItem
                 }
@@ -54,7 +56,7 @@ class AnnouncesViewModel {
     func fetch() {
         
         self.loading.onNext(true)
-        dataManager.get_announces { result in
+        announceApi.get_announce { result in
             self.loading.onNext(false)
             switch result {
             case .success(let announces):

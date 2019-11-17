@@ -34,7 +34,7 @@ class EditScheduleLKViewController: BaseStateViewController {
     @IBOutlet weak var referee3_btn: UIButton!
     @IBOutlet weak var timekeeper_btn: UIButton!
     
-    var viewModel: EditScheduleViewModel? = EditScheduleViewModel(dataManager: ApiRequests(), personApi: PersonApi(), leagueApi: LeagueApi())
+    var viewModel: EditScheduleViewModel? = EditScheduleViewModel(matchApi: MatchApi(), personApi: PersonApi(), leagueApi: LeagueApi())
     private let disposeBag = DisposeBag()
     private let userDefaults = UserDefaultsHelper()
     

@@ -20,7 +20,7 @@ protocol DoMatchProtocolRefereeView: MvpView {
 
 class DoMatchProtocolRefereePresenter: MvpPresenter<DoMatchProtocolRefereeViewController> {
     
-    let dataManager = ApiRequests()
+    let protocolApi = ProtocolApi()
     
     func saveProtocol(token: String, editedProtocol: EditProtocol, ok: @escaping (Match) -> (), r_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
 //        dataManager.post_changeProtocol(token: token, newProtocol: editedProtocol) { result in
@@ -44,7 +44,7 @@ class DoMatchProtocolRefereePresenter: MvpPresenter<DoMatchProtocolRefereeViewCo
 //    }
     
     func acceptProtocol(token: String, matchId: String, ok: @escaping (Match) -> (), response_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error) -> ()) {
-        dataManager.post_acceptProtocol(token: token, id: matchId) { result in
+        protocolApi.post_acceptProtocol(token: token, id: matchId) { result in
             switch result {
             case .success(let match):
                 ok(match)

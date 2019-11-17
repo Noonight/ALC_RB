@@ -23,7 +23,7 @@ protocol CommandsLKView : MvpView {
 
 class CommandsLKPresenter : MvpPresenter<CommandsLKTableViewController> {
     
-    let apiService = ApiRequests()
+    let personApi = PersonApi()
     let tourneyApi = TourneyApi()
     
     func getTournaments(closure: @escaping () -> ()) {
@@ -49,7 +49,7 @@ class CommandsLKPresenter : MvpPresenter<CommandsLKTableViewController> {
     }
     
     func refreshUser(token: String, closure: @escaping ()->()) {
-        apiService.get_refreshAuthUser(token: token, success: { authUser in
+        personApi.get_refreshAuthUser(token: token, success: { authUser in
             self.getView().getRefreshUserSuccessful(authUser: authUser)
             closure()
         }) { error in

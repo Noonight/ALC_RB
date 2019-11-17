@@ -18,9 +18,8 @@ final class ClubApi: ApiRequests {
             .limit(limit)
             .offset(offset)
             .get()
-        Alamofire
-            .request(ApiRoute.getApiURL(.clubs), method: .get, parameters: params)
-            .responseResultMy([Club].self, resultMy: resultMy)
+        
+        get_club(params: params, resultMy: resultMy)
     }
     
     func get_club(params: [String : Any], resultMy: @escaping (ResultMy<[Club], RequestError>) -> ()) {

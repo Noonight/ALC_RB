@@ -21,32 +21,36 @@ final class RegistrationViewModel {
     var authorizedUser: PublishSubject<AuthUser> = PublishSubject()
     var choosedImage = BehaviorRelay<UIImage?>(value: nil)
     
-    private let dataManager: ApiRequests
+    private let regionApi: RegionApi
+    private let personApi: PersonApi
     private let userDefaults: UserDefaultsHelper
     
-    init(dataManager: ApiRequests) {
-        self.dataManager = dataManager
+    init(regionApi: RegionApi, personApi: PersonApi) {
+        self.regionApi = regionApi
+        self.personApi = personApi
         self.userDefaults = UserDefaultsHelper()
     }
     
     func fetch() {
         loading.onNext(true)
-        dataManager.get_regions { result in
+        regionApi.get_region { result in
             self.loading.onNext(false)
             switch result {
             case .success(let regions):
                 self.regions.onNext(regions)
             case .message(let message):
                 self.message.onNext(message)
-            case .failure(let error):
+            case .failure(.error(let error)):
                 self.error.onNext(error)
+            case .failure(.notExpectedData):
+                Print.m("Not expected data")
             }
         }
     }
     
     func registration(userData: Registration) {
         loading.onNext(true)
-        dataManager.post_registration(userData: userData, profileImage: choosedImage.value) { response in
+        personApi.post_registration(userData: userData, profileImage: choosedImage.value) { response in
             self.loading.onNext(false)
             switch response {
             case .success(let authUser):

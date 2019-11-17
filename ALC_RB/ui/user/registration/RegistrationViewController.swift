@@ -27,7 +27,7 @@ class RegistrationViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     
     private var imagePicker: ImagePicker?
-    private let viewModel = RegistrationViewModel(dataManager: ApiRequests())
+    private let viewModel = RegistrationViewModel(regionApi: RegionApi(), personApi: PersonApi())
     private let bag = DisposeBag()
     
     // MARK: - LIFE CYCLE

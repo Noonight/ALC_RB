@@ -26,46 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let rootViewController = MainTabBarViewController()
 //        self.window?.rootViewController = rootViewController
         
-//        let leagueApi = LeagueApi()
-//
-//        leagueApi.get_league(
-//            params: ParamBuilder<League.CodingKeys>()
-//                .select(
-//                    StrBuilder()
-//                        .add(.id)
-//                )
-//                .add(key: .status, value: League.Status.started.ck)
-//                .get()
-//        ) { result in
-//            switch result {
-//            case .success(let leagues):
-//                dump(leagues)
-//            case .message(let message):
-//                Print.m(message.message)
-//            case .failure(.error(let error)):
-//                Print.m(error)
-//            case .failure(.notExpectedData):
-//                Print.m("not expected data")
-//            }
-//        }
-        
-        let matchApi = MatchApi()
-
-        matchApi.get_upcomingMatches { result in
-            switch result {
-            case .success(let upcomingMatches):
-                dump(upcomingMatches)
-            case .message(let message):
-                Print.m(message.message)
-
-            case .failure(.error(let error)):
-                Print.m(error)
-
-            case .failure(.notExpectedData):
-                Print.m("not expected data")
-            }
-        }
-        
         return true
     } // for xcode 10+
     

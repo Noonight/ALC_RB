@@ -9,32 +9,30 @@
 import Foundation
 
 struct News: Codable {
-    let tourney: String?
-    let id: String?
-    let caption: String?
-    let img: String?
-    let content: String?
-    let createdAt: Date?
-    let updatedAt: Date?
-    let v: Int?
+    
+    let id: String
+    
+    let caption: String? = nil
+    let img: String? = nil
+    let content: String? = nil
+    
+    let tourney: IdRefObjectWrapper<Tourney>? = nil
+    
+    let createdAt: Date? = nil
+    let updatedAt: Date? = nil
+    let v: Int? = nil
 
     enum CodingKeys: String, CodingKey {
-        case tourney = "tourney"
         case id = "_id"
+        
         case caption = "caption"
         case img = "img"
         case content = "content"
+        
+        case tourney = "tourney"
+        
         case createdAt = "createdAt"
         case updatedAt = "updatedAt"
         case v = "__v"
     }
 }
-
-//typealias NewsArray = [News]
-//
-//extension NewsArray {
-//    init?(data: Data) {
-//        guard let instance = try? ISO8601Decoder.getDecoder().decode([News].self, from: data) else { return nil }
-//        self = instance
-//    }
-//}

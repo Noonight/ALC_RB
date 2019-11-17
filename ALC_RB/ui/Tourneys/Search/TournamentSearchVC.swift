@@ -89,7 +89,7 @@ private extension TournamentSearchVC {
     }
     
     func setupPresenter() {
-        self.presenter = TournamentSearchPresenter(dataManager: ApiRequests())
+        self.presenter = TournamentSearchPresenter(tourneyApi: TourneyApi(), regionApi: RegionApi())
     }
     
     func setupTable() {

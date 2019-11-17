@@ -27,7 +27,7 @@ class CommandEditLKPresenter: MvpPresenter<CommandEditLKViewController> {
     var error = PublishSubject<Error?>()
     var message = PublishSubject<SingleLineMessage>()
     
-    let apiService = ApiRequests()
+    let teamApi = TeamApi()
     let personApi = PersonApi()
     
     func getPersons() {
@@ -48,7 +48,7 @@ class CommandEditLKPresenter: MvpPresenter<CommandEditLKViewController> {
     }
     
     func editCommand(token: String, editTeam: EditTeam) {
-        apiService.post_editTeam(token: token, editTeam: editTeam, response_success: { (editTeamResponse) in
+        teamApi.post_editTeam(token: token, editTeam: editTeam, response_success: { (editTeamResponse) in
             self.getView().onEditCommandSuccess(editTeamResponse: editTeamResponse)
         }, response_failure: { (error) in
             self.getView().onEditCommandFailure(error: error)

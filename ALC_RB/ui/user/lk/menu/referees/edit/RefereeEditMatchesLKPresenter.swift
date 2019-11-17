@@ -19,13 +19,13 @@ protocol RefereeEditMatchesView: MvpView {
 }
 
 class RefereeEditMatchesLKPresenter: MvpPresenter<RefereeEditMatchesLKTableViewController> {
-    let dataManager = ApiRequests()
+    let matchApi = MatchApi()
     
     var cache: EditMatchReferees?
     
     func requestEditMatchReferee(token: String, editMatchReferees: EditMatchReferees) {
         self.cache = editMatchReferees
-        dataManager.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees) { result in
+        matchApi.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees) { result in
             switch result {
             case .success(let match):
                 self.getView().onResponseEditMatchSuccess(soloMatch: match)

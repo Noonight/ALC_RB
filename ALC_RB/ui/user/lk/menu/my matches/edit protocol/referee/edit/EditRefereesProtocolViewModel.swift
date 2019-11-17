@@ -20,13 +20,13 @@ class EditRefereesProtocolViewModel {
     var referees: Variable<[Person]> = Variable<[Person]>([Person]())
     var comingMatch: Match!
     
-    private let dataManager: ApiRequests
+    private let matchApi: MatchApi
     private let apiPerson: PersonApi
     
     var cache: EditMatchReferees?
     
-    init(dataManager: ApiRequests, personApi: PersonApi) {
-        self.dataManager = dataManager
+    init(matchApi: MatchApi, personApi: PersonApi) {
+        self.matchApi = matchApi
         self.apiPerson = personApi
     }
     
@@ -62,7 +62,7 @@ class EditRefereesProtocolViewModel {
     func editMatchReferees(token: String, editMatchReferees: EditMatchReferees, success: @escaping (Match)->(), message_single: @escaping (SingleLineMessage)->(), failure: @escaping (Error)->()) {
         self.cache = editMatchReferees
         self.refreshing.onNext(true)
-        dataManager.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees) { result in
+        matchApi.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees) { result in
             self.refreshing.onNext(false)
             switch result {
             case .success(let match):

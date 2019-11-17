@@ -27,7 +27,7 @@ protocol CommandAddPlayerView: MvpView {
 }
 
 class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewController> {
-    let apiService = ApiRequests()
+    let teamApi = TeamApi()
     let personApi = PersonApi()
     
     func fetchPersons(limit: Int = 20, offset: Int) {
@@ -48,7 +48,7 @@ class CommandAddPlayerPresenter: MvpPresenter<CommandAddPlayerTableViewControlle
     }
     
     func addPlayerToTeamForLeague(token: String, addPlayerToTeam: AddPlayerToTeam) {
-        apiService.post_addPlayerToTeam(token: token, addPlayerToTeam: addPlayerToTeam, response_success: { soloLeague in
+        teamApi.post_addPlayerToTeam(token: token, addPlayerToTeam: addPlayerToTeam, response_success: { soloLeague in
             self.getView().onRequestAddPlayerToTeamSuccess(soloLeague: soloLeague)
         }, response_failure: { error in
             self.getView().onRequestAddPlayerToTeamError(error: error)

@@ -21,18 +21,17 @@ final class TourneysViewModel {
     let choosedRegion = BehaviorRelay<RegionMy?>(value: nil)
     let offset = BehaviorRelay<Int?>(value: nil)
     
-    let dataManager: ApiRequests
+    let tourneyApi: TourneyApi
     
-    init(dataManager: ApiRequests) {
-        self.dataManager = dataManager
+    init(tourneyApi: TourneyApi) {
+        self.tourneyApi = tourneyApi
     }
     
     func fetch() {
         self.loading.onNext(true)
-        dataManager.get_tourney(
+        tourneyApi.get_tourney(
             name: searchingQuery.value,
-            region: choosedRegion.value,
-//            limit: Constants.Values.LIMIT,// MARK: DEFAULT LIMIT ALL
+            region: choosedRegion.value?.id,
             limit: Constants.Values.LIMIT_ALL,
             offset: offset.value
         ) { result in

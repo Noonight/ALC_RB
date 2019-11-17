@@ -48,7 +48,7 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         tableView.dataSource = nil
         tableView.delegate = nil
         
-        viewModel = MyMatchesRefViewModel(dataManager: ApiRequests())
+        viewModel = MyMatchesRefViewModel(matchApi: MatchApi())
         
         tableView.tableFooterView = UIView()
         

@@ -45,11 +45,12 @@ class ClubEditLKPresenter : MvpPresenter<ClubEditLKViewController> {
     }
     
     func getClubLogo(byPath image: String) {
-        apiService.get_image(imagePath: image, get_success: { (image) in
-            self.getView().getClubLogoSuccess(image: image)
-        }) { (error) in
-            self.getView().getClubLogoFailure(error: error)
-        }
+        // DEPRECATED: use kingfisher
+//        apiService.get_image(imagePath: image, get_success: { (image) in
+//            self.getView().getClubLogoSuccess(image: image)
+//        }) { (error) in
+//            self.getView().getClubLogoFailure(error: error)
+//        }
     }
     
 }

@@ -35,7 +35,7 @@ class EditRefereesProtocolViewController: BaseStateViewController {
     
     @IBOutlet weak var save_btn: UIBarButtonItem!
     
-    var viewModel: EditRefereesProtocolViewModel? = EditRefereesProtocolViewModel(dataManager: ApiRequests(), personApi: PersonApi())
+    var viewModel: EditRefereesProtocolViewModel? = EditRefereesProtocolViewModel(matchApi: MatchApi(), personApi: PersonApi())
     private let disposeBag = DisposeBag()
     private let userDefaults = UserDefaultsHelper()
     

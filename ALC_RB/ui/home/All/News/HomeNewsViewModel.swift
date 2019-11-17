@@ -17,19 +17,20 @@ class HomeNewsViewModel {
     let message: PublishSubject<SingleLineMessage?> = PublishSubject()
     let loading: PublishSubject<Bool> = PublishSubject()
     
-    private let dataManger: ApiRequests
+    private let newsApi: NewsApi
     private let localTourney = LocalTourneys()
     private let disposeBag = DisposeBag()
     
-    init(newDataManager: ApiRequests) {
-        self.dataManger = newDataManager
+    init(newsApi: NewsApi) {
+        self.newsApi = newsApi
         
         news
             .map({ mNews -> [News] in
                 let mTourneys = self.localTourney.getLocalTourneys()
                 return mNews.filter { mmNews -> Bool in
                     return mTourneys.contains { tourney -> Bool in
-                        return mmNews.tourney == tourney.id
+                        return mmNews.tourney?.orEqual(tourney.id) { $0.id == tourney.id } ?? false
+//                        return mmNews.tourney == tourney.id
                     }
                 }
             })
@@ -38,7 +39,7 @@ class HomeNewsViewModel {
             let mNewsModelItems = news.map { mNews -> NewsModelItem in
                 let mNewsItem = NewsModelItem(news: mNews, tourney: nil)
                 mNewsItem.tourney = mTourneys.filter({ mTourney -> Bool in
-                    return mTourney.id == mNews.tourney
+                    return mNews.tourney?.orEqual(mTourney.id) { $0.id == mTourney.id } ?? false
                 }).first
                 return mNewsItem
             }
@@ -53,7 +54,7 @@ class HomeNewsViewModel {
     func fetch() {
         
         self.loading.onNext(true)
-        dataManger.get_news { result in
+        newsApi.get_news { result in
             self.loading.onNext(false)
             switch result {
             case .success(let news):

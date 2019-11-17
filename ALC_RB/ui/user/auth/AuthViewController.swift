@@ -42,7 +42,7 @@ class AuthViewController: UIViewController {
 extension AuthViewController {
     
     func setupViewModel() {
-        viewModel = AuthViewModel(dataManager: ApiRequests())
+        viewModel = AuthViewModel(dataManager: ApiRequests(), personApi: PersonApi())
     }
     
     func setupBinds() {

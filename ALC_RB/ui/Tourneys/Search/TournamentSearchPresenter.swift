@@ -10,16 +10,17 @@ import Foundation
 
 final class TournamentSearchPresenter {
     
-    private let dataManager: ApiRequests
+    private let regionApi: RegionApi
+    private let tourneyApi: TourneyApi
     
-    init(dataManager: ApiRequests) {
-        self.dataManager = dataManager
+    init(tourneyApi: TourneyApi, regionApi: RegionApi) {
+        self.tourneyApi = tourneyApi
+        self.regionApi = regionApi
     }
     
     func fetchRegions(success: @escaping ([RegionMy]) -> (), r_message: @escaping (SingleLineMessage) -> (), r_error: @escaping (Error) -> ()) {
-        self.dataManager.get_regions { resultMy in
-            switch resultMy
-            {
+        self.regionApi.get_region { resultMy in
+            switch resultMy {
             case .success(let regions):
                 success(regions)
             case .message(let message):
@@ -31,7 +32,7 @@ final class TournamentSearchPresenter {
     }
     
     func fetchTourneys(name: String?, region: RegionMy? = nil, limit: Int? = 20, offset: Int? = 0, success: @escaping ([Tourney]) -> (), r_message: @escaping (SingleLineMessage) -> (), r_error: @escaping (Error) -> ()) {
-        self.dataManager.get_tourney(name: name, region: region, limit: limit, offset: offset) { tourneys in
+        self.tourneyApi.get_tourney(name: name, region: region?.id, limit: limit, offset: offset) { tourneys in
             switch tourneys
             {
             case .success(let tourney):
@@ -43,10 +44,6 @@ final class TournamentSearchPresenter {
                 r_error(error)
             }
         }
-    }
-    
-    func findTournaments(success: @escaping ([Tourney]) -> ()) {
-        
     }
     
 }

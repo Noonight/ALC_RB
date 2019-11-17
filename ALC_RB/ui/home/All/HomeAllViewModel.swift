@@ -17,7 +17,7 @@ final class HomeAllViewModel {
     
     init(newDataManager: ApiRequests) {
         dataManager = newDataManager
-        newsViewModel = HomeNewsViewModel(newDataManager: dataManager)
+        newsViewModel = HomeNewsViewModel(newsApi: NewsApi())
 //        scheduleViewModel = ScheduleViewModel(newDataManager: dataManager)
     }
     

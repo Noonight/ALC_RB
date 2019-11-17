@@ -18,15 +18,17 @@ final class AuthViewModel {
     let message = PublishSubject<SingleLineMessage>()
     
     private let dataManager: ApiRequests
+    private let personApi: PersonApi
     lazy var userDefaults = UserDefaultsHelper()
     
-    init(dataManager: ApiRequests) {
+    init(dataManager: ApiRequests, personApi: PersonApi) {
         self.dataManager = dataManager
+        self.personApi = personApi
     }
     
     func authorization(userData: SignIn) {
         loading.onNext(true)
-        dataManager.post_authorization(userData: userData) { result in
+        personApi.post_authorization(userData: userData) { result in
             self.loading.onNext(false)
             switch result {
             case .success(let authUser):

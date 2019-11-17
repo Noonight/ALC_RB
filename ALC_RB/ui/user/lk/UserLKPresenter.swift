@@ -23,7 +23,7 @@ protocol UserLKView: MvpView {
 
 class UserLKPresenter: MvpPresenter<UserLKViewController> {
     
-    private let apiService = ApiRequests()
+    private let personApi = PersonApi()
     
 //    func getProfileImage(imagePath: String) {
 //        apiService.get_image(imagePath: imagePath, get_success: { (image) in
@@ -34,7 +34,7 @@ class UserLKPresenter: MvpPresenter<UserLKViewController> {
 //    }
     
     func refreshUser(token: String) {
-        apiService.get_refreshAuthUser(token: token, success: { authUser in
+        personApi.get_refreshAuthUser(token: token, success: { authUser in
             self.getView().onRefreshUserSuccessful(authUser: authUser)
         }) { error in
             self.getView().onRefreshUserFailure(authUser: error)

@@ -26,7 +26,7 @@ final class RegionsViewModel {
     
     func fetch() {
         self.loading.onNext(true)
-        regionApi.get_regions { result in
+        regionApi.get_region { result in
             self.loading.onNext(false)
             switch result {
             case .success(let regions):

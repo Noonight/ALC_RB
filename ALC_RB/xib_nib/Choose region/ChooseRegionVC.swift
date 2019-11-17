@@ -64,7 +64,7 @@ extension ChooseRegionVC {
     }
     
     func setupViewModel() {
-        self.viewModel = ChooseRegionVM(dataManager: ApiRequests())
+        self.viewModel = ChooseRegionVM(regionApi: RegionApi())
     }
     
     func setupBinds() {
