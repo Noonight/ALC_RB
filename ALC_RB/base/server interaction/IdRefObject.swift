@@ -85,7 +85,7 @@ class IdRefObjectWrapper<T>: Codable where T : Codable {
         do {
             try container.encode(self.value)
         } catch {
-            throw EncodingError.invalidValue(IdRefObjectWrapper.self, EncodingError.Context(codingPath: [], debugDescription: "not supported yet"))
+            throw EncodingError.invalidValue(IdRefObjectWrapper.self, EncodingError.Context(codingPath: [], debugDescription: "IdRefObjectWrapper not yet"))
         }
     }
 }
@@ -165,6 +165,6 @@ enum IdRefObject<T>: Codable where T : Codable {
         case .object(let object):
             try container.encode(object)
         }
-        throw EncodingError.invalidValue(IdRefObject.self, EncodingError.Context(codingPath: [], debugDescription: "not supported yet"))
+        throw EncodingError.invalidValue(IdRefObject.self, EncodingError.Context(codingPath: [], debugDescription: "IdRefObject error"))
     }
 }

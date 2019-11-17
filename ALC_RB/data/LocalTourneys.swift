@@ -33,7 +33,8 @@ class LocalTourneys {
     func setLocalTourneys(newTourneys: [Tourney]) {
         do {
 //            let tourneysData = NSKeyedArchiver.archivedData(withRootObject: newTourneys)
-            try userDefaults.set(object: newTourneys, forKey: userKey)
+//            try userDefaults.set(object: newTourneys, forKey: userKey)
+            userDefaults.setValue(newTourneys, forKey: userKey)
         } catch {
             Print.m("Somer error with setting tourney in UserDefaults")
         }
