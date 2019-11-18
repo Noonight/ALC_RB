@@ -36,7 +36,8 @@ final class TournamentSearchPresenter {
             switch tourneys
             {
             case .success(let tourney):
-                Print.m(tourney)
+//                Print.m(tourney)
+                dump(tourney)
                 success(tourney)
             case .message(let message):
                 r_message(message)

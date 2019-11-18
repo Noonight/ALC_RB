@@ -9,6 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 import Kingfisher
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +26,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //
 //        let rootViewController = MainTabBarViewController()
 //        self.window?.rootViewController = rootViewController
+//        LocalTourneys().deleteLocalTourneys()
+//        UserDefaultsHelper().deleteAuthorizedUser()
+//        let realm = DBHelper().getRealm()
+//        let realm = try! Realm()
+//        if realm.isEmpty == false {
+//            let tourneys = realm.objects(TourneyRealm.self)
+//
+//            if tourneys.count != 0 {
+//                tourneys.elements.forEach({ Print.m($0) })
+//            }
+//        }
+//
+//        var tourneyDB = TourneyRealm()
+//        tourneyDB.players.append(IdRefObjectWrapper<Person>(Person()).toData())
+////        tourneyDB.players.append("id id")
+//        try! realm.write {
+//            realm.add(tourneyDB)
+//        }
+//
+////        if tourneys.count != 0 {
+//            realm.objects(TourneyRealm.self).elements.forEach({ Print.m($0) })
+////        }
+        
         return true
     } // for xcode 10+
     

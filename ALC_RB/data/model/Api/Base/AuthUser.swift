@@ -23,107 +23,24 @@ struct AuthUser: Codable {
     }
 }
 
-struct AuthUserNot: Codable {
-    let message: String
-    
-    enum CodingKeys: String, CodingKey {
-        case message = "message"
-    }
-}
-
-// MARK: Convenience initializers and mutators
-
-extension AuthUserNot {
-    
-    
-    
-    init(data: Data) throws {
-        self = try JSONDecoder().decode(AuthUserNot.self, from: data)
-    }
-    
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-    
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-    
-    func with(
-        message: String? = nil
-        ) -> AuthUserNot {
-        return AuthUserNot(
-            message: message ?? self.message
-        )
-    }
-    
-    func jsonData() throws -> Data {
-        return try JSONEncoder().encode(self)
-    }
-    
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
-    }
-}
-
-// MARK: - Alamofire response handlers
-
-extension DataRequest {
-    @discardableResult
-    func responseAuthUserNot(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<AuthUserNot>) -> Void) -> Self {
-        return responseDecodable(queue: queue, completionHandler: completionHandler)
-    }
-}
-
 
 // MARK: Convenience initializers and mutators
 
 extension AuthUser {
     
-    init() {
-        person = Person()
-        token = " as "
+    init(coder aDecoder: NSCoder) {
+        let person = aDecoder.decodeObject(forKey: "person") as! Person
+        let token = aDecoder.decodeObject(forKey: "token") as! String
+        
+        self.init(person: person, token: token)
     }
     
-    init(data: Data) throws {
-        self = try JSONDecoder().decode(AuthUser.self, from: data)
-    }
-    
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-    
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-    
-    func with(
-        person: Person? = nil,
-        token: String? = nil
-        ) -> AuthUser {
-        return AuthUser(
-            person: person ?? self.person,
-            token: token ?? self.token
-        )
-    }
-    
-    func jsonData() throws -> Data {
-        return try JSONEncoder().encode(self)
-    }
-    
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+    func encode(with aCoder: NSCoder){
+        
+        aCoder.encode(person, forKey: "person")
+        aCoder.encode(token, forKey: "token")
     }
 }
-
-
-// MARK: Encode/decode helpers
 
 // MARK: - Alamofire response handlers
 

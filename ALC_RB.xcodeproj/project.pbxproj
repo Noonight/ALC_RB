@@ -45,6 +45,10 @@
 		04C024E82213E12C00A4A571 /* EventsProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C024E72213E12C00A4A571 /* EventsProtocolTableViewCell.swift */; };
 		04C024EA221427F500A4A571 /* MenuLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C024E9221427F500A4A571 /* MenuLauncher.swift */; };
 		04C024EC22142F6600A4A571 /* MenuLauncherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C024EB22142F6600A4A571 /* MenuLauncherCell.swift */; };
+		04C88E5C238266C300B2A8C4 /* TourneyRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C88E5B238266C300B2A8C4 /* TourneyRealm.swift */; };
+		04C88E5F2382687100B2A8C4 /* AuthUserRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C88E5E2382687100B2A8C4 /* AuthUserRealm.swift */; };
+		04C88E61238268E700B2A8C4 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C88E60238268E700B2A8C4 /* DBHelper.swift */; };
+		04C88E63238294D500B2A8C4 /* PersonRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C88E62238294D500B2A8C4 /* PersonRealm.swift */; };
 		04D01D42230689CB003AB74B /* AdverstingMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D01D41230689CB003AB74B /* AdverstingMaker.swift */; };
 		04DF5492220D6861001323A6 /* MatchProtocolPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5491220D6861001323A6 /* MatchProtocolPresenter.swift */; };
 		04DF5494220D6C25001323A6 /* ClubTeamHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5493220D6C25001323A6 /* ClubTeamHelper.swift */; };
@@ -434,6 +438,10 @@
 		04C024E72213E12C00A4A571 /* EventsProtocolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsProtocolTableViewCell.swift; sourceTree = "<group>"; };
 		04C024E9221427F500A4A571 /* MenuLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLauncher.swift; sourceTree = "<group>"; };
 		04C024EB22142F6600A4A571 /* MenuLauncherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLauncherCell.swift; sourceTree = "<group>"; };
+		04C88E5B238266C300B2A8C4 /* TourneyRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourneyRealm.swift; sourceTree = "<group>"; };
+		04C88E5E2382687100B2A8C4 /* AuthUserRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserRealm.swift; sourceTree = "<group>"; };
+		04C88E60238268E700B2A8C4 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
+		04C88E62238294D500B2A8C4 /* PersonRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRealm.swift; sourceTree = "<group>"; };
 		04D01D41230689CB003AB74B /* AdverstingMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdverstingMaker.swift; sourceTree = "<group>"; };
 		04DF5491220D6861001323A6 /* MatchProtocolPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchProtocolPresenter.swift; sourceTree = "<group>"; };
 		04DF5493220D6C25001323A6 /* ClubTeamHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubTeamHelper.swift; sourceTree = "<group>"; };
@@ -1055,6 +1063,32 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
+		04C88E59238266A700B2A8C4 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				04C88E5D2382686800B2A8C4 /* Person */,
+				04C88E5A238266B000B2A8C4 /* Tourney */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		04C88E5A238266B000B2A8C4 /* Tourney */ = {
+			isa = PBXGroup;
+			children = (
+				04C88E5B238266C300B2A8C4 /* TourneyRealm.swift */,
+			);
+			path = Tourney;
+			sourceTree = "<group>";
+		};
+		04C88E5D2382686800B2A8C4 /* Person */ = {
+			isa = PBXGroup;
+			children = (
+				04C88E5E2382687100B2A8C4 /* AuthUserRealm.swift */,
+				04C88E62238294D500B2A8C4 /* PersonRealm.swift */,
+			);
+			path = Person;
+			sourceTree = "<group>";
+		};
 		04F710C1236C29C700C26469 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1617,6 +1651,7 @@
 				DB673FDC22DDF41F00581E6D /* pages */,
 				CE77AC7C21B0FBB300C0ED0D /* api */,
 				CE61551521AF9786008C4463 /* model */,
+				04C88E60238268E700B2A8C4 /* DBHelper.swift */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -1624,6 +1659,7 @@
 		CE61551521AF9786008C4463 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				04C88E59238266A700B2A8C4 /* DB */,
 				04713EAC237BD152003783C2 /* Api */,
 				1894826A2356ECFE000C8A2A /* Helpers */,
 			);
@@ -2946,7 +2982,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AMScrollingNavbar/AMScrollingNavbar.framework",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
@@ -2959,6 +2995,8 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Lightbox/Lightbox.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -2981,6 +3019,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lightbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -2991,7 +3031,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ALC_RB/Pods-ALC_RB-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		51D949AE18D1EDAED4381B3B /* [CP] Check Pods Manifest.lock */ = {
@@ -3129,6 +3169,7 @@
 				CE916ABC21B520D90025FECF /* NewsDetailViewController.swift in Sources */,
 				189482622356EC35000C8A2A /* _GroupStage.swift in Sources */,
 				DB51CD9522155D8B00A8D08E /* ScoreMatchTableViewController.swift in Sources */,
+				04C88E61238268E700B2A8C4 /* DBHelper.swift in Sources */,
 				CE61551321AF929E008C4463 /* NewsTableViewCell.swift in Sources */,
 				04FF6F92237D28880045D82E /* Event.swift in Sources */,
 				DB2A35D821CA20C200E9E2C5 /* PlayersPresenter.swift in Sources */,
@@ -3228,6 +3269,7 @@
 				DB1CA0FF22256F53005E1FB9 /* SignIn.swift in Sources */,
 				DB55914B2209FB520034E3C5 /* PlayersLeagueTableViewCell.swift in Sources */,
 				CE61551D21AFC33D008C4463 /* Announce.swift in Sources */,
+				04C88E63238294D500B2A8C4 /* PersonRealm.swift in Sources */,
 				189482742356EFC8000C8A2A /* MyTourneysVM.swift in Sources */,
 				18427968235B169B006F2C4C /* _PendingTeamInvite.swift in Sources */,
 				DBE0E7A2223BDDE800CC0EE2 /* OngoingLeaguesLKTableViewController.swift in Sources */,
@@ -3235,6 +3277,7 @@
 				DB6AA17E21C294A4007D4693 /* ClubsTableViewController.swift in Sources */,
 				DB5AAC082236A1380097963E /* InvitationLKPresenter.swift in Sources */,
 				1839244A22C7CC4000A644F5 /* SoloMatch.swift in Sources */,
+				04C88E5F2382687100B2A8C4 /* AuthUserRealm.swift in Sources */,
 				DB5AAC0B2236A1AE0097963E /* InvitationTableViewCell.swift in Sources */,
 				DBCA6CAC22F7F9FD001D6C0B /* ProtocolAllTableEventsCell.swift in Sources */,
 				18459869234744F20066DE2A /* ButtonActivity.swift in Sources */,
@@ -3311,6 +3354,7 @@
 				DB0ABC9223030C1700FF6A8D /* PenaltyTableView.swift in Sources */,
 				DB1816E121D10161005375ED /* PlayerViewController.swift in Sources */,
 				18B1FEFA22E1CB1900D75F2D /* KingExtensions.swift in Sources */,
+				04C88E5C238266C300B2A8C4 /* TourneyRealm.swift in Sources */,
 				DB5AAC0622369FDB0097963E /* InvitationLKTableViewController.swift in Sources */,
 				18A8FC1C2358416B00042968 /* LeagueDetailViewModel.swift in Sources */,
 				DB495B7922AF77CB00FCC6F5 /* ScheduleRefViewModel.swift in Sources */,

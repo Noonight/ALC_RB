@@ -19,6 +19,21 @@ class IdRefObjectWrapper<T>: Codable where T : Codable {
         self.value = IdRefObject<T>.object(value)
     }
     
+    func toData() -> Data {
+//        let data = try! JSONEncoder().encode(self)
+//        let data = try! PropertyListEncoder().encode(self)
+        
+//        return NSKeyedArchiver.archivedData(withRootObject: self)
+        return data
+    }
+    
+    static func fromData(data: Data?) -> IdRefObjectWrapper<T>? {
+        if data == nil { return nil}
+//        return NSKeyedUnarchiver.unarchiveObject(with: data!) as? IdRefObjectWrapper<T>
+        let lva = try! PropertyListDecoder().decode(IdRefObjectWrapper<T>.self, from: data!)
+        return lva
+    }
+    
     func setValue(with value: IdRefObject<T>) {
         self.value = value
     }
@@ -83,7 +98,15 @@ class IdRefObjectWrapper<T>: Codable where T : Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         do {
-            try container.encode(self.value)
+//            try container.encode(self.value)
+            switch self.value {
+            case .id(let id):
+                try container.encode(id)
+            case .object(let obj):
+                try container.encode(obj)
+            }
+        } catch EncodingError.invalidValue(let any, let context) {
+            throw EncodingError.invalidValue(any, context)
         } catch {
             throw EncodingError.invalidValue(IdRefObjectWrapper.self, EncodingError.Context(codingPath: [], debugDescription: "IdRefObjectWrapper not yet"))
         }
@@ -136,6 +159,15 @@ extension IdRefObjectWrapper {
     
 }
 
+//extension IdRefObjectWrapper: RealmCollectionValue {
+//    static func == (lhs: IdRefObjectWrapper<T>, rhs: IdRefObjectWrapper<T>) -> Bool {
+//        if lhs.getId() == rhs.getId() {
+//            return true
+//        }
+//        return false
+//    }
+//}
+
 enum IdRefObject<T>: Codable where T : Codable {
     
     case id(String), object(T)
@@ -143,11 +175,11 @@ enum IdRefObject<T>: Codable where T : Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let id = try? container.decode(String.self) {
-            print("decode id")
+//            print("decode id")
             Print.m("id = \(id)")
             self = .id(id)
         } else if let object = try? container.decode(T.self) {
-            print("decode object")
+//            print("decode object")
             Print.m("object = \(object)")
             self = .object(object)
         } else {
@@ -159,12 +191,25 @@ enum IdRefObject<T>: Codable where T : Codable {
     
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
-        switch self {
-        case .id(let id):
-            try container.encode(id)
-        case .object(let object):
-            try container.encode(object)
+        do {
+            switch self {
+            case .id(let id):
+                try container.encode(id)
+            case .object(let object):
+                try container.encode(object)
+            }
+        } catch EncodingError.invalidValue(let any, let context) {
+            throw EncodingError.invalidValue(any, context)
+        } catch {
+            throw EncodingError.invalidValue(IdRefObject.self, EncodingError.Context(codingPath: [], debugDescription: "IdRefObject error"))
         }
-        throw EncodingError.invalidValue(IdRefObject.self, EncodingError.Context(codingPath: [], debugDescription: "IdRefObject error"))
     }
 }
+
+//extension SingleValueEncodingContainer {
+//
+//    func encode<T>(_ type: T, value: T) throws where T: Encodable  {
+//        self.encode(value, value: value)
+//    }
+//
+//}

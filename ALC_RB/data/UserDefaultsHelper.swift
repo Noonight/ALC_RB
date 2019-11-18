@@ -15,7 +15,8 @@ class UserDefaultsHelper {
     
     func userIsAuthorized() -> Bool {
         do {
-            let user = try self.userDefaults.get(objectType: AuthUser.self, forKey: userKey)
+//            let user = try self.userDefaults.get(objectType: AuthUser.self, forKey: userKey)
+            let user = getAuthorizedUser()
 //            Print.d(object: user)
             if user != nil {
                 return true
@@ -28,7 +29,10 @@ class UserDefaultsHelper {
     
     func getAuthorizedUser() -> AuthUser? {
         do {
-            let user = try self.userDefaults.get(objectType: AuthUser.self, forKey: userKey)
+            guard let decoder = userDefaults.object(forKey: userKey) as? Data else { return nil }
+            let user = NSKeyedUnarchiver.unarchiveObject(with: decoder) as? AuthUser
+//            let user = try self.userDefaults.get(objectType: AuthUser.self, forKey: userKey)
+            
             return user
         } catch {
             print("Some error with getting user from UserDefaults")
@@ -39,7 +43,10 @@ class UserDefaultsHelper {
     func setAuthorizedUser(user: AuthUser) {
         do {
 //            try userDefaults.set(object: user, forKey: userKey)
-            userDefaults.setValue(user, forKey: userKey)
+//            userDefaults.setValue(user, forKey: userKey)
+            deleteAuthorizedUser()
+            let encodedData = NSKeyedArchiver.archivedData(withRootObject: user)
+            userDefaults.set(encodedData, forKey: userKey)
         } catch {
             print("Somer error with setting user in UserDefaults")
         }
