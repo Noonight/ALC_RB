@@ -19,9 +19,14 @@ class TeamLKTableViewCell: UITableViewCell {
     @IBOutlet weak var tournamentTransfer_label: UILabel!
     @IBOutlet weak var countOfPlayers_label: UILabel!
     
-    var teamModelItem: TeamModelItem {
+    var teamModelItem: TeamModelItem! {
         didSet {
+            self.tournamentTitle_label.text = self.teamModelItem.tourneyLeagueName
             self.commandTitle_label.text = self.teamModelItem.name
+            self.status_label.text = self.teamModelItem.leagueStatus
+            self.tournamentDate_label.text = self.teamModelItem.leagueBeginEndDate
+            self.tournamentTransfer_label.text = self.teamModelItem.leagueTransferBeginEndDate
+            self.countOfPlayers_label.text = self.teamModelItem.maxCountOfPlayers
         }
     }
 }

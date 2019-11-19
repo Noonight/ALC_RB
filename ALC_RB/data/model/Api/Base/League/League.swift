@@ -17,6 +17,17 @@ struct League: Codable {
         case pending = "pending"
         case started = "started"
         case finished = "finished"
+        
+        func ru() -> String {
+            switch self {
+            case .pending:
+                return "В ожидании"
+            case .started:
+                return "Началась"
+            case .finished:
+                return "Завершилась"
+            }
+        }
     }
     
     var id: String

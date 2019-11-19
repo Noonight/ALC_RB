@@ -22,12 +22,14 @@ class CommandsLKTableViewController: UITableViewController {
     @IBOutlet weak var createNewCommandBtn: UIBarButtonItem!
     
     private var viewModel: TeamsLKViewModel!
+    private var teamTable: TeamsLKTable!
     private let bag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupViewModel()
+        setupTable()
         setupBinds()
         setupPullToRefresh()
     }
@@ -52,10 +54,15 @@ extension CommandsLKTableViewController {
         viewModel = TeamsLKViewModel(teamApi: TeamApi(), inviteApi: InviteApi())
     }
     
+    func setupTable() {
+        teamTable = TeamsLKTable(dataSource: [], tableActions: self)
+        tableView.delegate = teamTable
+        tableView.dataSource = teamTable
+    }
+    
     func setupBinds() {
-        tableView.delegate = nil
-        tableView.dataSource = nil
         
+//        tableView.rx.itemSelected.
         
         viewModel
             .loading
@@ -107,6 +114,12 @@ extension CommandsLKTableViewController {
     
 }
 
+extension CommandsLKTableViewController: TableActions {
+    func onCellSelected(model: CellModel) {
+        Print.m(model)
+    }
+}
+
 // MARK: Helpers
 
 extension CommandsLKTableViewController {
@@ -139,80 +152,5 @@ extension CommandsLKTableViewController {
             
         }
         
-    }
-}
-
-// MARK: Table view
-extension CommandsLKTableViewController {
-    // MARK: Data source
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return tableModel.headerTitleForSection(section: section)
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableModel.rowInSections(section: section)
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.COMMAND, for: indexPath) as! TeamLKTableViewCell
-        
-        switch indexPath.section {
-        case 0:
-            let model = tableModel.ownerTeams[indexPath.row]
-            configureCell(cell: cell, model: model)
-            cell.selectionStyle = .default
-            cell.accessoryType = .disclosureIndicator
-        case 1:
-            let model = tableModel.playerTeams[indexPath.row]
-            configureCell(cell: cell, model: model)
-            cell.accessoryType = .none
-        default:
-            break
-        }
-        
-        cell.selectionStyle = .none
-        
-        return cell
-    }
-    
-    // MARK: - Delegate
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            
-            if indexPath.section == 0 {
-                showRemoveTeamAlert(teamName: tableModel.ownerTeams[indexPath.row].name!, delete: {
-                    self.tableModel.ownerTeams.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .left)
-                    // TODO: do api request to delete team
-                }) {
-                    Print.m("cancel team delete")
-                }
-//                Print.m("delete cell at \(indexPath.row) -> \(tableModel.ownerTeams[indexPath.row])")
-            }
-            if indexPath.section == 1 {
-                showRemoveTeamAlert(teamName: tableModel.playerTeams[indexPath.row].name!, delete: {
-                    self.tableModel.playerTeams.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .left)
-                }) {
-                    Print.m("cancel team delete")
-                }
-                
-//                Print.m("delete cell at \(indexPath.row) -> \(tableModel.fplayerTeams[indexPath.row])")
-            }
-            
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if indexPath.section == 0 { // logic: only owner of team can edit it
-            return indexPath
-        } else {
-            return nil
-        }
     }
 }

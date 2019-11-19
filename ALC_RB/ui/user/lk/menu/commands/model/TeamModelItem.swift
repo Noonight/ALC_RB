@@ -8,6 +8,8 @@
 
 import Foundation
 
+extension TeamModelItem: CellModel {}
+
 final class TeamModelItem {
     
     var team: Team!
@@ -24,6 +26,24 @@ final class TeamModelItem {
         return team.creator?.getValue()?.name
     }
     
-    var
+    var tourneyLeagueName: String? {
+        return "\(team.league?.getValue()?.tourney?.getValue()?.name). \(team.league?.getValue()?.name)"
+    }
+    
+    var leagueBeginEndDate: String? {
+        return "\(team.league?.getValue()?.beginDate!.toFormat(.local)) - \(team.league?.getValue()?.endDate!.toFormat(.local))"
+    }
+    
+    var leagueTransferBeginEndDate: String? {
+        return "\(team.league?.getValue()?.transferBegin!.toFormat(.local)) - \(team.league?.getValue()?.transferEnd!.toFormat(.local))"
+    }
+    
+    var leagueStatus: String? {
+        return "\(team.league?.getValue()?.status!.ru())"
+    }
+    
+    var maxCountOfPlayers: String? {
+        return "\(team.league?.getValue()?.playersMax)"
+    }
     
 }
