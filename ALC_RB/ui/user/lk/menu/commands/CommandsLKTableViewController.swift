@@ -32,6 +32,8 @@ class CommandsLKTableViewController: UITableViewController {
         setupTable()
         setupBinds()
         setupPullToRefresh()
+        
+        viewModel.fetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +57,7 @@ extension CommandsLKTableViewController {
     }
     
     func setupTable() {
-        teamTable = TeamsLKTable(dataSource: [], tableActions: self)
+        teamTable = TeamsLKTable(tableActions: self)
         tableView.delegate = teamTable
         tableView.dataSource = teamTable
     }
@@ -63,6 +65,10 @@ extension CommandsLKTableViewController {
     func setupBinds() {
         
 //        tableView.rx.itemSelected.
+        
+        viewModel.teamOwnerVM.ownerTeams.subscribe { items in
+            self.teamTable.dataSource.items.append(contentsOf: items.element!)
+        }
         
         viewModel
             .loading

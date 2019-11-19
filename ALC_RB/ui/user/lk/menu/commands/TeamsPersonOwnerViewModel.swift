@@ -49,7 +49,7 @@ final class TeamsPersonOwnerViewModel {
                 var tmpTeams = teams
                 
                 let params1 = ParamBuilder<League.CodingKeys>()
-                    .add(key: .tourney, value: StrBuilder().add(.comma).add(leagueByTeamIds))
+                    .add(key: .tourney, value: StrBuilder().setSeparatorStyle(.comma).add(.comma).add(leagueByTeamIds))
                     .populate(.tourney)
                     .get()
                 self.leagueApi.get_league(params: params1) { result in

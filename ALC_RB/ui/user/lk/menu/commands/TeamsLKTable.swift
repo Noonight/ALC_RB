@@ -10,11 +10,13 @@ import Foundation
 
 final class TeamsLKTable: NSObject {
     
-    var dataSource = [TeamGropModelItem]()
+    var dataSource = TeamGropModelItem(name: "My", items: [])
+    var dataSourceNotMy = TeamGropModelItem(name:"Not my", items: [])
     let actions: TableActions
     
-    init(dataSource: [TeamGropModelItem], tableActions: TableActions) {
-        self.dataSource = dataSource
+    init(tableActions: TableActions) {
+//        self.dataSource.append(TeamGropModelItem(name: "My", items: []))
+//        self.dataSource.append(TeamGropModelItem(name: "Not my", items: []))
         self.actions = tableActions
     }
     
@@ -25,7 +27,7 @@ extension TeamsLKTable: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
-            actions.onCellSelected(model: dataSource[indexPath.section].items[indexPath.row])
+            actions.onCellSelected(model: dataSource.items[indexPath.row])
         }
         
     }
@@ -66,17 +68,32 @@ extension TeamsLKTable: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return dataSource[section].name
+        if section == 0 {
+            return dataSource.name
+        } else if section == 1 {
+            return dataSourceNotMy.name
+        }
+        return "NOOOOOOOO"
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource[section].items.count
+        if section == 0 {
+            return dataSource.items.count
+        } else if section == 1 {
+            return dataSourceNotMy.items.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TeamLKTableViewCell.ID, for: indexPath) as! TeamLKTableViewCell
         
-        cell.teamModelItem = dataSource[indexPath.section].items[indexPath.row]
+        if indexPath.section == 0 {
+            cell.teamModelItem = dataSource.items[indexPath.row]
+        } else if indexPath.section == 1 {
+            cell.teamModelItem = dataSourceNotMy.items[indexPath.row]
+        }
+        
         
         return cell
     }
