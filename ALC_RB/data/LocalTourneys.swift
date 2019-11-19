@@ -12,26 +12,48 @@ import RealmSwift
 class LocalTourneys {
     
     var realm: Realm?
+    let userKey = "local_tourneys"
+    let userDefaults = UserDefaults.standard
     
     func getLocalTourneys() -> [Tourney] {
-        realm = try! Realm()
-        let tourneys = realm?.objects(TourneyRealm.self)
-        
-        return tourneys?.elements.map({ tRealm -> Tourney in
-            return tRealm.toTourney()
-        }) ?? []
+        do {
+//            let tourneys = try self.userDefaults.get(objectType: [Tourney].self, forKey: userKey)
+            let tourneys = try self.userDefaults.get(objectType: [Tourney].self, forKey: userKey)
+            return tourneys ?? []
+        } catch {
+            Print.m("Some error with getting tourney from UserDefaults")
+        }
+        return []
     }
     
+//    func getLocalTourneys() -> [Tourney] {
+//        realm = try! Realm()
+//        let tourneys = realm?.objects(TourneyRealm.self)
+//
+//        return tourneys?.elements.map({ tRealm -> Tourney in
+//            return tRealm.toTourney()
+//        }) ?? []
+//    }
+    
     func setLocalTourneys(newTourneys: [Tourney]) {
-        deleteLocalTourneys()
-        
-        realm = try! Realm()
-        
-        try! realm?.write {
-            let tourneys = newTourneys.map { $0.toTourneyRealm() }
-            realm?.add(tourneys)
+        do {
+            try userDefaults.set(object: newTourneys, forKey: userKey)
+//            userDefaults.setValue(newTourneys, forKey: userKey)
+        } catch {
+            Print.m("Somer error with setting tourney in UserDefaults")
         }
     }
+    
+//    func setLocalTourneys(newTourneys: [Tourney]) {
+//        deleteLocalTourneys()
+//
+//        realm = try! Realm()
+//
+//        try! realm?.write {
+//            let tourneys = newTourneys.map { $0.toTourneyRealm() }
+//            realm?.add(tourneys)
+//        }
+//    }
     
     func appendTourney(_ tourney: Tourney) {
         removeTourney(tourney)
@@ -55,12 +77,16 @@ class LocalTourneys {
     }
     
     func deleteLocalTourneys() {
-        realm = try! Realm()
-        let tourneys = realm?.objects(TourneyRealm.self)
-        
-        try! realm?.write {
-            realm?.delete(tourneys!)
-        }
+        userDefaults.removeObject(forKey: userKey)
     }
+    
+//    func deleteLocalTourneys() {
+//        realm = try! Realm()
+//        let tourneys = realm?.objects(TourneyRealm.self)
+//
+//        try! realm?.write {
+//            realm?.delete(tourneys!)
+//        }
+//    }
     
 }

@@ -24,14 +24,19 @@ class IdRefObjectWrapper<T>: Codable where T : Codable {
 //        let data = try! PropertyListEncoder().encode(self)
         
 //        return NSKeyedArchiver.archivedData(withRootObject: self)
-        return data
+        
+        return try! JSONEncoder().encode(self)
+//        return try! JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
+//        return try
+//        return data
     }
     
     static func fromData(data: Data?) -> IdRefObjectWrapper<T>? {
         if data == nil { return nil}
 //        return NSKeyedUnarchiver.unarchiveObject(with: data!) as? IdRefObjectWrapper<T>
-        let lva = try! PropertyListDecoder().decode(IdRefObjectWrapper<T>.self, from: data!)
-        return lva
+//        let lva = try! JSONDecoder().decode(IdRefObjectWrapper<T>.self, from: data!)
+        return try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as? IdRefObjectWrapper<T>
+//        return lva
     }
     
     func setValue(with value: IdRefObject<T>) {
@@ -54,7 +59,7 @@ class IdRefObjectWrapper<T>: Codable where T : Codable {
         case .object(let obj):
             return obj
         }
-        return nil
+//        return nil
     }
     
     func map(_ set: (T) -> (T)) {
@@ -87,7 +92,9 @@ class IdRefObjectWrapper<T>: Codable where T : Codable {
     }
     
     required public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
+        Print.m("Decode init Wrapper")
+        var container = try! decoder.singleValueContainer()
+//        Print.m(container)
         do {
             self.value = try container.decode(IdRefObject<T>.self)
         } catch {
@@ -96,15 +103,13 @@ class IdRefObjectWrapper<T>: Codable where T : Codable {
     }
     
     public func encode(to encoder: Encoder) throws {
+        Print.m("Encode Wrapper")
         var container = encoder.singleValueContainer()
+//        var un = encoder.unkeyedContainer()
+        
         do {
-//            try container.encode(self.value)
-            switch self.value {
-            case .id(let id):
-                try container.encode(id)
-            case .object(let obj):
-                try container.encode(obj)
-            }
+//            try un.encode(self.value)
+            try container.encode(self.value)
         } catch EncodingError.invalidValue(let any, let context) {
             throw EncodingError.invalidValue(any, context)
         } catch {
@@ -173,14 +178,17 @@ enum IdRefObject<T>: Codable where T : Codable {
     case id(String), object(T)
     
     public init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
+        Print.m("decode value")
+        let container = try! decoder.singleValueContainer()
+//        var container = try! decoder.unkeyedContainer()
+//        let container = try decoder.container(keyedBy: Key)
         if let id = try? container.decode(String.self) {
 //            print("decode id")
-            Print.m("id = \(id)")
+            Print.m("Decode: id = \(id)")
             self = .id(id)
         } else if let object = try? container.decode(T.self) {
 //            print("decode object")
-            Print.m("object = \(object)")
+            Print.m("Decode: object = \(object)")
             self = .object(object)
         } else {
             // TEST: test wrapper object here
@@ -190,12 +198,16 @@ enum IdRefObject<T>: Codable where T : Codable {
     }
     
     public func encode(to encoder: Encoder) throws {
+        Print.m("encode value")
+//        var container = encoder.unkeyedContainer()
         var container = encoder.singleValueContainer()
         do {
             switch self {
             case .id(let id):
+                Print.m("Encode: id = \(id)")
                 try container.encode(id)
             case .object(let object):
+                Print.m("Encode: object = \(object)")
                 try container.encode(object)
             }
         } catch EncodingError.invalidValue(let any, let context) {

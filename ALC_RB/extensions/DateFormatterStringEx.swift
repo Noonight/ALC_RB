@@ -11,14 +11,14 @@ import Foundation
 enum DateFormats: String {
     case utc = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     case utcTime = "yyyy-MM-dd'T'HH:mm"
-    case local = "dd.MM.yyyy"
-    case localTime = "HH:mm"
     case ddMMMMyyyy = "dd MMMM yyyy"
     case GMT = "EEE MMM dd HH:mm:ss zzz yyyy"
     
     case leagueDate = "yyyy-MM-dd"
     
-    case iso8601 = "yyyy-MM-ddTHH:mm:ss:SSSZ"
+    case local = "dd.MM.yyyy"
+    case localTime = "HH:mm"
+    case iso8601 = "yyyy-MM-dd'T'HH:mm:ss:SSS+|-hh:mm"
 }
 //internal static let builtInAutoFormat: [String] =  [
 //    DateFormats.iso8601,

@@ -64,6 +64,13 @@ final class ParamBuilder<T> where T: CodingKey {
         return self
     }
     
+    func populate(_ value: T?) -> Self {
+        if value != nil {
+            params[CRUDParamKeys.populate.str()] = value!.stringValue
+        }
+        return self
+    }
+    
     func populate(_ builder: StrBuilder<T>) -> Self {
         params[CRUDParamKeys.populate.str()] = String(builder.getStr())
         return self
