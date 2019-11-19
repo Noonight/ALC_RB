@@ -32,7 +32,7 @@ extension MyTourneysTable: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionView = UIView(frame: CGRect(x: 32, y: 0, width: tableView.frame.size.width, height: 80))
+        let sectionView = UIView(frame: CGRect(x: 32, y: 0, width: tableView.frame.size.width, height: MyTourneyHeaderView.height))
         let header =  MyTourneyHeaderView()
         sectionView.addSubview(header)
         sectionView.leftAnchor.constraint(equalTo: header.leftAnchor).isActive = true
@@ -62,11 +62,11 @@ extension MyTourneysTable: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 80
+        return MyTourneyHeaderView.height
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return MyTourneyHeaderView.height
     }
 }
 

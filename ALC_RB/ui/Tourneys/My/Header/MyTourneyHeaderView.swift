@@ -10,6 +10,8 @@ import UIKit
 
 final class MyTourneyHeaderView: UIView {
     
+    static var height: CGFloat = 100
+    
     // MARK: - VIEWS
     private let containerView: UIView = {
         let view = UIView()
@@ -22,7 +24,7 @@ final class MyTourneyHeaderView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 19)
-        label.numberOfLines = 3
+        label.numberOfLines = 2
         label.setContentHuggingPriority(.defaultHigh, for: .vertical)
         
         return label
@@ -122,7 +124,7 @@ final class MyTourneyHeaderView: UIView {
         containerRightAnchor = containerView.rightAnchor.constraint(equalTo: rightAnchor)
         containerRightAnchor?.isActive = true
         containerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-//        containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 8).isActive = true
         
         addSubview(bottomSeparatorView)
         
