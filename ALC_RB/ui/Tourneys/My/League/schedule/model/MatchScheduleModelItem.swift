@@ -11,20 +11,16 @@ import Foundation
 final class MatchScheduleModelItem {
     
     let match: Match
-    var teamOne: Team?
-    var teamTwo: Team?
     
-    init(match: Match, teamOne: Team?, teamTwo: Team?) {
+    init(match: Match) {
         self.match = match
-        self.teamOne = teamOne
-        self.teamTwo = teamTwo
     }
     
     var date: String? {
-        return match.date?.toFormat(DateFormats.local.rawValue)//.toFormat(DateFormats.local.rawValue)
+        return match.date?.toFormat(DateFormats.local.rawValue)
     }
     var time: String? {
-        return match.date?.toFormat(DateFormats.localTime.rawValue)//.toFormat(DateFormats.localTime.rawValue)
+        return match.date?.toFormat(DateFormats.localTime.rawValue)
     }
     var score: String? {
         return match.score
@@ -42,10 +38,10 @@ final class MatchScheduleModelItem {
         return match.played ?? false
     }
     var teamOneName: String? {
-        return self.teamOne?.name
+        return match.teamOne?.getValue()?.name
     }
     var teamTwoName: String? {
-        return self.teamTwo?.name
+        return match.teamTwo?.getValue()?.name
     }
     
 }

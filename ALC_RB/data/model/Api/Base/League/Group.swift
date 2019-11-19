@@ -12,7 +12,7 @@ struct Group: Codable {
     
     var id: String?
     
-    var teams: [IdRefObjectWrapper<Team>?]?
+    var teams: [IdRefObjectWrapper<Team>]?
     var name: String?
     
     enum CodingKeys: String, CodingKey {

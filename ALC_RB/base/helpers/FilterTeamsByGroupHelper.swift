@@ -41,14 +41,14 @@ class FilterTeamsByGroupHelper {
         
         for group in groups {
             var item = GroupedLITeam(name: group.name ?? "")
-            for team in group.teams ?? [] {
-                let mTeam = teams.filter { liTeam -> Bool in
-                    return liTeam.id == team?.getId() ?? team?.getValue()!.id
-                }.first
-                if mTeam != nil {
-                    item.teams.append(mTeam!)
-                }
-            }
+//            for team in group.teams ?? [] {
+//                let mTeam = teams.filter { liTeam -> Bool in
+//                    return liTeam.id == team.getId() ?? team?.getValue()!.id ?? ""
+//                }.first
+//                if mTeam != nil {
+//                    item.teams.append(mTeam!)
+//                }
+//            }
             groupedTeams.append(item)
         }
         return groupedTeams

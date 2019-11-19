@@ -50,6 +50,13 @@ final class ParamBuilder<T> where T: CodingKey {
         return self
     }
     
+    func select(_ value: T?) -> Self {
+        if value != nil {
+            params[CRUDParamKeys.select.str()] = value?.stringValue
+        }
+        return self
+    }
+    
     func select(_ builder: StrBuilder<T>) -> Self {
         params[CRUDParamKeys.select.str()] = String(builder.getStr())
         return self

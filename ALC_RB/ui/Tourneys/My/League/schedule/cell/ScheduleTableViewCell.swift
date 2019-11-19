@@ -36,6 +36,10 @@ class ScheduleTableViewCell: UITableViewCell {
             self.mTitleTeam1.text = self.matchScheduleModelItem.teamOneName
             self.mTitleTeam2.text = self.matchScheduleModelItem.teamTwoName
             self.mScore.text = self.matchScheduleModelItem.score
+            
+            // TODO: DELETE IT. On this moment we do not have club, mean we do not have image
+            self.mImageTeam1.image = nil
+            self.mImageTeam2.image = nil
         }
     }
     

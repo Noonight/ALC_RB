@@ -13,6 +13,14 @@ struct SingleLineMessage: Codable {
     
     var message: String
     
+    init(message: String) {
+        self.message = message
+    }
+    
+    init(_ message: String) {
+        self.message = message
+    }
+    
 //    enum CodingKeys: String, CodingKey {
 //        case message = "message"
 //    }

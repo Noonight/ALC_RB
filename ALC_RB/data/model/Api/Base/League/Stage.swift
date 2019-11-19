@@ -13,7 +13,7 @@ struct Stage: Codable {
     
     enum sType: String, Codable {
         case groupStage = "group_stage"
-        case stage = "stage"
+        case stage = "stage" // all info || base schema
     }
     
     let id: String?

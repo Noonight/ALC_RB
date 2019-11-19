@@ -94,12 +94,13 @@ final class MatchApi: ApiRequests {
         }
     }
     
-    func get_match(id: String? = nil, limit: Int? = Constants.Values.LIMIT, offset: Int? = 0, resultMy: @escaping (ResultMy<[Match], RequestError>) -> ()) {
+    func get_match(id: String? = nil, league: String? = nil, limit: Int? = Constants.Values.LIMIT, offset: Int? = 0, resultMy: @escaping (ResultMy<[Match], RequestError>) -> ()) {
         let params = ParamBuilder<Match.CodingKeys>()
-                        .add(key: .id, value: id)
-                        .limit(limit)
-                        .offset(offset)
-                        .get()
+            .add(key: .id, value: id)
+            .add(key: .league, value: league)
+            .limit(limit)
+            .offset(offset)
+            .get()
         get_match(params: params, resultMy: resultMy)
     }
     

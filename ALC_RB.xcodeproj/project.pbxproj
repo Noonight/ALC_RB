@@ -28,7 +28,6 @@
 		048CB34A230BF17E006CF2A9 /* HomeScheduleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048CB349230BF17E006CF2A9 /* HomeScheduleHeaderView.swift */; };
 		048CB34C230BF18F006CF2A9 /* HomeScheduleHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048CB34B230BF18F006CF2A9 /* HomeScheduleHeaderView.xib */; };
 		049B9ACF21F6F6E300CDD104 /* PlayersTeamLeagueDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049B9ACE21F6F6E300CDD104 /* PlayersTeamLeagueDetailTableViewCell.swift */; };
-		049B9AD021F704EC00CDD104 /* ScheduleLeaguePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB62E1DD21E74D6800F11568 /* ScheduleLeaguePresenter.swift */; };
 		04A1D506230E6D240038D65C /* Result ++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A1D505230E6D240038D65C /* Result ++.swift */; };
 		04AE3D9F2373EB1400F3C6E9 /* PersonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AE3D9E2373EB1400F3C6E9 /* PersonApi.swift */; };
 		04AE3DA2237408C900F3C6E9 /* RequestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AE3DA1237408C900F3C6E9 /* RequestResult.swift */; };
@@ -689,7 +688,6 @@
 		DB5EC2CF237F960B006B2EC8 /* SinglePerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePerson.swift; sourceTree = "<group>"; };
 		DB5EC2D2237F9BD5006B2EC8 /* SingleTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTeam.swift; sourceTree = "<group>"; };
 		DB5FBF2622019A3B00C62291 /* MatchesTeamLeagueDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MatchesTeamLeagueDetailTableViewCell.swift; path = ALC_RB/data/model/MatchesTeamLeagueDetailTableViewCell.swift; sourceTree = SOURCE_ROOT; };
-		DB62E1DD21E74D6800F11568 /* ScheduleLeaguePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleLeaguePresenter.swift; sourceTree = "<group>"; };
 		DB641F87222BA63D004AC6CB /* Print.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Print.swift; sourceTree = "<group>"; };
 		DB641F89222BB283004AC6CB /* UserLKPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLKPresenter.swift; sourceTree = "<group>"; };
 		DB673F5021D7A39B006205A8 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -1873,7 +1871,6 @@
 			children = (
 				1833741F235C81220022D831 /* model */,
 				DB11CC8C21C22F890083773E /* ScheduleTableViewController.swift */,
-				DB62E1DD21E74D6800F11568 /* ScheduleLeaguePresenter.swift */,
 				18A6800F235866BD00AE8F87 /* ScheduleTableViewModel.swift */,
 				DB11CC8E21C235320083773E /* cell */,
 				DB595C6E21EF21B6000282F4 /* protocol */,
@@ -3243,7 +3240,6 @@
 				18B0F8812302BF6600080196 /* ModalPenaltySeriesVC.swift in Sources */,
 				1807709322F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.swift in Sources */,
 				DB8A68A1224E568900D3972A /* ClubPickerHelper.swift in Sources */,
-				049B9AD021F704EC00CDD104 /* ScheduleLeaguePresenter.swift in Sources */,
 				18EB8B9F226EF82E0087BD99 /* CommandAddPlayerTableViewController.swift in Sources */,
 				185669BF2301679100BCC565 /* AutoGoalsMaker.swift in Sources */,
 				187F2E0622CB19440049EA77 /* EditEventsMatchTableViewController.swift in Sources */,

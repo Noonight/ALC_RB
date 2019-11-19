@@ -185,7 +185,7 @@ extension TeamsLeagueTableViewController {
     
     func leagueTeamsIsEmpty() -> Bool {
 //        Print.m(leagueDetailModel.league.teams) // group can bel nil
-        return leagueDetailModel.league.teams!.isEmpty
+        return leagueDetailModel.league.teams?.isEmpty ?? true
     }
     
     func allTeamsIsContainsGroup() -> Bool {

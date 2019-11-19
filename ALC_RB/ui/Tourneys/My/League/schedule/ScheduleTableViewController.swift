@@ -48,7 +48,7 @@ class ScheduleTableViewController: UITableViewController {
     //        }
     //    }
     
-    var viewModel = ScheduleTableViewModel(dataManager: ApiRequests())
+    var viewModel = ScheduleTableViewModel(matchApi: MatchApi())
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -78,29 +78,38 @@ extension ScheduleTableViewController {
         //            .disposed(by: disposeBag)
         
         viewModel
-            .leagueDetailModel
-            .map({ leagueDM -> [Match] in
-                let matches = leagueDM.league.matches ?? []
-                return matches
-            })
-            .map({ matches in
-                matches.map({ match in
-                    return MatchScheduleModelItem(
-                        match: match,
-                        teamOne:
-                        match.teamOne?.getValue()
-                        ,
-                        teamTwo:
-                        match.teamTwo?.getValue()
-                    )
-                })
-            })
-            .map({ matches -> [MatchScheduleModelItem] in
-                let mMatches = matches.filter { match -> Bool in
-                    return match.teamOne != nil && match.teamTwo != nil
-                }
-                return mMatches
-            })
+            .items
+            .asDriver(onErrorJustReturn: [])
+            .drive(tableView.rx.items(cellIdentifier: ScheduleTableViewCell.ID, cellType: ScheduleTableViewCell.self)) { (index, match, cell) in
+                cell.matchScheduleModelItem = match
+        }
+        .disposed(by: disposeBag)
+        
+        viewModel
+            .items
+            .map({ $0.count == 0 })
+            .bind(to: self.rx.empty)
+            .disposed(by: disposeBag)
+        
+//        viewModel
+//            .leagueDetailModel
+//            .map({ leagueDM -> [Match] in
+//                let matches = leagueDM.league.matches ?? []
+//                return matches
+//            })
+//            .map({ matches in
+//                matches.map({ match in
+//                    return MatchScheduleModelItem(
+//                        match: match
+//                    )
+//                })
+//            })
+//            .map({ matches -> [MatchScheduleModelItem] in
+//                let mMatches = matches.filter { match -> Bool in
+//                    return match.teamOne != nil && match.teamTwo != nil
+//                }
+//                return mMatches
+//            })
             //            .map({ matches -> [MatchScheduleModelItem] in
             //                var mMatches = matches
             //                mMatches.sort { left, right -> Bool in
@@ -108,23 +117,23 @@ extension ScheduleTableViewController {
             //                }
             //                return mMatches
             //            })
-            .asDriver(onErrorJustReturn: [])
-            .drive(tableView.rx.items(cellIdentifier: ScheduleTableViewCell.ID, cellType: ScheduleTableViewCell.self)) { (index, match, cell) in
-                cell.matchScheduleModelItem = match
-                if cell.matchScheduleModelItem.teamOne == nil || cell.matchScheduleModelItem.teamTwo == nil || cell.matchScheduleModelItem.match.events?.count ?? 0 == 0 {
-                    cell.accessoryType = .none
-                } else {
-                    cell.accessoryType = .disclosureIndicator
-                }
-        }
-        .disposed(by: disposeBag)
+//            .asDriver(onErrorJustReturn: [])
+//            .drive(tableView.rx.items(cellIdentifier: ScheduleTableViewCell.ID, cellType: ScheduleTableViewCell.self)) { (index, match, cell) in
+//                cell.matchScheduleModelItem = match
+//                if cell.matchScheduleModelItem.teamOne == nil || cell.matchScheduleModelItem.teamTwo == nil || cell.matchScheduleModelItem.match.events?.count ?? 0 == 0 {
+//                    cell.accessoryType = .none
+//                } else {
+//                    cell.accessoryType = .disclosureIndicator
+//                }
+//        }
+//        .disposed(by: disposeBag)
         
-        viewModel
-            .leagueDetailModel
-            .map({ $0.league.matches ?? [] })
-            .map({ $0.count == 0 })
-            .bind(to: self.rx.empty)
-            .disposed(by: disposeBag)
+//        viewModel
+//            .leagueDetailModel
+//            .map({ $0.league.matches ?? [] })
+//            .map({ $0.count == 0 })
+//            .bind(to: self.rx.empty)
+//            .disposed(by: disposeBag)
         
         tableView
             .rx
