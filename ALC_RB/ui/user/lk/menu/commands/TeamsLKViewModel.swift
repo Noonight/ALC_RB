@@ -48,7 +48,7 @@ final class TeamsLKViewModel {
     let teamInVM: TeamsPersonInViewModel
     
     init(teamApi: TeamApi, inviteApi: InviteApi) {
-        self.teamOwnerVM = TeamsPersonOwnerViewModel(teamApi: teamApi)
+        self.teamOwnerVM = TeamsPersonOwnerViewModel(leagueApi: LeagueApi(), teamApi: teamApi)
         self.teamInVM = TeamsPersonInViewModel(inviteApi: inviteApi)
     }
     
