@@ -310,20 +310,14 @@ final class PersonApi : ApiRequests {
         }
     }
     
-    func get_refreshAuthUser(token: String, success: @escaping (AuthUser) -> (), failure: @escaping (Error) -> ()) {
+    func get_refreshAuthUser(token: String, resultMy: @escaping (ResultMy<AuthUser, RequestError>) -> ()) {
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
             "auth" : "\(token)"
         ]
         Alamofire
             .request(ApiRoute.getApiURL(.refreshUser), method: .get, encoding: JSONEncoding.default, headers: header)
-            .responseAuthUser { response in
-                switch response.result {
-                case .success(let value):
-                    success(value)
-                case .failure(let error):
-                    failure(error)
-                }
-        }
+            .responseResultMy(AuthUser.self, resultMy: resultMy)
+        
     }
 }

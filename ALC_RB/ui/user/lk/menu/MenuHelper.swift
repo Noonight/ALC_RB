@@ -25,6 +25,7 @@ class MenuHelper: NSObject, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
 //        if userType == Person.TypeOfPerson.player {
 //            return 5
 //        }
@@ -34,7 +35,7 @@ class MenuHelper: NSObject, UITableViewDelegate, UITableViewDataSource {
 //        if userType == Person.TypeOfPerson.mainReferee {
 //            return 4
 //        }
-        return 0
+//        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,6 +43,10 @@ class MenuHelper: NSObject, UITableViewDelegate, UITableViewDataSource {
         
         cell.image_view.image = nil
         cell.image_view.image = #imageLiteral(resourceName: "ic_logo_full")
+        
+        let menuOption = PlayerMenuOption(rawValue: indexPath.row)
+        cell.image_view.image = menuOption?.image
+        cell.name_label.text = menuOption?.description
         
 //        if userType == Person.TypeOfPerson.player {
 //            let menuOption = PlayerMenuOption(rawValue: indexPath.row)
@@ -64,8 +69,8 @@ class MenuHelper: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        if userType == Person.TypeOfPerson.player {
-//            let menuOption = PlayerMenuOption(rawValue: indexPath.row)
-//            playerMenuOptionActions!(menuOption!)
+            let menuOption = PlayerMenuOption(rawValue: indexPath.row)
+            playerMenuOptionActions!(menuOption!)
 //        }
 //        if userType == Person.TypeOfPerson.referee {
 //            let menuOption = RefereeMenuOption(rawValue: indexPath.row)

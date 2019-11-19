@@ -47,9 +47,17 @@ extension Reactive where Base: UIViewController {
         }
     }
     
-    internal var message: Binder<SingleLineMessage> {
+//    internal var message: Binder<SingleLineMessage> {
+//        return Binder(self.base) { vc, message in
+//            vc.showAlert(title: Constants.Texts.MESSAGE, message: message.message)
+//        }
+//    }
+    
+    internal var message: Binder<SingleLineMessage?> {
         return Binder(self.base) { vc, message in
-            vc.showAlert(title: Constants.Texts.MESSAGE, message: message.message)
+            if let mMessage = message {
+                vc.showAlert(title: Constants.Texts.MESSAGE, message: mMessage.message)
+            }
         }
     }
     

@@ -64,10 +64,18 @@ class InvitationLKPresenter: MvpPresenter<InvitationLKTableViewController> {
     }
     
     func refreshUser(token: String) {
-        personApi.get_refreshAuthUser(token: token, success: { authUser in
-            self.getView().onRefreshUserSuccess(authUser: authUser)
-        }) { error in
-            self.getView().onRefreshUserFailure(error: error)
+        personApi.get_refreshAuthUser(token: token) { result in
+            switch result {
+            case .success(let authUser):
+                self.getView().onRefreshUserSuccess(authUser: authUser)
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+                self.getView().onRefreshUserFailure(error: error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
         }
     }
     

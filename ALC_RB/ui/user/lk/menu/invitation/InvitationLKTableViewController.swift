@@ -60,15 +60,15 @@ class InvitationLKTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initPresenter()
-        
-        activityIndicator.hidesWhenStopped = true
-        
-        tableView.tableFooterView = UIView()
-        
-        tableView.es.addPullToRefresh {
-            self.fetch()
-        }
+//        initPresenter()
+//
+//        activityIndicator.hidesWhenStopped = true
+//
+//        tableView.tableFooterView = UIView()
+//        
+//        tableView.es.addPullToRefresh {
+//            self.fetch()
+//        }
         
     }
 

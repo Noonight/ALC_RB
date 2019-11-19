@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class CommandsLKTableViewController: BaseStateTableViewController {
+class CommandsLKTableViewController: UITableViewController {
     enum CellIdentifiers {
         static let COMMAND = "commands_lk_cell"
     }
@@ -16,104 +18,23 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         static let EDIT = "segue_edit_team"
         static let ADD = "segue_add_team"
     }
-    enum Texts {
-        static let FAIL_TO_RELOAD_DATA = "Не удалось обновить данные"
-    }
     
-    // MARK: Table model
-    struct TableModel {
-        var tournaments = [Tourney]()
-//        var personOwnCommands: [Participation] = [] // user is owner of team
-//        var personInsideCommands: [Participation] = [] // user is player of team
-        
-        var ownerTeams: [Team] = []
-        var playerTeams: [Team] = []
-        
-        let headerOwnerSection = "Мои команды"
-        let headerPlayerSection = "Команды"
-        
-        init () { }
-
-        // DEPRECATED: tourey does not contain leagues
-//        func getLeagueOfTeam(inTeam: Team) -> League? {
-//            return tournaments.leagues.filter({ league -> Bool in
-//                return (league.teams!.filter({ team -> Bool in
-//                    return team.id == inTeam.id
-//                }).first != nil)
-//            }).first
-//        }
-        
-        func countOfSections () -> Int {
-            if ownerTeams.count > 0 && playerTeams.count > 0 {
-                return 2
-            } else if ownerTeams.count > 0 || playerTeams.count > 0 {
-                return 1
-            } else {
-                return 0
-            }
-        }
-        
-        func rowInSections (section: Int) -> Int {
-            switch section {
-            case 0:
-                return ownerTeams.count
-//                return personOwnCommands.count
-            case 1:
-                return playerTeams.count
-//                return personInsideCommands.count
-            default:
-                return 0
-            }
-        }
-        
-        func headerTitleForSection(section: Int) -> String {
-            switch section {
-            case 0:
-                return headerOwnerSection
-            case 1:
-                return headerPlayerSection
-            default:
-                return "Something went wrong look at table view data source ->> sections"
-            }
-        }
-    }
-    
-    // MARK: Outlets
     @IBOutlet weak var createNewCommandBtn: UIBarButtonItem!
     
-    // MARK: Var & Let
-    let userDefaults = UserDefaultsHelper()
-    let presenter = CommandsLKPresenter()
-    
-    var tableModel = TableModel()
-    
-    // MARK: - model controllers
-    var teamOwnerController: TeamCommandsController!
-    var teamPlayerController: TeamCommandsController!
-//    var participationController: ParticipationCommandsController!
-    
-    // MARK: - Life cycle
+    private var viewModel: TeamsLKViewModel!
+    private let bag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.preparePresenter()
-        self.prepareRefreshing()
-        self.prepareEmptyState()
-        self.prepareTableView()
         
+        setupViewModel()
+        setupBinds()
+        setupPullToRefresh()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         navigationController?.navigationBar.topItem?.rightBarButtonItem = createNewCommandBtn
-//        self.updateTableModel()
-//        self.prepareCreateCommandBtn()
-        
-        self.refreshData()
-        
-        self.prepareModelController {
-            self.tableView.reloadData()
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -121,109 +42,69 @@ class CommandsLKTableViewController: BaseStateTableViewController {
         navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
     }
     
-    // MARK: Prepare
-    func prepareTableView() {
-        self.tableView.tableFooterView = UIView()
-    }
-    func prepareEmptyState() {
-        setEmptyMessage(message: "Вы пока не участвуете ни в одной команде")
-    }
-    func prepareRefreshing() {
-        self.fetch = self.presenter.fetch
-    }
-    func preparePresenter() {
-        initPresenter()
-    }
-    func prepareModelController(closure: @escaping ()->()) {
-        defer {
-            closure()
-        }
-        let tournaments = tableModel.tournaments
-        
-        // DEPRECATED
-//        participationController = ParticipationCommandsController(participation: (userDefaults.getAuthorizedUser()?.person.participation)!)
-//
-//        let ownerParticipations = getOwnerParticipations(participation: participationController.participation, tournaments: tournaments)
-//
-//        func getOwnerTeam(participation: Participation, tournaments: [Tourney]) -> Team? {
-//            var returnedTeam: Team?
-//            for league in tournaments.leagues {
-//                if participation.league == league.id {
-//                    for team in league.teams! {
-//                        if team.id == participation.team {
-//                            if team.creator == userDefaults.getAuthorizedUser()?.person.id {
-//                                returnedTeam = team
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            return returnedTeam
-//        }
-        
-//        func getOwnerTeams() -> [Team] {
-//            var teams: [Team] = []
-//            for participation in ownerParticipations {
-//                let team = getOwnerTeam(participation: participation, tournaments: tournaments)
-//                if team != nil {
-//                    teams.append(team!)
-//                }
-//            }
-//            return teams
-//        }
-//
-//        let playerParticipations = getPlayerParticipations(participation: (userDefaults.getAuthorizedUser()?.person.participation)!, tournaments: tournaments)
-//
-//        func getPlayerTeam(participation: Participation, tournaments: [Tourney]) -> Team? {
-//            var returnedTeam: Team?
-//            for league in tournaments.leagues {
-//                if participation.league == league.id {
-//                    for team in league.teams! {
-//                        if team.id == participation.team {
-//                            if team.creator != userDefaults.getAuthorizedUser()?.person.id {
-//                                returnedTeam = team
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            return returnedTeam
-//        }
-//
-//        func getPlayerTeams() -> [Team] {
-//            var teams: [Team] = []
-//            for participation in playerParticipations {
-//                let team = getPlayerTeam(participation: participation, tournaments: tournaments)
-//                if team != nil {
-//                    teams.append(team!)
-//                }
-//            }
-//            return teams
-//        }
-        
-//        teamOwnerController = TeamCommandsController(teams: getOwnerTeams())
-//        teamPlayerController = TeamCommandsController(teams: getPlayerTeams())
-//
-//        tableModel.ownerTeams = teamOwnerController.teams
-//        tableModel.playerTeams = teamPlayerController.teams
-    }
-    func prepareCreateCommandBtn() {
-//        if userDefaults.getAuthorizedUser()?.person.club?.count == 0 {
-//            createNewCommandBtn.isEnabled = false
-//        } else {
-//            createNewCommandBtn.isEnabled = true
-//        }
+}
+
+// MARK: SETUP
+
+extension CommandsLKTableViewController {
+    
+    func setupViewModel() {
+        viewModel = TeamsLKViewModel(teamApi: TeamApi(), inviteApi: InviteApi())
     }
     
-    // MARK: Update
-    func updateTableModel() {
-        self.tableModel.ownerTeams = self.teamOwnerController.teams
-        self.tableModel.playerTeams = self.teamPlayerController.teams
-        tableView.reloadData()
+    func setupBinds() {
+        tableView.delegate = nil
+        tableView.dataSource = nil
+        
+        
+        viewModel
+            .loading
+            .asDriver(onErrorJustReturn: false)
+            .drive(self.rx.loading)
+            .disposed(by: bag)
+        
+        viewModel
+            .error
+            .asDriver(onErrorJustReturn: nil)
+            .drive(self.rx.error)
+            .disposed(by: bag)
+        
+        viewModel
+            .message
+            .asDriver(onErrorJustReturn: nil)
+            .drive(self.rx.message)
+            .disposed(by: bag)
     }
     
-    // MARK: - Actions
+    func setupPullToRefresh() {
+        let refreshController = UIRefreshControl()
+        tableView.refreshControl = refreshController
+        
+        refreshController.rx
+            .controlEvent(.valueChanged)
+            .map { _ in !refreshController.isRefreshing}
+            .filter { $0 == false }
+            .subscribe({ event in
+                self.viewModel.fetch()
+            }).disposed(by: bag)
+        
+        refreshController.rx.controlEvent(.valueChanged)
+            .map { _ in refreshController.isRefreshing }
+            .filter { $0 == true }
+            .subscribe({ event in
+                refreshController.endRefreshing()
+            })
+            .disposed(by: bag)
+    }
+    
+}
+
+// MARK: ACTIONS
+
+extension CommandsLKTableViewController {
+    
     @IBAction func onAddCommandBtnPressed(_ sender: UIBarButtonItem) {  }
+    
 }
 
 // MARK: Helpers
@@ -239,121 +120,10 @@ extension CommandsLKTableViewController {
         }
         showAlert(title: "Предупреждение!", message: "Удалить команду '\(teamName)'?", actions: [actionDelete, actionCancel])
     }
-    
-//    func getOwnerParticipations(participation: [Participation], tournaments: [Tourney]) -> [Participation] {
-//        var arr : [Participation] = []
-//
-//        for par in participation {
-//            for league in tournaments.leagues {
-//                if league.id == par.league {
-//                    for team in league.teams! {
-//                        if team.id == par.team {
-//                            if team.creator == userDefaults.getAuthorizedUser()?.person.id {
-//                                arr.append(par)
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        return arr
-//    }
-    
-//    func getPlayerParticipations(participation: [Participation], tournaments: [Tourney]) -> [Participation] {
-//
-//        var arr : [Participation] = []
-//
-//        for par in participation {
-//            for league in tournaments.leagues {
-//                if league.id == par.league {
-//                    for team in league.teams! {
-//                        if team.id == par.team {
-//                            if team.creator != userDefaults.getAuthorizedUser()?.person.id {
-//                                arr.append(par)
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        return arr
-//    }
-}
-// MARK: Presenter
-extension CommandsLKTableViewController : CommandsLKView {
-    func onFetchSuccess() {
-        self.prepareModelController() {
-            self.endRefreshing()
-        }
-//        self.endRefreshing()
-    }
-    
-    func onFetchFailure() {
-//        showRepeatAlert(message: Texts.FAIL_TO_RELOAD_DATA) {
-//            self.refreshData()
-//        }
-    }
-    
-    func getRefreshUserSuccessful(authUser: AuthUser) {
-        userDefaults.setAuthorizedUser(user: authUser)
-//        self.presenter.getTournaments() { }
-//        self.authUser = userDefaults.getAuthorizedUser()
-        Print.m(authUser)
-    }
-    
-    func getRefreshUserFailure(error: Error) {
-//        showAlert(message: error.localizedDescription)
-        Print.m(error)
-    }
-    
-    func getTournamentsSuccess(tournaments: [Tourney]) {
-//        Print.m("get tournament success")
-//        tableModel.tournaments = [Tourney]()
-        tableModel.tournaments = tournaments
-//        prepareModelController(tournaments: tournaments)
-    }
-    
-    func getTournamentsFailure(error: Error) {
-        Print.m(error)
-//        showRepeatAlert(message: error.localizedDescription) {
-//            self.presenter.getTournaments() { }
-//        }
-    }
-    
-    func initPresenter() {
-        presenter.attachView(view: self)
-    }
-}
-
-// MARK: Refresh control
-extension CommandsLKTableViewController {
-    override func hasContent() -> Bool {
-        if tableModel.ownerTeams.count != 0 || tableModel.playerTeams.count != 0 {
-            return true
-        } else {
-            return false
-        }
-//        return true
-    }
 }
 
 // MARK: - Navigation
 extension CommandsLKTableViewController {
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == SegueIdentifiers.EDIT {
-            return true
-        }
-            // TODO: check logic of club later
-            //else if identifier == SegueIdentifiers.ADD && userDefaults.getAuthorizedUser()?.person.club != nil {
-            //return true
-    //    }
-    else {
-            showAlert(message: "Необходимо создать клуб.")
-            return false
-        }
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentifiers.EDIT,
@@ -361,18 +131,12 @@ extension CommandsLKTableViewController {
             let indexPath = tableView.indexPathForSelectedRow
         {
             assertionFailure("deprecated participation")
-//            destination.team = tableModel.ownerTeams[indexPath.row]
-//            destination.participation = participationController.getByTeamId(tableModel.ownerTeams[indexPath.row].id)
-//            destination.teamController = self.teamOwnerController
-//            destination.participationController = self.participationController
-//            destination.leagueController = LeagueController(league: self.tableModel.getLeagueOfTeam(inTeam: tableModel.ownerTeams[indexPath.row])!)
         }
         
         if segue.identifier == SegueIdentifiers.ADD,
             let destination = segue.destination as? CommandCreateLKViewController
         {
-//            destination.teamController = self.teamOwnerController
-//            destination.participationController = self.participationController
+            
         }
         
     }
@@ -394,7 +158,7 @@ extension CommandsLKTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.COMMAND, for: indexPath) as! CommandsLKTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.COMMAND, for: indexPath) as! TeamLKTableViewCell
         
         switch indexPath.section {
         case 0:
@@ -413,67 +177,6 @@ extension CommandsLKTableViewController {
         cell.selectionStyle = .none
         
         return cell
-    }
-    
-    func configureCell (cell: CommandsLKTableViewCell, model: Team) {
-//        let tournament = tableModel.tournaments.leagues.filter({ (league) -> Bool in
-//            return league.teams!.contains(where: { team -> Bool in
-//                return team.id == model.id
-//            })
-//        }).first
-//        if let tournament = tournament {
-//            guard let tourney = tournament.tourney else { return }
-//            guard let name = tournament.name else { return }
-//            if tourney.contains(".") {
-//                cell.tournamentTitle_label.text = "\(tourney) \(name)"
-//            } else {
-//                cell.tournamentTitle_label.text = "\(tourney). \(name)"
-//            }
-//
-//            cell.tournamentDate_label.text = "\(tournament.beginDate!.toFormat(DateFormats.local.ck)) - \(tournament.endDate!.toFormat(DateFormats.local.ck))"
-//
-//            cell.tournamentTransfer_label.text = "\(tournament.transferBegin!.toFormat(DateFormats.local.ck)) - \(tournament.transferEnd!.toFormat(DateFormats.local.ck))"
-//
-//            if tournament.betweenBeginEndDate() {
-//                cell.tournamentTitle_label.textColor = .red
-//                cell.tournamentTransfer_label.textColor = .red
-//            } else {
-//                cell.tournamentTitle_label.textColor = .black
-//                cell.tournamentTransfer_label.textColor = .black
-//            }
-//        }
-//        cell.commandTitle_label.text = model.name
-//
-//        var playerList: [DEPRECATED] = []
-//
-//        for player in model.players {
-//            if player.getInviteStatus() == InviteStatus.accepted || player.getInviteStatus() == InviteStatus.approved {
-//                playerList.append(player)
-//            }
-//        }
-//        cell.countOfPlayers_label.text = "\(playerList.count)"
-//
-//        switch model.getTeamStatus() {
-//        case .approved:
-//            cell.status_label.text = "Утверждена"
-//            if #available(iOS 11.0, *) {
-//                cell.status_label.textColor = UIColor(named: "colorPrimary")
-//            } else {
-//                // Fallback on earlier versions
-//            }
-//        case .rejected:
-//            cell.status_label.text = "Отклонена"
-//            if #available(iOS 11.0, *) {
-//                cell.status_label.textColor = UIColor(named: "colorBadge")
-//            } else {
-//                // Fallback on earlier versions
-//            }
-//        case .pending:
-//            cell.status_label.text = "Ожидание"
-//        case .fail:
-//            Print.m("default break off")  0
-//        }
-        
     }
     
     // MARK: - Delegate

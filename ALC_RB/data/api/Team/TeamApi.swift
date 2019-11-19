@@ -11,6 +11,24 @@ import Alamofire
 
 final class TeamApi: ApiRequests {
     
+    func get_team(id: String? = nil, name: String? = nil, limit: Int? = nil, offset: Int? = nil, resultMy: @escaping (ResultMy<[Team], RequestError>) -> ()) {
+        let params = ParamBuilder<Team.CodingKeys>()
+            .add(key: .id, value: id)
+            .add(key: .name, value: name)
+            .limit(limit)
+            .offset(offset)
+            .get()
+        Alamofire
+            .request(ApiRoute.getApiURL(.team), method: .get, parameters: params)
+            .responseResultMy([Team].self, resultMy: resultMy)
+    }
+    
+    func get_team(params: [String: Any], resultMy: @escaping (ResultMy<[Team], RequestError>) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.team), method: .get, parameters: params)
+            .responseResultMy([Team].self, resultMy: resultMy)
+    }
+    
     func post_teamAcceptRequest(token: String, acceptInfo: AcceptRequest, response_success: @escaping (SinglePerson) -> (), response_message: @escaping (SingleLineMessage)->(), response_failure: @escaping (Error) -> ()) {
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in
