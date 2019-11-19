@@ -92,9 +92,9 @@ class IdRefObjectWrapper<T>: Codable where T : Codable {
     }
     
     required public init(from decoder: Decoder) throws {
-        Print.m("Decode init Wrapper")
+        //Print.m("Decode init Wrapper")
         var container = try! decoder.singleValueContainer()
-//        Print.m(container)
+//        //Print.m(container)
         do {
             self.value = try container.decode(IdRefObject<T>.self)
         } catch {
@@ -103,7 +103,7 @@ class IdRefObjectWrapper<T>: Codable where T : Codable {
     }
     
     public func encode(to encoder: Encoder) throws {
-        Print.m("Encode Wrapper")
+        //Print.m("Encode Wrapper")
         var container = encoder.singleValueContainer()
 //        var un = encoder.unkeyedContainer()
         
@@ -178,17 +178,17 @@ enum IdRefObject<T>: Codable where T : Codable {
     case id(String), object(T)
     
     public init(from decoder: Decoder) throws {
-        Print.m("decode value")
+        //Print.m("decode value")
         let container = try! decoder.singleValueContainer()
 //        var container = try! decoder.unkeyedContainer()
 //        let container = try decoder.container(keyedBy: Key)
         if let id = try? container.decode(String.self) {
 //            print("decode id")
-            Print.m("Decode: id = \(id)")
+            //Print.m("Decode: id = \(id)")
             self = .id(id)
         } else if let object = try? container.decode(T.self) {
 //            print("decode object")
-            Print.m("Decode: object = \(object)")
+            //Print.m("Decode: object = \(object)")
             self = .object(object)
         } else {
             // TEST: test wrapper object here
@@ -198,16 +198,16 @@ enum IdRefObject<T>: Codable where T : Codable {
     }
     
     public func encode(to encoder: Encoder) throws {
-        Print.m("encode value")
+        //Print.m("encode value")
 //        var container = encoder.unkeyedContainer()
         var container = encoder.singleValueContainer()
         do {
             switch self {
             case .id(let id):
-                Print.m("Encode: id = \(id)")
+                //Print.m("Encode: id = \(id)")
                 try container.encode(id)
             case .object(let object):
-                Print.m("Encode: object = \(object)")
+                //Print.m("Encode: object = \(object)")
                 try container.encode(object)
             }
         } catch EncodingError.invalidValue(let any, let context) {

@@ -884,7 +884,6 @@
 				CE61551C21AFC33D008C4463 /* Announce.swift */,
 				DB17385A21BAACB900017B6D /* Clubs.swift */,
 				DB1816DD21D0DB81005375ED /* PastLeague.swift */,
-				DB1CA0FC22254FD4005E1FB9 /* AuthUser.swift */,
 				DB8D30BF22537328006355A7 /* SingleLineMessage.swift */,
 				18F0C9DB23531E75004886AF /* News.swift */,
 				18375E2E234A239D00E77809 /* Tourney.swift */,
@@ -1191,6 +1190,7 @@
 		182D4A92237EA215000C1053 /* Person */ = {
 			isa = PBXGroup;
 			children = (
+				DB1CA0FC22254FD4005E1FB9 /* AuthUser.swift */,
 				182D4A93237EA21E000C1053 /* Person.swift */,
 				182D4A95237EA271000C1053 /* PendingTeamInvite.swift */,
 				DB5EC2CF237F960B006B2EC8 /* SinglePerson.swift */,

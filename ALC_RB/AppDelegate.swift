@@ -49,29 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            realm.objects(TourneyRealm.self).elements.forEach({ Print.m($0) })
 ////        }
         
-        let tourneyApi = TourneyApi()
-        tourneyApi.get_tourney(params: ParamBuilder<Tourney.CodingKeys>().populate(.creator).get()) { result in
-            switch result {
-            case .success(let tourneys):
-                dump(tourneys)
-                let en = try! JSONEncoder.init().encode(tourneys)
-                Print.m(en)
-                Print.m(try! JSONDecoder().decode([Tourney].self, from: en))
-//                for i in tourneys {
-//                    Print.m(i.toTourneyRealm())
-//                }
-                
-            case .message(let message):
-                Print.m(message.message)
-                
-            case .failure(.error(let error)):
-                Print.m(error)
-                
-            case .failure(.notExpectedData):
-                Print.m("not expected data")
-            }
-        }
-        
         return true
     } // for xcode 10+
     
