@@ -124,7 +124,7 @@ final class MyTourneyHeaderView: UIView {
         containerRightAnchor = containerView.rightAnchor.constraint(equalTo: rightAnchor)
         containerRightAnchor?.isActive = true
         containerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 8).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
         addSubview(bottomSeparatorView)
         

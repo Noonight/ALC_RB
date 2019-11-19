@@ -10,14 +10,18 @@ import Foundation
 
 protocol TableActions {
     func onCellSelected(model: CellModel)
+    func onCellSelected(models: [CellModel])
     func onCellDeselected(model: CellModel)
     func onHeaderPressed(model: CellModel)
+    func onHeaderPressed(models: [CellModel])
     func onHeaderDeletePressed(model: CellModel)
 }
 extension TableActions {
-    func onCellselected(model: CellModel) {}
+    func onCellSelected(model: CellModel) {}
+    func onCellSelected(models: [CellModel]) {}
     func onCellDeselected(model: CellModel) {}
     func onHeaderPressed(model: CellModel) {}
+    func onHeaderPressed(models: [CellModel]) {}
     func onHeaderDeletePressed(model: CellModel) {}
 }
 

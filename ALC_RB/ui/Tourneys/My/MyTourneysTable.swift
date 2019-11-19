@@ -27,7 +27,7 @@ extension MyTourneysTable: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         if dataSource[indexPath.section].leagues?.count != 0 {
-            cellActions.onCellSelected(model: dataSource[indexPath.section].leagues![indexPath.row])
+            cellActions.onCellSelected(models: [dataSource[indexPath.section].leagues![indexPath.row], dataSource[indexPath.section]])
         }
     }
     
@@ -55,7 +55,7 @@ extension MyTourneysTable: UITableViewDelegate {
         if dataSource[section].leagues?.count == 1 {
             header.isDisclosure = true
             header.action = { tourneyModelItem in
-                self.cellActions.onHeaderPressed(model: tourneyModelItem.leagues!.first!)
+                self.cellActions.onHeaderPressed(models: [tourneyModelItem, tourneyModelItem.leagues!.first!])
             }
         }
         return sectionView

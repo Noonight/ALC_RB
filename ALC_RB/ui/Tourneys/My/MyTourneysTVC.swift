@@ -139,16 +139,17 @@ extension MyTourneysTVC {
 // MARK: ACTION
 
 extension MyTourneysTVC: TableActions {
-    func onCellSelected(model: CellModel) {
-        if model is LeagueModelItem {
-            self.showLeagueDetail(leagueModelItem: model as! LeagueModelItem)
-        }
+    
+    func onCellSelected(models: [CellModel]) {
+        let tourney = models.filter { $0 is TourneyModelItem }.first as! TourneyModelItem
+        let league = models.filter { $0 is LeagueModelItem }.first as! LeagueModelItem
+        self.showTourneyLeagueDetail(tourneyModelItem: tourney, leagueModelItem: league)
     }
     
-    func onHeaderPressed(model: CellModel) {
-        if model is LeagueModelItem {
-            self.showLeagueDetail(leagueModelItem: model as! LeagueModelItem)
-        }
+    func onHeaderPressed(models: [CellModel]) {
+        let tourney = models.filter { $0 is TourneyModelItem }.first as! TourneyModelItem
+        let league = models.filter { $0 is LeagueModelItem }.first as! LeagueModelItem
+        self.showTourneyLeagueDetail(tourneyModelItem: tourney, leagueModelItem: league)
     }
     
     func onHeaderDeletePressed(model: CellModel) {
@@ -189,19 +190,15 @@ extension MyTourneysTVC {
 
 extension MyTourneysTVC {
     
-    func showLeagueDetail(leagueModelItem: LeagueModelItem) {
+    func showTourneyLeagueDetail(tourneyModelItem: TourneyModelItem, leagueModelItem: LeagueModelItem) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "LeagueDetailViewController") as! LeagueDetailViewController
         
-        var leagueModel = LeagueDetailModel(leagueModelItem.league)
+        let leagueModel = LeagueDetailModel(tourney: tourneyModelItem.tourney, league: leagueModelItem.league)
         
-//        self.viewModel.fetchLeagueInfo(leagueId: leagueModelItem.league.id, success: { leagueInfo in
-//            leagueModel.leagueInfo = leagueInfo
-//
-//            newViewController.viewModel.leagueDetailModel = BehaviorRelay<LeagueDetailModel>(value: leagueModel)
-//
-//            self.navigationController?.show(newViewController, sender: self)
-//        })
+        newViewController.viewModel.leagueDetailModel.accept(leagueModel)
+        
+        self.navigationController?.show(newViewController, sender: self)
     }
     
     func showTourneyPicker() {
