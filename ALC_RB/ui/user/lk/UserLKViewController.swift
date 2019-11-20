@@ -73,10 +73,10 @@ class UserLKViewController: UIViewController {
     
     
     
-    private lazy var commands: CommandsLKTableViewController = {
+    private lazy var commands: TeamsLKTVC = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
-        var viewController = storyboard.instantiateViewController(withIdentifier: "CommandsLKTableViewController") as! CommandsLKTableViewController
+        var viewController = storyboard.instantiateViewController(withIdentifier: "CommandsLKTableViewController") as! TeamsLKTVC
         
         return viewController
     }()

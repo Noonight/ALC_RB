@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class CommandsLKTableViewController: UITableViewController {
+class TeamsLKTVC: UITableViewController {
     enum CellIdentifiers {
         static let COMMAND = "commands_lk_cell"
     }
@@ -50,7 +50,7 @@ class CommandsLKTableViewController: UITableViewController {
 
 // MARK: SETUP
 
-extension CommandsLKTableViewController {
+extension TeamsLKTVC {
     
     func setupViewModel() {
         viewModel = TeamsLKViewModel(leagueApi: LeagueApi(), teamApi: TeamApi(), inviteApi: InviteApi())
@@ -127,49 +127,67 @@ extension CommandsLKTableViewController {
 
 // MARK: ACTIONS
 
-extension CommandsLKTableViewController {
+extension TeamsLKTVC {
     
-    @IBAction func onAddCommandBtnPressed(_ sender: UIBarButtonItem) {  }
+    @IBAction func onAddCommandBtnPressed(_ sender: UIBarButtonItem) {
+        self.showCreateTeam()
+    }
     
 }
 
-extension CommandsLKTableViewController: TableActions {
+extension TeamsLKTVC: TableActions {
+    
     func onCellSelected(model: CellModel) {
-        Print.m(model)
+        if model is TeamModelItem {
+            self.showEditTeam(teamModelItem: model as! TeamModelItem)
+        }
+    }
+    
+    func onCellDelete(indexPath: IndexPath, model: CellModel) {
+        if model is TeamModelItem {
+            self.showRemoveTeamAlert(model: model as! TeamModelItem, delete: {
+                self.tableView.beginUpdates()
+                
+                self.teamTable.dataSource.items.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .left)
+                
+                self.tableView.endUpdates()
+            }) {
+                Print.m("Cancel delete")
+            }
+        }
     }
 }
 
-// MARK: Helpers
+// MARK: HELPERS
 
-extension CommandsLKTableViewController {
+extension TeamsLKTVC {
     
-    func showRemoveTeamAlert(teamName: String, delete: @escaping () -> (), cancel: @escaping () -> ()) {
+    func showRemoveTeamAlert(model: TeamModelItem, delete: @escaping () -> (), cancel: @escaping () -> ()) {
         let actionDelete = UIAlertAction(title: "Удалить", style: .destructive) { _ in
             delete()
         }
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel) { _ in
             cancel()
         }
-        showAlert(title: "Предупреждение!", message: "Удалить команду '\(teamName)'?", actions: [actionDelete, actionCancel])
+        showAlert(title: "Предупреждение!", message: "Удалить команду '\(model.name!)'?", actions: [actionDelete, actionCancel])
     }
 }
 
-// MARK: - Navigation
-extension CommandsLKTableViewController {
+// MARK: - NAVIGATION
+
+extension TeamsLKTVC {
+
+    func showEditTeam(teamModelItem: TeamModelItem) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "CommandEditLKViewController") as! CommandEditLKViewController
+//        newViewController.
+        self.navigationController?.show(newViewController, sender: self)
+    }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == SegueIdentifiers.EDIT,
-            let destination = segue.destination as? CommandEditLKViewController,
-            let indexPath = tableView.indexPathForSelectedRow
-        {
-            assertionFailure("deprecated participation")
-        }
-        
-        if segue.identifier == SegueIdentifiers.ADD,
-            let destination = segue.destination as? CommandCreateLKViewController
-        {
-            
-        }
-        
+    func showCreateTeam() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "CommandCreateLKViewController") as! CommandCreateLKViewController
+        self.navigationController?.show(newViewController, sender: self)
     }
 }

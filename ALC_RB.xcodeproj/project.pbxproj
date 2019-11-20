@@ -290,7 +290,7 @@
 		DB5AAC0622369FDB0097963E /* InvitationLKTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AAC0522369FDB0097963E /* InvitationLKTableViewController.swift */; };
 		DB5AAC082236A1380097963E /* InvitationLKPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AAC072236A1380097963E /* InvitationLKPresenter.swift */; };
 		DB5AAC0B2236A1AE0097963E /* InvitationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AAC0A2236A1AE0097963E /* InvitationTableViewCell.swift */; };
-		DB5BDB992247CD0E0014C003 /* CommandsLKTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5BDB982247CD0E0014C003 /* CommandsLKTableViewController.swift */; };
+		DB5BDB992247CD0E0014C003 /* TeamsLKTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5BDB982247CD0E0014C003 /* TeamsLKTVC.swift */; };
 		DB5D9A8F233CB7CD0076E41D /* UICollectionView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D9A8E233CB7CD0076E41D /* UICollectionView + Extensions.swift */; };
 		DB5EC2D0237F960B006B2EC8 /* SinglePerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5EC2CF237F960B006B2EC8 /* SinglePerson.swift */; };
 		DB5EC2D3237F9BD5006B2EC8 /* SingleTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5EC2D2237F9BD5006B2EC8 /* SingleTeam.swift */; };
@@ -697,7 +697,7 @@
 		DB5AAC0522369FDB0097963E /* InvitationLKTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationLKTableViewController.swift; sourceTree = "<group>"; };
 		DB5AAC072236A1380097963E /* InvitationLKPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationLKPresenter.swift; sourceTree = "<group>"; };
 		DB5AAC0A2236A1AE0097963E /* InvitationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationTableViewCell.swift; sourceTree = "<group>"; };
-		DB5BDB982247CD0E0014C003 /* CommandsLKTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsLKTableViewController.swift; sourceTree = "<group>"; };
+		DB5BDB982247CD0E0014C003 /* TeamsLKTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsLKTVC.swift; sourceTree = "<group>"; };
 		DB5D9A8E233CB7CD0076E41D /* UICollectionView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extensions.swift"; sourceTree = "<group>"; };
 		DB5EC2CF237F960B006B2EC8 /* SinglePerson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePerson.swift; sourceTree = "<group>"; };
 		DB5EC2D2237F9BD5006B2EC8 /* SingleTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTeam.swift; sourceTree = "<group>"; };
@@ -2293,14 +2293,14 @@
 		DB5BDB972247CB990014C003 /* commands */ = {
 			isa = PBXGroup;
 			children = (
+				DB5BDB982247CD0E0014C003 /* TeamsLKTVC.swift */,
+				18D3D7422384008F000C5F2E /* TeamsLKViewModel.swift */,
+				185B3E02238438A8003DB326 /* TeamsLKTable.swift */,
 				18D3D744238401CD000C5F2E /* model */,
 				DBBEE1B922D5412400CFB17E /* model controllers */,
-				DB5BDB982247CD0E0014C003 /* CommandsLKTableViewController.swift */,
 				DB52EAE62248E3F8004F7869 /* cell */,
 				DB52EAE12248E2AF004F7869 /* add */,
 				DB98FACB225470CF002933D0 /* edit */,
-				18D3D7422384008F000C5F2E /* TeamsLKViewModel.swift */,
-				185B3E02238438A8003DB326 /* TeamsLKTable.swift */,
 			);
 			path = commands;
 			sourceTree = "<group>";
@@ -3103,7 +3103,7 @@
 				048CB342230BD741006CF2A9 /* HomeScheduleTable.swift in Sources */,
 				DB4C45E022EDFD4900B28148 /* UITableView + Extensions.swift in Sources */,
 				187F2DFC22CB19440049EA77 /* EditRefereeProtocolTableViewCell.swift in Sources */,
-				DB5BDB992247CD0E0014C003 /* CommandsLKTableViewController.swift in Sources */,
+				DB5BDB992247CD0E0014C003 /* TeamsLKTVC.swift in Sources */,
 				DB4B1A452240AB2C00A9FB97 /* ClubLKViewController.swift in Sources */,
 				CE158CE921AD532600CEECFE /* LeagueDetailViewController.swift in Sources */,
 				182394C62362B33B007D6954 /* Static functions.swift in Sources */,

@@ -15,8 +15,6 @@ final class TeamsLKTable: NSObject {
     let actions: TableActions
     
     init(tableActions: TableActions) {
-//        self.dataSource.append(TeamGropModelItem(name: "My", items: []))
-//        self.dataSource.append(TeamGropModelItem(name: "Not my", items: []))
         self.actions = tableActions
     }
     
@@ -32,33 +30,16 @@ extension TeamsLKTable: UITableViewDelegate {
         
     }
     
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//            if editingStyle == .delete {
-//
-//                if indexPath.section == 0 {
-//                    showRemoveTeamAlert(teamName: tableModel.ownerTeams[indexPath.row].name!, delete: {
-//                        self.tableModel.ownerTeams.remove(at: indexPath.row)
-//                        tableView.deleteRows(at: [indexPath], with: .left)
-//                        // TODO: do api request to delete team
-//                    }) {
-//                        Print.m("cancel team delete")
-//                    }
-//    //                Print.m("delete cell at \(indexPath.row) -> \(tableModel.ownerTeams[indexPath.row])")
-//                }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle == .delete {
+                if indexPath.section == 0 {
+                    actions.onCellDelete(indexPath: indexPath, model: dataSource.items[indexPath.row])
+                }
 //                if indexPath.section == 1 {
-//                    showRemoveTeamAlert(teamName: tableModel.playerTeams[indexPath.row].name!, delete: {
-//                        self.tableModel.playerTeams.remove(at: indexPath.row)
-//                        tableView.deleteRows(at: [indexPath], with: .left)
-//                    }) {
-//                        Print.m("cancel team delete")
-//                    }
-//
-//    //                Print.m("delete cell at \(indexPath.row) -> \(tableModel.fplayerTeams[indexPath.row])")
+//                    actions.onCellDelete(indexPath: indexPath, model: dataSource.items[indexPath.row])
 //                }
-//
-//            }
-//        }
-//
+            }
+        }
 }
 
 extension TeamsLKTable: UITableViewDataSource {
