@@ -47,9 +47,9 @@ final class TeamsLKViewModel {
     let teamOwnerVM: TeamsPersonOwnerViewModel
     let teamInVM: TeamsPersonInViewModel
     
-    init(teamApi: TeamApi, inviteApi: InviteApi) {
-        self.teamOwnerVM = TeamsPersonOwnerViewModel(leagueApi: LeagueApi(), teamApi: teamApi)
-        self.teamInVM = TeamsPersonInViewModel(inviteApi: inviteApi)
+    init(leagueApi: LeagueApi, teamApi: TeamApi, inviteApi: InviteApi) {
+        self.teamOwnerVM = TeamsPersonOwnerViewModel(leagueApi: leagueApi, teamApi: teamApi)
+        self.teamInVM = TeamsPersonInViewModel(leagueApi: leagueApi, inviteApi: inviteApi)
     }
     
     func fetch() {

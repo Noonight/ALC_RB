@@ -1556,6 +1556,8 @@
 		18D3D744238401CD000C5F2E /* model */ = {
 			isa = PBXGroup;
 			children = (
+				18D3D74C23842278000C5F2E /* TeamsPersonInViewModel.swift */,
+				18D3D74E23842377000C5F2E /* TeamsPersonOwnerViewModel.swift */,
 				18D3D745238401D7000C5F2E /* TeamModelItem.swift */,
 				185B3E0423843925003DB326 /* TeamGroupModelItem.swift */,
 			);
@@ -2298,8 +2300,6 @@
 				DB52EAE12248E2AF004F7869 /* add */,
 				DB98FACB225470CF002933D0 /* edit */,
 				18D3D7422384008F000C5F2E /* TeamsLKViewModel.swift */,
-				18D3D74C23842278000C5F2E /* TeamsPersonInViewModel.swift */,
-				18D3D74E23842377000C5F2E /* TeamsPersonOwnerViewModel.swift */,
 				185B3E02238438A8003DB326 /* TeamsLKTable.swift */,
 			);
 			path = commands;

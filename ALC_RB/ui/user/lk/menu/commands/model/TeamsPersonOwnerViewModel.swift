@@ -29,6 +29,7 @@ final class TeamsPersonOwnerViewModel {
     func fetch() {
         self.loading.onNext(true)
         
+        // TODO: replace to teamApi
         let userId = userDefaults.getAuthorizedUser()?.person.id
         let params = ParamBuilder<Team.CodingKeys>()
             .add(key: .creator, value: userId)
@@ -49,13 +50,12 @@ final class TeamsPersonOwnerViewModel {
                 var tmpTeams = teams
                 
                 let params1 = ParamBuilder<League.CodingKeys>()
-                    .add(key: .tourney, value: StrBuilder().setSeparatorStyle(.comma).add(.comma).add(leagueByTeamIds))
+                    .add(key: .id, value: StrBuilder().setSeparatorStyle(.comma).add(.comma).add(leagueByTeamIds))
                     .populate(.tourney)
                     .get()
                 self.leagueApi.get_league(params: params1) { result in
                     switch result {
                     case .success(let leagues):
-                        
                         for i in 0..<tmpTeams.count {
                             if let league = leagues.filter({ league in
                                 return league.id == tmpTeams[i].league!.getId()!

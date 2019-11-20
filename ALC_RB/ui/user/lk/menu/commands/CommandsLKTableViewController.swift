@@ -53,7 +53,7 @@ class CommandsLKTableViewController: UITableViewController {
 extension CommandsLKTableViewController {
     
     func setupViewModel() {
-        viewModel = TeamsLKViewModel(teamApi: TeamApi(), inviteApi: InviteApi())
+        viewModel = TeamsLKViewModel(leagueApi: LeagueApi(), teamApi: TeamApi(), inviteApi: InviteApi())
     }
     
     func setupTable() {
@@ -66,9 +66,22 @@ extension CommandsLKTableViewController {
         
 //        tableView.rx.itemSelected.
         
-        viewModel.teamOwnerVM.ownerTeams.subscribe { items in
-            self.teamTable.dataSource.items.append(contentsOf: items.element!)
-        }
+        viewModel
+            .teamOwnerVM
+            .ownerTeams
+            .subscribe { items in
+                self.teamTable.dataSource.items.append(contentsOf: items.element!)
+                self.tableView.reloadSections(IndexSet(integersIn: 0...0), with: UITableView.RowAnimation.fade)
+            }.disposed(by: bag)
+        
+        viewModel
+            .teamInVM
+            .inTeams
+            .observeOn(MainScheduler.instance)
+            .subscribe { items in
+                self.teamTable.dataSourceNotMy.items = items.element!
+                self.tableView.reloadSections(IndexSet(integersIn: 1...1), with: .fade)
+            }.disposed(by: bag)
         
         viewModel
             .loading

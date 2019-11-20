@@ -27,23 +27,45 @@ final class TeamModelItem {
     }
     
     var tourneyLeagueName: String? {
-        return "\(team.league?.getValue()?.tourney?.getValue()?.name). \(team.league?.getValue()?.name)"
+        let strBuilder = StrBuilder<Team.CodingKeys>()
+            .setSeparatorMode(.independently)
+            .add(team.league?.getValue()?.tourney?.getValue()?.name)
+            .add(.dot)
+            .add(.space)
+            .add(team.league?.getValue()?.name)
+        return strBuilder.getStr()
     }
     
     var leagueBeginEndDate: String? {
-        return "\(team.league?.getValue()?.beginDate!.toFormat(.local)) - \(team.league?.getValue()?.endDate!.toFormat(.local))"
+        let strBuilder = StrBuilder<Team.CodingKeys>()
+            .setSeparatorMode(.independently)
+            .add(team.league?.getValue()?.beginDate!.toFormat(.local))
+            .add(" - ")
+            .add(team.league?.getValue()?.endDate!.toFormat(.local))
+        return strBuilder.getStr()
     }
     
     var leagueTransferBeginEndDate: String? {
-        return "\(team.league?.getValue()?.transferBegin!.toFormat(.local)) - \(team.league?.getValue()?.transferEnd!.toFormat(.local))"
+        let strBuilder = StrBuilder<Team.CodingKeys>()
+            .setSeparatorMode(.independently)
+            .add(team.league?.getValue()?.transferBegin!.toFormat(.local))
+            .add(" - ")
+            .add(team.league?.getValue()?.transferEnd!.toFormat(.local))
+        return strBuilder.getStr()
     }
     
     var leagueStatus: String? {
-        return "\(team.league?.getValue()?.status!.ru())"
+        let strBuilder = StrBuilder<Team.CodingKeys>()
+            .setSeparatorMode(.independently)
+            .add(team.league?.getValue()?.status!.ru())
+        return strBuilder.getStr()
     }
     
     var maxCountOfPlayers: String? {
-        return "\(team.league?.getValue()?.playersMax)"
+        if let maxPlayers = team.league?.getValue()?.playersMax {
+            return String(maxPlayers)
+        }
+        return nil
     }
     
 }
