@@ -70,12 +70,14 @@ enum Routes: String {
     case personInvite = "person_invite"
     case team = "crud/team"
     
+    case team_participation_request = "participation_request"
+    
     case post_auth = "signin"
     case post_reg = "signup"
     case post_edit_profile = "editPlayerInfo" // later
     case post_team_acceptrequest = "team/acceptrequest"
     case post_edit_club_info = "clubs/edit" // later
-    case post_create_team = "leagues/addrequest"
+//    case post_create_team = "crud/team"
     case post_edit_team = "team/edit"
     case post_add_player_team = "team/addplayer"
     case post_create_club = "clubs/add"

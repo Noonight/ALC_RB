@@ -30,7 +30,6 @@ final class TourneyApi: ApiRequests {
     }
     
     func get_tourneyModelItemsQuery(leagueName: String? = nil, region: RegionMy? = nil, resultMy: @escaping (ResultMy<[TourneyModelItem], RequestError>) -> ()) {
-        
         let leagueApi = LeagueApi()
         let params = ParamBuilder<League.CodingKeys>()
             .add(key: .name, value: leagueName)
@@ -47,12 +46,21 @@ final class TourneyApi: ApiRequests {
                         
                         // FILTER BY REGION
                         if region != nil {
-                            let resultArr = tourneyModelItems.filter({ tourneyMI -> Bool in
-                                let mRegion = tourneyMI.tourney.region
-                                return mRegion?.getId() ?? mRegion?.getValue()?.id == region?.id
-                            })
+                            var resultArr = [TourneyModelItem]()
+//                             = tourneyModelItems.filter({ tourneyMI -> Bool in
+//                                let mRegion = tourneyMI.tourney.region
+//                                return mRegion?.getId() ?? mRegion?.getValue()?.id == region?.id
+//                            })
+                            for tourney in tourneyModelItems {
+                                if tourney.tourney.region!.orEqual(region!.id, { regionMy -> Bool in
+                                    return region!.id == regionMy.id
+                                }) {
+                                    resultArr.append(tourney)
+                                }
+                            }
                             
                             resultMy(.success(resultArr))
+                            return
                         }
                         
                         resultMy(.success(tourneyModelItems))

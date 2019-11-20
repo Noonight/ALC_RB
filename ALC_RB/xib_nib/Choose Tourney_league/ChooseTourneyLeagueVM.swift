@@ -28,7 +28,7 @@ final class ChooseTourneyLeagueVM {
     
     func fetch() {
         loading.onNext(true)
-        
+        Print.m(choosedRegion.value)
         tourneyApi.get_tourneyModelItemsQuery(leagueName: query.value, region: choosedRegion.value) { result in
             switch result {
             case .success(let tourneyModelItems):

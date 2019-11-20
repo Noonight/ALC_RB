@@ -26,6 +26,9 @@ final class ChooseTourneyLeagueVC: UIViewController {
     
     var callBack: ChooseLeagueResult?
     private var viewModel: ChooseTourneyLeagueVM!
+    private var tourneyTable: TourneyTable!
+    
+    private var chooseRegionVC: ChooseRegionVC!
     
     let choosedLeague = PublishSubject<League>()
     private let bag = DisposeBag()
@@ -37,6 +40,7 @@ final class ChooseTourneyLeagueVC: UIViewController {
         setupViewModel()
         setupBinds()
         setupNavBar()
+        setupRegionChooser()
         
         viewModel.fetch()
     }
@@ -46,11 +50,16 @@ final class ChooseTourneyLeagueVC: UIViewController {
 
 extension ChooseTourneyLeagueVC {
     
+    func setupRegionChooser() {
+        self.chooseRegionVC = ChooseRegionVC()
+        chooseRegionVC.callBack = self
+    }
+    
     func setupNavBar() {
         modalPresentationCapturesStatusBarAppearance = true
         navBar.titleLabel.text = "Выберите Лигу"
-        //        navBar.leftButton.setTitle("Cancel", for: .normal)
-        //        navBar.leftButton.addTarget(self, action: #selector(closePressed(_:)), for: .touchUpInside)
+                navBar.rightButton.setTitle("Отмена", for: .normal)
+                navBar.rightButton.addTarget(self, action: #selector(closePressed(_:)), for: .touchUpInside)
         
         view.addSubview(navBar)
         
@@ -58,9 +67,13 @@ extension ChooseTourneyLeagueVC {
     }
     
     func setupTableView() {
-        self.tableView.delegate = nil
-        self.tableView.dataSource = nil
-        self.tableView.register(UINib(nibName: "ChooseRegionCell", bundle: Bundle.main), forCellReuseIdentifier: ChooseRegionCell.ID)
+//        tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.separatorInset = .zero
+        tableView.allowsMultipleSelection = false
+        tourneyTable = TourneyTable(cellActions: self)
+        self.tableView.delegate = tourneyTable
+        self.tableView.dataSource = tourneyTable
+        self.tableView.register(UINib(nibName: "MyTourneyCell", bundle: Bundle.main), forCellReuseIdentifier: MyTourneyCell.ID)
     }
     
     func setupViewModel() {
@@ -68,6 +81,12 @@ extension ChooseTourneyLeagueVC {
     }
     
     func setupBinds() {
+        
+        regionBtn.rx
+            .tap
+            .bind {
+                self.presentAsStork(self.chooseRegionVC, height: UIScreen.main.bounds.height - (UIScreen.main.bounds.height / 3))
+            }.disposed(by: bag)
         
         searchBar.rx
             .cancelButtonClicked
@@ -96,29 +115,42 @@ extension ChooseTourneyLeagueVC {
             })
             .disposed(by: bag)
         
+//        self.chooseRegionVC
+//            .choosedRegion
+//            .observeOn(MainScheduler.instance)
+//            .subscribe { regionElement in
+//                guard let region = regionElement.element else { return }
+//                Print.m(region)
+//                self.viewModel.choosedRegion.accept(region)
+//
+//                self.viewModel.fetch()
+//        }.disposed(by: bag)
+        
         self.viewModel
             .findedLeagues
-            .asDriver(onErrorJustReturn: [])
-            .drive(self.tableView.rx.items(cellIdentifier: ChooseRegionCell.ID, cellType: ChooseRegionCell.self)) { row, region, cell in
-                cell.region = region
-            }
-            .disposed(by: bag)
-        
-        self.tableView.rx
-            .itemSelected
-            .subscribe({ indexPath in
-                guard let index = indexPath.element else { return }
-                let cell = self.tableView.cellForRow(at: index) as! ChooseRegionCell
-                
-                self.callBack?.complete(region: cell.region)
-                self.choosedRegion.onNext(cell.region)
-                self.choosedRegion.onCompleted()
-                
-                self.tableView.deselectRow(at: index, animated: true)
-                
-                self.close()
+            .observeOn(MainScheduler.instance)
+            .subscribe({ element in
+                guard let items = element.element else { return }
+                self.tourneyTable.dataSource = items
+                self.tableView.reloadData()
             })
             .disposed(by: bag)
+        
+//        self.tableView.rx
+//            .itemSelected
+//            .subscribe({ indexPath in
+//                guard let index = indexPath.element else { return }
+//                let cell = self.tableView.cellForRow(at: index) as! ChooseRegionCell
+//
+//                self.callBack?.complete(region: cell.region)
+//                self.choosedRegion.onNext(cell.region)
+//                self.choosedRegion.onCompleted()
+//
+//                self.tableView.deselectRow(at: index, animated: true)
+//
+//                self.close()
+//            })
+//            .disposed(by: bag)
         
         self.viewModel
             .loading
@@ -143,7 +175,18 @@ extension ChooseTourneyLeagueVC {
 
 // MARK: - ACTION
 
-extension ChooseTourneyLeagueVC {
+extension ChooseTourneyLeagueVC: TableActions {
+    
+    func onCellSelected(model: CellModel) {
+        if model is LeagueModelItem {
+            Print.m(model as! LeagueModelItem)
+            callBack?.complete(league: (model as! LeagueModelItem).league)
+            choosedLeague.onNext((model as! LeagueModelItem).league)
+            choosedLeague.onCompleted()
+            
+            close()
+        }
+    }
     
     func close() {
         self.dismiss(animated: true, completion: nil)
@@ -151,6 +194,20 @@ extension ChooseTourneyLeagueVC {
     
     @objc func closePressed(_ sender: UIButton) {
         Print.m("close this view")
+    }
+    
+}
+
+// MARK: - ChooseRegionResult
+
+extension ChooseTourneyLeagueVC: ChooseRegionResult {
+    
+    func complete(region: RegionMy) {
+        Print.m("region is \(region)")
+        self.regionBtn.setTitle(region.name, for: .normal)
+        self.viewModel.choosedRegion.accept(region)
+        
+        self.viewModel.fetch()
     }
     
 }
@@ -165,4 +222,37 @@ extension ChooseTourneyLeagueVC: SPStorkControllerConfirmDelegate {
     func confirm(_ completion: @escaping (Bool) -> ()) {
         completion(true)
     }
+}
+
+// MARK: - HELPER
+
+extension ChooseTourneyLeagueVC {
+    
+    func showRegionChooser() {
+        let transitionDelegate = SPStorkTransitioningDelegate()
+        chooseRegionVC.transitioningDelegate = transitionDelegate
+        chooseRegionVC.modalPresentationStyle = .formSheet
+        chooseRegionVC.modalPresentationCapturesStatusBarAppearance = true
+        self.present(chooseRegionVC, animated: true, completion: nil)
+    }
+    
+}
+
+// MARK: OUT
+
+extension ChooseTourneyLeagueVC {
+    
+    static func getTransitionInstance() -> ChooseTourneyLeagueVC {
+        let chooseTourney = ChooseTourneyLeagueVC()
+        let transitionDelegate = SPStorkTransitioningDelegate()
+        chooseTourney.transitioningDelegate = transitionDelegate
+        if #available(iOS 13.0, *) {
+            chooseTourney.modalPresentationStyle = .automatic
+        } else {
+            chooseTourney.modalPresentationStyle = .custom
+        }
+        chooseTourney.modalPresentationCapturesStatusBarAppearance = true
+        return chooseTourney
+    }
+    
 }

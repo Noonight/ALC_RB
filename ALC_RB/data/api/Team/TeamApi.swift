@@ -29,6 +29,21 @@ final class TeamApi: ApiRequests {
             .responseResultMy([Team].self, resultMy: resultMy)
     }
     
+    func post_team(team: Team, resultMy: @escaping (ResultMy<Team, RequestError>) -> ()) {
+        let userToken = UserDefaultsHelper().getToken()
+        Alamofire
+            .request(ApiRoute.getApiURL(.team), method: .post, parameters: team.postMap, headers: ["auth" : userToken])
+            .responseResultMy(Team.self, resultMy: resultMy)
+    }
+    
+    func post_teamParticipationRequest(teamParticipationRequest: TeamParticipationRequest, resultMy: @escaping (ResultMy<TeamParticipationRequest, RequestError>) -> ()) {
+        let userToken = UserDefaultsHelper().getToken()
+        Alamofire
+            .request(ApiRoute.getApiURL(.team_participation_request), method: .post, parameters: teamParticipationRequest.postMap, headers: ["auth" : userToken])
+            .responseResultMy(TeamParticipationRequest.self, resultMy: resultMy)
+    }
+    
+    // deprecated:
     func post_teamAcceptRequest(token: String, acceptInfo: AcceptRequest, response_success: @escaping (SinglePerson) -> (), response_message: @escaping (SingleLineMessage)->(), response_failure: @escaping (Error) -> ()) {
         Alamofire
             .upload(multipartFormData: { (multipartFormData) in

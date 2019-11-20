@@ -187,7 +187,7 @@ extension TeamsLKTVC {
     
     func showCreateTeam() {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "CommandCreateLKViewController") as! CommandCreateLKViewController
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "CommandCreateLKViewController") as! TeamCreateLKVC
         self.navigationController?.show(newViewController, sender: self)
     }
 }

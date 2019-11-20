@@ -10,29 +10,19 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class CommandCreateLKViewModel {
+final class TeamCreateLKViewModel {
     
-    var tourneys = PublishSubject<[TourneyModelItem]>()
-    var regions = PublishSubject<[RegionMy]>()
     var loading = PublishSubject<Bool>()
     var error = PublishSubject<Error?>()
     var message = PublishSubject<SingleLineMessage>()
     
-    private let dataManager: ApiRequests
+    private let teamApi: TeamApi
     
-    init(dataManager: ApiRequests) {
-        self.dataManager = dataManager
+    init(teamApi: TeamApi) {
+        self.teamApi = teamApi
     }
     
-    func fetch() {
-        
-    }
-    
-    func fetchTourneys() {
-        
-    }
-    
-    func fetchRegions() {
+    func request() {
         
     }
     
