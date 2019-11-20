@@ -10,8 +10,8 @@ import Foundation
 
 final class TeamsLKTable: NSObject {
     
-    var dataSource = TeamGropModelItem(name: "My", items: [])
-    var dataSourceNotMy = TeamGropModelItem(name:"Not my", items: [])
+    var dataSource = TeamGropModelItem(name: "Мои команды", items: [])
+    var dataSourceNotMy = TeamGropModelItem(name:"В составе команд", items: [])
     let actions: TableActions
     
     init(tableActions: TableActions) {
