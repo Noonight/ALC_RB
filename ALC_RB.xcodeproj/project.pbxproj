@@ -48,6 +48,9 @@
 		04C88E5F2382687100B2A8C4 /* AuthUserRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C88E5E2382687100B2A8C4 /* AuthUserRealm.swift */; };
 		04C88E61238268E700B2A8C4 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C88E60238268E700B2A8C4 /* DBHelper.swift */; };
 		04C88E63238294D500B2A8C4 /* PersonRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C88E62238294D500B2A8C4 /* PersonRealm.swift */; };
+		04CC7BD02385167B00FE5B1B /* ChooseTourneyLeagueVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC7BCE2385167B00FE5B1B /* ChooseTourneyLeagueVC.swift */; };
+		04CC7BD12385167B00FE5B1B /* ChooseTourneyLeagueVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CC7BCF2385167B00FE5B1B /* ChooseTourneyLeagueVC.xib */; };
+		04CC7BD3238519AF00FE5B1B /* ChooseTourneyLeagueVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CC7BD2238519AF00FE5B1B /* ChooseTourneyLeagueVM.swift */; };
 		04D01D42230689CB003AB74B /* AdverstingMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D01D41230689CB003AB74B /* AdverstingMaker.swift */; };
 		04DF5492220D6861001323A6 /* MatchProtocolPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5491220D6861001323A6 /* MatchProtocolPresenter.swift */; };
 		04DF5494220D6C25001323A6 /* ClubTeamHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5493220D6C25001323A6 /* ClubTeamHelper.swift */; };
@@ -449,6 +452,9 @@
 		04C88E5E2382687100B2A8C4 /* AuthUserRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserRealm.swift; sourceTree = "<group>"; };
 		04C88E60238268E700B2A8C4 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		04C88E62238294D500B2A8C4 /* PersonRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRealm.swift; sourceTree = "<group>"; };
+		04CC7BCE2385167B00FE5B1B /* ChooseTourneyLeagueVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTourneyLeagueVC.swift; sourceTree = "<group>"; };
+		04CC7BCF2385167B00FE5B1B /* ChooseTourneyLeagueVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseTourneyLeagueVC.xib; sourceTree = "<group>"; };
+		04CC7BD2238519AF00FE5B1B /* ChooseTourneyLeagueVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseTourneyLeagueVM.swift; sourceTree = "<group>"; };
 		04D01D41230689CB003AB74B /* AdverstingMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdverstingMaker.swift; sourceTree = "<group>"; };
 		04DF5491220D6861001323A6 /* MatchProtocolPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchProtocolPresenter.swift; sourceTree = "<group>"; };
 		04DF5493220D6C25001323A6 /* ClubTeamHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubTeamHelper.swift; sourceTree = "<group>"; };
@@ -1101,6 +1107,16 @@
 				04C88E62238294D500B2A8C4 /* PersonRealm.swift */,
 			);
 			path = Person;
+			sourceTree = "<group>";
+		};
+		04CC7BCD2385164E00FE5B1B /* Choose Tourney_league */ = {
+			isa = PBXGroup;
+			children = (
+				04CC7BCE2385167B00FE5B1B /* ChooseTourneyLeagueVC.swift */,
+				04CC7BCF2385167B00FE5B1B /* ChooseTourneyLeagueVC.xib */,
+				04CC7BD2238519AF00FE5B1B /* ChooseTourneyLeagueVM.swift */,
+			);
+			path = "Choose Tourney_league";
 			sourceTree = "<group>";
 		};
 		04F710C1236C29C700C26469 /* Model */ = {
@@ -2176,6 +2192,7 @@
 		DB58E95721E8A44500AF265E /* xib_nib */ = {
 			isa = PBXGroup;
 			children = (
+				04CC7BCD2385164E00FE5B1B /* Choose Tourney_league */,
 				04B22E6523716B5600BA336C /* Choose region */,
 				DBDE79C0234FB0CE00E2F73B /* cell_type_view */,
 				18459867234744BE0066DE2A /* button + activity indicator */,
@@ -2993,6 +3010,7 @@
 				DB44F6A3233C4B7900EAF293 /* LoadingRepeatView.xib in Resources */,
 				184598612347142B0066DE2A /* TournamentSearchTableViewCell.xib in Resources */,
 				DB4C45DE22EDDE1B00B28148 /* AutoGoalFooterView.xib in Resources */,
+				04CC7BD12385167B00FE5B1B /* ChooseTourneyLeagueVC.xib in Resources */,
 				DBCA6CA722F7EDC4001D6C0B /* ProtocolAllFooterView.xib in Resources */,
 				CEA6EBA121A53CFE008F874D /* Main.storyboard in Resources */,
 				1890FBCF235DC36900514E33 /* MyTourneysVC.xib in Resources */,
@@ -3123,6 +3141,7 @@
 				04B22E6B23716DA000BA336C /* ChooseRegionVM.swift in Sources */,
 				DBD2498823814B6900683A8B /* TeamApi.swift in Sources */,
 				DB966A6522EC811600064233 /* ProtocolTeamOnePlayers.swift in Sources */,
+				04CC7BD02385167B00FE5B1B /* ChooseTourneyLeagueVC.swift in Sources */,
 				DBB208F2221316D90010B600 /* RefereeTeamPresenter.swift in Sources */,
 				DBF4F00822157BF900066BE3 /* ScoreMatchPresenter.swift in Sources */,
 				180F236722B25F1700ADE8FD /* EditScheduleLKViewController.swift in Sources */,
@@ -3332,6 +3351,7 @@
 				046F64B7237A7ECE007188BC /* MatchApi.swift in Sources */,
 				DB87FE812243D9E2001EBA7C /* EmptyViewNew.swift in Sources */,
 				1894827A2356F018000C8A2A /* MyTourneyCell.swift in Sources */,
+				04CC7BD3238519AF00FE5B1B /* ChooseTourneyLeagueVM.swift in Sources */,
 				185AF41C235339F200EC1F0A /* NewsModelItem.swift in Sources */,
 				DBD4D025225F946D00C8C8B3 /* EditTeamResponse.swift in Sources */,
 				1890FBC4235DBE1A00514E33 /* UserTourneysVC.swift in Sources */,

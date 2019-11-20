@@ -12,7 +12,7 @@ import RxCocoa
 
 final class CommandCreateLKViewModel {
     
-    var tourneys = PublishSubject<[Tourney]>()
+    var tourneys = PublishSubject<[TourneyModelItem]>()
     var regions = PublishSubject<[RegionMy]>()
     var loading = PublishSubject<Bool>()
     var error = PublishSubject<Error?>()
