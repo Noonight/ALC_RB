@@ -174,6 +174,15 @@ extension TeamsLKTVC {
     }
 }
 
+extension TeamsLKTVC: CreateTeamCallBack {
+    func back(team: Team) {
+//        Print.m("Team \(team) is created")
+        self.navigationController?.popViewController(animated: true)
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = createNewCommandBtn
+        self.viewModel.fetch()
+    }
+}
+
 // MARK: - NAVIGATION
 
 extension TeamsLKTVC {
@@ -183,11 +192,22 @@ extension TeamsLKTVC {
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "CommandEditLKViewController") as! CommandEditLKViewController
 //        newViewController.
         self.navigationController?.show(newViewController, sender: self)
+//        self.navigationController?.pushViewController(newViewController, animated: true)
+        
     }
     
     func showCreateTeam() {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "CommandCreateLKViewController") as! TeamCreateLKVC
+        newViewController.callBack = self
+        
+//        self.show(newViewController, sender: self)
+//        self.navigationController?.show(newViewController, sender: self)
         self.navigationController?.show(newViewController, sender: self)
+//        self.navigationController.
+//        self.navigationController?.show(newViewController, sender: self)
+        
+//        self.navigationController?.pushViewController(newViewController, animated: true)
+        
     }
 }

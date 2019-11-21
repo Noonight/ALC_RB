@@ -33,6 +33,16 @@ extension MBProgressHUD {
         self.detailsLabel.text = detailMessage
     }
     
+    func hideAfter(seconds: Int = 1, closure: @escaping () -> ())
+    {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(seconds), execute: {
+            
+            self.hide(animated: true)
+            closure()
+            
+        })
+    }
+    
     func hideAfter(seconds: Int = 1)
     {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(seconds), execute: {

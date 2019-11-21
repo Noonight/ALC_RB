@@ -99,6 +99,39 @@ extension UIViewController {
     func hideHUD(forView: UIView) {
         MBProgressHUD.hide(for: forView, animated: true)
     }
+    // MARK: - SUCCESS -> CLOSURE
+    
+    func showSuccessViewHUD(addTo: UIView? = nil, message: String? = Constants.Texts.COMPLETED, seconds: Int, closure: @escaping () -> ()) {
+        if let mView = addTo {
+            let hud = MBProgressHUD.showAdded(to: mView, animated: true)
+            
+            hud.mode = .customView
+            let successImage = UIImage(named: "hud_checkmark")
+            hud.customView = UIImageView(image: successImage)
+            
+//            hud.isSquare = true
+            
+            hud.label.text = message
+            
+            hud.hideAfter(seconds: seconds) {
+                closure()
+            }
+        }
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        hud.mode = .customView
+        let successImage = UIImage(named: "hud_checkmark")
+        hud.customView = UIImageView(image: successImage)
+        
+//        hud.isSquare = true
+        
+        hud.label.text = message
+        
+        hud.hideAfter(seconds: seconds) {
+            closure()
+        }
+    }
+    
     // MARK: CUSTOM
     func showCustomViewHUD(cView: UIView, to: UIView, message: String? = Constants.Texts.NOTHING, detailMessage: String? = Constants.Texts.NOTHING) -> MBProgressHUD {
         MBProgressHUD.hide(for: to, animated: false)

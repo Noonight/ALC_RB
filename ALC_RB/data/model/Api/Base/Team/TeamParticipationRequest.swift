@@ -12,11 +12,18 @@ final class TeamParticipationRequest: Codable {
     
     var id: String
     
-    var team: IdRefObjectWrapper<Team>?
+    var team: IdRefObjectWrapper<Team>? = nil
     
-    var league: IdRefObjectWrapper<League>?
+    var league: IdRefObjectWrapper<League>? = nil
     
-    var status: Status?
+    var status: Status? = nil
+    
+    init(id: String, team: IdRefObjectWrapper<Team>, league: IdRefObjectWrapper<League>, status: Status) {
+        self.id = id
+        self.team = team
+        self.league = league
+        self.status = status
+    }
     
     var postMap: [String: Any] {
         get {

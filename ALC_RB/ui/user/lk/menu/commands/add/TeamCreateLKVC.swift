@@ -10,6 +10,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol CreateTeamCallBack {
+    func back(team: Team)
+}
+
 class TeamCreateLKVC: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var saveBtn: UIBarButtonItem!
@@ -23,6 +27,7 @@ class TeamCreateLKVC: UIViewController, UITextFieldDelegate {
     var leagueChooser: ChooseTourneyLeagueVC!
     
     private let bag = DisposeBag()
+    var callBack: CreateTeamCallBack?
     
     let nameIsEmpty = "Укажите название команды"
     let creatorPhoneIsEmpty = "Укажите номер телефона"
@@ -63,6 +68,16 @@ extension TeamCreateLKVC {
     func setupBinds() {
         
         self.viewModel
+            .createdRequestedTeam
+            .observeOn(MainScheduler.instance)
+            .subscribe { te in
+                guard let mTeam = te.element else { return }
+                guard let team = mTeam else { return }
+                
+                self.close(team: team)
+            }.disposed(by: bag)
+        
+        self.viewModel
             .message
             .observeOn(MainScheduler.instance)
             .bind(to: self.rx.message)
@@ -89,7 +104,16 @@ extension TeamCreateLKVC {
     
     @IBAction func onSaveBtnPressed(_ sender: UIBarButtonItem) {
         if !nameTextField.isEmpty() && leagueItem != nil && !phoneNumberTextField.isEmpty() {
-            self.viewModel.request()
+            let person = UserDefaultsHelper().getAuthorizedUser()
+            self.viewModel.requestCreateTeam(team:
+                Team(id: "",
+                     name: nameTextField.text,
+                     league: IdRefObjectWrapper<League>(leagueItem!),
+                     creator: IdRefObjectWrapper<Person>(person!.person),
+                     trainer: IdRefObjectWrapper<Person>(person!.person),
+                     creatorPhone: phoneNumberTextField.text,
+                     players: nil)
+            )
 //            presenter.createTeam(token: userDefaults.getAuthorizedUser()?.token ?? "", teamInfo: CreateTeamInfo(
 //                name: nameTextField.text!,
 //                _id: (leagueItem?.id)!,
@@ -98,7 +122,7 @@ extension TeamCreateLKVC {
             return
         }
         if nameTextField.isEmpty() == true {
-            showToast(message: "\(leagueIsEmpty)")
+            showToast(message: "\(nameIsEmpty)")
         }
         if phoneNumberTextField.isEmpty() == true {
             showToast(message: "\(creatorPhoneIsEmpty)")
@@ -138,6 +162,17 @@ extension TeamCreateLKVC {
             }
         }
         return result
+    }
+}
+
+// MARK: - HELPER
+
+extension TeamCreateLKVC {
+    func close(team: Team) {
+        self.showSuccessViewHUD(message: "Команда успешно заявлена!", seconds: 3) {
+            self.viewModel.createdRequestedTeam.accept(nil)
+            self.callBack?.back(team: team)
+        }
     }
 }
 

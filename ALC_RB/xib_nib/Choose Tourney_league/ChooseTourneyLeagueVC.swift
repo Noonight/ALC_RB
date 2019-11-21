@@ -58,8 +58,8 @@ extension ChooseTourneyLeagueVC {
     func setupNavBar() {
         modalPresentationCapturesStatusBarAppearance = true
         navBar.titleLabel.text = "Выберите Лигу"
-                navBar.rightButton.setTitle("Отмена", for: .normal)
-                navBar.rightButton.addTarget(self, action: #selector(closePressed(_:)), for: .touchUpInside)
+        navBar.rightButton.setTitle("Отмена", for: .normal)
+        navBar.rightButton.addTarget(self, action: #selector(closePressed(_:)), for: .touchUpInside)
         
         view.addSubview(navBar)
         
@@ -193,7 +193,8 @@ extension ChooseTourneyLeagueVC: TableActions {
     }
     
     @objc func closePressed(_ sender: UIButton) {
-        Print.m("close this view")
+//        Print.m("close this view")
+        self.close()
     }
     
 }

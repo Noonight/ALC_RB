@@ -28,6 +28,8 @@ struct Constants {
         static let AUTHORIZATION            = "Авторизуемся..."
         
         static let TEAM_IS_NOT              = "Команда не указана"
+        
+        static let NOT_VALID_DATA           = "Не валидные данные"
     }
 //    struct Images {
 //        static let Q_INFO       = UIImage(named: "ic_info")
