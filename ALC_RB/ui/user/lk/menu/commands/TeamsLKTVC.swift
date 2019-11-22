@@ -137,9 +137,17 @@ extension TeamsLKTVC {
 
 extension TeamsLKTVC: TableActions {
     
-    func onCellSelected(model: CellModel) {
+    func onCellSelected(model: CellModel, closure: @escaping () -> ()) {
         if model is TeamModelItem {
-            self.showEditTeam(teamModelItem: model as! TeamModelItem)
+//            self.showEditTeam(teamModelItem: model as! TeamModelItem)
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
+//                closure()
+//            }
+            self.viewModel.teamEditVM.fetchTeamPlayerStatuses {
+                self.showEditTeam(teamModelItem: model as! TeamModelItem)
+                closure()
+            }
+//            closure()
         }
     }
     
@@ -148,6 +156,7 @@ extension TeamsLKTVC: TableActions {
             self.showRemoveTeamAlert(model: model as! TeamModelItem, delete: {
                 self.tableView.beginUpdates()
                 
+                // TODO: reqest for delete. And after delete data
                 self.teamTable.dataSource.items.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .left)
                 
@@ -189,8 +198,8 @@ extension TeamsLKTVC {
 
     func showEditTeam(teamModelItem: TeamModelItem) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "CommandEditLKViewController") as! CommandEditLKViewController
-//        newViewController.
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "CommandEditLKViewController") as! TeamEditLKVC
+        newViewController.viewModel = self.viewModel.teamEditVM
         self.navigationController?.show(newViewController, sender: self)
 //        self.navigationController?.pushViewController(newViewController, animated: true)
         

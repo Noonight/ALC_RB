@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommandEditLKViewController: BaseStateViewController {
+class TeamEditLKVC: BaseStateViewController {
     enum SegueIdentifiers {
         static let ADD_PLAYER = "segue_add_player_to_team"
     }
@@ -19,6 +19,8 @@ class CommandEditLKViewController: BaseStateViewController {
     @IBOutlet weak var commandInvitePlayers: IntrinsicTableView!
     
     // MARK: Var & Let
+    
+    var viewModel: TeamEditLKViewModel!
     
     let presenter = CommandEditLKPresenter()
     
@@ -62,7 +64,7 @@ class CommandEditLKViewController: BaseStateViewController {
 
 // MARK: - SETUP
 
-extension CommandEditLKViewController {
+extension TeamEditLKVC {
     
     func setupTableViews() {
         commandPlayers.dataSource = commandPlayersTableViewHelper
@@ -92,7 +94,7 @@ extension CommandEditLKViewController {
 
 // MARK: Actions
 
-extension CommandEditLKViewController {
+extension TeamEditLKVC {
     
     @IBAction func onAddPlayerBtnPressed(_ sender: UIButton) { }
     
@@ -110,7 +112,7 @@ extension CommandEditLKViewController {
 
 // MARK: Presenter
 
-extension CommandEditLKViewController: CommandEditLKView {
+extension TeamEditLKVC: CommandEditLKView {
     func onGetPersonsComplete(players: [Person]) {
         
 //        let teamPlayers = team.players
@@ -176,7 +178,7 @@ extension CommandEditLKViewController: CommandEditLKView {
 
 // MARK: Navigation
 
-extension CommandEditLKViewController {
+extension TeamEditLKVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentifiers.ADD_PLAYER,
             let destination = segue.destination as? CommandAddPlayerTableViewController
@@ -193,7 +195,7 @@ extension CommandEditLKViewController {
 
 // MARK: Delegates ( Edit / Delete )
 
-extension CommandEditLKViewController: OnCommandPlayerDeleteBtnPressedProtocol {
+extension TeamEditLKVC: OnCommandPlayerDeleteBtnPressedProtocol {
     
     func onDeleteBtnPressed(index: IndexPath, model: CommandPlayersTableViewCell.CellModel, success: @escaping () -> ()) {
         for i in 0...mutablePlayers.count {
@@ -227,7 +229,7 @@ extension CommandEditLKViewController: OnCommandPlayerDeleteBtnPressedProtocol {
     }
 }
 
-extension CommandEditLKViewController: OnCommandInvitePlayerDeleteBtnPressedProtocol {
+extension TeamEditLKVC: OnCommandInvitePlayerDeleteBtnPressedProtocol {
     
     func onDeleteInvBtnPressed(index: IndexPath, model: CommandInvitePlayersTableViewCell.CellModel, success: @escaping () -> ()) {
         for i in 0...mutablePlayers.count/* - 1*/ {
@@ -255,7 +257,7 @@ extension CommandEditLKViewController: OnCommandInvitePlayerDeleteBtnPressedProt
     }
 }
 
-extension CommandEditLKViewController: OnCommandPlayerEditNumberCompleteProtocol {
+extension TeamEditLKVC: OnCommandPlayerEditNumberCompleteProtocol {
     func onEditNumberComplete(model: CommandPlayersTableViewCell.CellModel) {
         for i in 0...mutablePlayers.count {
             // DEPRECATED

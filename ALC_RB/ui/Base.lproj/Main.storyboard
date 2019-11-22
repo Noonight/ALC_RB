@@ -3957,7 +3957,7 @@
         <!--Редактировать команду-->
         <scene sceneID="mKH-fF-PCq">
             <objects>
-                <viewController storyboardIdentifier="CommandEditLKViewController" title="Редактировать команду" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Fie-qf-cde" customClass="CommandEditLKViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CommandEditLKViewController" title="Редактировать команду" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Fie-qf-cde" customClass="TeamEditLKVC" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CTH-SY-oHW"/>
                         <viewControllerLayoutGuide type="bottom" id="ubO-Nj-770"/>

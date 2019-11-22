@@ -21,7 +21,7 @@ protocol CommandEditLKView: MvpView {
     
 }
 
-class CommandEditLKPresenter: MvpPresenter<CommandEditLKViewController> {
+class CommandEditLKPresenter: MvpPresenter<TeamEditLKVC> {
     
     var loading = PublishSubject<Bool>()
     var error = PublishSubject<Error?>()

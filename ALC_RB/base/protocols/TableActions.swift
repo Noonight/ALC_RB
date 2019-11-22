@@ -12,6 +12,8 @@ protocol TableActions {
     func onCellSelected(model: CellModel)
     func onCellSelected(models: [CellModel])
     
+    func onCellSelected(model: CellModel, closure: @escaping () -> ())
+    
     func onCellDeselected(model: CellModel)
     
     func onCellDelete(indexPath: IndexPath, model: CellModel)
@@ -24,6 +26,8 @@ protocol TableActions {
 extension TableActions {
     func onCellSelected(model: CellModel) {}
     func onCellSelected(models: [CellModel]) {}
+    
+    func onCellSelected(model: CellModel, closure: @escaping () -> ()) { }
     
     func onCellDeselected(model: CellModel) {}
     

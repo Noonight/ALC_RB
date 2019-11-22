@@ -25,7 +25,17 @@ extension TeamsLKTable: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
-            actions.onCellSelected(model: dataSource.items[indexPath.row])
+            
+            let activityIndicator = UIActivityIndicatorView(style: .gray)
+            activityIndicator.startAnimating()
+            
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.accessoryType = .none
+            cell?.accessoryView = activityIndicator
+            actions.onCellSelected(model: dataSource.items[indexPath.row]) {
+                cell?.accessoryView = nil
+                cell?.accessoryType = .disclosureIndicator
+            }
         }
         
     }
@@ -71,8 +81,11 @@ extension TeamsLKTable: UITableViewDataSource {
         
         if indexPath.section == 0 {
             cell.teamModelItem = dataSource.items[indexPath.row]
+            cell.accessoryType = .disclosureIndicator
+//            cell.accessoryView
         } else if indexPath.section == 1 {
             cell.teamModelItem = dataSourceNotMy.items[indexPath.row]
+            cell.accessoryType = .none
         }
         
         
