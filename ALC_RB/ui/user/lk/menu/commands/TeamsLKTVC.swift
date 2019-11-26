@@ -143,6 +143,7 @@ extension TeamsLKTVC: TableActions {
 //            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
 //                closure()
 //            }
+            self.viewModel.teamEditVM.team.accept((model as! TeamModelItem).team)
             self.viewModel.teamEditVM.fetchTeamPlayerStatuses {
                 self.showEditTeam(teamModelItem: model as! TeamModelItem)
                 closure()
@@ -156,7 +157,7 @@ extension TeamsLKTVC: TableActions {
             self.showRemoveTeamAlert(model: model as! TeamModelItem, delete: {
                 self.tableView.beginUpdates()
                 
-                // TODO: reqest for delete. And after delete data
+                // TODO: request for delete. And after delete data
                 self.teamTable.dataSource.items.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .left)
                 
