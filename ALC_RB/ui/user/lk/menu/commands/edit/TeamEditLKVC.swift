@@ -7,264 +7,143 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class TeamEditLKVC: BaseStateViewController {
-    enum SegueIdentifiers {
-        static let ADD_PLAYER = "segue_add_player_to_team"
-    }
+class TeamEditLKVC: UIViewController {
     
     @IBOutlet weak var teamName_textField: UITextField!
     @IBOutlet weak var saveBtn: UIBarButtonItem!
-    @IBOutlet weak var commandPlayers: IntrinsicTableView!
-    @IBOutlet weak var commandInvitePlayers: IntrinsicTableView!
-    
-    // MARK: Var & Let
+    @IBOutlet weak var teamPlayersTableView: IntrinsicTableView!
+    @IBOutlet weak var teamPlayersInvitedTableView: IntrinsicTableView!
     
     var viewModel: TeamEditLKViewModel!
+    private let bag = DisposeBag()
     
-    let presenter = CommandEditLKPresenter()
-    
-    let commandPlayersTableViewHelper = CommandPlayersTableViewHelper()
-    let commandInvPlayersTableViewHelper = CommandInvitePlayersTableViewHelper()
-    
-    // DEPRECATED: participation
-//    var participation: Participation?
-    
-    var team = Team()
-    var players = [Person]()
-    var leagueController: LeagueController!
-    var mutablePlayers: [Person] = []
+    let teamPlayersInTable = TeamPlayersInTable()
+    let teamPlayersInvitedTable = TeamPlayersInvitedTable()
 
-    let userDefaultHelper = UserDefaultsHelper()
-    
-    // MARK: - model controllers
-    var teamController: TeamCommandsController!
-//    var participationController: ParticipationCommandsController!
-    
-    // MARK: Life cycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupPresenter()
         self.setupTableViews()
         setupView()
+        setupBinds()
+        
+        viewModel.fetch()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        // DEPRECATED: team does not contain players
-//        team = (teamController.getTeamById(id: team.id)?.players)!
-//        mutablePlayers = team.players
-        
-        presenter.getPersons()
-    }
 }
 
 // MARK: - SETUP
 
 extension TeamEditLKVC {
     
-    func setupTableViews() {
-        commandPlayers.dataSource = commandPlayersTableViewHelper
-        commandPlayers.delegate = commandPlayersTableViewHelper
+    func setupBinds() {
         
-        commandPlayersTableViewHelper.setDeleteBtnProtocol(deleteBtnDelegate: self)
-        commandPlayersTableViewHelper.setEditNumberCompleteProtocol(editNumberProtocol: self)
+        teamName_textField.rx
+            .controlEvent([.editingDidEnd])
+            .observeOn(MainScheduler.instance)
+            .subscribe {
+                guard let newName = self.teamName_textField.text else { return }
+                guard var team = self.viewModel.team.value else { return }
+                team.name = newName
+                self.viewModel.team.accept(team)
+            }.disposed(by: bag)
         
-        commandInvitePlayers.dataSource = commandInvPlayersTableViewHelper
-        commandInvitePlayers.delegate = commandInvPlayersTableViewHelper
+//        viewModel.team
+        viewModel.teamPersonInvitesViewModel.teamPersonInvites
+            .observeOn(MainScheduler.instance)
+            .subscribe { invitesEvent in
+                guard let teamInvites = invitesEvent.element else { return }
+                self.teamPlayersInvitedTable.dataSource = teamInvites
+                self.teamPlayersInvitedTableView.reloadData()
+            }.disposed(by: bag)
         
-        commandInvPlayersTableViewHelper.setDeleteBtnProtocol(deleteBtnDelegate: self)
+        viewModel.loading
+            .asDriver(onErrorJustReturn: false)
+            .drive(self.rx.loading)
+            .disposed(by: bag)
         
-        commandInvitePlayers.tableFooterView = UIView()
-        commandPlayers.tableFooterView = UIView()
+        viewModel.message
+            .asDriver(onErrorJustReturn: nil)
+            .drive(self.rx.message)
+            .disposed(by: bag)
+        
+        viewModel.error
+            .asDriver(onErrorJustReturn: nil)
+            .drive(self.rx.error)
+            .disposed(by: bag)
     }
     
-    func setupPresenter() {
-        self.initPresenter()
+    func setupTableViews() {
+        teamPlayersTableView.dataSource = teamPlayersInTable
+        teamPlayersTableView.delegate = teamPlayersInTable
+        
+        teamPlayersInTable.deleteBtnProtocol = self
+        teamPlayersInTable.editNumberCompleteProtocol = self
+        
+        teamPlayersInvitedTableView.dataSource = teamPlayersInvitedTable
+        teamPlayersInvitedTableView.delegate = teamPlayersInvitedTable
+        
+        teamPlayersInvitedTable.deleteBtnProtocol = self
+        
+//        teamPlayersInvitedTableView.tableFooterView = UIView()
+//        teamPlayersTableView.tableFooterView = UIView()
     }
+    
+    
     
     func setupView() {
-        self.teamName_textField.text = self.team.name
+        self.teamName_textField.text = self.viewModel.team.value?.name
     }
     
 }
 
-// MARK: Actions
+// MARK: - ACTIONS
 
 extension TeamEditLKVC {
     
-    @IBAction func onAddPlayerBtnPressed(_ sender: UIButton) { }
+    @IBAction func onAddPlayerBtnPressed(_ sender: UIButton) {
+        showAddPlayers()
+    }
     
     @IBAction func onNavBarSaveBtnPressed(_ sender: UIBarButtonItem) {
-// DEPRECATED: participation
-        //        presenter.editCommand(
-//            token: (userDefaultHelper.getAuthorizedUser()?.token)!,
-//            editTeam: EditTeam(
-//                _id: (participation?.league)!,
-//                teamId: (participation?.team)!,
-//                players: EditTeam.Players(players: mutablePlayers))
-//        )
+        self.viewModel.requestPatchTeam {
+            self.showSuccessViewHUD(seconds: 2) {
+                Print.m("success end showing")
+            }
+        }
     }
 }
 
-// MARK: Presenter
-
-extension TeamEditLKVC: CommandEditLKView {
-    func onGetPersonsComplete(players: [Person]) {
-        
-//        let teamPlayers = team.players
-//        var array : [CommandPlayersTableViewCell.CellModel] = []
-//
-//        var arrayInv: [CommandInvitePlayersTableViewCell.CellModel] = []
-//
-//        for player in teamPlayers {
-//            for person in players.people {
-//                if player.playerID == person.id {
-//
-//                    if player.getInviteStatus() == .accepted || player.getInviteStatus() == .approved {
-//                        array.append(CommandPlayersTableViewCell.CellModel(
-//                            player: player,
-//                            playerImagePath: person.photo ?? "",
-//                            person: person)
-//                        )
-//                    } else if player.getInviteStatus() == .pending /*|| randNum > 2 */{
-//                    arrayInv.append(CommandInvitePlayersTableViewCell.CellModel(
-//                        player: player,
-//                        person: person,
-//                        playerImagePath: person.photo ?? "")
-//                        )
-//                    }
-//                }
-//            }
-//        }
-        
-//        commandPlayersTableViewHelper.setTableData(tableData: array)
-//        commandPlayers.reloadData()
-//
-//        commandInvPlayersTableViewHelper.setTableData(tableData: arrayInv)
-//        commandInvitePlayers.reloadData()
-    }
-    
-    func onGetPersonsFailure(error: Error) {
-        Print.m(error)
-        showAlert(message: error.localizedDescription)
-    }
-    
-    func onEditCommandSuccess(editTeamResponse: EditTeamResponse) {
-//        self.team.players = editTeamResponse.players
-        // DEPRECATED team does not contain players
-//        self.teamController.setPlayersByTeamId(id: self.team.id, players: editTeamResponse.players)
-//        self.leagueController.editTeamPlayersById(teamId: self.team.id, players: editTeamResponse.players)
-        presenter.getPersons()
-        showAlert(title: "Изменения успешно сохранены", message: "")
-    }
-    
-    func onEditCommandFailure(error: Error) {
-        Print.m(error)
-        showAlert(message: error.localizedDescription)
-    }
-    
-    func onEditCommandSingleLineMessageSuccess(singleLineMessage: SingleLineMessage) {
-        showAlert(title: "", message: singleLineMessage.message)
-    }
-    
-    func initPresenter() {
-        presenter.attachView(view: self)
-    }
-}
-
-// MARK: Navigation
+// MARK: - NAVIGATION
 
 extension TeamEditLKVC {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == SegueIdentifiers.ADD_PLAYER,
-            let destination = segue.destination as? CommandAddPlayerTableViewController
-        {
-            destination.tableModel = CommandAddPlayerTableViewController.TableModel()
-            destination.team = self.team
-            destination.leagueId = leagueController.league.id
-//            destination.leagueId = self.participation?.league
-            destination.teamController = self.teamController
-            destination.leagueController = self.leagueController
-        }
-    }
-}
-
-// MARK: Delegates ( Edit / Delete )
-
-extension TeamEditLKVC: OnCommandPlayerDeleteBtnPressedProtocol {
     
-    func onDeleteBtnPressed(index: IndexPath, model: CommandPlayersTableViewCell.CellModel, success: @escaping () -> ()) {
-        for i in 0...mutablePlayers.count {
-            // DEPRECATED: player
-//            if model.player?.id == mutablePlayers[i].id {
-            
-//                if mutablePlayers[i].playerID == userDefaultHelper.getAuthorizedUser()?.person.id { // i can't delete teams' trainer
-//                    showAlert(message: "Вы пытаетесь исключить тренера.")
-//                } else {
-//                    if let personName = model.person?.getFullName() {
-//                        showAlertOkCancel(title: "Внимание", message: "Исключить игрока \(personName)?", ok: {
-//                            self.mutablePlayers.remove(at: i)
-//                            success()
-//                        }) {
-//                            Print.m("Отмена удаления игрока")
-//                        }
-//                    } else {
-//                        showAlertOkCancel(title: "Внимание", message: "Исключить игрока?", ok: {
-//                            self.mutablePlayers.remove(at: i)
-//                            success()
-//                        }) {
-//                            Print.m("Отмена удаления игрока")
-//                        }
-//                    }
-//                }
-//                self.mutablePlayers.remove(at: i)
-//                success()
-//                break
-//            }
-        }
+    func showAddPlayers() {
+//        CommandAddPlayerTableViewController
     }
 }
 
-extension TeamEditLKVC: OnCommandInvitePlayerDeleteBtnPressedProtocol {
+// MARK: Deleg. ( Edit / Delete )
+
+extension TeamEditLKVC: TeamPlayerDeleteProtocol, TeamPlayerEditProtocol {
+    func onDeleteBtnPressed(index: IndexPath, model: TeamPlayersStatus, success: @escaping () -> ()) {
+        Print.m("delete pressed")
+    }
     
-    func onDeleteInvBtnPressed(index: IndexPath, model: CommandInvitePlayersTableViewCell.CellModel, success: @escaping () -> ()) {
-        for i in 0...mutablePlayers.count/* - 1*/ {
-//            if model.player?.id == mutablePlayers[i].id {
-//                if let personName = model.person?.getFullName() {
-//                    showAlertOkCancel(title: "Внимание", message: "Отозвать приглашение для игрока \(personName)?", ok: {
-//                        self.mutablePlayers.remove(at: i)
-//                        success()
-//                    }) {
-//                        Print.m("cancel delete")
-//                    }
-//                } else {
-//                    showAlertOkCancel(title: "Внимание", message: "Отозвать приглашение для игрока?", ok: {
-//                        self.mutablePlayers.remove(at: i)
-//                        success()
-//                    }) {
-//                        Print.m("cencel delete")
-//                    }
-//                }
-//                self.mutablePlayers.remove(at: i)
-//                success()
-//                break
-//            }
-        }
+    func onEditNumberComplete(model: TeamPlayersStatus) {
+        Print.m("Edit number complete")
     }
+    
+    
 }
 
-extension TeamEditLKVC: OnCommandPlayerEditNumberCompleteProtocol {
-    func onEditNumberComplete(model: CommandPlayersTableViewCell.CellModel) {
-        for i in 0...mutablePlayers.count {
-            // DEPRECATED
-//            if model.player?.id == mutablePlayers[i].id {
-//                mutablePlayers[i].number = model.player!.number
-//                break
-//            }
-        }
+extension TeamEditLKVC: TeamPlayerInvitedDeleteProtocol {
+    func onDeleteInvBtnPressed(index: IndexPath, model: TeamPlayerInviteStatus, success: @escaping () -> ()) {
+        Print.m("delete in pressed")
     }
+    
+    
 }

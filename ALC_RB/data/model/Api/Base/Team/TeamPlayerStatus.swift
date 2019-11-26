@@ -22,6 +22,21 @@ struct TeamPlayersStatus: Codable {
     var activeYellowCards: Int? = nil
     var activeDisquals: Int? = nil
     
+    var postMap: [String: Any] {
+        get {
+            var map = [CodingKeys: Any]()
+            map[.id] = id
+            map[.team] = team?.getId() ?? team?.getValue()?.id
+            map[.person] = person?.getId() ?? person?.getValue()?.id
+            map[.league] = league?.getId() ?? league?.getValue()?.id
+            map[.number] = number
+            map[.played] = played
+            map[.activeYellowCards] = activeYellowCards
+            map[.activeDisquals] = activeDisquals
+            return map.get()
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         

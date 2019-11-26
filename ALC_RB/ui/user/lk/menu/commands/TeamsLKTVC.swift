@@ -53,7 +53,7 @@ class TeamsLKTVC: UITableViewController {
 extension TeamsLKTVC {
     
     func setupViewModel() {
-        viewModel = TeamsLKViewModel(leagueApi: LeagueApi(), teamApi: TeamApi(), inviteApi: InviteApi())
+        viewModel = TeamsLKViewModel(leagueApi: LeagueApi(), teamApi: TeamApi(), personApi: PersonApi(), inviteApi: InviteApi())
     }
     
     func setupTable() {
@@ -144,7 +144,7 @@ extension TeamsLKTVC: TableActions {
 //                closure()
 //            }
             self.viewModel.teamEditVM.team.accept((model as! TeamModelItem).team)
-            self.viewModel.teamEditVM.fetchTeamPlayerStatuses {
+            self.viewModel.teamEditVM.fetchTeamPlayers {
                 self.showEditTeam(teamModelItem: model as! TeamModelItem)
                 closure()
             }

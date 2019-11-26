@@ -8,42 +8,18 @@
 
 import UIKit
 import Alamofire
+import Kingfisher
 
 class CommandInvitePlayersTableViewCell: UITableViewCell {
-
-    struct CellModel {
-//        var player: DEPRECATED?
-        var person: Person?
-        var playerImagePath: String?
-        var number: Int = 0
-        
-        init(person: Person, playerImagePath: String) {
-            self.person = person
-            self.playerImagePath = playerImagePath
-        }
-        
-        init() {
-            person = Person()
-            playerImagePath = ""
-            number = 0
-        }
-    }
-    
-    var cellModel: CellModel? {
-        didSet {
-            updateCell()
-        }
-    }
     
     @IBOutlet weak var playerImage: UIImageView!
     @IBOutlet weak var playerName: UILabel!
-//    @IBOutlet weak var playerDeleteBtn: UIButton!
     @IBOutlet weak var playerCommandNum: UILabel!
     
-    func updateCell() {
-        playerImage.af_setImage(withURL: ApiRoute.getImageURL(image: (cellModel?.playerImagePath)!))
-        playerImage.image = playerImage.image?.af_imageRoundedIntoCircle()
-        playerName.text = cellModel?.person?.getFullName()
-        playerCommandNum.text = String(cellModel!.number)
+    var playerInviteStatus: TeamPlayerInviteStatus! {
+        didSet {
+            playerImage.kfLoadRoundedImage(path: (self.playerInviteStatus.person?.getValue()?.photo)!)
+            playerName.text = self.playerInviteStatus.person?.getValue()?.name
+        }
     }
 }

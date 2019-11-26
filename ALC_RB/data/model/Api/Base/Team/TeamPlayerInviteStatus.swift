@@ -17,7 +17,7 @@ struct TeamPlayerInviteStatus: Codable {
     
     var status: Status? = nil
     
-    var v: String? = nil
+    var v: Int? = nil
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
@@ -34,5 +34,22 @@ struct TeamPlayerInviteStatus: Codable {
         case rejected
         case blocked
         case canceled
+        
+        var ru: String {
+            get {
+                switch self {
+                case .pending:
+                    return "В ожидании"
+                case .accepted:
+                    return "Принято"
+                case .rejected:
+                    return "Откланено"
+                case .blocked:
+                    return "Заблокированно"
+                case .canceled:
+                    return "Отменено"
+                }
+            }
+        }
     }
 }

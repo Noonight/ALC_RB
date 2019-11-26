@@ -35,6 +35,20 @@ struct Team: Codable {
         }
     }
     
+    var patchMap: [String: Any] {
+        get {
+            var map = [CodingKeys: Any]()
+//            map[.id] = id
+            map[.name] = name
+            map[.league] = league?.getId() ?? league?.getValue()?.id
+            map[.creator] = creator?.getId() ?? creator?.getValue()?.id
+            map[.trainer] = trainer?.getId() ?? trainer?.getValue()?.id
+            map[.creatorPhone] = creatorPhone
+            map[.players] = players?.map { $0.postMap }
+            return map.get()
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         

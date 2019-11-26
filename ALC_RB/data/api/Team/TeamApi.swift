@@ -43,6 +43,15 @@ final class TeamApi: ApiRequests {
             .responseResultMy(TeamParticipationRequest.self, resultMy: resultMy)
     }
     
+    func patch_team(team: Team, resultMy: @escaping (ResultMy<Team, RequestError>) -> ()) {
+        
+        let userToken = UserDefaultsHelper().getToken()
+        
+        Alamofire
+            .request(ApiRoute.getApiURL(.team, id: team.id), method: .patch, parameters: team.patchMap, headers: ["auth" : userToken])
+            .responseResultMy(Team.self, resultMy: resultMy)
+    }
+    
     // deprecated:
     func post_teamAcceptRequest(token: String, acceptInfo: AcceptRequest, response_success: @escaping (SinglePerson) -> (), response_message: @escaping (SingleLineMessage)->(), response_failure: @escaping (Error) -> ()) {
         Alamofire
@@ -78,103 +87,6 @@ final class TeamApi: ApiRequests {
                 }
         }
     }
-    
-    func post_editTeam(token: String, editTeam: EditTeam, response_success: @escaping (EditTeamResponse) -> (), response_failure: @escaping (Error) -> (), response_single_line_message: @escaping (SingleLineMessage) -> ()) {
-        
-        //        Print.m(String(data: try! JSONSerialization.data(withJSONObject: editTeam.toParams(), options: .prettyPrinted), encoding: .utf8))
-        
-        let header: HTTPHeaders = [
-            "Content-Type" : "application/json",
-            "auth" : "\(token)"
-        ]
-        
-        //        request(ApiRoute.getApiURL(.post_edit_team), method: .post, parameters: editTeam.toParams(), encoding: JSONEncoding.default, headers: header)
-        ////            .validate()
-        //            .responseJSON { (response) in
-        //                switch response.result {
-        //                case .success:
-        //                    Print.m(response.result.value)
-        //                    Print.m(String(data: response.data!, encoding: String.Encoding.utf8))
-        //                case .failure(let error):
-        //                    Print.m(error)
-        //                    response_failure(error)
-        //                }
-        //        }
-        
-        
-        Alamofire
-            .request(ApiRoute.getApiURL(.post_edit_team), method: .post, parameters: editTeam.toParams(), encoding: JSONEncoding.default, headers: header)
-            //            .responseJSON { (response) in
-            //                debugPrint(response)
-            //                Print.m(String(data: response.data!, encoding: String.Encoding.utf8))
-            //
-            //        }
-            .responseEditTeamResponse { (response) in
-                switch response.result {
-                case .success:
-                    if let editTeamResponse = response.result.value {
-                        response_success(editTeamResponse)
-                    }
-                case .failure(let error):
-                    Alamofire
-                        .request(ApiRoute.getApiURL(.post_edit_team), method: .post, parameters: editTeam.toParams(), encoding: JSONEncoding.default, headers: header)
-                        .responseSingleLineMessage(completionHandler: { response in
-                            switch response.result {
-                            case .success(let value):
-                                response_single_line_message(value)
-                            case .failure(let error):
-                                response_failure(error)
-                            }
-                        })
-                    //                    requestMessage(success: { message in
-                    //                        response_single_line_message(message)
-                    //                    }, failure: { error in
-                    //                        response_failure(error)
-                    //                    })
-                    ////                    response_failure(error)
-                }
-        }
-        
-        //        Alamofire
-        //            .upload(multipartFormData: { (multipartFormData) in
-        //                for (key, value) in editTeam.toParams() {
-        //                    let strValue = value as! String
-        //                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
-        //                }
-        //            },
-        //                    usingThreshold: UInt64(),
-        //                    to: ApiRoute.getApiURL(.post_edit_team),
-        //                    method: .post,
-        //                    headers: ["auth" : token])
-        //            { (result) in
-        //                switch result {
-        //                case .success(let upload, _, _):
-        //
-        //                    upload.responseEditTeamResponse(completionHandler: { response in
-        //                        switch response.result {
-        //                        case .success:
-        //                            if let editTeamResponse = response.result.value {
-        //                                response_success(editTeamResponse)
-        //                            }
-        //                        case .failure(let error):
-        //                            upload.responseSingleLineMessage(completionHandler: { response in
-        //                                switch response.result {
-        //                                case .success(let value):
-        //                                    response_single_line_message(value)
-        //                                case .failure(let error):
-        //                                    response_failure(error)
-        //                                }
-        //                            })
-        //                        }
-        //                    })
-        //
-        //                case .failure(let error):
-        //                    response_failure(error)
-        //                }
-        //        }
-    }
-    
-    
     
     func post_addPlayerToTeam(token: String, addPlayerToTeam: AddPlayerToTeam, response_success: @escaping (SoloLeague) -> (), response_failure: @escaping (Error) -> (), response_single_line_message: @escaping (SingleLineMessage) -> ()) {
         
