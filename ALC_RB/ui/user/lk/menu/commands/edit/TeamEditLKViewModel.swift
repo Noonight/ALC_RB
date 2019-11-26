@@ -30,9 +30,9 @@ final class TeamEditLKViewModel {
     }
     
     func fetch() {
-        fetchTeamPlayers {
-            Print.m("RELOAD TABLE VIEW MB")
-        }
+//        fetchTeamPlayers {
+//            Print.m("RELOAD TABLE VIEW MB")
+//        }
         
         guard let teamId = team.value?.id else { return }
         teamPersonInvitesViewModel.teamId.accept(teamId)
@@ -102,6 +102,7 @@ final class TeamEditLKViewModel {
                                 team.players = findedTeamPlayers
                                 
                                 self.team.accept(team)
+                                dump(team)
                                 closure()
 //                                Print.m(team)
                             case .message(let message):

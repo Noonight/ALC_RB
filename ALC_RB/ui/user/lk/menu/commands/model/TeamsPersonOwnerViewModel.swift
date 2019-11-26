@@ -33,6 +33,7 @@ final class TeamsPersonOwnerViewModel {
         let userId = userDefaults.getAuthorizedUser()?.person.id
         let params = ParamBuilder<Team.CodingKeys>()
             .add(key: .creator, value: userId)
+//            .populate(.players)
 //            .populate(.league)
             .get()
         teamApi.get_team(params: params) { result in

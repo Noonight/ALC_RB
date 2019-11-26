@@ -154,6 +154,8 @@ extension TeamsLKTVC: TableActions {
     
     func onCellDelete(indexPath: IndexPath, model: CellModel) {
         if model is TeamModelItem {
+            // TODO: if team have not zero players, different type of delete
+//            if (model as! TeamModelItem).team.players
             self.showRemoveTeamAlert(model: model as! TeamModelItem, delete: {
                 self.tableView.beginUpdates()
                 
