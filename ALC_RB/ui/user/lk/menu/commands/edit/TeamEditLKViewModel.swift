@@ -40,7 +40,7 @@ final class TeamEditLKViewModel {
     }
     
     func requestPatchTeam(closure: @escaping () -> ()) {
-        guard var team = team.value else { return }
+        guard let team = team.value else { return }
         self.loading.onNext(true)
         teamApi.patch_team(team: team) { result in
             switch result {

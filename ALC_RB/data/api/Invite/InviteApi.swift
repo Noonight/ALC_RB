@@ -28,4 +28,11 @@ final class InviteApi: ApiRequests {
             .responseResultMy([TeamPlayerInviteStatus].self, resultMy: resultMy)
     }
     
+    func post_cancelPersonInvite(id: String, resultMy: @escaping (ResultMy<TeamPlayerInviteStatus, RequestError>) -> ()) {
+        let userToken = UserDefaultsHelper().getToken()
+        Alamofire
+            .request(ApiRoute.getApiURL(.personInviteCancel, id: id), method: .post, headers: ["auth":userToken])
+            .responseResultMy(TeamPlayerInviteStatus.self, resultMy: resultMy)
+    }
+    
 }

@@ -55,4 +55,8 @@ final class TeamPersonInvitesViewModel {
         }
     }
     
+    func requestCancelInvite(inviteId: String, resultMy: @escaping (ResultMy<TeamPlayerInviteStatus, RequestError>) -> ()) {
+        inviteApi.post_cancelPersonInvite(id: inviteId, resultMy: resultMy)
+    }
+    
 }

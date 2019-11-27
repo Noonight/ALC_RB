@@ -26,7 +26,7 @@ class CommandPlayersTableViewCell: UITableViewCell {
             if let imagePath = self.playerStatus.person?.getValue()?.photo {
                 playerImage.kfLoadRoundedImage(path: imagePath)
             }
-            playerNameLabel.text = self.playerStatus.person?.getValue()?.name
+            playerNameLabel.text = self.playerStatus.person?.getValue()?.getSurnameNP()
             if let number = self.playerStatus.number {
                 playerNumberTextField.text = String(number)
             }

@@ -2571,9 +2571,9 @@
 		DB98FACB225470CF002933D0 /* edit */ = {
 			isa = PBXGroup;
 			children = (
-				18BAF2E1238CF85A009430F7 /* model */,
-				18D5B9A5238682B8008A7675 /* TeamEditLKViewModel.swift */,
 				DB98FACC2254717B002933D0 /* TeamEditLKVC.swift */,
+				18D5B9A5238682B8008A7675 /* TeamEditLKViewModel.swift */,
+				18BAF2E1238CF85A009430F7 /* model */,
 				DB98FACE2254AF35002933D0 /* CommandEditLKPresenter.swift */,
 				DB98FAD02254B03C002933D0 /* inside */,
 				DB98FAD32254B074002933D0 /* invite */,

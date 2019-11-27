@@ -23,7 +23,7 @@ extension DataRequest {
                     resultMy(.message(message))
                 } else {
                     // TEST: here test decode
-//                    try! decoder.decode(T.self, from: response.data!)
+                    try! decoder.decode(T.self, from: response.data!)
                     resultMy(.failure(.notExpectedData))
                     //                    try! decoder.decode(T.self, from: response.data!)
                 }

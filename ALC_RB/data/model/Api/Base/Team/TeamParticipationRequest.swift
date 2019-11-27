@@ -34,6 +34,14 @@ final class TeamParticipationRequest: Codable {
         }
     }
     
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        id = try container.decode(String.self, forKey: .id)
+//        team = try container.decode(IdRefObjectWrapper<Team>.self, forKey: .team)
+//        league = try container.decode(IdRefObjectWrapper<League>.self, forKey: .league)
+//        status = try! container.decode(Status.self, forKey: .status)
+//    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         

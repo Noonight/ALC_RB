@@ -54,6 +54,7 @@ extension TeamEditLKVC {
 //        viewModel.team
         viewModel.teamPersonInvitesViewModel.teamPersonInvites
             .observeOn(MainScheduler.instance)
+            .map { $0.filter { $0.status == .pending } } // show only pending players
             .subscribe { invitesEvent in
                 guard let teamInvites = invitesEvent.element else { return }
                 self.teamPlayersInvitedTable.dataSource = teamInvites
@@ -88,8 +89,8 @@ extension TeamEditLKVC {
         
         teamPlayersInvitedTable.deleteBtnProtocol = self
         
-//        teamPlayersInvitedTableView.tableFooterView = UIView()
-//        teamPlayersTableView.tableFooterView = UIView()
+        teamPlayersInvitedTableView.tableFooterView = UIView()
+        teamPlayersTableView.tableFooterView = UIView()
     }
     
     
@@ -134,6 +135,7 @@ extension TeamEditLKVC {
 extension TeamEditLKVC: TeamPlayerDeleteProtocol, TeamPlayerEditProtocol {
     func onDeleteBtnPressed(index: IndexPath, model: TeamPlayersStatus, success: @escaping () -> ()) {
         Print.m("delete pressed")
+        
     }
     
     func onEditNumberComplete(model: TeamPlayersStatus) {
@@ -145,7 +147,30 @@ extension TeamEditLKVC: TeamPlayerDeleteProtocol, TeamPlayerEditProtocol {
 
 extension TeamEditLKVC: TeamPlayerInvitedDeleteProtocol {
     func onDeleteInvBtnPressed(index: IndexPath, model: TeamPlayerInviteStatus, success: @escaping () -> ()) {
-        Print.m("delete in pressed")
+//        Print.m("delete in pressed")
+        self.viewModel.teamPersonInvitesViewModel.requestCancelInvite(inviteId: model.id) { result in
+            switch result {
+            case .success(let teamPersonInvite):
+//                dump(teamPersonInvite)
+                var teamInvites = self.viewModel.teamPersonInvitesViewModel.teamPersonInvites.value
+                for i in 0..<teamInvites.count {
+                    if teamInvites[i].id == teamPersonInvite.id {
+                        teamInvites[i] = teamPersonInvite
+                    }
+                }
+                self.viewModel.teamPersonInvitesViewModel.teamPersonInvites.accept(teamInvites)
+//                self.teamPlayersInvitedTableView.reloadRows(at: [index], with: .left)
+//                self.teamPlayersInvitedTableView.
+                success()
+                self.teamPlayersInvitedTableView.reloadData()
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
+        }
     }
     
     

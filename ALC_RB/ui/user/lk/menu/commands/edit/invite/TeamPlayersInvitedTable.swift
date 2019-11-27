@@ -24,7 +24,7 @@ class TeamPlayersInvitedTable: NSObject, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! CommandInvitePlayersTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CommandInvitePlayersTableViewCell.ID, for: indexPath) as! CommandInvitePlayersTableViewCell
         
         cell.playerInviteStatus = dataSource[indexPath.row]
         
@@ -38,9 +38,18 @@ class TeamPlayersInvitedTable: NSObject, UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
+            let activityIndicator = UIActivityIndicatorView(style: .gray)
+            activityIndicator.startAnimating()
+            
+            let cell = tableView.cellForRow(at: indexPath)
+            cell?.accessoryType = .none
+            cell?.accessoryView = activityIndicator
+            
             deleteBtnProtocol?.onDeleteInvBtnPressed(index: indexPath, model: dataSource[indexPath.row]) {
-                self.dataSource.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+                cell?.accessoryView = nil
+                cell?.accessoryType = .none
+//                self.dataSource.remove(at: indexPath.row)
+//                tableView.deleteRows(at: [indexPath], with: .automatic)
             }
         }
     }

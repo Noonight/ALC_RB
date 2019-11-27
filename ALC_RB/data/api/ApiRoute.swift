@@ -11,6 +11,7 @@ import Foundation
 struct ApiRoute {
     
     static let baseRoute = "https://football.bw2api.ru/"
+//    static let baseRoute = "https://footballapi.ibb.su/"
     
     static func getApiURL(_ mod: Routes, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) -> URL {
         #if DEBUG
@@ -68,6 +69,7 @@ enum Routes: String {
     case league = "crud/league"
     case leagueMatches = "matches/getbyleague" // deprecated
     case personInvite = "person_invite"
+    case personInviteCancel = "person_invite/cancel"
     case team = "crud/team"
     
     case team_participation_request = "participation_request"

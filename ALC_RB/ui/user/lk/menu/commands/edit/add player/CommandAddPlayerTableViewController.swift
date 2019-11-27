@@ -35,7 +35,7 @@ class CommandAddPlayerTableViewController: BaseStateTableViewController {
     let userDefaultsHelper = UserDefaultsHelper()
     var team = Team()
     var leagueId: String!
-    var leagueController: LeagueController!
+//    var leagueController: LeagueController!
     let searchController = UISearchController(searchResultsController: nil)
     
     var tableModel = TableModel()
