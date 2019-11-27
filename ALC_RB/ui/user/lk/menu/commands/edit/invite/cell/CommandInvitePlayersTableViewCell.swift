@@ -23,7 +23,9 @@ class CommandInvitePlayersTableViewCell: UITableViewCell {
             if let imagePath = self.playerInviteStatus.person?.getValue()?.photo {
                 playerImage.kfLoadRoundedImage(path: imagePath)
             }
-            playerName.text = self.playerInviteStatus.person?.getValue()?.getSurnameNP()
+            if let name = self.playerInviteStatus.person?.getValue()?.getSurnameNP() {
+                playerName.text = name
+            }
 //            playerName.text = "\(self.playerInviteStatus.person!.getValue()!.name!) \(self.playerInviteStatus.status!)"
         }
     }

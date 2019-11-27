@@ -40,11 +40,11 @@ struct Team: Codable {
             var map = [CodingKeys: Any]()
 //            map[.id] = id
             map[.name] = name
-            map[.league] = league?.getId() ?? league?.getValue()?.id
-            map[.creator] = creator?.getId() ?? creator?.getValue()?.id
-            map[.trainer] = trainer?.getId() ?? trainer?.getValue()?.id
+//            map[.league] = league?.getId() ?? league?.getValue()?.id
+//            map[.creator] = creator?.getId() ?? creator?.getValue()?.id
+//            map[.trainer] = trainer?.getId() ?? trainer?.getValue()?.id
             map[.creatorPhone] = creatorPhone
-            map[.players] = players?.map { $0.postMap }
+//            map[.players] = players?.map { $0.postMap } // TODO: dictionary
             return map.get()
         }
     }

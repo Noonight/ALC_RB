@@ -373,6 +373,7 @@
 		DBA77C2C22D24A3A000DCF02 /* AddEventsProtocolPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA77C2B22D24A3A000DCF02 /* AddEventsProtocolPresenter.swift */; };
 		DBA897B4238177F200BEB526 /* ProtocolApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA897B3238177F200BEB526 /* ProtocolApi.swift */; };
 		DBA8B3C422F3649A0008A16E /* FilterTeamsByGroupHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA8B3C322F3649A0008A16E /* FilterTeamsByGroupHelper.swift */; };
+		DBA92FCA238EABD2005B3209 /* Encodable + Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA92FC9238EABD2005B3209 /* Encodable + Dictionary.swift */; };
 		DBB0427A22F8399A009D6ABD /* EventOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB0427922F8399A009D6ABD /* EventOld.swift */; };
 		DBB208E5221180850010B600 /* TeamProtocolTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208E4221180850010B600 /* TeamProtocolTableViewController.swift */; };
 		DBB208E8221182870010B600 /* TeamProtocolTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB208E7221182870010B600 /* TeamProtocolTableViewCell.swift */; };
@@ -786,6 +787,7 @@
 		DBA77C2B22D24A3A000DCF02 /* AddEventsProtocolPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventsProtocolPresenter.swift; sourceTree = "<group>"; };
 		DBA897B3238177F200BEB526 /* ProtocolApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolApi.swift; sourceTree = "<group>"; };
 		DBA8B3C322F3649A0008A16E /* FilterTeamsByGroupHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTeamsByGroupHelper.swift; sourceTree = "<group>"; };
+		DBA92FC9238EABD2005B3209 /* Encodable + Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable + Dictionary.swift"; sourceTree = "<group>"; };
 		DBB0427922F8399A009D6ABD /* EventOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventOld.swift; sourceTree = "<group>"; };
 		DBB208E4221180850010B600 /* TeamProtocolTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamProtocolTableViewController.swift; sourceTree = "<group>"; };
 		DBB208E7221182870010B600 /* TeamProtocolTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamProtocolTableViewCell.swift; sourceTree = "<group>"; };
@@ -1789,6 +1791,7 @@
 				182394C32361BA1C007D6954 /* UIView + MBProgressHUD.swift */,
 				04FF6F95237D6EDE0045D82E /* Date ++.swift */,
 				DB682CB7237FED8400B069E7 /* Dictionary ++.swift */,
+				DBA92FC9238EABD2005B3209 /* Encodable + Dictionary.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -3377,6 +3380,7 @@
 				DBA69218221EB83500BEFB26 /* AuthViewController.swift in Sources */,
 				187F2DFE22CB19440049EA77 /* EditMatchProtocolViewController.swift in Sources */,
 				189482712356EFA8000C8A2A /* MyTourneysTVC.swift in Sources */,
+				DBA92FCA238EABD2005B3209 /* Encodable + Dictionary.swift in Sources */,
 				18FE29BF22AE1C420094C4D8 /* MenuHelper.swift in Sources */,
 				DB599A8B22F1CF5C002586C1 /* SortMatchesByDateHelper.swift in Sources */,
 				1842796A235B16EF006F2C4C /* _Participation.swift in Sources */,

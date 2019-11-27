@@ -26,14 +26,18 @@ class CommandPlayersTableViewCell: UITableViewCell {
             if let imagePath = self.playerStatus.person?.getValue()?.photo {
                 playerImage.kfLoadRoundedImage(path: imagePath)
             }
-            playerNameLabel.text = self.playerStatus.person?.getValue()?.getSurnameNP()
+            if let name = self.playerStatus.person?.getValue()?.getSurnameNP() {
+                playerNameLabel.text = name
+            }
             if let number = self.playerStatus.number {
                 playerNumberTextField.text = String(number)
             }
         }
     }
     
-    @IBAction func onPlayerNumberTextEditComplete(_ sender: UITextField) {
+    @IBAction func onPlayerNumberTextEdit(_ sender: UITextField) {
+        guard let newNumber = sender.text else { return }
+        playerStatus.number = Int(newNumber)
         playerNumberTextDidEndProtocol?.onEditNumberComplete(model: playerStatus)
     }
     

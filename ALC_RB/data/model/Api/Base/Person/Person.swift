@@ -53,7 +53,7 @@ struct Person: Codable {
     }
     
     func getFullName() -> String {
-        let fullName = "\(surname) \(name) \(lastname)"
+        let fullName = "\(surname ?? "") \(name ?? "") \(lastname ?? "")"
         if (fullName.count > 0) {
             return fullName
         }
@@ -63,7 +63,7 @@ struct Person: Codable {
     // Surname, First Name, First Patronymic
     func getSurnameNP() -> String {
         let emptyChar = Character(" ")
-        let surnameNP = "\(surname) \(name?.first ?? emptyChar) \(lastname?.first ?? emptyChar)"
+        let surnameNP = "\(surname ?? "") \(name?.first ?? emptyChar) \(lastname?.first ?? emptyChar)"
         if (surnameNP.count > 4) {
             return surnameNP
         }

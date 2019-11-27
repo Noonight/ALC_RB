@@ -46,7 +46,9 @@ final class TeamApi: ApiRequests {
     func patch_team(team: Team, resultMy: @escaping (ResultMy<Team, RequestError>) -> ()) {
         
         let userToken = UserDefaultsHelper().getToken()
-        
+        Print.m("PATH: DATA ")
+//        dump(team.dictionary)
+        Print.m(team.patchMap)
         Alamofire
             .request(ApiRoute.getApiURL(.team, id: team.id), method: .patch, parameters: team.patchMap, headers: ["auth" : userToken])
             .responseResultMy(Team.self, resultMy: resultMy)
