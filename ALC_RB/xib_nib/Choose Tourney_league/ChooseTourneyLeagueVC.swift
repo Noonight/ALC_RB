@@ -247,11 +247,11 @@ extension ChooseTourneyLeagueVC {
         let chooseTourney = ChooseTourneyLeagueVC()
         let transitionDelegate = SPStorkTransitioningDelegate()
         chooseTourney.transitioningDelegate = transitionDelegate
-        if #available(iOS 13.0, *) {
-            chooseTourney.modalPresentationStyle = .automatic
-        } else {
+//        if #available(iOS 13.0, *) {
+//            chooseTourney.modalPresentationStyle = .automatic
+//        } else {
             chooseTourney.modalPresentationStyle = .custom
-        }
+//        }
         chooseTourney.modalPresentationCapturesStatusBarAppearance = true
         return chooseTourney
     }

@@ -176,11 +176,11 @@ extension ChooseRegionVC {
         chooseTourney.callBack = callBackDelegate
         let transitionDelegate = SPStorkTransitioningDelegate()
         chooseTourney.transitioningDelegate = transitionDelegate
-        if #available(iOS 13.0, *) {
-            chooseTourney.modalPresentationStyle = .automatic
-        } else {
+//        if #available(iOS 13.0, *) {
+//            chooseTourney.modalPresentationStyle = .automatic
+//        } else {
             chooseTourney.modalPresentationStyle = .custom
-        }
+//        }
         chooseTourney.modalPresentationCapturesStatusBarAppearance = true
         return chooseTourney
     }
@@ -189,11 +189,11 @@ extension ChooseRegionVC {
         let chooseTourney = ChooseRegionVC()
         let transitionDelegate = SPStorkTransitioningDelegate()
         chooseTourney.transitioningDelegate = transitionDelegate
-        if #available(iOS 13.0, *) {
-            chooseTourney.modalPresentationStyle = .automatic
-        } else {
+//        if #available(iOS 13.0, *) {
+//            chooseTourney.modalPresentationStyle = .automatic
+//        } else {
             chooseTourney.modalPresentationStyle = .custom
-        }
+//        }
         chooseTourney.modalPresentationCapturesStatusBarAppearance = true
         return chooseTourney
     }

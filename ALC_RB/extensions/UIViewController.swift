@@ -61,43 +61,76 @@ extension UIViewController {
     
     // MARK: LOADING
     
-    func showLoadingViewHUD(with message: String? = Constants.Texts.LOADING, addTo: UIView) -> MBProgressHUD {
-        MBProgressHUD.hide(for: addTo, animated: false)
-        let hud = MBProgressHUD.showAdded(to: addTo, animated: true)
+    func showLoadingViewHUD(with message: String? = Constants.Texts.LOADING, addTo: UIView? = nil) -> MBProgressHUD {
+        var hud: MBProgressHUD!
+        if addTo != nil {
+            MBProgressHUD.hide(for: addTo!, animated: false)
+            hud = MBProgressHUD.showAdded(to: addTo!, animated: true)
+            
+            // if view is tableview
+            if let tableView = addTo as? UITableView {
+                tableView.separatorStyle = .none
+                hud = MBProgressHUD.showAdded(to: UIView(frame: tableView.frame), animated: true)
+                hud.layer.zPosition = 100
+            }
+        } else {
+            MBProgressHUD.hide(for: self.view, animated: false)
+            hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            
+            if let tableView = self.view as? UITableView {
+                tableView.separatorStyle = .none
+                hud.layer.zPosition = 100
+            }
+            
+            // if some of subviews is tableview
+            if let tableView = self.view.subviews.filter({ subView -> Bool in
+                return subView is UITableView
+            }).first as? UITableView {
+                tableView.separatorStyle = .none
+                hud.layer.zPosition = 100
+            }
+        }
         
+        hud.mode = .indeterminate
+
         hud.backgroundView.style = MBProgressHUDBackgroundStyle.solidColor
-        hud.backgroundView.backgroundColor = .white
-        hud.bezelView.style = .solidColor
-        hud.bezelView.backgroundColor = hud.backgroundView.backgroundColor
-        
-        hud.mode = MBProgressHUDMode.indeterminate
-        hud.label.text = message
-        
-        return hud
-    }
-    
-    func showLoadingViewHUD(with message: String? = Constants.Texts.LOADING) -> MBProgressHUD {
-        MBProgressHUD.hide(for: self.view, animated: false)
-        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-        
-        hud.mode = MBProgressHUDMode.indeterminate
-        
-        hud.backgroundView.style = MBProgressHUDBackgroundStyle.solidColor
-        hud.bezelView.style = .solidColor
         hud.backgroundView.color = .white
-        hud.bezelView.color = .white
+        hud.bezelView.style = .solidColor
+        hud.bezelView.color = hud.backgroundView.color
         
         hud.label.text = message
         
         return hud
     }
-    // MARK: HIDE
-    func hideHUD() {
-        MBProgressHUD.hide(for: self.view, animated: true)
-    }
     
-    func hideHUD(forView: UIView) {
-        MBProgressHUD.hide(for: forView, animated: true)
+    // MARK: HIDE
+    
+    func hideHUD(forView: UIView? = nil) {
+        if forView != nil {
+            MBProgressHUD.hide(for: forView!, animated: true)
+            
+            if let tableView = forView as? UITableView {
+//                tableView.isHidden = false
+//                tableView.sectionHeaderHeight = 100
+                tableView.separatorStyle = .singleLine
+            }
+        } else {
+            MBProgressHUD.hide(for: self.view, animated: true)
+            
+            if let tableView = self.view as? UITableView {
+//                tableView.isHidden = false
+//                tableView.sectionHeaderHeight = 100
+                tableView.separatorStyle = .singleLine
+            }
+
+            if let tableView = self.view.subviews.filter({ subView -> Bool in
+                return subView is UITableView
+            }).first as? UITableView {
+//                tableView.isHidden = false
+//                tableView.sectionHeaderHeight = 100
+                tableView.separatorStyle = .singleLine
+            }
+        }
     }
     // MARK: - SUCCESS -> CLOSURE
     
