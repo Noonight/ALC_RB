@@ -12,13 +12,17 @@ import Kingfisher
 
 class CommandInvitePlayersTableViewCell: UITableViewCell {
     
+    static let ID = "command_invite_players_cell"
+
     @IBOutlet weak var playerImage: UIImageView!
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var playerCommandNum: UILabel!
     
     var playerInviteStatus: TeamPlayerInviteStatus! {
         didSet {
-            playerImage.kfLoadRoundedImage(path: (self.playerInviteStatus.person?.getValue()?.photo)!)
+            if let imagePath = self.playerInviteStatus.person?.getValue()?.photo {
+                playerImage.kfLoadRoundedImage(path: imagePath)
+            }
             playerName.text = self.playerInviteStatus.person?.getValue()?.name
         }
     }

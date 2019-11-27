@@ -96,6 +96,9 @@ extension TeamEditLKVC {
     
     func setupView() {
         self.teamName_textField.text = self.viewModel.team.value?.name
+        
+        self.teamPlayersInTable.dataSource = self.viewModel.team.value?.players ?? []
+        self.teamPlayersTableView.reloadData()
     }
     
 }

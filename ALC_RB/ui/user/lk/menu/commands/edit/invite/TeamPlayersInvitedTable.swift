@@ -15,8 +15,6 @@ protocol TeamPlayerInvitedDeleteProtocol {
 
 class TeamPlayersInvitedTable: NSObject, UITableViewDataSource, UITableViewDelegate {
     
-    let cellId = "command_invite_players_cell"
-    
     var deleteBtnProtocol: TeamPlayerInvitedDeleteProtocol?
     
     var dataSource: [TeamPlayerInviteStatus] = []

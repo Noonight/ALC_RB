@@ -77,23 +77,38 @@ final class TeamEditLKViewModel {
                     var findedTeamPlayers = findedTeam.players
                     
                     let personIds = findedTeamPlayers?.map({ playerStatus -> String in
-                        return playerStatus.id
+                        return playerStatus.person?.getId() ?? (playerStatus.person?.getValue()?.id)!
                     })
+                    Print.m("PERSONS : \(personIds)")
                     if personIds?.count ?? 0 != 0 {
-                        let params1 = ParamBuilder<Person.CodingKeys>()
-                            .add(key: .id, value: StrBuilder().add(.comma).add(personIds))
-                            .get()
+                        var params1 = [String:Any]()
+                        if personIds?.count ?? 0 == 1 {
+                            params1 = ParamBuilder<Person.CodingKeys>()
+                                .add(key: .id, value: StrBuilder().add(personIds))
+                                .get()
+                        } else {
+                            params1 = ParamBuilder<Person.CodingKeys>()
+                                .add(key: .id, value: StrBuilder().add(.comma).add(personIds))
+                                .get()
+                        }
                         self.personApi.get_person(params: params1) { resultPerson in
                             switch resultPerson {
                             case .success(let persons):
+                                
                                 Print.m(persons)
+                                
                                 if persons.count != 0 {
                                     if findedTeamPlayers != nil {
                                         for i in 0..<findedTeamPlayers!.count {
+                                            Print.m("ITERATOR")
                                             if let person = persons.filter({ mPerson -> Bool in
                                                 return mPerson.id == findedTeamPlayers![i].person?.getId()
                                             }).first {
+                                                Print.m("SET PERSON VALUE")
+                                                Print.m("FOR: \(findedTeamPlayers![i].person)")
                                                 findedTeamPlayers![i].person = IdRefObjectWrapper<Person>(person)
+                                                Print.m("TO: \(IdRefObjectWrapper<Person>(person))")
+                                                Print.m("SET PERSON VALUE COMPLETE")
                                             }
                                         }
                                     }
@@ -102,7 +117,7 @@ final class TeamEditLKViewModel {
                                 team.players = findedTeamPlayers
                                 
                                 self.team.accept(team)
-                                dump(team)
+//                                dump(team)
                                 closure()
 //                                Print.m(team)
                             case .message(let message):

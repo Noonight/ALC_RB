@@ -23,7 +23,9 @@ class CommandPlayersTableViewCell: UITableViewCell {
     
     var playerStatus: TeamPlayersStatus! {
         didSet {
-            playerImage.kfLoadRoundedImage(path: (self.playerStatus.person?.getValue()?.photo)!)
+            if let imagePath = self.playerStatus.person?.getValue()?.photo {
+                playerImage.kfLoadRoundedImage(path: imagePath)
+            }
             playerNameLabel.text = self.playerStatus.person?.getValue()?.name
             if let number = self.playerStatus.number {
                 playerNumberTextField.text = String(number)
