@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChoosePersonVC" customModule="ALC_RB" customModuleProvider="target">
+            <connections>
+                <outlet property="regionBtn" destination="F7Q-XU-R9g" id="bDY-Q4-ikG"/>
+                <outlet property="searchBar" destination="T3I-oP-kjL" id="d8Y-Fc-OPy"/>
+                <outlet property="tableView" destination="eNS-Sq-Alj" id="sqq-PM-EzQ"/>
+                <outlet property="topConstraint" destination="DCl-LD-r8m" id="VZS-Jv-cAk"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="ФИО..." showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T3I-oP-kjL">
+                    <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdd-JL-hZH">
+                    <rect key="frame" x="8" y="76" width="359" height="30"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Регион:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rn1-cy-6KT">
+                            <rect key="frame" x="0.0" y="0.0" width="62" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F7Q-XU-R9g">
+                            <rect key="frame" x="78" y="0.0" width="30" height="30"/>
+                            <state key="normal" title="Все"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="rn1-cy-6KT" firstAttribute="leading" secondItem="vdd-JL-hZH" secondAttribute="leading" id="2fS-sQ-hRF"/>
+                        <constraint firstItem="rn1-cy-6KT" firstAttribute="top" secondItem="vdd-JL-hZH" secondAttribute="top" id="TCv-rB-UaO"/>
+                        <constraint firstAttribute="bottom" secondItem="F7Q-XU-R9g" secondAttribute="bottom" id="ZCC-Sq-NDW"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="F7Q-XU-R9g" secondAttribute="trailing" constant="16" id="gjg-mj-ivD"/>
+                        <constraint firstItem="F7Q-XU-R9g" firstAttribute="leading" secondItem="rn1-cy-6KT" secondAttribute="trailing" constant="16" id="vYd-C6-I0c"/>
+                        <constraint firstItem="F7Q-XU-R9g" firstAttribute="top" secondItem="vdd-JL-hZH" secondAttribute="top" id="yoe-hM-bA4"/>
+                        <constraint firstAttribute="bottom" secondItem="rn1-cy-6KT" secondAttribute="bottom" id="zzc-RQ-H6L"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y0t-W9-no2">
+                    <rect key="frame" x="0.0" y="114" width="375" height="0.5"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="mtx-Sj-UV5"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eNS-Sq-Alj">
+                    <rect key="frame" x="0.0" y="114.5" width="375" height="552.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="eNS-Sq-Alj" secondAttribute="trailing" id="3ZY-cf-g86"/>
+                <constraint firstItem="T3I-oP-kjL" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="62k-Uv-aGZ"/>
+                <constraint firstItem="T3I-oP-kjL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="DCl-LD-r8m"/>
+                <constraint firstItem="vdd-JL-hZH" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-8" id="JZk-bk-FgC"/>
+                <constraint firstItem="vdd-JL-hZH" firstAttribute="top" secondItem="T3I-oP-kjL" secondAttribute="bottom" id="KwL-Gu-UHu"/>
+                <constraint firstItem="Y0t-W9-no2" firstAttribute="top" secondItem="vdd-JL-hZH" secondAttribute="bottom" constant="8" id="O49-ng-L6P"/>
+                <constraint firstItem="vdd-JL-hZH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="UCP-he-88M"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="eNS-Sq-Alj" secondAttribute="bottom" id="Uvu-XV-rOJ"/>
+                <constraint firstItem="eNS-Sq-Alj" firstAttribute="top" secondItem="Y0t-W9-no2" secondAttribute="bottom" id="XbP-ZO-bMd"/>
+                <constraint firstItem="eNS-Sq-Alj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Xeg-3U-mdj"/>
+                <constraint firstItem="Y0t-W9-no2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="aiW-wV-vZ0"/>
+                <constraint firstItem="T3I-oP-kjL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="bB7-Ta-rAg"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Y0t-W9-no2" secondAttribute="trailing" id="zxJ-bX-7o5"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="132" y="154.27286356821591"/>
+        </view>
+    </objects>
+</document>
