@@ -34,8 +34,8 @@ final class TeamEditLKViewModel {
 //            Print.m("RELOAD TABLE VIEW MB")
 //        }
         
-        guard let teamId = team.value?.id else { return }
-        teamPersonInvitesViewModel.teamId.accept(teamId)
+        guard let team = team.value else { return }
+        teamPersonInvitesViewModel.team.accept(team)
         teamPersonInvitesViewModel.fetch()
     }
     

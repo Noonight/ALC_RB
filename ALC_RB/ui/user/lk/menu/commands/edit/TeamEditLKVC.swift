@@ -129,6 +129,11 @@ extension TeamEditLKVC {
     
     func showAddPlayers() {
 //        CommandAddPlayerTableViewController
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "TeamAddPlayersVC") as! TeamAddPlayersVC
+        newViewController.viewModel.team.accept(self.viewModel.team.value)
+        newViewController.viewModel.teamPersonInvitesViewModel = self.viewModel.teamPersonInvitesViewModel
+        self.navigationController?.show(newViewController, sender: self)
     }
 }
 

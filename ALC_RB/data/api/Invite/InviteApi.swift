@@ -35,4 +35,11 @@ final class InviteApi: ApiRequests {
             .responseResultMy(TeamPlayerInviteStatus.self, resultMy: resultMy)
     }
     
+    func post_personInvite(invite: TeamPlayerInviteStatus, resultMy: @escaping (ResultMy<TeamPlayerInviteStatus, RequestError>) -> ()) {
+        let userToken = UserDefaultsHelper().getToken()
+        Alamofire
+            .request(ApiRoute.getApiURL(.personInvite), method: .post, parameters: invite.postMap, headers: ["auth":userToken])
+            .responseResultMy(TeamPlayerInviteStatus.self, resultMy: resultMy)
+    }
+    
 }

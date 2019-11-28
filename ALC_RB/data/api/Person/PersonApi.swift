@@ -86,11 +86,16 @@ final class PersonApi : ApiRequests {
             parameters["_populate"] = query
         }
         
-        Alamofire
-            .request(ApiRoute.getApiURL(.personQuery), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
-            .responseResultMy([Person].self) { result in
-                resultMy(result)
+        if name != nil || surname != nil || lastname != nil {
+            Alamofire
+                .request(ApiRoute.getApiURL(.personQuery), method: .get, parameters: parameters, encoding: URLEncoding(destination: .queryString), headers: nil)
+                .responseResultMy([Person].self) { result in
+                    resultMy(result)
+            }
+        } else {
+            get_person(params: parameters, resultMy: resultMy)
         }
+        
     }
 
     func get_personQuery(params: [String: Any], resultMy: @escaping (ResultMy<[Person], RequestError>) -> ()) {

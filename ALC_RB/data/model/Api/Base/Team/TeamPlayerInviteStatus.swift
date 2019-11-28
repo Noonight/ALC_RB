@@ -27,6 +27,22 @@ struct TeamPlayerInviteStatus: Codable {
 //        status = try! container.decode(Status.self, forKey: .status)
 //    }
     
+    init(team: IdRefObjectWrapper<Team>, person: IdRefObjectWrapper<Person>, status: Status? = nil) {
+        self.team = team
+        self.person = person
+        self.status = status
+    }
+    
+    var postMap: [String: Any] {
+        get {
+            var map = [CodingKeys: Any]()
+            map[.person] = person?.getId() ?? person?.getValue()
+            map[.team] = team?.getId() ?? team?.getValue()
+            map[.status] = status?.rawValue ?? Status.pending.rawValue
+            return map.get()
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         

@@ -16,7 +16,7 @@ final class TeamPersonInvitesViewModel {
     let loading = PublishSubject<Bool>()
     let message = PublishSubject<SingleLineMessage?>()
     
-    let teamId = BehaviorRelay<String?>(value: nil)
+    let team = BehaviorRelay<Team?>(value: nil)
     
     let teamPersonInvites = BehaviorRelay<[TeamPlayerInviteStatus]>(value: [])
     
@@ -30,7 +30,7 @@ final class TeamPersonInvitesViewModel {
     
     func fetch() {
         self.loading.onNext(true)
-        guard let teamId = teamId.value else { assertionFailure("LOOK AT WHAT YOU DO"); return }
+        guard let teamId = team.value?.id else { assertionFailure("LOOK AT WHAT YOU DO"); return }
         let params = ParamBuilder<TeamPlayerInviteStatus.CodingKeys>()
             .add(key: .team, value: teamId)
             .populate(.person)
@@ -57,6 +57,11 @@ final class TeamPersonInvitesViewModel {
     
     func requestCancelInvite(inviteId: String, resultMy: @escaping (ResultMy<TeamPlayerInviteStatus, RequestError>) -> ()) {
         inviteApi.post_cancelPersonInvite(id: inviteId, resultMy: resultMy)
+    }
+    
+    func requestInvite(personId: String, resultMy: @escaping (ResultMy<TeamPlayerInviteStatus, RequestError>) -> ()) {
+        guard let team = self.team.value else { return }
+        inviteApi.post_personInvite(invite: TeamPlayerInviteStatus(team: IdRefObjectWrapper<Team>(team), person: IdRefObjectWrapper<Person>(personId)), resultMy: resultMy)
     }
     
 }
