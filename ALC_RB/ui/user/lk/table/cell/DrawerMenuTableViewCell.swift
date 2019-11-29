@@ -10,7 +10,16 @@ import UIKit
 
 class DrawerMenuTableViewCell: UITableViewCell {
     
+    static let ID = "drawer_menu_cell"
+    
     @IBOutlet weak var image_view: UIImageView!
     @IBOutlet weak var name_label: UILabel!
 
+    var menuOption: UserMenuOption! {
+        didSet {
+            self.image_view = menuOption.image
+            self.name_label.text = menuOption.description
+        }
+    }
+    
 }

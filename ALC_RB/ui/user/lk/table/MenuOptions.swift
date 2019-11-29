@@ -8,6 +8,49 @@
 
 import UIKit
 
+enum UserMenuOption: Int, CustomStringConvertible {
+    
+    // -- Player
+    case invites
+    case tourneys
+    // TODO: case clubs
+    case teams
+    // -- Referee
+    case schedule
+    case myMatches
+    
+    case signOut
+    
+    var description: String {
+        switch self {
+        case .invites: return "Приглашения"
+        case .tourneys: return "Мой турнир"
+        // TODO: case .Clubs: return "Клубы"
+        case .teams: return "Команды"
+        // -- Referee
+        case .schedule: return "Расписание"
+        case .myMatches: return "Мои матчи"
+            
+        case .signOut: return "Выйти"
+        }
+    }
+    
+    var image: UIImage {
+        switch self {
+        case .invites: return UIImage(named: "ic_inv") ?? UIImage()
+        case .tourneys: return UIImage(named: "ic_trophy") ?? UIImage()
+        // TODO: case .Clubs: return UIImage(named: "ic_cl") ?? UIImage()
+        case .teams: return UIImage(named: "ic_commands") ?? UIImage()
+        // -- Referee
+        case .schedule: return UIImage(named: "ic_timetable") ?? UIImage()
+        case .myMatches: return UIImage(named: "ic_whistle") ?? UIImage()
+        
+        case .signOut: return UIImage(named: "ic_sign_out2") ?? UIImage()
+        }
+    }
+    
+}
+
 enum PlayerMenuOption: Int, CustomStringConvertible {
     
     case Invites

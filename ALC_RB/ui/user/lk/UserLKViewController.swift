@@ -34,7 +34,7 @@ class UserLKViewController: UIViewController {
     var drawerIsOpened = false
     
     var segmentHelper: SegmentHelper?
-    var menuHelper: MenuHelper?
+    var menuTable: MenuTable?
     
     var authUser: AuthUser?
     
@@ -54,24 +54,15 @@ class UserLKViewController: UIViewController {
         return viewController
     }()
     
-//    private lazy var ongoingLeagues: OngoingLeaguesLKTableViewController = {
+    private lazy var ongoingLeagues = TourneyWebViewVC()
+    
+//    private lazy var club: ClubLKViewController = {
 //        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
 //
-//        var viewController = storyboard.instantiateViewController(withIdentifier: "OngoingLeaguesLKTableViewController") as! OngoingLeaguesLKTableViewController
+//        var viewController = storyboard.instantiateViewController(withIdentifier: "ClubLKViewController") as! ClubLKViewController
 //
 //        return viewController
 //    }()
-    private lazy var ongoingLeagues = TourneyWebViewVC()
-    
-    private lazy var club: ClubLKViewController = {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        
-        var viewController = storyboard.instantiateViewController(withIdentifier: "ClubLKViewController") as! ClubLKViewController
-        
-        return viewController
-    }()
-    
-    
     
     private lazy var commands: TeamsLKTVC = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -113,51 +104,27 @@ class UserLKViewController: UIViewController {
         initPresenter()
         
         segmentHelper = SegmentHelper(self, containerView)
-        menuHelper = MenuHelper()
+        menuTable = MenuTable(menu: [MenuGroupModel])
+//
+//        menuTable?.playerMenuOptionActions = playerSelectMenuOption(menuOption:)
+//        menuTable?.refereeMenuOptionActions = refereeSelectMenuOption(menuOption:)
+//        menuTable?.mainRefereeMenuOptionActions = mainRefereeMenuOption(menuOption:)
         
-        menuHelper?.playerMenuOptionActions = playerSelectMenuOption(menuOption:)
-        menuHelper?.refereeMenuOptionActions = refereeSelectMenuOption(menuOption:)
-        menuHelper?.mainRefereeMenuOptionActions = mainRefereeMenuOption(menuOption:)
+        menuTable?.userMenuOptionActions = userSelectMenuOption(menuOption:)
         
-        tableView.delegate = menuHelper
-        tableView.dataSource = menuHelper
+        tableView.delegate = menuTable
+        tableView.dataSource = menuTable
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-//        authUser = userDefaultsHelper.getAuthorizedUser()
         self.presenter.refreshUser(token: userDefaultsHelper.getAuthorizedUser()!.token)
         
-        
-//        menuHelper?.userType = authUser?.person.getUserType()
-        
         barMenuBtn.image = barMenuBtn.image?.af_imageAspectScaled(toFit: CGSize(width: 24, height: 24))
-//        showFirstItem()
 
         self.userHeaderMenuLabel.text = authUser?.person.getFullName()
-//        if authUser?.person.photo != nil {
-//            self.presenter.getProfileImage(imagePath: (authUser?.person.photo!)!)
-//        } else {
-////            self.userHeaderMenuImage.image = UIImage(named: "ic_user")
-//            self.userHeaderMenuImage.image = UIImage(named: "ic_logo")?.af_imageRoundedIntoCircle()
-//        }
-//        if let image = authUser?.person.photo {
-//            let url = ApiRoute.getImageURL(image: image)
-//            let processor = CroppingImageProcessorCustom(size: self.userHeaderMenuImage.frame.size)
-//                .append(another: RoundCornerImageProcessor(cornerRadius: self.userHeaderMenuImage.getHalfWidthHeight()))
-//
-//            self.userHeaderMenuImage.kf.indicatorType = .activity
-//            self.userHeaderMenuImage.kf.setImage(
-//                with: url,
-//                placeholder: UIImage(named: "ic_logo"),
-//                options: [
-//                    .processor(processor),
-//                    .scaleFactor(UIScreen.main.scale)//,
-////                    .transition(.fade(1))//,
-////                    .cacheOriginalImage
-//                ])
-//        }
+
         if let imagePath = authUser?.person.photo {
             self.userHeaderMenuImage.kfLoadRoundedImage(path: imagePath, placeholder: #imageLiteral(resourceName: "ic_account2"))
         }
@@ -172,7 +139,11 @@ class UserLKViewController: UIViewController {
         }
     }
     
-    // MARK: - Drawer btn action
+}
+
+// MARK: - ACTIONS
+
+extension UserLKViewController {
     
     @IBAction func drawerHeaderPressed(_ sender: UITapGestureRecognizer) {
         // show EditProfileViewcontroller
@@ -181,37 +152,17 @@ class UserLKViewController: UIViewController {
     @IBAction func menuPressed(_ sender: UIBarButtonItem) {
         setDrawerState()
     }
-
+    
     @IBAction func shadowBtnPressed(_ sender: UIButton) {
         setDrawerState()
     }
-    
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if  segue.identifier == segueEditProfile,
-            let destination = segue.destination as? EditProfileViewController
-        {
-//            destination.authUser = self.authUser
-            // MARK: TODO CHECK IT 
-        }
-    }
-    
-    // MARK: - Drawer menu
+}
+
+// MARK: - Drawer menu
+
+extension UserLKViewController {
     
     func showFirstItem() {
-        // MARK: TODO: user type is deprecated
-//        if authUser?.person.getUserType() == Person.TypeOfPerson.player {
-//            segmentHelper?.add(invitation)
-//            navigationItem.title = invitation.title
-//        } else if authUser?.person.getUserType() == Person.TypeOfPerson.referee {
-//            segmentHelper?.add(myMatches)
-//            navigationItem.title = myMatches.title
-//        } else if authUser?.person.getUserType() == Person.TypeOfPerson.mainReferee {
-//            segmentHelper?.add(schedule)
-//            navigationItem.title = schedule.title
-//        }
-        // set pointer of choose at first item that equal first item in person's menu
         tableView.selectRow(at: IndexPath.init(row: 0, section: 0), animated: true, scrollPosition: UITableView.ScrollPosition.top)
     }
     
@@ -219,14 +170,13 @@ class UserLKViewController: UIViewController {
         if drawerIsOpened {
             drawerLeadingConstraint.constant = -220
             
-
         } else {
             self.drawerMenuView.layer.shadowOpacity = 0.5
             self.drawerMenuView.layer.shadowRadius = 5
             drawerLeadingConstraint.constant = 0
             
         }
-    
+        
         UIView.animate(withDuration: 0.3, animations: {
             if self.drawerIsOpened {
                 self.drawerShadowButton.alpha = 0
@@ -248,78 +198,30 @@ class UserLKViewController: UIViewController {
             self.drawerIsOpened = !self.drawerIsOpened
         }
     }
-
-    func playerSelectMenuOption(menuOption: PlayerMenuOption) {
+    
+    func userSelectMenuOption(menuOption: UserMenuOption) {
         switch menuOption {
-        case .Invites:
-            segmentHelper?.remove(ongoingLeagues)
-            segmentHelper?.remove(club)
-            segmentHelper?.remove(commands)
+        case .invites:
+            segmentHelper?.removeAll()
             segmentHelper?.add(invitation)
             navigationItem.title = invitation.title
-        case .Tourneys:
-            segmentHelper?.remove(invitation)
-            segmentHelper?.remove(club)
-            segmentHelper?.remove(commands)
+        case .tourneys:
+            segmentHelper?.removeAll()
             segmentHelper?.add(ongoingLeagues)
             navigationItem.title = ongoingLeagues.title
-        case .Clubs:
-            segmentHelper?.remove(invitation)
-            segmentHelper?.remove(ongoingLeagues)
-            segmentHelper?.remove(commands)
-            segmentHelper?.add(club)
-            navigationItem.title = club.title
-        case .Teams:
-            segmentHelper?.remove(invitation)
-            segmentHelper?.remove(ongoingLeagues)
-            segmentHelper?.remove(club)
+        case .teams:
+            segmentHelper?.removeAll()
             segmentHelper?.add(commands)
             navigationItem.title = commands.title
-//        case .Referees:
-//            segmentHelper?.remove(invitation)
-//            segmentHelper?.remove(ongoingLeagues)
-//            segmentHelper?.remove(club)
-//            segmentHelper?.remove(commands)
-//            segmentHelper?.add(referees)
-//            navigationItem.title = referees.title
-        case .SignOut:
-            signOut()
-        }
-        setDrawerState()
-    }
-    
-    func refereeSelectMenuOption(menuOption: RefereeMenuOption) {
-        switch menuOption {
-        case .MyMatches:
-//            segmentHelper?.remove(referees)
-            // shedule
-            segmentHelper?.add(myMatches)
-            navigationItem.title = myMatches.title
-//            Print.m("Schedule")
-        case .SignOut:
-            signOut()
-        }
-        setDrawerState()
-    }
-    
-    func mainRefereeMenuOption(menuOption: MainRefereeMenuOption) {
-        switch menuOption {
-        case .Schedule:
-            segmentHelper?.remove(referees)
-            segmentHelper?.remove(myMatches)
+        case .schedule:
+            segmentHelper?.removeAll()
             segmentHelper?.add(schedule)
             navigationItem.title = schedule.title
-        case .MyMatches:
-            segmentHelper?.remove(referees)
-            segmentHelper?.remove(schedule)
+        case .myMatches:
+            segmentHelper?.removeAll()
             segmentHelper?.add(myMatches)
             navigationItem.title = myMatches.title
-        case .Referees:
-            segmentHelper?.remove(myMatches)
-            segmentHelper?.remove(schedule)
-            segmentHelper?.add(referees)
-            navigationItem.title = referees.title
-        case .SignOut:
+        case .signOut:
             signOut()
         }
         setDrawerState()
@@ -335,11 +237,14 @@ class UserLKViewController: UIViewController {
         let viewController = storyboard.instantiateViewController(withIdentifier: "AuthNC") as! UINavigationController
         
         let countOfViewControllers = tabBarController?.viewControllers?.count
-        //        _ = tabBarController?.selectedViewController
+        
         tabBarController?.viewControllers![countOfViewControllers! - 1] = viewController
     }
+    
 }
+
 // MARK: - Presenter
+
 extension UserLKViewController: UserLKView {
     func onRefreshUserSuccessful(authUser: AuthUser) {
         userDefaultsHelper.setAuthorizedUser(user: authUser)
@@ -348,49 +253,9 @@ extension UserLKViewController: UserLKView {
     
     func onRefreshUserFailure(authUser: Error) {
         Print.m(authUser)
-//        showAlert(message: authUser.localizedDescription)
     }
-    
-//    func fetchRefereesSuccess(referees: Players) {
-////        self.referees = referees
-//    }
-//    
-//    func fetchRefereesFailure(error: Error) {
-//        Print.m("referees")
-//    }
-    
-//    func getProfileImageSuccessful(image: UIImage) {
-//        self.userHeaderMenuImage.image = image.af_imageRoundedIntoCircle()
-//    }
-//
-//    func getProfileImageFailure(error: Error) {
-//        Print.d(error: error)
-//        self.userHeaderMenuImage.image = UIImage(named: "ic_user")
-//    }
     
     func initPresenter() {
         self.presenter.attachView(view: self)
     }
 }
-
-//extension UserLKViewController: UITableViewDelegate, UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 5
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! DrawerMenuTableViewCell
-//
-//        let menuOption = PlayerMenuOption(rawValue: indexPath.row)
-//        cell.image_view.image = menuOption?.image
-//        cell.name_label.text = menuOption?.description
-//
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let menuOption = PlayerMenuOption(rawValue: indexPath.row)
-//        didSelectMenuOption(menuOption: menuOption!)
-////        tableView.deselectRow(at: indexPath, animated: true)
-//    }
-//}
