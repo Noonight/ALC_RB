@@ -22,10 +22,10 @@ class TeamAddPlayerModelItem {
     
     var statusRu: String? {
         if status == .pending {
-            return "Отправлено приглашение"
+            return "Приглашен"
         }
         if status == .accepted {
-            return "В составе команды"
+            return "В составе"
         }
         return nil
     }

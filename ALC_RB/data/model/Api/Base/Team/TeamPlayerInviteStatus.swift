@@ -36,8 +36,9 @@ struct TeamPlayerInviteStatus: Codable {
     var postMap: [String: Any] {
         get {
             var map = [CodingKeys: Any]()
-            map[.person] = person?.getId() ?? person?.getValue()
-            map[.team] = team?.getId() ?? team?.getValue()
+            map[.id] = id
+            map[.person] = person?.getId() ?? person?.getValue()?.id
+            map[.team] = team?.getId() ?? team?.getValue()?.id
             map[.status] = status?.rawValue ?? Status.pending.rawValue
             return map.get()
         }

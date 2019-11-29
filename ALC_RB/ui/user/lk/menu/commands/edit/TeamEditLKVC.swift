@@ -30,9 +30,14 @@ class TeamEditLKVC: UIViewController {
         setupView()
         setupBinds()
         
-        viewModel.fetch()
+//        viewModel.fetch()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.fetch()
+    }
 }
 
 // MARK: - SETUP

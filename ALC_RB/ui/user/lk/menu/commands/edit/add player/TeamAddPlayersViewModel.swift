@@ -21,7 +21,7 @@ final class TeamAddPlayersViewModel {
     let choosedRegion = BehaviorRelay<RegionMy?>(value: nil)
     let query = BehaviorRelay<String?>(value: nil)
     
-    let findedTeamPersons = PublishSubject<[TeamAddPlayerModelItem]?>()
+    let findedTeamPersons = BehaviorRelay<[TeamAddPlayerModelItem]?>(value: [])
     
     var teamPersonInvitesViewModel: TeamPersonInvitesViewModel
     
@@ -37,21 +37,43 @@ final class TeamAddPlayersViewModel {
         self.personApi.get_personQuery(name: query.value, surname: query.value, lastname: query.value, region: choosedRegion.value, limit: Constants.Values.LIMIT_ALL) { result in
             switch result {
             case .success(let persons):
-                
                 var resultArray = [TeamAddPlayerModelItem]()
                 
                 var findedPersons = persons
+                
+                let teamInvites = self.teamPersonInvitesViewModel.teamPersonInvites.value
+                let teamPlayers = self.team.value?.players ?? []
+                
                 for i in 0..<findedPersons.count {
-                    if let playerStatus = self.teamPersonInvitesViewModel.teamPersonInvites.value.filter({ teamPlayerInvite -> Bool in
-                        return teamPlayerInvite.person?.getId() ?? teamPlayerInvite.person?.getValue()?.id == findedPersons[i].id
+                    
+                    if let teamIn = teamPlayers.filter({ teamPlayer -> Bool in
+                        return teamPlayer.person?.orEqual(findedPersons[i].id, { person -> Bool in
+                            return person.id == findedPersons[i].id
+                        }) ?? false
                     }).first {
-                        resultArray.append(TeamAddPlayerModelItem(person: findedPersons[i], status: playerStatus.status))
-                    } else {
+                        resultArray.append(TeamAddPlayerModelItem(person: findedPersons[i], status: .accepted))
+                        continue
+                    }
+                    else
+                    if let playerStatus = teamInvites.filter({ teamInvite -> Bool in
+                        return teamInvite.person?.orEqual(findedPersons[i].id, { person -> Bool in
+                            return person.id == findedPersons[i].id
+                        }) ?? false
+                    }).first {
+                        if playerStatus.status == .pending {
+                            resultArray.append(TeamAddPlayerModelItem(person: findedPersons[i], status: playerStatus.status))
+                        } else {
+                            resultArray.append(TeamAddPlayerModelItem(person: findedPersons[i]))
+                        }
+                        
+                    }
+                    else
+                    {
                         resultArray.append(TeamAddPlayerModelItem(person: findedPersons[i]))
                     }
                 }
                 
-                self.findedTeamPersons.onNext(resultArray)
+                self.findedTeamPersons.accept(resultArray)
                 
             case .message(let message):
                 Print.m(message.message)

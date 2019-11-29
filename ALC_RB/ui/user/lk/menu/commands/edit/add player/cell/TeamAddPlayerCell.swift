@@ -19,13 +19,16 @@ class TeamAddPlayerCell: UITableViewCell {
 //        case notUsed
 //    }
     
+    enum AddPlayerStatus {
+        case success
+        case failure
+        case none
+    }
+    
     @IBOutlet weak var player_image: UIImageView!
     @IBOutlet weak var player_name: UILabel!
     @IBOutlet weak var player_date_of_birth: UILabel!
     @IBOutlet weak var player_status: UILabel!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
-    @IBOutlet weak var cell_add_player_btn: UIButton!
     
     var teamAddPlayer: TeamAddPlayerModelItem! {
         didSet {
@@ -35,18 +38,35 @@ class TeamAddPlayerCell: UITableViewCell {
             self.player_name.text = self.teamAddPlayer.personModelItem.fullNameNP
             self.player_date_of_birth.text = self.teamAddPlayer.personModelItem.age
             self.player_status.text = self.teamAddPlayer.statusRu
+            
+            if self.teamAddPlayer.status == .accepted {
+                self.player_status.textColor = .green
+            }
+            if self.teamAddPlayer.status == .pending {
+                self.player_status.textColor = .blue
+            }
         }
     }
     
-    func showLoading() {
-        self.activityIndicator.isHidden = false
-        self.cell_add_player_btn.isHidden = true
+    func setStatus(status: TeamPlayerInviteStatus.Status) {
+        if self.teamAddPlayer.status == .accepted {
+            self.player_status.textColor = .green
+        }
+        if self.teamAddPlayer.status == .pending {
+            self.player_status.textColor = .blue
+        }
+        self.layoutIfNeeded()
+        self.layoutSubviews()
     }
     
-    func showAdd() {
-        self.activityIndicator.isHidden = true
-        self.cell_add_player_btn.isHidden = false
-    }
+//    override func drawRect(rect: CGRect) {
+//        UIColor.whiteColor().setFill()
+//        UIRectFill(self.bounds)
+//        if str != nil {
+//            let ns = str! as NSString
+//            ns.drawInRect(self.bounds, withAttributes: [NSForegroundColorAttributeName: UIColor.blueColor(), NSFontAttributeName: UIFont.systemFontOfSize(10)])
+//        }
+//    }
     
 //    var usedPlayers: [Person] = []
 //

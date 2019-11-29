@@ -55,6 +55,16 @@ extension TeamAddPlayersVC {
     
     func bindViews() {
         
+        viewModel
+            .findedTeamPersons
+            .observeOn(MainScheduler.instance)
+            .subscribe { items in
+                guard let models = items.element else { return }
+                guard let persons = models else { return }
+                self.teamTable.dataSource = persons
+                self.tableView.reloadData()
+            }.disposed(by: bag)
+        
         searchBar.rx
             .cancelButtonClicked
             .observeOn(MainScheduler.instance)
@@ -143,22 +153,36 @@ extension TeamAddPlayersVC {
 
 // MARK: - ACTIONS
 
-extension TeamAddPlayersVC: TableActions {
+extension TeamAddPlayersVC: TeamAddTableActions {
     
-    func onCellSelected(model: CellModel, closure: @escaping () -> ()) {
+    func onCellSelected(model: CellModel, closure: @escaping (TeamAddPlayerCell.AddPlayerStatus) -> ()) {
         if model is TeamAddPlayerModelItem {
             let teamModel = model as! TeamAddPlayerModelItem
             self.viewModel.teamPersonInvitesViewModel.requestInvite(personId: teamModel.personModelItem.person.id) { result in
                 switch result {
                 case .success(let personInvited):
                     Print.m(personInvited)
-                    closure()
+                    
+                    var invitedPerson = personInvited
+                    var teamInvites = self.viewModel.teamPersonInvitesViewModel.teamPersonInvites.value
+                    
+                    if let person = self.viewModel.findedTeamPersons.value?.filter({ model -> Bool in
+                        return model.personModelItem.person.id == personInvited.person?.getId() ?? personInvited.person?.getValue()?.id
+                    }).first?.personModelItem.person {
+                        invitedPerson.person = IdRefObjectWrapper<Person>(person)
+                    }
+                    teamInvites.append(invitedPerson)
+                    self.viewModel.teamPersonInvitesViewModel.teamPersonInvites.accept(teamInvites)
+                    closure(.success)
                 case .message(let message):
                     Print.m(message.message)
+                    closure(.failure)
                 case .failure(.error(let error)):
                     Print.m(error)
+                    closure(.failure)
                 case .failure(.notExpectedData):
                     Print.m("not expected data")
+                    closure(.failure)
                 }
             }
         }
