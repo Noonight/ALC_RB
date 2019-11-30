@@ -17,10 +17,10 @@ extension Reactive where Base: UIViewController {
             if isLoading == true {
                 Print.m("HUD LOADING <--- START")
                 if vc.hud != nil {
-                    Print.m("HUD <--- NOT EMPTY")
+//                    Print.m("HUD <--- NOT EMPTY")
                     vc.hud?.setToLoadingView()
                 } else {
-                    Print.m("HUD <--- EMPTY")
+//                    Print.m("HUD <--- EMPTY")
                     vc.hud = vc.showLoadingViewHUD()
                 }
             } else {
@@ -73,9 +73,13 @@ extension Reactive where Base: UIViewController {
                         vc.emptyAction?()
                     })
                 } else {
-                    vc.hud = vc.showEmptyViewHUD {
+                    Print.m("SHOW EMPTY VIEw")
+//                    vc.hud = vc.showEmptyViewHUD {
+//                        vc.emptyAction?()
+//                    }
+                    vc.hud = vc.showEmptyViewHUD_one(tap: {
                         vc.emptyAction?()
-                    }
+                    })
                 }
             } else {
                 vc.hud?.hide(animated: false)

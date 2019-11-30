@@ -82,8 +82,12 @@ class UserDefaultsHelper {
 //        return false
 //    }
     
-    func getToken() -> String {
-        return (self.getAuthorizedUser()?.token)!
+//    func getToken() -> String {
+//        return (self.getAuthorizedUser()?.token)!
+//    }
+    
+    func getToken() -> String? {
+        return self.getAuthorizedUser()?.token
     }
     
 //    func setMatch(match: Match) {

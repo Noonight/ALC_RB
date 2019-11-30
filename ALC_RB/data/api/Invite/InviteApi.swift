@@ -29,16 +29,30 @@ final class InviteApi: ApiRequests {
     }
     
     func post_cancelPersonInvite(id: String, resultMy: @escaping (ResultMy<TeamPlayerInviteStatus, RequestError>) -> ()) {
-        let userToken = UserDefaultsHelper().getToken()
+        guard let userToken = UserDefaultsHelper().getToken() else { return }
         Alamofire
             .request(ApiRoute.getApiURL(.personInviteCancel, id: id), method: .post, headers: ["auth":userToken])
             .responseResultMy(TeamPlayerInviteStatus.self, resultMy: resultMy)
     }
     
     func post_personInvite(invite: TeamPlayerInviteStatus, resultMy: @escaping (ResultMy<TeamPlayerInviteStatus, RequestError>) -> ()) {
-        let userToken = UserDefaultsHelper().getToken()
+        guard let userToken = UserDefaultsHelper().getToken() else { return }
         Alamofire
             .request(ApiRoute.getApiURL(.personInvite), method: .post, parameters: invite.postMap, headers: ["auth":userToken])
+            .responseResultMy(TeamPlayerInviteStatus.self, resultMy: resultMy)
+    }
+    
+    func post_acceptPersonInvite(id: String, resultMy: @escaping (ResultMy<TeamPlayerInviteStatus, RequestError>) -> ()) {
+        guard let userToken = UserDefaultsHelper().getToken() else { return }
+        Alamofire
+            .request(ApiRoute.getApiURL(.personInviteAccept, id: id), method: .post, headers: ["auth":userToken])
+            .responseResultMy(TeamPlayerInviteStatus.self, resultMy: resultMy)
+    }
+    
+    func post_rejectPersonInvite(id: String, resultMy: @escaping (ResultMy<TeamPlayerInviteStatus, RequestError>) -> ()) {
+        guard let userToken = UserDefaultsHelper().getToken() else { return }
+        Alamofire
+            .request(ApiRoute.getApiURL(.personInviteReject, id: id), method: .post, headers: ["auth":userToken])
             .responseResultMy(TeamPlayerInviteStatus.self, resultMy: resultMy)
     }
     

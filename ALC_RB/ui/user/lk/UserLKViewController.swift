@@ -11,6 +11,10 @@ import Kingfisher
 import RxSwift
 import RxCocoa
 
+protocol RefreshUserProtocol {
+    func refresh(closure: @escaping (AuthUser) -> ())
+}
+
 class UserLKViewController: UIViewController {
 
     @IBOutlet weak var drawerMenuView: UIView!
@@ -47,10 +51,10 @@ class UserLKViewController: UIViewController {
     
     // MARK: - Drawer controllers
     
-    private lazy var invitation: InvitationLKTableViewController = {
+    private lazy var invitation: InvitationLKTVC = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
-        var viewController = storyboard.instantiateViewController(withIdentifier: "InvitationLKTableViewController") as! InvitationLKTableViewController
+        var viewController = storyboard.instantiateViewController(withIdentifier: "InvitationLKTableViewController") as! InvitationLKTVC
         
         return viewController
     }()
@@ -265,6 +269,25 @@ extension UserLKViewController {
         tabBarController?.viewControllers![countOfViewControllers! - 1] = viewController
     }
     
+}
+
+// MARK: - RefreshUser
+
+extension UserLKViewController: RefreshUserProtocol {
+    func refresh(closure: @escaping (AuthUser) -> ()) {
+        self.presenter.refreshUser { result in
+            switch result {
+            case .success(let authorizedUser):
+                closure(authorizedUser)
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
+        }
+    }
 }
 
 // MARK: - Presenter

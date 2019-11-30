@@ -30,14 +30,14 @@ final class TeamApi: ApiRequests {
     }
     
     func post_team(team: Team, resultMy: @escaping (ResultMy<Team, RequestError>) -> ()) {
-        let userToken = UserDefaultsHelper().getToken()
+        guard let userToken = UserDefaultsHelper().getToken() else { return }
         Alamofire
             .request(ApiRoute.getApiURL(.team), method: .post, parameters: team.postMap, headers: ["auth" : userToken])
             .responseResultMy(Team.self, resultMy: resultMy)
     }
     
     func post_teamParticipationRequest(teamParticipationRequest: TeamParticipationRequest, resultMy: @escaping (ResultMy<TeamParticipationRequest, RequestError>) -> ()) {
-        let userToken = UserDefaultsHelper().getToken()
+        guard let userToken = UserDefaultsHelper().getToken() else { return }
         Alamofire
             .request(ApiRoute.getApiURL(.team_participation_request), method: .post, parameters: teamParticipationRequest.postMap, headers: ["auth" : userToken])
             .responseResultMy(TeamParticipationRequest.self, resultMy: resultMy)
@@ -45,7 +45,7 @@ final class TeamApi: ApiRequests {
     
     func patch_team(team: Team, resultMy: @escaping (ResultMy<Team, RequestError>) -> ()) {
         
-        let userToken = UserDefaultsHelper().getToken()
+        guard let userToken = UserDefaultsHelper().getToken() else { return }
         Print.m("PATH: DATA ")
 //        dump(team.dictionary)
         Print.m(team.patchMap)

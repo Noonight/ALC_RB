@@ -289,8 +289,7 @@
 		DB59E5BC222829FC00D1F62F /* Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59E5BB222829FC00D1F62F /* Registration.swift */; };
 		DB59E5C022292B5900D1F62F /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB59E5BF22292B5900D1F62F /* EditProfile.swift */; };
 		DB5A00CF2237F1AF00B93EF5 /* AcceptRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5A00CE2237F1AF00B93EF5 /* AcceptRequest.swift */; };
-		DB5AAC0622369FDB0097963E /* InvitationLKTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AAC0522369FDB0097963E /* InvitationLKTableViewController.swift */; };
-		DB5AAC082236A1380097963E /* InvitationLKPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AAC072236A1380097963E /* InvitationLKPresenter.swift */; };
+		DB5AAC0622369FDB0097963E /* InvitationLKTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AAC0522369FDB0097963E /* InvitationLKTVC.swift */; };
 		DB5AAC0B2236A1AE0097963E /* InvitationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5AAC0A2236A1AE0097963E /* InvitationTableViewCell.swift */; };
 		DB5BDB992247CD0E0014C003 /* TeamsLKTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5BDB982247CD0E0014C003 /* TeamsLKTVC.swift */; };
 		DB5D9A8F233CB7CD0076E41D /* UICollectionView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5D9A8E233CB7CD0076E41D /* UICollectionView + Extensions.swift */; };
@@ -400,6 +399,11 @@
 		DBCA6CAA22F7F26A001D6C0B /* ProtocolAllViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA6CA922F7F26A001D6C0B /* ProtocolAllViewModel.swift */; };
 		DBCA6CAC22F7F9FD001D6C0B /* ProtocolAllTableEventsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCA6CAB22F7F9FD001D6C0B /* ProtocolAllTableEventsCell.swift */; };
 		DBCB1EBF2223FE3F005A6976 /* ApiRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCB1EBE2223FE3F005A6976 /* ApiRequests.swift */; };
+		DBD194572392C32300FDF05B /* InvitationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD194562392C32300FDF05B /* InvitationViewModel.swift */; };
+		DBD1945A2392C36700FDF05B /* InvitationModelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD194592392C36700FDF05B /* InvitationModelItem.swift */; };
+		DBD1945C2392D13D00FDF05B /* InvitationLKTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1945B2392D13D00FDF05B /* InvitationLKTable.swift */; };
+		DBD1945F2392D5BC00FDF05B /* InvitationTableActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1945E2392D5BC00FDF05B /* InvitationTableActions.swift */; };
+		DBD194612392D87900FDF05B /* UITableViewCell + Activity indicator + accessory type.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD194602392D87900FDF05B /* UITableViewCell + Activity indicator + accessory type.swift */; };
 		DBD2498323812A4400683A8B /* AnnounceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2498223812A4400683A8B /* AnnounceApi.swift */; };
 		DBD2498523812C3D00683A8B /* NewsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2498423812C3D00683A8B /* NewsApi.swift */; };
 		DBD2498823814B6900683A8B /* TeamApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2498723814B6900683A8B /* TeamApi.swift */; };
@@ -709,8 +713,7 @@
 		DB59E5BB222829FC00D1F62F /* Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registration.swift; sourceTree = "<group>"; };
 		DB59E5BF22292B5900D1F62F /* EditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
 		DB5A00CE2237F1AF00B93EF5 /* AcceptRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRequest.swift; sourceTree = "<group>"; };
-		DB5AAC0522369FDB0097963E /* InvitationLKTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationLKTableViewController.swift; sourceTree = "<group>"; };
-		DB5AAC072236A1380097963E /* InvitationLKPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationLKPresenter.swift; sourceTree = "<group>"; };
+		DB5AAC0522369FDB0097963E /* InvitationLKTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationLKTVC.swift; sourceTree = "<group>"; };
 		DB5AAC0A2236A1AE0097963E /* InvitationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationTableViewCell.swift; sourceTree = "<group>"; };
 		DB5BDB982247CD0E0014C003 /* TeamsLKTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsLKTVC.swift; sourceTree = "<group>"; };
 		DB5D9A8E233CB7CD0076E41D /* UICollectionView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + Extensions.swift"; sourceTree = "<group>"; };
@@ -821,6 +824,11 @@
 		DBCA6CA922F7F26A001D6C0B /* ProtocolAllViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolAllViewModel.swift; sourceTree = "<group>"; };
 		DBCA6CAB22F7F9FD001D6C0B /* ProtocolAllTableEventsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolAllTableEventsCell.swift; sourceTree = "<group>"; };
 		DBCB1EBE2223FE3F005A6976 /* ApiRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequests.swift; sourceTree = "<group>"; };
+		DBD194562392C32300FDF05B /* InvitationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewModel.swift; sourceTree = "<group>"; };
+		DBD194592392C36700FDF05B /* InvitationModelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationModelItem.swift; sourceTree = "<group>"; };
+		DBD1945B2392D13D00FDF05B /* InvitationLKTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationLKTable.swift; sourceTree = "<group>"; };
+		DBD1945E2392D5BC00FDF05B /* InvitationTableActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationTableActions.swift; sourceTree = "<group>"; };
+		DBD194602392D87900FDF05B /* UITableViewCell + Activity indicator + accessory type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell + Activity indicator + accessory type.swift"; sourceTree = "<group>"; };
 		DBD2498223812A4400683A8B /* AnnounceApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceApi.swift; sourceTree = "<group>"; };
 		DBD2498423812C3D00683A8B /* NewsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsApi.swift; sourceTree = "<group>"; };
 		DBD2498723814B6900683A8B /* TeamApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamApi.swift; sourceTree = "<group>"; };
@@ -1800,6 +1808,7 @@
 				04FF6F95237D6EDE0045D82E /* Date ++.swift */,
 				DB682CB7237FED8400B069E7 /* Dictionary ++.swift */,
 				DBA92FC9238EABD2005B3209 /* Encodable + Dictionary.swift */,
+				DBD194602392D87900FDF05B /* UITableViewCell + Activity indicator + accessory type.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -2307,9 +2316,10 @@
 		DB5AAC0422369F6F0097963E /* invitation */ = {
 			isa = PBXGroup;
 			children = (
-				DB5AAC092236A19B0097963E /* cell */,
-				DB5AAC0522369FDB0097963E /* InvitationLKTableViewController.swift */,
-				DB5AAC072236A1380097963E /* InvitationLKPresenter.swift */,
+				DBD1945D2392D58700FDF05B /* table */,
+				DB5AAC0522369FDB0097963E /* InvitationLKTVC.swift */,
+				DBD194562392C32300FDF05B /* InvitationViewModel.swift */,
+				DBD194582392C35600FDF05B /* model */,
 			);
 			path = invitation;
 			sourceTree = "<group>";
@@ -2903,6 +2913,24 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
+		DBD194582392C35600FDF05B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				DBD194592392C36700FDF05B /* InvitationModelItem.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		DBD1945D2392D58700FDF05B /* table */ = {
+			isa = PBXGroup;
+			children = (
+				DBD1945B2392D13D00FDF05B /* InvitationLKTable.swift */,
+				DBD1945E2392D5BC00FDF05B /* InvitationTableActions.swift */,
+				DB5AAC092236A19B0097963E /* cell */,
+			);
+			path = table;
+			sourceTree = "<group>";
+		};
 		DBD2498023812A3200683A8B /* News */ = {
 			isa = PBXGroup;
 			children = (
@@ -3267,6 +3295,7 @@
 				DBC5C5FC222015A300B0A1B6 /* UIViewController.swift in Sources */,
 				DB8A689F224E0D5C00D3972A /* TournamentPickerView.swift in Sources */,
 				DB78E13F21D529DC001C885D /* EmptyProtocol.swift in Sources */,
+				DBD194572392C32300FDF05B /* InvitationViewModel.swift in Sources */,
 				180F236922B262AD00ADE8FD /* EditScheduleViewModel.swift in Sources */,
 				DB932DE422C8FF9000C060C2 /* RefereeEditMatchesLKTableViewController.swift in Sources */,
 				18427962235A0D3A006F2C4C /* _Event.swift in Sources */,
@@ -3298,6 +3327,7 @@
 				DB4A789821C154E70071BA8F /* Navigation Bar Border Line.swift in Sources */,
 				DB595C7521EF4EB6000282F4 /* TeamsLeagueTableViewController.swift in Sources */,
 				CEA6EBBB21A53FD1008F874D /* MvpPresenter.swift in Sources */,
+				DBD194612392D87900FDF05B /* UITableViewCell + Activity indicator + accessory type.swift in Sources */,
 				CE916ABC21B520D90025FECF /* NewsDetailViewController.swift in Sources */,
 				189482622356EC35000C8A2A /* _GroupStage.swift in Sources */,
 				DB51CD9522155D8B00A8D08E /* ScoreMatchTableViewController.swift in Sources */,
@@ -3353,6 +3383,7 @@
 				DB0E0CBD22D6ABB5005342FE /* View.swift in Sources */,
 				1823DC2622952762000A1055 /* LoadingCell.swift in Sources */,
 				DB4B1A472240AB3A00A9FB97 /* ClubLKPresenter.swift in Sources */,
+				DBD1945C2392D13D00FDF05B /* InvitationLKTable.swift in Sources */,
 				182394BF23617E24007D6954 /* RegionsViewModel.swift in Sources */,
 				DB17384B21BA56D400017B6D /* NewsAllTableViewController.swift in Sources */,
 				CE0AF81721C78D9F00F8F6A2 /* ActivityIndicatorProtocol.swift in Sources */,
@@ -3377,6 +3408,7 @@
 				1807709322F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.swift in Sources */,
 				DB8A68A1224E568900D3972A /* ClubPickerHelper.swift in Sources */,
 				18EB8B9F226EF82E0087BD99 /* TeamAddPlayersVC.swift in Sources */,
+				DBD1945F2392D5BC00FDF05B /* InvitationTableActions.swift in Sources */,
 				185669BF2301679100BCC565 /* AutoGoalsMaker.swift in Sources */,
 				187F2E0622CB19440049EA77 /* EditEventsMatchTableViewController.swift in Sources */,
 				1890FBD1235ED7D900514E33 /* RegistrationViewModel.swift in Sources */,
@@ -3413,7 +3445,6 @@
 				DBE0E7A2223BDDE800CC0EE2 /* OngoingLeaguesLKTableViewController.swift in Sources */,
 				182394C42361BA1C007D6954 /* UIView + MBProgressHUD.swift in Sources */,
 				DB6AA17E21C294A4007D4693 /* ClubsTableViewController.swift in Sources */,
-				DB5AAC082236A1380097963E /* InvitationLKPresenter.swift in Sources */,
 				1839244A22C7CC4000A644F5 /* SoloMatch.swift in Sources */,
 				04C88E5F2382687100B2A8C4 /* AuthUserRealm.swift in Sources */,
 				DB5AAC0B2236A1AE0097963E /* InvitationTableViewCell.swift in Sources */,
@@ -3447,6 +3478,7 @@
 				DB673F5121D7A39B006205A8 /* Image.swift in Sources */,
 				DBA69218221EB83500BEFB26 /* AuthViewController.swift in Sources */,
 				187F2DFE22CB19440049EA77 /* EditMatchProtocolViewController.swift in Sources */,
+				DBD1945A2392C36700FDF05B /* InvitationModelItem.swift in Sources */,
 				189482712356EFA8000C8A2A /* MyTourneysTVC.swift in Sources */,
 				DBA92FCA238EABD2005B3209 /* Encodable + Dictionary.swift in Sources */,
 				18FE29BF22AE1C420094C4D8 /* MenuTable.swift in Sources */,
@@ -3499,7 +3531,7 @@
 				DB7786F5238FB724000F4117 /* TeamAddPlayersViewModel.swift in Sources */,
 				18B1FEFA22E1CB1900D75F2D /* KingExtensions.swift in Sources */,
 				04C88E5C238266C300B2A8C4 /* TourneyRealm.swift in Sources */,
-				DB5AAC0622369FDB0097963E /* InvitationLKTableViewController.swift in Sources */,
+				DB5AAC0622369FDB0097963E /* InvitationLKTVC.swift in Sources */,
 				18A8FC1C2358416B00042968 /* LeagueDetailViewModel.swift in Sources */,
 				DB495B7922AF77CB00FCC6F5 /* ScheduleRefViewModel.swift in Sources */,
 				18337422235C81E00022D831 /* _LeagueDetailModel.swift in Sources */,

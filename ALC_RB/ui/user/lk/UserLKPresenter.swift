@@ -76,6 +76,11 @@ class UserLKPresenter: MvpPresenter<UserLKViewController> {
         }
     }
     
+    func refreshUser(resultMy: @escaping (ResultMy<AuthUser, RequestError>) -> ()) {
+        guard let userToken = UserDefaultsHelper().getToken() else { return }
+        personApi.get_refreshAuthUser(token: userToken, resultMy: resultMy)
+    }
+    
     func fetchMainRefLeagues() {
         guard let userId = UserDefaultsHelper().getAuthorizedUser()?.person.id else { return }
         let params = ParamBuilder<League.CodingKeys>()

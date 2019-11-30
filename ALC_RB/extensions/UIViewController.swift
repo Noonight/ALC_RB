@@ -149,6 +149,7 @@ extension UIViewController {
             hud.hideAfter(seconds: seconds) {
                 closure()
             }
+            return
         }
         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         
@@ -266,6 +267,49 @@ extension UIViewController {
         return hud
     }
     // MARK: EMPTY
+    // HERE IT HERE
+    func showEmptyViewHUD_one(addTo: UIView? = nil, message: String = "", detailMessage: String = "", tap: (() -> ())?) -> MBProgressHUD {
+        
+        if tap != nil {
+            self.tapAction(action: tap!)
+        }
+        
+        if let mView = addTo {
+            let hud = MBProgressHUD.showAdded(to: mView, animated: true)
+            
+            hud.mode = .customView
+            let emptyImage =  #imageLiteral(resourceName: "ic_empty")
+            hud.customView = UIImageView(image: emptyImage)
+            
+            hud.label.text = message
+            hud.label.font = UIFont.systemFont(ofSize: 19)
+            hud.detailsLabel.text = detailMessage
+            hud.detailsLabel.font = UIFont.systemFont(ofSize: 15)
+            hud.detailsLabel.textColor = .blue
+            
+            hud.bezelView.isUserInteractionEnabled = true
+            hud.bezelView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnHud)))
+            
+            return hud
+        }
+        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        hud.mode = .customView
+        let emptyImage =  #imageLiteral(resourceName: "ic_empty")
+        hud.customView = UIImageView(image: emptyImage)
+        
+        hud.label.text = message
+        hud.label.font = UIFont.systemFont(ofSize: 19)
+        hud.detailsLabel.text = detailMessage
+        hud.detailsLabel.font = UIFont.systemFont(ofSize: 15)
+        hud.detailsLabel.textColor = .blue
+        
+        hud.bezelView.isUserInteractionEnabled = true
+        hud.bezelView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapOnHud)))
+        
+        return hud
+    }
+    // ----------------------------------------------------------------------------------------------------------------------------------------------------------
     func showEmptyViewHUD(addTo: UIView, message: String? = "", detailMessage: String? = "") -> MBProgressHUD {
         let image = #imageLiteral(resourceName: "ic_empty")
         let imageView = UIImageView(image: image)

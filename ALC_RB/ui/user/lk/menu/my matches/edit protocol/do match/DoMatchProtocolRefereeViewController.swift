@@ -367,8 +367,9 @@ extension DoMatchProtocolRefereeViewController {
         
         let hud = self.showLoadingViewHUD(with: Texts.PROGRESS_ADD_EVENT)
         
+        guard let userToken = UserDefaultsHelper().getToken() else { return }
         self.presenter.saveProtocol(
-            token: self.userDefaults.getToken(),
+            token: userToken,
             editedProtocol: self.viewModel.prepareEditProtocol(),
         ok: { match in
                 self.viewModel.updateMatch(match: match)
@@ -410,8 +411,9 @@ extension DoMatchProtocolRefereeViewController {
         {
             let hud = self.showLoadingViewHUD(with: Texts.PROGRESS_DELETE_EVENT)
             
+            guard let userToken = UserDefaultsHelper().getToken() else { return }
             self.presenter.saveProtocol(
-                token: userDefaults.getToken(),
+                token: userToken,
                 editedProtocol: self.viewModel.prepareEditProtocol(),
                 ok: { match in
                     self.viewModel.updateMatch(match: match)
@@ -463,8 +465,9 @@ extension DoMatchProtocolRefereeViewController {
             let hud = self.showLoadingViewHUD()
             hud.setDetailMessage(with: Texts.PROGRESS_1_PROTOCOL_SAVING)
 
+            guard let userToken = UserDefaultsHelper().getToken() else { return }
             self.presenter.saveProtocol(
-                token: self.userDefaults.getToken(),
+                token: userToken,
                 editedProtocol: self.viewModel.prepareEditProtocol(),
             ok: { match in // protocol saved
 
@@ -472,8 +475,9 @@ extension DoMatchProtocolRefereeViewController {
 
 //                Print.m("token \(self.userDefaults.getToken()) ,, matchId \(self.viewModel.prepareMatchId())")
                 
+                guard let userToken = UserDefaultsHelper().getToken() else { return }
                 self.presenter.acceptProtocol(
-                    token: self.userDefaults.getToken(),
+                    token: userToken,
                     matchId: self.viewModel.prepareMatchId(),
                 ok: { match in
                     hud.setDetailMessage(with: Texts.PROGRESS_2_PROTOCOL_ACCEPTED)
@@ -525,8 +529,9 @@ extension DoMatchProtocolRefereeViewController {
             let hud = self.showLoadingViewHUD()
             hud.setDetailMessage(with: Texts.PROGRESS_PROTOCOL_SAVING)
             
+            guard let userToken = UserDefaultsHelper().getToken() else { return }
             self.presenter.saveProtocol(
-                token: self.userDefaults.getToken(),
+                token: userToken,
                 editedProtocol: self.viewModel.prepareEditProtocol(),
             ok: { match in
                 hud.setDetailMessage(with: Texts.PROGRESS_PROTOCOL_SAVED)
@@ -640,8 +645,9 @@ extension DoMatchProtocolRefereeViewController {
     func addEventSaveProtocol() {
         let hud = self.showLoadingViewHUD(with: Texts.PROGRESS_UPDATE)
         
+        guard let userToken = UserDefaultsHelper().getToken() else { return }
         self.presenter.saveProtocol(
-            token: self.userDefaults.getToken(),
+            token: userToken,
             editedProtocol: self.viewModel.prepareEditProtocol(),
             ok: { match in
                 Print.m(match)
