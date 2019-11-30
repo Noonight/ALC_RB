@@ -18,7 +18,8 @@ enum DateFormats: String {
     
     case local = "dd.MM.yyyy"
     case localTime = "HH:mm"
-    case iso8601 = "yyyy-MM-dd'T'HH:mm:ss:SSS+|-hh:mm"
+//    case iso8601 = "yyyy-MM-dd'T'HH:mm:ss:SSS+|-hh:mm"
+    case iso8601 = "yyyy-MM-ddTHH:mm:ss:SSSZ"
 }
 //internal static let builtInAutoFormat: [String] =  [
 //    DateFormats.iso8601,

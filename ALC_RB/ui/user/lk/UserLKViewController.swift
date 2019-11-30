@@ -8,11 +8,11 @@
 
 import UIKit
 import Kingfisher
+import RxSwift
+import RxCocoa
 
 class UserLKViewController: UIViewController {
 
-    // MARK: - Properties
-    
     @IBOutlet weak var drawerMenuView: UIView!
     @IBOutlet weak var headerMenuView: UIView!
     @IBOutlet weak var userHeaderMenuImage: UIImageView!
@@ -28,7 +28,6 @@ class UserLKViewController: UIViewController {
     
     @IBOutlet weak var containerView: UIView!
     
-    let cellId = "drawer_menu_cell"
     let segueEditProfile = "segue_edit_profile"
     
     var drawerIsOpened = false
@@ -43,6 +42,8 @@ class UserLKViewController: UIViewController {
     let userDefaultsHelper = UserDefaultsHelper()
     
     var firstInit = true
+    
+    private let bag = DisposeBag()
     
     // MARK: - Drawer controllers
     
@@ -104,16 +105,19 @@ class UserLKViewController: UIViewController {
         initPresenter()
         
         segmentHelper = SegmentHelper(self, containerView)
-        menuTable = MenuTable(menu: [MenuGroupModel])
-//
-//        menuTable?.playerMenuOptionActions = playerSelectMenuOption(menuOption:)
-//        menuTable?.refereeMenuOptionActions = refereeSelectMenuOption(menuOption:)
-//        menuTable?.mainRefereeMenuOptionActions = mainRefereeMenuOption(menuOption:)
+        menuTable = MenuTable(menu: [
+            MenuGroupModel(title: "Игрок", items: [.invites, .tourneys, .teams]),
+            MenuGroupModel(title: "Выход", items: [.signOut])
+        ])
         
         menuTable?.userMenuOptionActions = userSelectMenuOption(menuOption:)
         
+        bindViews()
+        
         tableView.delegate = menuTable
         tableView.dataSource = menuTable
+        
+        self.presenter.fetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -137,6 +141,26 @@ class UserLKViewController: UIViewController {
             showFirstItem()
             firstInit = false
         }
+    }
+    
+}
+
+// MARK: - SETUP
+
+extension UserLKViewController {
+    
+    func bindViews() {
+        
+        self.presenter
+            .menuItems
+            .observeOn(MainScheduler.instance)
+            .subscribe { elements in
+                guard let menu = elements.element else { return }
+                Print.m(menu)
+                self.menuTable?.menu = menu
+                self.tableView.reloadData()
+            }.disposed(by: bag)
+        
     }
     
 }

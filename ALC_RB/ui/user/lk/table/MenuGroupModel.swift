@@ -14,4 +14,9 @@ struct MenuGroupModel {
     
     var items: [UserMenuOption]
     
+    init(title: String, items: [UserMenuOption]) {
+        self.title = title
+        self.items = items
+    }
+    
 }

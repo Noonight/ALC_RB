@@ -17,7 +17,7 @@ class DrawerMenuTableViewCell: UITableViewCell {
 
     var menuOption: UserMenuOption! {
         didSet {
-            self.image_view = menuOption.image
+            self.image_view.image = menuOption.image
             self.name_label.text = menuOption.description
         }
     }
