@@ -3520,7 +3520,7 @@
                             <constraint firstItem="map-g3-oHb" firstAttribute="top" secondItem="gTl-B3-7cJ" secondAttribute="bottom" id="vPV-SG-XFW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="ЛК" id="AFh-FZ-88S">
+                    <navigationItem key="navigationItem" id="AFh-FZ-88S">
                         <barButtonItem key="leftBarButtonItem" image="ic_menu4" id="LJK-VX-HPd">
                             <inset key="landscapeImageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="5"/>
                             <connections>
@@ -5984,12 +5984,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="invitation_cell" rowHeight="233" id="FwP-wZ-vQd" customClass="InvitationTableViewCell" customModule="ALC_RB" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="320" height="233"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="invitation_cell" rowHeight="217" id="FwP-wZ-vQd" customClass="InvitationTableViewCell" customModule="ALC_RB" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="320" height="217"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FwP-wZ-vQd" id="z3i-TU-JMv">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="232.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="216.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwE-LX-Ij1">
@@ -6025,6 +6026,7 @@
                                                 <constraint firstItem="sPj-b9-a2H" firstAttribute="leading" secondItem="rwE-LX-Ij1" secondAttribute="leading" constant="8" id="0lM-nf-oBU"/>
                                                 <constraint firstAttribute="trailing" secondItem="9YS-oM-DoE" secondAttribute="trailing" constant="8" id="1qG-Xc-Vd7"/>
                                                 <constraint firstItem="dL0-WO-NP9" firstAttribute="top" secondItem="sPj-b9-a2H" secondAttribute="bottom" constant="4" id="3zz-Kb-Jtf"/>
+                                                <constraint firstAttribute="height" constant="101" id="75t-Wg-dPY"/>
                                                 <constraint firstItem="9YS-oM-DoE" firstAttribute="leading" secondItem="rwE-LX-Ij1" secondAttribute="leading" constant="8" id="8fd-X5-3Sz"/>
                                                 <constraint firstItem="9YS-oM-DoE" firstAttribute="top" secondItem="rwE-LX-Ij1" secondAttribute="top" constant="8" id="9T9-Tr-LuB"/>
                                                 <constraint firstAttribute="bottom" secondItem="dL0-WO-NP9" secondAttribute="bottom" constant="8" id="9XR-fm-cc3"/>
@@ -6067,7 +6069,7 @@
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tss-y3-CqN">
-                                            <rect key="frame" x="232" y="185" width="72" height="30"/>
+                                            <rect key="frame" x="232" y="177" width="72" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="ZiE-Uk-YSy"/>
                                             </constraints>
@@ -6077,7 +6079,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mfq-JN-NwS">
-                                            <rect key="frame" x="123" y="185" width="93" height="31"/>
+                                            <rect key="frame" x="123" y="177" width="93" height="31"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="31" id="RNp-2W-ZcH"/>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="j25-Lb-pUD"/>
@@ -6092,9 +6094,9 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="rwE-LX-Ij1" firstAttribute="top" secondItem="z3i-TU-JMv" secondAttribute="top" id="4Ma-IM-DER"/>
-                                        <constraint firstItem="Tss-y3-CqN" firstAttribute="top" secondItem="Omq-1j-DWx" secondAttribute="bottom" constant="8" id="7nz-yI-Ejf"/>
+                                        <constraint firstItem="Tss-y3-CqN" firstAttribute="top" secondItem="Omq-1j-DWx" secondAttribute="bottom" id="7nz-yI-Ejf"/>
                                         <constraint firstItem="Omq-1j-DWx" firstAttribute="top" secondItem="z3i-TU-JMv" secondAttribute="topMargin" constant="90" id="Icv-DH-tPf"/>
-                                        <constraint firstItem="mfq-JN-NwS" firstAttribute="top" secondItem="Omq-1j-DWx" secondAttribute="bottom" constant="8" id="LB8-53-EMk"/>
+                                        <constraint firstItem="mfq-JN-NwS" firstAttribute="top" secondItem="Omq-1j-DWx" secondAttribute="bottom" id="LB8-53-EMk"/>
                                         <constraint firstItem="Omq-1j-DWx" firstAttribute="top" secondItem="rwE-LX-Ij1" secondAttribute="bottom" id="Pss-cN-EVV"/>
                                         <constraint firstAttribute="bottom" secondItem="mfq-JN-NwS" secondAttribute="bottom" constant="8" id="Rgo-S2-F0b"/>
                                         <constraint firstAttribute="trailing" secondItem="rwE-LX-Ij1" secondAttribute="trailing" id="UoH-Cs-vt0"/>
@@ -6118,6 +6120,7 @@
                                 </connections>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="4eH-Ib-0Tk" id="R0Q-g9-v8d"/>
                             <outlet property="delegate" destination="4eH-Ib-0Tk" id="Pyi-tF-Oiu"/>

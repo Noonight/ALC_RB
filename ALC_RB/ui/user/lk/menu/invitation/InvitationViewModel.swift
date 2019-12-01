@@ -44,7 +44,7 @@ final class InvitationViewModel {
                 if invites.count != 0 {
                     self.loading.onNext(true)
                     let params1 = ParamBuilder<Team.CodingKeys>()
-                        .add(key: .id, value: StrBuilder().setSeparatorStyle(.comma).add(.comma).add(invites.map { $0.person?.getId() ?? ($0.person?.getValue()?.id)! }))
+                        .add(key: .id, value: StrBuilder().setSeparatorStyle(.comma).add(.comma).add(invites.map { $0.team?.getId() ?? ($0.team?.getValue()?.id)! }))
                         .populate(StrBuilder().add([.trainer, .league]))
                         .get()
                     self.teamApi.get_team(params: params1, resultMy: { result1 in
@@ -60,6 +60,8 @@ final class InvitationViewModel {
                             }
                             
                             self.invites.accept(invites.map { InvitationModelItem(inviteStatus: $0) })
+                            
+                            dump(self.invites.value)
                             
                         case .message(let message):
                             Print.m(message.message)

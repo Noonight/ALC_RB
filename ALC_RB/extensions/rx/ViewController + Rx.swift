@@ -77,9 +77,10 @@ extension Reactive where Base: UIViewController {
 //                    vc.hud = vc.showEmptyViewHUD {
 //                        vc.emptyAction?()
 //                    }
-                    vc.hud = vc.showEmptyViewHUD_one(tap: {
-                        vc.emptyAction?()
-                    })
+                    vc.hud = vc.showLoadingViewHUD()
+//                    vc.hud = vc.showEmptyViewHUD_one(tap: {
+//                        vc.emptyAction?()
+//                    })
                 }
             } else {
                 vc.hud?.hide(animated: false)

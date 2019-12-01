@@ -141,10 +141,10 @@ class UserLKViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        if firstInit {
-            showFirstItem()
-            firstInit = false
-        }
+//        if firstInit {
+//            showFirstItem()
+//            firstInit = false
+//        }
     }
     
 }
@@ -163,6 +163,10 @@ extension UserLKViewController {
                 Print.m(menu)
                 self.menuTable?.menu = menu
                 self.tableView.reloadData()
+                if self.firstInit {
+                    self.showFirstItem()
+                    self.firstInit = false
+                }
             }.disposed(by: bag)
         
     }
@@ -191,6 +195,8 @@ extension UserLKViewController {
 extension UserLKViewController {
     
     func showFirstItem() {
+        segmentHelper?.add(invitation)
+        navigationItem.title = invitation.title
         tableView.selectRow(at: IndexPath.init(row: 0, section: 0), animated: true, scrollPosition: UITableView.ScrollPosition.top)
     }
     

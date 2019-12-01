@@ -68,8 +68,10 @@ extension TeamAddPlayersTable: UITableViewDelegate {
                     cell?.accessoryView = warningImg
                     
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1, execute: {
+                        let addImg = UIImageView(image: UIImage(named: "ic_blue_plus"))
+                        addImg.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
                         cell?.accessoryType = .none
-                        cell?.accessoryView = nil
+                        cell?.accessoryView = addImg
                     })
                     
                 case .none:

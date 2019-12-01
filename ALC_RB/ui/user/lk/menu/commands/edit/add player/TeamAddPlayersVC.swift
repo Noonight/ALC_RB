@@ -177,12 +177,15 @@ extension TeamAddPlayersVC: TeamAddTableActions {
                 case .message(let message):
                     Print.m(message.message)
                     closure(.failure)
+                    self.showAlert(message: message.message)
                 case .failure(.error(let error)):
                     Print.m(error)
                     closure(.failure)
+                    self.showAlert(message: error.localizedDescription)
                 case .failure(.notExpectedData):
                     Print.m("not expected data")
                     closure(.failure)
+                    self.showAlert(message: Constants.Texts.NOT_VALID_DATA)
                 }
             }
         }

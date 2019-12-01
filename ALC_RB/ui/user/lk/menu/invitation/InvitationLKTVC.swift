@@ -25,6 +25,7 @@ class InvitationLKTVC: UITableViewController {
         setupTable()
         setupViewModel()
         setupBinds()
+        setupPullToRefresh()
         
         self.viewModel.fetch()
     }
@@ -81,6 +82,28 @@ extension InvitationLKTVC {
         self.invitationTable = InvitationLKTable(tableActions: self)
         self.tableView.delegate = invitationTable
         self.tableView.dataSource = invitationTable
+        self.tableView.separatorStyle = .singleLine
+    }
+    
+    func setupPullToRefresh() {
+        let refreshController = UIRefreshControl()
+        tableView.refreshControl = refreshController
+        
+        refreshController.rx
+            .controlEvent(.valueChanged)
+            .map { _ in !refreshController.isRefreshing}
+            .filter { $0 == false }
+            .subscribe({ event in
+                self.viewModel.fetch()
+            }).disposed(by: bag)
+        
+        refreshController.rx.controlEvent(.valueChanged)
+            .map { _ in refreshController.isRefreshing }
+            .filter { $0 == true }
+            .subscribe({ event in
+                refreshController.endRefreshing()
+            })
+            .disposed(by: bag)
     }
     
 }
