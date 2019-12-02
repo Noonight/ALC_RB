@@ -33,7 +33,7 @@ class EditScheduleLKViewController: UIViewController {
     @IBOutlet weak var referee3_btn: UIButton!
     @IBOutlet weak var timekeeper_btn: UIButton!
     
-    private var viewModel: EditScheduleViewModel!
+    var viewModel: EditScheduleViewModel = EditScheduleViewModel(matchApi: MatchApi())
     private let bag = DisposeBag()
     
     private var choosePersonVC: ChoosePersonVC!
@@ -49,7 +49,6 @@ class EditScheduleLKViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupViewModel()
         setupViewBinds()
         setupPersonChooser()
         
@@ -67,10 +66,6 @@ class EditScheduleLKViewController: UIViewController {
 // MARK: - SETUP
 
 extension EditScheduleLKViewController {
-    
-    func setupViewModel() {
-        self.viewModel = EditScheduleViewModel(matchApi: MatchApi())
-    }
     
     func setupViewBinds() {
         
@@ -138,7 +133,7 @@ extension EditScheduleLKViewController {
                 }
             }.disposed(by: bag)
         
-        viewModel!.editedMatch
+        viewModel.editedMatch
             .asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe({ element in

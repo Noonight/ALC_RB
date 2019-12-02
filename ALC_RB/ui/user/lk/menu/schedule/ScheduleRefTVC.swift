@@ -114,6 +114,7 @@ extension ScheduleRefTVC {
     
     func showEditMatchReferees(model: MatchScheduleModelItem) {
 //        editSchedule.
+        editSchedule.viewModel.matchScheduleModel.accept(model)
         show(editSchedule, sender: self)
     }
     
