@@ -71,7 +71,7 @@ extension UIViewController {
             if let tableView = addTo as? UITableView {
                 tableView.separatorStyle = .none
                 hud = MBProgressHUD.showAdded(to: UIView(frame: tableView.frame), animated: true)
-                hud.layer.zPosition = 100
+                hud.layer.zPosition = tableView.layer.zPosition + 10
             }
         } else {
             MBProgressHUD.hide(for: self.view, animated: false)
@@ -79,7 +79,7 @@ extension UIViewController {
             
             if let tableView = self.view as? UITableView {
                 tableView.separatorStyle = .none
-                hud.layer.zPosition = 100
+                hud.layer.zPosition = tableView.layer.zPosition + 10
             }
             
             // if some of subviews is tableview
@@ -87,7 +87,7 @@ extension UIViewController {
                 return subView is UITableView
             }).first as? UITableView {
                 tableView.separatorStyle = .none
-                hud.layer.zPosition = 100
+                hud.layer.zPosition = tableView.layer.zPosition + 10
             }
         }
         

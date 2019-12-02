@@ -13,9 +13,7 @@ import RxSwift
 import RxCocoa
 
 protocol AnnouncesReloadCallBack {
-    
     func reload()
-    
 }
 
 final class AnnouncesVC: UIViewController {
@@ -79,11 +77,7 @@ final class AnnouncesVC: UIViewController {
     }
 }
 
-// MARK: EXTENSIONS
-
-
-
-// MARK: SETUP
+// MARK: - SETUP
 
 private extension AnnouncesVC {
     
@@ -131,7 +125,7 @@ private extension AnnouncesVC {
         
         announcesViewModel
             .loading
-            .bind(to: self.rx.isLoading)
+            .bind(to: self.rx.loading)
             .disposed(by: disposeBag)
         
         announcesViewModel
@@ -151,7 +145,7 @@ private extension AnnouncesVC {
     }
 }
 
-// MARK: HELPERS
+// MARK: - HELPERS
 
 extension AnnouncesVC {
     
@@ -194,7 +188,7 @@ extension AnnouncesVC {
 // MARK: REACTIVE
 
 extension Reactive where Base: AnnouncesVC {
-
+    // works bad
     internal var isLoading: Binder<Bool> {
         return Binder(self.base) { vc, loading in
             vc.text_with_image_label.isHidden = loading

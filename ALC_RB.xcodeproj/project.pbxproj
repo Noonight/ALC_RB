@@ -2316,9 +2316,9 @@
 		DB5AAC0422369F6F0097963E /* invitation */ = {
 			isa = PBXGroup;
 			children = (
-				DBD1945D2392D58700FDF05B /* table */,
 				DB5AAC0522369FDB0097963E /* InvitationLKTVC.swift */,
 				DBD194562392C32300FDF05B /* InvitationViewModel.swift */,
+				DBD1945D2392D58700FDF05B /* table */,
 				DBD194582392C35600FDF05B /* model */,
 			);
 			path = invitation;

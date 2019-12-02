@@ -38,13 +38,17 @@ extension InvitationLKTable: UITableViewDataSource {
         cell.okCallBack = { model in
             cell.showAccessoryLoading()
             self.tableActions.onOkPressed(model: model, closure: {
-                cell.hideAccessoryLoading()
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                    cell.hideAccessoryLoading()
+                })
             })
         }
         cell.cancelCallBack = { model in
             cell.showAccessoryLoading()
             self.tableActions.onCancelPressed(model: model, closure: {
-                cell.hideAccessoryLoading()
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                    cell.hideAccessoryLoading()
+                })
             })
         }
         

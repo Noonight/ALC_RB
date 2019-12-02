@@ -29,7 +29,7 @@ class TournamentSearchVC: UIViewController {
     private var tournamentSearchTable: TournamentSearchTable!
     let searchController = UISearchController(searchResultsController: nil)
     private var acp: ActionSheetStringPicker?
-    private var tableView_hud: MBProgressHUD?
+//    private var tableView_hud: MBProgressHUD?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -215,10 +215,11 @@ extension TournamentSearchVC {
     
     func refreshData() {
         // check mbprogress hud inside view
-        if self.tableView_hud == nil
-        {
-            self.tableView_hud = self.showLoadingViewHUD(addTo: self.table_view)
-        }
+//        if self.tableView_hud == nil
+//        {
+//            self.tableView_hud = self.showLoadingViewHUD(addTo: self.table_view)
+//        }
+//        self.showLoadingViewHUD(addTo: self.table_view)
         Print.m("offset is \(self.viewModel.prepareOffset())")
         self.presenter?.fetchTourneys(name: self.viewModel.prepareSearchingQuery(), region: self.viewModel.prepareChoosedRegion(), limit: Constants.Values.LIMIT, offset: self.viewModel.prepareOffset(), success: { tourneys in
 
@@ -231,35 +232,41 @@ extension TournamentSearchVC {
             {
                 let imageView = UIImageView(image: UIImage(named: "not"))
                 imageView.contentMode = .scaleAspectFit
-                self.tableView_hud?.setToCustomView(with: imageView)
+//                self.tableView_hud?.setToCustomView(with: imageView)
+                self.hud?.setToCustomView(with: imageView)
             }
             else
             {
                 self.table_view.reloadData()
-                self.tableView_hud?.hide(animated: true)
-                self.tableView_hud = nil
+//                self.tableView_hud?.hide(animated: true)
+//                self.tableView_hud = nil
+                self.hideHUD()
             }
             
             self.refreshController.endRefreshing()
             
         }, r_message: { r_message in
             
-            self.hideHUD()
+//            self.hideHUD()
             
-            self.tableView_hud?.hide(animated: true)
-            self.tableView_hud = nil
+//            self.tableView_hud?.hide(animated: true)
+//            self.tableView_hud = nil
+            self.hideHUD()
             self.showAlert(message: r_message.message)
             
         }, r_error: { error in
             
-            self.hideHUD()
+//            self.hideHUD()
             
-            self.tableView_hud?.hide(animated: true)
-            self.tableView_hud = nil
-            self.tableView_hud = self.showEmptyViewHUD(addTo: self.table_view) {
+//            self.tableView_hud?.hide(animated: true)
+//            self.tableView_hud = nil
+//            self.tableView_hud = self.showEmptyViewHUD(addTo: self.table_view) {
+//                self.refreshData()
+//            }
+            self.hud?.hideHUD()
+            self.hud = self.showEmptyViewHUD(addTo: self.table_view, tap: {
                 self.refreshData()
-            }
-            
+            })
         })
     }
     
