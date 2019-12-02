@@ -82,13 +82,7 @@ class UserLKPresenter: MvpPresenter<UserLKViewController> {
     }
     
     func fetchMainRefLeagues() {
-        guard let userId = UserDefaultsHelper().getAuthorizedUser()?.person.id else { return }
-        let params = ParamBuilder<League.CodingKeys>()
-            .add(key: .status, value: StrBuilder().setSeparatorStyle(.comma).add(.comma).add([League.Status.pending.rawValue, League.Status.started.rawValue]))
-            .add(key: .mainReferee, value: userId)
-            .select(.mainReferee)
-            .get()
-        leagueApi.get_league(params: params) { result in
+        leagueApi.get_userMainRefLeagues { result in
             switch result {
             case .success(let leagues):
                 Print.m(leagues)

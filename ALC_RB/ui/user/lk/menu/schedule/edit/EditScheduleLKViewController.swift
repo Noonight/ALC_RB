@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import ActionSheetPicker_3_0
 
-class EditScheduleLKViewController: BaseStateViewController {
+class EditScheduleLKViewController: UIViewController {
     private enum Texts {
         static let NO_REF = "Не назначен"
         static let REFEREES = "Рефери"

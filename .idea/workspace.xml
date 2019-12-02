@@ -2,16 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12ca8836-b4f8-4f04-bd9b-95f2ce59baa9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/TeamAddPlayersViewModel.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/cell/TeamAddPlayerCell.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/model/TeamAddPlayerModelItem.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/schedule/Model/ScheduleGroupByLeagueMatches.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/schedule/ScheduleRefTVC.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ALC_RB.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/api/League/LeagueApi.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/api/League/LeagueApi.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/data/api/Match/MatchApi.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/data/api/Match/MatchApi.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ALC_RB/ui/Base.lproj/Main.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/Base.lproj/Main.storyboard" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/TeamEditLKVC.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/TeamEditLKVC.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/CommandAddPlayerPresenter.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/CommandAddPlayerTableViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/TeamAddPlayersTVC.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/cell/CommandAddPlayerTableViewCell.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/view model/CommandAddPlayerViewModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/CommandAddPlayerViewModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/Tourneys/My/League/schedule/model/MatchScheduleModelItem.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/Tourneys/My/League/schedule/model/MatchScheduleModelItem.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/user/lk/UserLKPresenter.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/user/lk/UserLKPresenter.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/user/lk/UserLKViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/user/lk/UserLKViewController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/schedule/ScheduleRefTableViewController.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/schedule/ScheduleRefViewModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/schedule/ScheduleRefViewModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/schedule/cell/ScheduleRefTableViewCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/schedule/cell/ScheduleRefTableViewCell.swift" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,25 +26,27 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/CommandAddPlayerViewModel.swift">
+        <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/TeamAddPlayersViewModel.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7" />
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/TeamAddPlayersTVC.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="43" column="4" lean-forward="true" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
+            <state relative-caret-position="504">
+              <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/TeamAddPlayersViewModel.swift">
+        <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/UserLKPresenter.swift">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7" />
+            <state relative-caret-position="-758" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/schedule/ScheduleRefViewModel.swift">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" column="4" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -59,12 +64,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/TeamAddPlayersTVC.swift" />
+        <option value="$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/schedule/ScheduleRefViewModel.swift" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="1707" />
+    <option name="width" value="2560" />
     <option name="height" value="1002" />
   </component>
   <component name="ProjectId" id="1TEW8AKS9Q1vhNrQgx4c0kBZMQB" />
@@ -74,6 +80,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Cidr.FilesView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -124,50 +132,12 @@
               <item name="user" type="fcab9f18:XcodeViewNode" />
               <item name="lk" type="fcab9f18:XcodeViewNode" />
               <item name="menu" type="fcab9f18:XcodeViewNode" />
-              <item name="commands" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
-              <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
-              <item name="ui" type="fcab9f18:XcodeViewNode" />
-              <item name="user" type="fcab9f18:XcodeViewNode" />
-              <item name="lk" type="fcab9f18:XcodeViewNode" />
-              <item name="menu" type="fcab9f18:XcodeViewNode" />
-              <item name="commands" type="fcab9f18:XcodeViewNode" />
-              <item name="edit" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
-              <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
-              <item name="ui" type="fcab9f18:XcodeViewNode" />
-              <item name="user" type="fcab9f18:XcodeViewNode" />
-              <item name="lk" type="fcab9f18:XcodeViewNode" />
-              <item name="menu" type="fcab9f18:XcodeViewNode" />
-              <item name="commands" type="fcab9f18:XcodeViewNode" />
-              <item name="edit" type="fcab9f18:XcodeViewNode" />
-              <item name="add player" type="fcab9f18:XcodeViewNode" />
-            </path>
-            <path>
-              <item name="" type="efc3779f:XcodeRootNode" />
-              <item name="ALC_RB" type="1d218c8b:XcodeProjectNode" />
-              <item name="ALC_RB" type="fcab9f18:XcodeViewNode" />
-              <item name="ui" type="fcab9f18:XcodeViewNode" />
-              <item name="user" type="fcab9f18:XcodeViewNode" />
-              <item name="lk" type="fcab9f18:XcodeViewNode" />
-              <item name="menu" type="fcab9f18:XcodeViewNode" />
-              <item name="commands" type="fcab9f18:XcodeViewNode" />
-              <item name="edit" type="fcab9f18:XcodeViewNode" />
-              <item name="add player" type="fcab9f18:XcodeViewNode" />
-              <item name="cell" type="fcab9f18:XcodeViewNode" />
+              <item name="schedule" type="fcab9f18:XcodeViewNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Cidr.FilesView" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -422,19 +392,19 @@
       <workItem from="1573121078892" duration="1161000" />
       <workItem from="1573913955457" duration="478000" />
       <workItem from="1574938442686" duration="592000" />
+      <workItem from="1575278409594" duration="1247000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1070000" />
+    <option name="totallyTimeSpent" value="2317000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="2560" height="1002" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16719618" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989011" visible="true" weight="0.1683876" />
+      <window_info id="Designer" order="1" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -452,6 +422,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Structure" order="5" sideWeight="0.50109893" visible="true" weight="0.1683876" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -506,19 +477,31 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/CommandAddPlayerViewModel.swift">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/TeamAddPlayersTVC.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7" />
+        <state relative-caret-position="738">
+          <caret line="43" column="4" lean-forward="true" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/TeamAddPlayersViewModel.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7" />
+        <state relative-caret-position="504">
+          <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/commands/edit/add player/TeamAddPlayersTVC.swift">
+    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/UserLKPresenter.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="43" column="4" lean-forward="true" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
+        <state relative-caret-position="-758" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ALC_RB/ui/user/lk/menu/schedule/ScheduleRefViewModel.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="4" lean-forward="true" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
         </state>
       </provider>
     </entry>

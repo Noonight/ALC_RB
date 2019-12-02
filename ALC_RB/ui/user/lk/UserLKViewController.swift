@@ -77,10 +77,10 @@ class UserLKViewController: UIViewController {
         return viewController
     }()
     
-    private lazy var schedule: ScheduleRefTableViewController = {
+    private lazy var schedule: ScheduleRefTVC = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
-        var viewController = storyboard.instantiateViewController(withIdentifier: "ScheduleRefTableViewController") as! ScheduleRefTableViewController
+        var viewController = storyboard.instantiateViewController(withIdentifier: "ScheduleRefTableViewController") as! ScheduleRefTVC
         
         return viewController
     }()

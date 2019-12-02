@@ -32,6 +32,17 @@ final class LeagueApi: ApiRequests {
             .responseResultMy([League].self, resultMy: resultMy)
     }
     
+    func get_userMainRefLeagues(resultMy: @escaping (ResultMy<[League], RequestError>) -> ()) {
+        guard let userId = UserDefaultsHelper().getAuthorizedUser()?.person.id else { return }
+        let params = ParamBuilder<League.CodingKeys>()
+            .add(key: .status, value: StrBuilder().setSeparatorStyle(.comma).add(.comma).add([League.Status.pending.rawValue, League.Status.started.rawValue]))
+            .add(key: .mainReferee, value: userId)
+//            .select(.mainReferee)
+            .select(StrBuilder().add([.mainReferee, .name]))
+            .get()
+        get_league(params: params, resultMy: resultMy)
+    }
+    
     func get_leagueModelItems(tourney: Tourney?, resultMy: @escaping (ResultMy<[LeagueModelItem], RequestError>) -> ()) {
         guard let mTourney = tourney else {
             resultMy(.success([]))

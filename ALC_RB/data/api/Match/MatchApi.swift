@@ -11,6 +11,75 @@ import Alamofire
 
 final class MatchApi: ApiRequests {
     
+    func get_match(id: String? = nil, league: String? = nil, limit: Int? = Constants.Values.LIMIT, offset: Int? = 0, resultMy: @escaping (ResultMy<[Match], RequestError>) -> ()) {
+        let params = ParamBuilder<Match.CodingKeys>()
+            .add(key: .id, value: id)
+            .add(key: .league, value: league)
+            .limit(limit)
+            .offset(offset)
+            .get()
+        get_match(params: params, resultMy: resultMy)
+    }
+    
+    func get_match(params: [String : Any], limit: Int? = Constants.Values.LIMIT, offset: Int? = 0, resultMy: @escaping (ResultMy<[Match], RequestError>) -> ()) {
+        Alamofire
+            .request(ApiRoute.getApiURL(.match), method: .get, parameters: params)
+            .responseResultMy([Match].self, resultMy: resultMy)
+    }
+    
+    func get_mainRefMatchesModelsGroupedByLeague(resultMy: @escaping (ResultMy<[ScheduleGroupByLeagueMatches], RequestError>) -> ()) {
+        let leagueApi = LeagueApi()
+        leagueApi.get_userMainRefLeagues { result in
+            switch result {
+            case .success(let findedLeagues):
+                
+                let params1 = ParamBuilder<Match.CodingKeys>()
+                    .add(key: .league, value: StrBuilder().setSeparatorStyle(.comma).add(.comma).add(findedLeagues.map { $0.id }))
+                    .populate(StrBuilder().add([.teamOne, .teamTwo, .league, .place]).add("referees.person"))
+                    .get()
+                self.get_match(params: params1, resultMy: { result1 in
+                    switch result1 {
+                    case .success(let findedMatches):
+                        
+                        var resultArr = [ScheduleGroupByLeagueMatches]()
+                        
+                        for league in findedLeagues {
+                            var matches = [MatchScheduleModelItem]()
+                            for match in findedMatches {
+                                if league.id == match.league?.getId() ?? match.league?.getValue()?.id {
+                                    matches.append(MatchScheduleModelItem(match: match))
+                                }
+                            }
+                            resultArr.append(ScheduleGroupByLeagueMatches(title: league.name!, matches: matches))
+                        }
+                        
+                        resultMy(.success(resultArr))
+                        
+                    case .message(let message):
+                        Print.m(message.message)
+                        resultMy(.message(message))
+                    case .failure(.error(let error)):
+                        Print.m(error)
+                        resultMy(.failure(.error(error)))
+                    case .failure(.notExpectedData):
+                        Print.m("not expected data")
+                        resultMy(.failure(.notExpectedData))
+                    }
+                })
+                
+            case .message(let message):
+                Print.m(message.message)
+                resultMy(.message(message))
+            case .failure(.error(let error)):
+                Print.m(error)
+                resultMy(.failure(.error(error)))
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+                resultMy(.failure(.notExpectedData))
+            }
+        }
+    }
+    
     func get_upcomingMatches(limit: Int? = Constants.Values.LIMIT, offset: Int? = 0, resultMy: @escaping (ResultMy<[Match], RequestError>) -> ()) {
         
         // get active leagues
@@ -92,22 +161,6 @@ final class MatchApi: ApiRequests {
             }
             resultMy(.success(upcomingMatches))
         }
-    }
-    
-    func get_match(id: String? = nil, league: String? = nil, limit: Int? = Constants.Values.LIMIT, offset: Int? = 0, resultMy: @escaping (ResultMy<[Match], RequestError>) -> ()) {
-        let params = ParamBuilder<Match.CodingKeys>()
-            .add(key: .id, value: id)
-            .add(key: .league, value: league)
-            .limit(limit)
-            .offset(offset)
-            .get()
-        get_match(params: params, resultMy: resultMy)
-    }
-    
-    func get_match(params: [String : Any], limit: Int? = Constants.Values.LIMIT, offset: Int? = 0, resultMy: @escaping (ResultMy<[Match], RequestError>) -> ()) {
-        Alamofire
-            .request(ApiRoute.getApiURL(.match), method: .get, parameters: params)
-            .responseResultMy([Match].self, resultMy: resultMy)
     }
     
     func post_matchSetReferee(token: String, editMatchReferees: EditMatchReferees, resultMy: @escaping (ResultMy<Match, Error>) -> ()) {

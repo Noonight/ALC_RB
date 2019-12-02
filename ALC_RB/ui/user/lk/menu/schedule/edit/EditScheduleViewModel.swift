@@ -39,7 +39,7 @@ class EditScheduleViewModel {
 //    var activeMatch: PublishSubject<ActiveMatch> = PublishSubject()
 //    var referees: PublishSubject<[Person]> = PublishSubject()
     
-    var comingCellModel: Variable<ScheduleRefTableViewCell.CellModel> = Variable<ScheduleRefTableViewCell.CellModel>(ScheduleRefTableViewCell.CellModel())
+    var comingCellModel: Variable<ScheduleRefCell.CellModel> = Variable<ScheduleRefTableViewCell.CellModel>(ScheduleRefTableViewCell.CellModel())
     var comingReferees: Variable<[Person]> = Variable<[Person]>([])
     
     var sliderData: PublishSubject<SlidersData> = PublishSubject()

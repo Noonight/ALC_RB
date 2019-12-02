@@ -8,73 +8,42 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 class ScheduleRefViewModel {
-    struct DataModel {
-        var activeMatches = [Match]()
-        var referees = [Person]()
-        var clubs: [Club] = []
-        
-        init(activeMatches: [Match], referees: [Person], clubs: [Club]) {
-            self.activeMatches = activeMatches
-            self.referees = referees
-            self.clubs = clubs
-        }
-        
-        init(tuple: ([Match], [Person], [Club])) {
-            self.activeMatches = tuple.0
-            self.referees = tuple.1
-            self.clubs = tuple.2
-        }
-    }
     
     var error: PublishSubject<Error?> = PublishSubject()
-    var refreshing: PublishSubject<Bool> = PublishSubject()
-    var message: PublishSubject<SingleLineMessage> = PublishSubject()
+    var loading: PublishSubject<Bool> = PublishSubject()
+    var message: PublishSubject<SingleLineMessage?> = PublishSubject()
 
-    var dataModel: PublishSubject<DataModel> = PublishSubject()
+    var groupedMatches: PublishSubject<[ScheduleGroupByLeagueMatches]> = PublishSubject()
     
-    private let dataManager: ApiRequests
+    private let matchApi: MatchApi
     
-    init(dataManager: ApiRequests) {
-        self.dataManager = dataManager
+    init(matchApi: MatchApi) {
+        self.matchApi = matchApi
     }
     
-    func fetch(closure: @escaping () -> ()) {
-        refreshing.onNext(true)
+    func fetch() {
+        loading.onNext(true)
         
-        // DEPRECATED: schedule changed
-//        dataManager.get_scheduleRefereeData { result in
-//            self.refreshing.onNext(false)
-//            switch result {
-//            case .success(let tuple):
-//                Print.m(tuple)
-//                self.dataModel.onNext(DataModel(tuple: tuple))
-//            case .message(let message):
-//                self.message.onNext(message)
-//            case .failure(let error):
-//                self.error.onNext(error)
-//            }
-//            closure()
-//        }
-        
-//        dataManager.get[Match]ForView(get_success: { (activeMatches, referees, clubs) in
-//
-//            self.refreshing.onNext(false)
-//            self.dataModel.onNext(ScheduleRefViewModel.DataModel(
-//                activeMatches: activeMatches,
-//                referees: referees,
-//                clubs: clubs)
-//            )
-//            closure()
-//
-//        }, get_message: { message in
-//            self.message.onNext(message)
-//            closure()
-//        }) { (error) in
-//            Print.m(error)
-//            self.error.onNext(error)
-//            closure()
-//        }
+        matchApi.get_mainRefMatchesModelsGroupedByLeague { result in
+            switch result {
+            case .success(let groupedMatches):
+                
+                self.groupedMatches.onNext(groupedMatches)
+                
+            case .message(let message):
+                Print.m(message.message)
+                self.message.onNext(message)
+            case .failure(.error(let error)):
+                Print.m(error)
+                self.error.onNext(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+                self.message.onNext(SingleLineMessage(Constants.Texts.NOT_VALID_DATA))
+            }
+            self.loading.onNext(false)
+        }
     }
 }
