@@ -1197,13 +1197,13 @@
 			path = "Save protocol";
 			sourceTree = "<group>";
 		};
-		180F236522B25EA000ADE8FD /* Edit */ = {
+		180F236522B25EA000ADE8FD /* edit */ = {
 			isa = PBXGroup;
 			children = (
 				180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */,
 				180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */,
 			);
-			path = Edit;
+			path = edit;
 			sourceTree = "<group>";
 		};
 		181B114E22F4D36E004670F2 /* filtered by group */ = {
@@ -2098,7 +2098,7 @@
 				DB4ACEE822AF711A00B9C58A /* ScheduleRefTVC.swift */,
 				DB495B7822AF77CB00FCC6F5 /* ScheduleRefViewModel.swift */,
 				DB69BAB623952E6C002746A4 /* Table */,
-				180F236522B25EA000ADE8FD /* Edit */,
+				180F236522B25EA000ADE8FD /* edit */,
 			);
 			path = schedule;
 			sourceTree = "<group>";
