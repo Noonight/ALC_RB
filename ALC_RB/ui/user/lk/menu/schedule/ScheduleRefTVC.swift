@@ -45,6 +45,8 @@ class ScheduleRefTVC: UITableViewController {
             self.viewModel.fetch()
         }
         
+        viewModel.fetch()
+        
     }
     
 }

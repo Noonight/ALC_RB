@@ -163,32 +163,18 @@ final class MatchApi: ApiRequests {
         }
     }
     
-    func post_matchSetReferee(token: String, editMatchReferees: EditMatchReferees, resultMy: @escaping (ResultMy<Match, Error>) -> ()) {
+    func post_matchSetReferee(editMatchReferees: EditMatchReferees, resultMy: @escaping (ResultMy<Match, RequestError>) -> ()) {
+        
+        guard let userToken = UserDefaultsHelper().getToken() else { return }
         
         let header: HTTPHeaders = [
             "Content-Type" : "application/json",
-            "auth" : "\(token)"
+            "auth" : "\(userToken)"
         ]
         
-        let request = Alamofire
+        Alamofire
             .request(ApiRoute.getApiURL(.post_edit_match_referee), method: .post, parameters: editMatchReferees.toParams(), encoding: JSONEncoding.default, headers: header)
-        
-        request
-            .responseData { response in
-//                dump(response)
-                let decoder = ISO8601Decoder.getDecoder()
-                do {
-                    if let match = try? decoder.decode(Match.self, from: response.data!) {
-                        resultMy(.success(match))
-                    }
-                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
-                        resultMy(.message(message))
-                    }
-                }
-                if response.result.isFailure {
-                    resultMy(.failure(response.error!))
-                }
-        }
+            .responseResultMy(Match.self, resultMy: resultMy)
     }
     
     func get_myMatchesCellModels(participationMatches: [Match], resultMy: @escaping (ResultMy<[MyMatchesRefTableViewCell.CellModel], Error>) -> ()) {

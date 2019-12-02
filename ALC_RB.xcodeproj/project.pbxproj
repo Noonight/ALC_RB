@@ -318,6 +318,7 @@
 		DB6AA18321C296DE007D4693 /* ClubTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6AA18221C296DE007D4693 /* ClubTableViewCell.swift */; };
 		DB7786F5238FB724000F4117 /* TeamAddPlayersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7786F4238FB724000F4117 /* TeamAddPlayersViewModel.swift */; };
 		DB7786F8238FBA12000F4117 /* TeamAddPlayerModelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7786F7238FBA12000F4117 /* TeamAddPlayerModelItem.swift */; };
+		DB77EE142395495100408309 /* EditScheduleRefereesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB77EE132395495100408309 /* EditScheduleRefereesModel.swift */; };
 		DB78E13F21D529DC001C885D /* EmptyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB78E13E21D529DC001C885D /* EmptyProtocol.swift */; };
 		DB85B36322F14C820030D8A3 /* AutoGoalsFoulsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB85B36222F14C820030D8A3 /* AutoGoalsFoulsHelper.swift */; };
 		DB85B36522F15D5B0030D8A3 /* SoloLeague.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB85B36422F15D5B0030D8A3 /* SoloLeague.swift */; };
@@ -745,6 +746,7 @@
 		DB6AA18221C296DE007D4693 /* ClubTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubTableViewCell.swift; sourceTree = "<group>"; };
 		DB7786F4238FB724000F4117 /* TeamAddPlayersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamAddPlayersViewModel.swift; sourceTree = "<group>"; };
 		DB7786F7238FBA12000F4117 /* TeamAddPlayerModelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamAddPlayerModelItem.swift; sourceTree = "<group>"; };
+		DB77EE132395495100408309 /* EditScheduleRefereesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleRefereesModel.swift; sourceTree = "<group>"; };
 		DB78E13E21D529DC001C885D /* EmptyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyProtocol.swift; sourceTree = "<group>"; };
 		DB85B36222F14C820030D8A3 /* AutoGoalsFoulsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoGoalsFoulsHelper.swift; sourceTree = "<group>"; };
 		DB85B36422F15D5B0030D8A3 /* SoloLeague.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloLeague.swift; sourceTree = "<group>"; };
@@ -1202,6 +1204,7 @@
 			children = (
 				180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */,
 				180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */,
+				DB77EE122395493D00408309 /* Model */,
 			);
 			path = edit;
 			sourceTree = "<group>";
@@ -2485,6 +2488,14 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		DB77EE122395493D00408309 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DB77EE132395495100408309 /* EditScheduleRefereesModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		DB87FE7A2243B4FF001EBA7C /* view controller states */ = {
 			isa = PBXGroup;
 			children = (
@@ -3559,6 +3570,7 @@
 				DB495B7922AF77CB00FCC6F5 /* ScheduleRefViewModel.swift in Sources */,
 				18337422235C81E00022D831 /* _LeagueDetailModel.swift in Sources */,
 				DB51CD982215619E00A8D08E /* ScoreMatchTableViewCell.swift in Sources */,
+				DB77EE142395495100408309 /* EditScheduleRefereesModel.swift in Sources */,
 				DB17385D21BAAFDC00017B6D /* UpcomingGameCellPresenter.swift in Sources */,
 				1894826C2356ED0C000C8A2A /* Helpers.swift in Sources */,
 				DB682CBA237FF0FB00B069E7 /* TeamPlayerStatus.swift in Sources */,

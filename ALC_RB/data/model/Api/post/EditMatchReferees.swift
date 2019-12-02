@@ -82,17 +82,17 @@ struct EditMatchReferees: Codable {
 }
 
 struct EditMatchReferee: Codable {
-    var type = "" // match id
-    var person = ""
+    var type: Referee.rType // match id
+    var person: String // person id
     
-    init(type: String, person: String) {
+    init(type: Referee.rType, person: String) {
         self.type = type
         self.person = person
     }
     
     func toParams() -> [String: Any] {
         return [
-            Fields.type.value() : self.type,
+            Fields.type.value() : self.type.rawValue,
             Fields.person.value() : self.person
         ]
     }
@@ -113,7 +113,7 @@ struct EditMatchReferee: Codable {
     
     func toDictionary() -> [String: Any] {
         return [
-            CodingKeys.type.rawValue : type,
+            CodingKeys.type.rawValue : type.rawValue,
             CodingKeys.person.rawValue : person
         ]
     }

@@ -19,7 +19,7 @@ struct Stadium: Codable {
     var createdAt: Date?
     var updatedAt: Date?
     
-    var v: String?
+    var v: Int?
     
     enum CodingKeys: String, CodingKey {
         

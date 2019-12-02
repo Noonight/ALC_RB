@@ -97,8 +97,14 @@ class IdRefObjectWrapper<T>: Codable where T : Codable {
 //        //Print.m(container)
         do {
             self.value = try container.decode(IdRefObject<T>.self)
+        } catch DecodingError.keyNotFound(let key, let context) {
+            throw DecodingError.keyNotFound(key, context)
+        } catch DecodingError.typeMismatch(let type, let context) {
+            throw DecodingError.typeMismatch(type, context)
+        } catch DecodingError.valueNotFound(let type, let context) {
+            throw DecodingError.valueNotFound(type, context)
         } catch {
-            throw DecodingError.typeMismatch(IdRefObjectWrapper.self, DecodingError.Context(codingPath: container.codingPath, debugDescription: "SEE CODE. Mb model has changed, or smth any"))
+            throw DecodingError.typeMismatch(IdRefObjectWrapper.self, DecodingError.Context(codingPath: container.codingPath, debugDescription: "IdRefObjectWrapper: SEE CODE. Mb model has changed, or smth any"))
         }
     }
     
@@ -182,18 +188,38 @@ enum IdRefObject<T>: Codable where T : Codable {
         let container = try! decoder.singleValueContainer()
 //        var container = try! decoder.unkeyedContainer()
 //        let container = try decoder.container(keyedBy: Key)
-        if let id = try? container.decode(String.self) {
-//            print("decode id")
-            //Print.m("Decode: id = \(id)")
-            self = .id(id)
-        } else if let object = try? container.decode(T.self) {
-//            print("decode object")
-            //Print.m("Decode: object = \(object)")
-            self = .object(object)
-        } else {
-            // TEST: test wrapper object here
-//            try! container.decode(T.self)
-            throw DecodingError.typeMismatch(IdRefObject.self, DecodingError.Context(codingPath: container.codingPath, debugDescription: "Not a JSON"))
+//        if let id = try? container.decode(String.self) {
+////            print("decode id")
+//            //Print.m("Decode: id = \(id)")
+//            self = .id(id)
+//        } else if let object = try? container.decode(T.self) {
+////            print("decode object")
+//            //Print.m("Decode: object = \(object)")
+//            self = .object(object)
+//        } else {
+//            // TEST: test wrapper object here
+////            try! container.decode(T.self)
+//            throw DecodingError.typeMismatch(IdRefObject.self, DecodingError.Context(codingPath: container.codingPath, debugDescription: "Not a JSON"))
+//        }
+        do {
+//            self = .id(try container.decode(String.self))
+//            self = .object(try container.decode(T.self))
+            if let id = try? container.decode(String.self) {
+                self = .id(id)
+            } else {
+                self = .object(try container.decode(T.self))
+            }
+//            else if let object = try container.decode(T.self) {
+//                self = .object(object)
+//            }
+        } catch DecodingError.keyNotFound(let key, let context) {
+            throw DecodingError.keyNotFound(key, context)
+        } catch DecodingError.typeMismatch(let type, let context) {
+            throw DecodingError.typeMismatch(type, context)
+        } catch DecodingError.valueNotFound(let type, let context) {
+            throw DecodingError.valueNotFound(type, context)
+        } catch {
+            throw DecodingError.typeMismatch(IdRefObject.self, DecodingError.Context(codingPath: container.codingPath, debugDescription: "IdRefObject: Not a JSON"))
         }
     }
     

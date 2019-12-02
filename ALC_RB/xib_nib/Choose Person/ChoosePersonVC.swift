@@ -13,6 +13,12 @@ import SPStorkController
 
 protocol ChoosePersonResult {
     func complete(person: Person)
+    func complete(type: Referee.rType, person: Person)
+}
+
+extension ChoosePersonResult {
+    func complete(person: Person) {}
+    func complete(type: Referee.rType, person: Person) {}
 }
 
 class ChoosePersonVC: UIViewController {
@@ -25,6 +31,7 @@ class ChoosePersonVC: UIViewController {
     private let navBar = SPFakeBarView(style: .stork)
     
     var callBack: ChoosePersonResult?
+    var refereeType: Referee.rType?
     private var viewModel: ChoosePersonVM!
     private let bag = DisposeBag()
     
@@ -126,6 +133,9 @@ extension ChoosePersonVC {
                 let cell = self.tableView.cellForRow(at: index) as! ChoosePersonCell
                 
                 self.callBack?.complete(person: cell.personModelItem.person)
+                if let refereeType = self.refereeType {
+                    self.callBack?.complete(type: refereeType, person: cell.personModelItem.person)
+                }
                 
                 self.tableView.deselectRow(at: index, animated: true)
                 

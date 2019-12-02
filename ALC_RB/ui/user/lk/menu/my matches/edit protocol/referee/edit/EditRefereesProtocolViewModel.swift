@@ -62,7 +62,7 @@ class EditRefereesProtocolViewModel {
     func editMatchReferees(token: String, editMatchReferees: EditMatchReferees, success: @escaping (Match)->(), message_single: @escaping (SingleLineMessage)->(), failure: @escaping (Error)->()) {
         self.cache = editMatchReferees
         self.refreshing.onNext(true)
-        matchApi.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees) { result in
+        matchApi.post_matchSetReferee(editMatchReferees: editMatchReferees) { result in
             self.refreshing.onNext(false)
             switch result {
             case .success(let match):

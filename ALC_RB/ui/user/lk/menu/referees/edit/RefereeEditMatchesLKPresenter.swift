@@ -23,9 +23,9 @@ class RefereeEditMatchesLKPresenter: MvpPresenter<RefereeEditMatchesLKTableViewC
     
     var cache: EditMatchReferees?
     
-    func requestEditMatchReferee(token: String, editMatchReferees: EditMatchReferees) {
+    func requestEditMatchReferee(editMatchReferees: EditMatchReferees) {
         self.cache = editMatchReferees
-        matchApi.post_matchSetReferee(token: token, editMatchReferees: editMatchReferees) { result in
+        matchApi.post_matchSetReferee(editMatchReferees: editMatchReferees) { result in
             switch result {
             case .success(let match):
                 self.getView().onResponseEditMatchSuccess(soloMatch: match)

@@ -203,20 +203,20 @@ class EditRefereesProtocolViewController: BaseStateViewController {
 //            resultArray.append(EditMatchReferee(type: Referee.rType.inspector.rawValue, person: getPersonId(inspector_btn.title(for: .normal)!)!))
         }
         if isCorrectTitle(btn: referee1_btn) {
-            resultArray.append(EditMatchReferee(type: Referee.rType.firstReferee.rawValue, person: getPersonId(referee1_btn.title(for: .normal)!)!))
+            resultArray.append(EditMatchReferee(type: Referee.rType.firstReferee, person: getPersonId(referee1_btn.title(for: .normal)!)!))
         }
         if isCorrectTitle(btn: referee2_btn) {
-            resultArray.append(EditMatchReferee(type: Referee.rType.secondReferee.rawValue, person: getPersonId(referee2_btn.title(for: .normal)!)!))
+            resultArray.append(EditMatchReferee(type: Referee.rType.secondReferee, person: getPersonId(referee2_btn.title(for: .normal)!)!))
         }
 //        if isCorrectTitle(btn: referee3_btn) {
 //            resultArray.append(EditMatchReferee(type: Referee.RefereeType.referee3.rawValue, person: getPersonId(referee3_btn.title(for: .normal)!)!))
 //        }
         if isCorrectTitle(btn: timekeeper_btn) {
-            resultArray.append(EditMatchReferee(type: Referee.rType.timekeeper.rawValue, person: getPersonId(timekeeper_btn.title(for: .normal)!)!))
+            resultArray.append(EditMatchReferee(type: Referee.rType.timekeeper, person: getPersonId(timekeeper_btn.title(for: .normal)!)!))
         }
         
         // add referee - 3 { by default }
-        resultArray.append(EditMatchReferee(type: Referee.rType.thirdReferee.rawValue, person: (userDefaults.getAuthorizedUser()?.person.id)!))
+        resultArray.append(EditMatchReferee(type: Referee.rType.thirdReferee, person: (userDefaults.getAuthorizedUser()?.person.id)!))
         
         return resultArray
     }
