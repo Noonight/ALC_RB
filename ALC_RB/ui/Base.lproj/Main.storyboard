@@ -4309,10 +4309,11 @@
         <scene sceneID="p4Y-Yj-eZU">
             <objects>
                 <tableViewController storyboardIdentifier="ScheduleRefTableViewController" title="Расписание" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nQ1-YV-kY7" customClass="ScheduleRefTVC" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3oI-oP-Ka8">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3oI-oP-Ka8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ScheduleRefTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="activeMatches_cell" rowHeight="179" id="D5b-NS-RuV" customClass="ScheduleRefCell" customModule="ALC_RB" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="179"/>
@@ -4507,10 +4508,20 @@
                                                 <constraint firstItem="Jps-tY-qEY" firstAttribute="leading" secondItem="XxI-OW-4tj" secondAttribute="leading" id="yvy-t1-aNi"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="beL-He-PgH">
+                                            <rect key="frame" x="0.0" y="178" width="286" height="0.5"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="0.5" id="gC9-Vp-fVz"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="beL-He-PgH" secondAttribute="bottom" id="9zS-pd-0em"/>
                                         <constraint firstItem="XxI-OW-4tj" firstAttribute="top" secondItem="pYg-WB-nV2" secondAttribute="top" constant="8" id="Ejs-yn-kmG"/>
-                                        <constraint firstAttribute="bottom" secondItem="XxI-OW-4tj" secondAttribute="bottom" constant="8" id="aXN-Hu-gLd"/>
+                                        <constraint firstItem="beL-He-PgH" firstAttribute="top" secondItem="XxI-OW-4tj" secondAttribute="bottom" constant="7.5" id="HxW-hr-xmq"/>
+                                        <constraint firstAttribute="trailing" secondItem="beL-He-PgH" secondAttribute="trailing" id="Ye6-LY-Q1O"/>
+                                        <constraint firstItem="beL-He-PgH" firstAttribute="leading" secondItem="pYg-WB-nV2" secondAttribute="leading" id="ZU4-qa-msr"/>
                                         <constraint firstAttribute="trailing" secondItem="XxI-OW-4tj" secondAttribute="trailing" constant="8" id="mXz-6T-TTz"/>
                                         <constraint firstItem="XxI-OW-4tj" firstAttribute="leading" secondItem="pYg-WB-nV2" secondAttribute="leading" constant="8" id="p6b-rk-mbr"/>
                                     </constraints>

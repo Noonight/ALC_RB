@@ -14,6 +14,8 @@ class ScheduleRefCell: UITableViewCell {
     enum StaticVariables {
         static let scorePlaceHolder = " - "
         static let refereePlaceHolder = "Не назначен"
+        static let noPlace = "Не указан"
+        static let noTeam = "Не назначена"
     }
     
     static let ID = "activeMatches_cell"
@@ -42,10 +44,10 @@ class ScheduleRefCell: UITableViewCell {
             self.date_label.text = self.scheduleMatch.date
             self.time_label.text = self.scheduleMatch.time
             self.league_label.text = "" // grouped by league
-            self.stadium_label.text = self.scheduleMatch.place
+            self.stadium_label.text = self.scheduleMatch.place ?? StaticVariables.noPlace
             
-            self.teamNameOne_label.text = self.scheduleMatch.teamOneName
-            self.teamNameTwo_label.text = self.scheduleMatch.teamTwoName
+            self.teamNameOne_label.text = self.scheduleMatch.teamOneName ?? StaticVariables.noTeam
+            self.teamNameTwo_label.text = self.scheduleMatch.teamTwoName ?? StaticVariables.noTeam
             self.score_label.text = self.scheduleMatch.score
             
             self.refereeOne_label.text = self.scheduleMatch.firstRefereeName
