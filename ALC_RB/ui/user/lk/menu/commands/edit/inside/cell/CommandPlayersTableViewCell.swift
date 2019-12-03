@@ -35,10 +35,22 @@ class CommandPlayersTableViewCell: UITableViewCell {
         }
     }
     
-    @IBAction func onPlayerNumberTextEdit(_ sender: UITextField) {
+//    @IBAction func onPlayerNumberTextEdit(_ sender: UITextField) {
+//        guard let newNumber = sender.text else { return }
+//        playerStatus.number = Int(newNumber)
+//        playerNumberTextDidEndProtocol?.onEditNumberComplete(model: playerStatus)
+//    }
+    @IBAction func onPlayerNumberDidEndChanged(_ sender: UITextField) {
+//        Print.m("did end changed")
+//        guard let newNumber = sender.text else { return }
+//        playerStatus.number = Int(newNumber)
+//        playerNumberTextDidEndProtocol?.onEditNumberComplete(model: playerStatus)
+    }
+    
+    @IBAction func onPlayerNumberDidEnd(_ sender: UITextField) {
+//        Print.m("did end")
         guard let newNumber = sender.text else { return }
         playerStatus.number = Int(newNumber)
         playerNumberTextDidEndProtocol?.onEditNumberComplete(model: playerStatus)
     }
-    
 }

@@ -45,6 +45,18 @@ struct ApiRoute {
         #endif
         return URL(string: "\(baseRoute)api/\(mod.rawValue)/\(id)")!
     }
+    
+    static func getApiURL(_ mod: Routes, ids: String..., functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) -> URL {
+        #if DEBUG
+        let className = (fileName as NSString).lastPathComponent
+        var mIds = String()
+        for id in ids {
+            mIds += "/\(id)"
+        }
+        print("<\(className)> ->> \(functionName) [#\(lineNumber)]| \(baseRoute)api/\(mod.rawValue)\(mIds)\n")
+        #endif
+        return URL(string: "\(baseRoute)api/\(mod.rawValue)\(mIds)")!
+    }
 }
 
 enum Routes: String {
@@ -73,6 +85,7 @@ enum Routes: String {
     case personInviteAccept = "person_invite/accept"
     case personInviteReject = "person_invite/reject"
     case team = "crud/team"
+    case teamChangePersonNubmer = "team/person/change_number"
     
     case team_participation_request = "participation_request"
     

@@ -4052,7 +4052,8 @@
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                                             <connections>
-                                                                                <action selector="onPlayerNumberTextEdit:" destination="ti3-Wg-0jd" eventType="editingChanged" id="OWM-by-VrT"/>
+                                                                                <action selector="onPlayerNumberDidEnd:" destination="ti3-Wg-0jd" eventType="editingDidEnd" id="CaN-69-c7k"/>
+                                                                                <action selector="onPlayerNumberDidEndChanged:" destination="ti3-Wg-0jd" eventType="editingDidEndOnExit" id="T3c-qA-hod"/>
                                                                             </connections>
                                                                         </textField>
                                                                     </subviews>

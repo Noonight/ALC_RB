@@ -47,111 +47,17 @@ final class TeamApi: ApiRequests {
         
         guard let userToken = UserDefaultsHelper().getToken() else { return }
         Print.m("PATH: DATA ")
-//        dump(team.dictionary)
         Print.m(team.patchMap)
         Alamofire
             .request(ApiRoute.getApiURL(.team, id: team.id), method: .patch, parameters: team.patchMap, headers: ["auth" : userToken])
             .responseResultMy(Team.self, resultMy: resultMy)
     }
     
-    // deprecated:
-    func post_teamAcceptRequest(token: String, acceptInfo: AcceptRequest, response_success: @escaping (SinglePerson) -> (), response_message: @escaping (SingleLineMessage)->(), response_failure: @escaping (Error) -> ()) {
+    func post_changePlayerNubmer(teamId: String, personId: String, number: Int, resultMy: @escaping (ResultMy<TeamPlayersStatus, RequestError>) -> ()) {
+        guard let userToken = UserDefaultsHelper().getToken() else { return }
         Alamofire
-            .upload(multipartFormData: { (multipartFormData) in
-                for (key, value) in acceptInfo.toParams() {
-                    let strValue = value as! String
-                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
-                }
-            },
-                    usingThreshold: UInt64(),
-                    to: ApiRoute.getApiURL(.post_team_acceptrequest),
-                    method: .post,
-                    headers: ["auth" : token])
-            { (result) in
-                switch result {
-                case .success(let upload, _, _):
-                    
-                    upload.responseResultMy(SinglePerson.self) { resultMy in
-                        switch resultMy {
-                        case .success(let person):
-                            Print.m("TODO: value is \(person)")
-                        case .message(let msg):
-                            Print.m(msg.message)
-                        case .failure(.error(let error)):
-                            Print.m(error)
-                        case .failure(.notExpectedData):
-                            Print.m("not expectedData")
-                        }
-                    }
-                    
-                case .failure(let error):
-                    response_failure(error)
-                }
-        }
-    }
-    
-    func post_addPlayerToTeam(token: String, addPlayerToTeam: AddPlayerToTeam, response_success: @escaping (SoloLeague) -> (), response_failure: @escaping (Error) -> (), response_single_line_message: @escaping (SingleLineMessage) -> ()) {
-        
-        
-        let header: HTTPHeaders = [
-            "Content-Type" : "application/json",
-            "auth" : "\(token)"
-        ]
-        
-        Alamofire
-            .upload(multipartFormData: { (multipartFormData) in
-                for (key, value) in addPlayerToTeam.toParams() {
-                    let strValue = value as! String
-                    multipartFormData.append(strValue.data(using: String.Encoding.utf8)!, withName: key)
-                }
-            },
-                    usingThreshold: UInt64(),
-                    to: ApiRoute.getApiURL(.post_add_player_team),
-                    method: .post,
-                    headers: ["auth" : token])
-            { (result) in
-                switch result {
-                case .success(let upload, _, _):
-                    
-                    //                    upload.responseJSON(completionHandler: { response in
-                    //                    })
-                    
-                    upload.responseSoloLeague(completionHandler: { response in
-                        switch response.result {
-                        case .success(let value):
-                            response_success(value)
-                        case .failure(let error):
-                            upload.responseSingleLineMessage(completionHandler: { response in
-                                switch response.result {
-                                case .success(let value):
-                                    response_single_line_message(value)
-                                case .failure(let error):
-                                    response_failure(error)
-                                }
-                            })
-                        }
-                    })
-                    
-                    //                    upload.responseLILeagueInfo(completionHandler: { response in
-                    //                        switch response.result {
-                    //                        case .success(let value):
-                    //                            response_success(value)
-                    //                        case .failure(let error):
-                    //                            upload.responseSingleLineMessage(completionHandler: { response in
-                    //                                switch response.result {
-                    //                                case .success(let value):
-                    //                                    response_single_line_message(value)
-                    //                                case .failure(let error):
-                    //                                    response_failure(error)
-                    //                                }
-                    //                            })
-                    //                        }
-                //                    })
-                case .failure(let error):
-                    Print.m(error)
-                    response_failure(error)
-                }
-        }
+            .request(ApiRoute.getApiURL(.teamChangePersonNubmer, ids: teamId, personId), method: .patch, parameters: ["number": number], encoding: JSONEncoding.default, headers: ["auth" : userToken])
+            .responseResultMy(TeamPlayersStatus.self, resultMy: resultMy)
     }
     
 }

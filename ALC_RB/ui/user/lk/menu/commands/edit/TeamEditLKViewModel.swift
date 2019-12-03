@@ -39,6 +39,36 @@ final class TeamEditLKViewModel {
         teamPersonInvitesViewModel.fetch()
     }
     
+    func requestChangePersonNumber(personId: String, nubmer: Int) {
+        self.loading.onNext(true)
+        teamApi.post_changePlayerNubmer(teamId: (team.value?.id)!, personId: personId, number: nubmer) { result in
+            switch result {
+            case .success(let editedPlayerStatus):
+                
+                guard var team = self.team.value else { return }
+                if team.players != nil {
+                    for i in 0..<team.players!.count {
+                        if team.players![i].id == editedPlayerStatus.id {
+                            team.players![i] = editedPlayerStatus
+                        }
+                    }
+                }
+                self.team.accept(team)
+                
+            case .message(let message):
+                Print.m(message.message)
+                self.message.onNext(message)
+            case .failure(.error(let error)):
+                Print.m(error)
+                self.error.onNext(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+                self.message.onNext(SingleLineMessage(Constants.Texts.NOT_VALID_DATA))
+            }
+            self.loading.onNext(false)
+        }
+    }
+    
     func requestPatchTeam(closure: @escaping () -> ()) {
         guard let team = team.value else { return }
         self.loading.onNext(true)

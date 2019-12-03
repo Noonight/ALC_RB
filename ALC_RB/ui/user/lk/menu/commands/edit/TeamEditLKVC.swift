@@ -46,6 +46,15 @@ extension TeamEditLKVC {
     
     func setupBinds() {
         
+        viewModel.team
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe { element in
+                guard let team = element.element else { return }
+                Print.m(team!)
+                self.setupView()
+            }.disposed(by: bag)
+        
         teamName_textField.rx
             .controlEvent([.editingChanged])
             .withLatestFrom(teamName_textField.rx.text)
@@ -151,16 +160,8 @@ extension TeamEditLKVC: TeamPlayerDeleteProtocol, TeamPlayerEditProtocol {
     }
     
     func onEditNumberComplete(model: TeamPlayersStatus) {
-        Print.m("Edit number complete")
-        guard var team = self.viewModel.team.value else { return }
-        if team.players != nil {
-            for i in 0..<team.players!.count {
-                if team.players![i].id == model.id {
-                    team.players![i] = model
-                }
-            }
-        }
-        self.viewModel.team.accept(team)
+        guard let personId = model.person?.getId() ?? model.person?.getValue()?.id else { return }
+        self.viewModel.requestChangePersonNumber(personId: personId, nubmer: model.number ?? 0)
     }
     
     
