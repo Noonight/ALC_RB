@@ -20,34 +20,6 @@ class ScheduleTableViewController: UITableViewController {
         return viewController
     }
     
-    //    var _leagueDetailModel = LeagueDetailModel()
-    //    var leagueDetailModel: LeagueDetailModel
-    //    {
-    //        get {
-    //            return _leagueDetailModel
-    //        }
-    //        set {
-    //            if newValue.leagueInfo.league.matches?.count != 0
-    //            {
-    //                var newVal = newValue
-    //                let hud = self.tableView.showLoadingViewHUD(with: "Сортируем...")
-    //                if let curMatches = newVal.leagueInfo.league.matches {
-    //
-    //                    let sortedMatches = SortMatchesByDateHelper.sort(type: .lowToHigh, matches: curMatches) // sorting matches by date
-    //                    newVal.leagueInfo.league.matches = sortedMatches
-    //                }
-    //                _leagueDetailModel = newVal
-    //                hud.hide(animated: false)
-    //                hud.showSuccessAfterAndHideAfter(withMessage: "Готово")
-    //                self.updateUI()
-    //            }
-    //            else
-    //            {
-    //                self.updateUI()
-    //            }
-    //        }
-    //    }
-    
     var viewModel = ScheduleTableViewModel(matchApi: MatchApi())
     private let disposeBag = DisposeBag()
     
@@ -176,7 +148,7 @@ extension ScheduleTableViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         var viewController = storyboard.instantiateViewController(withIdentifier: "MatchProtocolViewController") as! MatchProtocolViewController
         
-        viewController.viewModel = ProtocolAllViewModel(match: match, leagueDetailModel: self.viewModel.leagueDetailModel.value)
+        viewController.viewModel = ProtocolAllViewModel(match: match, leagueDetailModel: self.viewModel.leagueDetailModel.value!)
         
         self.navigationController?.show(viewController, sender: self)
     }

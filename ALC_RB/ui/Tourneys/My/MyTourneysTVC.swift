@@ -14,11 +14,10 @@ import MBProgressHUD
 class MyTourneysTVC: UITableViewController {
         
     var viewModel: MyTourneysVM!
-//    var hud: MBProgressHUD?
+    
     private let disposeBag = DisposeBag()
     private var tourneyTable: MyTourneysTable!
     private let localTourneys = LocalTourneys()
-//    var leagueDetailModel = BehaviorRelay<_LeagueDetailModel>(value: _LeagueDetailModel())
     
     override func viewDidLoad() {
         super.viewDidLoad()

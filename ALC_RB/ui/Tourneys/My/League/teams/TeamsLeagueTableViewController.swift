@@ -33,7 +33,7 @@ class TeamsLeagueTableViewController: UITableViewController {
     
     var filteredTeamsTable: FilteredTeamsLeagueTableView = FilteredTeamsLeagueTableView()
     var allTeamsTable: AllTeamsLeagueTableView = AllTeamsLeagueTableView()
-    var leagueDetailModel = LeagueDetailModel() {
+    var leagueDetailModel: LeagueDetailModel! {
         didSet {
             updateUI()
         }

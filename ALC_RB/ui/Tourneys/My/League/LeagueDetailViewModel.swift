@@ -15,11 +15,7 @@ final class LeagueDetailViewModel {
     let loading: PublishSubject<Bool> = PublishSubject()
     let error: PublishSubject<Error?> = PublishSubject()
     // as variable and as observable object, subject
-    var leagueDetailModel = BehaviorRelay<LeagueDetailModel>(value: LeagueDetailModel()) {
-        didSet {
-            Print.m(self.leagueDetailModel.value.league.name)
-        }
-    }
+    let leagueDetailModel = BehaviorRelay<LeagueDetailModel?>(value: nil)
     
     private let dataManager: ApiRequests
     
@@ -27,5 +23,5 @@ final class LeagueDetailViewModel {
         self.dataManager = dataManager
     }
     // MARK: TODO
-    // fetch
+    // fetch 
 }

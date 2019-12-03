@@ -35,7 +35,7 @@ final class MatchScheduleModelItem {
     }
     
     var place: String? {
-        return match.place?.getValue()?.name
+        return match.place?.getValue()?.name ?? "Не указан"
     }
     
     var tour: String? {
@@ -51,11 +51,11 @@ final class MatchScheduleModelItem {
     }
     
     var teamOneName: String? {
-        return match.teamOne?.getValue()?.name
+        return match.teamOne?.getValue()?.name ?? "Не назначена"
     }
     
     var teamTwoName: String? {
-        return match.teamTwo?.getValue()?.name
+        return match.teamTwo?.getValue()?.name ?? "Не назначена"
     }
     
     var firstRefereeName: String? {

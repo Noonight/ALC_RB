@@ -171,8 +171,11 @@ extension TeamEditLKVC: TeamPlayerDeleteProtocol, TeamPlayerEditProtocol {
                     team.players?.removeAll(where: { playerStatus -> Bool in
                         return playerStatus.id == model.id
                     })
+                    
                     self.viewModel.team.accept(team)
                     self.viewModel.fetch()
+                    
+                    self.view.layoutIfNeeded()
                 case .message(let message):
                     Print.m(message.message)
                 case .failure(.error(let error)):

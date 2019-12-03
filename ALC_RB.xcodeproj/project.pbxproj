@@ -84,7 +84,6 @@
 		1826378C22F085BF0014C30A /* IntrinsicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1826378B22F085BF0014C30A /* IntrinsicTableView.swift */; };
 		182D4A94237EA21E000C1053 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182D4A93237EA21E000C1053 /* Person.swift */; };
 		182D4A96237EA271000C1053 /* PendingTeamInvite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182D4A95237EA271000C1053 /* PendingTeamInvite.swift */; };
-		18337422235C81E00022D831 /* _LeagueDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18337421235C81E00022D831 /* _LeagueDetailModel.swift */; };
 		18375E2F234A239E00E77809 /* Tourney.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18375E2E234A239D00E77809 /* Tourney.swift */; };
 		18375E31234A34C300E77809 /* SearchTourneyModelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18375E30234A34C300E77809 /* SearchTourneyModelItem.swift */; };
 		1839244822C7500D00A644F5 /* EditMatchReferees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1839244722C7500D00A644F5 /* EditMatchReferees.swift */; };
@@ -411,6 +410,7 @@
 		DBD2498523812C3D00683A8B /* NewsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2498423812C3D00683A8B /* NewsApi.swift */; };
 		DBD2498823814B6900683A8B /* TeamApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2498723814B6900683A8B /* TeamApi.swift */; };
 		DBD4A808239663440096EA0B /* Request + Log it.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD4A807239663440096EA0B /* Request + Log it.swift */; };
+		DBD4A80A2396B5960096EA0B /* LeagueDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD4A8092396B5960096EA0B /* LeagueDetailModel.swift */; };
 		DBD4D025225F946D00C8C8B3 /* EditTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD4D024225F946D00C8C8B3 /* EditTeamResponse.swift */; };
 		DBDCCF312332A2DE00645A06 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDCCF302332A2DE00645A06 /* HomeViewModel.swift */; };
 		DBDE79C2234FB10600E2F73B /* CellTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE79C1234FB10600E2F73B /* CellTypeView.swift */; };
@@ -510,7 +510,6 @@
 		1826378B22F085BF0014C30A /* IntrinsicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntrinsicTableView.swift; sourceTree = "<group>"; };
 		182D4A93237EA21E000C1053 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		182D4A95237EA271000C1053 /* PendingTeamInvite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingTeamInvite.swift; sourceTree = "<group>"; };
-		18337421235C81E00022D831 /* _LeagueDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _LeagueDetailModel.swift; sourceTree = "<group>"; };
 		18375E2E234A239D00E77809 /* Tourney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tourney.swift; sourceTree = "<group>"; };
 		18375E30234A34C300E77809 /* SearchTourneyModelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchTourneyModelItem.swift; path = ../Search/model/SearchTourneyModelItem.swift; sourceTree = "<group>"; };
 		1839244722C7500D00A644F5 /* EditMatchReferees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMatchReferees.swift; sourceTree = "<group>"; };
@@ -842,6 +841,7 @@
 		DBD2498423812C3D00683A8B /* NewsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsApi.swift; sourceTree = "<group>"; };
 		DBD2498723814B6900683A8B /* TeamApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamApi.swift; sourceTree = "<group>"; };
 		DBD4A807239663440096EA0B /* Request + Log it.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request + Log it.swift"; sourceTree = "<group>"; };
+		DBD4A8092396B5960096EA0B /* LeagueDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailModel.swift; sourceTree = "<group>"; };
 		DBD4D024225F946D00C8C8B3 /* EditTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamResponse.swift; sourceTree = "<group>"; };
 		DBDCCF302332A2DE00645A06 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		DBDE79C1234FB10600E2F73B /* CellTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTypeView.swift; sourceTree = "<group>"; };
@@ -1279,7 +1279,7 @@
 		18337420235C81C70022D831 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				18337421235C81E00022D831 /* _LeagueDetailModel.swift */,
+				DBD4A8092396B5960096EA0B /* LeagueDetailModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1966,9 +1966,9 @@
 		DB11CC8B21C22F300083773E /* schedule */ = {
 			isa = PBXGroup;
 			children = (
-				1833741F235C81220022D831 /* model */,
 				DB11CC8C21C22F890083773E /* ScheduleTableViewController.swift */,
 				18A6800F235866BD00AE8F87 /* ScheduleTableViewModel.swift */,
+				1833741F235C81220022D831 /* model */,
 				DB11CC8E21C235320083773E /* cell */,
 				DB595C6E21EF21B6000282F4 /* protocol */,
 			);
@@ -3509,6 +3509,7 @@
 				1839244A22C7CC4000A644F5 /* SoloMatch.swift in Sources */,
 				04C88E5F2382687100B2A8C4 /* AuthUserRealm.swift in Sources */,
 				DB5AAC0B2236A1AE0097963E /* InvitationTableViewCell.swift in Sources */,
+				DBD4A80A2396B5960096EA0B /* LeagueDetailModel.swift in Sources */,
 				DBCA6CAC22F7F9FD001D6C0B /* ProtocolAllTableEventsCell.swift in Sources */,
 				18459869234744F20066DE2A /* ButtonActivity.swift in Sources */,
 				18717A5622BCD55100CD36C9 /* MyMatchesViewModel.swift in Sources */,
@@ -3596,7 +3597,6 @@
 				DB5AAC0622369FDB0097963E /* InvitationLKTVC.swift in Sources */,
 				18A8FC1C2358416B00042968 /* LeagueDetailViewModel.swift in Sources */,
 				DB495B7922AF77CB00FCC6F5 /* ScheduleViewModel.swift in Sources */,
-				18337422235C81E00022D831 /* _LeagueDetailModel.swift in Sources */,
 				DB51CD982215619E00A8D08E /* ScoreMatchTableViewCell.swift in Sources */,
 				DB77EE142395495100408309 /* EditScheduleRefereesModel.swift in Sources */,
 				DB17385D21BAAFDC00017B6D /* UpcomingGameCellPresenter.swift in Sources */,

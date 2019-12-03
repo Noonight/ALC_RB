@@ -29,11 +29,7 @@ class PlayersLeagueDetailViewController: UIViewController {
     
     let cellId = "cell_players_tournament"
     
-    var leagueDetailModel = LeagueDetailModel() {
-        didSet {
-            //updateUI()
-        }
-    }
+    var leagueDetailModel: LeagueDetailModel!
     
     let backgroundView = UIView()
     

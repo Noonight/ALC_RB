@@ -36,7 +36,7 @@ class EditMatchProtocolViewController: UIViewController {
     
     // MARK: Var & Let
     
-    var leagueDetailModel = LeagueDetailModel()
+    var leagueDetailModel: LeagueDetailModel!
     var match = Match()
 //    var model: MyMatchesRefTableViewCell.CellModel!
     

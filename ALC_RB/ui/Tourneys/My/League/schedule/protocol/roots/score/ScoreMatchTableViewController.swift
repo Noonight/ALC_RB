@@ -29,7 +29,7 @@ class ScoreMatchTableViewController: UITableViewController {
     let cellId = "score_match_cell"
     let presenter = ScoreMatchPresenter()
     
-    var leagueDetailModel = LeagueDetailModel()
+    var leagueDetailModel: LeagueDetailModel!
     var match = Match()
     
     var tableStruct: TableStruct = TableStruct()

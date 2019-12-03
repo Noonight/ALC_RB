@@ -12,12 +12,12 @@ import RxCocoa
 
 final class ScheduleTableViewModel {
     
-    var items: PublishSubject<[MatchScheduleModelItem]> = PublishSubject()
-    var loading: PublishSubject<Bool> = PublishSubject()
-    var mMessage: PublishSubject<SingleLineMessage> = PublishSubject()
-    var error: PublishSubject<Error?> = PublishSubject()
-    var firstLoad: BehaviorRelay<Bool> = BehaviorRelay(value: true)
-    var leagueDetailModel = BehaviorRelay<LeagueDetailModel>(value: LeagueDetailModel())
+    let items: PublishSubject<[MatchScheduleModelItem]> = PublishSubject()
+    let loading: PublishSubject<Bool> = PublishSubject()
+    let mMessage: PublishSubject<SingleLineMessage> = PublishSubject()
+    let error: PublishSubject<Error?> = PublishSubject()
+    let firstLoad: BehaviorRelay<Bool> = BehaviorRelay(value: true)
+    var leagueDetailModel = BehaviorRelay<LeagueDetailModel?>(value: nil)
     
     var lastItemCounts = BehaviorRelay<Int>(value: 0)
     
@@ -35,8 +35,8 @@ final class ScheduleTableViewModel {
         
         matchApi.get_match(
         params: ParamBuilder<Match.CodingKeys>()
-            .add(key: .league, value: leagueDetailModel.value.league.id)
-            .populate(.place)
+            .add(key: .league, value: leagueDetailModel.value!.league.id)
+            .populate(StrBuilder().add([.place, .teamOne, .teamTwo]))
 //            .limit()
 //            .offset(lastItemCounts.value)
             .limit(Constants.Values.LIMIT_ALL)

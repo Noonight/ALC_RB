@@ -11,23 +11,6 @@ import RxSwift
 import RxCocoa
 import MBProgressHUD
 
-struct LeagueDetailModel {
-    var tourney: Tourney!
-    var league: League!
-//    var leagueInfo = [League]()
-
-    init() { }
-    
-    init (_ league: League) {
-        self.league = league
-    }
-    
-    init(tourney: Tourney, league: League) {
-        self.tourney = tourney
-        self.league = league
-    }
-}
-
 fileprivate enum Segments: Int {
     case schedule = 0
     case teams = 1
@@ -60,7 +43,6 @@ class LeagueDetailViewController: UIViewController {
     
     var segmentHelper: SegmentHelper!
     var viewModel = LeagueDetailViewModel(dataManager: ApiRequests())
-//    var hud: MBProgressHUD?
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -98,7 +80,7 @@ extension LeagueDetailViewController {
         viewModel
             .leagueDetailModel
             .asDriver()
-            .map { "\($0.tourney!.name!) \($0.league.name!)" }
+            .map { "\($0!.tourney.name!). \($0!.league.name!)" }
             .drive(self.mTitle.rx.text)
             .disposed(by: disposeBag)
         
