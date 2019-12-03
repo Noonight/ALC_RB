@@ -108,12 +108,26 @@ extension ScheduleRefTVC: TableActions {
     }
 }
 
+// MARK: - EDIT SCHEDULE CALL BACK
+
+extension ScheduleRefTVC: EditScheduleCallBack {
+    
+    func back(match: Match) {
+        editSchedule.dismiss(animated: true) {
+            Print.m("dismiss here yee")
+        }
+        self.viewModel.fetch()
+    }
+    
+}
+
 // MARK: - NAVIGATION
 
 extension ScheduleRefTVC {
     
     func showEditMatchReferees(model: MatchScheduleModelItem) {
 //        editSchedule.
+        editSchedule.editScheduleCallBack = self
         editSchedule.viewModel.matchScheduleModel.accept(model)
         show(editSchedule, sender: self)
     }

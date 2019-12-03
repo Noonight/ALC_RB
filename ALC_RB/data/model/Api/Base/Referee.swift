@@ -23,6 +23,12 @@ struct Referee: Codable {
         self.type = type
     }
     
+    init(person: String, type: rType) {
+        self.id = ""
+        self.person = IdRefObjectWrapper<Person>(person)
+        self.type = type
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case type

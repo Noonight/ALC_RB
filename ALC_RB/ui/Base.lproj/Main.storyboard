@@ -5508,7 +5508,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XpW-4K-U53">
-                                                <rect key="frame" x="0.0" y="103.5" width="320" height="181"/>
+                                                <rect key="frame" x="0.0" y="100.5" width="320" height="181"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1-й судья:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAk-L0-Bfk">
                                                         <rect key="frame" x="8" y="16" width="79" height="21"/>
@@ -5609,7 +5609,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lBp-46-q12">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="103"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tourney league name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebQ-sH-gfY">
                                                         <rect key="frame" x="8" y="8" width="304" height="20.5"/>
@@ -5618,42 +5618,42 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Date + time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3D-UM-QIm">
-                                                        <rect key="frame" x="8" y="36.5" width="89" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="8" y="36.5" width="79.5" height="18"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLa-HQ-Wxq">
-                                                        <rect key="frame" x="0.0" y="65.5" width="320" height="0.5"/>
+                                                        <rect key="frame" x="0.0" y="62.5" width="320" height="0.5"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="0.5" id="EIe-ef-uN3"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team one" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M33-Bb-nTM">
-                                                        <rect key="frame" x="8" y="74" width="114" height="21"/>
+                                                        <rect key="frame" x="8" y="71" width="114" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99 : 99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SsH-Ao-uua">
-                                                        <rect key="frame" x="130" y="74" width="60" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99 : 99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SsH-Ao-uua">
+                                                        <rect key="frame" x="130" y="71" width="60" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="hqa-VG-CE9"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team two" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4q-z8-UpY">
-                                                        <rect key="frame" x="198" y="74" width="114" height="21"/>
+                                                        <rect key="frame" x="198" y="71" width="114" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Place" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5QK-jW-Jh9">
-                                                        <rect key="frame" x="270" y="36.5" width="42" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="274.5" y="36.5" width="37.5" height="18"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -5686,7 +5686,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qhS-ed-dU1">
-                                                <rect key="frame" x="0.0" y="103" width="320" height="0.5"/>
+                                                <rect key="frame" x="0.0" y="100" width="320" height="0.5"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="0.5" id="dEB-vN-Jkz"/>
@@ -5742,13 +5742,19 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="dateTimeLabel" destination="B3D-UM-QIm" id="IwD-IO-g8X"/>
                         <outlet property="mainRefShowProtocol_btn" destination="Yhd-Su-Dyx" id="cOF-ex-Rvb"/>
+                        <outlet property="placeLabel" destination="5QK-jW-Jh9" id="JzU-TW-One"/>
                         <outlet property="referee1_btn" destination="ogs-7O-9Ke" id="8TL-qE-R07"/>
                         <outlet property="referee2_btn" destination="tKK-j8-w7D" id="zhk-Us-M28"/>
                         <outlet property="referee3_btn" destination="ixi-0K-0cn" id="sNn-tx-RjG"/>
                         <outlet property="save_btn" destination="g8s-Iv-4is" id="4ds-zw-o9G"/>
+                        <outlet property="scoreLabel" destination="SsH-Ao-uua" id="7lT-Ue-RLk"/>
                         <outlet property="scrollView" destination="rc3-QU-7jZ" id="cmH-jn-J2f"/>
+                        <outlet property="teamOneLabel" destination="M33-Bb-nTM" id="H9B-PO-Ap6"/>
+                        <outlet property="teamTwoLabel" destination="X4q-z8-UpY" id="f8A-bB-toW"/>
                         <outlet property="timekeeper_btn" destination="89g-Au-JEB" id="MAP-9a-ktJ"/>
+                        <outlet property="tourneyLeagueLabel" destination="ebQ-sH-gfY" id="iD3-t6-c7I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0o-Rv-hpX" userLabel="First Responder" sceneMemberID="firstResponder"/>

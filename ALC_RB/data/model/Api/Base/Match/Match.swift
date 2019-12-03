@@ -40,6 +40,26 @@ struct Match: Codable {
     var updatedAt: Date? = nil
     var v: Int? = nil
 
+    var patchReferees: [String: Any] {
+        get {
+            var map = [CodingKeys : Any]()
+            map[.id] = id
+            map[.referees] = referees.flatMap({ referees -> [[String : Any]] in
+                var mArray = [[String:Any]]()
+                for referee in referees {
+                    var mMap = [Referee.CodingKeys: Any]()
+                    mMap[.id] = referee.id
+                    mMap[.type] = referee.type?.rawValue
+                    mMap[.person] = referee.person?.getId() ?? referee.person?.getValue()?.id
+                    mArray.append(mMap.get())
+                }
+                return mArray
+            })
+            
+            return map.get()
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         
         case id = "_id"
@@ -106,5 +126,10 @@ extension Match {
         createdAt = nil
         updatedAt = nil
         v = nil
+    }
+    
+    init(id: String, referees: [Referee]) {
+        self.id = id
+        self.referees = referees
     }
 }

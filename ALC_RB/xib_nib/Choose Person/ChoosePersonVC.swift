@@ -74,7 +74,7 @@ extension ChoosePersonVC {
     
     func setupNavBar() {
         modalPresentationCapturesStatusBarAppearance = true
-        navBar.titleLabel.text = "Выберите Лигу"
+        navBar.titleLabel.text = "Выберите Пользователя"
         navBar.rightButton.setTitle("Отмена", for: .normal)
         navBar.rightButton.addTarget(self, action: #selector(closePressed(_:)), for: .touchUpInside)
         

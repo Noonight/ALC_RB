@@ -11,6 +11,10 @@ import RxSwift
 import RxCocoa
 import SPStorkController
 
+protocol EditScheduleCallBack {
+    func back(match: Match)
+}
+
 class EditScheduleLKViewController: UIViewController {
     private enum Texts {
         static let NO_REF = "Не назначен"
@@ -27,6 +31,12 @@ class EditScheduleLKViewController: UIViewController {
     @IBOutlet weak var mainRefShowProtocol_btn: UIBarButtonItem!
     @IBOutlet weak var save_btn: UIBarButtonItem!
     
+    @IBOutlet weak var tourneyLeagueLabel: UILabel!
+    @IBOutlet weak var dateTimeLabel: UILabel!
+    @IBOutlet weak var placeLabel: UILabel!
+    @IBOutlet weak var teamOneLabel: UILabel!
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var teamTwoLabel: UILabel!
     
     @IBOutlet weak var referee1_btn: UIButton!
     @IBOutlet weak var referee2_btn: UIButton!
@@ -35,6 +45,8 @@ class EditScheduleLKViewController: UIViewController {
     
     var viewModel: EditScheduleViewModel = EditScheduleViewModel(matchApi: MatchApi())
     private let bag = DisposeBag()
+    
+    var editScheduleCallBack: EditScheduleCallBack?
     
     private var choosePersonVC: ChoosePersonVC!
     
@@ -52,8 +64,7 @@ class EditScheduleLKViewController: UIViewController {
         setupViewBinds()
         setupPersonChooser()
         
-        guard let match = viewModel.matchScheduleModel.value?.match else { return }
-        self.viewModel.refereesModel.setup(referees: match.referees)
+        setupView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +77,21 @@ class EditScheduleLKViewController: UIViewController {
 // MARK: - SETUP
 
 extension EditScheduleLKViewController {
+    
+    func setupView() {
+        guard let matchModel = viewModel.matchScheduleModel.value else { return }
+        
+        self.tourneyLeagueLabel.text = matchModel.leagueName
+//        self.dateTimeLabel.text = "\(matchModel.date) : \(matchModel.time)"
+        self.dateTimeLabel.text = matchModel.dateTime
+        self.placeLabel.text = matchModel.place
+        self.teamOneLabel.text = matchModel.teamOneName
+        self.teamTwoLabel.text = matchModel.teamTwoName
+        self.scoreLabel.text = matchModel.score
+        
+        
+        self.viewModel.refereesModel.setup(referees: matchModel.match.referees)
+    }
     
     func setupViewBinds() {
         
@@ -136,11 +162,13 @@ extension EditScheduleLKViewController {
         viewModel.editedMatch
             .asObservable()
             .observeOn(MainScheduler.instance)
+            .takeLast(1)
             .subscribe({ element in
                 guard let match = element.element else { return }
-//                if let mMatch = match {
-//                    self.onResponseSuccess(soloMatch: mMatch)
-//                }
+                Print.m("MATCH WAS EDITED = \(match)")
+                self.showSuccessViewHUD(seconds: 2, closure: {
+                    self.editScheduleCallBack?.back(match: match!)
+                })
             })
             .disposed(by: bag)
         
@@ -252,7 +280,8 @@ extension EditScheduleLKViewController {
         choosePersonVC.modalPresentationStyle = .formSheet
         choosePersonVC.modalPresentationCapturesStatusBarAppearance = true
         choosePersonVC.refereeType = type
-        self.present(choosePersonVC, animated: true, completion: nil)
+//        self.present(choosePersonVC, animated: true, completion: nil)
+        self.presentAsStork(choosePersonVC)
     }
 }
 

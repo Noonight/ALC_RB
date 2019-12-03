@@ -41,6 +41,28 @@ struct EditScheduleRefereesModel {
         }
     }
     
+    func getReferees() -> [Referee] {
+        var resultArray = [Referee]()
+        
+        if let firstReferee = firstReferee.value {
+            resultArray.append(Referee(person: firstReferee.id, type: .firstReferee))
+        }
+        
+        if let secondReferee = secondReferee.value {
+            resultArray.append(Referee(person: secondReferee.id, type: .firstReferee))
+        }
+        
+        if let thirdReferee = thirdReferee.value {
+            resultArray.append(Referee(person: thirdReferee.id, type: .firstReferee))
+        }
+        
+        if let timekeeper = timekeeper.value {
+            resultArray.append(Referee(person: timekeeper.id, type: .firstReferee))
+        }
+        
+        return resultArray
+    }
+    
     func getRefereesArray() -> EditMatchReferees.Referees {
         var resultArray: [EditMatchReferee] = []
         

@@ -26,6 +26,10 @@ final class MatchScheduleModelItem {
         return match.date?.toFormat(DateFormats.localTime.rawValue)
     }
     
+    var dateTime: String? {
+        return "\(date ?? "") : \(time ?? "")"
+    }
+    
     var score: String? {
         return match.score
     }
@@ -68,6 +72,10 @@ final class MatchScheduleModelItem {
     
     var timekeeperRefereeName: String? {
         return match.referees?.filter { $0.type == Referee.rType.timekeeper }.first?.person?.getValue()?.getFullName()
+    }
+    
+    var leagueName: String? {
+        return match.league?.getValue()?.name
     }
     
 }

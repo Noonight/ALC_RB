@@ -31,8 +31,8 @@ class EditScheduleViewModel {
     
     func editMatchReferees() {
         self.loading.onNext(true)
-        let newReferees = EditMatchReferees(id: (self.matchScheduleModel.value?.match.id)!, referees: self.refereesModel.getRefereesArray())
-        matchApi.post_matchSetReferee(editMatchReferees: newReferees) { result in
+        let patchMatch = Match(id: (self.matchScheduleModel.value?.match.id)!, referees: self.refereesModel.getReferees())
+        matchApi.patch_matchReferees(match: patchMatch) { result in
             switch result {
             case .success(let editedMatch):
                 self.editedMatch.accept(editedMatch)

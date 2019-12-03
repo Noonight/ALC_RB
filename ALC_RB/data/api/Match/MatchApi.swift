@@ -162,7 +162,7 @@ final class MatchApi: ApiRequests {
             resultMy(.success(upcomingMatches))
         }
     }
-    
+    // DEPRECATED: always return 500, because there check user role
     func post_matchSetReferee(editMatchReferees: EditMatchReferees, resultMy: @escaping (ResultMy<Match, RequestError>) -> ()) {
         
         guard let userToken = UserDefaultsHelper().getToken() else { return }
@@ -284,4 +284,13 @@ final class MatchApi: ApiRequests {
     //        }
     //    }
     
+    // MARK: - PATCH
+    
+    func patch_matchReferees(match: Match, resultMy: @escaping (ResultMy<Match, RequestError>) -> ()) {
+        guard let userToken = UserDefaultsHelper().getToken() else { return }
+        
+        Alamofire
+            .request(ApiRoute.getApiURL(.match, id: match.id), method: .patch, parameters: match.patchReferees, headers: ["auth": userToken])
+            .responseResultMy(Match.self, resultMy: resultMy)
+    }
 }
