@@ -38,7 +38,7 @@ class EditMatchProtocolViewController: UIViewController {
     
     var leagueDetailModel = LeagueDetailModel()
     var match = Match()
-    var model: MyMatchesRefTableViewCell.CellModel!
+//    var model: MyMatchesRefTableViewCell.CellModel!
     
     let presenter = EditMatchProtocolPresenter()
     
@@ -254,7 +254,7 @@ extension EditMatchProtocolViewController {
         case is EditEventsMatchTableViewController:
             let controller = destination as! EditEventsMatchTableViewController
             controller.eventsController = eventsController
-            controller.model = self.model
+//            controller.model = self.model
             controller.teamOneController = self.teamOnePlayersController
             controller.teamTwoController = self.teamTwoPlayersController
         case is EditScoreMatchTableViewController:

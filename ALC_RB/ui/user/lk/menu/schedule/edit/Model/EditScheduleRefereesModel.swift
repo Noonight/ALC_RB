@@ -49,15 +49,15 @@ struct EditScheduleRefereesModel {
         }
         
         if let secondReferee = secondReferee.value {
-            resultArray.append(Referee(person: secondReferee.id, type: .firstReferee))
+            resultArray.append(Referee(person: secondReferee.id, type: .secondReferee))
         }
         
         if let thirdReferee = thirdReferee.value {
-            resultArray.append(Referee(person: thirdReferee.id, type: .firstReferee))
+            resultArray.append(Referee(person: thirdReferee.id, type: .thirdReferee))
         }
         
         if let timekeeper = timekeeper.value {
-            resultArray.append(Referee(person: timekeeper.id, type: .firstReferee))
+            resultArray.append(Referee(person: timekeeper.id, type: .timekeeper))
         }
         
         return resultArray

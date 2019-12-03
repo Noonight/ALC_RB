@@ -40,7 +40,7 @@ class EditEventsMatchTableViewController: UITableViewController {
 //    var destinationModel = [Event]()
     var fetchedPersons: [Person] = []
     
-    var model: MyMatchesRefTableViewCell.CellModel!
+//    var model: MyMatchesRefTableViewCell.CellModel!
     
     let presenter = EditEventsMatchPresenter()
     let menuLauncher = MenuLauncher()
@@ -222,7 +222,7 @@ class EditEventsMatchTableViewController: UITableViewController {
             let destination = segue.destination as? AddEventsProtocolViewController
         {
             destination.eventsController = self.eventsController
-            destination.model = self.model
+//            destination.model = self.model
             destination.teamOneController = self.teamOneController
             destination.teamTwoController = self.teamTwoController
         }

@@ -31,6 +31,7 @@ final class MatchApi: ApiRequests {
         guard let userId = UserDefaultsHelper().getAuthorizedUser()?.person.id else { return }
         let params = ParamBuilder<Match.CodingKeys>()
             .add(key: "referees.person", value: userId)
+            .add(key: .played, value: false)
             .select("referees.person referees._id")
             .get()
         get_match(params: params, resultMy: resultMy)
@@ -186,120 +187,13 @@ final class MatchApi: ApiRequests {
             .responseResultMy(Match.self, resultMy: resultMy)
     }
     
-    func get_myMatchesCellModels(participationMatches: [Match], resultMy: @escaping (ResultMy<[MyMatchesRefTableViewCell.CellModel], Error>) -> ()) {
-        
-        var mError: Error?
-        var mMessage: SingleLineMessage?
-        
-        let group = DispatchGroup()
-        var mResult = [MyMatchesRefTableViewCell.CellModel]()
-        
-        for match in participationMatches {
-            
-            // DEPRECATED: chto to tam
-            //            group.enter()
-            //            getMyMatchesCell(parMatch: match) { result in
-            //                switch result {
-            //                case .success(let cell):
-            //                    mResult.append(cell)
-            //                case .message(let message):
-            //                    mMessage = message
-            //                case .failure(let error):
-            //                    mError = error
-            //                }
-            //                group.leave()
-            //            }
-        }
-        
-        group.notify(queue: .main) {
-            if let error = mError {
-                resultMy(.failure(error))
-            }
-            if let message = mMessage {
-                resultMy(.message(message))
-            }
-            resultMy(.success(mResult))
-        }
-    }
-    
-    //    func getMyMatchesCell(parMatch: Match, resultMy: @escaping (ResultMy<MyMatchesRefTableViewCell.CellModel, Error>) -> ()) {
-    //
-    //        var mMessage: SingleLineMessage?
-    //        var mError: Error?
-    //
-    //        let group = DispatchGroup()
-    //        var model = MyMatchesRefTableViewCell.CellModel(participationMatch: parMatch)
-    //
-    //        group.enter()
-    //        get_tournamentLeague(id: parMatch.league) { result in
-    //            switch result {
-    //            case .success(let league):
-    //                if let team1 = league.league.teams?.filter({ team -> Bool in
-    //                    return team.id == parMatch.teamOne
-    //                }).first {
-    //                    model.team1Name = team1.name
-    //
-    //                    if team1.club?.count ?? 0 > 1 {
-    //                        group.enter()
-    //                        self.get_club(id: team1.club!) { cResult in
-    //                            switch cResult {
-    //                            case .success(let club):
-    //                                model.club1 = club.club
-    //                            case .message(let message):
-    //                                mMessage = message
-    //                            case .failure(let error):
-    //                                mError = error
-    //                            }
-    //                            group.leave()
-    //                        }
-    //                    }
-    //                }
-    //                if let team2 = league.league.teams?.filter({ team -> Bool in
-    //                    return team.id == parMatch.teamTwo
-    //                }).first {
-    //                    model.team2Name = team2.name
-    //
-    //                    if team2.club?.count ?? 0 > 1 {
-    //                        group.enter()
-    //                        self.get_club(id: team2.club!) { cResult in
-    //                            switch cResult {
-    //                            case .success(let club):
-    //                                model.club2 = club.club
-    //                            case .message(let message):
-    //                                mMessage = message
-    //                            case .failure(let error):
-    //                                mError = error
-    //                            }
-    //                            group.leave()
-    //                        }
-    //                    }
-    //                }
-    //            case .message(let message):
-    //                mMessage = message
-    //            case .failure(let error):
-    //                mError = error
-    //            }
-    //            group.leave()
-    //        }
-    //
-    //        group.notify(queue: .main) {
-    //            if let error = mError {
-    //                resultMy(.failure(error))
-    //            }
-    //            if let message = mMessage {
-    //                resultMy(.message(message))
-    //            }
-    //            resultMy(.success(model))
-    //        }
-    //    }
-    
     // MARK: - PATCH
     
     func patch_matchReferees(match: Match, resultMy: @escaping (ResultMy<Match, RequestError>) -> ()) {
         guard let userToken = UserDefaultsHelper().getToken() else { return }
-        
         Alamofire
-            .request(ApiRoute.getApiURL(.match, id: match.id), method: .patch, parameters: match.patchReferees, headers: ["auth": userToken])
+            .request(ApiRoute.getApiURL(.match, id: match.id), method: .patch, parameters: match.patchReferees, encoding: JSONEncoding.default, headers: ["auth": userToken])
+            .logBody()
             .responseResultMy(Match.self, resultMy: resultMy)
     }
 }

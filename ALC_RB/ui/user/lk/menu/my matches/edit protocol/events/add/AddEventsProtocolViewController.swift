@@ -46,7 +46,7 @@ class AddEventsProtocolViewController: BaseStateViewController {
     let presenter = AddEventsProtocolPresenter()
     
     // MARK: - Vars
-    var model: MyMatchesRefTableViewCell.CellModel!
+//    var model: MyMatchesRefTableViewCell.CellModel!
     var teamOneController: ProtocolPlayersController!
     var teamTwoController: ProtocolPlayersController!
     
@@ -250,40 +250,40 @@ class AddEventsProtocolViewController: BaseStateViewController {
 //    }
     
     func showTeamPicker(sender: UIButton) {
-        let acp = ActionSheetStringPicker(title: "", rows: [model.team1Name!, model.team2Name!], initialSelection: 0, doneBlock: { (picker, index, value) in
-            self.teamBtn.setTitle(value as? String, for: .normal)
-        }, cancel: { (picker) in
-            self.teamBtn.setTitle(Texts.DEFAULT_TEAM_BTN, for: .normal)
-        }, origin: sender)
-        
-        acp?.show()
+//        let acp = ActionSheetStringPicker(title: "", rows: [model.team1Name!, model.team2Name!], initialSelection: 0, doneBlock: { (picker, index, value) in
+//            self.teamBtn.setTitle(value as? String, for: .normal)
+//        }, cancel: { (picker) in
+//            self.teamBtn.setTitle(Texts.DEFAULT_TEAM_BTN, for: .normal)
+//        }, origin: sender)
+//
+//        acp?.show()
     }
 
     func showPlayerPicker(sender: UIButton) {
 
         // default team, both players
-        if teamBtn.titleLabel?.text == Texts.DEFAULT_TEAM_BTN {
-            let acp = ActionSheetStringPicker(title: "", rows: getFullNamePlayers(persons: filterFullNamePlayers(persons: connectTeamOneAndTeamTwoPlayers())), initialSelection: 0, doneBlock: { (picker, index, value) in
-                self.playerBtn.setTitle(value as? String, for: .normal)
-            }, cancel: { (picker) in
-                self.playerBtn.setTitle(Texts.DEFAULT_PLAYER_BTN, for: .normal)
-            }, origin: sender)
-            acp?.show()
-        } else if teamBtn.titleLabel?.text == model.team1Name {
-            let acp = ActionSheetStringPicker(title: "", rows: getFullNamePlayers(persons: filterFullNamePlayers(persons: fetchedTeamOnePlayers!)), initialSelection: 0, doneBlock: { (picker, index, value) in
-                self.playerBtn.setTitle(value as? String, for: .normal)
-            }, cancel: { (picker) in
-                self.playerBtn.setTitle(Texts.DEFAULT_PLAYER_BTN, for: .normal)
-            }, origin: sender)
-            acp?.show()
-        } else if teamBtn.titleLabel?.text == model.team2Name {
-            let acp = ActionSheetStringPicker(title: "", rows: getFullNamePlayers(persons: filterFullNamePlayers(persons: fetchedTeamTwoPlayers!)), initialSelection: 0, doneBlock: { (picker, index, value) in
-                self.playerBtn.setTitle(value as? String, for: .normal)
-            }, cancel: { (picker) in
-                self.playerBtn.setTitle(Texts.DEFAULT_PLAYER_BTN, for: .normal)
-            }, origin: sender)
-            acp?.show()
-        }
+//        if teamBtn.titleLabel?.text == Texts.DEFAULT_TEAM_BTN {
+//            let acp = ActionSheetStringPicker(title: "", rows: getFullNamePlayers(persons: filterFullNamePlayers(persons: connectTeamOneAndTeamTwoPlayers())), initialSelection: 0, doneBlock: { (picker, index, value) in
+//                self.playerBtn.setTitle(value as? String, for: .normal)
+//            }, cancel: { (picker) in
+//                self.playerBtn.setTitle(Texts.DEFAULT_PLAYER_BTN, for: .normal)
+//            }, origin: sender)
+//            acp?.show()
+//        } else if teamBtn.titleLabel?.text == model.team1Name {
+//            let acp = ActionSheetStringPicker(title: "", rows: getFullNamePlayers(persons: filterFullNamePlayers(persons: fetchedTeamOnePlayers!)), initialSelection: 0, doneBlock: { (picker, index, value) in
+//                self.playerBtn.setTitle(value as? String, for: .normal)
+//            }, cancel: { (picker) in
+//                self.playerBtn.setTitle(Texts.DEFAULT_PLAYER_BTN, for: .normal)
+//            }, origin: sender)
+//            acp?.show()
+//        } else if teamBtn.titleLabel?.text == model.team2Name {
+//            let acp = ActionSheetStringPicker(title: "", rows: getFullNamePlayers(persons: filterFullNamePlayers(persons: fetchedTeamTwoPlayers!)), initialSelection: 0, doneBlock: { (picker, index, value) in
+//                self.playerBtn.setTitle(value as? String, for: .normal)
+//            }, cancel: { (picker) in
+//                self.playerBtn.setTitle(Texts.DEFAULT_PLAYER_BTN, for: .normal)
+//            }, origin: sender)
+//            acp?.show()
+//        }
     }
     
     func isCorrectPlayer() -> Bool {

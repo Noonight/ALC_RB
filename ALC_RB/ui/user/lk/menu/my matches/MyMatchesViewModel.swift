@@ -11,68 +11,41 @@ import RxSwift
 
 class MyMatchesViewModel {
     
-    var message = PublishSubject<SingleLineMessage>()
-    var refreshing: PublishSubject<Bool> = PublishSubject()
-    var error: PublishSubject<Error> = PublishSubject()
-    var participationMatches: Variable<[Match]> = Variable<[Match]>([])
-    var tableModel: PublishSubject<[MyMatchesRefTableViewCell.CellModel]> = PublishSubject()
-//    var firstInit: Variable<Bool> = Variable<Bool>(true)
+    let message = PublishSubject<SingleLineMessage?>()
+    let loading: PublishSubject<Bool> = PublishSubject()
+    let error: PublishSubject<Error?> = PublishSubject()
     
-    var matchApi: MatchApi?
+    let matches = PublishSubject<[MyMatchModelItem]>()
+    
+    private let matchApi: MatchApi
     
     init(matchApi: MatchApi) {
         self.matchApi = matchApi
     }
     
-    func fetch(closure: @escaping () -> ())
-    {
-        Print.m(participationMatches.value)
-        if participationMatches.value.count > 0 {
-            refreshing.onNext(true)
-            
-//            self.dataManager?.get_forMyMatches(participationMatches: participationMatches.value, get_success: { (cellModels) in
-//                Print.m("request for my matches complete with success code")
-//                dump(cellModels)
-//                self.tableModel.onNext(cellModels)
-//                self.refreshing.onNext(false)
-//                closure()
-////                Print.m(cellModels)
-//            }, get_failure: { (error) in
-//                self.error.onNext(error)
-//            })
-        } else {
-            self.tableModel.onNext([])
-            closure()
-//            self.error.onNext(Error)
+    func fetch() {
+        self.loading.onNext(true)
+        guard let userId = UserDefaultsHelper().getAuthorizedUser()?.person.id else { return }
+        let params = ParamBuilder<Match.CodingKeys>()
+            .add(key: "referees.person", value: userId)
+            .add(key: .played, value: false)
+            .populate(StrBuilder().add([.teamOne, .teamTwo, .league, .place]).add("referees.person"))
+            .get()
+        self.matchApi.get_match(params: params) { result in
+            switch result {
+            case .success(let findedMatches):
+                self.matches.onNext(findedMatches.map { MyMatchModelItem(match: $0) })
+            case .message(let message):
+                Print.m(message.message)
+                self.message.onNext(message)
+            case .failure(.error(let error)):
+                Print.m(error)
+                self.error.onNext(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+                self.message.onNext(SingleLineMessage(Constants.Texts.NOT_VALID_DATA))
+            }
+            self.loading.onNext(false)
         }
-        
-        if participationMatches.value.count > 0 {
-            refreshing.onNext(true)
-            matchApi?.get_myMatchesCellModels(participationMatches: participationMatches.value, resultMy: { result in
-                self.refreshing.onNext(false)
-                switch result {
-                case .success(let cells):
-                    dump(cells)
-                    self.tableModel.onNext(cells)
-                case .message(let message):
-                    self.message.onNext(message)
-                case .failure(let error):
-                    self.error.onNext(error)
-                }
-            })
-        }
-    }
-    
-    func fetchLeagueInfo(id: String, success: @escaping ([League])->(), r_message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error)->()) {
-//        dataManager?.get_tournamentLeague(id: id, result: { result in
-//            switch result {
-//            case .success(let league):
-//                success(league)
-//            case .message(let message):
-//                r_message(message)
-//            case .failure(let error):
-//                failure(error)
-//            }
-//        })
     }
 }

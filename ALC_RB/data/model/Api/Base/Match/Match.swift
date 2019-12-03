@@ -48,7 +48,7 @@ struct Match: Codable {
                 var mArray = [[String:Any]]()
                 for referee in referees {
                     var mMap = [Referee.CodingKeys: Any]()
-                    mMap[.id] = referee.id
+//                    mMap[.id] = referee.id
                     mMap[.type] = referee.type?.rawValue
                     mMap[.person] = referee.person?.getId() ?? referee.person?.getValue()?.id
                     mArray.append(mMap.get())

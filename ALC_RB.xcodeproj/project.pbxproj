@@ -410,6 +410,7 @@
 		DBD2498323812A4400683A8B /* AnnounceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2498223812A4400683A8B /* AnnounceApi.swift */; };
 		DBD2498523812C3D00683A8B /* NewsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2498423812C3D00683A8B /* NewsApi.swift */; };
 		DBD2498823814B6900683A8B /* TeamApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2498723814B6900683A8B /* TeamApi.swift */; };
+		DBD4A808239663440096EA0B /* Request + Log it.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD4A807239663440096EA0B /* Request + Log it.swift */; };
 		DBD4D025225F946D00C8C8B3 /* EditTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD4D024225F946D00C8C8B3 /* EditTeamResponse.swift */; };
 		DBDCCF312332A2DE00645A06 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDCCF302332A2DE00645A06 /* HomeViewModel.swift */; };
 		DBDE79C2234FB10600E2F73B /* CellTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE79C1234FB10600E2F73B /* CellTypeView.swift */; };
@@ -419,6 +420,8 @@
 		DBE0E7A4223BDE0000CC0EE2 /* OngoingLeaguesLKPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE0E7A3223BDE0000CC0EE2 /* OngoingLeaguesLKPresenter.swift */; };
 		DBE0E7A7223BDE5800CC0EE2 /* BaseStateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE0E7A6223BDE5800CC0EE2 /* BaseStateTableViewController.swift */; };
 		DBE0E7AA223C063200CC0EE2 /* OngoingLeagueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE0E7A9223C063200CC0EE2 /* OngoingLeagueTableViewCell.swift */; };
+		DBE82EC72396440600C1BF1D /* MyMatchesTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE82EC62396440600C1BF1D /* MyMatchesTable.swift */; };
+		DBE82ECA2396444E00C1BF1D /* MyMatchModelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE82EC92396444E00C1BF1D /* MyMatchModelItem.swift */; };
 		DBF4F00822157BF900066BE3 /* ScoreMatchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF4F00722157BF900066BE3 /* ScoreMatchPresenter.swift */; };
 		DBF50FE92391166100AA73BE /* TeamAddTableActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF50FE82391166100AA73BE /* TeamAddTableActions.swift */; };
 		DBF50FED239124D500AA73BE /* MenuGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF50FEC239124D500AA73BE /* MenuGroupModel.swift */; };
@@ -838,6 +841,7 @@
 		DBD2498223812A4400683A8B /* AnnounceApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnounceApi.swift; sourceTree = "<group>"; };
 		DBD2498423812C3D00683A8B /* NewsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsApi.swift; sourceTree = "<group>"; };
 		DBD2498723814B6900683A8B /* TeamApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamApi.swift; sourceTree = "<group>"; };
+		DBD4A807239663440096EA0B /* Request + Log it.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Request + Log it.swift"; sourceTree = "<group>"; };
 		DBD4D024225F946D00C8C8B3 /* EditTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamResponse.swift; sourceTree = "<group>"; };
 		DBDCCF302332A2DE00645A06 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		DBDE79C1234FB10600E2F73B /* CellTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTypeView.swift; sourceTree = "<group>"; };
@@ -847,6 +851,8 @@
 		DBE0E7A3223BDE0000CC0EE2 /* OngoingLeaguesLKPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingLeaguesLKPresenter.swift; sourceTree = "<group>"; };
 		DBE0E7A6223BDE5800CC0EE2 /* BaseStateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStateTableViewController.swift; sourceTree = "<group>"; };
 		DBE0E7A9223C063200CC0EE2 /* OngoingLeagueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OngoingLeagueTableViewCell.swift; sourceTree = "<group>"; };
+		DBE82EC62396440600C1BF1D /* MyMatchesTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMatchesTable.swift; sourceTree = "<group>"; };
+		DBE82EC92396444E00C1BF1D /* MyMatchModelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMatchModelItem.swift; sourceTree = "<group>"; };
 		DBF4F00722157BF900066BE3 /* ScoreMatchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreMatchPresenter.swift; sourceTree = "<group>"; };
 		DBF50FE82391166100AA73BE /* TeamAddTableActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamAddTableActions.swift; sourceTree = "<group>"; };
 		DBF50FEC239124D500AA73BE /* MenuGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuGroupModel.swift; sourceTree = "<group>"; };
@@ -1333,7 +1339,8 @@
 			children = (
 				18717A5322BCD46600CD36C9 /* MyMatchesTVC.swift */,
 				18717A5522BCD55100CD36C9 /* MyMatchesViewModel.swift */,
-				18717A5722BCD57100CD36C9 /* cell */,
+				DBE82EC82396444400C1BF1D /* Model */,
+				DBE82EC5239643F400C1BF1D /* Table */,
 				187F2DE222CB19440049EA77 /* edit protocol */,
 			);
 			path = "my matches";
@@ -1816,6 +1823,7 @@
 				DB682CB7237FED8400B069E7 /* Dictionary ++.swift */,
 				DBA92FC9238EABD2005B3209 /* Encodable + Dictionary.swift */,
 				DBD194602392D87900FDF05B /* UITableViewCell + Activity indicator + accessory type.swift */,
+				DBD4A807239663440096EA0B /* Request + Log it.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -3016,6 +3024,23 @@
 			path = cell;
 			sourceTree = "<group>";
 		};
+		DBE82EC5239643F400C1BF1D /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				18717A5722BCD57100CD36C9 /* cell */,
+				DBE82EC62396440600C1BF1D /* MyMatchesTable.swift */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
+		DBE82EC82396444400C1BF1D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DBE82EC92396444E00C1BF1D /* MyMatchModelItem.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		DBEF59B522F8106B00D34DFF /* roots */ = {
 			isa = PBXGroup;
 			children = (
@@ -3347,6 +3372,7 @@
 				187F2DFF22CB19440049EA77 /* EditScoreMatchTableViewController.swift in Sources */,
 				182394BC23617DC8007D6954 /* EditProfileViewModel.swift in Sources */,
 				1869CA1923545EDA00204697 /* Reactive ++ Binder.swift in Sources */,
+				DBE82ECA2396444E00C1BF1D /* MyMatchModelItem.swift in Sources */,
 				DB3A03AF238FE229006B1139 /* TeamAddPlayersTable.swift in Sources */,
 				04C024EC22142F6600A4A571 /* MenuLauncherCell.swift in Sources */,
 				DB59E5C022292B5900D1F62F /* EditProfile.swift in Sources */,
@@ -3410,12 +3436,14 @@
 				DB986B5522FDB2DD0050AC8F /* EditFoulsView.swift in Sources */,
 				DBC347612216F34B001D9B7D /* StringEx.swift in Sources */,
 				18870B3322C0DD1300126A87 /* ClubCreatePresenter.swift in Sources */,
+				DBD4A808239663440096EA0B /* Request + Log it.swift in Sources */,
 				DB87FE7C2243B522001EBA7C /* BaseStateViewController.swift in Sources */,
 				185B3E0523843925003DB326 /* TeamGroupModelItem.swift in Sources */,
 				DBB208ED221306170010B600 /* RefereeTeamTableViewController.swift in Sources */,
 				DB0E0CBD22D6ABB5005342FE /* View.swift in Sources */,
 				1823DC2622952762000A1055 /* LoadingCell.swift in Sources */,
 				DB4B1A472240AB3A00A9FB97 /* ClubLKPresenter.swift in Sources */,
+				DBE82EC72396440600C1BF1D /* MyMatchesTable.swift in Sources */,
 				DBD1945C2392D13D00FDF05B /* InvitationLKTable.swift in Sources */,
 				182394BF23617E24007D6954 /* RegionsViewModel.swift in Sources */,
 				DB17384B21BA56D400017B6D /* NewsAllTableViewController.swift in Sources */,

@@ -18,7 +18,7 @@ class EditScheduleViewModel {
     
     var matchScheduleModel = BehaviorRelay<MatchScheduleModelItem?>(value: nil)
     
-    var editedMatch = BehaviorRelay<Match?>(value: nil)
+    var editedMatch = PublishSubject<Match>()
     
     let refereesModel: EditScheduleRefereesModel
     
@@ -35,7 +35,7 @@ class EditScheduleViewModel {
         matchApi.patch_matchReferees(match: patchMatch) { result in
             switch result {
             case .success(let editedMatch):
-                self.editedMatch.accept(editedMatch)
+                self.editedMatch.onNext(editedMatch)
             case .message(let message):
                 Print.m(message.message)
                 self.message.onNext(message)

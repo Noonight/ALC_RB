@@ -33,6 +33,7 @@ class ScheduleTVC: UITableViewController {
         setupViewModel()
         setupTable()
         setupViewBinds()
+        setupPullToRefresh()
         
         emptyAction = {
             self.hideHUD()
@@ -96,6 +97,27 @@ extension ScheduleTVC {
         
     }
     
+    func setupPullToRefresh() {
+        let refreshController = UIRefreshControl()
+        tableView.refreshControl = refreshController
+        
+        refreshController.rx
+            .controlEvent(.valueChanged)
+            .map { _ in !refreshController.isRefreshing}
+            .filter { $0 == false }
+            .subscribe({ event in
+                self.viewModel.fetch()
+            }).disposed(by: bag)
+        
+        refreshController.rx.controlEvent(.valueChanged)
+            .map { _ in refreshController.isRefreshing }
+            .filter { $0 == true }
+            .subscribe({ event in
+                refreshController.endRefreshing()
+            })
+            .disposed(by: bag)
+    }
+    
 }
 
 // MARK: - ACTIONS
@@ -113,9 +135,10 @@ extension ScheduleTVC: TableActions {
 extension ScheduleTVC: EditScheduleCallBack {
     
     func back(match: Match) {
-        editSchedule.dismiss(animated: true) {
-            Print.m("dismiss here yee")
-        }
+//        editSchedule.dismiss(animated: true) {
+//            Print.m("dismiss here yee")
+//        }
+        navigationController?.popViewController(animated: true)
         self.viewModel.fetch()
     }
     

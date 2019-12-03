@@ -160,14 +160,12 @@ extension EditScheduleLKViewController {
             }.disposed(by: bag)
         
         viewModel.editedMatch
-            .asObservable()
             .observeOn(MainScheduler.instance)
-            .takeLast(1)
             .subscribe({ element in
                 guard let match = element.element else { return }
                 Print.m("MATCH WAS EDITED = \(match)")
                 self.showSuccessViewHUD(seconds: 2, closure: {
-                    self.editScheduleCallBack?.back(match: match!)
+                    self.editScheduleCallBack?.back(match: match)
                 })
             })
             .disposed(by: bag)
