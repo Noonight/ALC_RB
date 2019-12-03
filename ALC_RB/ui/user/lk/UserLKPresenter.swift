@@ -98,15 +98,10 @@ class UserLKPresenter: MvpPresenter<UserLKViewController> {
     }
     
     func fetchMyMatches() {
-        guard let userId = UserDefaultsHelper().getAuthorizedUser()?.person.id else { return }
-        let params = ParamBuilder<Match.CodingKeys>()
-            .add(key: "referees.person", value: userId)
-            .select("referees.person referees._id")
-            .get()
-        matchApi.get_match(params: params) { result in
+        matchApi.get_userRefereeMatches { result in
             switch result {
-            case .success(let matches):
-                self.matches.onNext(matches)
+            case .success(let findedMatches):
+                self.matches.onNext(findedMatches) 
             case .message(let message):
                 Print.m(message.message)
             case .failure(.error(let error)):

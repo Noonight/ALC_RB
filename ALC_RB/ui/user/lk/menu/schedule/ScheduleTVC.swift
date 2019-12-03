@@ -10,12 +10,12 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class ScheduleRefTVC: UITableViewController {
+class ScheduleTVC: UITableViewController {
     private enum StaticParams {
         static let emptyMessage = "Здесь будут отображаться текущие матчи"
     }
     
-    private var viewModel: ScheduleRefViewModel!
+    private var viewModel: ScheduleViewModel!
     private var scheduleTable: ScheduleRefTable!
     private let bag = DisposeBag()
     
@@ -53,10 +53,10 @@ class ScheduleRefTVC: UITableViewController {
 
 // MARK: - SETUP
 
-extension ScheduleRefTVC {
+extension ScheduleTVC {
     
     func setupViewModel() {
-        self.viewModel = ScheduleRefViewModel(matchApi: MatchApi())
+        self.viewModel = ScheduleViewModel(matchApi: MatchApi())
     }
     
     func setupTable() {
@@ -100,7 +100,7 @@ extension ScheduleRefTVC {
 
 // MARK: - ACTIONS
 
-extension ScheduleRefTVC: TableActions {
+extension ScheduleTVC: TableActions {
     func onCellSelected(model: CellModel) {
         if model is MatchScheduleModelItem {
             showEditMatchReferees(model: model as! MatchScheduleModelItem)
@@ -110,7 +110,7 @@ extension ScheduleRefTVC: TableActions {
 
 // MARK: - EDIT SCHEDULE CALL BACK
 
-extension ScheduleRefTVC: EditScheduleCallBack {
+extension ScheduleTVC: EditScheduleCallBack {
     
     func back(match: Match) {
         editSchedule.dismiss(animated: true) {
@@ -123,7 +123,7 @@ extension ScheduleRefTVC: EditScheduleCallBack {
 
 // MARK: - NAVIGATION
 
-extension ScheduleRefTVC {
+extension ScheduleTVC {
     
     func showEditMatchReferees(model: MatchScheduleModelItem) {
 //        editSchedule.

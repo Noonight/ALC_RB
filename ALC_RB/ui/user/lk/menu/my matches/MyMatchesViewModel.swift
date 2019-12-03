@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class MyMatchesRefViewModel {
+class MyMatchesViewModel {
     
     var message = PublishSubject<SingleLineMessage>()
     var refreshing: PublishSubject<Bool> = PublishSubject()

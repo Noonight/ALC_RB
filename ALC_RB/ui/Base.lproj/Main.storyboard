@@ -4308,7 +4308,7 @@
         <!--Расписание-->
         <scene sceneID="p4Y-Yj-eZU">
             <objects>
-                <tableViewController storyboardIdentifier="ScheduleRefTableViewController" title="Расписание" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nQ1-YV-kY7" customClass="ScheduleRefTVC" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ScheduleRefTableViewController" title="Расписание" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nQ1-YV-kY7" customClass="ScheduleTVC" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3oI-oP-Ka8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4558,7 +4558,7 @@
         <!--Матчи-->
         <scene sceneID="sC9-4I-diE">
             <objects>
-                <tableViewController storyboardIdentifier="MyMatchesRefTableViewController" title="Матчи" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yfY-Kj-gel" customClass="MyMatchesRefTableViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MyMatchesRefTableViewController" title="Матчи" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yfY-Kj-gel" customClass="MyMatchesTVC" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Tfc-p6-lLh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

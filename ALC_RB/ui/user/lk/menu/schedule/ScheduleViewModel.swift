@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ScheduleRefViewModel {
+class ScheduleViewModel {
     
     var error: PublishSubject<Error?> = PublishSubject()
     var loading: PublishSubject<Bool> = PublishSubject()

@@ -10,19 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class MyMatchesRefTableViewController: BaseStateTableViewController {
-    private enum CellIdentifiers {
-        static let cell = "cell_my_matches"
-    }
-    private enum SegueIdentifiers {
-        static let showProtocol = "segue_showProtocol"
-    }
-    private enum AlertLets {
-        static let alertTitle = "Ошибка!"
-        static let alertMessage = "Не получилось получить данные пользователя. Нажмите 'Перезагрузить' чтобы попробовать снова"
-        static let okBtn = "Ок"
-        static let refreshBtn = "Перезагрузить"
-    }
+class MyMatchesTVC: UITableViewController {
     
     private lazy var refProtocol: EditMatchProtocolViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
@@ -32,9 +20,8 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         return viewController
     }()
     
-    var viewModel: MyMatchesRefViewModel!
-    let disposeBag = DisposeBag()
-    let userDefaults = UserDefaultsHelper()
+    var viewModel: MyMatchesViewModel!
+    let bag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +35,7 @@ class MyMatchesRefTableViewController: BaseStateTableViewController {
         tableView.dataSource = nil
         tableView.delegate = nil
         
-        viewModel = MyMatchesRefViewModel(matchApi: MatchApi())
+        viewModel = MyMatchesViewModel(matchApi: MatchApi())
         
         tableView.tableFooterView = UIView()
         

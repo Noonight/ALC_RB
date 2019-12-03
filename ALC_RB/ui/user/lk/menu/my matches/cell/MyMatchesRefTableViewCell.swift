@@ -12,6 +12,8 @@ import Kingfisher
 
 class MyMatchesRefTableViewCell: UITableViewCell {
 
+    static let ID = "cell_my_matches"
+    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var tourLabel: UILabel!

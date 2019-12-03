@@ -77,10 +77,10 @@ class UserLKViewController: UIViewController {
         return viewController
     }()
     
-    private lazy var schedule: ScheduleRefTVC = {
+    private lazy var schedule: ScheduleTVC = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
-        var viewController = storyboard.instantiateViewController(withIdentifier: "ScheduleRefTableViewController") as! ScheduleRefTVC
+        var viewController = storyboard.instantiateViewController(withIdentifier: "ScheduleRefTableViewController") as! ScheduleTVC
         
         return viewController
     }()
@@ -93,10 +93,10 @@ class UserLKViewController: UIViewController {
         return viewController
     }()
     
-    private lazy var myMatches: MyMatchesRefTableViewController = {
+    private lazy var myMatches: MyMatchesTVC = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
-        var viewController = storyboard.instantiateViewController(withIdentifier: "MyMatchesRefTableViewController") as! MyMatchesRefTableViewController
+        var viewController = storyboard.instantiateViewController(withIdentifier: "MyMatchesRefTableViewController") as! MyMatchesTVC
         
         return viewController
     }()

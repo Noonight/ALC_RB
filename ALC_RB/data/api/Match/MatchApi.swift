@@ -27,6 +27,15 @@ final class MatchApi: ApiRequests {
             .responseResultMy([Match].self, resultMy: resultMy)
     }
     
+    func get_userRefereeMatches(resultMy: @escaping (ResultMy<[Match], RequestError>) -> ()) {
+        guard let userId = UserDefaultsHelper().getAuthorizedUser()?.person.id else { return }
+        let params = ParamBuilder<Match.CodingKeys>()
+            .add(key: "referees.person", value: userId)
+            .select("referees.person referees._id")
+            .get()
+        get_match(params: params, resultMy: resultMy)
+    }
+    
     func get_mainRefMatchesModelsGroupedByLeague(resultMy: @escaping (ResultMy<[ScheduleGroupByLeagueMatches], RequestError>) -> ()) {
         let leagueApi = LeagueApi()
         leagueApi.get_userMainRefLeagues { result in
