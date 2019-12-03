@@ -51,7 +51,6 @@ extension TeamEditLKVC {
             .observeOn(MainScheduler.instance)
             .subscribe { element in
                 guard let team = element.element else { return }
-                Print.m(team!)
                 self.setupView()
             }.disposed(by: bag)
         
@@ -156,6 +155,34 @@ extension TeamEditLKVC {
 extension TeamEditLKVC: TeamPlayerDeleteProtocol, TeamPlayerEditProtocol {
     func onDeleteBtnPressed(index: IndexPath, model: TeamPlayersStatus, success: @escaping () -> ()) {
         Print.m("delete pressed")
+        let invites = viewModel.teamPersonInvitesViewModel.teamPersonInvites.value
+        if let inviteObj = invites.filter({ playerInvite -> Bool in
+            return playerInvite.person?.orEqual(model.person?.getId() ?? model.person?.getValue()?.id ?? "", { person -> Bool in
+                return person.id == model.person?.getId() ?? model.person?.getValue()?.id
+            }) ?? false
+        }).first {
+            let cell = teamPlayersTableView.cellForRow(at: index)
+            cell?.showAccessoryLoading()
+            viewModel.teamPersonInvitesViewModel.requestCancelInvite(inviteId: inviteObj.id) { result in
+                switch result {
+                case .success(let editedInviteModel):
+                    Print.m(editedInviteModel)
+                    guard var team = self.viewModel.team.value else { return }
+                    team.players?.removeAll(where: { playerStatus -> Bool in
+                        return playerStatus.id == model.id
+                    })
+                    self.viewModel.team.accept(team)
+                    self.viewModel.fetch()
+                case .message(let message):
+                    Print.m(message.message)
+                case .failure(.error(let error)):
+                    Print.m(error)
+                case .failure(.notExpectedData):
+                    Print.m("not expected data")
+                }
+                cell?.hideAccessoryLoading()
+            }
+        }
         
     }
     
