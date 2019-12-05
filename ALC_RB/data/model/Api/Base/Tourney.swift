@@ -65,37 +65,37 @@ struct Tourney: Codable {
         v = nil
     }
     
-    func toTourneyRealm() -> TourneyRealm {
-        
-        var tourney = TourneyRealm()
-        tourney.id = self.id
-        
-        tourney.creator = creator?.toData()
-        tourney.region = region?.toData()
-        tourney.name = self.name
-        
-        tourney.maxTeams.value = self.maxTeams
-        tourney.maxPlayersInMatch.value = self.maxPlayersInMatch
-        
-        tourney.transferBegin = self.transferBegin
-        tourney.transferEnd = self.transferEnd
-        tourney.beginDate = self.beginDate
-        tourney.endDate = endDate
-        
-        tourney.mainReferee = mainReferee?.toData()
-        
-        tourney.playersMin.value = playersMin
-        tourney.playersMax.value = playersMax
-        tourney.canBeAddNonPlayed.value = canBeAddNonPlayed
-        tourney.canBeDeleteNonPlayed.value = canBeDeleteNonPlayed
-        
-        players?.forEach { tourney.players.append($0.toData()) }
-        
-        tourney.v.value = v
-        
-        return tourney
-    }
-    
+//    func toTourneyRealm() -> TourneyRealm {
+//        
+//        var tourney = TourneyRealm()
+//        tourney.id = self.id
+//
+//        tourney.creator = creator?.toData()
+//        tourney.region = region?.toData()
+//        tourney.name = self.name
+//
+//        tourney.maxTeams.value = self.maxTeams
+//        tourney.maxPlayersInMatch.value = self.maxPlayersInMatch
+//
+//        tourney.transferBegin = self.transferBegin
+//        tourney.transferEnd = self.transferEnd
+//        tourney.beginDate = self.beginDate
+//        tourney.endDate = endDate
+//
+//        tourney.mainReferee = mainReferee?.toData()
+//
+//        tourney.playersMin.value = playersMin
+//        tourney.playersMax.value = playersMax
+//        tourney.canBeAddNonPlayed.value = canBeAddNonPlayed
+//        tourney.canBeDeleteNonPlayed.value = canBeDeleteNonPlayed
+//
+//        players?.forEach { tourney.players.append($0.toData()) }
+//
+//        tourney.v.value = v
+//
+//        return tourney
+//    }
+//
     init(data: Data) throws {
         self = try ISO8601Decoder.getDecoder().decode(Tourney.self, from: data)
     }

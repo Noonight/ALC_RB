@@ -69,7 +69,7 @@ extension UIViewController {
             
             // if view is tableview
             if let tableView = addTo as? UITableView {
-                tableView.separatorStyle = .none
+//                tableView.separatorStyle = .none
                 hud = MBProgressHUD.showAdded(to: UIView(frame: tableView.frame), animated: true)
                 hud.layer.zPosition = tableView.layer.zPosition + 10
             }
@@ -78,7 +78,7 @@ extension UIViewController {
             hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             
             if let tableView = self.view as? UITableView {
-                tableView.separatorStyle = .none
+//                tableView.separatorStyle = .none
                 hud.layer.zPosition = tableView.layer.zPosition + 10
             }
             
@@ -86,7 +86,7 @@ extension UIViewController {
             if let tableView = self.view.subviews.filter({ subView -> Bool in
                 return subView is UITableView
             }).first as? UITableView {
-                tableView.separatorStyle = .none
+//                tableView.separatorStyle = .none
                 hud.layer.zPosition = tableView.layer.zPosition + 10
             }
         }
@@ -109,27 +109,27 @@ extension UIViewController {
         if forView != nil {
             MBProgressHUD.hide(for: forView!, animated: true)
             
-            if let tableView = forView as? UITableView {
-//                tableView.isHidden = false
-//                tableView.sectionHeaderHeight = 100
-                tableView.separatorStyle = .singleLine
-            }
+//            if let tableView = forView as? UITableView {
+////                tableView.isHidden = false
+////                tableView.sectionHeaderHeight = 100
+//                tableView.separatorStyle = .singleLine
+//            }
         } else {
             MBProgressHUD.hide(for: self.view, animated: true)
             
-            if let tableView = self.view as? UITableView {
-//                tableView.isHidden = false
-//                tableView.sectionHeaderHeight = 100
-                tableView.separatorStyle = .singleLine
-            }
-
-            if let tableView = self.view.subviews.filter({ subView -> Bool in
-                return subView is UITableView
-            }).first as? UITableView {
-//                tableView.isHidden = false
-//                tableView.sectionHeaderHeight = 100
-                tableView.separatorStyle = .singleLine
-            }
+//            if let tableView = self.view as? UITableView {
+////                tableView.isHidden = false
+////                tableView.sectionHeaderHeight = 100
+//                tableView.separatorStyle = .singleLine
+//            }
+//
+//            if let tableView = self.view.subviews.filter({ subView -> Bool in
+//                return subView is UITableView
+//            }).first as? UITableView {
+////                tableView.isHidden = false
+////                tableView.sectionHeaderHeight = 100
+//                tableView.separatorStyle = .singleLine
+//            }
         }
     }
     // MARK: - SUCCESS -> CLOSURE

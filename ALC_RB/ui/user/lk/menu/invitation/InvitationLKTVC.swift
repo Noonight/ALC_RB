@@ -38,6 +38,14 @@ extension InvitationLKTVC {
     
     func setupBinds() {
         
+        self.emptyAction = {
+            self.viewModel.fetch()
+        }
+        
+        self.errorAction = {
+            self.viewModel.fetch()
+        }
+        
         viewModel
             .invites
             .observeOn(MainScheduler.instance)
@@ -156,29 +164,29 @@ extension InvitationLKTVC: InvitationTableActions {
 
 extension Reactive where Base: InvitationLKTVC {
     
-    internal var empty: Binder<Bool> {
-        return Binder(self.base) { vc, isEmpty in
-            if isEmpty == true {
-                if vc.hud != nil {
-                    vc.hud?.setToEmptyView(tap: {
-                        vc.emptyAction?()
-                    })
-                } else {
-                    Print.m("SHOW EMPTY VIEW - Invitation")
-                    //                    vc.hud = vc.showEmptyViewHUD {
-                    //                        vc.emptyAction?()
-                    //                    }
-                    //                    vc.hud = vc.showLoadingViewHUD()
-                    vc.hud = vc.showEmptyViewHUD_one(tap: {
-                        vc.emptyAction?()
-                    })
-                }
-            } else {
-                vc.hud?.hide(animated: false)
-                vc.hud = nil
-            }
-            
-        }
-    }
+//    internal var empty: Binder<Bool> {
+//        return Binder(self.base) { vc, isEmpty in
+//            if isEmpty == true {
+//                if vc.hud != nil {
+//                    vc.hud?.setToEmptyView(tap: {
+//                        vc.emptyAction?()
+//                    })
+//                } else {
+//                    Print.m("SHOW EMPTY VIEW - Invitation")
+//                    //                    vc.hud = vc.showEmptyViewHUD {
+//                    //                        vc.emptyAction?()
+//                    //                    }
+//                    //                    vc.hud = vc.showLoadingViewHUD()
+//                    vc.hud = vc.showEmptyViewHUD_one(tap: {
+//                        vc.emptyAction?()
+//                    })
+//                }
+//            } else {
+//                vc.hud?.hide(animated: false)
+//                vc.hud = nil
+//            }
+//
+//        }
+//    }
     
 }

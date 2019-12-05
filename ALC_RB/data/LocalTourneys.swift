@@ -7,11 +7,9 @@
 //
 
 import Foundation
-import RealmSwift
 
 class LocalTourneys {
     
-    var realm: Realm?
     let userKey = "local_tourneys"
     let userDefaults = UserDefaults.standard
     

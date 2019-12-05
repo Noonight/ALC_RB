@@ -61,15 +61,19 @@ class EditScheduleLKViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupViewBinds()
+        
         setupPersonChooser()
         
-        setupView()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mainRefShowProtocol_btn.image = mainRefShowProtocol_btn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
+        
+        setupViewBinds()
+        setupView()
+        
     }
     
 }
@@ -216,7 +220,7 @@ extension EditScheduleLKViewController {
     }
     
     @IBAction func onMainRefShowProtocolBtnPressed(_ sender: UIBarButtonItem) {
-        self.showAlert(message: "SHOW PROTOCOL IF YOU ARE MAIN REFEREE")
+        self.showAlert(message: "Рабочий протокол")
         //        let activityIndicator = UIActivityIndicatorView(style: .gray)
         //        activityIndicator.hidesWhenStopped = true
         //

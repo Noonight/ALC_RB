@@ -7,38 +7,28 @@
 //
 
 import UIKit
+import loady
 
 class EditMatchProtocolViewController: UIViewController {
-    enum SegueIdentifiers {
-        static let DO_MATCH = "segue_do_match_referee"
-        static let TEAM_ONE = "team_one_protocol_segue"
-        static let TEAM_TWO = "team_two_protocol_segue"
-        static let REFEREES = "referee_protocol_segue"
-        static let EVENTS   = "events_protocol_segue"
-    }
-    
-    // MARK: Outlets
     
     @IBOutlet weak var teamOneLogo: UIImageView!
     @IBOutlet weak var teamOneTitle: UILabel!
     @IBOutlet weak var teamTwoLogo: UIImageView!
     @IBOutlet weak var teamTwoTitle: UILabel!
     
-    @IBOutlet weak var teamOneBtn: UIButton!
-    @IBOutlet weak var teamTwoBtn: UIButton!
-    @IBOutlet weak var refereesBtn: UIButton!
+    @IBOutlet weak var teamOneBtn: Loady!
+    @IBOutlet weak var teamTwoBtn: Loady!
+    @IBOutlet weak var refereesBtn: Loady!
     @IBOutlet weak var eventsBtn: UIButton!
     
-    @IBOutlet weak var height_constraint: NSLayoutConstraint!
+    @IBOutlet weak var workProtocolBtn: Loady!
     
-    @IBOutlet weak var scoreBarBtn: UIBarButtonItem!
-    @IBOutlet weak var saveBarBtn: UIBarButtonItem!
-    
-    // MARK: Var & Let
+    @IBOutlet weak var teamOneView: UIView!
+    @IBOutlet weak var teamTwoView: UIView!
+    @IBOutlet weak var refereesView: UIView!
     
     var leagueDetailModel: LeagueDetailModel!
     var match = Match()
-//    var model: MyMatchesRefTableViewCell.CellModel!
     
     let presenter = EditMatchProtocolPresenter()
     
@@ -51,14 +41,10 @@ class EditMatchProtocolViewController: UIViewController {
     var refereesController: ProtocolRefereesController!
     var eventsController: ProtocolEventsController!
     
-    // MARK: - Life cycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setupPresenter()
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,14 +54,11 @@ class EditMatchProtocolViewController: UIViewController {
         self.setupView()
         
     }
+}
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        self.unSetupNavigationcontroller()
-    }
-    
-    // MARK: Setup
+// MARK: - SETUP
+
+extension EditMatchProtocolViewController {
     
     func setupPresenter() {
         self.initPresenter()
@@ -83,33 +66,26 @@ class EditMatchProtocolViewController: UIViewController {
     
     func setupView() {
         
-//        teamOneTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .one)
-//
-//        teamTwoTitle.text = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .two)
-//
-//        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamOne!, league: leagueDetailModel.league)) { (image) in
-//            self.teamOneLogo.image = image.af_imageRoundedIntoCircle()
-//        }
-//        presenter.getClubImage(id: ClubTeamHelper.getClubIdByTeamId(match.teamTwo!, league: leagueDetailModel.league)) { (image) in
-//            self.teamTwoLogo.image = image.af_imageRoundedIntoCircle()
-//        }
+        teamOneTitle.text = self.match.teamOne?.getValue()?.name ?? "Не назначена"
+        teamTwoTitle.text = self.match.teamTwo?.getValue()?.name ?? "Не назначена"
+        
+        teamOneBtn.indicatorViewStyle = true
+        teamTwoBtn.indicatorViewStyle = true
+        refereesBtn.indicatorViewStyle = true
+        workProtocolBtn.indicatorViewStyle = true
+        self.teamOneView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(teamOnePressed(_:))))
+        self.teamTwoView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(teamTwoPressed(_:))))
+        self.refereesView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(refereesPressed(_:))))
+        self.workProtocolBtn.addTarget(self, action: #selector(doMatchPressed(_:)), for: .touchUpInside)
     }
     
     func setupNavController() {
         navigationController?.navigationBar.topItem?.title = " "
         title = "Матч"
         if #available(iOS 11.0, *) {
-//            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 24)]
-//            self.navigationController?.navigationBar.prefersLargeTitles = true
-//            self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
-        }
-    }
-    
-    // MARK: Un-setup
-    
-    func unSetupNavigationcontroller() {
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = false
+            //            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 24)]
+            //            self.navigationController?.navigationBar.prefersLargeTitles = true
+            //            self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         }
     }
     
@@ -118,20 +94,48 @@ class EditMatchProtocolViewController: UIViewController {
     func preConfigureModelControllers() {
         teamOnePlayersController = nil
         teamTwoPlayersController = nil
-//        teamOnePlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamOne!))
-//        teamOnePlayersController = ProtocolPlayersController(teamPlayers: getPlayersTeam(team: match.teamOne!), matchPlayers: getMatchPlayers(team: match.teamOne!))
-////        teamTwoPlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamTwo!))
-//        teamTwoPlayersController = ProtocolPlayersController(teamPlayers: getPlayersTeam(team: match.teamTwo!), matchPlayers: getMatchPlayers(team: match.teamTwo!))
-//        refereesController = nil
-//        refereesController = ProtocolRefereesController(referees: match.referees)
-//        eventsController = nil
-//        eventsController = ProtocolEventsController(events: match.events)
+        //        teamOnePlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamOne!))
+        //        teamOnePlayersController = ProtocolPlayersController(teamPlayers: getPlayersTeam(team: match.teamOne!), matchPlayers: getMatchPlayers(team: match.teamOne!))
+        ////        teamTwoPlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamTwo!))
+        //        teamTwoPlayersController = ProtocolPlayersController(teamPlayers: getPlayersTeam(team: match.teamTwo!), matchPlayers: getMatchPlayers(team: match.teamTwo!))
+        //        refereesController = nil
+        //        refereesController = ProtocolRefereesController(referees: match.referees)
+        //        eventsController = nil
+        //        eventsController = ProtocolEventsController(events: match.events)
     }
 }
 
-// MARK: Extensions
+// MARK: - ACTIONS
 
-// MARK: Helpers
+extension EditMatchProtocolViewController {
+    
+    @objc func teamOnePressed(_ sender: UIView) {
+        Print.m("TEAM ONE")
+//        teamOneBtn.startLoading()
+        self.showAlert(message: "Команда")
+    }
+    
+    @objc func teamTwoPressed(_ sender: UIView) {
+        Print.m("TEAM TWO")
+//        teamTwoBtn.startLoading()
+        self.showAlert(message: "Команда")
+    }
+    
+    @objc func refereesPressed(_ sender: UIView) {
+        Print.m("REFEREES")
+//        refereesBtn.startLoading()
+        self.showAlert(message: "Судья")
+    }
+    
+    @objc func doMatchPressed(_ sender: UIButton) {
+        Print.m("WORK PROTOCOL")
+//        workProtocolBtn.startLoading()
+        self.showAlert(message: "Рабочий протокол")
+    }
+    
+}
+
+// MARK: - HELPERS
 
 extension EditMatchProtocolViewController {
     
@@ -141,103 +145,34 @@ extension EditMatchProtocolViewController {
         })
     }
     
-//    func getPlayersTeam(team id: String) -> [Person] {
-//        return (leagueDetailModel.league.teams?.filter({ (team) -> Bool in
-//            return team.id == id
-//        }).first?.players)!
-//    }
-    
-//    func getMatchPlayers(team id: String) -> [Person] {
-//        let teamPlayers = (leagueDetailModel.league.teams?.filter({ team -> Bool in
-//            return team.id == id
-//        }).first?.players!)!
-//        var players = [Person]()
-//        for teamPlayer in teamPlayers {
-//            for playerId in match.playersList! {
-//                if teamPlayer.playerId == playerId {
-//                    players.append(teamPlayer)
-//                }
-//            }
-//        }
-//        return players
-//    }
-    
 }
 
-// MARK: Actions
-
-extension EditMatchProtocolViewController {
-    @IBAction func scoreBtnPressed(_ sender: UIBarButtonItem) {
-        let score: EditScoreMatchTableViewController = {
-            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            
-            let controller = storyboard.instantiateViewController(withIdentifier: "EditScoreMatchTableViewController") as! EditScoreMatchTableViewController
-            
-//            controller.viewModel = RefereeScoreModel(
-//                match: self.match,
-//                leagueDetailModel: self.leagueDetailModel,
-//                teamOnePlayers: self.teamOnePlayersController,
-//                teamTwoPlayers: self.teamTwoPlayersController,
-//                events: self.eventsController
-//            )
-            
-            return controller
-        }()
-        navigationController?.show(score, sender: self)
-    }
-    
-    @IBAction func saveBtnPressed(_ sender: UIBarButtonItem) {
-        
-//        showAlertOkCancel(title: "Сохранить протокол?", message: "", ok: {
-//            let request = EditProtocol(
-//                id: self.match.id,
-//                events: EditProtocol.Events(events: self.eventsController.events),
-//                playersList: self.connectPlayersOfTeamOneAndTwo().map({ liPlayer -> String in
-//                    return liPlayer.playerId
-//                })
-//            )
-//            self.presenter.requestEditProtocol(
-//                token: (self.userDefaults.getAuthorizedUser()?.token)!,
-//                editProtocol: request
-//            )
-//        }) {
-//            Print.m("Отмена сохранения протокола")
-//        }
-        
-    }
-    
-    @IBAction func teamOneBtnPressed(_ sender: UIButton) { }
-    @IBAction func teamTwoBtnPressed(_ sender: UIButton) { }
-    @IBAction func refereeBtnPressed(_ sender: UIButton) { }
-    @IBAction func eventsBtnPressed(_ sender: UIButton) { }
-}
-
-// MARK: Navigation
+// MARK: - NAVIGATION
 
 extension EditMatchProtocolViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case SegueIdentifiers.TEAM_ONE:
-            prepareSegueDataModel(destination: segue.destination, team: .one)
-        case SegueIdentifiers.TEAM_TWO:
-            prepareSegueDataModel(destination: segue.destination, team: .two)
-        case SegueIdentifiers.REFEREES:
-            prepareSegueDataModel(destination: segue.destination)
-        case SegueIdentifiers.EVENTS:
-            prepareSegueDataModel(destination: segue.destination)
-        case SegueIdentifiers.DO_MATCH:
-            let controller = segue.destination as! DoMatchProtocolRefereeViewController
-            controller.viewModel = ProtocolRefereeViewModel(
-                match: self.match,
-                leagueDetailModel: self.leagueDetailModel,
-                teamOneModel: self.teamOnePlayersController,
-                teamTwoModel: self.teamTwoPlayersController,
-                refereesModel: self.refereesController,
-                eventsModel: self.eventsController
-            )
-        default:
-            break
-        }
+//        switch segue.identifier {
+//        case SegueIdentifiers.TEAM_ONE:
+//            prepareSegueDataModel(destination: segue.destination, team: .one)
+//        case SegueIdentifiers.TEAM_TWO:
+//            prepareSegueDataModel(destination: segue.destination, team: .two)
+//        case SegueIdentifiers.REFEREES:
+//            prepareSegueDataModel(destination: segue.destination)
+//        case SegueIdentifiers.EVENTS:
+//            prepareSegueDataModel(destination: segue.destination)
+//        case SegueIdentifiers.DO_MATCH:
+//            let controller = segue.destination as! DoMatchProtocolRefereeViewController
+//            controller.viewModel = ProtocolRefereeViewModel(
+//                match: self.match,
+//                leagueDetailModel: self.leagueDetailModel,
+//                teamOneModel: self.teamOnePlayersController,
+//                teamTwoModel: self.teamTwoPlayersController,
+//                refereesModel: self.refereesController, // TODO: Don't need anymore
+//                eventsModel: self.eventsController
+//            )
+//        default:
+//            break
+//        }
     }
     
     func prepareSegueDataModel(destination: UIViewController) {

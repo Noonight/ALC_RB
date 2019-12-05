@@ -145,12 +145,14 @@ extension ScheduleTableViewController {
 extension ScheduleTableViewController {
     
     func showProtocol(match: Match) {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        var viewController = storyboard.instantiateViewController(withIdentifier: "MatchProtocolViewController") as! MatchProtocolViewController
-        
-        viewController.viewModel = ProtocolAllViewModel(match: match, leagueDetailModel: self.viewModel.leagueDetailModel.value!)
-        
-        self.navigationController?.show(viewController, sender: self)
+        self.showAlert(message: "Публичный протокол")
+        // TODO: make it ok
+//        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+//        var viewController = storyboard.instantiateViewController(withIdentifier: "MatchProtocolViewController") as! MatchProtocolViewController
+//
+//        viewController.viewModel = ProtocolAllViewModel(match: match, leagueDetailModel: self.viewModel.leagueDetailModel.value!)
+//
+//        self.navigationController?.show(viewController, sender: self)
     }
     
 }

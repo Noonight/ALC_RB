@@ -58,10 +58,10 @@ final class InvitationViewModel {
                                     invites[i].team = IdRefObjectWrapper<Team>(team)
                                 }
                             }
-                            
+                            self.loading.onNext(false)
                             self.invites.accept(invites.map { InvitationModelItem(inviteStatus: $0) })
                             
-                            dump(self.invites.value)
+//                            dump(self.invites.value)
                             
                         case .message(let message):
                             Print.m(message.message)
@@ -73,9 +73,10 @@ final class InvitationViewModel {
                             Print.m("not expected data")
                             self.message.onNext(SingleLineMessage(Constants.Texts.NOT_VALID_DATA))
                         }
-                        self.loading.onNext(false)
+//                        self.loading.onNext(false)
                     })
                 } else {
+                    self.loading.onNext(false)
                     self.invites.accept([])
                 }
                 
@@ -89,7 +90,6 @@ final class InvitationViewModel {
                 Print.m("not expected data")
                 self.message.onNext(SingleLineMessage(Constants.Texts.NOT_VALID_DATA))
             }
-            self.loading.onNext(false)
         }
         
     }

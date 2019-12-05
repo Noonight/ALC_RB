@@ -146,11 +146,11 @@ extension Reactive where Base: LeagueDetailViewController {
             guard let mError = error else { return }
             if vc.hud != nil {
                 vc.hud?.setToFailureView(detailMessage: mError.localizedDescription, tap: {
-                    
+                    vc.errorAction?()
                 })
             } else {
                 vc.hud = vc.showFailureViewHUD(detailMessage: mError.localizedDescription, tap: {
-                    
+                    vc.errorAction?()
                 })
             }
         }

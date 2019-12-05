@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4874E7E655CEB4C01E4572AD903AEA21"
+               BlueprintIdentifier = "BAB9AB6EB252264FABBBA1BF7977858A"
                BlueprintName = "FloatingPanel"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "FloatingPanel.framework">

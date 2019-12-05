@@ -74,13 +74,13 @@ extension Reactive where Base: UIViewController {
                     })
                 } else {
                     Print.m("SHOW EMPTY VIEw")
-//                    vc.hud = vc.showEmptyViewHUD {
-//                        vc.emptyAction?()
-//                    }
-//                    vc.hud = vc.showLoadingViewHUD()
-                    vc.hud = vc.showEmptyViewHUD_one(tap: {
+                    vc.hud = vc.showEmptyViewHUD {
                         vc.emptyAction?()
-                    })
+                    }
+//                    vc.hud = vc.showLoadingViewHUD()
+//                    vc.hud = vc.showEmptyViewHUD_one(tap: {
+//                        vc.emptyAction?()
+//                    })
                 }
             } else {
                 vc.hud?.hide(animated: false)

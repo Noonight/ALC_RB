@@ -151,7 +151,9 @@ extension ScheduleTVC {
     func showEditMatchReferees(model: MatchScheduleModelItem) {
 //        editSchedule.
         editSchedule.editScheduleCallBack = self
+        editSchedule.viewModel = EditScheduleViewModel(matchApi: MatchApi())
         editSchedule.viewModel.matchScheduleModel.accept(model)
+//        editSchedule.viewModel.initReferees()
         show(editSchedule, sender: self)
     }
     

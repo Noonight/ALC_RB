@@ -20,12 +20,16 @@ class EditScheduleViewModel {
     
     var editedMatch = PublishSubject<Match>()
     
-    let refereesModel: EditScheduleRefereesModel
+    var refereesModel: EditScheduleRefereesModel!
     
     private let matchApi: MatchApi
     
     init(matchApi: MatchApi) {
         self.matchApi = matchApi
+        initReferees()
+    }
+    
+    func initReferees() {
         self.refereesModel = EditScheduleRefereesModel(first: nil, second: nil, third: nil, time: nil)
     }
     

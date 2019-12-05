@@ -9,7 +9,6 @@
 import UIKit
 import IQKeyboardManagerSwift
 import Kingfisher
-import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

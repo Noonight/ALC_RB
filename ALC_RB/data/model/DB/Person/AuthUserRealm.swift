@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import RealmSwift
-
-class AuthUserRealm: Object {
-//    @objc dynamic var person: Person?
-//    @objc dynamic var token = ""
-}
+//import RealmSwift
+//
+//class AuthUserRealm: Object {
+////    @objc dynamic var person: Person?
+////    @objc dynamic var token = ""
+//}

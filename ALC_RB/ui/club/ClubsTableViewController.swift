@@ -28,12 +28,16 @@ class ClubsTableViewController: BaseStateTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.configurePresenter()
-        self.configureEmptyView()
-        self.configureTableView()
-        self.configureRefreshController()
-        
-        self.refreshData()
+//        self.configurePresenter()
+//        self.configureEmptyView()
+//        self.configureTableView()
+//        self.configureRefreshController()
+//
+//        self.refreshData()
+        self.tableView.separatorStyle = .none
+        self.showEmptyViewHUD(message: "Здесь будут клубы", detailMessage: "") {
+            
+        }
     }
 }
 // MARK: Extensions

@@ -118,7 +118,7 @@ final class TeamEditLKViewModel {
                                 .get()
                         } else {
                             params1 = ParamBuilder<Person.CodingKeys>()
-                                .add(key: .id, value: StrBuilder().add(.comma).add(personIds))
+                                .add(key: .id, value: StrBuilder().setSeparatorStyle(.comma).add(.comma).add(personIds))
                                 .get()
                         }
                         self.personApi.get_person(params: params1) { resultPerson in

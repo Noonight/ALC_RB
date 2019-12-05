@@ -7,23 +7,23 @@
 //
 
 import Foundation
-import RealmSwift
-
-final class DBHelper {
-    
-    private var realmDB: Realm?
-    
-    func initRealm() {
-        self.realmDB = try? Realm()
-    }
-    
-    func getRealm() -> Realm {
-        initRealm()
-        guard let mRealm = realmDB else {
-            Print.m("Realm is nil try again")
-            return getRealm()
-        }
-        return mRealm
-    }
-    
-}
+//import RealmSwift
+//
+//final class DBHelper {
+//
+//    private var realmDB: Realm?
+//
+//    func initRealm() {
+//        self.realmDB = try? Realm()
+//    }
+//
+//    func getRealm() -> Realm {
+//        initRealm()
+//        guard let mRealm = realmDB else {
+//            Print.m("Realm is nil try again")
+//            return getRealm()
+//        }
+//        return mRealm
+//    }
+//
+//}

@@ -12,7 +12,7 @@ import RxSwift
 
 class MyMatchesTVC: UITableViewController {
     
-    private lazy var refProtocol: EditMatchProtocolViewController = {
+    private lazy var workProtocol: EditMatchProtocolViewController = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         var viewController = storyboard.instantiateViewController(withIdentifier: "EditMatchProtocolViewControllerProtocol") as! EditMatchProtocolViewController
@@ -151,7 +151,10 @@ extension MyMatchesTVC {
 extension MyMatchesTVC {
     
     func showWorkProtocol(match: Match) {
-        self.showAlert(message: "SHOW WORK PROTOCOL")
+//        self.showAlert(message: "SHOW WORK PROTOCOL")
+        workProtocol.leagueDetailModel = LeagueDetailModel(tourney: Tourney(), league: (match.league?.getValue())!)
+        workProtocol.match = match
+        self.show(workProtocol, sender: self)
     }
     
     func showPublicProtocol(match: Match) {

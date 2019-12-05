@@ -23,39 +23,6 @@ class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> 
     
     let dataManager = ApiRequests()
     
-    func getClubs(id: String, getting: @escaping ([Club]) -> ()) {
-        Alamofire
-            .request(ApiRoute.getApiURL(.clubs))
-            .validate()
-            .responseClubs { response in
-                switch response.result {
-                case .success:
-                    if let clubs = response.result.value {
-                        getting(clubs)
-                    }
-                case .failure:
-                    debugPrint("failure getting clubs with id : \(id) \n message is \(String(describing: response.result.value))")
-                }
-        }
-    }
-    
-    func getClubImage(id club: String, getting: @escaping (UIImage) -> ()) {
-        getClubs(id: club) { (clubs) in
-            if let mClub = clubs.first {
-                if let logo = mClub.logo {
-                    Alamofire
-                        .request(ApiRoute.getImageURL(image: logo))
-                        .responseImage(completionHandler: { response in
-                            if let img = response.result.value {
-                                debugPrint("get club image complete")
-                                getting(img)
-                            }
-                        })
-                }
-            }
-        }
-    }
-    
     func requestEditProtocol(token: String, editProtocol: EditProtocol) {
 
 //        dataManager.post_changeProtocol(token: token, newProtocol: editProtocol) { result in

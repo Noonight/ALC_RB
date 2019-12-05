@@ -38,7 +38,7 @@ extension TourneyWebViewVC {
         
         let configuration = WKWebViewConfiguration()
         let contentController = WKUserContentController()
-        let token = userDefaults.getToken()
+        guard let token = userDefaults.getToken() else { return }
         let js = "javascript: localStorage.setItem('authToken', '\(token)')"
         let userScript = WKUserScript(source: js, injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: false)
         contentController.addUserScript(userScript)
