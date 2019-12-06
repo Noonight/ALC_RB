@@ -82,8 +82,6 @@ class ModalPenaltySeriesVC: UIViewController {
     }
 }
 
-// MARK: EXTENSIONS
-
 // MARK: SETUP
 
 extension ModalPenaltySeriesVC {

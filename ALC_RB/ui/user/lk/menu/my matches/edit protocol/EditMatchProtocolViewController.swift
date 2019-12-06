@@ -30,9 +30,7 @@ class EditMatchProtocolViewController: UIViewController {
     var leagueDetailModel: LeagueDetailModel!
     var match = Match()
     
-    let presenter = EditMatchProtocolPresenter()
-    
-    let userDefaults = UserDefaultsHelper()
+    let presenter = EditMatchProtocolPresenter(teamApi: TeamApi(), personApi: PersonApi(), matchApi: MatchApi())
     
     // MARK: - Model Controllers
     
@@ -239,13 +237,13 @@ extension EditMatchProtocolViewController: EditMatchProtocolView {
     }
     
     func requestEditProtocolSuccess(match: Match) {
-        var user = userDefaults.getAuthorizedUser()
+        
 //        user?.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.match?.id }) })
 //        user?.person.participationMatches!.removeAll(where: { pMatch -> Bool in
 //            return pMatch.id == match.match?.id
 //        })
 //        user?.person.participationMatches!.append(IdRefObjectWrapper(match.match!))
-        self.userDefaults.setAuthorizedUser(user: user!)
+        
         showAlert(title: "Протокол сохранен", message: "")
     }
     

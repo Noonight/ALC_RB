@@ -21,19 +21,41 @@ protocol EditMatchProtocolView : MvpView {
 
 class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> {
     
-    let dataManager = ApiRequests()
+    let teamApi: TeamApi
+    let personApi: PersonApi
+    let matchApi: MatchApi
     
-    func requestEditProtocol(token: String, editProtocol: EditProtocol) {
-
-//        dataManager.post_changeProtocol(token: token, newProtocol: editProtocol) { result in
-//            switch result {
-//            case .success(let match):
-//                self.getView().requestEditProtocolSuccess(match: match)
-//            case .message(let message):
-//                self.getView().requestEditProtocolMessage(message: message)
-//            case .failure(let error):
-//                self.getView().requestEditProtocolFailure(error: error)
-//            }
-//        }
+    var match: Match!
+    
+    init(teamApi: TeamApi, personApi: PersonApi, matchApi: MatchApi) {
+        self.teamApi = teamApi
+        self.personApi = personApi
+        self.matchApi = matchApi
     }
+    
+    func fetchTeamPlayers(team: TeamEnum, resultMy: @escaping (ResultMy<Team, RequestError>) -> ()) {
+        let params = ParamBuilder<Team.CodingKeys>()
+            .select(StrBuilder().add([.trainer, .players]))
+            .populate(StrBuilder().add([.trainer, .players]))
+        
+        switch team {
+        case .one:
+            guard let team = match.teamOne else { return }
+            params.add(key: .id, value: team.getId() ?? team.getValue()?.id)
+            guard let teamObj = team.getValue() else { assertionFailure("team is not object"); return }
+            teamApi.get_teamPlayers(inTeam: teamObj, params: params.get(), resultMy: resultMy)
+        case .two:
+            guard let team = match.teamTwo else { return }
+            params.add(key: .id, value: team.getId() ?? team.getValue()?.id)
+            guard let teamObj = team.getValue() else { assertionFailure("team is not object"); return }
+            teamApi.get_teamPlayers(inTeam: teamObj, params: params.get(), resultMy: resultMy)
+        }
+        
+    }
+    
+    func fetchMatchPlayers(resultMy: @escaping (ResultMy<Match, RequestError>) -> ()) {
+        matchApi.get_matchPlayers(inMatch: self.match, resultMy: resultMy)
+    }
+    
+    
 }
