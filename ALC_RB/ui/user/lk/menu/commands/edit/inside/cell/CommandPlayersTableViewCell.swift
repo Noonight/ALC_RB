@@ -21,7 +21,7 @@ class CommandPlayersTableViewCell: UITableViewCell {
     @IBOutlet weak var playerNumberTextField: UITextField!
     @IBOutlet weak var playerCommandNumLabel: UILabel!
     
-    var playerStatus: TeamPlayersStatus! {
+    var playerStatus: Player! {
         didSet {
             if let imagePath = self.playerStatus.person?.getValue()?.photo {
                 playerImage.kfLoadRoundedImage(path: imagePath)

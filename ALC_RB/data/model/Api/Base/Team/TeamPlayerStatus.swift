@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct TeamPlayersStatus: Codable {
+struct Player: Codable {
     
     var id: String
     

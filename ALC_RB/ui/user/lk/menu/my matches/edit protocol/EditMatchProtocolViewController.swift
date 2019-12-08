@@ -80,27 +80,8 @@ extension EditMatchProtocolViewController {
     func setupNavController() {
         navigationController?.navigationBar.topItem?.title = " "
         title = "Матч"
-        if #available(iOS 11.0, *) {
-            //            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 24)]
-            //            self.navigationController?.navigationBar.prefersLargeTitles = true
-            //            self.navigationController?.navigationItem.largeTitleDisplayMode = .automatic
-        }
     }
     
-    // MARK: - PRE CONFIGURE Model Controllers
-    
-    func preConfigureModelControllers() {
-        teamOnePlayersController = nil
-        teamTwoPlayersController = nil
-        //        teamOnePlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamOne!))
-        //        teamOnePlayersController = ProtocolPlayersController(teamPlayers: getPlayersTeam(team: match.teamOne!), matchPlayers: getMatchPlayers(team: match.teamOne!))
-        ////        teamTwoPlayersController = ProtocolPlayersController(players: getPlayersTeam(team: match.teamTwo!))
-        //        teamTwoPlayersController = ProtocolPlayersController(teamPlayers: getPlayersTeam(team: match.teamTwo!), matchPlayers: getMatchPlayers(team: match.teamTwo!))
-        //        refereesController = nil
-        //        refereesController = ProtocolRefereesController(referees: match.referees)
-        //        eventsController = nil
-        //        eventsController = ProtocolEventsController(events: match.events)
-    }
 }
 
 // MARK: - ACTIONS
@@ -109,19 +90,34 @@ extension EditMatchProtocolViewController {
     
     @objc func teamOnePressed(_ sender: UIView) {
         Print.m("TEAM ONE")
-//        teamOneBtn.startLoading()
+        teamOneBtn.startLoading()
+        self.presenter.fetchTeamPlayers(team: .one) { result in
+            switch result {
+            case .success(let fetchedTeam):
+                
+                
+                
+                self.teamOneBtn.stopLoading()
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
+        }
         self.showAlert(message: "Команда")
     }
     
     @objc func teamTwoPressed(_ sender: UIView) {
         Print.m("TEAM TWO")
-//        teamTwoBtn.startLoading()
+        teamTwoBtn.startLoading()
         self.showAlert(message: "Команда")
     }
     
     @objc func refereesPressed(_ sender: UIView) {
         Print.m("REFEREES")
-//        refereesBtn.startLoading()
+        refereesBtn.startLoading()
         self.showAlert(message: "Судья")
     }
     
@@ -148,6 +144,18 @@ extension EditMatchProtocolViewController {
 // MARK: - NAVIGATION
 
 extension EditMatchProtocolViewController {
+    
+    func showEditTeamPlayers(match: Match, team: Team) {
+        Print.m("match is \(match)")
+        Print.m("team is \(team)")
+        self.showAlert(message: "Edit team players")
+    }
+    
+    func showEditReferees(match: Match) {
+        Print.m("match is \(match)")
+        self.showAlert(message: "Edit match referees")
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        switch segue.identifier {
 //        case SegueIdentifiers.TEAM_ONE:
@@ -175,9 +183,9 @@ extension EditMatchProtocolViewController {
     
     func prepareSegueDataModel(destination: UIViewController) {
         switch destination {
-        case is EditTeamProtocolTableViewController:
-            let controller = destination as! EditTeamProtocolTableViewController
-            controller.playersController = teamOnePlayersController
+        case is EditTeamProtocolVC:
+            let controller = destination as! EditTeamProtocolVC
+//            controller.playersController = teamOnePlayersController
 //            controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .one)
 //            controller.saveProtocol = self
         case is EditRefereeTeamTableViewController:
@@ -206,18 +214,20 @@ extension EditMatchProtocolViewController {
     
     func prepareSegueDataModel(destination: UIViewController, team: TeamEnum) {
         switch destination {
-        case is EditTeamProtocolTableViewController:
-            let controller = destination as! EditTeamProtocolTableViewController
+        case is EditTeamProtocolVC:
+            let controller = destination as! EditTeamProtocolVC
             
             switch team{
             case .one:
-                controller.playersController = teamOnePlayersController
+                Print.m("deprecated")
+//                controller.playersController = teamOnePlayersController
 //                controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .one)
-                controller.saveProtocol = self
+//                controller.saveProtocol = self
             case .two:
-                controller.playersController = teamTwoPlayersController
+                Print.m("deprecated")
+//                controller.playersController = teamTwoPlayersController
 //                controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .two)
-                controller.saveProtocol = self
+//                controller.saveProtocol = self
             }
         default:
             break

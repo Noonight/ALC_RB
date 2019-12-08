@@ -40,6 +40,17 @@ struct Match: Codable {
     var updatedAt: Date? = nil
     var v: Int? = nil
 
+    var postPlayersList: [String: Any] {
+        get {
+            var map = [CodingKeys : Any]()
+            map[.playersList] = playersList?.map({ person -> String in
+                return person.getId() ?? (person.getValue()?.id)!
+            })
+            
+            return map.get()
+        }
+    }
+    
     var patchReferees: [String: Any] {
         get {
             var map = [CodingKeys : Any]()

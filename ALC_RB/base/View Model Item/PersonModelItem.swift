@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class PersonModelItem {
+class PersonModelItem {
     
     var person: Person
     

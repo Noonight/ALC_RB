@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 
 protocol TeamPlayerDeleteProtocol {
-    func onDeleteBtnPressed(index: IndexPath, model: TeamPlayersStatus, success: @escaping() -> ()) // delete is ok or not
+    func onDeleteBtnPressed(index: IndexPath, model: Player, success: @escaping() -> ()) // delete is ok or not
 }
 
 protocol TeamPlayerEditProtocol {
-    func onEditNumberComplete(model: TeamPlayersStatus)
+    func onEditNumberComplete(model: Player)
 }
 
 class TeamPlayersInTable: NSObject, UITableViewDelegate, UITableViewDataSource {
@@ -25,7 +25,7 @@ class TeamPlayersInTable: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     var editNumberCompleteProtocol: TeamPlayerEditProtocol?
     
-    var dataSource: [TeamPlayersStatus] = []
+    var dataSource: [Player] = []
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
@@ -40,7 +40,7 @@ class TeamPlayersInTable: NSObject, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func configureCell(cell: CommandPlayersTableViewCell, model: TeamPlayersStatus, tag: Int) {
+    func configureCell(cell: CommandPlayersTableViewCell, model: Player, tag: Int) {
         cell.playerStatus = model
         cell.playerNumberTextDidEndProtocol = self.editNumberCompleteProtocol!
     }

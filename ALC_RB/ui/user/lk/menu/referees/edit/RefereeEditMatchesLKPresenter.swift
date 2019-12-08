@@ -25,16 +25,16 @@ class RefereeEditMatchesLKPresenter: MvpPresenter<RefereeEditMatchesLKTableViewC
     
     func requestEditMatchReferee(editMatchReferees: EditMatchReferees) {
         self.cache = editMatchReferees
-        matchApi.post_matchSetReferee(editMatchReferees: editMatchReferees) { result in
-            switch result {
-            case .success(let match):
-                self.getView().onResponseEditMatchSuccess(soloMatch: match)
-            case .message(let message):
-                self.getView().onResponseEditMatchMessage(message: message)
-            case .failure(let error):
-                self.getView().onResponseEditMatchFailure(error: error)
-            }
-        }
+//        matchApi.post_matchSetReferee(editMatchReferees: editMatchReferees) { result in
+//            switch result {
+//            case .success(let match):
+//                self.getView().onResponseEditMatchSuccess(soloMatch: match)
+//            case .message(let message):
+//                self.getView().onResponseEditMatchMessage(message: message)
+//            case .failure(let error):
+//                self.getView().onResponseEditMatchFailure(error: error)
+//            }
+//        }
     }
     
     func fetch(refId: String) {

@@ -153,7 +153,7 @@ extension TeamEditLKVC {
 // MARK: Deleg. ( Edit / Delete )
 
 extension TeamEditLKVC: TeamPlayerDeleteProtocol, TeamPlayerEditProtocol {
-    func onDeleteBtnPressed(index: IndexPath, model: TeamPlayersStatus, success: @escaping () -> ()) {
+    func onDeleteBtnPressed(index: IndexPath, model: Player, success: @escaping () -> ()) {
         Print.m("delete pressed")
         let invites = viewModel.teamPersonInvitesViewModel.teamPersonInvites.value
         if let inviteObj = invites.filter({ playerInvite -> Bool in
@@ -189,7 +189,7 @@ extension TeamEditLKVC: TeamPlayerDeleteProtocol, TeamPlayerEditProtocol {
         
     }
     
-    func onEditNumberComplete(model: TeamPlayersStatus) {
+    func onEditNumberComplete(model: Player) {
         guard let personId = model.person?.getId() ?? model.person?.getValue()?.id else { return }
         self.viewModel.requestChangePersonNumber(personId: personId, nubmer: model.number ?? 0)
     }

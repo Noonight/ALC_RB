@@ -21,7 +21,7 @@ struct Team: Codable {
 
     var creatorPhone: String? = nil
     
-    var players: [TeamPlayersStatus]? = nil // TODO: m.b. it's have to work with IdRefObjectWrapper
+    var players: [Player]? = nil // TODO: m.b. it's have to work with IdRefObjectWrapper
     
     var postMap: [String: Any] {
         get {

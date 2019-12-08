@@ -111,7 +111,7 @@ extension PlayersTeamLeagueDetailViewController: UITableViewDataSource {
         return cell
     }
     
-    func configureCell(cell: PlayersTeamLeagueDetailTableViewCell, model: TeamPlayersStatus) {
+    func configureCell(cell: PlayersTeamLeagueDetailTableViewCell, model: Player) {
         
         func setupCell(person: Person) {
             cell.name.text = person.getSurnameNP()

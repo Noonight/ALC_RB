@@ -142,11 +142,11 @@ final class TeamApi: ApiRequests {
             .responseResultMy(Team.self, resultMy: resultMy)
     }
     
-    func post_changePlayerNubmer(teamId: String, personId: String, number: Int, resultMy: @escaping (ResultMy<TeamPlayersStatus, RequestError>) -> ()) {
+    func post_changePlayerNubmer(teamId: String, personId: String, number: Int, resultMy: @escaping (ResultMy<Player, RequestError>) -> ()) {
         guard let userToken = UserDefaultsHelper().getToken() else { return }
         Alamofire
             .request(ApiRoute.getApiURL(.teamChangePersonNubmer, ids: teamId, personId), method: .patch, parameters: ["number": number], encoding: JSONEncoding.default, headers: ["auth" : userToken])
-            .responseResultMy(TeamPlayersStatus.self, resultMy: resultMy)
+            .responseResultMy(Player.self, resultMy: resultMy)
     }
     
 }

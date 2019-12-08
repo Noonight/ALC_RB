@@ -199,18 +199,14 @@ final class MatchApi: ApiRequests {
             resultMy(.success(upcomingMatches))
         }
     }
-    // DEPRECATED: always return 500, because there check user role
-    func post_matchSetReferee(editMatchReferees: EditMatchReferees, resultMy: @escaping (ResultMy<Match, RequestError>) -> ()) {
-        
+    
+    // MARK: - POST
+    
+    // without role check
+    func post_changePlayers(match: Match, resultMy: @escaping (ResultMy<Match, RequestError>) -> ()) {
         guard let userToken = UserDefaultsHelper().getToken() else { return }
-        
-        let header: HTTPHeaders = [
-            "Content-Type" : "application/json",
-            "auth" : "\(userToken)"
-        ]
-        
         Alamofire
-            .request(ApiRoute.getApiURL(.post_edit_match_referee), method: .post, parameters: editMatchReferees.toParams(), encoding: JSONEncoding.default, headers: header)
+            .request(ApiRoute.getApiURL(.matchChangePlayers, id: match.id), method: .post, parameters: match.postPlayersList, encoding: JSONEncoding.default, headers: ["auth": userToken])
             .responseResultMy(Match.self, resultMy: resultMy)
     }
     

@@ -78,6 +78,7 @@ enum Routes: String {
     case tourney = "crud/tourney"
     case upcomingMatches = "upcoming/matches" // later
     case match = "crud/match"
+    case matchChangePlayers = "matches/changePlayers"
     case league = "crud/league"
     case leagueMatches = "matches/getbyleague" // deprecated
     case personInvite = "person_invite"
