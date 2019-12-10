@@ -152,8 +152,9 @@ extension MyMatchesTVC {
     
     func showWorkProtocol(match: Match) {
 //        self.showAlert(message: "SHOW WORK PROTOCOL")
-        workProtocol.leagueDetailModel = LeagueDetailModel(tourney: Tourney(), league: (match.league?.getValue())!)
-        workProtocol.match = match
+//        workProtocol.leagueDetailModel = LeagueDetailModel(tourney: Tourney(), league: (match.league?.getValue())!)
+//        workProtocol.match = match
+        workProtocol.presenter.match = match
         self.show(workProtocol, sender: self)
     }
     

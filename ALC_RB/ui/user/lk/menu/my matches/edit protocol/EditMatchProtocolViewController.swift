@@ -8,6 +8,8 @@
 
 import UIKit
 import loady
+import RxSwift
+import RxCocoa
 
 class EditMatchProtocolViewController: UIViewController {
     
@@ -27,8 +29,8 @@ class EditMatchProtocolViewController: UIViewController {
     @IBOutlet weak var teamTwoView: UIView!
     @IBOutlet weak var refereesView: UIView!
     
-    var leagueDetailModel: LeagueDetailModel!
-    var match = Match()
+//    var leagueDetailModel: LeagueDetailModel!
+//    var match = Match()
     
     let presenter = EditMatchProtocolPresenter(teamApi: TeamApi(), personApi: PersonApi(), matchApi: MatchApi())
     
@@ -64,13 +66,19 @@ extension EditMatchProtocolViewController {
     
     func setupView() {
         
-        teamOneTitle.text = self.match.teamOne?.getValue()?.name ?? "Не назначена"
-        teamTwoTitle.text = self.match.teamTwo?.getValue()?.name ?? "Не назначена"
+        teamOneTitle.text = self.presenter.match.teamOne?.getValue()?.name ?? "Не назначена"
+        teamTwoTitle.text = self.presenter.match.teamTwo?.getValue()?.name ?? "Не назначена"
         
         teamOneBtn.indicatorViewStyle = true
         teamTwoBtn.indicatorViewStyle = true
         refereesBtn.indicatorViewStyle = true
         workProtocolBtn.indicatorViewStyle = true
+        
+        teamOneBtn.stopLoading()
+        teamTwoBtn.stopLoading()
+        refereesBtn.stopLoading()
+        workProtocolBtn.stopLoading()
+        
         self.teamOneView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(teamOnePressed(_:))))
         self.teamTwoView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(teamTwoPressed(_:))))
         self.refereesView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(refereesPressed(_:))))
@@ -95,7 +103,7 @@ extension EditMatchProtocolViewController {
             switch result {
             case .success(let fetchedTeam):
                 
-                
+                self.showEditTeamPlayers(match: self.presenter.match, team: fetchedTeam)
                 
                 self.teamOneBtn.stopLoading()
             case .message(let message):
@@ -106,7 +114,6 @@ extension EditMatchProtocolViewController {
                 Print.m("not expected data")
             }
         }
-        self.showAlert(message: "Команда")
     }
     
     @objc func teamTwoPressed(_ sender: UIView) {
@@ -146,9 +153,17 @@ extension EditMatchProtocolViewController {
 extension EditMatchProtocolViewController {
     
     func showEditTeamPlayers(match: Match, team: Team) {
-        Print.m("match is \(match)")
-        Print.m("team is \(team)")
-        self.showAlert(message: "Edit team players")
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        var editTeamPlayersVC = storyboard.instantiateViewController(withIdentifier: "EditTeamProtocolVC") as! EditTeamProtocolVC
+        
+//        Print.m("MATCH = \(match)")
+//        Print.m("TEAM = \(team)")
+        editTeamPlayersVC.viewModel.match = BehaviorRelay<Match?>(value: match)
+        editTeamPlayersVC.viewModel.team = BehaviorRelay<Team?>(value: team)
+//        Print.m(editTeamPlayersVC.viewModel.match.value)
+//        Print.m(editTeamPlayersVC.viewModel.team.value)
+        self.show(editTeamPlayersVC, sender: self)
     }
     
     func showEditReferees(match: Match) {
@@ -190,8 +205,8 @@ extension EditMatchProtocolViewController {
 //            controller.saveProtocol = self
         case is EditRefereeTeamTableViewController:
             let controller = destination as! EditRefereeTeamTableViewController
-            controller.refereesController = self.refereesController
-            controller.match = self.match
+//            controller.refereesController = self.refereesController
+//            controller.presenter.match = self.match
         case is EditEventsMatchTableViewController:
             let controller = destination as! EditEventsMatchTableViewController
             controller.eventsController = eventsController

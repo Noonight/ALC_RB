@@ -55,10 +55,14 @@ class Print {
         #endif
     }
     
-    public static func m(_ m: Any, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
+    public static func m(_ m: Any? = nil, functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) {
         #if DEBUG
         let className = (fileName as NSString).lastPathComponent
-        print("<\(className)> ->> \(functionName) [#\(lineNumber)]| \(m)\n")
+        if let mm = m {
+            print("<\(className)> ->> \(functionName) [#\(lineNumber)]| \(mm)\n")
+        } else {
+            print("<\(className)> ->> \(functionName) [#\(lineNumber)]|\n")
+        }
         #endif
     }
     

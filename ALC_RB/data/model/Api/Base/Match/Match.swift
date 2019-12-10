@@ -144,3 +144,69 @@ extension Match {
         self.referees = referees
     }
 }
+
+// MARK: - HELPERS
+
+extension Match {
+    
+    func getPlaingTeamPlayers(team: TeamEnum) -> [IdRefObjectWrapper<Person>] {
+        var resultArray = [IdRefObjectWrapper<Person>]()
+        var mTeam: Team!
+        guard let mPlayersList = self.playersList else { return [] }
+        switch team {
+        case .one:
+            mTeam = (teamOne?.getValue())!
+        case .two:
+            mTeam = (teamTwo?.getValue())!
+        }
+        
+        for player in mPlayersList {
+            for teamPlayer in mTeam.players ?? [] {
+                if player.getId() ?? player.getValue()?.id == teamPlayer.person?.getId() ?? teamPlayer.person?.getValue()?.id {
+                    resultArray.append(player)
+                }
+            }
+        }
+        
+        return resultArray
+    }
+    
+    mutating func setPlaingTeamPlayers(team: Team, newTeamPlayers: [IdRefObjectWrapper<Person>]) {
+        var newPlayers = [IdRefObjectWrapper<Person>]()
+        
+        var plaingTeamPlayers: [IdRefObjectWrapper<Person>]!
+        
+        if team.id == teamOne?.getId() ?? teamOne?.getValue()?.id {
+            plaingTeamPlayers = getPlaingTeamPlayers(team: .two)
+        } else
+        if team.id == teamTwo?.getId() ?? teamTwo?.getValue()?.id {
+            plaingTeamPlayers = getPlaingTeamPlayers(team: .one)
+        } else {
+            assertionFailure("NOT VALID TEAM")
+        }
+        
+        newPlayers.append(contentsOf: plaingTeamPlayers)
+        newPlayers.append(contentsOf: newTeamPlayers)
+        
+        playersList = newPlayers
+    }
+    
+    mutating func setPlaingTeamPlayers(team: TeamEnum, newTeamPlayers: [String]) {
+        var newPlayers = [IdRefObjectWrapper<Person>]()
+        
+        var plaingTeamPlayers: [IdRefObjectWrapper<Person>]!
+        
+        switch team {
+        case .one:
+            plaingTeamPlayers = getPlaingTeamPlayers(team: .two)
+        case .two:
+            plaingTeamPlayers = getPlaingTeamPlayers(team: .one)
+        }
+        
+        newPlayers.append(contentsOf: plaingTeamPlayers)
+        newPlayers.append(contentsOf: newTeamPlayers.map { IdRefObjectWrapper<Person>($0) })
+        
+        playersList = newPlayers
+    }
+    
+}

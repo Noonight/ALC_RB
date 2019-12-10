@@ -39,7 +39,7 @@ extension EditTeamProtocolPlayersTable: UITableViewDataSource {
 extension EditTeamProtocolPlayersTable: EditTeamProtocolPlayerSwitchValueChanged {
     func switchValueChanged(model: PlayerSwitchModelItem) {
         for i in 0..<dataSource.count {
-            if dataSource[i].person.person.id == model.person.person.id {
+            if dataSource[i].player.player.person?.getId() ?? dataSource[i].player.player.person?.getValue()?.id  == model.player.player.person?.getId() ?? model.player.player.person?.getValue()?.id {
                 dataSource[i] = model
             }
         }

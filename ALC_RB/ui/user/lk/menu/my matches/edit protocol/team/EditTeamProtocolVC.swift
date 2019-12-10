@@ -16,7 +16,7 @@ class EditTeamProtocolVC: UIViewController {
     @IBOutlet weak var trainerPhoneLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var viewModel: EditTeamProtocolViewModel = EditTeamProtocolViewModel(protocolApi: ProtocolApi(), teamApi: TeamApi())
+    var viewModel: EditTeamProtocolViewModel = EditTeamProtocolViewModel(matchApi: MatchApi())
     var table: EditTeamProtocolPlayersTable!
     private let bag = DisposeBag()
     
@@ -26,7 +26,8 @@ class EditTeamProtocolVC: UIViewController {
         setupTable()
         setupViewBinds()
         
-        
+        self.viewModel.setupDataModel()
+        self.setupView()
     }
     
 }
@@ -34,6 +35,15 @@ class EditTeamProtocolVC: UIViewController {
 // MARK: - SETUP
 
 extension EditTeamProtocolVC {
+    
+    func setupView() {
+        guard let team = self.viewModel.team.value else { return }
+        self.title = team.name
+        self.trainerNameLabel.text = team.trainer?.getValue()?.getFullName()
+        Print.m(team.trainer?.getId())
+        Print.m(team.trainer?.getValue())
+        self.trainerPhoneLabel.text = team.creatorPhone
+    }
     
     func setupTable() {
         table = EditTeamProtocolPlayersTable(tableActions: self)

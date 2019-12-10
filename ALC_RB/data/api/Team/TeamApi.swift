@@ -26,6 +26,8 @@ final class TeamApi: ApiRequests {
     func get_team(params: [String: Any], resultMy: @escaping (ResultMy<[Team], RequestError>) -> ()) {
         Alamofire
             .request(ApiRoute.getApiURL(.team), method: .get, parameters: params)
+            .logURL()
+            .logBody()
             .responseResultMy([Team].self, resultMy: resultMy)
     }
     

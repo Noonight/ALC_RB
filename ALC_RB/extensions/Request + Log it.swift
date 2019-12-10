@@ -10,6 +10,18 @@ import Alamofire
 
 extension Request {
     
+    func logURL(functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) -> Self {
+        
+        if let url = self.request?.urlRequest.debugDescription {
+            #if DEBUG
+            let className = (fileName as NSString).lastPathComponent
+            print("<\(className)> ->> \(functionName) [#\(lineNumber)]| REQUEST URL: \(url)\n")
+            #endif
+        }
+        
+        return self
+    }
+    
     func logBody(functionName: String = #function, fileName: String = #file, lineNumber: Int = #line) -> Self {
         
         if let requestBody = self.request?.httpBody {

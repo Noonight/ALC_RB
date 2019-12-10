@@ -26,10 +26,10 @@ class EditTeamProtocolCell: UITableViewCell {
     
     var playerSwitchModel: PlayerSwitchModelItem! {
         didSet {
-            if let imagePath = self.playerSwitchModel.person.photoPath {
+            if let imagePath = self.playerSwitchModel.player.player.person?.getValue()?.photo {
                 self.photo_image.kfLoadRoundedImage(path: imagePath)
             }
-            self.name_label.text = self.playerSwitchModel.person.fullNameNP
+            self.name_label.text = self.playerSwitchModel.player.player.person?.getValue()?.getFullName()
 //            self.position_label.text = String(self.playerSwitchModel.player)
             self.switcher.isOn = self.playerSwitchModel.isRight
             
