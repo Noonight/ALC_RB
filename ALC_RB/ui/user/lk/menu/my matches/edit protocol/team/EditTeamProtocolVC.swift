@@ -32,6 +32,12 @@ class EditTeamProtocolVC: UIViewController {
         setupViewBinds()
         
         self.viewModel.setupDataModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
         self.setupView()
     }
     
@@ -103,7 +109,12 @@ extension EditTeamProtocolVC {
 extension EditTeamProtocolVC: EditTeamProtocolPlayersTableActions {
     
     func switchValueChanged(model: PlayerSwitchModelItem) {
-        self.showAlert(message: "CALL BACK VALUE IS CHANGED = >> \(model.isRight)")
+        var players = self.viewModel.players.value
+        for i in 0..<players.count {
+            if players[i].player.player.id == model.player.player.id {
+                players[i] = model
+            }
+        }
     }
     
     @IBAction func onSaveBtnPressed(_ sender: UIBarButtonItem) {

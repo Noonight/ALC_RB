@@ -198,6 +198,7 @@ extension EditMatchProtocolViewController {
     
     func showEditTeamPlayers(match: Match, team: Team) {
         
+        editTeamPlayersVC.viewModel = EditTeamProtocolViewModel(matchApi: MatchApi())
         editTeamPlayersVC.viewModel.match = BehaviorRelay<Match?>(value: match)
         editTeamPlayersVC.viewModel.team = BehaviorRelay<Team?>(value: team)
         editTeamPlayersVC.back = self

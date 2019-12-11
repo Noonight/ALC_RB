@@ -37,7 +37,6 @@ class EditTeamProtocolCell: UITableViewCell {
     }
     
     @IBAction func switchValueChanged(_ sender: UISwitch) {
-        Print.m("switch value changed \(sender.isOn)")
         self.playerSwitchModel.isRight = sender.isOn
         self.switchChangedProtocol?.switchValueChanged(model: self.playerSwitchModel)
     }

@@ -90,7 +90,8 @@ extension EditTeamProtocolViewModel {
         } else {
             assertionFailure("Match cannot be empty")
         }
-        
+        Print.m("PLAING PLAYERS:")
+        Print.m(getPlaingTeamPlayers())
         match.setPlaingTeamPlayers(team: team.value!, newTeamPlayers: getPlaingTeamPlayers().map({ playerSwitch -> IdRefObjectWrapper<Person> in
             return IdRefObjectWrapper<Person>((playerSwitch.player.player.person?.getValue())!)
         }))

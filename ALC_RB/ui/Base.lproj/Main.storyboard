@@ -4585,28 +4585,28 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="yal-wf-tHM">
-                                            <rect key="frame" x="8" y="8" width="304" height="38"/>
+                                            <rect key="frame" x="8" y="8" width="304" height="37.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31.12.2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1C-ly-eDh">
-                                                    <rect key="frame" x="0.0" y="0.0" width="89" height="38"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="89" height="37.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WfF-oE-KZy">
-                                                    <rect key="frame" x="93" y="0.0" width="50" height="38"/>
+                                                    <rect key="frame" x="93" y="0.0" width="50" height="37.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 тур" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zXn-BN-egl">
-                                                    <rect key="frame" x="147" y="0.0" width="54.5" height="38"/>
+                                                    <rect key="frame" x="147" y="0.0" width="54.5" height="37.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="КСК ЗММК" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Gi-bd-fvA">
-                                                    <rect key="frame" x="205.5" y="0.0" width="98.5" height="38"/>
+                                                    <rect key="frame" x="205.5" y="0.0" width="98.5" height="37.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4614,7 +4614,7 @@
                                             </subviews>
                                         </stackView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2jv-Rx-4x5">
-                                            <rect key="frame" x="8" y="54" width="304" height="22"/>
+                                            <rect key="frame" x="8" y="53.5" width="304" height="22"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="VKN-CM-68U">
                                                     <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -4666,23 +4666,13 @@
                                                 <constraint firstItem="GYL-uy-OIS" firstAttribute="centerX" secondItem="2jv-Rx-4x5" secondAttribute="centerX" id="qKs-aM-R7A"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uix-hb-bUt">
-                                            <rect key="frame" x="0.0" y="83" width="320" height="0.5"/>
-                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="0.5" id="Qle-bQ-mwa"/>
-                                            </constraints>
-                                        </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="uix-hb-bUt" firstAttribute="top" secondItem="2jv-Rx-4x5" secondAttribute="bottom" constant="7" id="0Qw-Kb-d0o"/>
-                                        <constraint firstAttribute="trailing" secondItem="uix-hb-bUt" secondAttribute="trailing" id="77H-Py-cn5"/>
                                         <constraint firstItem="2jv-Rx-4x5" firstAttribute="top" secondItem="yal-wf-tHM" secondAttribute="bottom" constant="8" id="F2j-rK-fv1"/>
                                         <constraint firstItem="2jv-Rx-4x5" firstAttribute="leading" secondItem="eZP-Yq-99h" secondAttribute="leading" constant="8" id="Pft-dK-zTt"/>
                                         <constraint firstItem="yal-wf-tHM" firstAttribute="leading" secondItem="eZP-Yq-99h" secondAttribute="leading" constant="8" id="QOK-xT-9uH"/>
-                                        <constraint firstAttribute="bottom" secondItem="uix-hb-bUt" secondAttribute="bottom" id="gIS-K1-yXD"/>
+                                        <constraint firstAttribute="bottom" secondItem="2jv-Rx-4x5" secondAttribute="bottom" constant="8" id="Rxh-BH-nFU"/>
                                         <constraint firstAttribute="trailing" secondItem="2jv-Rx-4x5" secondAttribute="trailing" constant="8" id="iOB-Dd-QgP"/>
-                                        <constraint firstItem="uix-hb-bUt" firstAttribute="leading" secondItem="eZP-Yq-99h" secondAttribute="leading" id="kR1-Ir-E4G"/>
                                         <constraint firstAttribute="trailing" secondItem="yal-wf-tHM" secondAttribute="trailing" constant="8" id="lGd-EO-bpM"/>
                                         <constraint firstItem="yal-wf-tHM" firstAttribute="top" secondItem="eZP-Yq-99h" secondAttribute="top" constant="8" id="pLe-IC-hEV"/>
                                     </constraints>
