@@ -146,6 +146,14 @@ extension MyMatchesTVC {
     
 }
 
+// MARK: EditTeamPlayersCallBack
+
+extension MyMatchesTVC: EditMatchProtocolCallBack {
+    func back(match: Match) {
+        self.viewModel.fetch()
+    }
+}
+
 // MARK: - NAVIGATION
 
 extension MyMatchesTVC {
@@ -155,6 +163,7 @@ extension MyMatchesTVC {
 //        workProtocol.leagueDetailModel = LeagueDetailModel(tourney: Tourney(), league: (match.league?.getValue())!)
 //        workProtocol.match = match
         workProtocol.presenter.match = match
+        workProtocol.back = self
         self.show(workProtocol, sender: self)
     }
     

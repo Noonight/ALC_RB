@@ -11,7 +11,18 @@ import loady
 import RxSwift
 import RxCocoa
 
+protocol EditMatchProtocolCallBack {
+    func back(match: Match)
+}
+
 class EditMatchProtocolViewController: UIViewController {
+    
+    lazy var editTeamPlayersVC: EditTeamProtocolVC = {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        var editTeamPlayersVC = storyboard.instantiateViewController(withIdentifier: "EditTeamProtocolVC") as! EditTeamProtocolVC
+        
+        return editTeamPlayersVC
+    }()
     
     @IBOutlet weak var teamOneLogo: UIImageView!
     @IBOutlet weak var teamOneTitle: UILabel!
@@ -32,6 +43,7 @@ class EditMatchProtocolViewController: UIViewController {
 //    var leagueDetailModel: LeagueDetailModel!
 //    var match = Match()
     
+    var back: EditMatchProtocolCallBack?
     let presenter = EditMatchProtocolPresenter(teamApi: TeamApi(), personApi: PersonApi(), matchApi: MatchApi())
     
     // MARK: - Model Controllers
@@ -53,6 +65,26 @@ class EditMatchProtocolViewController: UIViewController {
         self.setupNavController()
         self.setupView()
         
+    }
+    
+//    override func willMove(toParent parent: UIViewController?) {
+//        // if parent is nil, vc is poped from navigation stack
+//        // it means we go back
+//        // TEST IT
+//        if parent == nil {
+//            self.back?.back(match: self.presenter.match)
+//            Print.m("Move to parent. Parent is MyMatchesTVC")
+//        }
+//    }
+    
+    override func didMove(toParent parent: UIViewController?) {
+        // if parent is nil, vc is poped from navigation stack
+        // it means we go back
+        // TEST IT
+        if parent == nil {
+            self.back?.back(match: self.presenter.match)
+            Print.m("Move to parent. Parent is MyMatchesTVC")
+        }
     }
 }
 
@@ -148,21 +180,28 @@ extension EditMatchProtocolViewController {
     
 }
 
+// MARK: - EditTeamPlayersCallBack
+
+extension EditMatchProtocolViewController: EditTeamPlayersCallBack {
+    func back(match: Match) {
+        // TODO: fetch the match or smth
+        if navigationController?.viewControllers.last is EditTeamProtocolVC {
+            navigationController?.popViewController(animated: true)
+        }
+        
+    }
+}
+
 // MARK: - NAVIGATION
 
 extension EditMatchProtocolViewController {
     
     func showEditTeamPlayers(match: Match, team: Team) {
         
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        var editTeamPlayersVC = storyboard.instantiateViewController(withIdentifier: "EditTeamProtocolVC") as! EditTeamProtocolVC
-        
-//        Print.m("MATCH = \(match)")
-//        Print.m("TEAM = \(team)")
         editTeamPlayersVC.viewModel.match = BehaviorRelay<Match?>(value: match)
         editTeamPlayersVC.viewModel.team = BehaviorRelay<Team?>(value: team)
-//        Print.m(editTeamPlayersVC.viewModel.match.value)
-//        Print.m(editTeamPlayersVC.viewModel.team.value)
+        editTeamPlayersVC.back = self
+        
         self.show(editTeamPlayersVC, sender: self)
     }
     
@@ -171,83 +210,6 @@ extension EditMatchProtocolViewController {
         self.showAlert(message: "Edit match referees")
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        switch segue.identifier {
-//        case SegueIdentifiers.TEAM_ONE:
-//            prepareSegueDataModel(destination: segue.destination, team: .one)
-//        case SegueIdentifiers.TEAM_TWO:
-//            prepareSegueDataModel(destination: segue.destination, team: .two)
-//        case SegueIdentifiers.REFEREES:
-//            prepareSegueDataModel(destination: segue.destination)
-//        case SegueIdentifiers.EVENTS:
-//            prepareSegueDataModel(destination: segue.destination)
-//        case SegueIdentifiers.DO_MATCH:
-//            let controller = segue.destination as! DoMatchProtocolRefereeViewController
-//            controller.viewModel = ProtocolRefereeViewModel(
-//                match: self.match,
-//                leagueDetailModel: self.leagueDetailModel,
-//                teamOneModel: self.teamOnePlayersController,
-//                teamTwoModel: self.teamTwoPlayersController,
-//                refereesModel: self.refereesController, // TODO: Don't need anymore
-//                eventsModel: self.eventsController
-//            )
-//        default:
-//            break
-//        }
-    }
-    
-    func prepareSegueDataModel(destination: UIViewController) {
-        switch destination {
-        case is EditTeamProtocolVC:
-            let controller = destination as! EditTeamProtocolVC
-//            controller.playersController = teamOnePlayersController
-//            controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .one)
-//            controller.saveProtocol = self
-        case is EditRefereeTeamTableViewController:
-            let controller = destination as! EditRefereeTeamTableViewController
-//            controller.refereesController = self.refereesController
-//            controller.presenter.match = self.match
-        case is EditEventsMatchTableViewController:
-            let controller = destination as! EditEventsMatchTableViewController
-            controller.eventsController = eventsController
-//            controller.model = self.model
-            controller.teamOneController = self.teamOnePlayersController
-            controller.teamTwoController = self.teamTwoPlayersController
-        case is EditScoreMatchTableViewController:
-            let controller = destination as! EditScoreMatchTableViewController
-//            controller.viewModel = RefereeScoreModel(
-//                match: self.match,
-//                leagueDetailModel: self.leagueDetailModel,
-//                teamOnePlayers: self.teamOnePlayersController,
-//                teamTwoPlayers: self.teamTwoPlayersController,
-//                events: self.eventsController
-//            )
-        default:
-            break
-        }
-    }
-    
-    func prepareSegueDataModel(destination: UIViewController, team: TeamEnum) {
-        switch destination {
-        case is EditTeamProtocolVC:
-            let controller = destination as! EditTeamProtocolVC
-            
-            switch team{
-            case .one:
-                Print.m("deprecated")
-//                controller.playersController = teamOnePlayersController
-//                controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .one)
-//                controller.saveProtocol = self
-            case .two:
-                Print.m("deprecated")
-//                controller.playersController = teamTwoPlayersController
-//                controller.title = ClubTeamHelper.getTeamTitle(league: leagueDetailModel.league, match: match, team: .two)
-//                controller.saveProtocol = self
-            }
-        default:
-            break
-        }
-    }
 }
 
 // MARK: Presenter

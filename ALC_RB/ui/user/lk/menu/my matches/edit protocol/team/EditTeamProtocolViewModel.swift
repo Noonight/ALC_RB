@@ -20,6 +20,8 @@ final class EditTeamProtocolViewModel {
     var team = BehaviorRelay<Team?>(value: nil)
     var match = BehaviorRelay<Match?>(value: nil)
     
+    var changedMatch = PublishSubject<Match>()
+    
     var players = BehaviorRelay<[PlayerSwitchModelItem]>(value: [])
     
     let matchApi: MatchApi
@@ -61,7 +63,7 @@ final class EditTeamProtocolViewModel {
             switch result {
             case .success(let changedMatch):
                 self.loading.onNext(false)
-                self.match.accept(changedMatch)
+                self.changedMatch.onNext(changedMatch)
             case .message(let message):
                 Print.m(message.message)
                 self.message.onNext(message)

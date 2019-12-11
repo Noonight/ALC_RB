@@ -10,12 +10,17 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol EditTeamPlayersCallBack {
+    func back(match: Match)
+}
+
 class EditTeamProtocolVC: UIViewController {
     
     @IBOutlet weak var trainerNameLabel: UILabel!
     @IBOutlet weak var trainerPhoneLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    var back: EditTeamPlayersCallBack?
     var viewModel: EditTeamProtocolViewModel = EditTeamProtocolViewModel(matchApi: MatchApi())
     var table: EditTeamProtocolPlayersTable!
     private let bag = DisposeBag()
@@ -52,6 +57,16 @@ extension EditTeamProtocolVC {
     }
     
     func setupViewBinds() {
+        
+        viewModel
+            .changedMatch
+            .observeOn(MainScheduler.instance)
+            .subscribe { element in
+                guard let match = element.element else { return }
+                self.showSuccessViewHUD(seconds: 2, closure: {
+                    self.back?.back(match: match)
+                })
+            }.disposed(by: bag)
         
         viewModel
             .players
