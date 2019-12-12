@@ -35,8 +35,8 @@ class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> 
     
     func fetchTeamPlayers(team: TeamEnum, resultMy: @escaping (ResultMy<Team, RequestError>) -> ()) {
         let params = ParamBuilder<Team.CodingKeys>()
-            .select(StrBuilder().add([.trainer, .players]))
-            .populate(StrBuilder().add([.trainer, .players]))
+            .select(StrBuilder().add([.players, .trainer]))
+            .populate(StrBuilder().add([.players, .trainer]))
         
         switch team {
         case .one:
@@ -53,8 +53,21 @@ class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> 
         
     }
     
-    func fetchMatchPlayers(resultMy: @escaping (ResultMy<Match, RequestError>) -> ()) {
-        matchApi.get_matchPlayers(inMatch: self.match, resultMy: resultMy)
+    func fetchMatchPlayers() {
+        matchApi.get_matchPlayers(inMatch: self.match) { result in
+            switch result {
+            case .success(let matchPlayers):
+                
+                self.match.playersList = matchPlayers.playersList
+                
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
+        }
     }
     
     

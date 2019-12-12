@@ -17,13 +17,6 @@ protocol EditMatchProtocolCallBack {
 
 class EditMatchProtocolViewController: UIViewController {
     
-    lazy var editTeamPlayersVC: EditTeamProtocolVC = {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        var editTeamPlayersVC = storyboard.instantiateViewController(withIdentifier: "EditTeamProtocolVC") as! EditTeamProtocolVC
-        
-        return editTeamPlayersVC
-    }()
-    
     @IBOutlet weak var teamOneLogo: UIImageView!
     @IBOutlet weak var teamOneTitle: UILabel!
     @IBOutlet weak var teamTwoLogo: UIImageView!
@@ -131,27 +124,17 @@ extension EditMatchProtocolViewController {
     @objc func teamOnePressed(_ sender: UIView) {
         Print.m("TEAM ONE")
         teamOneBtn.startLoading()
-        self.presenter.fetchTeamPlayers(team: .one) { result in
-            switch result {
-            case .success(let fetchedTeam):
-                
-                self.showEditTeamPlayers(match: self.presenter.match, team: fetchedTeam)
-                
-                self.teamOneBtn.stopLoading()
-            case .message(let message):
-                Print.m(message.message)
-            case .failure(.error(let error)):
-                Print.m(error)
-            case .failure(.notExpectedData):
-                Print.m("not expected data")
-            }
+        self.fetchShowTeamPlayers(team: .one) {
+            self.teamOneBtn.stopLoading()
         }
     }
     
     @objc func teamTwoPressed(_ sender: UIView) {
         Print.m("TEAM TWO")
         teamTwoBtn.startLoading()
-        self.showAlert(message: "Команда")
+        self.fetchShowTeamPlayers(team: .two) {
+            self.teamTwoBtn.stopLoading()
+        }
     }
     
     @objc func refereesPressed(_ sender: UIView) {
@@ -172,6 +155,24 @@ extension EditMatchProtocolViewController {
 
 extension EditMatchProtocolViewController {
     
+    func fetchShowTeamPlayers(team: TeamEnum, closure: @escaping () -> ()) {
+        self.presenter.fetchTeamPlayers(team: team) { result in
+            switch result {
+            case .success(let fetchedTeam):
+                
+                self.showEditTeamPlayers(match: self.presenter.match, team: fetchedTeam)
+                
+                closure()
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
+        }
+    }
+    
     func connectPlayersOfTeamOneAndTwo() -> [Person] {
         return [teamOnePlayersController.getPlayingPlayers(), teamTwoPlayersController.getPlayingPlayers()].flatMap({ liPlayer -> [Person] in
             return liPlayer
@@ -185,10 +186,10 @@ extension EditMatchProtocolViewController {
 extension EditMatchProtocolViewController: EditTeamPlayersCallBack {
     func back(match: Match) {
         // TODO: fetch the match or smth
-        if navigationController?.viewControllers.last is EditTeamProtocolVC {
+        if navigationController?.viewControllers.last is EditTeamProtocolPlayersVC {
             navigationController?.popViewController(animated: true)
         }
-        
+        self.presenter.fetchMatchPlayers()
     }
 }
 
@@ -198,12 +199,13 @@ extension EditMatchProtocolViewController {
     
     func showEditTeamPlayers(match: Match, team: Team) {
         
-        editTeamPlayersVC.viewModel = EditTeamProtocolViewModel(matchApi: MatchApi())
-        editTeamPlayersVC.viewModel.match = BehaviorRelay<Match?>(value: match)
-        editTeamPlayersVC.viewModel.team = BehaviorRelay<Team?>(value: team)
-        editTeamPlayersVC.back = self
+        let vc = EditTeamProtocolPlayersVC.getInstance()
+//        vc.viewModel = EditTeamProtocolViewModel(matchApi: MatchApi())
+        vc.viewModel.match = BehaviorRelay<Match?>(value: match)
+        vc.viewModel.team = BehaviorRelay<Team?>(value: team)
+        vc.back = self
         
-        self.show(editTeamPlayersVC, sender: self)
+        self.show(vc, sender: self)
     }
     
     func showEditReferees(match: Match) {

@@ -160,6 +160,16 @@ extension Match {
             mTeam = (teamTwo?.getValue())!
         }
         
+        let playersOne = teamOne?.getValue()?.players?.map({ player -> String in
+            return player.person?.getId() ?? (player.person?.getValue()?.id)!
+        })
+        Print.m("Match.teamOne.players: \(playersOne)")
+        
+        let playersTwo = teamTwo?.getValue()?.players?.map({ player -> String in
+            return player.person?.getId() ?? (player.person?.getValue()?.id)!
+        })
+        Print.m("Match.teamTwo.players: \(playersTwo)")
+        
         for player in mPlayersList {
             for teamPlayer in mTeam.players ?? [] {
                 if player.getId() ?? player.getValue()?.id == teamPlayer.person?.getId() ?? teamPlayer.person?.getValue()?.id {

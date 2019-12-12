@@ -130,7 +130,7 @@
 		187F2DFF22CB19440049EA77 /* EditScoreMatchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F2DEA22CB19440049EA77 /* EditScoreMatchTableViewController.swift */; };
 		187F2E0022CB19440049EA77 /* EditScoreMatchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F2DEC22CB19440049EA77 /* EditScoreMatchTableViewCell.swift */; };
 		187F2E0122CB19440049EA77 /* EditScoreMatchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F2DED22CB19440049EA77 /* EditScoreMatchPresenter.swift */; };
-		187F2E0222CB19440049EA77 /* EditTeamProtocolVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F2DEF22CB19440049EA77 /* EditTeamProtocolVC.swift */; };
+		187F2E0222CB19440049EA77 /* EditTeamProtocolPlayersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F2DEF22CB19440049EA77 /* EditTeamProtocolPlayersVC.swift */; };
 		187F2E0422CB19440049EA77 /* EditTeamProtocolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F2DF222CB19440049EA77 /* EditTeamProtocolCell.swift */; };
 		187F2E0522CB19440049EA77 /* EditMatchProtocolPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F2DF322CB19440049EA77 /* EditMatchProtocolPresenter.swift */; };
 		187F2E0622CB19440049EA77 /* EditEventsMatchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F2DF522CB19440049EA77 /* EditEventsMatchTableViewController.swift */; };
@@ -560,7 +560,7 @@
 		187F2DEA22CB19440049EA77 /* EditScoreMatchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditScoreMatchTableViewController.swift; sourceTree = "<group>"; };
 		187F2DEC22CB19440049EA77 /* EditScoreMatchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditScoreMatchTableViewCell.swift; sourceTree = "<group>"; };
 		187F2DED22CB19440049EA77 /* EditScoreMatchPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditScoreMatchPresenter.swift; sourceTree = "<group>"; };
-		187F2DEF22CB19440049EA77 /* EditTeamProtocolVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTeamProtocolVC.swift; sourceTree = "<group>"; };
+		187F2DEF22CB19440049EA77 /* EditTeamProtocolPlayersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTeamProtocolPlayersVC.swift; sourceTree = "<group>"; };
 		187F2DF222CB19440049EA77 /* EditTeamProtocolCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTeamProtocolCell.swift; sourceTree = "<group>"; };
 		187F2DF322CB19440049EA77 /* EditMatchProtocolPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditMatchProtocolPresenter.swift; sourceTree = "<group>"; };
 		187F2DF522CB19440049EA77 /* EditEventsMatchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditEventsMatchTableViewController.swift; sourceTree = "<group>"; };
@@ -1438,7 +1438,7 @@
 		187F2DEE22CB19440049EA77 /* team */ = {
 			isa = PBXGroup;
 			children = (
-				187F2DEF22CB19440049EA77 /* EditTeamProtocolVC.swift */,
+				187F2DEF22CB19440049EA77 /* EditTeamProtocolPlayersVC.swift */,
 				DB58A19A239CC60100FD402A /* EditTeamProtocolViewModel.swift */,
 				DB58A19C239CD1E500FD402A /* Model */,
 				DB58A197239CC4B800FD402A /* Table */,
@@ -3318,7 +3318,7 @@
 				DBB208F0221315110010B600 /* RefereeProtocolTableViewCell.swift in Sources */,
 				DB7786F8238FBA12000F4117 /* TeamAddPlayerModelItem.swift in Sources */,
 				1826378C22F085BF0014C30A /* IntrinsicTableView.swift in Sources */,
-				187F2E0222CB19440049EA77 /* EditTeamProtocolVC.swift in Sources */,
+				187F2E0222CB19440049EA77 /* EditTeamProtocolPlayersVC.swift in Sources */,
 				DB58A1A2239D007500FD402A /* EditTeamProtocolPlayersTableActions.swift in Sources */,
 				DB9FA4AC22ECA1A000BA5A52 /* TableActions.swift in Sources */,
 				18427960235A0B67006F2C4C /* _Match.swift in Sources */,

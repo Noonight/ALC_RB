@@ -61,8 +61,6 @@ final class TeamApi: ApiRequests {
                         switch resultPerson {
                         case .success(let persons):
                             
-                            Print.m(persons)
-                            
                             if persons.count != 0 {
                                 if findedTeamPlayers != nil {
                                     for i in 0..<findedTeamPlayers!.count {
@@ -80,6 +78,7 @@ final class TeamApi: ApiRequests {
 
                             if var inTeam = inTeam {
                                 inTeam.players = findedTeamPlayers
+                                inTeam.trainer = findedTeam.trainer
                                 resultMy(.success(inTeam))
                             } else {
                                 findedTeam.players = findedTeamPlayers
@@ -100,6 +99,7 @@ final class TeamApi: ApiRequests {
                 } else {
                     if var inTeam = inTeam {
                         inTeam.players = findedTeamPlayers
+                        inTeam.trainer = findedTeam.trainer
                         resultMy(.success(inTeam))
                     } else {
                         findedTeam.players = findedTeamPlayers

@@ -14,7 +14,14 @@ protocol EditTeamPlayersCallBack {
     func back(match: Match)
 }
 
-class EditTeamProtocolVC: UIViewController {
+class EditTeamProtocolPlayersVC: UIViewController {
+    
+    static func getInstance() -> EditTeamProtocolPlayersVC {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let editTeamPlayersVC = storyboard.instantiateViewController(withIdentifier: "EditTeamProtocolVC") as! EditTeamProtocolPlayersVC
+        
+        return editTeamPlayersVC
+    }
     
     @IBOutlet weak var trainerNameLabel: UILabel!
     @IBOutlet weak var trainerPhoneLabel: UILabel!
@@ -31,13 +38,12 @@ class EditTeamProtocolVC: UIViewController {
         setupTable()
         setupViewBinds()
         
-        self.viewModel.setupDataModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+        self.viewModel.setupDataModel()
         self.setupView()
     }
     
@@ -45,14 +51,12 @@ class EditTeamProtocolVC: UIViewController {
 
 // MARK: - SETUP
 
-extension EditTeamProtocolVC {
+extension EditTeamProtocolPlayersVC {
     
     func setupView() {
         guard let team = self.viewModel.team.value else { return }
         self.title = team.name
         self.trainerNameLabel.text = team.trainer?.getValue()?.getFullName()
-        Print.m(team.trainer?.getId())
-        Print.m(team.trainer?.getValue())
         self.trainerPhoneLabel.text = team.creatorPhone
     }
     
@@ -69,16 +73,16 @@ extension EditTeamProtocolVC {
             .observeOn(MainScheduler.instance)
             .subscribe { element in
                 guard let match = element.element else { return }
-                self.showSuccessViewHUD(seconds: 2, closure: {
+                self.showSuccessViewHUD(message: "Сохранение успешно", seconds: 2, closure: {
                     self.back?.back(match: match)
                 })
             }.disposed(by: bag)
         
         viewModel
-            .players
+            .playersChanged
             .observeOn(MainScheduler.instance)
             .subscribe { element in
-                guard let players = element.element else { return }
+                let players = self.viewModel.players.value
                 self.table.dataSource = players
                 self.tableView.reloadData()
             }.disposed(by: bag)
@@ -100,13 +104,19 @@ extension EditTeamProtocolVC {
             .observeOn(MainScheduler.instance)
             .bind(to: self.rx.message)
             .disposed(by: bag)
+        
+        viewModel
+            .noTeamPlayers
+            .asDriver(onErrorJustReturn: false)
+            .drive(self.rx.empty)
+            .disposed(by: bag)
     }
     
 }
 
 // MARK: - ACTIONS
 
-extension EditTeamProtocolVC: EditTeamProtocolPlayersTableActions {
+extension EditTeamProtocolPlayersVC: EditTeamProtocolPlayersTableActions {
     
     func switchValueChanged(model: PlayerSwitchModelItem) {
         var players = self.viewModel.players.value
@@ -124,19 +134,19 @@ extension EditTeamProtocolVC: EditTeamProtocolPlayersTableActions {
 
 // MARK: - HELPERS
 
-extension EditTeamProtocolVC {
+extension EditTeamProtocolPlayersVC {
     
 }
 
 // MARK: - NAVIGATION
 
-extension EditTeamProtocolVC {
+extension EditTeamProtocolPlayersVC {
     
 }
 
 // MARK: - REACTIVE
 
-extension Reactive where Base: EditTeamProtocolVC {
+extension Reactive where Base: EditTeamProtocolPlayersVC {
     
     internal var loading: Binder<Bool> {
         return Binder(self.base) { vc, isLoading in
@@ -148,6 +158,28 @@ extension Reactive where Base: EditTeamProtocolVC {
                 }
             } else {
                 vc.hud?.hide(animated: false)
+                vc.hud = nil
+            }
+        }
+    }
+    
+    internal var empty: Binder<Bool> {
+        return Binder(self.base) { vc, isEmpty in
+            if isEmpty == true {
+                vc.tableView.separatorStyle = .none
+                if vc.hud != nil {
+                    vc.hud?.hide(animated: true)
+                    vc.hud = vc.showEmptyViewHUD(addTo: vc.tableView, message: "В команде нет игроков", tap: {
+                        Print.m("tap on empty")
+                    })
+                } else {
+                    vc.hud = vc.showEmptyViewHUD(addTo: vc.tableView, message: "В команде нет игроков", tap: {
+                        Print.m("tap on empty")
+                    })
+                }
+            } else {
+                vc.tableView.separatorStyle = .singleLine
+                vc.hud?.hide(animated: true)
                 vc.hud = nil
             }
         }
