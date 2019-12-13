@@ -5657,7 +5657,7 @@
         <!--Назначить судей-->
         <scene sceneID="WkT-Zf-uAW">
             <objects>
-                <viewController storyboardIdentifier="EditScheduleLKViewController" title="Назначить судей" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cZY-Zf-FZI" customClass="EditScheduleLKViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AssignRefereesVC" title="Назначить судей" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cZY-Zf-FZI" customClass="AssignRefereesVC" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8Qo-EO-F8Q"/>
                         <viewControllerLayoutGuide type="bottom" id="nh4-fx-YiP"/>
@@ -5673,7 +5673,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XpW-4K-U53">
-                                                <rect key="frame" x="0.0" y="100.5" width="320" height="181"/>
+                                                <rect key="frame" x="0.0" y="130.5" width="320" height="181"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1-й судья:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAk-L0-Bfk">
                                                         <rect key="frame" x="8" y="16" width="79" height="21"/>
@@ -5774,35 +5774,35 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lBp-46-q12">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tourney league name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebQ-sH-gfY">
-                                                        <rect key="frame" x="8" y="8" width="304" height="20.5"/>
+                                                        <rect key="frame" x="8" y="8" width="304" height="50.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Date + time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3D-UM-QIm">
-                                                        <rect key="frame" x="8" y="36.5" width="79.5" height="18"/>
+                                                        <rect key="frame" x="8" y="66.5" width="79.5" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLa-HQ-Wxq">
-                                                        <rect key="frame" x="0.0" y="62.5" width="320" height="0.5"/>
+                                                        <rect key="frame" x="0.0" y="92.5" width="320" height="0.5"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="0.5" id="EIe-ef-uN3"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team one" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M33-Bb-nTM">
-                                                        <rect key="frame" x="8" y="71" width="114" height="21"/>
+                                                        <rect key="frame" x="8" y="101" width="114" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99 : 99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SsH-Ao-uua">
-                                                        <rect key="frame" x="130" y="71" width="60" height="21"/>
+                                                        <rect key="frame" x="130" y="101" width="60" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="hqa-VG-CE9"/>
                                                         </constraints>
@@ -5811,13 +5811,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team two" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4q-z8-UpY">
-                                                        <rect key="frame" x="198" y="71" width="114" height="21"/>
+                                                        <rect key="frame" x="198" y="101" width="114" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Place" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5QK-jW-Jh9">
-                                                        <rect key="frame" x="274.5" y="36.5" width="37.5" height="18"/>
+                                                        <rect key="frame" x="274.5" y="66.5" width="37.5" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -5831,6 +5831,7 @@
                                                     <constraint firstItem="X4q-z8-UpY" firstAttribute="leading" secondItem="SsH-Ao-uua" secondAttribute="trailing" constant="8" id="7lb-v9-Req"/>
                                                     <constraint firstItem="jLa-HQ-Wxq" firstAttribute="leading" secondItem="lBp-46-q12" secondAttribute="leading" id="9Zn-4m-wvL"/>
                                                     <constraint firstItem="jLa-HQ-Wxq" firstAttribute="top" secondItem="B3D-UM-QIm" secondAttribute="bottom" constant="8" id="BYS-xY-BXE"/>
+                                                    <constraint firstAttribute="height" constant="130" id="Cag-B8-NJ6"/>
                                                     <constraint firstItem="5QK-jW-Jh9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="B3D-UM-QIm" secondAttribute="trailing" constant="8" id="H2m-2z-qpi"/>
                                                     <constraint firstAttribute="trailing" secondItem="ebQ-sH-gfY" secondAttribute="trailing" constant="8" id="JZz-7t-ZO4"/>
                                                     <constraint firstAttribute="trailing" secondItem="X4q-z8-UpY" secondAttribute="trailing" constant="8" id="KwY-j0-RRR"/>
@@ -5851,7 +5852,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qhS-ed-dU1">
-                                                <rect key="frame" x="0.0" y="100" width="320" height="0.5"/>
+                                                <rect key="frame" x="0.0" y="130" width="320" height="0.5"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="0.5" id="dEB-vN-Jkz"/>
@@ -5897,7 +5898,7 @@
                                     <action selector="onSaveBtnPressed:" destination="cZY-Zf-FZI" id="6Xt-8s-gje"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="ic_document" id="Yhd-Su-Dyx">
+                            <barButtonItem image="ic_document" id="Yhd-Su-Dyx">
                                 <connections>
                                     <action selector="onMainRefShowProtocolBtnPressed:" destination="cZY-Zf-FZI" id="JWZ-Yc-viQ"/>
                                 </connections>
@@ -5909,6 +5910,7 @@
                     <connections>
                         <outlet property="dateTimeLabel" destination="B3D-UM-QIm" id="IwD-IO-g8X"/>
                         <outlet property="mainRefShowProtocol_btn" destination="Yhd-Su-Dyx" id="cOF-ex-Rvb"/>
+                        <outlet property="matchInfoHeight" destination="Cag-B8-NJ6" id="Y8G-t2-07B"/>
                         <outlet property="placeLabel" destination="5QK-jW-Jh9" id="JzU-TW-One"/>
                         <outlet property="referee1_btn" destination="ogs-7O-9Ke" id="8TL-qE-R07"/>
                         <outlet property="referee2_btn" destination="tKK-j8-w7D" id="zhk-Us-M28"/>

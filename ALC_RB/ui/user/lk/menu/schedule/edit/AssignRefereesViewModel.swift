@@ -10,13 +10,13 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class EditScheduleViewModel {
+class AssignRefereesViewModel {
     
     var loading: PublishSubject<Bool> = PublishSubject()
     var error: PublishSubject<Error?> = PublishSubject()
     var message = PublishSubject<SingleLineMessage?>()
     
-    var matchScheduleModel = BehaviorRelay<MatchScheduleModelItem?>(value: nil)
+    var match = BehaviorRelay<Match?>(value: nil)
     
     var editedMatch = PublishSubject<Match>()
     
@@ -35,7 +35,7 @@ class EditScheduleViewModel {
     
     func editMatchReferees() {
         self.loading.onNext(true)
-        let patchMatch = Match(id: (self.matchScheduleModel.value?.match.id)!, referees: self.refereesModel.getReferees())
+        let patchMatch = Match(id: (self.match.value?.id)!, referees: self.refereesModel.getReferees())
         matchApi.patch_matchReferees(match: patchMatch) { result in
             switch result {
             case .success(let editedMatch):

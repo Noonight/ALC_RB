@@ -37,6 +37,32 @@ final class MatchApi: ApiRequests {
         get_match(params: params, resultMy: resultMy)
     }
     
+    func get_matchReferees(inMatch: Match, resultMy: @escaping (ResultMy<Match, RequestError>) -> ()) {
+        let params = ParamBuilder<Match.CodingKeys>()
+            .add(key: .id, value: inMatch.id)
+            .select(.referees)
+            .populate("referees.person")
+            .get()
+        get_match(params: params) { result in
+            switch result {
+            case .success(let findedMatches):
+                var inMatch = inMatch
+                guard let match = findedMatches.first else { return }
+                inMatch.referees = match.referees
+                resultMy(.success(inMatch))
+            case .message(let message):
+                Print.m(message.message)
+                resultMy(.message(message))
+            case .failure(.error(let error)):
+                Print.m(error)
+                resultMy(.failure(.error(error)))
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+                resultMy(.failure(.notExpectedData))
+            }
+        }
+    }
+    
     // required: _id={match.id}&_select=playersList&_populate=playersList
     func get_matchPlayers(inMatch: Match, resultMy: @escaping (ResultMy<Match, RequestError>) -> ()) {
         let params = ParamBuilder<Match.CodingKeys>()

@@ -19,10 +19,10 @@ class ScheduleTVC: UITableViewController {
     private var scheduleTable: ScheduleRefTable!
     private let bag = DisposeBag()
     
-    private lazy var editSchedule: EditScheduleLKViewController = {
+    private lazy var assignReferees: AssignRefereesVC = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
-        var viewController = storyboard.instantiateViewController(withIdentifier: "EditScheduleLKViewController") as! EditScheduleLKViewController
+        var viewController = storyboard.instantiateViewController(withIdentifier: "EditScheduleLKViewController") as! AssignRefereesVC
         
         return viewController
     }()
@@ -132,16 +132,11 @@ extension ScheduleTVC: TableActions {
 
 // MARK: - EDIT SCHEDULE CALL BACK
 
-extension ScheduleTVC: EditScheduleCallBack {
-    
-    func back(match: Match) {
-//        editSchedule.dismiss(animated: true) {
-//            Print.m("dismiss here yee")
-//        }
+extension ScheduleTVC: AssignRefereesCallBack {
+    func assignRefereesBack(match: Match) {
         navigationController?.popViewController(animated: true)
         self.viewModel.fetch()
     }
-    
 }
 
 // MARK: - NAVIGATION
@@ -150,11 +145,11 @@ extension ScheduleTVC {
     
     func showEditMatchReferees(model: MatchScheduleModelItem) {
 //        editSchedule.
-        editSchedule.editScheduleCallBack = self
-        editSchedule.viewModel = EditScheduleViewModel(matchApi: MatchApi())
-        editSchedule.viewModel.matchScheduleModel.accept(model)
+        assignReferees.assignRefereesCallBack = self
+        assignReferees.viewModel = AssignRefereesViewModel(matchApi: MatchApi())
+        assignReferees.viewModel.match.accept(model.match)
 //        editSchedule.viewModel.initReferees()
-        show(editSchedule, sender: self)
+        show(assignReferees, sender: self)
     }
     
 }

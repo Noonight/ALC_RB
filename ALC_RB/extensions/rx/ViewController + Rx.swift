@@ -15,7 +15,7 @@ extension Reactive where Base: UIViewController {
     internal var loading: Binder<Bool> {
         return Binder(self.base) { vc, isLoading in
             if isLoading == true {
-                Print.m("HUD LOADING <--- START")
+//                Print.m("HUD LOADING <--- START")
                 if vc.hud != nil {
 //                    Print.m("HUD <--- NOT EMPTY")
                     vc.hud?.setToLoadingView()
@@ -24,7 +24,7 @@ extension Reactive where Base: UIViewController {
                     vc.hud = vc.showLoadingViewHUD()
                 }
             } else {
-                Print.m("HUD LOADING <--- STOP")
+//                Print.m("HUD LOADING <--- STOP")
                 vc.hud?.hide(animated: false)
                 vc.hud = nil
             }
@@ -73,7 +73,7 @@ extension Reactive where Base: UIViewController {
                         vc.emptyAction?()
                     })
                 } else {
-                    Print.m("SHOW EMPTY VIEw")
+//                    Print.m("SHOW EMPTY VIEw")
                     vc.hud = vc.showEmptyViewHUD {
                         vc.emptyAction?()
                     }

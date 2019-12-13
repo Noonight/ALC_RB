@@ -48,8 +48,6 @@ class EditMatchProtocolViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.setupPresenter()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,17 +83,11 @@ class EditMatchProtocolViewController: UIViewController {
 
 extension EditMatchProtocolViewController {
     
-    func setupPresenter() {
-        self.initPresenter()
-    }
-    
     func setupView() {
         
         teamOneTitle.text = self.presenter.match.teamOne?.getValue()?.name ?? "Не назначена"
         teamTwoTitle.text = self.presenter.match.teamTwo?.getValue()?.name ?? "Не назначена"
         
-        teamOneBtn.indicatorViewStyle = true
-        teamTwoBtn.indicatorViewStyle = true
         refereesBtn.indicatorViewStyle = true
         workProtocolBtn.indicatorViewStyle = true
         
@@ -104,8 +96,19 @@ extension EditMatchProtocolViewController {
         refereesBtn.stopLoading()
         workProtocolBtn.stopLoading()
         
-        self.teamOneView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(teamOnePressed(_:))))
-        self.teamTwoView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(teamTwoPressed(_:))))
+        if presenter.match.teamOne != nil {
+            self.teamOneView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(teamOnePressed(_:))))
+            teamOneBtn.indicatorViewStyle = true
+        } else {
+            self.teamOneView.gestureRecognizers?.removeAll()
+        }
+        if presenter.match.teamTwo != nil {
+            self.teamTwoView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(teamTwoPressed(_:))))
+            teamTwoBtn.indicatorViewStyle = true
+        } else {
+            self.teamTwoView.gestureRecognizers?.removeAll()
+        }
+        
         self.refereesView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(refereesPressed(_:))))
         self.workProtocolBtn.addTarget(self, action: #selector(doMatchPressed(_:)), for: .touchUpInside)
     }
@@ -139,8 +142,7 @@ extension EditMatchProtocolViewController {
     
     @objc func refereesPressed(_ sender: UIView) {
         Print.m("REFEREES")
-        refereesBtn.startLoading()
-        self.showAlert(message: "Судья")
+        self.showEditReferees()
     }
     
     @objc func doMatchPressed(_ sender: UIButton) {
@@ -193,6 +195,17 @@ extension EditMatchProtocolViewController: EditTeamPlayersCallBack {
     }
 }
 
+// MARK: - AssignRefereesCallBack
+
+extension EditMatchProtocolViewController: AssignRefereesCallBack {
+    func assignRefereesBack(match: Match) {
+        if navigationController?.viewControllers.last is AssignRefereesVC {
+            navigationController?.popViewController(animated: true)
+        }
+        self.presenter.fetchMatchReferees()
+    }
+}
+
 // MARK: - NAVIGATION
 
 extension EditMatchProtocolViewController {
@@ -208,61 +221,10 @@ extension EditMatchProtocolViewController {
         self.show(vc, sender: self)
     }
     
-    func showEditReferees(match: Match) {
-        Print.m("match is \(match)")
-        self.showAlert(message: "Edit match referees")
-    }
-    
-}
-
-// MARK: Presenter
-
-extension EditMatchProtocolViewController: EditMatchProtocolView {
-    func requestAcceptProtocolSuccess(message: SingleLineMessage) {
-        showAlert(title: message.message, message: "")
-    }
-    
-    func requestAcceptProtocolFailure(error: Error) {
-        showAlert(message: error.localizedDescription)
-    }
-    
-    func requestEditProtocolSuccess(match: Match) {
+    func showEditReferees() {
+        let vc = AssignRefereesVC.getInstance(kind: .editMatchProtocol, match: self.presenter.match, callBack: self)
         
-//        user?.person.participationMatches?.removeAll(where: { $0.isEqual({ $0.id == match.match?.id }) })
-//        user?.person.participationMatches!.removeAll(where: { pMatch -> Bool in
-//            return pMatch.id == match.match?.id
-//        })
-//        user?.person.participationMatches!.append(IdRefObjectWrapper(match.match!))
-        
-        showAlert(title: "Протокол сохранен", message: "")
+        self.show(vc, sender: self)
     }
     
-    func requestEditProtocolMessage(message: SingleLineMessage) {
-        showAlert(message: message.message)
-    }
-    
-    func requestEditProtocolFailure(error: Error) {
-        showAlert(message: error.localizedDescription)
-    }
-    
-    func initPresenter() {
-        presenter.attachView(view: self)
-    }
-}
-
-extension EditMatchProtocolViewController: SaveProtocol {
-    func save() {
-        Print.m("save staff")
-//        let request = EditProtocol(
-//            id: self.match.id,
-////            events: EditProtocol.Events(events: self.eventsController.events),
-////            playersList: connectPlayersOfTeamOneAndTwo().map({ liPlayer -> String in
-////                return liPlayer.playerId
-////            })
-//        )
-//        self.presenter.requestEditProtocol(
-//            token: (self.userDefaults.getAuthorizedUser()?.token)!,
-//            editProtocol: request
-//        )
-    }
 }

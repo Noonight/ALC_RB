@@ -11,11 +11,11 @@ import RxSwift
 import RxCocoa
 import SPStorkController
 
-protocol EditScheduleCallBack {
-    func back(match: Match)
+protocol AssignRefereesCallBack {
+    func assignRefereesBack(match: Match)
 }
 
-class EditScheduleLKViewController: UIViewController {
+class AssignRefereesVC: UIViewController {
     private enum Texts {
         static let NO_REF = "Не назначен"
         static let REFEREES = "Рефери"
@@ -26,11 +26,30 @@ class EditScheduleLKViewController: UIViewController {
         static let NO_REF = #colorLiteral(red: 1, green: 0.3098039216, blue: 0.2666666667, alpha: 1)
         static let YES_REF = #colorLiteral(red: 0.07843137255, green: 0.5568627451, blue: 1, alpha: 1)
     }
+    enum Kind {
+        // show: match info, show editMatchProtocol btn
+        case schedule
+        // hide: match info, hide editMatchProtocol btn
+        case editMatchProtocol // before work protocol view
+    }
+    
+    static func getInstance(kind: AssignRefereesVC.Kind, match: Match, callBack: AssignRefereesCallBack) -> AssignRefereesVC {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let assignRefereesVC = storyboard.instantiateViewController(withIdentifier: "AssignRefereesVC") as! AssignRefereesVC
+        
+        assignRefereesVC.assignRefereesCallBack = callBack
+        assignRefereesVC.viewModel = AssignRefereesViewModel(matchApi: MatchApi())
+        assignRefereesVC.viewModel.match.accept(match)
+        assignRefereesVC.kind = kind
+        
+        return assignRefereesVC
+    }
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var mainRefShowProtocol_btn: UIBarButtonItem!
     @IBOutlet weak var save_btn: UIBarButtonItem!
     
+    @IBOutlet weak var matchInfoHeight: NSLayoutConstraint!
     @IBOutlet weak var tourneyLeagueLabel: UILabel!
     @IBOutlet weak var dateTimeLabel: UILabel!
     @IBOutlet weak var placeLabel: UILabel!
@@ -43,11 +62,11 @@ class EditScheduleLKViewController: UIViewController {
     @IBOutlet weak var referee3_btn: UIButton!
     @IBOutlet weak var timekeeper_btn: UIButton!
     
-    var viewModel: EditScheduleViewModel = EditScheduleViewModel(matchApi: MatchApi())
+    var viewModel: AssignRefereesViewModel = AssignRefereesViewModel(matchApi: MatchApi())
     private let bag = DisposeBag()
     
-    var editScheduleCallBack: EditScheduleCallBack?
-    
+    var assignRefereesCallBack: AssignRefereesCallBack?
+    var kind = Kind.schedule
     private var choosePersonVC: ChoosePersonVC!
     
     private lazy var refProtocol: EditMatchProtocolViewController = {
@@ -80,21 +99,31 @@ class EditScheduleLKViewController: UIViewController {
 
 // MARK: - SETUP
 
-extension EditScheduleLKViewController {
+extension AssignRefereesVC {
     
     func setupView() {
-        guard let matchModel = viewModel.matchScheduleModel.value else { return }
         
-        self.tourneyLeagueLabel.text = matchModel.leagueName
-//        self.dateTimeLabel.text = "\(matchModel.date) : \(matchModel.time)"
-        self.dateTimeLabel.text = matchModel.dateTime
-        self.placeLabel.text = matchModel.place
-        self.teamOneLabel.text = matchModel.teamOneName
-        self.teamTwoLabel.text = matchModel.teamTwoName
-        self.scoreLabel.text = matchModel.score
+        guard let match = viewModel.match.value else { return }
         
+        switch kind {
+        case .schedule:
+            self.matchInfoHeight.constant = 130
+            self.tourneyLeagueLabel.text = match.league?.getValue()?.name
+            self.dateTimeLabel.text = "\(match.date?.toFormat(DateFormats.local.rawValue) ?? "") : \(match.date?.toFormat(DateFormats.localTime.rawValue) ?? "")"
+            self.placeLabel.text = match.place?.getValue()?.name
+            self.teamOneLabel.text = match.teamOne?.getValue()?.name
+            self.teamTwoLabel.text = match.teamTwo?.getValue()?.name
+            self.scoreLabel.text = match.score
+            
+            self.mainRefShowProtocol_btn.isEnabled = true
+            self.mainRefShowProtocol_btn.image = UIImage(named: "ic_document")
+        case .editMatchProtocol:
+            self.matchInfoHeight.constant = 0
+            self.mainRefShowProtocol_btn.isEnabled = false
+            self.mainRefShowProtocol_btn.image = nil
+        }
         
-        self.viewModel.refereesModel.setup(referees: matchModel.match.referees)
+        self.viewModel.refereesModel.setup(referees: match.referees)
     }
     
     func setupViewBinds() {
@@ -169,7 +198,7 @@ extension EditScheduleLKViewController {
                 guard let match = element.element else { return }
                 Print.m("MATCH WAS EDITED = \(match)")
                 self.showSuccessViewHUD(seconds: 2, closure: {
-                    self.editScheduleCallBack?.back(match: match)
+                    self.assignRefereesCallBack?.assignRefereesBack(match: match)
                 })
             })
             .disposed(by: bag)
@@ -201,7 +230,7 @@ extension EditScheduleLKViewController {
 
 // MARK: - ACTIONS
 
-extension EditScheduleLKViewController {
+extension AssignRefereesVC {
     
     @IBAction func onReferee1BtnPressed(_ sender: UIButton) {
         self.showPersonChooser(type: .firstReferee)
@@ -274,7 +303,7 @@ extension EditScheduleLKViewController {
 
 // MARK: - HELPER
 
-extension EditScheduleLKViewController {
+extension AssignRefereesVC {
     
     func showPersonChooser(type: Referee.rType) {
         let transitionDelegate = SPStorkTransitioningDelegate()
@@ -287,7 +316,7 @@ extension EditScheduleLKViewController {
     }
 }
 
-extension EditScheduleLKViewController: ChoosePersonResult {
+extension AssignRefereesVC: ChoosePersonResult {
     func complete(type: Referee.rType, person: Person) {
         switch type {
         case .firstReferee:
@@ -304,6 +333,6 @@ extension EditScheduleLKViewController: ChoosePersonResult {
 
 // MARK: NAVIGATION
 
-extension EditScheduleLKViewController {
+extension AssignRefereesVC {
     
 }

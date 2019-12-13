@@ -69,23 +69,23 @@ final class EditTeamProtocolViewModel {
     
     func requestEditMatchPlayers() {
         self.loading.onNext(true)
-        prepareMatch()
-//        matchApi.post_changePlayers(match: prepareMatch()) { result in
-//            switch result {
-//            case .success(let changedMatch):
-//                self.loading.onNext(false)
-//                self.changedMatch.onNext(changedMatch)
-//            case .message(let message):
-//                Print.m(message.message)
-//                self.message.onNext(message)
-//            case .failure(.error(let error)):
-//                Print.m(error)
-//                self.error.onNext(error)
-//            case .failure(.notExpectedData):
-//                Print.m("not expected data")
-//                self.message.onNext(SingleLineMessage(Constants.Texts.NOT_VALID_DATA))
-//            }
-//        }
+//        prepareMatch()
+        matchApi.post_changePlayers(match: prepareMatch()) { result in
+            switch result {
+            case .success(let changedMatch):
+                self.loading.onNext(false)
+                self.changedMatch.onNext(changedMatch)
+            case .message(let message):
+                Print.m(message.message)
+                self.message.onNext(message)
+            case .failure(.error(let error)):
+                Print.m(error)
+                self.error.onNext(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+                self.message.onNext(SingleLineMessage(Constants.Texts.NOT_VALID_DATA))
+            }
+        }
     }
     
 }
@@ -95,6 +95,9 @@ final class EditTeamProtocolViewModel {
 extension EditTeamProtocolViewModel {
     
     private func prepareMatch() -> Match {
+        
+        self.removeTeamPlayersFromMatch()
+        
         var match: Match!
         if self.match.value != nil {
             match = self.match.value!
@@ -105,22 +108,22 @@ extension EditTeamProtocolViewModel {
         Print.m(getPlaingTeamPlayers().map({ playerSwitch -> String in
             return playerSwitch.player.player.person?.getId() ?? (playerSwitch.player.player.person?.getValue()?.id)!
         }))
-        Print.m("plaingPlayers team one: \(match.getPlaingTeamPlayers(team: .one))")
-        Print.m("plaingPlayers team two: \(match.getPlaingTeamPlayers(team: .two))")
-//        match.setPlaingTeamPlayers(team: team.value!, newTeamPlayers: getPlaingTeamPlayers().map({ playerSwitch -> IdRefObjectWrapper<Person> in
-//            return IdRefObjectWrapper<Person>((playerSwitch.player.player.person?.getValue())!)
-//        }))
         
+        var plaingPlayers = getPlaingTeamPlayers().map { playerSwitch -> IdRefObjectWrapper<Person> in
+            return playerSwitch.player.player.person!
+        }
+    
+        match.playersList?.append(contentsOf: plaingPlayers)
+        
+        let players = match.playersList?.map({ person -> String in
+            return person.getId() ?? (person.getValue()?.id)!
+        })
+        Print.m("match.playersList: \(players)")
         
         return match
     }
     
-    private func connectTeamPlayersWithPlaingPlayers() -> [IdRefObjectWrapper<Person>] {
-        let plaingTeamPlayers = self.getPlaingTeamPlayers().map { playerSwitch -> IdRefObjectWrapper<Person> in
-            return playerSwitch.player.player.person!
-        }
-        
-    }
+    
     
     private func removeTeamPlayersFromMatch() {
         guard var team = self.team.value else { return }
@@ -129,19 +132,15 @@ extension EditTeamProtocolViewModel {
         guard var playersList = match.playersList else { return }
         guard var teamPlayers = team.players else { return }
         
-        
-        for i in 0..<playersList.count {
-//            playersList.removeAll { person -> Bool in
-//                return teamPlayers.contains(where: { player -> Bool in
-//                    return player.person?.getId() ?? player.person?.getValue()?.id == person?.getId() ?? person?.getValue()?.id
-//                })
-//            }
-            for j in 0..<teamPlayers.count {
-                if playersList[i].getId() ?? playersList[i].getValue()?.id == teamPlayers[j].person?.getId() ?? teamPlayers[j].person?.getValue()?.id {
-
-                }
-            }
+        playersList.removeAll { person -> Bool in
+            return teamPlayers.contains(where: { player -> Bool in
+                return player.person?.getId() ?? player.person?.getValue()?.id == person.getId() ?? person.getValue()?.id
+            })
         }
+        
+        match.playersList = playersList
+        self.match.accept(match)
+        
     }
     
     private func getPlaingTeamPlayers() -> [PlayerSwitchModelItem] {

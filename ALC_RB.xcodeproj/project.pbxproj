@@ -67,8 +67,8 @@
 		1807709422F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1807709222F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.xib */; };
 		180C084D22C1F74A00ADC90D /* CreateClub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180C084C22C1F74A00ADC90D /* CreateClub.swift */; };
 		180DAB9323682B740064C291 /* SaveProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180DAB9223682B740064C291 /* SaveProtocol.swift */; };
-		180F236722B25F1700ADE8FD /* EditScheduleLKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */; };
-		180F236922B262AD00ADE8FD /* EditScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */; };
+		180F236722B25F1700ADE8FD /* AssignRefereesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F236622B25F1700ADE8FD /* AssignRefereesVC.swift */; };
+		180F236922B262AD00ADE8FD /* AssignRefereesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F236822B262AD00ADE8FD /* AssignRefereesViewModel.swift */; };
 		1814452722E6BFCF00C9D45E /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1814452622E6BFCF00C9D45E /* MainTabBarViewController.swift */; };
 		181B115122F4D406004670F2 /* AllTeamsLeagueTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B115022F4D406004670F2 /* AllTeamsLeagueTableView.swift */; };
 		1821150B22E59F22000F86D5 /* CGSize Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1821150A22E59F22000F86D5 /* CGSize Ext.swift */; };
@@ -497,8 +497,8 @@
 		1807709222F3EEFE00D71EA9 /* TournamentTeamHeaderCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TournamentTeamHeaderCellTableViewCell.xib; sourceTree = "<group>"; };
 		180C084C22C1F74A00ADC90D /* CreateClub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateClub.swift; sourceTree = "<group>"; };
 		180DAB9223682B740064C291 /* SaveProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveProtocol.swift; sourceTree = "<group>"; };
-		180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleLKViewController.swift; sourceTree = "<group>"; };
-		180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewModel.swift; sourceTree = "<group>"; };
+		180F236622B25F1700ADE8FD /* AssignRefereesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignRefereesVC.swift; sourceTree = "<group>"; };
+		180F236822B262AD00ADE8FD /* AssignRefereesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignRefereesViewModel.swift; sourceTree = "<group>"; };
 		1814452622E6BFCF00C9D45E /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		181B115022F4D406004670F2 /* AllTeamsLeagueTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTeamsLeagueTableView.swift; sourceTree = "<group>"; };
 		1821150A22E59F22000F86D5 /* CGSize Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize Ext.swift"; sourceTree = "<group>"; };
@@ -1216,8 +1216,8 @@
 		180F236522B25EA000ADE8FD /* edit */ = {
 			isa = PBXGroup;
 			children = (
-				180F236622B25F1700ADE8FD /* EditScheduleLKViewController.swift */,
-				180F236822B262AD00ADE8FD /* EditScheduleViewModel.swift */,
+				180F236622B25F1700ADE8FD /* AssignRefereesVC.swift */,
+				180F236822B262AD00ADE8FD /* AssignRefereesViewModel.swift */,
 				DB77EE122395493D00408309 /* Model */,
 			);
 			path = edit;
@@ -3330,7 +3330,7 @@
 				DBB208F2221316D90010B600 /* RefereeTeamPresenter.swift in Sources */,
 				DBF50FE92391166100AA73BE /* TeamAddTableActions.swift in Sources */,
 				DBF4F00822157BF900066BE3 /* ScoreMatchPresenter.swift in Sources */,
-				180F236722B25F1700ADE8FD /* EditScheduleLKViewController.swift in Sources */,
+				180F236722B25F1700ADE8FD /* AssignRefereesVC.swift in Sources */,
 				DBA897B4238177F200BEB526 /* ProtocolApi.swift in Sources */,
 				DB641F88222BA63D004AC6CB /* Print.swift in Sources */,
 				DB6AA18321C296DE007D4693 /* ClubTableViewCell.swift in Sources */,
@@ -3381,7 +3381,7 @@
 				DB8A689F224E0D5C00D3972A /* TournamentPickerView.swift in Sources */,
 				DB78E13F21D529DC001C885D /* EmptyProtocol.swift in Sources */,
 				DBD194572392C32300FDF05B /* InvitationViewModel.swift in Sources */,
-				180F236922B262AD00ADE8FD /* EditScheduleViewModel.swift in Sources */,
+				180F236922B262AD00ADE8FD /* AssignRefereesViewModel.swift in Sources */,
 				DB932DE422C8FF9000C060C2 /* RefereeEditMatchesLKTableViewController.swift in Sources */,
 				18427962235A0D3A006F2C4C /* _Event.swift in Sources */,
 				DBB208EA221192F90010B600 /* TeamProtocolPresenter.swift in Sources */,

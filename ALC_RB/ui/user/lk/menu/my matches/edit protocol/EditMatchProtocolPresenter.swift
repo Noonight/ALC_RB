@@ -7,19 +7,8 @@
 //
 
 import Foundation
-import Alamofire
-import AlamofireImage
 
-protocol EditMatchProtocolView : MvpView {
-    func requestEditProtocolSuccess(match: Match)
-    func requestEditProtocolMessage(message: SingleLineMessage)
-    func requestEditProtocolFailure(error: Error)
-    
-    func requestAcceptProtocolSuccess(message: SingleLineMessage)
-    func requestAcceptProtocolFailure(error: Error)
-}
-
-class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> {
+class EditMatchProtocolPresenter {
     
     let teamApi: TeamApi
     let personApi: PersonApi
@@ -59,6 +48,24 @@ class EditMatchProtocolPresenter: MvpPresenter<EditMatchProtocolViewController> 
             case .success(let matchPlayers):
                 
                 self.match.playersList = matchPlayers.playersList
+                
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
+        }
+    }
+    
+    func fetchMatchReferees() {
+        
+        matchApi.get_matchReferees(inMatch: self.match) { result in
+            switch result {
+            case .success(let matchReferees):
+                
+                self.match.referees = matchReferees.referees
                 
             case .message(let message):
                 Print.m(message.message)
