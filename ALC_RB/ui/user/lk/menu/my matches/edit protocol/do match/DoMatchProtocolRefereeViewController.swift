@@ -23,8 +23,6 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         static let ACCEPT_PROTOCOL = "Подтвердить протокол"
         
         static let Q_ACCEPT_MATCH = "Завершить матч?"
-//        static let D_ACCEPT_MATCH = "Завершая матч вы подтверждаете протокол, изменения большне не будут доступны. Нажмите 'Сохранить протокол' если хотите внести изменения позже"
-//        static let D_ACCEPT_MATCH = "Завершая матч вы сохраняете протокол, изменения будут доступны пока главный судья не подтвердит протокол"
         static let D_ACCEPT_MATCH_NOT_MAIN_REF = "Завершая матч вы сохраняете протокол, изменения будут доступны пока главный судья не подтвердит протокол. Для публикации главный судья должен подтвердить протокол"
         static let D_ACCEPT_MATCH_MAIN_REF = "Завершая матч вы сохраняете протокол, изменения будут доступны пока главный судья не подтвердит протокол. Т.к. вы являетесь главным судьеи вы можете сразу подтвердить протокол нажав на 'Подтвердить протокол', изменения больше не будут доступны, протокол будет опубликован."
 
@@ -54,8 +52,15 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         
         static let PROGRESS_UPDATE  = "Обновляем..."
     }
-    enum Segues {
-        static let REFEREES = "segue_edit_referees_do_protocol"
+    
+    static func getInstance(viewModel: ProtocolRefereeViewModel) -> DoMatchProtocolRefereeViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        let viewController = storyboard.instantiateViewController(withIdentifier: "DoMatchProtocolRefereeViewController") as! DoMatchProtocolRefereeViewController
+        
+        viewController.viewModel = viewModel
+        
+        return viewController
     }
     
     // MARK: OUTLETS
@@ -114,10 +119,6 @@ class DoMatchProtocolRefereeViewController: UIViewController {
     }
     
 }
-
-// MARK: EXTENSIONS
-
-
 
 // MARK: SETUP
 
@@ -747,12 +748,5 @@ extension DoMatchProtocolRefereeViewController: DoMatchProtocolRefereeView {
 // MARK: NAVIGATION
 
 extension DoMatchProtocolRefereeViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Segues.REFEREES,
-            let destination = segue.destination as? EditRefereesProtocolViewController
-        {
-            destination.refereesController = self.viewModel.refereesController
-            destination.viewModel?.comingMatch = self.viewModel.match
-        }
-    }
+    
 }

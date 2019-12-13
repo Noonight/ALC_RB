@@ -17,6 +17,17 @@ protocol EditMatchProtocolCallBack {
 
 class EditMatchProtocolViewController: UIViewController {
     
+    static func getInstance(match: Match, callBack: EditMatchProtocolCallBack) -> EditMatchProtocolViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        
+        var viewController = storyboard.instantiateViewController(withIdentifier: "EditMatchProtocolViewControllerProtocol") as! EditMatchProtocolViewController
+        
+        viewController.presenter.match = match
+        viewController.back = callBack
+        
+        return viewController
+    }
+    
     @IBOutlet weak var teamOneLogo: UIImageView!
     @IBOutlet weak var teamOneTitle: UILabel!
     @IBOutlet weak var teamTwoLogo: UIImageView!

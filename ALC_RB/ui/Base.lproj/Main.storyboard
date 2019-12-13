@@ -4707,7 +4707,7 @@
         <!--1 тайм-->
         <scene sceneID="hLE-jB-kmc">
             <objects>
-                <viewController id="2UG-mV-sx9" customClass="DoMatchProtocolRefereeViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DoMatchProtocolRefereeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2UG-mV-sx9" customClass="DoMatchProtocolRefereeViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NWD-1W-gDp"/>
                         <viewControllerLayoutGuide type="bottom" id="uTn-fu-loL"/>
@@ -5256,11 +5256,7 @@
                         <outlet property="titleTeamTwo_label" destination="id7-3a-OAN" id="zlr-Nb-Lam"/>
                     </connections>
                 </viewController>
-                <tapGestureRecognizer id="h54-cb-rjC">
-                    <connections>
-                        <segue destination="Wqd-gf-gJI" kind="show" identifier="segue_edit_referees_do_protocol" id="j6x-Mv-JVi"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="h54-cb-rjC"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yKo-5K-SqZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8178.75" y="-540.84507042253517"/>
@@ -8603,7 +8599,6 @@ E9QT2RPhE+QT9hP5E/4AAAAAAAACAQAAAAAAAABXAAAAAAAAAAAAAAAAAAAUAA
         <image name="tab_user" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="j6x-Mv-JVi"/>
         <segue reference="cnx-WA-sa7"/>
     </inferredMetricsTieBreakers>
 </document>

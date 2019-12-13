@@ -18,19 +18,16 @@ class ProtocolRefereeViewModel {
     
     var teamOnePlayersController: ProtocolPlayersController!
     var teamTwoPlayersController: ProtocolPlayersController!
-    var refereesController: ProtocolRefereesController!
     var eventsController: ProtocolEventsController!
     
     let dataManager = ApiRequests()
     let personApi = PersonApi()
     
-    init(match: Match, leagueDetailModel: LeagueDetailModel, teamOneModel: ProtocolPlayersController, teamTwoModel: ProtocolPlayersController,
-         refereesModel: ProtocolRefereesController, eventsModel: ProtocolEventsController) {
+    init(match: Match, leagueDetailModel: LeagueDetailModel, teamOneModel: ProtocolPlayersController, teamTwoModel: ProtocolPlayersController, eventsModel: ProtocolEventsController) {
         self.match = match
         self.leagueDetailModel = leagueDetailModel
         self.teamOnePlayersController = teamOneModel
         self.teamTwoPlayersController = teamTwoModel
-        self.refereesController = refereesModel
         self.eventsController = eventsModel
     }
     

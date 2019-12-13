@@ -203,6 +203,14 @@ extension AssignRefereesVC {
             })
             .disposed(by: bag)
         
+        viewModel
+            .matchIsFetched
+            .observeOn(MainScheduler.instance)
+            .subscribe {
+                guard let match = self.viewModel.match.value else { return }
+                self.viewModel.refereesModel.setup(referees: match.referees)
+            }.disposed(by: bag)
+        
         viewModel.loading
             .asDriver(onErrorJustReturn: false)
             .drive(self.rx.loading)
@@ -249,50 +257,7 @@ extension AssignRefereesVC {
     }
     
     @IBAction func onMainRefShowProtocolBtnPressed(_ sender: UIBarButtonItem) {
-        self.showAlert(message: "Рабочий протокол")
-        //        let activityIndicator = UIActivityIndicatorView(style: .gray)
-        //        activityIndicator.hidesWhenStopped = true
-        //
-        //        let defaultView = sender.customView
-        //        sender.customView = activityIndicator
-        //
-        //        activityIndicator.startAnimating()
-        //
-        //        guard let leagueId = viewModel?.comingCellModel.value.activeMatch.league?.getId() ?? viewModel?.comingCellModel.value.activeMatch.league?.getValue()?.id else {
-        //            Print.m("cell league is nil")
-        //            return
-        //        }
-        //
-        //        self.viewModel?.fetchLeague(id: leagueId, resultMy: { result in
-        //            switch result {
-        //            case .success(let leagues):
-        //                sender.customView = defaultView
-        //
-        //                self.refProtocol.leagueDetailModel.league = leagues.first!
-        //                guard let match = leagues.first!.matches?.filter({ match -> Bool in
-        //                    return match.id == self.viewModel?.comingCellModel.value.activeMatch.id
-        //                }).first else {
-        //                    Print.m("not found match in incoming league matches")
-        //                    return
-        //                }
-        //                self.refProtocol.match = match
-        //
-        //                self.refProtocol.model = self.viewModel?.comingCellModel.value.convertToMyMatchesRefTableViewCellCellModle()
-        //
-        //                self.refProtocol.preConfigureModelControllers()
-        //
-        //                self.show(self.refProtocol, sender: self)
-        //            case .message(let message):
-        //                sender.customView = defaultView
-        //
-        //                self.showAlert(message: message.message)
-        //            case .failure(.notExpectedData):
-        //                Print.m("not expected data")
-        //            case .failure(.error(let error)):
-        //                self.showAlert(message: error.localizedDescription)
-        //                Print.m(error)
-        //            }
-        //        })
+        self.showEditMatchProtocol()
     }
     
     @IBAction func onSaveBtnPressed(_ sender: UIBarButtonItem) {
@@ -304,6 +269,11 @@ extension AssignRefereesVC {
 // MARK: - HELPER
 
 extension AssignRefereesVC {
+    
+    func showEditMatchProtocol() {
+        let vc = EditMatchProtocolViewController.getInstance(match: self.viewModel.match.value!, callBack: self)
+        self.show(vc, sender: self)
+    }
     
     func showPersonChooser(type: Referee.rType) {
         let transitionDelegate = SPStorkTransitioningDelegate()
@@ -328,6 +298,12 @@ extension AssignRefereesVC: ChoosePersonResult {
         case .timekeeper:
             self.viewModel.refereesModel.timekeeper.accept(person)
         }
+    }
+}
+
+extension AssignRefereesVC: EditMatchProtocolCallBack {
+    func back(match: Match) {
+        self.viewModel.fetchMatchReferees()
     }
 }
 
