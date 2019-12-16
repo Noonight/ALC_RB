@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol FoulsMakerCallBack {
+    
+    func addCallBack()
+    
+}
+
 class FoulsMaker: NSObject {
     static let SIZE = CGRect(x: 0, y: 0, width: 278, height: 153)
     static let BACKGROUND_COLOR = UIColor(white: 0, alpha: 0.1)

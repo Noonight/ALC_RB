@@ -159,7 +159,8 @@ extension EditMatchProtocolViewController {
     @objc func doMatchPressed(_ sender: UIButton) {
         Print.m("WORK PROTOCOL")
 //        workProtocolBtn.startLoading()
-        self.showAlert(message: "Рабочий протокол")
+//        self.showAlert(message: "Рабочий протокол")
+        self.showWorkProtocol()
     }
     
 }
@@ -236,6 +237,94 @@ extension EditMatchProtocolViewController {
         let vc = AssignRefereesVC.getInstance(kind: .editMatchProtocol, match: self.presenter.match, callBack: self)
         
         self.show(vc, sender: self)
+    }
+    
+    func showWorkProtocol() {
+        
+        workProtocolBtn.startLoading()
+        
+        let group = DispatchGroup()
+        
+        let leagueApi = LeagueApi()
+        let params = ParamBuilder<League.CodingKeys>()
+            .add(key: .id, value: self.presenter.match.league?.getId() ?? self.presenter.match.league?.getValue()?.id)
+            .populate(.tourney)
+            .get()
+        group.enter()
+        leagueApi.get_league(params: params) { result in
+            switch result {
+            case .success(let fetchedLeague):
+                
+                self.presenter.match.league = IdRefObjectWrapper<League>(fetchedLeague.first!)
+                
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
+            group.leave()
+        }
+        group.enter()
+        self.presenter.fetchMatchPlayers() {
+            group.leave()
+        }
+        group.enter()
+        self.presenter.fetchTeamPlayers(team: .one) { result in
+            switch result {
+            case .success(let fetchedTeam):
+                self.presenter.match.teamOne = IdRefObjectWrapper<Team>(fetchedTeam)
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
+            group.leave()
+        }
+        group.enter()
+        self.presenter.fetchTeamPlayers(team: .two) { result in
+            switch result {
+            case .success(let fetchedTeam):
+                self.presenter.match.teamTwo = IdRefObjectWrapper<Team>(fetchedTeam)
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
+            group.leave()
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+            
+            self.workProtocolBtn.stopLoading()
+            
+            let teamOnePersons = self.presenter.match.teamOne?.getValue()?.players?.map({ player -> Person in
+                return (player.person?.getValue())!
+            }) ?? []
+            let teamTwoPersons = self.presenter.match.teamTwo?.getValue()?.players?.map({ player -> Person in
+                return (player.person?.getValue())!
+            }) ?? []
+            let matchPersons = self.presenter.match.playersList?.map({ personObj -> Person in
+                return personObj.getValue()!
+            }) ?? []
+            
+            let vm = ProtocolRefereeViewModel(
+                match: self.presenter.match,
+                leagueDetailModel: LeagueDetailModel(tourney: (self.presenter.match.league?.getValue()?.tourney?.getValue()!)!, league: (self.presenter.match.league?.getValue()!)!),
+                teamOneModel: ProtocolPlayersController(teamPlayers: teamOnePersons, matchPlayers: matchPersons),
+                teamTwoModel: ProtocolPlayersController(teamPlayers: teamTwoPersons, matchPlayers: matchPersons),
+                eventsModel: ProtocolEventsController(events: self.presenter.match.events!))
+            let vc = DoMatchProtocolRefereeViewController.getInstance(viewModel: vm)
+            
+            self.show(vc, sender: self)
+        }
+        
+        
     }
     
 }

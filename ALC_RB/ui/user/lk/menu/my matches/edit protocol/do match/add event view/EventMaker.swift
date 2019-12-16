@@ -8,22 +8,27 @@
 
 import UIKit
 
+protocol EventMakerCallBack {
+    
+    func addCallBack(event: Event)
+    
+}
+
 class EventMaker: NSObject {
     static let SIZE = CGRect(x: 0, y: 0, width: 278, height: 70)
     static let BACKGROUND_COLOR = UIColor(white: 0, alpha: 0.1)
     
     let eventView = AddEventView(frame: SIZE)
-    var onHideAddTriggered: ((Event) -> ())
-    var onHideDeleteTriggered: ((DeleteEvent) -> ())
+    
+    let callBack: EventMakerCallBack
+    
     var backgroundView = UIView()
     var curMatchId: String!
     var curPlayerId: String!
-//    var curTime: String!
     var curTime: Event.Time!
     
-    init(addEventBack: @escaping (Event) -> (), deleteEventBack: @escaping (DeleteEvent) -> ()) {
-        self.onHideAddTriggered = addEventBack
-        self.onHideDeleteTriggered = deleteEventBack
+    init(callBack: EventMakerCallBack) {
+        self.callBack = callBack
     }
     
     // MARK: WORK WORK VIEW CONTROLLER
@@ -67,31 +72,19 @@ class EventMaker: NSObject {
     
     public func hideAdd(eventType: Event.eType) -> Event {
         self.hideBackgroundView()
-//        return Event().with(
-//            id: self.curMatchId,
-//            eventType: eventType.rawValue,
-//            player: self.curPlayerId,
-//            time: self.curTime
-//        )
-        return Event(id: self.curMatchId!, type: eventType, player: IdRefObjectWrapper<Person>(self.curPlayerId), team: nil, time: self.curTime)
-    }
-    
-    public func hideDelete(eventType: Event.eType) -> DeleteEvent {
-        self.hideBackgroundView()
-        return DeleteEvent(
-            playerId: self.curPlayerId,
-            eventType: eventType
-        )
+        return Event(
+            id: self.curMatchId!,
+            type: eventType,
+            player: IdRefObjectWrapper<Person>(self.curPlayerId),
+            team: nil,
+            time: self.curTime)
     }
     
     func hide(eventType: Event.eType) {
-        if self.eventView.stateMinusActive == true
-        {
-            onHideDeleteTriggered(hideDelete(eventType: eventType))
-        }
-        else
-        {
-            onHideAddTriggered(hideAdd(eventType: eventType))
+        if self.eventView.stateMinusActive == true {
+            assertionFailure("Delete is deprecated there")
+        } else {
+            self.callBack.addCallBack(event: hideAdd(eventType: eventType))
         }
     }
     
@@ -127,15 +120,4 @@ extension EventMaker: EventCallBack {
     func onRedCardPressed(playerId: String) {
         hide(eventType: .redCard)
     }
-}
-
-// MARK: DELETE EVENT STRUCT
-
-extension EventMaker {
-    
-    struct DeleteEvent {
-        var playerId: String
-        var eventType: Event.eType
-    }
-
 }

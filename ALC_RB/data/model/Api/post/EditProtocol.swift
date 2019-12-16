@@ -11,38 +11,38 @@ import Foundation
 struct EditProtocol: Codable {
     var id = "" // match id
     var events = EditProtocol.Events()
-    var playersList: [String] = []
+//    var playersList: [String] = []
     
     init() {}
     
-    init(id: String, events: EditProtocol.Events, playersList: [String]) {
+    init(id: String, events: EditProtocol.Events/*, playersList: [String]*/) {
         self.id = id
         self.events = events
-        self.playersList = playersList
+//        self.playersList = playersList
     }
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case events = "events"
-        case playersList = "playersList"
+//        case playersList = "playersList"
     }
     
     func jsonData() throws -> Data {
         return try JSONEncoder().encode(self)
     }
     
-//    func toParams() -> [String: Any] {
-//        return [
-//            Fields.id.value() : self.id,
-//            Fields.events.value() : self.events.getArrayOfEventsInDictionary(),
+    func toParams() -> [String: Any] {
+        return [
+            Fields.id.value() : self.id,
+            Fields.events.value() : self.events.getArrayOfEventsInDictionary()//,
 //            Fields.playersList.value() : self.playersList
-//        ]
-//    }
+        ]
+    }
     
     enum Fields: String {
         case id = "_id"
         case events = "events"
-        case playersList = "playersList"
+//        case playersList = "playersList"
         
         func value() -> String {
             return self.rawValue
@@ -72,12 +72,12 @@ struct EditProtocol: Codable {
 //            return [CodingKeys.events.rawValue : events]
 //        }
         
-//        func getArrayOfEventsInDictionary() -> [Any] {
-//            var events: [Any] = []
-//            for event in self.events {
-//                events.append(event.toDictionary())
-//            }
-//            return events
-//        }
+        func getArrayOfEventsInDictionary() -> [Any] {
+            var events: [Any] = []
+            for event in self.events {
+                events.append(event.toDictionary())
+            }
+            return events
+        }
     }
 }

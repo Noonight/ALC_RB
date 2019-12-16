@@ -9,10 +9,6 @@
 import UIKit
 import SPStorkController
 
-protocol DismissModalPenaltySeriesVC {
-    func dismiss(viewModel: ModalPenaltySeriesVM)
-}
-
 class DoMatchProtocolRefereeViewController: UIViewController {
     enum Texts {
         static let FIRST_TIME   = "1 тайм"
@@ -105,7 +101,6 @@ class DoMatchProtocolRefereeViewController: UIViewController {
         super.viewDidLoad()
         
         self.setupBorderViews()
-        self.setupPresenter()
         self.setupTableDataSources()
         self.setupAutogoalsFooter()
         self.setupEventMaker()
@@ -259,10 +254,6 @@ extension DoMatchProtocolRefereeViewController {
         self.playersTwo_table.dataSource    = self.playersTeamTwo
         self.playersTwo_table.delegate      = self.playersTeamTwo
     }
-    
-    func setupPresenter() {
-        self.initPresenter()
-    }
 }
 
 // MARK: ACTIONS
@@ -370,23 +361,21 @@ extension DoMatchProtocolRefereeViewController {
         
         let hud = self.showLoadingViewHUD(with: Texts.PROGRESS_ADD_EVENT)
         
-        guard let userToken = UserDefaultsHelper().getToken() else { return }
-        self.presenter.saveProtocol(
-            token: userToken,
-            editedProtocol: self.viewModel.prepareEditProtocol(),
-        ok: { match in
-                self.viewModel.updateMatch(match: match)
-//                hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_ADD_EVENT_COMPLETE)
+        self.presenter.saveProtocolEvents(editProtocol: self.viewModel.prepareEditProtocol()) { result in
+            switch result {
+            case .success(let editedMatch):
+                self.viewModel.updateMatch(match: editedMatch)
+                
                 hud.hide(animated: true)
-            
+                
                 self.setupTableDataSources()
                 self.setupDynamicView()
-        },
-        r_message : { message in
-            hud.hide(animated: true )
-            self.showAlert(message: message.message)
-        },
-        failure: { error in
+            case .message(let message):
+                Print.m(message.message)
+                hud.hide(animated: true )
+                self.showAlert(message: message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
                 hud.hide(animated: true)
                 
                 let delete = UIAlertAction(title: Texts.DELETE, style: .default)
@@ -406,7 +395,11 @@ extension DoMatchProtocolRefereeViewController {
                 }
                 
                 self.showAlert(title: Constants.Texts.FAILURE, message: error.localizedDescription, actions: [delete, leave])
-        })
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
+        }
+        
     }
     
     func eventMakerCompleteWork_DELETE(event: EventMaker.DeleteEvent) {
@@ -414,24 +407,26 @@ extension DoMatchProtocolRefereeViewController {
         {
             let hud = self.showLoadingViewHUD(with: Texts.PROGRESS_DELETE_EVENT)
             
-            guard let userToken = UserDefaultsHelper().getToken() else { return }
-            self.presenter.saveProtocol(
-                token: userToken,
-                editedProtocol: self.viewModel.prepareEditProtocol(),
-                ok: { match in
-                    self.viewModel.updateMatch(match: match)
-//                    hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_DELETE_EVENT_COMPLETE)
+            self.presenter.saveProtocolEvents(editProtocol: self.viewModel.prepareEditProtocol()) { result in
+                switch result {
+                case .success(let editedMatch):
+                    
+                    self.viewModel.updateMatch(match: editedMatch)
                     hud.hide(animated: true)
                     
                     self.setupTableDataSources()
                     self.setupDynamicView()
-            },
-                r_message: { message in
+                    
+                case .message(let message):
+                    Print.m(message.message)
+                    
                     hud.hide(animated: true)
                     
                     self.showAlert(message: message.message)
-            },
-                failure: { error in
+                    
+                case .failure(.error(let error)):
+                    Print.m(error)
+                    
                     hud.hide(animated: true)
                     
                     let restore = UIAlertAction(title: Texts.RESTORE, style: .default, handler:
@@ -451,7 +446,12 @@ extension DoMatchProtocolRefereeViewController {
                     }
                     
                     self.showAlert(title: Constants.Texts.FAILURE, message: error.localizedDescription, actions: [restore, leave])
-            })
+                    
+                case .failure(.notExpectedData):
+                    Print.m("not expected data")
+                }
+            }
+            
         }
         else // nothing to delete. Event by params not found
         {
@@ -462,100 +462,100 @@ extension DoMatchProtocolRefereeViewController {
     
     @IBAction func onAcceptProtocolBtnPressed(_ sender: UIButton) {
         
-        let acceptProtocol = UIAlertAction(title: Texts.ACCEPT_PROTOCOL, style: .default)
-        { alerter in
-
-            let hud = self.showLoadingViewHUD()
-            hud.setDetailMessage(with: Texts.PROGRESS_1_PROTOCOL_SAVING)
-
-            guard let userToken = UserDefaultsHelper().getToken() else { return }
-            self.presenter.saveProtocol(
-                token: userToken,
-                editedProtocol: self.viewModel.prepareEditProtocol(),
-            ok: { match in // protocol saved
-
-                hud.setDetailMessage(with: Texts.PROGRESS_2_PROTOCOL_ACCEPTING)
-
-//                Print.m("token \(self.userDefaults.getToken()) ,, matchId \(self.viewModel.prepareMatchId())")
-                
-                guard let userToken = UserDefaultsHelper().getToken() else { return }
-                self.presenter.acceptProtocol(
-                    token: userToken,
-                    matchId: self.viewModel.prepareMatchId(),
-                ok: { match in
-                    hud.setDetailMessage(with: Texts.PROGRESS_2_PROTOCOL_ACCEPTED)
-                    // do some staff for saving status of accepted match
-                    
-                    // DEPRECATED: person does not contain match
-//                    self.userDefaults.setMatch(match: match)
-                    hud.showSuccessAfterAndHideAfter()
-                },
-                response_message: { message in
-                    hud.hide(animated: true)
-                    
-                    self.showAlert(title: message.message, message: "")
-                },
-                failure: { error in
-                    hud.hide(animated: true)
-                    
-                    self.showAlert(message: error.localizedDescription)
-                    Print.m(error)
-                })
-                
+//        let acceptProtocol = UIAlertAction(title: Texts.ACCEPT_PROTOCOL, style: .default)
+//        { alerter in
+//
+//            let hud = self.showLoadingViewHUD()
+//            hud.setDetailMessage(with: Texts.PROGRESS_1_PROTOCOL_SAVING)
+//
+//            guard let userToken = UserDefaultsHelper().getToken() else { return }
+//            self.presenter.saveProtocol(
+//                token: userToken,
+//                editedProtocol: self.viewModel.prepareEditProtocol(),
+//            ok: { match in // protocol saved
+//
+//                hud.setDetailMessage(with: Texts.PROGRESS_2_PROTOCOL_ACCEPTING)
+//
+////                Print.m("token \(self.userDefaults.getToken()) ,, matchId \(self.viewModel.prepareMatchId())")
+//
+//                guard let userToken = UserDefaultsHelper().getToken() else { return }
 //                self.presenter.acceptProtocol(
-//                    token: self.userDefaults.getToken(),
+//                    token: userToken,
 //                    matchId: self.viewModel.prepareMatchId(),
-//                ok: { message in // protocol accepted
+//                ok: { match in
 //                    hud.setDetailMessage(with: Texts.PROGRESS_2_PROTOCOL_ACCEPTED)
 //                    // do some staff for saving status of accepted match
 //
+//                    // DEPRECATED: person does not contain match
+////                    self.userDefaults.setMatch(match: match)
 //                    hud.showSuccessAfterAndHideAfter()
-//                }, failure: { error in // protocol not accepted
+//                },
+//                response_message: { message in
+//                    hud.hide(animated: true)
 //
+//                    self.showAlert(title: message.message, message: "")
+//                },
+//                failure: { error in
+//                    hud.hide(animated: true)
+//
+//                    self.showAlert(message: error.localizedDescription)
+//                    Print.m(error)
 //                })
-
-            },
-            r_message: { message in
-                hud.hide(animated: true )
-                self.showAlert(message: message.message)
-            },
-            failure: { error in // protocol not saved
-                Print.m(error)
-                hud.setToFailureWith(detailMessage: error.localizedDescription)
-                hud.hideAfter()
-            })
-        }
-        
-        let saveProtocol = UIAlertAction(title: Texts.SAVE_PROTOCOL, style: .default)
-        { alerter in
-            
-            let hud = self.showLoadingViewHUD()
-            hud.setDetailMessage(with: Texts.PROGRESS_PROTOCOL_SAVING)
-            
-            guard let userToken = UserDefaultsHelper().getToken() else { return }
-            self.presenter.saveProtocol(
-                token: userToken,
-                editedProtocol: self.viewModel.prepareEditProtocol(),
-            ok: { match in
-                hud.setDetailMessage(with: Texts.PROGRESS_PROTOCOL_SAVED)
-                // do some staff for saving protocol to models
-                
-                hud.showSuccessAfterAndHideAfter()
-            }, r_message: { message in
-                
-            },
-               failure: { error in
-                Print.m(error)
-                hud.setToFailureWith(detailMessage: error.localizedDescription)
-                hud.hideAfter()
-            })
-        }
-        
-        let cancel = UIAlertAction(title: Constants.Texts.CANCEL, style: .cancel)
-        { alerter in
-            // nothing
-            Print.m("cancel pressed")
-        }
+//
+////                self.presenter.acceptProtocol(
+////                    token: self.userDefaults.getToken(),
+////                    matchId: self.viewModel.prepareMatchId(),
+////                ok: { message in // protocol accepted
+////                    hud.setDetailMessage(with: Texts.PROGRESS_2_PROTOCOL_ACCEPTED)
+////                    // do some staff for saving status of accepted match
+////
+////                    hud.showSuccessAfterAndHideAfter()
+////                }, failure: { error in // protocol not accepted
+////
+////                })
+//
+//            },
+//            r_message: { message in
+//                hud.hide(animated: true )
+//                self.showAlert(message: message.message)
+//            },
+//            failure: { error in // protocol not saved
+//                Print.m(error)
+//                hud.setToFailureWith(detailMessage: error.localizedDescription)
+//                hud.hideAfter()
+//            })
+//        }
+//
+//        let saveProtocol = UIAlertAction(title: Texts.SAVE_PROTOCOL, style: .default)
+//        { alerter in
+//
+//            let hud = self.showLoadingViewHUD()
+//            hud.setDetailMessage(with: Texts.PROGRESS_PROTOCOL_SAVING)
+//
+//            guard let userToken = UserDefaultsHelper().getToken() else { return }
+//            self.presenter.saveProtocol(
+//                token: userToken,
+//                editedProtocol: self.viewModel.prepareEditProtocol(),
+//            ok: { match in
+//                hud.setDetailMessage(with: Texts.PROGRESS_PROTOCOL_SAVED)
+//                // do some staff for saving protocol to models
+//
+//                hud.showSuccessAfterAndHideAfter()
+//            }, r_message: { message in
+//
+//            },
+//               failure: { error in
+//                Print.m(error)
+//                hud.setToFailureWith(detailMessage: error.localizedDescription)
+//                hud.hideAfter()
+//            })
+//        }
+//
+//        let cancel = UIAlertAction(title: Constants.Texts.CANCEL, style: .cancel)
+//        { alerter in
+//            // nothing
+//            Print.m("cancel pressed")
+//        }
         
         // TODO: type of person is deprecated
 //        if userDefaults.getAuthorizedUser()?.person.getUserType() == Person.TypeOfPerson.mainReferee // main ref here
@@ -564,8 +564,12 @@ extension DoMatchProtocolRefereeViewController {
 //        }
 //        else
 //        {
-            showAlert(title: Texts.Q_ACCEPT_MATCH, message: Texts.D_ACCEPT_MATCH_NOT_MAIN_REF, actions: [saveProtocol, cancel])
+        
+//            showAlert(title: Texts.Q_ACCEPT_MATCH, message: Texts.D_ACCEPT_MATCH_NOT_MAIN_REF, actions: [saveProtocol, cancel])
+
 //        }
+        
+        self.showAlert(message: "accept protocol btn pressed")
     }
     
     @IBAction func onFirstTimeBtnPressed(_ sender: UIButton) {
@@ -599,12 +603,9 @@ extension DoMatchProtocolRefereeViewController {
 // MARK: TABLE ACITONS
 
 extension DoMatchProtocolRefereeViewController: TableActions {
-    func onCellDeselected(model: CellModel) {
+
+    func onCellSelected(model: CellModel) {
         
-    }
-    
-    func onCellSelected(model: CellModel)
-    {
         let curModel = model as! RefereeProtocolPlayerTeamCellModel
         self.eventMaker!.showWith(
             matchId: self.viewModel.match.id,
@@ -648,24 +649,22 @@ extension DoMatchProtocolRefereeViewController {
     func addEventSaveProtocol() {
         let hud = self.showLoadingViewHUD(with: Texts.PROGRESS_UPDATE)
         
-        guard let userToken = UserDefaultsHelper().getToken() else { return }
-        self.presenter.saveProtocol(
-            token: userToken,
-            editedProtocol: self.viewModel.prepareEditProtocol(),
-            ok: { match in
-                Print.m(match)
-                self.viewModel.updateMatch(match: match)
+        self.presenter.saveProtocolEvents(editProtocol: self.viewModel.prepareEditProtocol()) { result in
+            switch result {
+            case .success(let editedMatch):
+                Print.m(editedMatch)
+                self.viewModel.updateMatch(match: editedMatch)
                 //                hud.showSuccessAfterAndHideAfter(withMessage: Texts.PROGRESS_ADD_EVENT_COMPLETE)
                 hud.hide(animated: true)
                 
                 self.setupTableDataSources()
                 self.setupDynamicView()
-        },
-            r_message: { message in
+            case .message(let message):
+                Print.m(message.message)
                 hud.hide(animated: true)
                 self.showAlert(message: message.message)
-        },
-            failure: { error in
+            case .failure(.error(let error)):
+                Print.m(error)
                 hud.hide(animated: true)
                 
                 let delete = UIAlertAction(title: Texts.DELETE, style: .default)
@@ -685,7 +684,10 @@ extension DoMatchProtocolRefereeViewController {
                 }
                 
                 self.showAlert(title: Constants.Texts.FAILURE, message: error.localizedDescription, actions: [delete, leave])
-        })
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
+        }
     }
     
     func updateUIFouls() {
@@ -718,30 +720,6 @@ extension DoMatchProtocolRefereeViewController: DismissModalPenaltySeriesVC {
     func dismiss(viewModel: ModalPenaltySeriesVM) {
         self.viewModel.updatePenaltySeriesEvents(penaltySeriesEvents: viewModel.events)
         self.addEventSaveProtocol()
-    }
-}
-
-// MARK: PRESENTER
-
-extension DoMatchProtocolRefereeViewController: DoMatchProtocolRefereeView {
-    func onSaveProtocolSuccess(match: Match) {
-        print()
-    }
-    
-    func onSaveProtocolFailure(error: Error) {
-        print()
-    }
-    
-    func onAcceptProtocolSuccess(message: SingleLineMessage) {
-        print()
-    }
-    
-    func onAcceptProtocolFailure(error: Error) {
-        print()
-    }
-    
-    func initPresenter() {
-        self.presenter.attachView(view: self)
     }
 }
 

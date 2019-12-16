@@ -19,6 +19,18 @@ struct Event: Codable {
     
     var time: Time? = nil
     
+    func toDictionary() -> [String: Any] {
+        var map = [CodingKeys: Any]()
+        
+        map[.id] = id
+        map[.type] = type?.rawValue
+        map[.player] = player?.getId() ?? player?.getValue()?.id
+        map[.team] = team?.getId() ?? team?.getValue()?.id
+        map[.time] = time?.rawValue
+        
+        return map.get()
+    }
+    
     init(id: String, type: eType, player: IdRefObjectWrapper<Person>?, team: IdRefObjectWrapper<Team>?, time: Time) {
         self.id = id
         self.type = type

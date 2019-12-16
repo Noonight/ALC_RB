@@ -319,8 +319,8 @@ class ProtocolRefereeViewModel {
     func prepareEditProtocol() -> EditProtocol {
         return EditProtocol(
             id: self.match.id,
-            events: EditProtocol.Events(events: eventsController.events),
-            playersList: self.getPlayersId()
+            events: EditProtocol.Events(events: eventsController.events)//,
+//            playersList: self.getPlayersId()
         )
     }
     
@@ -449,7 +449,7 @@ class ProtocolRefereeViewModel {
         var returnedModel = RefereeProtocolPlayerEventsModel()
         for item in eventsController.events
         {
-            if item.player?.getId() ?? item.player!.getValue()!.id == playerId
+            if item.player?.getId() ?? item.player?.getValue()?.id == playerId
             {
                 playerEvents.append(item)
             }

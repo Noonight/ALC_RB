@@ -22,7 +22,7 @@ class ScheduleTVC: UITableViewController {
     private lazy var assignReferees: AssignRefereesVC = {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
-        var viewController = storyboard.instantiateViewController(withIdentifier: "EditScheduleLKViewController") as! AssignRefereesVC
+        var viewController = storyboard.instantiateViewController(withIdentifier: "AssignRefereesVC") as! AssignRefereesVC
         
         return viewController
     }()

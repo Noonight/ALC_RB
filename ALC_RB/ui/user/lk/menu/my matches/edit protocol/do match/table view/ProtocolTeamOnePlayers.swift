@@ -22,6 +22,10 @@ class ProtocolTeamOnePlayers : NSObject {
         self.cellActions = cellActions
     }
     
+    init(cellActions: TableActions) {
+        self.cellActions = cellActions
+    }
+    
     override init() { }
 }
 
@@ -29,8 +33,7 @@ extension ProtocolTeamOnePlayers : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         // row selected do somethig  # important place
-        guard let cellActions = self.cellActions else { return }
-        cellActions.onCellSelected(model: self.dataSource[indexPath.row]) // call back here <---
+        cellActions?.onCellSelected(model: self.dataSource[indexPath.row]) // call back here <---
     }
 }
 

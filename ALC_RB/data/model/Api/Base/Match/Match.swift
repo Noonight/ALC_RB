@@ -40,37 +40,6 @@ struct Match: Codable {
     var updatedAt: Date? = nil
     var v: Int? = nil
 
-    var postPlayersList: [String: Any] {
-        get {
-            var map = [CodingKeys : Any]()
-            map[.playersList] = playersList?.map({ person -> String in
-                return person.getId() ?? (person.getValue()?.id)!
-            })
-            
-            return map.get()
-        }
-    }
-    
-    var patchReferees: [String: Any] {
-        get {
-            var map = [CodingKeys : Any]()
-            map[.id] = id
-            map[.referees] = referees.flatMap({ referees -> [[String : Any]] in
-                var mArray = [[String:Any]]()
-                for referee in referees {
-                    var mMap = [Referee.CodingKeys: Any]()
-//                    mMap[.id] = referee.id
-                    mMap[.type] = referee.type?.rawValue
-                    mMap[.person] = referee.person?.getId() ?? referee.person?.getValue()?.id
-                    mArray.append(mMap.get())
-                }
-                return mArray
-            })
-            
-            return map.get()
-        }
-    }
-    
     enum CodingKeys: String, CodingKey {
         
         case id = "_id"
@@ -145,78 +114,47 @@ extension Match {
     }
 }
 
-// MARK: - HELPERS
+// MARK: - REQUEST PREPARE
 
 extension Match {
     
-    func getPlaingTeamPlayers(team: TeamEnum) -> [IdRefObjectWrapper<Person>] {
-        var resultArray = [IdRefObjectWrapper<Person>]()
-        var mTeam: Team!
-        guard let mPlayersList = self.playersList else { return [] }
-        switch team {
-        case .one:
-            mTeam = (teamOne?.getValue())!
-        case .two:
-            mTeam = (teamTwo?.getValue())!
+    var postPlayersList: [String: Any] {
+        get {
+            var map = [CodingKeys : Any]()
+            map[.playersList] = playersList?.map({ person -> String in
+                return person.getId() ?? (person.getValue()?.id)!
+            })
+            
+            return map.get()
         }
-        
-        let playersOne = teamOne?.getValue()?.players?.map({ player -> String in
-            return player.person?.getId() ?? (player.person?.getValue()?.id)!
-        })
-        Print.m("Match.teamOne.players: \(playersOne)")
-        
-        let playersTwo = teamTwo?.getValue()?.players?.map({ player -> String in
-            return player.person?.getId() ?? (player.person?.getValue()?.id)!
-        })
-        Print.m("Match.teamTwo.players: \(playersTwo)")
-        
-        for player in mPlayersList {
-            for teamPlayer in mTeam.players ?? [] {
-                if player.getId() ?? player.getValue()?.id == teamPlayer.person?.getId() ?? teamPlayer.person?.getValue()?.id {
-                    resultArray.append(player)
+    }
+    
+    var patchReferees: [String: Any] {
+        get {
+            var map = [CodingKeys : Any]()
+            map[.id] = id
+            map[.referees] = referees.flatMap({ referees -> [[String : Any]] in
+                var mArray = [[String:Any]]()
+                for referee in referees {
+                    var mMap = [Referee.CodingKeys: Any]()
+                    //                    mMap[.id] = referee.id
+                    mMap[.type] = referee.type?.rawValue
+                    mMap[.person] = referee.person?.getId() ?? referee.person?.getValue()?.id
+                    mArray.append(mMap.get())
                 }
-            }
+                return mArray
+            })
+            
+            return map.get()
         }
-        
-        return resultArray
     }
     
-    mutating func setPlaingTeamPlayers(team: Team, newTeamPlayers: [IdRefObjectWrapper<Person>]) {
-        var newPlayers = [IdRefObjectWrapper<Person>]()
-        
-        var plaingTeamPlayers: [IdRefObjectWrapper<Person>]!
-        
-        if team.id == teamOne?.getId() ?? teamOne?.getValue()?.id {
-            plaingTeamPlayers = getPlaingTeamPlayers(team: .two)
-        } else
-        if team.id == teamTwo?.getId() ?? teamTwo?.getValue()?.id {
-            plaingTeamPlayers = getPlaingTeamPlayers(team: .one)
-        } else {
-            assertionFailure("NOT VALID TEAM")
-        }
-        
-        newPlayers.append(contentsOf: plaingTeamPlayers)
-        newPlayers.append(contentsOf: newTeamPlayers)
-        
-        playersList = newPlayers
-    }
+}
+
+// MARK: - MUTATE
+
+extension Match {
     
-    mutating func setPlaingTeamPlayers(team: TeamEnum, newTeamPlayers: [String]) {
-        var newPlayers = [IdRefObjectWrapper<Person>]()
-        
-        var plaingTeamPlayers: [IdRefObjectWrapper<Person>]!
-        
-        switch team {
-        case .one:
-            plaingTeamPlayers = getPlaingTeamPlayers(team: .two)
-        case .two:
-            plaingTeamPlayers = getPlaingTeamPlayers(team: .one)
-        }
-        
-        newPlayers.append(contentsOf: plaingTeamPlayers)
-        newPlayers.append(contentsOf: newTeamPlayers.map { IdRefObjectWrapper<Person>($0) })
-        
-        playersList = newPlayers
-    }
+    
     
 }

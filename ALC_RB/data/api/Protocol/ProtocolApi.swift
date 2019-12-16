@@ -48,33 +48,22 @@ final class ProtocolApi: ApiRequests {
         }
     }
     
-    //        func post_changeProtocol(token: String, newProtocol: EditProtocol, resultMy: @escaping (ResultMy<Match, Error>) -> ()) {
-        //        let header: HTTPHeaders = [
-        //            "Content-Type" : "application/json",
-        //            "auth" : "\(token)"
-        //        ]
-        //
-        //        let instance = Alamofire
-        //            .request(ApiRoute.getApiURL(.post_edit_protcol), method: .post, parameters: newProtocol.toParams(), encoding: JSONEncoding.default, headers: header)
-        //        instance
-        //            .responseData(completionHandler: { response in
-        //                let decoder = ISO8601Decoder.getDecoder()
-        //                do {
-        //                    if let match = try? decoder.decode(Match.self, from: response.data!) {
-        //                        resultMy(.success(match))
-        //                    }
-        //                    if let message = try? decoder.decode(SingleLineMessage.self, from: response.data!) {
-        //                        resultMy(.message(message))
-        //                    }
-        //                }
-        //                if response.result.isFailure {
-        //                    resultMy(.failure(response.error!))
-        //                }
-        //            })
-        //
-        //
-        //    }
+    func post_changeProtocol(newProtocol: EditProtocol, resultMy: @escaping (ResultMy<Match, RequestError>) -> ()) {
+        guard let userToken = UserDefaultsHelper().getToken() else { return }
+        let header: HTTPHeaders = [
+            "Content-Type" : "application/json",
+            "auth" : "\(userToken)"
+        ]
         
+        Alamofire
+            .request(ApiRoute.getApiURL(.post_changeProtocol, id: newProtocol.id), method: .post, parameters: newProtocol.toParams(), encoding: JSONEncoding.default, headers: header)
+            .logURL()
+            .logBody()
+            .responseResultMy(Match.self, resultMy: resultMy)
+        
+        
+    }
+    
         //    func post_changeProtocol(token: String, newProtocol: EditProtocol, success: @escaping (Match)->(), message: @escaping (SingleLineMessage) -> (), failure: @escaping (Error)->()) {
         //        let header: HTTPHeaders = [
         //            "Content-Type" : "application/json",

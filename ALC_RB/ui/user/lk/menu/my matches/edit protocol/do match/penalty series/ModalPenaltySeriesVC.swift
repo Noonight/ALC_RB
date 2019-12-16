@@ -9,9 +9,11 @@
 import UIKit
 import SPStorkController
 
+protocol DismissModalPenaltySeriesVC {
+    func dismiss(viewModel: ModalPenaltySeriesVM)
+}
+
 class ModalPenaltySeriesVC: UIViewController {
-    
-    // MARK: OUTLETS
     
     @IBOutlet weak var team_one_label: UILabel!
     @IBOutlet weak var team_two_label: UILabel!

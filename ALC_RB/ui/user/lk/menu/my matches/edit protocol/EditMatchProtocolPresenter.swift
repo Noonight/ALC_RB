@@ -59,6 +59,24 @@ class EditMatchProtocolPresenter {
         }
     }
     
+    func fetchMatchPlayers(closure: @escaping () -> ()) {
+        matchApi.get_matchPlayers(inMatch: self.match) { result in
+            switch result {
+            case .success(let matchPlayers):
+                
+                self.match.playersList = matchPlayers.playersList
+                closure()
+                
+            case .message(let message):
+                Print.m(message.message)
+            case .failure(.error(let error)):
+                Print.m(error)
+            case .failure(.notExpectedData):
+                Print.m("not expected data")
+            }
+        }
+    }
+    
     func fetchMatchReferees() {
         
         matchApi.get_matchReferees(inMatch: self.match) { result in
