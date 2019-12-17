@@ -70,6 +70,31 @@ extension WorkProtocolVC {
     
     func setupViewBinds() {
         
+        viewModel
+            .events
+            .observeOn(MainScheduler.instance)
+            .subscribe { elements in
+                guard let events = elements.element else { return }
+                
+        }.disposed(by: bag)
+        
+        viewModel
+            .loading
+            .asDriver(onErrorJustReturn: false)
+            .drive(self.rx.loading)
+            .disposed(by: bag)
+        
+        viewModel
+            .error
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.rx.error)
+        .disposed(by: bag)
+        
+        viewModel
+            .message
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.rx.message)
+            .disposed(by: bag)
     }
     
     func setupView() {
@@ -123,6 +148,7 @@ extension WorkProtocolVC {
     
     @objc func addTeamOneFoul(_ sender: UIView) {
         self.showAlert(message: "team one foul")
+        viewModel.request_addEvent(event: viewModel.createEvent(teamId: viewModel.match.teamOne?.getId() ?? viewModel.match.teamOne?.getValue()?.id, type: .foul))
     }
     
     @objc func addTeamTwoFoul(_ sender: UIView) {

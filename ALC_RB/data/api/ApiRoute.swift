@@ -103,5 +103,6 @@ enum Routes: String {
 //    case post_edit_protcol = "matches/changeProtocol"
     case post_accept_protocol = "matches/acceptProtocol"
     
-    case post_changeProtocol = "matches/changeProtocol"
+    case post_changeProtocol = "matches/changeProtocol" // deprecated
+    case post_matchAddevent = "matches/addEvent" // /:id
 }

@@ -31,13 +31,13 @@ final class WorkProtocolViewModel {
         self.protocolApi = protocolApi
     }
     
-    func request_saveProtocolEvents() {
-        let editProtocolModel = EditProtocol(id: match.id, events: EditProtocol.Events(events: match.events!))
+    func request_addEvent(event: Event) {
         self.loading.onNext(true)
-        protocolApi.post_changeProtocol(newProtocol: editProtocolModel) { result in
+        protocolApi.post_addEvent(matchId: match.id, event: event) { result in
             switch result {
-            case .success(let editedMatch):
-                self.match.events = editedMatch.events
+            case .success(let resultMatch):
+                self.match.events = resultMatch.events
+                self.loading.onNext(false)
             case .message(let message):
                 Print.m(message.message)
                 self.message.onNext(message)
@@ -50,7 +50,21 @@ final class WorkProtocolViewModel {
             }
         }
     }
+}
+
+// MARK: - HELPERS
+
+extension WorkProtocolViewModel {
     
-    // another view models
+    func createEvent(playerId: String? = nil, teamId: String? = nil, type: Event.eType) -> Event {
+        var event: Event!
+        if let player = playerId {
+            event = Event(type: type, player: IdRefObjectWrapper<Person>(player), team: nil, time: time)
+        }
+        if let team = teamId {
+            event = Event(type: type, player: nil, team: IdRefObjectWrapper<Team>(team), time: time)
+        }
+        return event
+    }
     
 }

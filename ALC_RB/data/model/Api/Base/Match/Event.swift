@@ -39,6 +39,14 @@ struct Event: Codable {
         self.time = time
     }
     
+    init(type: eType, player: IdRefObjectWrapper<Person>?, team: IdRefObjectWrapper<Team>?, time: Time) {
+        self.id = ""
+        self.type = type
+        self.player = player
+        self.team = team
+        self.time = time
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         
