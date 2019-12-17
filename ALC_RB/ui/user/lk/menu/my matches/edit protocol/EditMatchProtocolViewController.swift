@@ -303,23 +303,24 @@ extension EditMatchProtocolViewController {
             
             self.workProtocolBtn.stopLoading()
             
-            let teamOnePersons = self.presenter.match.teamOne?.getValue()?.players?.map({ player -> Person in
-                return (player.person?.getValue())!
-            }) ?? []
-            let teamTwoPersons = self.presenter.match.teamTwo?.getValue()?.players?.map({ player -> Person in
-                return (player.person?.getValue())!
-            }) ?? []
-            let matchPersons = self.presenter.match.playersList?.map({ personObj -> Person in
-                return personObj.getValue()!
-            }) ?? []
+//            let teamOnePersons = self.presenter.match.teamOne?.getValue()?.players?.map({ player -> Person in
+//                return (player.person?.getValue())!
+//            }) ?? []
+//            let teamTwoPersons = self.presenter.match.teamTwo?.getValue()?.players?.map({ player -> Person in
+//                return (player.person?.getValue())!
+//            }) ?? []
+//            let matchPersons = self.presenter.match.playersList?.map({ personObj -> Person in
+//                return personObj.getValue()!
+//            }) ?? []
             
-            let vm = ProtocolRefereeViewModel(
-                match: self.presenter.match,
-                leagueDetailModel: LeagueDetailModel(tourney: (self.presenter.match.league?.getValue()?.tourney?.getValue()!)!, league: (self.presenter.match.league?.getValue()!)!),
-                teamOneModel: ProtocolPlayersController(teamPlayers: teamOnePersons, matchPlayers: matchPersons),
-                teamTwoModel: ProtocolPlayersController(teamPlayers: teamTwoPersons, matchPlayers: matchPersons),
-                eventsModel: ProtocolEventsController(events: self.presenter.match.events!))
-            let vc = DoMatchProtocolRefereeViewController.getInstance(viewModel: vm)
+//            let vm = ProtocolRefereeViewModel(
+//                match: self.presenter.match,
+//                leagueDetailModel: LeagueDetailModel(tourney: (self.presenter.match.league?.getValue()?.tourney?.getValue()!)!, league: (self.presenter.match.league?.getValue()!)!),
+//                teamOneModel: ProtocolPlayersController(teamPlayers: teamOnePersons, matchPlayers: matchPersons),
+//                teamTwoModel: ProtocolPlayersController(teamPlayers: teamTwoPersons, matchPlayers: matchPersons),
+//                eventsModel: ProtocolEventsController(events: self.presenter.match.events!))
+//            let vc = DoMatchProtocolRefereeViewController.getInstance(viewModel: vm)
+            let vc = WorkProtocolVC.getInstance(match: self.presenter.match)
             
             self.show(vc, sender: self)
         }

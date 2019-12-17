@@ -122,6 +122,7 @@ extension AssignRefereesVC {
             self.mainRefShowProtocol_btn.isEnabled = false
             self.mainRefShowProtocol_btn.image = nil
         }
+        mainRefShowProtocol_btn.image = mainRefShowProtocol_btn.image?.af_imageAspectScaled(toFit: CGSize(width: 22, height: 22))
         
         self.viewModel.refereesModel.setup(referees: match.referees)
     }

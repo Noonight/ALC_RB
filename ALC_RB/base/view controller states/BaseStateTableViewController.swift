@@ -103,7 +103,7 @@ extension BaseStateTableViewController : PullToRefresh {
         }
         if tableView.isDragging == false
         {
-            self.fetch!()
+            self.fetch?()
         }
     }
     

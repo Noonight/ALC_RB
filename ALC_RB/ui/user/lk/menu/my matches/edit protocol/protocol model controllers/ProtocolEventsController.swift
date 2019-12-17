@@ -139,16 +139,16 @@ class ProtocolEventsController {
         lastAddedEvent = event
     }
     
-    func removeFirstWith(event: EventMaker.DeleteEvent) -> Bool {
-        for i in 0...events.count - 1
-        {
-            if events[i].player?.getId() ?? events[i].player?.getValue()!.id == event.playerId && events[i].type == event.eventType {
-                events.remove(at: i)
-                return true
-            }
-        }
-        return false
-    }
+//    func removeFirstWith(event: EventMaker.DeleteEvent) -> Bool {
+//        for i in 0...events.count - 1
+//        {
+//            if events[i].player?.getId() ?? events[i].player?.getValue()!.id == event.playerId && events[i].type == event.eventType {
+//                events.remove(at: i)
+//                return true
+//            }
+//        }
+//        return false
+//    }
     
     func restoreLastDeleted() {
         if lastDeletedEvent != nil

@@ -4707,7 +4707,7 @@
         <!--1 тайм-->
         <scene sceneID="hLE-jB-kmc">
             <objects>
-                <viewController storyboardIdentifier="DoMatchProtocolRefereeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2UG-mV-sx9" customClass="DoMatchProtocolRefereeViewController" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WorkProtocolVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2UG-mV-sx9" customClass="WorkProtocolVC" customModule="ALC_RB" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NWD-1W-gDp"/>
                         <viewControllerLayoutGuide type="bottom" id="uTn-fu-loL"/>
@@ -4787,17 +4787,6 @@
                                                                     <constraint firstAttribute="width" constant="45" id="WDk-jP-u3G"/>
                                                                     <constraint firstItem="EqQ-i9-9yB" firstAttribute="centerX" secondItem="OLc-SD-Kk9" secondAttribute="centerX" id="WdG-O8-VeG"/>
                                                                 </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                        <real key="value" value="0.0"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                        <real key="value" value="2"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" red="0.86666666670000003" green="0.2274509804" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kba-Cm-nNf" userLabel="R team" customClass="DesignableView" customModule="ALC_RB" customModuleProvider="target">
                                                                 <rect key="frame" x="217" y="8" width="45" height="30.5"/>
@@ -4818,14 +4807,6 @@
                                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vMM-O7-aEh" secondAttribute="trailing" constant="8" id="hzM-DS-YYK"/>
                                                                     <constraint firstAttribute="width" constant="45" id="soU-FI-duG"/>
                                                                 </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                        <real key="value" value="2"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" red="0.86666666670000003" green="0.2274509804" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TDd-Id-vCa" customClass="DesignableView" customModule="ALC_RB" customModuleProvider="target">
                                                                 <rect key="frame" x="102" y="8" width="100" height="30.5"/>
@@ -4845,14 +4826,6 @@
                                                                     <constraint firstAttribute="trailing" secondItem="8fQ-ma-aba" secondAttribute="trailing" constant="8" id="dYe-0j-mYF"/>
                                                                     <constraint firstItem="8fQ-ma-aba" firstAttribute="leading" secondItem="TDd-Id-vCa" secondAttribute="leading" constant="8" id="g1Y-jd-dTG"/>
                                                                 </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" red="0.12941176469999999" green="0.47450980390000003" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                        <real key="value" value="2"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v4R-fI-sC9">
                                                                 <rect key="frame" x="28" y="42.5" width="74" height="19"/>
@@ -5038,88 +5011,44 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="2r1-I1-KoC">
                                                         <rect key="frame" x="0.0" y="0.0" width="312" height="30"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ykc-rE-il8" customClass="DesignableButton" customModule="ALC_RB" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ykc-rE-il8">
                                                                 <rect key="frame" x="0.0" y="0.0" width="57" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="57" id="E1e-PF-SQR"/>
                                                                 </constraints>
                                                                 <state key="normal" title="1 тайм"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                        <real key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" red="0.12941176469999999" green="0.47450980390000003" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                        <real key="value" value="0.0"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="onFirstTimeBtnPressed:" destination="2UG-mV-sx9" eventType="touchUpInside" id="pIs-Fr-Uau"/>
+                                                                    <action selector="firstHalfPressed:" destination="2UG-mV-sx9" eventType="touchUpInside" id="NDT-Tl-zWB"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZa-Yj-Qyx" customClass="DesignableButton" customModule="ALC_RB" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cZa-Yj-Qyx">
                                                                 <rect key="frame" x="68.5" y="0.0" width="59" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="59" id="vLl-oD-niK"/>
                                                                 </constraints>
                                                                 <state key="normal" title="2 тайм"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                        <real key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" red="0.12941176469999999" green="0.47450980390000003" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                        <real key="value" value="0.0"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="onSecondTimeBtnPressed:" destination="2UG-mV-sx9" eventType="touchUpInside" id="rXV-YO-k0y"/>
+                                                                    <action selector="secondHalfPressed:" destination="2UG-mV-sx9" eventType="touchUpInside" id="sn5-hF-F6w"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebJ-Fx-1Nh" customClass="DesignableButton" customModule="ALC_RB" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ebJ-Fx-1Nh">
                                                                 <rect key="frame" x="139.5" y="0.0" width="85" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85" id="bLi-U5-hf7"/>
                                                                 </constraints>
                                                                 <state key="normal" title="доп время"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                        <real key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" red="0.12941176469999999" green="0.47450980390000003" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                        <real key="value" value="0.0"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="onMoreTimeBtnPressed:" destination="2UG-mV-sx9" eventType="touchUpInside" id="tm1-2M-GUq"/>
+                                                                    <action selector="extraTimePressed:" destination="2UG-mV-sx9" eventType="touchUpInside" id="PRE-OZ-dLv"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcV-i0-045" customClass="DesignableButton" customModule="ALC_RB" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcV-i0-045">
                                                                 <rect key="frame" x="236" y="0.0" width="76" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="76" id="w78-MK-mSa"/>
                                                                 </constraints>
                                                                 <state key="normal" title="пенальти"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                        <real key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                        <color key="value" red="0.12941176469999999" green="0.47450980390000003" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                        <real key="value" value="0.0"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
-                                                                    <action selector="onPenaltyTimeBtnPressed:" destination="2UG-mV-sx9" eventType="touchUpInside" id="GPu-bx-Fgg"/>
+                                                                    <action selector="penaltySeriesPressed:" destination="2UG-mV-sx9" eventType="touchUpInside" id="atf-jw-OEh"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -5150,16 +5079,24 @@
                                                             <constraint firstAttribute="height" constant="22" id="o9U-sD-mc2"/>
                                                         </constraints>
                                                     </imageView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0dq-uV-Hy3">
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="38"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="MGq-ak-wSZ" secondAttribute="bottom" constant="8" id="10I-jA-5rV"/>
+                                                    <constraint firstAttribute="bottom" secondItem="0dq-uV-Hy3" secondAttribute="bottom" id="3R8-Np-WXs"/>
                                                     <constraint firstItem="MGq-ak-wSZ" firstAttribute="centerY" secondItem="lfv-Ce-OVC" secondAttribute="centerY" id="9jY-Yv-qLK"/>
                                                     <constraint firstItem="SV1-IB-4A5" firstAttribute="leading" secondItem="lfv-Ce-OVC" secondAttribute="leading" constant="8" id="AOY-X4-zvd"/>
                                                     <constraint firstAttribute="trailing" secondItem="MGq-ak-wSZ" secondAttribute="trailing" constant="8" id="cOJ-zI-OgR"/>
+                                                    <constraint firstAttribute="trailing" secondItem="0dq-uV-Hy3" secondAttribute="trailing" id="fqo-9M-M5n"/>
                                                     <constraint firstItem="MGq-ak-wSZ" firstAttribute="top" secondItem="lfv-Ce-OVC" secondAttribute="top" constant="8" id="jP8-9o-sEV"/>
+                                                    <constraint firstItem="0dq-uV-Hy3" firstAttribute="top" secondItem="lfv-Ce-OVC" secondAttribute="top" id="mz1-k0-8gs"/>
                                                     <constraint firstItem="MGq-ak-wSZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SV1-IB-4A5" secondAttribute="trailing" constant="8" symbolic="YES" id="qyY-Yp-Jjs"/>
+                                                    <constraint firstItem="0dq-uV-Hy3" firstAttribute="leading" secondItem="lfv-Ce-OVC" secondAttribute="leading" id="vYT-YE-4tP"/>
                                                     <constraint firstItem="SV1-IB-4A5" firstAttribute="centerY" secondItem="MGq-ak-wSZ" secondAttribute="centerY" id="zJL-2G-2uK"/>
                                                 </constraints>
                                                 <connections>
@@ -5169,26 +5106,15 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ECv-FB-JaN">
                                                 <rect key="frame" x="0.0" y="507" width="320" height="33"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PH0-XP-MzI" customClass="DesignableButton" customModule="ALC_RB" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PH0-XP-MzI">
                                                         <rect key="frame" x="100" y="0.0" width="120" height="33"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="Vke-e4-Ptw"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <state key="normal" title="Матч окончен"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                <real key="value" value="1"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                <color key="value" red="0.12941176469999999" green="0.47450980390000003" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                <real key="value" value="0.0"/>
-                                                            </userDefinedRuntimeAttribute>
-                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <action selector="onAcceptProtocolBtnPressed:" destination="2UG-mV-sx9" eventType="touchUpInside" id="0uh-C9-VRa"/>
+                                                            <action selector="endMatchPressed:" destination="2UG-mV-sx9" eventType="touchUpInside" id="pgA-aa-oxD"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -5241,17 +5167,16 @@
                     </view>
                     <navigationItem key="navigationItem" title="1 тайм" id="mgY-3O-3Gc"/>
                     <connections>
-                        <outlet property="foulsTeamOneCount_view" destination="OLc-SD-Kk9" id="tUn-gc-vrX"/>
-                        <outlet property="foulsTeamTwoCount_view" destination="Kba-Cm-nNf" id="dw0-fo-Ah0"/>
-                        <outlet property="l_team_border_view" destination="OLc-SD-Kk9" id="CQb-1B-rjy"/>
-                        <outlet property="playersOne_table" destination="eQv-G9-HmJ" id="5hV-CH-i40"/>
-                        <outlet property="playersTwo_table" destination="nH9-dG-YV9" id="REr-FN-CoF"/>
-                        <outlet property="r_team_border_view" destination="Kba-Cm-nNf" id="ZWT-OK-9lE"/>
-                        <outlet property="scoreAtTimeTeamOne_label" destination="EqQ-i9-9yB" id="92e-sA-Qfo"/>
-                        <outlet property="scoreAtTimeTeamTwo_label" destination="vMM-O7-aEh" id="lz5-3V-TRK"/>
-                        <outlet property="score_label" destination="Mmb-JB-qZc" id="BMB-xy-KuS"/>
-                        <outlet property="titleTeamOne_label" destination="3U9-Jk-Blc" id="aei-q9-mn9"/>
-                        <outlet property="titleTeamTwo_label" destination="id7-3a-OAN" id="zlr-Nb-Lam"/>
+                        <outlet property="eventsView" destination="0dq-uV-Hy3" id="P19-aL-cC2"/>
+                        <outlet property="scoreLabel" destination="Mmb-JB-qZc" id="QTc-t5-jJ1"/>
+                        <outlet property="teamOneBorderView" destination="OLc-SD-Kk9" id="Puk-ZP-25X"/>
+                        <outlet property="teamOneFoulsLabel" destination="EqQ-i9-9yB" id="REF-Vd-rJM"/>
+                        <outlet property="teamOneTableView" destination="eQv-G9-HmJ" id="AsM-P8-ToG"/>
+                        <outlet property="teamOneTitleLabel" destination="3U9-Jk-Blc" id="V2L-ob-Bzv"/>
+                        <outlet property="teamTwoBorderView" destination="Kba-Cm-nNf" id="pZd-45-key"/>
+                        <outlet property="teamTwoFoulsLabel" destination="vMM-O7-aEh" id="JrJ-A0-vRu"/>
+                        <outlet property="teamTwoTableView" destination="nH9-dG-YV9" id="LLX-QN-gX0"/>
+                        <outlet property="teamTwoTitleLabel" destination="id7-3a-OAN" id="bfU-Rw-s4A"/>
                     </connections>
                 </viewController>
                 <tapGestureRecognizer id="h54-cb-rjC"/>

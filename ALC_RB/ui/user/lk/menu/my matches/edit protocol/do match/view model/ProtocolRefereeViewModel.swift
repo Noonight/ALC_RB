@@ -268,9 +268,9 @@ class ProtocolRefereeViewModel {
         self.eventsController.add(event)
     }
     
-    func removeEvent(event: EventMaker.DeleteEvent) -> Bool {
-        return self.eventsController.removeFirstWith(event: event)
-    }
+//    func removeEvent(event: EventMaker.DeleteEvent) -> Bool {
+//        return self.eventsController.removeFirstWith(event: event)
+//    }
     
     // MARK: PREPARE FOR DISPLAY OR PREPARE DATA FOR SERVER REQUEST
     

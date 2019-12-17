@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrainerFooterView" customModule="ALC_RB" customModuleProvider="target">
+            <connections>
+                <outlet property="container_view" destination="iN0-l3-epB" id="CSA-jk-dRQ"/>
+                <outlet property="nameLabel" destination="Yfs-3v-JEB" id="NKj-AR-n5k"/>
+                <outlet property="redCardImage" destination="V4C-iv-AzL" id="2ED-rm-3PF"/>
+                <outlet property="redCardLabel" destination="53q-oo-SW0" id="A28-m0-Tks"/>
+                <outlet property="yellowCardImage" destination="97p-ov-8cP" id="kSA-s7-c88"/>
+                <outlet property="yellowCardLabel" destination="Ac9-9n-Hyd" id="ElF-e3-tcA"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="217" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trainer name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfs-3v-JEB">
+                    <rect key="frame" x="8" y="8" width="143" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_redCard" translatesAutoresizingMaskIntoConstraints="NO" id="V4C-iv-AzL">
+                    <rect key="frame" x="187" y="8" width="22" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="Ekx-uZ-s3A"/>
+                        <constraint firstAttribute="width" constant="22" id="nql-ar-3Nc"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_yellowCard" translatesAutoresizingMaskIntoConstraints="NO" id="97p-ov-8cP">
+                    <rect key="frame" x="159" y="8" width="22" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="GjA-Kd-f7x"/>
+                        <constraint firstAttribute="width" constant="22" id="iTq-hd-Yya"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ac9-9n-Hyd">
+                    <rect key="frame" x="170" y="20" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53q-oo-SW0">
+                    <rect key="frame" x="198" y="20" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="V4C-iv-AzL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="1Lf-Sd-Ewo"/>
+                <constraint firstItem="97p-ov-8cP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="538-qb-kgz"/>
+                <constraint firstItem="Ac9-9n-Hyd" firstAttribute="centerY" secondItem="97p-ov-8cP" secondAttribute="centerY" id="OQP-dn-3ud"/>
+                <constraint firstItem="53q-oo-SW0" firstAttribute="centerY" secondItem="V4C-iv-AzL" secondAttribute="centerY" id="QyL-cy-uvd"/>
+                <constraint firstItem="V4C-iv-AzL" firstAttribute="leading" secondItem="97p-ov-8cP" secondAttribute="trailing" constant="6" id="TjZ-Lf-vSg"/>
+                <constraint firstItem="97p-ov-8cP" firstAttribute="leading" secondItem="Yfs-3v-JEB" secondAttribute="trailing" constant="8" id="Usy-Uq-cia"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="V4C-iv-AzL" secondAttribute="trailing" constant="8" id="XE8-QX-LUl"/>
+                <constraint firstItem="Ac9-9n-Hyd" firstAttribute="centerX" secondItem="97p-ov-8cP" secondAttribute="centerX" id="Y0e-2v-WAh"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="V4C-iv-AzL" secondAttribute="bottom" constant="8" id="azt-1X-cLr"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="97p-ov-8cP" secondAttribute="bottom" constant="8" id="l3Y-Zt-jJD"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Yfs-3v-JEB" secondAttribute="bottom" constant="8" id="nAo-ki-xTV"/>
+                <constraint firstItem="Yfs-3v-JEB" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="uTW-fe-rWq"/>
+                <constraint firstItem="53q-oo-SW0" firstAttribute="centerX" secondItem="V4C-iv-AzL" secondAttribute="centerX" id="ulk-BV-Pt7"/>
+                <constraint firstItem="Yfs-3v-JEB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="xtz-zx-R1y"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-87.200000000000003" y="-235.68215892053973"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_redCard" width="50" height="75"/>
+        <image name="ic_yellowCard" width="50" height="75"/>
+    </resources>
+</document>

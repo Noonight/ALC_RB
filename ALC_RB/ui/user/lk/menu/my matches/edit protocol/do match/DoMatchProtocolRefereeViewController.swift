@@ -182,13 +182,13 @@ extension DoMatchProtocolRefereeViewController {
     }
     
     func setupEventMaker() {
-        self.eventMaker = EventMaker(addEventBack:
-        { addEvent in
-            self.eventMakerCompleteWork_ADD(event: addEvent)
-        }, deleteEventBack:
-        { deleteEvent in
-            self.eventMakerCompleteWork_DELETE(event: deleteEvent)
-        })
+//        self.eventMaker = EventMaker(addEventBack:
+//        { addEvent in
+//            self.eventMakerCompleteWork_ADD(event: addEvent)
+//        }, deleteEventBack:
+//        { deleteEvent in
+//            self.eventMakerCompleteWork_DELETE(event: deleteEvent)
+//        })
     }
     
     func setupFoulsMaker() {
@@ -402,63 +402,63 @@ extension DoMatchProtocolRefereeViewController {
         
     }
     
-    func eventMakerCompleteWork_DELETE(event: EventMaker.DeleteEvent) {
-        if self.viewModel.removeEvent(event: event) == true // event delete successful
-        {
-            let hud = self.showLoadingViewHUD(with: Texts.PROGRESS_DELETE_EVENT)
-            
-            self.presenter.saveProtocolEvents(editProtocol: self.viewModel.prepareEditProtocol()) { result in
-                switch result {
-                case .success(let editedMatch):
-                    
-                    self.viewModel.updateMatch(match: editedMatch)
-                    hud.hide(animated: true)
-                    
-                    self.setupTableDataSources()
-                    self.setupDynamicView()
-                    
-                case .message(let message):
-                    Print.m(message.message)
-                    
-                    hud.hide(animated: true)
-                    
-                    self.showAlert(message: message.message)
-                    
-                case .failure(.error(let error)):
-                    Print.m(error)
-                    
-                    hud.hide(animated: true)
-                    
-                    let restore = UIAlertAction(title: Texts.RESTORE, style: .default, handler:
-                    { alerter in
-                        self.viewModel.restoreLastDeletedEvent()
-                        
-                        self.setupTableDataSources()
-                        self.setupDynamicView()
-                    })
-                    
-                    let leave = UIAlertAction(title: Texts.LEAVE, style: .cancel)
-                    { alerter in
-                        Print.m("NOTHING")
-                        
-                        self.setupTableDataSources()
-                        self.setupDynamicView()
-                    }
-                    
-                    self.showAlert(title: Constants.Texts.FAILURE, message: error.localizedDescription, actions: [restore, leave])
-                    
-                case .failure(.notExpectedData):
-                    Print.m("not expected data")
-                }
-            }
-            
-        }
-        else // nothing to delete. Event by params not found
-        {
-            let hud = self.showToastHUD(message: Texts.EVENT_NOT_FOUND)
-            hud.hideAfter(seconds: 2)
-        }
-    }
+//    func eventMakerCompleteWork_DELETE(event: EventMaker.DeleteEvent) {
+//        if self.viewModel.removeEvent(event: event) == true // event delete successful
+//        {
+//            let hud = self.showLoadingViewHUD(with: Texts.PROGRESS_DELETE_EVENT)
+//            
+//            self.presenter.saveProtocolEvents(editProtocol: self.viewModel.prepareEditProtocol()) { result in
+//                switch result {
+//                case .success(let editedMatch):
+//                    
+//                    self.viewModel.updateMatch(match: editedMatch)
+//                    hud.hide(animated: true)
+//                    
+//                    self.setupTableDataSources()
+//                    self.setupDynamicView()
+//                    
+//                case .message(let message):
+//                    Print.m(message.message)
+//                    
+//                    hud.hide(animated: true)
+//                    
+//                    self.showAlert(message: message.message)
+//                    
+//                case .failure(.error(let error)):
+//                    Print.m(error)
+//                    
+//                    hud.hide(animated: true)
+//                    
+//                    let restore = UIAlertAction(title: Texts.RESTORE, style: .default, handler:
+//                    { alerter in
+//                        self.viewModel.restoreLastDeletedEvent()
+//                        
+//                        self.setupTableDataSources()
+//                        self.setupDynamicView()
+//                    })
+//                    
+//                    let leave = UIAlertAction(title: Texts.LEAVE, style: .cancel)
+//                    { alerter in
+//                        Print.m("NOTHING")
+//                        
+//                        self.setupTableDataSources()
+//                        self.setupDynamicView()
+//                    }
+//                    
+//                    self.showAlert(title: Constants.Texts.FAILURE, message: error.localizedDescription, actions: [restore, leave])
+//                    
+//                case .failure(.notExpectedData):
+//                    Print.m("not expected data")
+//                }
+//            }
+//            
+//        }
+//        else // nothing to delete. Event by params not found
+//        {
+//            let hud = self.showToastHUD(message: Texts.EVENT_NOT_FOUND)
+//            hud.hideAfter(seconds: 2)
+//        }
+//    }
     
     @IBAction func onAcceptProtocolBtnPressed(_ sender: UIButton) {
         

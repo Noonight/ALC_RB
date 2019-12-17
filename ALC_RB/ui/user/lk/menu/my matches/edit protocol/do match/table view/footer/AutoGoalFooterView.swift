@@ -10,6 +10,8 @@ import UIKit
 
 class AutoGoalFooterView: UIView {
 
+    static let HEIGHT: CGFloat = 40
+    
     @IBOutlet var container_view: UIView!
     @IBOutlet weak var goals_label: UILabel!
     

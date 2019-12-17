@@ -27,11 +27,8 @@ final class WorkProtocolVC: UIViewController {
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var teamTwoTitleLabel: UILabel!
     
-    @IBOutlet weak var teamOneFoulsCountView: UIView!
-    @IBOutlet weak var teamTwoFoulsCountView: UIView!
-    
-    @IBOutlet weak var teamOneScoreAtTimeLabel: UILabel!
-    @IBOutlet weak var teamTwoScoreAtTimeLabel: UILabel!
+    @IBOutlet weak var teamOneFoulsLabel: UILabel!
+    @IBOutlet weak var teamTwoFoulsLabel: UILabel!
     
     @IBOutlet weak var teamOneBorderView: DesignableView!
     @IBOutlet weak var teamTwoBorderView: DesignableView!
@@ -39,24 +36,30 @@ final class WorkProtocolVC: UIViewController {
     @IBOutlet weak var teamOneTableView: UITableView!
     @IBOutlet weak var teamTwoTableView: UITableView!
     
+    @IBOutlet weak var eventsView: UIView!
+    
     var viewModel = WorkProtocolViewModel(protocolApi: ProtocolApi())
     var teamOneTable: ProtocolTeamOnePlayers!
     var teamTwoTable: ProtocolTeamTwoPlayers!
     
     let bag = DisposeBag()
     
-    let teamOneFooter = AutoGoalFooterView()
-    let teamTwoFooter = AutoGoalFooterView()
+    var teamOneAutogoalFooter: AutoGoalFooterView!
+    var teamTwoAutogoalFooter: AutoGoalFooterView!
     
     var eventMaker: EventMaker?
-    var autoGoalsMaker: AutoGoalsMaker?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTables()
-        setupViewBinds()
+        
         setupEventMaker()
+        setupBorderViews()
+        setupAutogoalsFooter()
+        setupGestures()
+        
+        setupViewBinds()
     }
     
 }
@@ -67,6 +70,20 @@ extension WorkProtocolVC {
     
     func setupViewBinds() {
         
+    }
+    
+    func setupView() {
+        
+    }
+    
+    func setupGestures() {
+        teamOneBorderView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addTeamOneFoul(_:))))
+        teamTwoBorderView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addTeamTwoFoul(_:))))
+        
+        eventsView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(eventsPressed(_:))))
+        
+        teamOneAutogoalFooter.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addTeamOneAutoGoal(_:))))
+        teamTwoAutogoalFooter.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addTeamTwoAutoGoal(_:))))
     }
     
     func setupTables() {
@@ -83,12 +100,66 @@ extension WorkProtocolVC {
     func setupEventMaker() {
         self.eventMaker = EventMaker(callBack: self)
     }
+    
+    func setupAutogoalsFooter() {
+        teamOneAutogoalFooter = AutoGoalFooterView(frame: CGRect(x: 0, y: 0, width: teamOneTableView.frame.width, height: AutoGoalFooterView.HEIGHT))
+        teamOneTableView.tableFooterView = teamOneAutogoalFooter
+        
+        teamTwoAutogoalFooter = AutoGoalFooterView(frame: CGRect(x: 0, y: 0, width: teamTwoTableView.frame.width, height: AutoGoalFooterView.HEIGHT))
+        teamTwoTableView.tableFooterView = teamTwoAutogoalFooter
+    }
+    
+    func setupBorderViews() {
+        self.teamOneBorderView.borderWidth = 2
+        self.teamOneBorderView.borderColor = .red
+        self.teamTwoBorderView.borderWidth = 2
+        self.teamTwoBorderView.borderColor = .red
+    }
 }
 
 // MARK: - ACTIONS
 
 extension WorkProtocolVC {
     
+    @objc func addTeamOneFoul(_ sender: UIView) {
+        self.showAlert(message: "team one foul")
+    }
+    
+    @objc func addTeamTwoFoul(_ sender: UIView) {
+        self.showAlert(message: "team two foul")
+    }
+    
+    @objc func addTeamOneAutoGoal(_ sender: UIButton) {
+        self.showAlert(message: "team one add autogoal")
+    }
+    
+    @objc func addTeamTwoAutoGoal(_ sender: UIButton) {
+        self.showAlert(message: "team two add autogoal")
+    }
+    
+    @IBAction func firstHalfPressed(_ sender: UIButton) {
+        self.showAlert(message: "first half")
+    }
+    
+    @IBAction func secondHalfPressed(_ sender: UIButton) {
+        self.showAlert(message: "second half")
+    }
+    
+    @IBAction func extraTimePressed(_ sender: UIButton) {
+        self.showAlert(message: "extra time")
+    }
+    
+    @IBAction func penaltySeriesPressed(_ sender: UIButton) {
+        self.showAlert(message: "penalty series")
+    }
+    
+    @objc func eventsPressed(_ sender: UIView) {
+        self.showAlert(message: "events")
+    }
+    
+    @IBAction func endMatchPressed(_ sender: UIButton) {
+        self.showAlert(message: "end match")
+    }
 }
 
 // MARK: - TABLE ACTIONS
