@@ -26,6 +26,7 @@ class EventMaker: NSObject {
     var curMatchId: String!
     var curPlayerId: String!
     var curTime: Event.Time!
+    var curTeamId: String!
     
     init(callBack: EventMakerCallBack) {
         self.callBack = callBack
@@ -33,9 +34,10 @@ class EventMaker: NSObject {
     
     // MARK: WORK WORK VIEW CONTROLLER
     
-    public func showWith(matchId: String, playerId: String, time: Event.Time) { // TODO modify time
+    public func showWith(matchId: String, playerId: String, teamId: String, time: Event.Time) { // TODO modify time
         self.curMatchId = matchId
         self.curPlayerId = playerId
+        self.curTeamId = teamId
         self.curTime = time
         
         self.eventView.callBacks = self
@@ -76,7 +78,7 @@ class EventMaker: NSObject {
             id: self.curMatchId!,
             type: eventType,
             player: IdRefObjectWrapper<Person>(self.curPlayerId),
-            team: nil,
+            team: IdRefObjectWrapper<Team>(self.curTeamId),
             time: self.curTime)
     }
     

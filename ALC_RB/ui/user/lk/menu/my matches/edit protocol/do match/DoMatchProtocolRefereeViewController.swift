@@ -607,11 +607,11 @@ extension DoMatchProtocolRefereeViewController: TableActions {
     func onCellSelected(model: CellModel) {
         
         let curModel = model as! RefereeProtocolPlayerTeamCellModel
-        self.eventMaker!.showWith(
-            matchId: self.viewModel.match.id,
-            playerId: (curModel.person?.id)!,
-            time: self.viewModel.currentTime
-        )
+//        self.eventMaker!.showWith(
+//            matchId: self.viewModel.match.id,
+//            playerId: (curModel.person?.id)!,
+//            time: self.viewModel.currentTime
+//        )
     }
 }
 

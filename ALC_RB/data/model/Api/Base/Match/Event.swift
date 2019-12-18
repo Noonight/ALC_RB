@@ -19,6 +19,19 @@ struct Event: Codable {
     
     var time: Time? = nil
     
+    var post_create: [String: Any] {
+        get {
+            var map = [CodingKeys: Any]()
+            
+            map[.type] = type?.rawValue
+            map[.player] = player?.getId() ?? player?.getValue()?.id
+            map[.team] = team?.getId() ?? team?.getValue()?.id
+            map[.time] = time?.rawValue
+            
+            return map.get()
+        }
+    }
+    
     func toDictionary() -> [String: Any] {
         var map = [CodingKeys: Any]()
         
@@ -50,9 +63,9 @@ struct Event: Codable {
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         
-        case type
+        case type = "eventType"
         
-        case player
+        case player = "person"
         case team
         
         case time
@@ -68,6 +81,10 @@ struct Event: Codable {
         case foul = "foul"
         case penaltySeriesSuccess = "penaltySeriesSuccess"
         case penaltySeriesFailure = "penaltySeriesFailure"
+        case disable = "disable"
+        case enable = "enable"
+        case matchEnd = "matchEnd"
+        case matchStart = "matchStart"
         
         func getTitle() -> String {
             switch self {
@@ -89,6 +106,14 @@ struct Event: Codable {
                 return "Серия пенальти"
             case .penaltySeriesFailure:
                 return "Серия пенальти - "
+            case .disable:
+                return "Disable"
+            case .enable:
+                return "Enable"
+            case .matchEnd:
+                return "Match end"
+            case .matchStart:
+                return "Match start"
             }
         }
     }
@@ -98,5 +123,18 @@ struct Event: Codable {
         case secondHalf = "secondHalf"
         case extraTime = "extraTime"
         case penaltySeries = "penaltySeries"
+        
+        func ru() -> String {
+            switch self {
+            case .firstHalf:
+                return "Первый тайм"
+            case .secondHalf:
+                return "Второй тайм"
+            case .extraTime:
+                return "Дополнительное время"
+            case .penaltySeries:
+                return "Серия пенальти"
+            }
+        }
     }
 }

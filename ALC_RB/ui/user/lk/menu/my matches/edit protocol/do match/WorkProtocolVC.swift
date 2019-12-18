@@ -62,6 +62,11 @@ final class WorkProtocolVC: UIViewController {
         setupViewBinds()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.setupTables()
+    }
+    
 }
 
 // MARK: - SETUP
@@ -71,12 +76,92 @@ extension WorkProtocolVC {
     func setupViewBinds() {
         
         viewModel
-            .events
+            .teamOneEvents
             .observeOn(MainScheduler.instance)
+            .map { events -> [RefereeProtocolPlayerTeamCellModel] in
+//                Print.m(events)
+                var cellModels = [RefereeProtocolPlayerTeamCellModel]()
+                for event in events {
+                    if let person = self.viewModel.match.playersList?.filter({ personObj -> Bool in
+                        return personObj.getId() ?? personObj.getValue()?.id == event.player?.getId() ?? event.player?.getValue()?.id
+                    }).first {
+                        if !cellModels.contains(where: { cellModel -> Bool in
+                            return cellModel.person?.id == person.getId() ?? person.getValue()?.id
+                        }) {
+                            let goals = events.filter({ gEvent -> Bool in
+                                return gEvent.player?.getId() ?? gEvent.player?.getValue()?.id == person.getId() ?? person.getValue()?.id && gEvent.type == .goal
+                            }).count
+                            let penalties = events.filter({ gEvent -> Bool in
+                                return gEvent.player?.getId() ?? gEvent.player?.getValue()?.id == person.getId() ?? person.getValue()?.id && gEvent.type == .penalty
+                            }).count
+                            let failurePenalties = events.filter({ gEvent -> Bool in
+                                return gEvent.player?.getId() ?? gEvent.player?.getValue()?.id == person.getId() ?? person.getValue()?.id && gEvent.type == .penaltyFailure
+                            }).count
+                            let yellowCards = events.filter({ gEvent -> Bool in
+                                return gEvent.player?.getId() ?? gEvent.player?.getValue()?.id == person.getId() ?? person.getValue()?.id && gEvent.type == .yellowCard
+                            }).count
+                            let redCard = events.filter({ gEvent -> Bool in
+                                return gEvent.player?.getId() ?? gEvent.player?.getValue()?.id == person.getId() ?? person.getValue()?.id && gEvent.type == .redCard
+                            }).count > 0 ? true : false
+                            let personEvents = RefereeProtocolPlayerEventsModel(goals: goals, successfulPenaltyGoals: penalties, failurePenaltyGoals: failurePenalties, yellowCards: yellowCards, redCard: redCard)
+                            cellModels.append(RefereeProtocolPlayerTeamCellModel(person: person.getValue()!, eventsModel: personEvents))
+                        }
+                    }
+                }
+                return cellModels
+            }
             .subscribe { elements in
-                guard let events = elements.element else { return }
-                
-        }.disposed(by: bag)
+                guard let cellModels = elements.element else { return }
+                self.teamOneTable.dataSource = cellModels
+                self.teamOneTableView.reloadData()
+            }.disposed(by: bag)
+        
+        viewModel
+            .teamTwoEvents
+            .map { events -> [RefereeProtocolPlayerTeamCellModel] in
+//                Print.m(events)
+                var cellModels = [RefereeProtocolPlayerTeamCellModel]()
+                for event in events {
+                    if let person = self.viewModel.match.playersList?.filter({ personObj -> Bool in
+                        return personObj.getId() ?? personObj.getValue()?.id == event.player?.getId() ?? event.player?.getValue()?.id
+                    }).first {
+                        if !cellModels.contains(where: { cellModel -> Bool in
+                            return cellModel.person?.id == person.getId() ?? person.getValue()?.id
+                        }) {
+                            let goals = events.filter({ gEvent -> Bool in
+                                return gEvent.player?.getId() ?? gEvent.player?.getValue()?.id == person.getId() ?? person.getValue()?.id && gEvent.type == .goal
+                            }).count
+                            let penalties = events.filter({ gEvent -> Bool in
+                                return gEvent.player?.getId() ?? gEvent.player?.getValue()?.id == person.getId() ?? person.getValue()?.id && gEvent.type == .penalty
+                            }).count
+                            let failurePenalties = events.filter({ gEvent -> Bool in
+                                return gEvent.player?.getId() ?? gEvent.player?.getValue()?.id == person.getId() ?? person.getValue()?.id && gEvent.type == .penaltyFailure
+                            }).count
+                            let yellowCards = events.filter({ gEvent -> Bool in
+                                return gEvent.player?.getId() ?? gEvent.player?.getValue()?.id == person.getId() ?? person.getValue()?.id && gEvent.type == .yellowCard
+                            }).count
+                            let redCard = events.filter({ gEvent -> Bool in
+                                return gEvent.player?.getId() ?? gEvent.player?.getValue()?.id == person.getId() ?? person.getValue()?.id && gEvent.type == .redCard
+                            }).count > 0 ? true : false
+                            let personEvents = RefereeProtocolPlayerEventsModel(goals: goals, successfulPenaltyGoals: penalties, failurePenaltyGoals: failurePenalties, yellowCards: yellowCards, redCard: redCard)
+                            cellModels.append(RefereeProtocolPlayerTeamCellModel(person: person.getValue()!, eventsModel: personEvents))
+                        }
+                    }
+                }
+                return cellModels
+            }.subscribe { elements in
+                guard let cellModels = elements.element else { return }
+                self.teamTwoTable.dataSource = cellModels
+                self.teamTwoTableView.reloadData()
+            }.disposed(by: bag)
+        
+        viewModel
+            .rxTime
+            .observeOn(MainScheduler.instance)
+            .subscribe { element in
+                guard let time = element.element else { return }
+                self.title = time.ru()
+            }.disposed(by: bag)
         
         viewModel
             .loading
@@ -147,36 +232,44 @@ extension WorkProtocolVC {
 extension WorkProtocolVC {
     
     @objc func addTeamOneFoul(_ sender: UIView) {
-        self.showAlert(message: "team one foul")
-        viewModel.request_addEvent(event: viewModel.createEvent(teamId: viewModel.match.teamOne?.getId() ?? viewModel.match.teamOne?.getValue()?.id, type: .foul))
+//        self.showAlert(message: "team one foul")
+        viewModel.request_addEvent(event: viewModel.createEvent(teamId: viewModel.match.teamOne?.getId() ?? (viewModel.match.teamOne?.getValue()?.id)!, type: .foul))
     }
     
     @objc func addTeamTwoFoul(_ sender: UIView) {
-        self.showAlert(message: "team two foul")
+//        self.showAlert(message: "team two foul")
+        viewModel.request_addEvent(event: viewModel.createEvent(teamId: viewModel.match.teamTwo?.getId() ?? (viewModel.match.teamTwo?.getValue()?.id)!, type: .foul))
     }
     
     @objc func addTeamOneAutoGoal(_ sender: UIButton) {
-        self.showAlert(message: "team one add autogoal")
+//        self.showAlert(message: "team one add autogoal")
+        viewModel.request_addEvent(event: viewModel.createEvent(teamId: viewModel.match.teamOne?.getId() ?? (viewModel.match.teamOne?.getValue()?.id)!, type: .autoGoal))
     }
     
     @objc func addTeamTwoAutoGoal(_ sender: UIButton) {
-        self.showAlert(message: "team two add autogoal")
+//        self.showAlert(message: "team two add autogoal")
+        viewModel.request_addEvent(event: viewModel.createEvent(teamId: viewModel.match.teamTwo?.getId() ?? (viewModel.match.teamTwo?.getValue()?.id)!, type: .autoGoal))
     }
     
     @IBAction func firstHalfPressed(_ sender: UIButton) {
-        self.showAlert(message: "first half")
+//        self.showAlert(message: "first half")
+        viewModel.time = .firstHalf
     }
     
     @IBAction func secondHalfPressed(_ sender: UIButton) {
-        self.showAlert(message: "second half")
+//        self.showAlert(message: "second half")
+        viewModel.time = .secondHalf
     }
     
     @IBAction func extraTimePressed(_ sender: UIButton) {
-        self.showAlert(message: "extra time")
+//        self.showAlert(message: "extra time")
+        viewModel.time = .extraTime
     }
     
     @IBAction func penaltySeriesPressed(_ sender: UIButton) {
-        self.showAlert(message: "penalty series")
+//        self.showAlert(message: "penalty series")
+        viewModel.time = .penaltySeries
+        
     }
     
     @objc func eventsPressed(_ sender: UIView) {
@@ -196,10 +289,25 @@ extension WorkProtocolVC: TableActions {
         
         if model is RefereeProtocolPlayerTeamCellModel {
             let model = model as! RefereeProtocolPlayerTeamCellModel
-            self.eventMaker?.showWith(
-                matchId: self.viewModel.match.id,
-                playerId: model.person!.id,
-                time: self.viewModel.time)
+            if viewModel.match.teamOne?.getValue()?.players?.contains(where: { player -> Bool in
+                return player.person?.getId() ?? player.person?.getValue()?.id == model.person?.id
+            }) ?? false {
+                self.eventMaker?.showWith(
+                    matchId: self.viewModel.match.id,
+                    playerId: model.person!.id,
+                    teamId: viewModel.match.teamOne?.getId() ?? (viewModel.match.teamOne?.getValue()?.id)!,
+                    time: self.viewModel.time)
+            } else if viewModel.match.teamTwo?.getValue()?.players?.contains(where: { player -> Bool in
+                return player.person?.getId() ?? player.person?.getValue()?.id == model.person?.id
+            }) ?? false {
+                self.eventMaker?.showWith(
+                    matchId: self.viewModel.match.id,
+                    playerId: model.person!.id,
+                    teamId: viewModel.match.teamTwo?.getId() ?? (viewModel.match.teamTwo?.getValue()?.id)!,
+                    time: self.viewModel.time)
+            } else {
+                assertionFailure("team not found")
+            }
         } else { assertionFailure("not valid model") }
     }
     
@@ -212,7 +320,8 @@ extension WorkProtocolVC: EventMakerCallBack {
     func addCallBack(event: Event) {
         self.viewModel.match.events?.append(event)
         
-        self.viewModel.request_saveProtocolEvents()
+        self.viewModel.request_addEvent(event: event)
+//        self.viewModel.request_saveProtocolEvents()
     }
 }
 

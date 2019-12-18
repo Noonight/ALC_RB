@@ -2078,6 +2078,8 @@
 		DB2E1F7122EAFACE00CDA5CD /* do match */ = {
 			isa = PBXGroup;
 			children = (
+				DBDF89E823A75C920078D082 /* WorkProtocolVC.swift */,
+				DBDF89EA23A75D6A0078D082 /* WorkProtocolViewModel.swift */,
 				DB4E126223A8E25B000BA74F /* Models */,
 				18B0F87E2302BECF00080196 /* penalty series */,
 				DB986B5122FDB1300050AC8F /* edit team events */,
@@ -2086,8 +2088,6 @@
 				DB2E1F7622EC11C700CDA5CD /* view model */,
 				DB2E1F7222EAFAE800CDA5CD /* DoMatchProtocolRefereeViewController.swift */,
 				DB2E1F7422EAFB7B00CDA5CD /* DoMatchProtocolRefereePresenter.swift */,
-				DBDF89E823A75C920078D082 /* WorkProtocolVC.swift */,
-				DBDF89EA23A75D6A0078D082 /* WorkProtocolViewModel.swift */,
 			);
 			path = "do match";
 			sourceTree = "<group>";

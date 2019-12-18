@@ -11,13 +11,13 @@ import Alamofire
 
 final class ProtocolApi: ApiRequests {
     
-    func post_addEvent(matchId: String, event: Event, resultMy: @escaping (ResultMy<Match, RequestError>) -> ()) {
+    func post_addEvent(matchId: String, event: Event, resultMy: @escaping (ResultMy<Event, RequestError>) -> ()) {
         guard let userToken = UserDefaultsHelper().getToken() else { return }
         Alamofire
-            .request(ApiRoute.getApiURL(.post_matchAddevent, id: matchId), method: .post, parameters: event.toDictionary(), encoding: JSONEncoding.default, headers: ["auth": userToken])
+            .request(ApiRoute.getApiURL(.post_matchAddevent, id: matchId), method: .post, parameters: event.post_create, encoding: JSONEncoding.default, headers: ["auth": userToken])
             .logURL()
             .logBody()
-            .responseResultMy(Match.self, resultMy: resultMy)
+            .responseResultMy(Event.self, resultMy: resultMy)
     }
     
     func post_acceptProtocol(token: String, id: String, resultMy: @escaping (ResultMy<Match, Error>) -> ()) {
