@@ -232,44 +232,35 @@ extension WorkProtocolVC {
 extension WorkProtocolVC {
     
     @objc func addTeamOneFoul(_ sender: UIView) {
-//        self.showAlert(message: "team one foul")
         viewModel.request_addEvent(event: viewModel.createEvent(teamId: viewModel.match.teamOne?.getId() ?? (viewModel.match.teamOne?.getValue()?.id)!, type: .foul))
     }
     
     @objc func addTeamTwoFoul(_ sender: UIView) {
-//        self.showAlert(message: "team two foul")
         viewModel.request_addEvent(event: viewModel.createEvent(teamId: viewModel.match.teamTwo?.getId() ?? (viewModel.match.teamTwo?.getValue()?.id)!, type: .foul))
     }
     
     @objc func addTeamOneAutoGoal(_ sender: UIButton) {
-//        self.showAlert(message: "team one add autogoal")
         viewModel.request_addEvent(event: viewModel.createEvent(teamId: viewModel.match.teamOne?.getId() ?? (viewModel.match.teamOne?.getValue()?.id)!, type: .autoGoal))
     }
     
     @objc func addTeamTwoAutoGoal(_ sender: UIButton) {
-//        self.showAlert(message: "team two add autogoal")
         viewModel.request_addEvent(event: viewModel.createEvent(teamId: viewModel.match.teamTwo?.getId() ?? (viewModel.match.teamTwo?.getValue()?.id)!, type: .autoGoal))
     }
     
     @IBAction func firstHalfPressed(_ sender: UIButton) {
-//        self.showAlert(message: "first half")
         viewModel.time = .firstHalf
     }
     
     @IBAction func secondHalfPressed(_ sender: UIButton) {
-//        self.showAlert(message: "second half")
         viewModel.time = .secondHalf
     }
     
     @IBAction func extraTimePressed(_ sender: UIButton) {
-//        self.showAlert(message: "extra time")
         viewModel.time = .extraTime
     }
     
     @IBAction func penaltySeriesPressed(_ sender: UIButton) {
-//        self.showAlert(message: "penalty series")
         viewModel.time = .penaltySeries
-        
     }
     
     @objc func eventsPressed(_ sender: UIView) {
@@ -334,5 +325,13 @@ extension WorkProtocolVC {
 // MARK: - NAVIGATION
 
 extension WorkProtocolVC {
+    
+    func showMatchEvents() {
+        
+    }
+    
+    func showPenaltySeriesModal() {
+        
+    }
     
 }

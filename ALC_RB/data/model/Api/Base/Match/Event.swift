@@ -116,6 +116,39 @@ struct Event: Codable {
                 return "Match start"
             }
         }
+        
+        func getImage() -> UIImage {
+            var imagePath = String()
+            switch self {
+            case .goal:
+                imagePath = "ic_green_footbal_with_background"
+            case .redCard:
+                imagePath = "ic_redCard"
+            case .yellowCard:
+                imagePath = "ic_yellowCard"
+            case .penalty:
+                imagePath = "ic_green_footbal_with_P"
+            case .penaltyFailure:
+                imagePath = "ic_gray_footbal_with_P"
+            case .autoGoal:
+                imagePath = "ic_autoGoal"
+            case .foul:
+                imagePath = "ic_foul"
+            case .penaltySeriesSuccess:
+                imagePath = "ic_green_footbal_with_P"
+            case .penaltySeriesFailure:
+                imagePath = "ic_gray_footbal_with_P"
+            case .disable:
+                assertionFailure("enable")
+            case .enable:
+                assertionFailure("disable")
+            case .matchEnd:
+                assertionFailure("match end")
+            case .matchStart:
+                assertionFailure("match start")
+            }
+            return UIImage(named: imagePath) ?? UIImage(named: "ic_warning")!
+        }
     }
     
     enum Time: String, Codable {
