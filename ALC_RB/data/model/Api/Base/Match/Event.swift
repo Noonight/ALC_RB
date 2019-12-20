@@ -17,6 +17,8 @@ struct Event: Codable {
     var player: IdRefObjectWrapper<Person>? = nil // there is can be played id or team id
     var team: IdRefObjectWrapper<Team>? = nil
     
+    var event: String? = nil // id of disable / enable event
+    
     var time: Time? = nil
     
     var post_create: [String: Any] {
@@ -26,6 +28,7 @@ struct Event: Codable {
             map[.type] = type?.rawValue
             map[.player] = player?.getId() ?? player?.getValue()?.id
             map[.team] = team?.getId() ?? team?.getValue()?.id
+            map[.event] = event
             map[.time] = time?.rawValue
             
             return map.get()
@@ -52,10 +55,26 @@ struct Event: Codable {
         self.time = time
     }
     
-    init(type: eType, player: IdRefObjectWrapper<Person>?, team: IdRefObjectWrapper<Team>?, time: Time) {
+    // type required {disable, enable}, event of enable disable event
+    init(type: eType, event: String) {
+        self.id = ""
+        self.type = type
+        self.event = event
+    }
+    
+    // type {goal, yellowCard, redCard, penalty} event of player
+    init(type: eType, player: IdRefObjectWrapper<Person>, team: IdRefObjectWrapper<Team>, time: Time) {
         self.id = ""
         self.type = type
         self.player = player
+        self.team = team
+        self.time = time
+    }
+    
+    // type {autoGoal, foul, penaltySeriesSuccess, penaltySeriesFailure} event of team
+    init(type: eType, team: IdRefObjectWrapper<Team>, time: Time) {
+        self.id = ""
+        self.type = type
         self.team = team
         self.time = time
     }
@@ -67,6 +86,8 @@ struct Event: Codable {
         
         case player = "person"
         case team
+        
+        case event
         
         case time
     }

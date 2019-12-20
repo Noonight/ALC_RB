@@ -2094,9 +2094,9 @@
 		DB2E1F7122EAFACE00CDA5CD /* do match */ = {
 			isa = PBXGroup;
 			children = (
-				DB667BEE23AA787C00E5B80D /* Events */,
 				DBDF89E823A75C920078D082 /* WorkProtocolVC.swift */,
 				DBDF89EA23A75D6A0078D082 /* WorkProtocolViewModel.swift */,
+				DB667BEE23AA787C00E5B80D /* Events */,
 				DB4E126223A8E25B000BA74F /* Models */,
 				18B0F87E2302BECF00080196 /* penalty series */,
 				DB986B5122FDB1300050AC8F /* edit team events */,

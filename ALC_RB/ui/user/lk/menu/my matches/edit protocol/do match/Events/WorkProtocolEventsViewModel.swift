@@ -49,10 +49,10 @@ final class WorkProtocolEventsViewModel {
         
         if includeEnabledEvents.value == true {
             for event in allEvents {
-                if allEvents.contains(where: { mEvent -> Bool in
-                    return mEvent.id == event.id
-                }) {
-                    
+                for fEvent in filteredEvents {
+                    if event.id == fEvent.id {
+                        
+                    }
                 }
             }
         } else {

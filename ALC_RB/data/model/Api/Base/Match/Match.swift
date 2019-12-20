@@ -151,10 +151,123 @@ extension Match {
     
 }
 
-// MARK: - MUTATE
+// MARK: - HELPERS
 
 extension Match {
     
+    // requered populated teams
+    func getTeamPlayers(team: TeamEnum) -> [IdRefObjectWrapper<Person>] {
+        var teamPersons = [IdRefObjectWrapper<Person>]()
+        switch team {
+        case .one:
+            for person in playersList ?? [] {
+                for teamPlayer in teamOne!.getValue()!.players ?? [] {
+                    if person.getId() ?? person.getValue()?.id == teamPlayer.person?.getId() ?? teamPlayer.person?.getValue()?.id {
+                        if teamPersons.contains(where: { pObj -> Bool in
+                            return pObj.getId() ?? pObj.getValue()?.id == person.getId() ?? person.getValue()?.id
+                        }) == false {
+                            teamPersons.append(person)
+                        }
+                    }
+                }
+            }
+        case .two:
+            for person in playersList ?? [] {
+                for teamPlayer in teamTwo!.getValue()!.players ?? [] {
+                    if person.getId() ?? person.getValue()?.id == teamPlayer.person?.getId() ?? teamPlayer.person?.getValue()?.id {
+                        if teamPersons.contains(where: { pObj -> Bool in
+                            return pObj.getId() ?? pObj.getValue()?.id == person.getId() ?? person.getValue()?.id
+                        }) == false {
+                            teamPersons.append(person)
+                        }
+                    }
+                }
+            }
+        }
+        return teamPersons
+    }
     
+    // required populate teamOne players
+    func getEnabledEvents(team: TeamEnum) -> [Event] {
+        let enabledEvents = getEnabledEvents()
+        
+        var findedEvents = [Event]()
+        
+        switch team {
+        case .one:
+            let teamOnePlayerEvents = enabledEvents.filter({ event -> Bool in
+                return teamOne?.getValue()?.players?.contains(where: { player -> Bool in
+                    return player.person?.getId() ?? player.person?.getValue()?.id == event.player?.getId() ?? event.player?.getValue()?.id
+                }) ?? false
+            })
+            let teamOneTeamEvents = enabledEvents.filter({ event -> Bool in
+                return event.team?.getId() ?? event.team?.getValue()?.id == teamTwo?.getId() ?? teamOne?.getValue()?.id
+            })
+            findedEvents.append(contentsOf: teamOnePlayerEvents)
+            findedEvents.append(contentsOf: teamOneTeamEvents)
+        case .two:
+            let teamTwoPlayerEvents = enabledEvents.filter({ event -> Bool in
+                return teamTwo?.getValue()?.players?.contains(where: { player -> Bool in
+                    return player.person?.getId() ?? player.person?.getValue()?.id == event.player?.getId() ?? event.player?.getValue()?.id
+                }) ?? false
+            })
+            let teamTwoTeamEvents = enabledEvents.filter({ event -> Bool in
+                return event.team?.getId() ?? event.team?.getValue()?.id == teamTwo?.getId() ?? teamTwo?.getValue()?.id
+            })
+            findedEvents.append(contentsOf: teamTwoPlayerEvents)
+            findedEvents.append(contentsOf: teamTwoTeamEvents)
+        }
+        
+        return findedEvents
+    }
     
+    func getEnabledEvents() -> [Event] {
+        let disabledEventIds = getDisabledEventIds()
+        var enabledEvents = [Event]()
+        
+        for event in events ?? [] {
+            for disabledId in disabledEventIds {
+                if event.id != disabledId { // there is check: enable event
+                    if enabledEvents.contains(where: { mEvent -> Bool in
+                        return mEvent.id == event.id
+                    }) == false {
+                        enabledEvents.append(event)
+                    }
+                }
+            }
+        }
+        
+        return enabledEvents
+    }
+    
+    func getDisabledEvents() -> [Event] {
+        let disabledEventIds = getDisabledEventIds()
+        var disabledEvents = [Event]()
+        
+        for event in events ?? [] {
+            for disabledId in disabledEventIds {
+                if event.id == disabledId {
+                    if disabledEvents.contains(where: { mEvent -> Bool in
+                        return mEvent.id == event.id
+                    }) == false {
+                        disabledEvents.append(event)
+                    }
+                }
+            }
+        }
+        
+        return disabledEvents
+    }
+    
+    func getDisabledEventIds() -> [String] {
+        var ids = [String]()
+        
+        for event in events ?? [] {
+            if event.type == .disable && event.event != nil {
+                ids.append(event.event!)
+            }
+        }
+        
+        return ids
+    }
 }
