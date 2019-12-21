@@ -76,6 +76,16 @@ extension WorkProtocolVC {
     func setupViewBinds() {
         
         viewModel
+            .isChangedMatch
+            .observeOn(MainScheduler.instance)
+            .subscribe { element in
+                guard let isChanged = element.element else { return }
+                if isChanged {
+                    self.viewModel.setupTables()
+                }
+            }.disposed(by: bag)
+        
+        viewModel
             .teamOneEvents
             .observeOn(MainScheduler.instance)
             .subscribe { elements in

@@ -16,11 +16,9 @@ final class WorkProtocolViewModel {
     let error = PublishSubject<Error>()
     let message = PublishSubject<SingleLineMessage>()
     
-    var match: Match! {
-        didSet {
-            setupTables()
-        }
-    }
+    var match: Match!
+    let isChangedMatch = PublishSubject<Bool>()
+    
     let teamOneEvents = PublishSubject<[RefereeProtocolPlayerTeamCellModel]>()
     let teamTwoEvents = PublishSubject<[RefereeProtocolPlayerTeamCellModel]>()
     
@@ -38,7 +36,7 @@ final class WorkProtocolViewModel {
     }
     
     func setupTables() {
-        Print.m()
+        Print.m("Match.enabledEvents: \(match.getEnabledEvents())")
         setupTeamOneEventModels()
         setupTeamTwoEventModels()
     }
@@ -48,10 +46,8 @@ final class WorkProtocolViewModel {
         protocolApi.post_addEvent(matchId: match.id, event: event) { result in
             switch result {
             case .success(let resultEvent):
-                dump(resultEvent)
-                var match = self.match
-                match!.events?.append(resultEvent)
-                self.match = match
+                self.match.events?.append(resultEvent)
+                self.isChangedMatch.onNext(true)
             case .message(let message):
                 Print.m(message.message)
                 self.message.onNext(message)
@@ -74,6 +70,7 @@ extension WorkProtocolViewModel {
     func setupTeamOneEventModels() {
         var cellModels = [RefereeProtocolPlayerTeamCellModel]()
         let events = match.getEnabledEvents(team: .one)
+        Print.m(events)
         let matchPersonList = match.getTeamPlayers(team: .one).map({ pObj -> Person in
             return pObj.getValue()!
         })
@@ -104,6 +101,7 @@ extension WorkProtocolViewModel {
     func setupTeamTwoEventModels() {
         var cellModels = [RefereeProtocolPlayerTeamCellModel]()
         let events = match.getEnabledEvents(team: .two)
+        Print.m(events)
         let matchPersonList = match.getTeamPlayers(team: .two).map({ pObj -> Person in
             return pObj.getValue()!
         })
